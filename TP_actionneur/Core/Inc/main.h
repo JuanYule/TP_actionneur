@@ -69,7 +69,16 @@ void Error_Handler(void);
 #define T_SWCLK_Pin GPIO_PIN_14
 #define T_SWCLK_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
-
+#define UART_TX_BUFFER_SIZE 64
+#define UART_RX_BUFFER_SIZE 1
+#define CMD_BUFFER_SIZE 64
+#define MAX_ARGS 9
+// LF = line feed, saut de ligne
+#define ASCII_LF 0x0A
+// CR = carriage return, retour chariot
+#define ASCII_CR 0x0D
+// DEL = delete
+#define ASCII_DEL 0x7F
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
