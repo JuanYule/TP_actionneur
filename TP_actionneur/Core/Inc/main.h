@@ -62,6 +62,8 @@ void Error_Handler(void);
 #define BUTTON_Pin GPIO_PIN_13
 #define BUTTON_GPIO_Port GPIOC
 #define BUTTON_EXTI_IRQn EXTI15_10_IRQn
+#define POWER_UP_Pin GPIO_PIN_3
+#define POWER_UP_GPIO_Port GPIOC
 #define LED_Pin GPIO_PIN_5
 #define LED_GPIO_Port GPIOA
 #define T_SWDIO_Pin GPIO_PIN_13

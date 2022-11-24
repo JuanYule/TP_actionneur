@@ -60,8 +60,8 @@ all: main-build
 main-build: TP_actionneur.elf secondary-outputs
 
 # Tool invocations
-TP_actionneur.elf TP_actionneur.map: $(OBJS) $(USER_OBJS) /home/yule/Documents/ENSEA/Ensea_2022-2023/Actionneur_et_automatique/code\ NUCLEO-STM32/TP_actionneur/STM32G474RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "TP_actionneur.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/yule/Documents/ENSEA/Ensea_2022-2023/Actionneur_et_automatique/code NUCLEO-STM32/TP_actionneur/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TP_actionneur.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+TP_actionneur.elf TP_actionneur.map: $(OBJS) $(USER_OBJS) C:\Users\Lizianne\STM32CubeIDE\workspace_1.10.1\TP_actionneur\STM32G474RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "TP_actionneur.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Lizianne\STM32CubeIDE\workspace_1.10.1\TP_actionneur\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TP_actionneur.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
