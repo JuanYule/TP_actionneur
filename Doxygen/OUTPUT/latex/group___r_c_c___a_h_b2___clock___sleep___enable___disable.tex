@@ -1,0 +1,337 @@
+\doxysection{AHB2 Peripheral Clock Sleep Enable Disable}
+\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable}\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+
+
+Enable or disable the AHB2 peripheral clock during Low Power (Sleep) mode.  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOA\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOASMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOB\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOBSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOC\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOCSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOD\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIODSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOE\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOESMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOF\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOFSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOG\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOGSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SRAM2\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+SRAM2\+SMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+CCM\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+CCMSRAMSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+ADC12\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+ADC12\+SMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+DAC1\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+DAC1\+SMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+DAC3\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+DAC3\+SMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+RNG\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE}()~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+RNGSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOA\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOASMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOB\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOBSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOC\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOCSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOD\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIODSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOE\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOESMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOF\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOFSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOG\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOGSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SRAM2\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+SRAM2\+SMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+CCM\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+CCMSRAMSMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+ADC12\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+ADC12\+SMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+DAC1\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+DAC1\+SMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+DAC3\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+DAC3\+SMEN)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+RNG\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE}()~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+RNGSMEN)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Enable or disable the AHB2 peripheral clock during Low Power (Sleep) mode. 
+
+\begin{DoxyNote}{Note}
+Peripheral clock gating in SLEEP mode can be used to further reduce power consumption. 
+
+After wakeup from SLEEP mode, the peripheral clock is enabled again. 
+
+By default, all peripheral clocks are enabled during SLEEP mode. 
+\end{DoxyNote}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga648fe32985a490feaf13406d49cbb2c3}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+ADC12\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+ADC12\+SMEN)}
+
+
+
+Definition at line \textbf{ 2070} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga7336fd2924664e2428c5f04a1fa75ce8}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_ADC12\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+ADC12\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+ADC12\+SMEN)}
+
+
+
+Definition at line \textbf{ 2027} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga5234a3596b31edba49e429c82db3024e}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+CCM\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+CCMSRAMSMEN)}
+
+
+
+Definition at line \textbf{ 2068} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gafe5cf722271537f1990feed19347b050}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_CCM\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+CCM\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+CCMSRAMSMEN)}
+
+
+
+Definition at line \textbf{ 2025} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gadc709172e271af6fcdede83673279969}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+DAC1\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+DAC1\+SMEN)}
+
+
+
+Definition at line \textbf{ 2076} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gadd251d53dbab95b47da9fd24dcdc0430}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_DAC1\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+DAC1\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+DAC1\+SMEN)}
+
+
+
+Definition at line \textbf{ 2033} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga59413fdd423ebe879a670645e1b988c8}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+DAC3\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+DAC3\+SMEN)}
+
+
+
+Definition at line \textbf{ 2082} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga9d4382be83000dd36b137d85574e6e4d}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_DAC3\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+DAC3\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+DAC3\+SMEN)}
+
+
+
+Definition at line \textbf{ 2039} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gad6753edbd9047eeac39ae4f234642942}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOA\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOASMEN)}
+
+
+
+Definition at line \textbf{ 2052} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gaff8820b47bd3764e7cded76b9368460b}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOA\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOA\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOASMEN)}
+
+
+
+Definition at line \textbf{ 2009} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga0a20ad851a2ef9e1ccdbf280dcd1dc44}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOB\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOBSMEN)}
+
+
+
+Definition at line \textbf{ 2054} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga0e718efc965ab07752cd865c3f33551a}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOB\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOB\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOBSMEN)}
+
+
+
+Definition at line \textbf{ 2011} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga293f9870ba631d23f8011bad12420f83}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOC\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOCSMEN)}
+
+
+
+Definition at line \textbf{ 2056} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gac62505cc695d985fcf18ca1fd2f1a421}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOC\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOC\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOCSMEN)}
+
+
+
+Definition at line \textbf{ 2013} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga8520028c77aa2ecdd497c313665fa381}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOD\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIODSMEN)}
+
+
+
+Definition at line \textbf{ 2058} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga5f04963ee5709230888d50574008372f}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOD\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOD\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIODSMEN)}
+
+
+
+Definition at line \textbf{ 2015} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga2204e5cccaf75bc541f901fd2beb7381}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOE\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOESMEN)}
+
+
+
+Definition at line \textbf{ 2060} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga18d20464a11db42973a0cc6df21b0e22}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOE\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOE\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOESMEN)}
+
+
+
+Definition at line \textbf{ 2017} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga035d018d1c3984de9cc06dcb661fff60}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOF\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOFSMEN)}
+
+
+
+Definition at line \textbf{ 2062} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gac520a0043affccd819818a11b19523a2}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOF\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOF\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOFSMEN)}
+
+
+
+Definition at line \textbf{ 2019} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga296c8414e577cab553cc903752315a88}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOG\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOGSMEN)}
+
+
+
+Definition at line \textbf{ 2064} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gab1d4773e76bae0871b8dace747971fc4}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_GPIOG\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+GPIOG\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+GPIOGSMEN)}
+
+
+
+Definition at line \textbf{ 2021} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_gae85e4ea41a2b365ee27c459ddcb9a3a1}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+RNG\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+RNGSMEN)}
+
+
+
+Definition at line \textbf{ 2092} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga03ec704e7309312630b3a572fb6f8856}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_RNG\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+RNG\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+RNGSMEN)}
+
+
+
+Definition at line \textbf{ 2049} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga6313cca024215b6681c273ea588e2ecf}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_DISABLE}}
+\index{\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_DISABLE@{\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_DISABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_DISABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SRAM2\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+DISABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+SRAM2\+SMEN)}
+
+
+
+Definition at line \textbf{ 2066} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_h_b2___clock___sleep___enable___disable_ga485ced56558657be69e01a48e5d62f6d}} 
+\index{AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}!\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_ENABLE}}
+\index{\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_ENABLE@{\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_ENABLE}!AHB2 Peripheral Clock Sleep Enable Disable@{AHB2 Peripheral Clock Sleep Enable Disable}}
+\doxysubsubsection{\_\_HAL\_RCC\_SRAM2\_CLK\_SLEEP\_ENABLE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SRAM2\+\_\+\+CLK\+\_\+\+SLEEP\+\_\+\+ENABLE(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$AHB2\+SMENR, RCC\+\_\+\+AHB2\+SMENR\+\_\+\+SRAM2\+SMEN)}
+
+
+
+Definition at line \textbf{ 2023} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+

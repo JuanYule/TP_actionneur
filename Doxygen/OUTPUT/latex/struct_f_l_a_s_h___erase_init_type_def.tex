@@ -1,0 +1,77 @@
+\doxysection{FLASH\+\_\+\+Erase\+Init\+Type\+Def Struct Reference}
+\label{struct_f_l_a_s_h___erase_init_type_def}\index{FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}}
+
+
+FLASH Erase structure definition.  
+
+
+
+
+{\ttfamily \#include $<$stm32g4xx\+\_\+hal\+\_\+flash.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \textbf{ Type\+Erase}
+\item 
+uint32\+\_\+t \textbf{ Banks}
+\item 
+uint32\+\_\+t \textbf{ Page}
+\item 
+uint32\+\_\+t \textbf{ Nb\+Pages}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+FLASH Erase structure definition. 
+
+Definition at line \textbf{ 45} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\label{struct_f_l_a_s_h___erase_init_type_def_aa07868a5b012861c6111322c3dccdbec}} 
+\index{FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}!Banks@{Banks}}
+\index{Banks@{Banks}!FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}}
+\doxysubsubsection{Banks}
+{\footnotesize\ttfamily uint32\+\_\+t Banks}
+
+Select bank to erase. This parameter must be a value of \doxyref{FLASH Banks}{p.}{group___f_l_a_s_h___banks} (FLASH\+\_\+\+BANK\+\_\+\+BOTH should be used only for mass erase) 
+
+Definition at line \textbf{ 49} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___erase_init_type_def_a883b193a78c63e993f1d70102eac64b3}} 
+\index{FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}!NbPages@{NbPages}}
+\index{NbPages@{NbPages}!FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}}
+\doxysubsubsection{NbPages}
+{\footnotesize\ttfamily uint32\+\_\+t Nb\+Pages}
+
+Number of pages to be erased. This parameter must be a value between 1 and (max number of pages in the bank -\/ value of initial page) 
+
+Definition at line \textbf{ 55} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___erase_init_type_def_ad5ac387429b4b85d2ee00e34559b4a28}} 
+\index{FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}!Page@{Page}}
+\index{Page@{Page}!FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}}
+\doxysubsubsection{Page}
+{\footnotesize\ttfamily uint32\+\_\+t Page}
+
+Initial Flash page to erase when page erase is disabled. This parameter must be a value between 0 and (max number of pages in the bank -\/ 1) (eg \+: 127 for 512KB dual bank) 
+
+Definition at line \textbf{ 52} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___erase_init_type_def_ae2154c09320f3ef7feb8f4a84e9ac17b}} 
+\index{FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}!TypeErase@{TypeErase}}
+\index{TypeErase@{TypeErase}!FLASH\_EraseInitTypeDef@{FLASH\_EraseInitTypeDef}}
+\doxysubsubsection{TypeErase}
+{\footnotesize\ttfamily uint32\+\_\+t Type\+Erase}
+
+Mass erase or page erase. This parameter can be a value of \doxyref{FLASH Erase Type}{p.}{group___f_l_a_s_h___type___erase} 
+
+Definition at line \textbf{ 47} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/\textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}\end{DoxyCompactItemize}

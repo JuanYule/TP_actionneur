@@ -1,0 +1,191 @@
+\doxysection{FLASH\+\_\+\+OBProgram\+Init\+Type\+Def Struct Reference}
+\label{struct_f_l_a_s_h___o_b_program_init_type_def}\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+
+
+FLASH Option Bytes Program structure definition.  
+
+
+
+
+{\ttfamily \#include $<$stm32g4xx\+\_\+hal\+\_\+flash.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \textbf{ Option\+Type}
+\item 
+uint32\+\_\+t \textbf{ WRPArea}
+\item 
+uint32\+\_\+t \textbf{ WRPStart\+Offset}
+\item 
+uint32\+\_\+t \textbf{ WRPEnd\+Offset}
+\item 
+uint32\+\_\+t \textbf{ RDPLevel}
+\item 
+uint32\+\_\+t \textbf{ USERType}
+\item 
+uint32\+\_\+t \textbf{ USERConfig}
+\item 
+uint32\+\_\+t \textbf{ PCROPConfig}
+\item 
+uint32\+\_\+t \textbf{ PCROPStart\+Addr}
+\item 
+uint32\+\_\+t \textbf{ PCROPEnd\+Addr}
+\item 
+uint32\+\_\+t \textbf{ Boot\+Entry\+Point}
+\item 
+uint32\+\_\+t \textbf{ Sec\+Bank}
+\item 
+uint32\+\_\+t \textbf{ Sec\+Size}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+FLASH Option Bytes Program structure definition. 
+
+Definition at line \textbf{ 62} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_a190a45209911fbe6eeb188f0f3dbbbeb}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!BootEntryPoint@{BootEntryPoint}}
+\index{BootEntryPoint@{BootEntryPoint}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{BootEntryPoint}
+{\footnotesize\ttfamily uint32\+\_\+t Boot\+Entry\+Point}
+
+Set the Boot Lock (used for OPTIONBYTE\+\_\+\+BOOT\+\_\+\+LOCK). This parameter can be a value of \doxyref{FLASH Boot Lock}{p.}{group___f_l_a_s_h___o_b___boot___lock} 
+
+Definition at line \textbf{ 94} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_ac5941efaeb6bd9e3c0852613f990ebd8}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!OptionType@{OptionType}}
+\index{OptionType@{OptionType}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{OptionType}
+{\footnotesize\ttfamily uint32\+\_\+t Option\+Type}
+
+Option byte to be configured. This parameter can be a combination of the values of \doxyref{FLASH Option Bytes Type}{p.}{group___f_l_a_s_h___o_b___type} 
+
+Definition at line \textbf{ 64} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_a07a586e1c17edc17ab5ef6fde379e1df}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!PCROPConfig@{PCROPConfig}}
+\index{PCROPConfig@{PCROPConfig}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{PCROPConfig}
+{\footnotesize\ttfamily uint32\+\_\+t PCROPConfig}
+
+Configuration of the PCROP (used for OPTIONBYTE\+\_\+\+PCROP). This parameter must be a combination of \doxyref{FLASH Banks}{p.}{group___f_l_a_s_h___banks} (except FLASH\+\_\+\+BANK\+\_\+\+BOTH) and \doxyref{FLASH Option Bytes PCROP On RDP Level Type}{p.}{group___f_l_a_s_h___o_b___p_c_r_o_p___r_d_p} 
+
+Definition at line \textbf{ 86} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_ab5a6185fe25711bf99fb0abd4a751711}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!PCROPEndAddr@{PCROPEndAddr}}
+\index{PCROPEndAddr@{PCROPEndAddr}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{PCROPEndAddr}
+{\footnotesize\ttfamily uint32\+\_\+t PCROPEnd\+Addr}
+
+PCROP End address (used for OPTIONBYTE\+\_\+\+PCROP). This parameter must be a value between PCROP Start address and end of bank 
+
+Definition at line \textbf{ 92} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_a9dbd10c816d4f923270ba9d8930cc1d2}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!PCROPStartAddr@{PCROPStartAddr}}
+\index{PCROPStartAddr@{PCROPStartAddr}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{PCROPStartAddr}
+{\footnotesize\ttfamily uint32\+\_\+t PCROPStart\+Addr}
+
+PCROP Start address (used for OPTIONBYTE\+\_\+\+PCROP). This parameter must be a value between begin and end of bank =$>$ Be careful of the bank swapping for the address 
+
+Definition at line \textbf{ 89} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_a671880a1dafb7b92e0e2b65593407c12}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!RDPLevel@{RDPLevel}}
+\index{RDPLevel@{RDPLevel}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{RDPLevel}
+{\footnotesize\ttfamily uint32\+\_\+t RDPLevel}
+
+Set the read protection level.. (used for OPTIONBYTE\+\_\+\+RDP). This parameter can be a value of \doxyref{FLASH Option Bytes Read Protection}{p.}{group___f_l_a_s_h___o_b___read___protection} 
+
+Definition at line \textbf{ 73} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_a09f72297b06f250e81c1f334d247301c}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!SecBank@{SecBank}}
+\index{SecBank@{SecBank}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{SecBank}
+{\footnotesize\ttfamily uint32\+\_\+t Sec\+Bank}
+
+Bank of securable memory area to be programmed (used for OPTIONBYTE\+\_\+\+SEC). Only one securable memory area could be programmed at the same time. This parameter can be one of the following values\+: FLASH\+\_\+\+BANK\+\_\+1\+: Securable memory area to be programmed in bank 1 FLASH\+\_\+\+BANK\+\_\+2\+: Securable memory area to be programmed in bank 2 ($\ast$) \begin{DoxyNote}{Note}
+($\ast$) availability depends on devices 
+\end{DoxyNote}
+
+
+Definition at line \textbf{ 96} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_a9ea43d49f0db8ad2d066cceb2bc89245}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!SecSize@{SecSize}}
+\index{SecSize@{SecSize}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{SecSize}
+{\footnotesize\ttfamily uint32\+\_\+t Sec\+Size}
+
+Size of securable memory area to be programmed (used for OPTIONBYTE\+\_\+\+SEC), in number of pages. Securable memory area is starting from first page of the bank. Only one securable memory could be programmed at the same time. This parameter must be a value between 0 and (max number of pages in the bank -\/ 1) 
+
+Definition at line \textbf{ 102} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_aefa4621be119ce8af715a2271b53168c}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!USERConfig@{USERConfig}}
+\index{USERConfig@{USERConfig}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{USERConfig}
+{\footnotesize\ttfamily uint32\+\_\+t USERConfig}
+
+Value of the user option byte (used for OPTIONBYTE\+\_\+\+USER). This parameter can be a combination of \doxyref{FLASH Option Bytes User BOR Level}{p.}{group___f_l_a_s_h___o_b___u_s_e_r___b_o_r___l_e_v_e_l}, \doxyref{FLASH Option Bytes User Reset On Stop}{p.}{group___f_l_a_s_h___o_b___u_s_e_r__n_r_s_t___s_t_o_p}, \doxyref{FLASH Option Bytes User Reset On Standby}{p.}{group___f_l_a_s_h___o_b___u_s_e_r__n_r_s_t___s_t_a_n_d_b_y}, \doxyref{FLASH Option Bytes User Reset On Shutdown}{p.}{group___f_l_a_s_h___o_b___u_s_e_r__n_r_s_t___s_h_u_t_d_o_w_n}, \doxyref{FLASH Option Bytes User IWDG Type}{p.}{group___f_l_a_s_h___o_b___u_s_e_r___i_w_d_g___s_w}, \doxyref{FLASH Option Bytes User IWDG Mode On Stop}{p.}{group___f_l_a_s_h___o_b___u_s_e_r___i_w_d_g___s_t_o_p}, \doxyref{FLASH Option Bytes User IWDG Mode On Standby}{p.}{group___f_l_a_s_h___o_b___u_s_e_r___i_w_d_g___s_t_a_n_d_b_y}, \doxyref{FLASH Option Bytes User WWDG Type}{p.}{group___f_l_a_s_h___o_b___u_s_e_r___w_w_d_g___s_w}, FLASH\+\_\+\+OB\+\_\+\+USER\+\_\+\+BFB2 ($\ast$), \doxyref{FLASH Option Bytes User BOOT1 Type}{p.}{group___f_l_a_s_h___o_b___u_s_e_r__n_b_o_o_t1}, \doxyref{FLASH Option Bytes User SRAM Parity Check Type}{p.}{group___f_l_a_s_h___o_b___u_s_e_r___s_r_a_m___p_e}, \doxyref{FLASH Option Bytes User CCMSRAM Erase On Reset Type}{p.}{group___f_l_a_s_h___o_b___u_s_e_r___c_c_m_s_r_a_m___r_s_t} \begin{DoxyNote}{Note}
+($\ast$) availability depends on devices 
+\end{DoxyNote}
+
+
+Definition at line \textbf{ 77} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_a84b990aa673c75ca04bd361e8157953d}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!USERType@{USERType}}
+\index{USERType@{USERType}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{USERType}
+{\footnotesize\ttfamily uint32\+\_\+t USERType}
+
+User option byte(s) to be configured (used for OPTIONBYTE\+\_\+\+USER). This parameter can be a combination of \doxyref{FLASH Option Bytes User Type}{p.}{group___f_l_a_s_h___o_b___u_s_e_r___type} 
+
+Definition at line \textbf{ 75} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_ae7d8307ee7a0754760d067430448b8df}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!WRPArea@{WRPArea}}
+\index{WRPArea@{WRPArea}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{WRPArea}
+{\footnotesize\ttfamily uint32\+\_\+t WRPArea}
+
+Write protection area to be programmed (used for OPTIONBYTE\+\_\+\+WRP). Only one WRP area could be programmed at the same time. This parameter can be value of \doxyref{FLASH WRP Area}{p.}{group___f_l_a_s_h___o_b___w_r_p___area} 
+
+Definition at line \textbf{ 66} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_af0e01c4c38905cd3ed60c8836d28da20}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!WRPEndOffset@{WRPEndOffset}}
+\index{WRPEndOffset@{WRPEndOffset}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{WRPEndOffset}
+{\footnotesize\ttfamily uint32\+\_\+t WRPEnd\+Offset}
+
+Write protection end offset (used for OPTIONBYTE\+\_\+\+WRP). This parameter must be a value between WRPStart\+Offset and (max number of pages in the bank -\/ 1) 
+
+Definition at line \textbf{ 71} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{struct_f_l_a_s_h___o_b_program_init_type_def_a8dd2e3028f6a42c22d89107ad81b5171}} 
+\index{FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}!WRPStartOffset@{WRPStartOffset}}
+\index{WRPStartOffset@{WRPStartOffset}!FLASH\_OBProgramInitTypeDef@{FLASH\_OBProgramInitTypeDef}}
+\doxysubsubsection{WRPStartOffset}
+{\footnotesize\ttfamily uint32\+\_\+t WRPStart\+Offset}
+
+Write protection start offset (used for OPTIONBYTE\+\_\+\+WRP). This parameter must be a value between 0 and (max number of pages in the bank -\/ 1) 
+
+Definition at line \textbf{ 69} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/\textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}\end{DoxyCompactItemize}

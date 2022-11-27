@@ -1,0 +1,827 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+adc\+\_\+ex.\+h}
+\label{stm32g4xx__hal__adc__ex_8h_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_adc\_ex.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_adc\_ex.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00019 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020 \textcolor{preprocessor}{\#ifndef STM32G4xx\_HAL\_ADC\_EX\_H}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#define STM32G4xx\_HAL\_ADC\_EX\_H}}
+\DoxyCodeLine{00022 }
+\DoxyCodeLine{00023 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00024 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal\_def.h"{}}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00038 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00046 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00047 \{}
+\DoxyCodeLine{00048   uint32\_t Ratio;                         }
+\DoxyCodeLine{00051   uint32\_t RightBitShift;                 }
+\DoxyCodeLine{00053 \} ADC\_InjOversamplingTypeDef;}
+\DoxyCodeLine{00054 }
+\DoxyCodeLine{00071 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00072 \{}
+\DoxyCodeLine{00073   uint32\_t InjectedChannel;               }
+\DoxyCodeLine{00077   uint32\_t InjectedRank;                  }
+\DoxyCodeLine{00082   uint32\_t InjectedSamplingTime;          }
+\DoxyCodeLine{00093   uint32\_t InjectedSingleDiff;            }
+\DoxyCodeLine{00105   uint32\_t InjectedOffsetNumber;          }
+\DoxyCodeLine{00109   uint32\_t InjectedOffset;                }
+\DoxyCodeLine{00116   uint32\_t InjectedOffsetSign;                }
+\DoxyCodeLine{00119   FunctionalState InjectedOffsetSaturation;   }
+\DoxyCodeLine{00123   uint32\_t InjectedNbrOfConversion;       }
+\DoxyCodeLine{00129   FunctionalState InjectedDiscontinuousConvMode; }
+\DoxyCodeLine{00139   FunctionalState AutoInjectedConv;       }
+\DoxyCodeLine{00148   FunctionalState QueueInjectedContext;   }
+\DoxyCodeLine{00159   uint32\_t ExternalTrigInjecConv;         }
+\DoxyCodeLine{00165   uint32\_t ExternalTrigInjecConvEdge;     }
+\DoxyCodeLine{00171   FunctionalState InjecOversamplingMode;         }
+\DoxyCodeLine{00175   ADC\_InjOversamplingTypeDef  InjecOversampling; }
+\DoxyCodeLine{00178 \} ADC\_InjectionConfTypeDef;}
+\DoxyCodeLine{00179 }
+\DoxyCodeLine{00180 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00186 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00187 \{}
+\DoxyCodeLine{00188   uint32\_t Mode;              }
+\DoxyCodeLine{00191   uint32\_t DMAAccessMode;     }
+\DoxyCodeLine{00195   uint32\_t TwoSamplingDelay;  }
+\DoxyCodeLine{00200 \} ADC\_MultiModeTypeDef;}
+\DoxyCodeLine{00201 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00202 }
+\DoxyCodeLine{00207 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00208 }
+\DoxyCodeLine{00216 \textcolor{comment}{/* ADC group regular trigger sources for all ADC instances */}}
+\DoxyCodeLine{00217 \textcolor{preprocessor}{\#define ADC\_INJECTED\_SOFTWARE\_START        (LL\_ADC\_INJ\_TRIG\_SOFTWARE)            }}
+\DoxyCodeLine{00218 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T1\_TRGO      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO)       }}
+\DoxyCodeLine{00219 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T1\_TRGO2     (LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO2)      }}
+\DoxyCodeLine{00220 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T1\_CC3       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH3)        }}
+\DoxyCodeLine{00221 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T1\_CC4       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH4)        }}
+\DoxyCodeLine{00222 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T2\_TRGO      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_TRGO)       }}
+\DoxyCodeLine{00223 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T2\_CC1       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_CH1)        }}
+\DoxyCodeLine{00224 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T3\_TRGO      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_TRGO)       }}
+\DoxyCodeLine{00225 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T3\_CC1       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH1)        }}
+\DoxyCodeLine{00226 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T3\_CC3       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH3)        }}
+\DoxyCodeLine{00227 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T3\_CC4       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH4)        }}
+\DoxyCodeLine{00228 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T4\_TRGO      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_TRGO)       }}
+\DoxyCodeLine{00229 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T4\_CC3       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH3)        }}
+\DoxyCodeLine{00230 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T4\_CC4       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH4)        }}
+\DoxyCodeLine{00231 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T6\_TRGO      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM6\_TRGO)       }}
+\DoxyCodeLine{00232 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T7\_TRGO      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM7\_TRGO)       }}
+\DoxyCodeLine{00233 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T8\_TRGO      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO)       }}
+\DoxyCodeLine{00234 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T8\_TRGO2     (LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO2)      }}
+\DoxyCodeLine{00235 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T8\_CC2       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH2)        }}
+\DoxyCodeLine{00236 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T8\_CC4       (LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH4)        }}
+\DoxyCodeLine{00237 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T15\_TRGO     (LL\_ADC\_INJ\_TRIG\_EXT\_TIM15\_TRGO)      }}
+\DoxyCodeLine{00238 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T16\_CC1      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM16\_CH1)       }}
+\DoxyCodeLine{00239 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T20\_TRGO     (LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_TRGO)      }}
+\DoxyCodeLine{00240 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T20\_TRGO2    (LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_TRGO2)     }}
+\DoxyCodeLine{00241 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T20\_CC2      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_CH2)       }}
+\DoxyCodeLine{00242 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_T20\_CC4      (LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_CH4)       }}
+\DoxyCodeLine{00243 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG1   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG1)      }}
+\DoxyCodeLine{00244 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG2   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG2)      }}
+\DoxyCodeLine{00245 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG3   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG3)      }}
+\DoxyCodeLine{00246 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG4   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG4)      }}
+\DoxyCodeLine{00247 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG5   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG5)      }}
+\DoxyCodeLine{00248 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG6   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG6)      }}
+\DoxyCodeLine{00249 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG7   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG7)      }}
+\DoxyCodeLine{00250 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG8   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG8)      }}
+\DoxyCodeLine{00251 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG9   (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG9)      }}
+\DoxyCodeLine{00252 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG10  (LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG10)     }}
+\DoxyCodeLine{00253 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_EXT\_IT3      (LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE3)      }}
+\DoxyCodeLine{00254 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_EXT\_IT15     (LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE15)     }}
+\DoxyCodeLine{00255 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJEC\_LPTIM\_OUT    (LL\_ADC\_INJ\_TRIG\_EXT\_LPTIM\_OUT)       }}
+\DoxyCodeLine{00263 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_EDGE\_NONE           (0x00000000UL)        }}
+\DoxyCodeLine{00264 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_EDGE\_RISING         (ADC\_JSQR\_JEXTEN\_0)   }}
+\DoxyCodeLine{00265 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_EDGE\_FALLING        (ADC\_JSQR\_JEXTEN\_1)   }}
+\DoxyCodeLine{00266 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_EDGE\_RISINGFALLING  (ADC\_JSQR\_JEXTEN)     }}
+\DoxyCodeLine{00274 \textcolor{preprocessor}{\#define ADC\_SINGLE\_ENDED                (LL\_ADC\_SINGLE\_ENDED)         }}
+\DoxyCodeLine{00275 \textcolor{preprocessor}{\#define ADC\_DIFFERENTIAL\_ENDED          (LL\_ADC\_DIFFERENTIAL\_ENDED)   }}
+\DoxyCodeLine{00283 \textcolor{preprocessor}{\#define ADC\_OFFSET\_NONE              (ADC\_OFFSET\_4 + 1U) }}
+\DoxyCodeLine{00284 \textcolor{preprocessor}{\#define ADC\_OFFSET\_1                 (LL\_ADC\_OFFSET\_1) }}
+\DoxyCodeLine{00285 \textcolor{preprocessor}{\#define ADC\_OFFSET\_2                 (LL\_ADC\_OFFSET\_2) }}
+\DoxyCodeLine{00286 \textcolor{preprocessor}{\#define ADC\_OFFSET\_3                 (LL\_ADC\_OFFSET\_3) }}
+\DoxyCodeLine{00287 \textcolor{preprocessor}{\#define ADC\_OFFSET\_4                 (LL\_ADC\_OFFSET\_4) }}
+\DoxyCodeLine{00295 \textcolor{preprocessor}{\#define ADC\_OFFSET\_SIGN\_NEGATIVE      (0x00000000UL)          }}
+\DoxyCodeLine{00296 \textcolor{preprocessor}{\#define ADC\_OFFSET\_SIGN\_POSITIVE      (ADC\_OFR1\_OFFSETPOS)   }}
+\DoxyCodeLine{00304 \textcolor{preprocessor}{\#define ADC\_INJECTED\_RANK\_1                (LL\_ADC\_INJ\_RANK\_1) }}
+\DoxyCodeLine{00305 \textcolor{preprocessor}{\#define ADC\_INJECTED\_RANK\_2                (LL\_ADC\_INJ\_RANK\_2) }}
+\DoxyCodeLine{00306 \textcolor{preprocessor}{\#define ADC\_INJECTED\_RANK\_3                (LL\_ADC\_INJ\_RANK\_3) }}
+\DoxyCodeLine{00307 \textcolor{preprocessor}{\#define ADC\_INJECTED\_RANK\_4                (LL\_ADC\_INJ\_RANK\_4) }}
+\DoxyCodeLine{00312 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00316 \textcolor{preprocessor}{\#define ADC\_MODE\_INDEPENDENT               (LL\_ADC\_MULTI\_INDEPENDENT)                                          }}
+\DoxyCodeLine{00317 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_REGSIMULT             (LL\_ADC\_MULTI\_DUAL\_REG\_SIMULT) }}
+\DoxyCodeLine{00318 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_INTERL                (LL\_ADC\_MULTI\_DUAL\_REG\_INTERL) }}
+\DoxyCodeLine{00319 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_INJECSIMULT           (LL\_ADC\_MULTI\_DUAL\_INJ\_SIMULT) }}
+\DoxyCodeLine{00320 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_ALTERTRIG             (LL\_ADC\_MULTI\_DUAL\_INJ\_ALTERN) }}
+\DoxyCodeLine{00321 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_REGSIMULT\_INJECSIMULT (LL\_ADC\_MULTI\_DUAL\_REG\_SIM\_INJ\_SIM) }}
+\DoxyCodeLine{00322 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_REGSIMULT\_ALTERTRIG   (LL\_ADC\_MULTI\_DUAL\_REG\_SIM\_INJ\_ALT) }}
+\DoxyCodeLine{00323 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_REGINTERL\_INJECSIMULT (LL\_ADC\_MULTI\_DUAL\_REG\_INT\_INJ\_SIM) }}
+\DoxyCodeLine{00328 \textcolor{preprocessor}{\#define ADC\_DMAACCESSMODE\_DISABLED      (0x00000000UL)     }}
+\DoxyCodeLine{00329 \textcolor{preprocessor}{\#define ADC\_DMAACCESSMODE\_12\_10\_BITS    (ADC\_CCR\_MDMA\_1)   }}
+\DoxyCodeLine{00330 \textcolor{preprocessor}{\#define ADC\_DMAACCESSMODE\_8\_6\_BITS      (ADC\_CCR\_MDMA)     }}
+\DoxyCodeLine{00338 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_1CYCLE        (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_1CYCLE)   }}
+\DoxyCodeLine{00339 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_2CYCLES       (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_2CYCLES)  }}
+\DoxyCodeLine{00340 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_3CYCLES       (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_3CYCLES)  }}
+\DoxyCodeLine{00341 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_4CYCLES       (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_4CYCLES)  }}
+\DoxyCodeLine{00342 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_5CYCLES       (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_5CYCLES)  }}
+\DoxyCodeLine{00343 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_6CYCLES       (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_6CYCLES)  }}
+\DoxyCodeLine{00344 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_7CYCLES       (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_7CYCLES)  }}
+\DoxyCodeLine{00345 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_8CYCLES       (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_8CYCLES)  }}
+\DoxyCodeLine{00346 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_9CYCLES       (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_9CYCLES)  }}
+\DoxyCodeLine{00347 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_10CYCLES      (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_10CYCLES) }}
+\DoxyCodeLine{00348 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_11CYCLES      (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_11CYCLES) }}
+\DoxyCodeLine{00349 \textcolor{preprocessor}{\#define ADC\_TWOSAMPLINGDELAY\_12CYCLES      (LL\_ADC\_MULTI\_TWOSMP\_DELAY\_12CYCLES) }}
+\DoxyCodeLine{00357 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00358 }
+\DoxyCodeLine{00362 \textcolor{preprocessor}{\#define ADC\_REGULAR\_GROUP                  (LL\_ADC\_GROUP\_REGULAR)           }}
+\DoxyCodeLine{00363 \textcolor{preprocessor}{\#define ADC\_INJECTED\_GROUP                 (LL\_ADC\_GROUP\_INJECTED)          }}
+\DoxyCodeLine{00364 \textcolor{preprocessor}{\#define ADC\_REGULAR\_INJECTED\_GROUP         (LL\_ADC\_GROUP\_REGULAR\_INJECTED)  }}
+\DoxyCodeLine{00372 \textcolor{preprocessor}{\#define ADC\_CFGR\_FIELDS    (ADC\_CFGR\_AWD1CH  | ADC\_CFGR\_JAUTO   | ADC\_CFGR\_JAWD1EN |\(\backslash\)}}
+\DoxyCodeLine{00373 \textcolor{preprocessor}{                            ADC\_CFGR\_AWD1EN  | ADC\_CFGR\_AWD1SGL | ADC\_CFGR\_JQM     |\(\backslash\)}}
+\DoxyCodeLine{00374 \textcolor{preprocessor}{                            ADC\_CFGR\_JDISCEN | ADC\_CFGR\_DISCNUM | ADC\_CFGR\_DISCEN  |\(\backslash\)}}
+\DoxyCodeLine{00375 \textcolor{preprocessor}{                            ADC\_CFGR\_AUTDLY  | ADC\_CFGR\_CONT    | ADC\_CFGR\_OVRMOD  |\(\backslash\)}}
+\DoxyCodeLine{00376 \textcolor{preprocessor}{                            ADC\_CFGR\_EXTEN   | ADC\_CFGR\_EXTSEL  | ADC\_CFGR\_ALIGN   |\(\backslash\)}}
+\DoxyCodeLine{00377 \textcolor{preprocessor}{                            ADC\_CFGR\_RES     | ADC\_CFGR\_DMACFG  | ADC\_CFGR\_DMAEN   )}}
+\DoxyCodeLine{00385 \textcolor{preprocessor}{\#if defined(ADC\_SMPR1\_SMPPLUS)}}
+\DoxyCodeLine{00386 \textcolor{preprocessor}{\#define ADC\_SMPR1\_FIELDS    (ADC\_SMPR1\_SMP9 | ADC\_SMPR1\_SMP8 | ADC\_SMPR1\_SMP7 |\(\backslash\)}}
+\DoxyCodeLine{00387 \textcolor{preprocessor}{                             ADC\_SMPR1\_SMP6 | ADC\_SMPR1\_SMP5 | ADC\_SMPR1\_SMP4 |\(\backslash\)}}
+\DoxyCodeLine{00388 \textcolor{preprocessor}{                             ADC\_SMPR1\_SMP3 | ADC\_SMPR1\_SMP2 | ADC\_SMPR1\_SMP1 |\(\backslash\)}}
+\DoxyCodeLine{00389 \textcolor{preprocessor}{                             ADC\_SMPR1\_SMP0 | ADC\_SMPR1\_SMPPLUS)}}
+\DoxyCodeLine{00390 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00391 \textcolor{preprocessor}{\#define ADC\_SMPR1\_FIELDS    (ADC\_SMPR1\_SMP9 | ADC\_SMPR1\_SMP8 | ADC\_SMPR1\_SMP7 |\(\backslash\)}}
+\DoxyCodeLine{00392 \textcolor{preprocessor}{                             ADC\_SMPR1\_SMP6 | ADC\_SMPR1\_SMP5 | ADC\_SMPR1\_SMP4 |\(\backslash\)}}
+\DoxyCodeLine{00393 \textcolor{preprocessor}{                             ADC\_SMPR1\_SMP3 | ADC\_SMPR1\_SMP2 | ADC\_SMPR1\_SMP1 |\(\backslash\)}}
+\DoxyCodeLine{00394 \textcolor{preprocessor}{                             ADC\_SMPR1\_SMP0)}}
+\DoxyCodeLine{00395 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_SMPR1\_SMPPLUS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00403 \textcolor{comment}{/* ADC\_CFGR fields of parameters that can be updated when no conversion}}
+\DoxyCodeLine{00404 \textcolor{comment}{   (neither regular nor injected) is on-\/going  */}}
+\DoxyCodeLine{00405 \textcolor{preprocessor}{\#define ADC\_CFGR\_FIELDS\_2  ((ADC\_CFGR\_DMACFG | ADC\_CFGR\_AUTDLY))}}
+\DoxyCodeLine{00414 \textcolor{comment}{/* Exported macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00415 }
+\DoxyCodeLine{00416 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00435 \textcolor{preprocessor}{\#define ADC\_FORCE\_MODE\_INDEPENDENT(\_\_HANDLE\_\_)                                 \(\backslash\)}}
+\DoxyCodeLine{00436 \textcolor{preprocessor}{  LL\_ADC\_SetMultimode(\_\_LL\_ADC\_COMMON\_INSTANCE((\_\_HANDLE\_\_)-\/>Instance), LL\_ADC\_MULTI\_INDEPENDENT)}}
+\DoxyCodeLine{00437 }
+\DoxyCodeLine{00441 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00442 }
+\DoxyCodeLine{00443 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00444 }
+\DoxyCodeLine{00448 \textcolor{comment}{/* Macro reserved for internal HAL driver usage, not intended to be used in   */}}
+\DoxyCodeLine{00449 \textcolor{comment}{/* code of final user.                                                        */}}
+\DoxyCodeLine{00450 }
+\DoxyCodeLine{00457 \textcolor{preprocessor}{\#define ADC\_IS\_SOFTWARE\_START\_INJECTED(\_\_HANDLE\_\_)                             \(\backslash\)}}
+\DoxyCodeLine{00458 \textcolor{preprocessor}{  (((\_\_HANDLE\_\_)-\/>Instance-\/>JSQR \& ADC\_JSQR\_JEXTEN) == 0UL)}}
+\DoxyCodeLine{00459 }
+\DoxyCodeLine{00466 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00467 \textcolor{preprocessor}{\#define ADC\_IS\_INDEPENDENT(\_\_HANDLE\_\_)    \(\backslash\)}}
+\DoxyCodeLine{00468 \textcolor{preprocessor}{  ( ( ( ((\_\_HANDLE\_\_)-\/>Instance) == ADC5) \(\backslash\)}}
+\DoxyCodeLine{00469 \textcolor{preprocessor}{    )?                                    \(\backslash\)}}
+\DoxyCodeLine{00470 \textcolor{preprocessor}{    SET                                   \(\backslash\)}}
+\DoxyCodeLine{00471 \textcolor{preprocessor}{    :                                     \(\backslash\)}}
+\DoxyCodeLine{00472 \textcolor{preprocessor}{    RESET                                 \(\backslash\)}}
+\DoxyCodeLine{00473 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00474 \textcolor{preprocessor}{\#elif defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00475 \textcolor{preprocessor}{\#define ADC\_IS\_INDEPENDENT(\_\_HANDLE\_\_)    \(\backslash\)}}
+\DoxyCodeLine{00476 \textcolor{preprocessor}{  ( ( ( ((\_\_HANDLE\_\_)-\/>Instance) == ADC3) \(\backslash\)}}
+\DoxyCodeLine{00477 \textcolor{preprocessor}{    )?                                    \(\backslash\)}}
+\DoxyCodeLine{00478 \textcolor{preprocessor}{    SET                                   \(\backslash\)}}
+\DoxyCodeLine{00479 \textcolor{preprocessor}{    :                                     \(\backslash\)}}
+\DoxyCodeLine{00480 \textcolor{preprocessor}{    RESET                                 \(\backslash\)}}
+\DoxyCodeLine{00481 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00482 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G471xx)}}
+\DoxyCodeLine{00483 \textcolor{preprocessor}{\#define ADC\_IS\_INDEPENDENT(\_\_HANDLE\_\_) (RESET)}}
+\DoxyCodeLine{00484 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00485 }
+\DoxyCodeLine{00492 \textcolor{preprocessor}{\#define ADC\_JSQR\_RK(\_\_CHANNELNB\_\_, \_\_RANKNB\_\_) ((((\_\_CHANNELNB\_\_)\(\backslash\)}}
+\DoxyCodeLine{00493 \textcolor{preprocessor}{                                                  \& ADC\_CHANNEL\_ID\_NUMBER\_MASK) >> ADC\_CHANNEL\_ID\_NUMBER\_BITOFFSET\_POS) << ((\_\_RANKNB\_\_) \& ADC\_INJ\_RANK\_ID\_JSQR\_MASK))}}
+\DoxyCodeLine{00494 }
+\DoxyCodeLine{00500 \textcolor{preprocessor}{\#define ADC\_CFGR\_INJECT\_CONTEXT\_QUEUE(\_\_INJECT\_CONTEXT\_QUEUE\_MODE\_\_) ((\_\_INJECT\_CONTEXT\_QUEUE\_MODE\_\_) << ADC\_CFGR\_JQM\_Pos)}}
+\DoxyCodeLine{00501 }
+\DoxyCodeLine{00507 \textcolor{preprocessor}{\#define ADC\_CFGR\_INJECT\_DISCCONTINUOUS(\_\_INJECT\_DISCONTINUOUS\_MODE\_\_) ((\_\_INJECT\_DISCONTINUOUS\_MODE\_\_) <<  ADC\_CFGR\_JDISCEN\_Pos)}}
+\DoxyCodeLine{00508 }
+\DoxyCodeLine{00514 \textcolor{preprocessor}{\#define ADC\_CFGR\_REG\_DISCONTINUOUS(\_\_REG\_DISCONTINUOUS\_MODE\_\_) ((\_\_REG\_DISCONTINUOUS\_MODE\_\_) << ADC\_CFGR\_DISCEN\_Pos)}}
+\DoxyCodeLine{00515 }
+\DoxyCodeLine{00521 \textcolor{preprocessor}{\#define ADC\_CFGR\_DISCONTINUOUS\_NUM(\_\_NBR\_DISCONTINUOUS\_CONV\_\_) (((\_\_NBR\_DISCONTINUOUS\_CONV\_\_) -\/ 1UL) << ADC\_CFGR\_DISCNUM\_Pos)}}
+\DoxyCodeLine{00522 }
+\DoxyCodeLine{00528 \textcolor{preprocessor}{\#define ADC\_CFGR\_AUTOWAIT(\_\_AUTOWAIT\_\_) ((\_\_AUTOWAIT\_\_) << ADC\_CFGR\_AUTDLY\_Pos)}}
+\DoxyCodeLine{00529 }
+\DoxyCodeLine{00535 \textcolor{preprocessor}{\#define ADC\_CFGR\_CONTINUOUS(\_\_CONTINUOUS\_MODE\_\_) ((\_\_CONTINUOUS\_MODE\_\_) << ADC\_CFGR\_CONT\_Pos)}}
+\DoxyCodeLine{00536 }
+\DoxyCodeLine{00542 \textcolor{preprocessor}{\#define ADC\_CFGR\_DMACONTREQ(\_\_DMACONTREQ\_MODE\_\_) ((\_\_DMACONTREQ\_MODE\_\_) <<  ADC\_CFGR\_DMACFG\_Pos)}}
+\DoxyCodeLine{00543 }
+\DoxyCodeLine{00544 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00550 \textcolor{preprocessor}{\#define ADC\_CCR\_MULTI\_DMACONTREQ(\_\_DMACONTREQ\_MODE\_\_) ((\_\_DMACONTREQ\_MODE\_\_) << ADC\_CCR\_DMACFG\_Pos)}}
+\DoxyCodeLine{00551 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00552 }
+\DoxyCodeLine{00565 \textcolor{preprocessor}{\#define ADC\_OFFSET\_SHIFT\_RESOLUTION(\_\_HANDLE\_\_, \_\_OFFSET\_\_) \(\backslash\)}}
+\DoxyCodeLine{00566 \textcolor{preprocessor}{  ((\_\_OFFSET\_\_) << ((((\_\_HANDLE\_\_)-\/>Instance-\/>CFGR \& ADC\_CFGR\_RES) >> 3UL) * 2UL))}}
+\DoxyCodeLine{00567 }
+\DoxyCodeLine{00580 \textcolor{preprocessor}{\#define ADC\_AWD1THRESHOLD\_SHIFT\_RESOLUTION(\_\_HANDLE\_\_, \_\_THRESHOLD\_\_) \(\backslash\)}}
+\DoxyCodeLine{00581 \textcolor{preprocessor}{  ((\_\_THRESHOLD\_\_) << ((((\_\_HANDLE\_\_)-\/>Instance-\/>CFGR \& ADC\_CFGR\_RES) >> 3UL) * 2UL))}}
+\DoxyCodeLine{00582 }
+\DoxyCodeLine{00594 \textcolor{preprocessor}{\#define ADC\_AWD23THRESHOLD\_SHIFT\_RESOLUTION(\_\_HANDLE\_\_, \_\_THRESHOLD\_\_)                                       \(\backslash\)}}
+\DoxyCodeLine{00595 \textcolor{preprocessor}{  ((((\_\_HANDLE\_\_)-\/>Instance-\/>CFGR \& ADC\_CFGR\_RES) != (ADC\_CFGR\_RES\_1 | ADC\_CFGR\_RES\_0))                    ? \(\backslash\)}}
+\DoxyCodeLine{00596 \textcolor{preprocessor}{   ((\_\_THRESHOLD\_\_) >> ((4UL -\/ ((((\_\_HANDLE\_\_)-\/>Instance-\/>CFGR \& ADC\_CFGR\_RES) >> 3UL) * 2UL)) \& 0x1FUL)) : \(\backslash\)}}
+\DoxyCodeLine{00597 \textcolor{preprocessor}{   ((\_\_THRESHOLD\_\_) << 2UL)                                                                                 \(\backslash\)}}
+\DoxyCodeLine{00598 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00599 }
+\DoxyCodeLine{00605 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00606 \textcolor{preprocessor}{\#define ADC\_CLEAR\_COMMON\_CONTROL\_REGISTER(\_\_HANDLE\_\_) CLEAR\_BIT(\_\_LL\_ADC\_COMMON\_INSTANCE((\_\_HANDLE\_\_)-\/>Instance)-\/>CCR, \(\backslash\)}}
+\DoxyCodeLine{00607 \textcolor{preprocessor}{                                                                ADC\_CCR\_CKMODE    | \(\backslash\)}}
+\DoxyCodeLine{00608 \textcolor{preprocessor}{                                                                ADC\_CCR\_PRESC     | \(\backslash\)}}
+\DoxyCodeLine{00609 \textcolor{preprocessor}{                                                                ADC\_CCR\_VBATSEL   | \(\backslash\)}}
+\DoxyCodeLine{00610 \textcolor{preprocessor}{                                                                ADC\_CCR\_VSENSESEL | \(\backslash\)}}
+\DoxyCodeLine{00611 \textcolor{preprocessor}{                                                                ADC\_CCR\_VREFEN    | \(\backslash\)}}
+\DoxyCodeLine{00612 \textcolor{preprocessor}{                                                                ADC\_CCR\_MDMA      | \(\backslash\)}}
+\DoxyCodeLine{00613 \textcolor{preprocessor}{                                                                ADC\_CCR\_DMACFG    | \(\backslash\)}}
+\DoxyCodeLine{00614 \textcolor{preprocessor}{                                                                ADC\_CCR\_DELAY     | \(\backslash\)}}
+\DoxyCodeLine{00615 \textcolor{preprocessor}{                                                                ADC\_CCR\_DUAL)}}
+\DoxyCodeLine{00616 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00617 }
+\DoxyCodeLine{00618 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00626 \textcolor{preprocessor}{\#define ADC\_MULTI\_SLAVE(\_\_HANDLE\_MASTER\_\_, \_\_HANDLE\_SLAVE\_\_)             \(\backslash\)}}
+\DoxyCodeLine{00627 \textcolor{preprocessor}{  ( ((\_\_HANDLE\_MASTER\_\_)-\/>Instance == ADC1) ?                            \(\backslash\)}}
+\DoxyCodeLine{00628 \textcolor{preprocessor}{    ((\_\_HANDLE\_SLAVE\_\_)-\/>Instance = ADC2)                                \(\backslash\)}}
+\DoxyCodeLine{00629 \textcolor{preprocessor}{    :                                                                    \(\backslash\)}}
+\DoxyCodeLine{00630 \textcolor{preprocessor}{    ((\_\_HANDLE\_MASTER\_\_)-\/>Instance == ADC3) ?                            \(\backslash\)}}
+\DoxyCodeLine{00631 \textcolor{preprocessor}{    ((\_\_HANDLE\_SLAVE\_\_)-\/>Instance = ADC4)                                \(\backslash\)}}
+\DoxyCodeLine{00632 \textcolor{preprocessor}{    :                                                                    \(\backslash\)}}
+\DoxyCodeLine{00633 \textcolor{preprocessor}{    ((\_\_HANDLE\_SLAVE\_\_)-\/>Instance = NULL)                                \(\backslash\)}}
+\DoxyCodeLine{00634 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00635 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G471xx) || defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00643 \textcolor{preprocessor}{\#define ADC\_MULTI\_SLAVE(\_\_HANDLE\_MASTER\_\_, \_\_HANDLE\_SLAVE\_\_)             \(\backslash\)}}
+\DoxyCodeLine{00644 \textcolor{preprocessor}{  ( ((\_\_HANDLE\_MASTER\_\_)-\/>Instance == ADC1) ?                            \(\backslash\)}}
+\DoxyCodeLine{00645 \textcolor{preprocessor}{    ((\_\_HANDLE\_SLAVE\_\_)-\/>Instance = ADC2)                                \(\backslash\)}}
+\DoxyCodeLine{00646 \textcolor{preprocessor}{    :                                                                    \(\backslash\)}}
+\DoxyCodeLine{00647 \textcolor{preprocessor}{    ((\_\_HANDLE\_SLAVE\_\_)-\/>Instance = NULL)                                \(\backslash\)}}
+\DoxyCodeLine{00648 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00649 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00650 }
+\DoxyCodeLine{00651 }
+\DoxyCodeLine{00657 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00658 \textcolor{preprocessor}{\#define ADC\_TEMPERATURE\_SENSOR\_INSTANCE(\_\_HANDLE\_\_)  ((((\_\_HANDLE\_\_)-\/>Instance) == ADC1) || (((\_\_HANDLE\_\_)-\/>Instance) == ADC5))}}
+\DoxyCodeLine{00659 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G471xx) || defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00660 \textcolor{preprocessor}{\#define ADC\_TEMPERATURE\_SENSOR\_INSTANCE(\_\_HANDLE\_\_)  (((\_\_HANDLE\_\_)-\/>Instance) == ADC1)}}
+\DoxyCodeLine{00661 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00662 }
+\DoxyCodeLine{00668 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00669 \textcolor{preprocessor}{\#define ADC\_BATTERY\_VOLTAGE\_INSTANCE(\_\_HANDLE\_\_)  ((((\_\_HANDLE\_\_)-\/>Instance) != ADC2) || (((\_\_HANDLE\_\_)-\/>Instance) != ADC4))}}
+\DoxyCodeLine{00670 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G471xx)}}
+\DoxyCodeLine{00671 \textcolor{preprocessor}{\#define ADC\_BATTERY\_VOLTAGE\_INSTANCE(\_\_HANDLE\_\_)  (((\_\_HANDLE\_\_)-\/>Instance) != ADC2)}}
+\DoxyCodeLine{00672 \textcolor{preprocessor}{\#elif defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00673 \textcolor{preprocessor}{\#define ADC\_BATTERY\_VOLTAGE\_INSTANCE(\_\_HANDLE\_\_)  (((\_\_HANDLE\_\_)-\/>Instance) == ADC1)}}
+\DoxyCodeLine{00674 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00675 }
+\DoxyCodeLine{00681 \textcolor{preprocessor}{\#define ADC\_VREFINT\_INSTANCE(\_\_HANDLE\_\_)  (((\_\_HANDLE\_\_)-\/>Instance) != ADC2)}}
+\DoxyCodeLine{00682 }
+\DoxyCodeLine{00688 \textcolor{preprocessor}{\#define IS\_ADC\_INJECTED\_NB\_CONV(\_\_LENGTH\_\_) (((\_\_LENGTH\_\_) >= (1U)) \&\& ((\_\_LENGTH\_\_) <= (4U)))}}
+\DoxyCodeLine{00689 }
+\DoxyCodeLine{00695 \textcolor{preprocessor}{\#define IS\_ADC\_CALFACT(\_\_CALIBRATION\_FACTOR\_\_) ((\_\_CALIBRATION\_FACTOR\_\_) <= (0x7FU))}}
+\DoxyCodeLine{00696 }
+\DoxyCodeLine{00697 }
+\DoxyCodeLine{00704 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00705 \textcolor{preprocessor}{\#define IS\_ADC\_CHANNEL(\_\_HANDLE\_\_, \_\_CHANNEL\_\_)  (      ( ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_1)                || \(\backslash\)}}
+\DoxyCodeLine{00706 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)                || \(\backslash\)}}
+\DoxyCodeLine{00707 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_6)                || \(\backslash\)}}
+\DoxyCodeLine{00708 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_7)                || \(\backslash\)}}
+\DoxyCodeLine{00709 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_8)                || \(\backslash\)}}
+\DoxyCodeLine{00710 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_9)                || \(\backslash\)}}
+\DoxyCodeLine{00711 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_10)               || \(\backslash\)}}
+\DoxyCodeLine{00712 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_11)               || \(\backslash\)}}
+\DoxyCodeLine{00713 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)               || \(\backslash\)}}
+\DoxyCodeLine{00714 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_14)               || \(\backslash\)}}
+\DoxyCodeLine{00715 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_15))              || \(\backslash\)}}
+\DoxyCodeLine{00716 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC1)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00717 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)                || \(\backslash\)}}
+\DoxyCodeLine{00718 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)                || \(\backslash\)}}
+\DoxyCodeLine{00719 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)                || \(\backslash\)}}
+\DoxyCodeLine{00720 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP1)          || \(\backslash\)}}
+\DoxyCodeLine{00721 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_TEMPSENSOR\_ADC1)  || \(\backslash\)}}
+\DoxyCodeLine{00722 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VBAT)             || \(\backslash\)}}
+\DoxyCodeLine{00723 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT)))        || \(\backslash\)}}
+\DoxyCodeLine{00724 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC2)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00725 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)                || \(\backslash\)}}
+\DoxyCodeLine{00726 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)                || \(\backslash\)}}
+\DoxyCodeLine{00727 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)                || \(\backslash\)}}
+\DoxyCodeLine{00728 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)               || \(\backslash\)}}
+\DoxyCodeLine{00729 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP2)          || \(\backslash\)}}
+\DoxyCodeLine{00730 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_17)               || \(\backslash\)}}
+\DoxyCodeLine{00731 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP3\_ADC2)))   || \(\backslash\)}}
+\DoxyCodeLine{00732 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC3)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00733 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)                || \(\backslash\)}}
+\DoxyCodeLine{00734 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)                || \(\backslash\)}}
+\DoxyCodeLine{00735 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)                || \(\backslash\)}}
+\DoxyCodeLine{00736 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP3\_ADC3)     || \(\backslash\)}}
+\DoxyCodeLine{00737 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_16)               || \(\backslash\)}}
+\DoxyCodeLine{00738 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VBAT)             || \(\backslash\)}}
+\DoxyCodeLine{00739 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT)))        || \(\backslash\)}}
+\DoxyCodeLine{00740 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC4)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00741 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)                || \(\backslash\)}}
+\DoxyCodeLine{00742 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)                || \(\backslash\)}}
+\DoxyCodeLine{00743 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)                || \(\backslash\)}}
+\DoxyCodeLine{00744 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)               || \(\backslash\)}}
+\DoxyCodeLine{00745 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_16)               || \(\backslash\)}}
+\DoxyCodeLine{00746 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP6)          || \(\backslash\)}}
+\DoxyCodeLine{00747 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT)))        || \(\backslash\)}}
+\DoxyCodeLine{00748 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC5)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00749 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP5)          || \(\backslash\)}}
+\DoxyCodeLine{00750 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_TEMPSENSOR\_ADC5)  || \(\backslash\)}}
+\DoxyCodeLine{00751 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP4)          || \(\backslash\)}}
+\DoxyCodeLine{00752 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)               || \(\backslash\)}}
+\DoxyCodeLine{00753 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_16)               || \(\backslash\)}}
+\DoxyCodeLine{00754 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VBAT)             || \(\backslash\)}}
+\DoxyCodeLine{00755 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT))))}}
+\DoxyCodeLine{00756 \textcolor{preprocessor}{\#elif defined(STM32G471xx)}}
+\DoxyCodeLine{00757 \textcolor{preprocessor}{\#define IS\_ADC\_CHANNEL(\_\_HANDLE\_\_, \_\_CHANNEL\_\_)  (      ( ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_1)                || \(\backslash\)}}
+\DoxyCodeLine{00758 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)                || \(\backslash\)}}
+\DoxyCodeLine{00759 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)                || \(\backslash\)}}
+\DoxyCodeLine{00760 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)                || \(\backslash\)}}
+\DoxyCodeLine{00761 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)                || \(\backslash\)}}
+\DoxyCodeLine{00762 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_6)                || \(\backslash\)}}
+\DoxyCodeLine{00763 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_7)                || \(\backslash\)}}
+\DoxyCodeLine{00764 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_8)                || \(\backslash\)}}
+\DoxyCodeLine{00765 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_9)                || \(\backslash\)}}
+\DoxyCodeLine{00766 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_10)               || \(\backslash\)}}
+\DoxyCodeLine{00767 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_11)               || \(\backslash\)}}
+\DoxyCodeLine{00768 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)               || \(\backslash\)}}
+\DoxyCodeLine{00769 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_14)               || \(\backslash\)}}
+\DoxyCodeLine{00770 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_15))              || \(\backslash\)}}
+\DoxyCodeLine{00771 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC1)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00772 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP1)          || \(\backslash\)}}
+\DoxyCodeLine{00773 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_TEMPSENSOR\_ADC1)  || \(\backslash\)}}
+\DoxyCodeLine{00774 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VBAT)             || \(\backslash\)}}
+\DoxyCodeLine{00775 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT)))        || \(\backslash\)}}
+\DoxyCodeLine{00776 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC2)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00777 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)               || \(\backslash\)}}
+\DoxyCodeLine{00778 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP2)          || \(\backslash\)}}
+\DoxyCodeLine{00779 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_17)               || \(\backslash\)}}
+\DoxyCodeLine{00780 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP3\_ADC2)))   || \(\backslash\)}}
+\DoxyCodeLine{00781 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC3)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00782 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP3\_ADC3)     || \(\backslash\)}}
+\DoxyCodeLine{00783 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_16)               || \(\backslash\)}}
+\DoxyCodeLine{00784 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VBAT)             || \(\backslash\)}}
+\DoxyCodeLine{00785 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT))))}}
+\DoxyCodeLine{00786 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)}}
+\DoxyCodeLine{00787 \textcolor{preprocessor}{\#define IS\_ADC\_CHANNEL(\_\_HANDLE\_\_, \_\_CHANNEL\_\_)  (      ( ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_1)                || \(\backslash\)}}
+\DoxyCodeLine{00788 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)                || \(\backslash\)}}
+\DoxyCodeLine{00789 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)                || \(\backslash\)}}
+\DoxyCodeLine{00790 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)                || \(\backslash\)}}
+\DoxyCodeLine{00791 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)                || \(\backslash\)}}
+\DoxyCodeLine{00792 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_6)                || \(\backslash\)}}
+\DoxyCodeLine{00793 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_7)                || \(\backslash\)}}
+\DoxyCodeLine{00794 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_8)                || \(\backslash\)}}
+\DoxyCodeLine{00795 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_9)                || \(\backslash\)}}
+\DoxyCodeLine{00796 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_10)               || \(\backslash\)}}
+\DoxyCodeLine{00797 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_11)               || \(\backslash\)}}
+\DoxyCodeLine{00798 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)               || \(\backslash\)}}
+\DoxyCodeLine{00799 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_14)               || \(\backslash\)}}
+\DoxyCodeLine{00800 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_15))              || \(\backslash\)}}
+\DoxyCodeLine{00801 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC1)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00802 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP1)          || \(\backslash\)}}
+\DoxyCodeLine{00803 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_TEMPSENSOR\_ADC1)  || \(\backslash\)}}
+\DoxyCodeLine{00804 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VBAT)             || \(\backslash\)}}
+\DoxyCodeLine{00805 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT)))        || \(\backslash\)}}
+\DoxyCodeLine{00806 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC2)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00807 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)               || \(\backslash\)}}
+\DoxyCodeLine{00808 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP2)          || \(\backslash\)}}
+\DoxyCodeLine{00809 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_17)               || \(\backslash\)}}
+\DoxyCodeLine{00810 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP3\_ADC2))))}}
+\DoxyCodeLine{00811 \textcolor{preprocessor}{\#elif defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00812 \textcolor{preprocessor}{\#define IS\_ADC\_CHANNEL(\_\_HANDLE\_\_, \_\_CHANNEL\_\_)  (      ( ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_1)                || \(\backslash\)}}
+\DoxyCodeLine{00813 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)                || \(\backslash\)}}
+\DoxyCodeLine{00814 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)                || \(\backslash\)}}
+\DoxyCodeLine{00815 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)                || \(\backslash\)}}
+\DoxyCodeLine{00816 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)                || \(\backslash\)}}
+\DoxyCodeLine{00817 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_6)                || \(\backslash\)}}
+\DoxyCodeLine{00818 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_7)                || \(\backslash\)}}
+\DoxyCodeLine{00819 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_8)                || \(\backslash\)}}
+\DoxyCodeLine{00820 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_9)                || \(\backslash\)}}
+\DoxyCodeLine{00821 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_10)               || \(\backslash\)}}
+\DoxyCodeLine{00822 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_11)               || \(\backslash\)}}
+\DoxyCodeLine{00823 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)               || \(\backslash\)}}
+\DoxyCodeLine{00824 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_14)               || \(\backslash\)}}
+\DoxyCodeLine{00825 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_15))              || \(\backslash\)}}
+\DoxyCodeLine{00826 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC1)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00827 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP1)          || \(\backslash\)}}
+\DoxyCodeLine{00828 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_TEMPSENSOR\_ADC1)  || \(\backslash\)}}
+\DoxyCodeLine{00829 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VBAT)             || \(\backslash\)}}
+\DoxyCodeLine{00830 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT)))        || \(\backslash\)}}
+\DoxyCodeLine{00831 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC2)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00832 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)               || \(\backslash\)}}
+\DoxyCodeLine{00833 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP2)          || \(\backslash\)}}
+\DoxyCodeLine{00834 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_17)               || \(\backslash\)}}
+\DoxyCodeLine{00835 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP3\_ADC2)))   || \(\backslash\)}}
+\DoxyCodeLine{00836 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC3)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00837 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP3\_ADC3)     || \(\backslash\)}}
+\DoxyCodeLine{00838 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_16)               || \(\backslash\)}}
+\DoxyCodeLine{00839 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VOPAMP6)          || \(\backslash\)}}
+\DoxyCodeLine{00840 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_VREFINT))))}}
+\DoxyCodeLine{00841 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00842 }
+\DoxyCodeLine{00849 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00850 \textcolor{preprocessor}{\#define IS\_ADC\_DIFF\_CHANNEL(\_\_HANDLE\_\_, \_\_CHANNEL\_\_)  ( ( ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_1)           || \(\backslash\)}}
+\DoxyCodeLine{00851 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_6)           || \(\backslash\)}}
+\DoxyCodeLine{00852 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_7)           || \(\backslash\)}}
+\DoxyCodeLine{00853 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_8)           || \(\backslash\)}}
+\DoxyCodeLine{00854 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_9)           || \(\backslash\)}}
+\DoxyCodeLine{00855 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_10)          || \(\backslash\)}}
+\DoxyCodeLine{00856 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_11)          || \(\backslash\)}}
+\DoxyCodeLine{00857 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_14))         || \(\backslash\)}}
+\DoxyCodeLine{00858 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC1)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00859 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)           || \(\backslash\)}}
+\DoxyCodeLine{00860 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)           || \(\backslash\)}}
+\DoxyCodeLine{00861 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)           || \(\backslash\)}}
+\DoxyCodeLine{00862 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)))         || \(\backslash\)}}
+\DoxyCodeLine{00863 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC2)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00864 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)           || \(\backslash\)}}
+\DoxyCodeLine{00865 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)           || \(\backslash\)}}
+\DoxyCodeLine{00866 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)           || \(\backslash\)}}
+\DoxyCodeLine{00867 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)           || \(\backslash\)}}
+\DoxyCodeLine{00868 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)          || \(\backslash\)}}
+\DoxyCodeLine{00869 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)))        || \(\backslash\)}}
+\DoxyCodeLine{00870 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC3)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00871 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)           || \(\backslash\)}}
+\DoxyCodeLine{00872 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)           || \(\backslash\)}}
+\DoxyCodeLine{00873 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)           || \(\backslash\)}}
+\DoxyCodeLine{00874 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)           || \(\backslash\)}}
+\DoxyCodeLine{00875 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_15)))        || \(\backslash\)}}
+\DoxyCodeLine{00876 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC4)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00877 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)           || \(\backslash\)}}
+\DoxyCodeLine{00878 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)           || \(\backslash\)}}
+\DoxyCodeLine{00879 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)           || \(\backslash\)}}
+\DoxyCodeLine{00880 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)           || \(\backslash\)}}
+\DoxyCodeLine{00881 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)          || \(\backslash\)}}
+\DoxyCodeLine{00882 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)          || \(\backslash\)}}
+\DoxyCodeLine{00883 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_15)))        || \(\backslash\)}}
+\DoxyCodeLine{00884 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC5)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00885 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)          || \(\backslash\)}}
+\DoxyCodeLine{00886 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)          || \(\backslash\)}}
+\DoxyCodeLine{00887 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_15))) )}}
+\DoxyCodeLine{00888 \textcolor{preprocessor}{\#elif defined(STM32G471xx) || defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00889 \textcolor{preprocessor}{\#define IS\_ADC\_DIFF\_CHANNEL(\_\_HANDLE\_\_, \_\_CHANNEL\_\_)  ( ( ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_1)           || \(\backslash\)}}
+\DoxyCodeLine{00890 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)           || \(\backslash\)}}
+\DoxyCodeLine{00891 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)           || \(\backslash\)}}
+\DoxyCodeLine{00892 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)           || \(\backslash\)}}
+\DoxyCodeLine{00893 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)           || \(\backslash\)}}
+\DoxyCodeLine{00894 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_6)           || \(\backslash\)}}
+\DoxyCodeLine{00895 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_7)           || \(\backslash\)}}
+\DoxyCodeLine{00896 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_8)           || \(\backslash\)}}
+\DoxyCodeLine{00897 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_9)           || \(\backslash\)}}
+\DoxyCodeLine{00898 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_10)          || \(\backslash\)}}
+\DoxyCodeLine{00899 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_11)          || \(\backslash\)}}
+\DoxyCodeLine{00900 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_14))         || \(\backslash\)}}
+\DoxyCodeLine{00901 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC2)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00902 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)          || \(\backslash\)}}
+\DoxyCodeLine{00903 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13)))        || \(\backslash\)}}
+\DoxyCodeLine{00904 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC3)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00905 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_15))) )}}
+\DoxyCodeLine{00906 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)}}
+\DoxyCodeLine{00907 \textcolor{preprocessor}{\#define IS\_ADC\_DIFF\_CHANNEL(\_\_HANDLE\_\_, \_\_CHANNEL\_\_)  ( ( ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_1)           || \(\backslash\)}}
+\DoxyCodeLine{00908 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_2)           || \(\backslash\)}}
+\DoxyCodeLine{00909 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_3)           || \(\backslash\)}}
+\DoxyCodeLine{00910 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_4)           || \(\backslash\)}}
+\DoxyCodeLine{00911 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_5)           || \(\backslash\)}}
+\DoxyCodeLine{00912 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_6)           || \(\backslash\)}}
+\DoxyCodeLine{00913 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_7)           || \(\backslash\)}}
+\DoxyCodeLine{00914 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_8)           || \(\backslash\)}}
+\DoxyCodeLine{00915 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_9)           || \(\backslash\)}}
+\DoxyCodeLine{00916 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_10)          || \(\backslash\)}}
+\DoxyCodeLine{00917 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_11)          || \(\backslash\)}}
+\DoxyCodeLine{00918 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_14))         || \(\backslash\)}}
+\DoxyCodeLine{00919 \textcolor{preprocessor}{                                                        ((((\_\_HANDLE\_\_)-\/>Instance) == ADC2)  \&\& \(\backslash\)}}
+\DoxyCodeLine{00920 \textcolor{preprocessor}{                                                         (((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_12)          || \(\backslash\)}}
+\DoxyCodeLine{00921 \textcolor{preprocessor}{                                                          ((\_\_CHANNEL\_\_) == ADC\_CHANNEL\_13))) )}}
+\DoxyCodeLine{00922 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00923 }
+\DoxyCodeLine{00929 \textcolor{preprocessor}{\#define IS\_ADC\_SINGLE\_DIFFERENTIAL(\_\_SING\_DIFF\_\_) (((\_\_SING\_DIFF\_\_) == ADC\_SINGLE\_ENDED)      || \(\backslash\)}}
+\DoxyCodeLine{00930 \textcolor{preprocessor}{                                                   ((\_\_SING\_DIFF\_\_) == ADC\_DIFFERENTIAL\_ENDED)  )}}
+\DoxyCodeLine{00931 }
+\DoxyCodeLine{00937 \textcolor{preprocessor}{\#define IS\_ADC\_OFFSET\_NUMBER(\_\_OFFSET\_NUMBER\_\_) (((\_\_OFFSET\_NUMBER\_\_) == ADC\_OFFSET\_NONE) || \(\backslash\)}}
+\DoxyCodeLine{00938 \textcolor{preprocessor}{                                                 ((\_\_OFFSET\_NUMBER\_\_) == ADC\_OFFSET\_1)    || \(\backslash\)}}
+\DoxyCodeLine{00939 \textcolor{preprocessor}{                                                 ((\_\_OFFSET\_NUMBER\_\_) == ADC\_OFFSET\_2)    || \(\backslash\)}}
+\DoxyCodeLine{00940 \textcolor{preprocessor}{                                                 ((\_\_OFFSET\_NUMBER\_\_) == ADC\_OFFSET\_3)    || \(\backslash\)}}
+\DoxyCodeLine{00941 \textcolor{preprocessor}{                                                 ((\_\_OFFSET\_NUMBER\_\_) == ADC\_OFFSET\_4)      )}}
+\DoxyCodeLine{00942 }
+\DoxyCodeLine{00948 \textcolor{preprocessor}{\#define IS\_ADC\_OFFSET\_SIGN(\_\_OFFSET\_SIGN\_\_)     (((\_\_OFFSET\_SIGN\_\_) == ADC\_OFFSET\_SIGN\_NEGATIVE) || \(\backslash\)}}
+\DoxyCodeLine{00949 \textcolor{preprocessor}{                                                 ((\_\_OFFSET\_SIGN\_\_) == ADC\_OFFSET\_SIGN\_POSITIVE)    )}}
+\DoxyCodeLine{00950 }
+\DoxyCodeLine{00956 \textcolor{preprocessor}{\#define IS\_ADC\_INJECTED\_RANK(\_\_CHANNEL\_\_) (((\_\_CHANNEL\_\_) == ADC\_INJECTED\_RANK\_1) || \(\backslash\)}}
+\DoxyCodeLine{00957 \textcolor{preprocessor}{                                           ((\_\_CHANNEL\_\_) == ADC\_INJECTED\_RANK\_2) || \(\backslash\)}}
+\DoxyCodeLine{00958 \textcolor{preprocessor}{                                           ((\_\_CHANNEL\_\_) == ADC\_INJECTED\_RANK\_3) || \(\backslash\)}}
+\DoxyCodeLine{00959 \textcolor{preprocessor}{                                           ((\_\_CHANNEL\_\_) == ADC\_INJECTED\_RANK\_4)   )}}
+\DoxyCodeLine{00960 }
+\DoxyCodeLine{00967 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx)}}
+\DoxyCodeLine{00968 \textcolor{preprocessor}{\#define IS\_ADC\_EXTTRIGINJEC(\_\_HANDLE\_\_, \_\_INJTRIG\_\_)  (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{00969 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{00970 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{00971 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{00972 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{00973 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{00974 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T6\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{00975 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T7\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{00976 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{00977 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{00978 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{00979 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T15\_TRGO)       || \(\backslash\)}}
+\DoxyCodeLine{00980 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_TRGO)       || \(\backslash\)}}
+\DoxyCodeLine{00981 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_TRGO2)      || \(\backslash\)}}
+\DoxyCodeLine{00982 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG2)     || \(\backslash\)}}
+\DoxyCodeLine{00983 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG4)     || \(\backslash\)}}
+\DoxyCodeLine{00984 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG5)     || \(\backslash\)}}
+\DoxyCodeLine{00985 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG6)     || \(\backslash\)}}
+\DoxyCodeLine{00986 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG7)     || \(\backslash\)}}
+\DoxyCodeLine{00987 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG8)     || \(\backslash\)}}
+\DoxyCodeLine{00988 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG9)     || \(\backslash\)}}
+\DoxyCodeLine{00989 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG10)    || \(\backslash\)}}
+\DoxyCodeLine{00990 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_LPTIM\_OUT)      || \(\backslash\)}}
+\DoxyCodeLine{00991 \textcolor{preprocessor}{                                                       ((((\_\_HANDLE\_\_)-\/>Instance == ADC1) || ((\_\_HANDLE\_\_)-\/>Instance == ADC2)) \&\& \(\backslash\)}}
+\DoxyCodeLine{00992 \textcolor{preprocessor}{                                                        (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_CC1)       || \(\backslash\)}}
+\DoxyCodeLine{00993 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC1)       || \(\backslash\)}}
+\DoxyCodeLine{00994 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{00995 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC4)       || \(\backslash\)}}
+\DoxyCodeLine{00996 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T16\_CC1)      || \(\backslash\)}}
+\DoxyCodeLine{00997 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_CC4)      || \(\backslash\)}}
+\DoxyCodeLine{00998 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT15)))   || \(\backslash\)}}
+\DoxyCodeLine{00999 \textcolor{preprocessor}{                                                       ((((\_\_HANDLE\_\_)-\/>Instance == ADC3) || ((\_\_HANDLE\_\_)-\/>Instance == ADC4) || ((\_\_HANDLE\_\_)-\/>Instance == ADC5)) \&\& \(\backslash\)}}
+\DoxyCodeLine{01000 \textcolor{preprocessor}{                                                        (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01001 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01002 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_CC4)       || \(\backslash\)}}
+\DoxyCodeLine{01003 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC2)       || \(\backslash\)}}
+\DoxyCodeLine{01004 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_CC2)      || \(\backslash\)}}
+\DoxyCodeLine{01005 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG1)   || \(\backslash\)}}
+\DoxyCodeLine{01006 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_HRTIM\_TRG3)   || \(\backslash\)}}
+\DoxyCodeLine{01007 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT3)))    || \(\backslash\)}}
+\DoxyCodeLine{01008 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_INJECTED\_SOFTWARE\_START)          )}}
+\DoxyCodeLine{01009 \textcolor{preprocessor}{\#elif defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{01010 \textcolor{preprocessor}{\#define IS\_ADC\_EXTTRIGINJEC(\_\_HANDLE\_\_, \_\_INJTRIG\_\_)  (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01011 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{01012 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01013 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01014 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01015 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01016 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T6\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01017 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T7\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01018 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01019 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{01020 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01021 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T15\_TRGO)       || \(\backslash\)}}
+\DoxyCodeLine{01022 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_TRGO)       || \(\backslash\)}}
+\DoxyCodeLine{01023 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_TRGO2)      || \(\backslash\)}}
+\DoxyCodeLine{01024 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_LPTIM\_OUT)      || \(\backslash\)}}
+\DoxyCodeLine{01025 \textcolor{preprocessor}{                                                       ((((\_\_HANDLE\_\_)-\/>Instance == ADC1) || ((\_\_HANDLE\_\_)-\/>Instance == ADC2)) \&\& \(\backslash\)}}
+\DoxyCodeLine{01026 \textcolor{preprocessor}{                                                        (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_CC1)       || \(\backslash\)}}
+\DoxyCodeLine{01027 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC1)       || \(\backslash\)}}
+\DoxyCodeLine{01028 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01029 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC4)       || \(\backslash\)}}
+\DoxyCodeLine{01030 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T16\_CC1)      || \(\backslash\)}}
+\DoxyCodeLine{01031 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_CC4)      || \(\backslash\)}}
+\DoxyCodeLine{01032 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT15)))   || \(\backslash\)}}
+\DoxyCodeLine{01033 \textcolor{preprocessor}{                                                       ((((\_\_HANDLE\_\_)-\/>Instance == ADC3) || ((\_\_HANDLE\_\_)-\/>Instance == ADC4) || ((\_\_HANDLE\_\_)-\/>Instance == ADC5)) \&\& \(\backslash\)}}
+\DoxyCodeLine{01034 \textcolor{preprocessor}{                                                        (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01035 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01036 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_CC4)       || \(\backslash\)}}
+\DoxyCodeLine{01037 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC2)       || \(\backslash\)}}
+\DoxyCodeLine{01038 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_CC2)      || \(\backslash\)}}
+\DoxyCodeLine{01039 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT3)))    || \(\backslash\)}}
+\DoxyCodeLine{01040 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_INJECTED\_SOFTWARE\_START)          )}}
+\DoxyCodeLine{01041 \textcolor{preprocessor}{\#elif defined(STM32G471xx)}}
+\DoxyCodeLine{01042 \textcolor{preprocessor}{\#define IS\_ADC\_EXTTRIGINJEC(\_\_HANDLE\_\_, \_\_INJTRIG\_\_)  (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01043 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{01044 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01045 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01046 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01047 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01048 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T6\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01049 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T7\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01050 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01051 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{01052 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01053 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T15\_TRGO)       || \(\backslash\)}}
+\DoxyCodeLine{01054 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_LPTIM\_OUT)      || \(\backslash\)}}
+\DoxyCodeLine{01055 \textcolor{preprocessor}{                                                       ((((\_\_HANDLE\_\_)-\/>Instance == ADC1) || ((\_\_HANDLE\_\_)-\/>Instance == ADC2)) \&\& \(\backslash\)}}
+\DoxyCodeLine{01056 \textcolor{preprocessor}{                                                        (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_CC1)       || \(\backslash\)}}
+\DoxyCodeLine{01057 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC1)       || \(\backslash\)}}
+\DoxyCodeLine{01058 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01059 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC4)       || \(\backslash\)}}
+\DoxyCodeLine{01060 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T16\_CC1)      || \(\backslash\)}}
+\DoxyCodeLine{01061 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT15)))   || \(\backslash\)}}
+\DoxyCodeLine{01062 \textcolor{preprocessor}{                                                       ((((\_\_HANDLE\_\_)-\/>Instance == ADC3)) \&\& \(\backslash\)}}
+\DoxyCodeLine{01063 \textcolor{preprocessor}{                                                        (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01064 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01065 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_CC4)       || \(\backslash\)}}
+\DoxyCodeLine{01066 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC2)       || \(\backslash\)}}
+\DoxyCodeLine{01067 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT3)))    || \(\backslash\)}}
+\DoxyCodeLine{01068 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_INJECTED\_SOFTWARE\_START)          )}}
+\DoxyCodeLine{01069 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)}}
+\DoxyCodeLine{01070 \textcolor{preprocessor}{\#define IS\_ADC\_EXTTRIGINJEC(\_\_HANDLE\_\_, \_\_INJTRIG\_\_)  (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01071 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{01072 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01073 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01074 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_CC1)         || \(\backslash\)}}
+\DoxyCodeLine{01075 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01076 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC1)         || \(\backslash\)}}
+\DoxyCodeLine{01077 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC3)         || \(\backslash\)}}
+\DoxyCodeLine{01078 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01079 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01080 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T6\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01081 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T7\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01082 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01083 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{01084 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01085 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T15\_TRGO)       || \(\backslash\)}}
+\DoxyCodeLine{01086 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T16\_CC1)        || \(\backslash\)}}
+\DoxyCodeLine{01087 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT15)       || \(\backslash\)}}
+\DoxyCodeLine{01088 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_LPTIM\_OUT)      || \(\backslash\)}}
+\DoxyCodeLine{01089 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_INJECTED\_SOFTWARE\_START)          )}}
+\DoxyCodeLine{01090 \textcolor{preprocessor}{\#elif defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{01091 \textcolor{preprocessor}{\#define IS\_ADC\_EXTTRIGINJEC(\_\_HANDLE\_\_, \_\_INJTRIG\_\_)  (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01092 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{01093 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01094 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01095 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01096 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01097 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T6\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01098 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T7\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01099 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO)        || \(\backslash\)}}
+\DoxyCodeLine{01100 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_TRGO2)       || \(\backslash\)}}
+\DoxyCodeLine{01101 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC4)         || \(\backslash\)}}
+\DoxyCodeLine{01102 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T15\_TRGO)       || \(\backslash\)}}
+\DoxyCodeLine{01103 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_TRGO)       || \(\backslash\)}}
+\DoxyCodeLine{01104 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_TRGO2)      || \(\backslash\)}}
+\DoxyCodeLine{01105 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_LPTIM\_OUT)      || \(\backslash\)}}
+\DoxyCodeLine{01106 \textcolor{preprocessor}{                                                       ((((\_\_HANDLE\_\_)-\/>Instance == ADC1) || ((\_\_HANDLE\_\_)-\/>Instance == ADC2)) \&\& \(\backslash\)}}
+\DoxyCodeLine{01107 \textcolor{preprocessor}{                                                        (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T2\_CC1)       || \(\backslash\)}}
+\DoxyCodeLine{01108 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC1)       || \(\backslash\)}}
+\DoxyCodeLine{01109 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01110 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T3\_CC4)       || \(\backslash\)}}
+\DoxyCodeLine{01111 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T16\_CC1)      || \(\backslash\)}}
+\DoxyCodeLine{01112 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_CC4)      || \(\backslash\)}}
+\DoxyCodeLine{01113 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT15)))   || \(\backslash\)}}
+\DoxyCodeLine{01114 \textcolor{preprocessor}{                                                       (((\_\_HANDLE\_\_)-\/>Instance == ADC3) \&\& \(\backslash\)}}
+\DoxyCodeLine{01115 \textcolor{preprocessor}{                                                        (((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T1\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01116 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_CC3)       || \(\backslash\)}}
+\DoxyCodeLine{01117 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T4\_CC4)       || \(\backslash\)}}
+\DoxyCodeLine{01118 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T8\_CC2)       || \(\backslash\)}}
+\DoxyCodeLine{01119 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_T20\_CC2)      || \(\backslash\)}}
+\DoxyCodeLine{01120 \textcolor{preprocessor}{                                                         ((\_\_INJTRIG\_\_) == ADC\_EXTERNALTRIGINJEC\_EXT\_IT3)))    || \(\backslash\)}}
+\DoxyCodeLine{01121 \textcolor{preprocessor}{                                                       ((\_\_INJTRIG\_\_) == ADC\_INJECTED\_SOFTWARE\_START)          )}}
+\DoxyCodeLine{01122 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01123 }
+\DoxyCodeLine{01129 \textcolor{preprocessor}{\#define IS\_ADC\_EXTTRIGINJEC\_EDGE(\_\_EDGE\_\_) (((\_\_EDGE\_\_) == ADC\_EXTERNALTRIGINJECCONV\_EDGE\_NONE)         || \(\backslash\)}}
+\DoxyCodeLine{01130 \textcolor{preprocessor}{                                            ((\_\_EDGE\_\_) == ADC\_EXTERNALTRIGINJECCONV\_EDGE\_RISING)       || \(\backslash\)}}
+\DoxyCodeLine{01131 \textcolor{preprocessor}{                                            ((\_\_EDGE\_\_) == ADC\_EXTERNALTRIGINJECCONV\_EDGE\_FALLING)      || \(\backslash\)}}
+\DoxyCodeLine{01132 \textcolor{preprocessor}{                                            ((\_\_EDGE\_\_) == ADC\_EXTERNALTRIGINJECCONV\_EDGE\_RISINGFALLING) )}}
+\DoxyCodeLine{01133 }
+\DoxyCodeLine{01134 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{01140 \textcolor{preprocessor}{\#define IS\_ADC\_MULTIMODE(\_\_MODE\_\_) (((\_\_MODE\_\_) == ADC\_MODE\_INDEPENDENT)               || \(\backslash\)}}
+\DoxyCodeLine{01141 \textcolor{preprocessor}{                                    ((\_\_MODE\_\_) == ADC\_DUALMODE\_REGSIMULT\_INJECSIMULT) || \(\backslash\)}}
+\DoxyCodeLine{01142 \textcolor{preprocessor}{                                    ((\_\_MODE\_\_) == ADC\_DUALMODE\_REGSIMULT\_ALTERTRIG)   || \(\backslash\)}}
+\DoxyCodeLine{01143 \textcolor{preprocessor}{                                    ((\_\_MODE\_\_) == ADC\_DUALMODE\_REGINTERL\_INJECSIMULT) || \(\backslash\)}}
+\DoxyCodeLine{01144 \textcolor{preprocessor}{                                    ((\_\_MODE\_\_) == ADC\_DUALMODE\_INJECSIMULT)           || \(\backslash\)}}
+\DoxyCodeLine{01145 \textcolor{preprocessor}{                                    ((\_\_MODE\_\_) == ADC\_DUALMODE\_REGSIMULT)             || \(\backslash\)}}
+\DoxyCodeLine{01146 \textcolor{preprocessor}{                                    ((\_\_MODE\_\_) == ADC\_DUALMODE\_INTERL)                || \(\backslash\)}}
+\DoxyCodeLine{01147 \textcolor{preprocessor}{                                    ((\_\_MODE\_\_) == ADC\_DUALMODE\_ALTERTRIG)               )}}
+\DoxyCodeLine{01148 }
+\DoxyCodeLine{01154 \textcolor{preprocessor}{\#define IS\_ADC\_DMA\_ACCESS\_MULTIMODE(\_\_MODE\_\_) (((\_\_MODE\_\_) == ADC\_DMAACCESSMODE\_DISABLED)   || \(\backslash\)}}
+\DoxyCodeLine{01155 \textcolor{preprocessor}{                                               ((\_\_MODE\_\_) == ADC\_DMAACCESSMODE\_12\_10\_BITS) || \(\backslash\)}}
+\DoxyCodeLine{01156 \textcolor{preprocessor}{                                               ((\_\_MODE\_\_) == ADC\_DMAACCESSMODE\_8\_6\_BITS)     )}}
+\DoxyCodeLine{01157 }
+\DoxyCodeLine{01163 \textcolor{preprocessor}{\#define IS\_ADC\_SAMPLING\_DELAY(\_\_DELAY\_\_) (((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_1CYCLE)   || \(\backslash\)}}
+\DoxyCodeLine{01164 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_2CYCLES)  || \(\backslash\)}}
+\DoxyCodeLine{01165 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_3CYCLES)  || \(\backslash\)}}
+\DoxyCodeLine{01166 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_4CYCLES)  || \(\backslash\)}}
+\DoxyCodeLine{01167 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_5CYCLES)  || \(\backslash\)}}
+\DoxyCodeLine{01168 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_6CYCLES)  || \(\backslash\)}}
+\DoxyCodeLine{01169 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_7CYCLES)  || \(\backslash\)}}
+\DoxyCodeLine{01170 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_8CYCLES)  || \(\backslash\)}}
+\DoxyCodeLine{01171 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_9CYCLES)  || \(\backslash\)}}
+\DoxyCodeLine{01172 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_10CYCLES) || \(\backslash\)}}
+\DoxyCodeLine{01173 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_11CYCLES) || \(\backslash\)}}
+\DoxyCodeLine{01174 \textcolor{preprocessor}{                                          ((\_\_DELAY\_\_) == ADC\_TWOSAMPLINGDELAY\_12CYCLES)   )}}
+\DoxyCodeLine{01175 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01176 }
+\DoxyCodeLine{01182 \textcolor{preprocessor}{\#define IS\_ADC\_ANALOG\_WATCHDOG\_NUMBER(\_\_WATCHDOG\_\_) (((\_\_WATCHDOG\_\_) == ADC\_ANALOGWATCHDOG\_1) || \(\backslash\)}}
+\DoxyCodeLine{01183 \textcolor{preprocessor}{                                                     ((\_\_WATCHDOG\_\_) == ADC\_ANALOGWATCHDOG\_2) || \(\backslash\)}}
+\DoxyCodeLine{01184 \textcolor{preprocessor}{                                                     ((\_\_WATCHDOG\_\_) == ADC\_ANALOGWATCHDOG\_3)   )}}
+\DoxyCodeLine{01185 }
+\DoxyCodeLine{01191 \textcolor{preprocessor}{\#define IS\_ADC\_ANALOG\_WATCHDOG\_MODE(\_\_WATCHDOG\_MODE\_\_) (((\_\_WATCHDOG\_MODE\_\_) == ADC\_ANALOGWATCHDOG\_NONE)             || \(\backslash\)}}
+\DoxyCodeLine{01192 \textcolor{preprocessor}{                                                        ((\_\_WATCHDOG\_MODE\_\_) == ADC\_ANALOGWATCHDOG\_SINGLE\_REG)       || \(\backslash\)}}
+\DoxyCodeLine{01193 \textcolor{preprocessor}{                                                        ((\_\_WATCHDOG\_MODE\_\_) == ADC\_ANALOGWATCHDOG\_SINGLE\_INJEC)     || \(\backslash\)}}
+\DoxyCodeLine{01194 \textcolor{preprocessor}{                                                        ((\_\_WATCHDOG\_MODE\_\_) == ADC\_ANALOGWATCHDOG\_SINGLE\_REGINJEC)  || \(\backslash\)}}
+\DoxyCodeLine{01195 \textcolor{preprocessor}{                                                        ((\_\_WATCHDOG\_MODE\_\_) == ADC\_ANALOGWATCHDOG\_ALL\_REG)          || \(\backslash\)}}
+\DoxyCodeLine{01196 \textcolor{preprocessor}{                                                        ((\_\_WATCHDOG\_MODE\_\_) == ADC\_ANALOGWATCHDOG\_ALL\_INJEC)        || \(\backslash\)}}
+\DoxyCodeLine{01197 \textcolor{preprocessor}{                                                        ((\_\_WATCHDOG\_MODE\_\_) == ADC\_ANALOGWATCHDOG\_ALL\_REGINJEC)       )}}
+\DoxyCodeLine{01198 }
+\DoxyCodeLine{01204 \textcolor{preprocessor}{\#define IS\_ADC\_ANALOG\_WATCHDOG\_FILTERING\_MODE(\_\_FILTERING\_MODE\_\_)  (((\_\_FILTERING\_MODE\_\_) == ADC\_AWD\_FILTERING\_NONE)            || \(\backslash\)}}
+\DoxyCodeLine{01205 \textcolor{preprocessor}{                                                                    ((\_\_FILTERING\_MODE\_\_) == ADC\_AWD\_FILTERING\_2SAMPLES)        || \(\backslash\)}}
+\DoxyCodeLine{01206 \textcolor{preprocessor}{                                                                    ((\_\_FILTERING\_MODE\_\_) == ADC\_AWD\_FILTERING\_3SAMPLES)        || \(\backslash\)}}
+\DoxyCodeLine{01207 \textcolor{preprocessor}{                                                                    ((\_\_FILTERING\_MODE\_\_) == ADC\_AWD\_FILTERING\_4SAMPLES)        || \(\backslash\)}}
+\DoxyCodeLine{01208 \textcolor{preprocessor}{                                                                    ((\_\_FILTERING\_MODE\_\_) == ADC\_AWD\_FILTERING\_5SAMPLES)        || \(\backslash\)}}
+\DoxyCodeLine{01209 \textcolor{preprocessor}{                                                                    ((\_\_FILTERING\_MODE\_\_) == ADC\_AWD\_FILTERING\_6SAMPLES)        || \(\backslash\)}}
+\DoxyCodeLine{01210 \textcolor{preprocessor}{                                                                    ((\_\_FILTERING\_MODE\_\_) == ADC\_AWD\_FILTERING\_7SAMPLES)        || \(\backslash\)}}
+\DoxyCodeLine{01211 \textcolor{preprocessor}{                                                                    ((\_\_FILTERING\_MODE\_\_) == ADC\_AWD\_FILTERING\_8SAMPLES)           )}}
+\DoxyCodeLine{01212 }
+\DoxyCodeLine{01213 }
+\DoxyCodeLine{01219 \textcolor{preprocessor}{\#define IS\_ADC\_CONVERSION\_GROUP(\_\_CONVERSION\_\_) (((\_\_CONVERSION\_\_) == ADC\_REGULAR\_GROUP)         || \(\backslash\)}}
+\DoxyCodeLine{01220 \textcolor{preprocessor}{                                                 ((\_\_CONVERSION\_\_) == ADC\_INJECTED\_GROUP)        || \(\backslash\)}}
+\DoxyCodeLine{01221 \textcolor{preprocessor}{                                                 ((\_\_CONVERSION\_\_) == ADC\_REGULAR\_INJECTED\_GROUP)  )}}
+\DoxyCodeLine{01222 }
+\DoxyCodeLine{01228 \textcolor{preprocessor}{\#define IS\_ADC\_EVENT\_TYPE(\_\_EVENT\_\_) (((\_\_EVENT\_\_) == ADC\_EOSMP\_EVENT)  || \(\backslash\)}}
+\DoxyCodeLine{01229 \textcolor{preprocessor}{                                      ((\_\_EVENT\_\_) == ADC\_AWD\_EVENT)    || \(\backslash\)}}
+\DoxyCodeLine{01230 \textcolor{preprocessor}{                                      ((\_\_EVENT\_\_) == ADC\_AWD2\_EVENT)   || \(\backslash\)}}
+\DoxyCodeLine{01231 \textcolor{preprocessor}{                                      ((\_\_EVENT\_\_) == ADC\_AWD3\_EVENT)   || \(\backslash\)}}
+\DoxyCodeLine{01232 \textcolor{preprocessor}{                                      ((\_\_EVENT\_\_) == ADC\_OVR\_EVENT)    || \(\backslash\)}}
+\DoxyCodeLine{01233 \textcolor{preprocessor}{                                      ((\_\_EVENT\_\_) == ADC\_JQOVF\_EVENT)  )}}
+\DoxyCodeLine{01234 }
+\DoxyCodeLine{01240 \textcolor{preprocessor}{\#define IS\_ADC\_OVERSAMPLING\_RATIO(\_\_RATIO\_\_)      (((\_\_RATIO\_\_) == ADC\_OVERSAMPLING\_RATIO\_2   ) || \(\backslash\)}}
+\DoxyCodeLine{01241 \textcolor{preprocessor}{                                                   ((\_\_RATIO\_\_) == ADC\_OVERSAMPLING\_RATIO\_4   ) || \(\backslash\)}}
+\DoxyCodeLine{01242 \textcolor{preprocessor}{                                                   ((\_\_RATIO\_\_) == ADC\_OVERSAMPLING\_RATIO\_8   ) || \(\backslash\)}}
+\DoxyCodeLine{01243 \textcolor{preprocessor}{                                                   ((\_\_RATIO\_\_) == ADC\_OVERSAMPLING\_RATIO\_16  ) || \(\backslash\)}}
+\DoxyCodeLine{01244 \textcolor{preprocessor}{                                                   ((\_\_RATIO\_\_) == ADC\_OVERSAMPLING\_RATIO\_32  ) || \(\backslash\)}}
+\DoxyCodeLine{01245 \textcolor{preprocessor}{                                                   ((\_\_RATIO\_\_) == ADC\_OVERSAMPLING\_RATIO\_64  ) || \(\backslash\)}}
+\DoxyCodeLine{01246 \textcolor{preprocessor}{                                                   ((\_\_RATIO\_\_) == ADC\_OVERSAMPLING\_RATIO\_128 ) || \(\backslash\)}}
+\DoxyCodeLine{01247 \textcolor{preprocessor}{                                                   ((\_\_RATIO\_\_) == ADC\_OVERSAMPLING\_RATIO\_256 ))}}
+\DoxyCodeLine{01248 }
+\DoxyCodeLine{01254 \textcolor{preprocessor}{\#define IS\_ADC\_RIGHT\_BIT\_SHIFT(\_\_SHIFT\_\_)        (((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_NONE) || \(\backslash\)}}
+\DoxyCodeLine{01255 \textcolor{preprocessor}{                                                  ((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_1   ) || \(\backslash\)}}
+\DoxyCodeLine{01256 \textcolor{preprocessor}{                                                  ((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_2   ) || \(\backslash\)}}
+\DoxyCodeLine{01257 \textcolor{preprocessor}{                                                  ((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_3   ) || \(\backslash\)}}
+\DoxyCodeLine{01258 \textcolor{preprocessor}{                                                  ((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_4   ) || \(\backslash\)}}
+\DoxyCodeLine{01259 \textcolor{preprocessor}{                                                  ((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_5   ) || \(\backslash\)}}
+\DoxyCodeLine{01260 \textcolor{preprocessor}{                                                  ((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_6   ) || \(\backslash\)}}
+\DoxyCodeLine{01261 \textcolor{preprocessor}{                                                  ((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_7   ) || \(\backslash\)}}
+\DoxyCodeLine{01262 \textcolor{preprocessor}{                                                  ((\_\_SHIFT\_\_) == ADC\_RIGHTBITSHIFT\_8   ))}}
+\DoxyCodeLine{01263 }
+\DoxyCodeLine{01269 \textcolor{preprocessor}{\#define IS\_ADC\_TRIGGERED\_OVERSAMPLING\_MODE(\_\_MODE\_\_) (((\_\_MODE\_\_) == ADC\_TRIGGEREDMODE\_SINGLE\_TRIGGER) || \(\backslash\)}}
+\DoxyCodeLine{01270 \textcolor{preprocessor}{                                                      ((\_\_MODE\_\_) == ADC\_TRIGGEREDMODE\_MULTI\_TRIGGER) )}}
+\DoxyCodeLine{01271 }
+\DoxyCodeLine{01277 \textcolor{preprocessor}{\#define IS\_ADC\_REGOVERSAMPLING\_MODE(\_\_MODE\_\_) (((\_\_MODE\_\_) == ADC\_REGOVERSAMPLING\_CONTINUED\_MODE) || \(\backslash\)}}
+\DoxyCodeLine{01278 \textcolor{preprocessor}{                                               ((\_\_MODE\_\_) == ADC\_REGOVERSAMPLING\_RESUMED\_MODE) )}}
+\DoxyCodeLine{01279 }
+\DoxyCodeLine{01288 \textcolor{preprocessor}{\#define IS\_ADC\_DFSDMCFG\_MODE(\_\_HANDLE\_\_) (SET)}}
+\DoxyCodeLine{01289 }
+\DoxyCodeLine{01298 \textcolor{preprocessor}{\#define ADC\_CFGR\_DFSDM(\_\_HANDLE\_\_) (0x0UL)}}
+\DoxyCodeLine{01299 }
+\DoxyCodeLine{01305 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{01313 \textcolor{comment}{/* IO operation functions *****************************************************/}}
+\DoxyCodeLine{01314 }
+\DoxyCodeLine{01315 \textcolor{comment}{/* ADC calibration */}}
+\DoxyCodeLine{01316 HAL\_StatusTypeDef       HAL\_ADCEx\_Calibration\_Start(ADC\_HandleTypeDef *hadc, uint32\_t SingleDiff);}
+\DoxyCodeLine{01317 uint32\_t                HAL\_ADCEx\_Calibration\_GetValue(ADC\_HandleTypeDef *hadc, uint32\_t SingleDiff);}
+\DoxyCodeLine{01318 HAL\_StatusTypeDef       HAL\_ADCEx\_Calibration\_SetValue(ADC\_HandleTypeDef *hadc, uint32\_t SingleDiff,}
+\DoxyCodeLine{01319                                                        uint32\_t CalibrationFactor);}
+\DoxyCodeLine{01320 }
+\DoxyCodeLine{01321 \textcolor{comment}{/* Blocking mode: Polling */}}
+\DoxyCodeLine{01322 HAL\_StatusTypeDef       HAL\_ADCEx\_InjectedStart(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01323 HAL\_StatusTypeDef       HAL\_ADCEx\_InjectedStop(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01324 HAL\_StatusTypeDef       HAL\_ADCEx\_InjectedPollForConversion(ADC\_HandleTypeDef *hadc, uint32\_t Timeout);}
+\DoxyCodeLine{01325 }
+\DoxyCodeLine{01326 \textcolor{comment}{/* Non-\/blocking mode: Interruption */}}
+\DoxyCodeLine{01327 HAL\_StatusTypeDef       HAL\_ADCEx\_InjectedStart\_IT(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01328 HAL\_StatusTypeDef       HAL\_ADCEx\_InjectedStop\_IT(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01329 }
+\DoxyCodeLine{01330 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{01331 \textcolor{comment}{/* ADC multimode */}}
+\DoxyCodeLine{01332 HAL\_StatusTypeDef       HAL\_ADCEx\_MultiModeStart\_DMA(ADC\_HandleTypeDef *hadc, uint32\_t *pData, uint32\_t Length);}
+\DoxyCodeLine{01333 HAL\_StatusTypeDef       HAL\_ADCEx\_MultiModeStop\_DMA(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01334 uint32\_t                HAL\_ADCEx\_MultiModeGetValue(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01335 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01336 }
+\DoxyCodeLine{01337 \textcolor{comment}{/* ADC retrieve conversion value intended to be used with polling or interruption */}}
+\DoxyCodeLine{01338 uint32\_t                HAL\_ADCEx\_InjectedGetValue(ADC\_HandleTypeDef *hadc, uint32\_t InjectedRank);}
+\DoxyCodeLine{01339 }
+\DoxyCodeLine{01340 \textcolor{comment}{/* ADC IRQHandler and Callbacks used in non-\/blocking modes (Interruption) */}}
+\DoxyCodeLine{01341 \textcolor{keywordtype}{void}                    HAL\_ADCEx\_InjectedConvCpltCallback(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01342 \textcolor{keywordtype}{void}                    HAL\_ADCEx\_InjectedQueueOverflowCallback(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01343 \textcolor{keywordtype}{void}                    HAL\_ADCEx\_LevelOutOfWindow2Callback(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01344 \textcolor{keywordtype}{void}                    HAL\_ADCEx\_LevelOutOfWindow3Callback(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01345 \textcolor{keywordtype}{void}                    HAL\_ADCEx\_EndOfSamplingCallback(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01346 }
+\DoxyCodeLine{01347 \textcolor{comment}{/* ADC group regular conversions stop */}}
+\DoxyCodeLine{01348 HAL\_StatusTypeDef HAL\_ADCEx\_RegularStop(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01349 HAL\_StatusTypeDef HAL\_ADCEx\_RegularStop\_IT(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01350 HAL\_StatusTypeDef HAL\_ADCEx\_RegularStop\_DMA(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01351 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{01352 HAL\_StatusTypeDef HAL\_ADCEx\_RegularMultiModeStop\_DMA(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01353 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01354 }
+\DoxyCodeLine{01362 \textcolor{comment}{/* Peripheral Control functions ***********************************************/}}
+\DoxyCodeLine{01363 HAL\_StatusTypeDef       HAL\_ADCEx\_InjectedConfigChannel(ADC\_HandleTypeDef *hadc,}
+\DoxyCodeLine{01364                                                         ADC\_InjectionConfTypeDef *sConfigInjected);}
+\DoxyCodeLine{01365 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{01366 HAL\_StatusTypeDef       HAL\_ADCEx\_MultiModeConfigChannel(ADC\_HandleTypeDef *hadc, ADC\_MultiModeTypeDef *multimode);}
+\DoxyCodeLine{01367 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01368 HAL\_StatusTypeDef       HAL\_ADCEx\_EnableInjectedQueue(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01369 HAL\_StatusTypeDef       HAL\_ADCEx\_DisableInjectedQueue(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01370 HAL\_StatusTypeDef       HAL\_ADCEx\_DisableVoltageRegulator(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01371 HAL\_StatusTypeDef       HAL\_ADCEx\_EnterADCDeepPowerDownMode(ADC\_HandleTypeDef *hadc);}
+\DoxyCodeLine{01372 }
+\DoxyCodeLine{01389 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{01390 \}}
+\DoxyCodeLine{01391 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01392 }
+\DoxyCodeLine{01393 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32G4xx\_HAL\_ADC\_EX\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

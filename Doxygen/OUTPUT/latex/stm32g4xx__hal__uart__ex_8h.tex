@@ -1,0 +1,116 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.h File Reference}
+\label{stm32g4xx__hal__uart__ex_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_uart\_ex.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_uart\_ex.h}}
+
+
+Header file of UART HAL Extended module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ UART\+\_\+\+Wake\+Up\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em UART wake up from stop mode parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ UART\+\_\+\+WORDLENGTH\+\_\+7B}~\textbf{ USART\+\_\+\+CR1\+\_\+\+M1}
+\item 
+\#define \textbf{ UART\+\_\+\+WORDLENGTH\+\_\+8B}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+WORDLENGTH\+\_\+9B}~\textbf{ USART\+\_\+\+CR1\+\_\+\+M0}
+\item 
+\#define \textbf{ UART\+\_\+\+ADDRESS\+\_\+\+DETECT\+\_\+4B}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADDRESS\+\_\+\+DETECT\+\_\+7B}~\textbf{ USART\+\_\+\+CR2\+\_\+\+ADDM7}
+\item 
+\#define \textbf{ UART\+\_\+\+FIFOMODE\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+FIFOMODE\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR1\+\_\+\+FIFOEN}
+\item 
+\#define \textbf{ UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD\+\_\+1\+\_\+8}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD\+\_\+1\+\_\+4}~\textbf{ USART\+\_\+\+CR3\+\_\+\+TXFTCFG\+\_\+0}
+\item 
+\#define \textbf{ UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD\+\_\+1\+\_\+2}~\textbf{ USART\+\_\+\+CR3\+\_\+\+TXFTCFG\+\_\+1}
+\item 
+\#define \textbf{ UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD\+\_\+3\+\_\+4}~(\textbf{ USART\+\_\+\+CR3\+\_\+\+TXFTCFG\+\_\+0}$\vert$\textbf{ USART\+\_\+\+CR3\+\_\+\+TXFTCFG\+\_\+1})
+\item 
+\#define \textbf{ UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD\+\_\+7\+\_\+8}~\textbf{ USART\+\_\+\+CR3\+\_\+\+TXFTCFG\+\_\+2}
+\item 
+\#define \textbf{ UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD\+\_\+8\+\_\+8}~(\textbf{ USART\+\_\+\+CR3\+\_\+\+TXFTCFG\+\_\+2}$\vert$\textbf{ USART\+\_\+\+CR3\+\_\+\+TXFTCFG\+\_\+0})
+\item 
+\#define \textbf{ UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD\+\_\+1\+\_\+8}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD\+\_\+1\+\_\+4}~\textbf{ USART\+\_\+\+CR3\+\_\+\+RXFTCFG\+\_\+0}
+\item 
+\#define \textbf{ UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD\+\_\+1\+\_\+2}~\textbf{ USART\+\_\+\+CR3\+\_\+\+RXFTCFG\+\_\+1}
+\item 
+\#define \textbf{ UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD\+\_\+3\+\_\+4}~(\textbf{ USART\+\_\+\+CR3\+\_\+\+RXFTCFG\+\_\+0}$\vert$\textbf{ USART\+\_\+\+CR3\+\_\+\+RXFTCFG\+\_\+1})
+\item 
+\#define \textbf{ UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD\+\_\+7\+\_\+8}~\textbf{ USART\+\_\+\+CR3\+\_\+\+RXFTCFG\+\_\+2}
+\item 
+\#define \textbf{ UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD\+\_\+8\+\_\+8}~(\textbf{ USART\+\_\+\+CR3\+\_\+\+RXFTCFG\+\_\+2}$\vert$\textbf{ USART\+\_\+\+CR3\+\_\+\+RXFTCFG\+\_\+0})
+\item 
+\#define \textbf{ UART\+\_\+\+GETCLOCKSOURCE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+CLOCKSOURCE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Report the UART clock source. \end{DoxyCompactList}\item 
+\#define \textbf{ UART\+\_\+\+MASK\+\_\+\+COMPUTATION}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Report the UART mask to apply to retrieve the received data according to the word length and to the parity bits activation. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+WORD\+\_\+\+LENGTH}(\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame length is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADDRESSLENGTH\+\_\+\+DETECT}(\+\_\+\+\_\+\+ADDRESS\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART wake-\/up address length is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD}(\+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART TXFIFO threshold level is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD}(\+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART RXFIFO threshold level is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+RS485\+Ex\+\_\+\+Init} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint32\+\_\+t Polarity, uint32\+\_\+t Assertion\+Time, uint32\+\_\+t Deassertion\+Time)
+\item 
+void {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Wakeup\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Rx\+Fifo\+Full\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Tx\+Fifo\+Empty\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Stop\+Mode\+Wake\+Up\+Source\+Config} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, \textbf{ UART\+\_\+\+Wake\+Up\+Type\+Def} Wake\+Up\+Selection)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Enable\+Stop\+Mode} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Disable\+Stop\+Mode} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Multi\+Processor\+Ex\+\_\+\+Address\+Length\+\_\+\+Set} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint32\+\_\+t Address\+Length)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Enable\+Fifo\+Mode} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Disable\+Fifo\+Mode} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Set\+Tx\+Fifo\+Threshold} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint32\+\_\+t Threshold)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Set\+Rx\+Fifo\+Threshold} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint32\+\_\+t Threshold)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Receive\+To\+Idle} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size, uint16\+\_\+t $\ast$Rx\+Len, uint32\+\_\+t Timeout)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Receive\+To\+Idle\+\_\+\+IT} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Receive\+To\+Idle\+\_\+\+DMA} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of UART HAL Extended module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+h}.
+

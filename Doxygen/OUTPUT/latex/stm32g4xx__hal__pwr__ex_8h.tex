@@ -1,0 +1,304 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.h File Reference}
+\label{stm32g4xx__hal__pwr__ex_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_pwr\_ex.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_pwr\_ex.h}}
+
+
+Header file of PWR HAL Extended module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ PWR\+\_\+\+PVMType\+Def}
+\begin{DoxyCompactList}\small\item\em PWR PVM configuration structure definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ PWR\+\_\+\+WUP\+\_\+\+POLARITY\+\_\+\+SHIFT}~0x05U
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN1}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP1}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN2}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP2}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN3}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP3}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN4}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP4}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN5}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP5}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN1\+\_\+\+HIGH}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP1}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN2\+\_\+\+HIGH}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP2}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN3\+\_\+\+HIGH}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP3}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN4\+\_\+\+HIGH}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP4}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN5\+\_\+\+HIGH}~\textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP5}
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN1\+\_\+\+LOW}~(uint32\+\_\+t)((\textbf{ PWR\+\_\+\+CR4\+\_\+\+WP1}$<$$<$\textbf{ PWR\+\_\+\+WUP\+\_\+\+POLARITY\+\_\+\+SHIFT}) $\vert$ \textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP1})
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN2\+\_\+\+LOW}~(uint32\+\_\+t)((\textbf{ PWR\+\_\+\+CR4\+\_\+\+WP2}$<$$<$\textbf{ PWR\+\_\+\+WUP\+\_\+\+POLARITY\+\_\+\+SHIFT}) $\vert$ \textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP2})
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN3\+\_\+\+LOW}~(uint32\+\_\+t)((\textbf{ PWR\+\_\+\+CR4\+\_\+\+WP3}$<$$<$\textbf{ PWR\+\_\+\+WUP\+\_\+\+POLARITY\+\_\+\+SHIFT}) $\vert$ \textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP3})
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN4\+\_\+\+LOW}~(uint32\+\_\+t)((\textbf{ PWR\+\_\+\+CR4\+\_\+\+WP4}$<$$<$\textbf{ PWR\+\_\+\+WUP\+\_\+\+POLARITY\+\_\+\+SHIFT}) $\vert$ \textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP4})
+\item 
+\#define \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN5\+\_\+\+LOW}~(uint32\+\_\+t)((\textbf{ PWR\+\_\+\+CR4\+\_\+\+WP5}$<$$<$\textbf{ PWR\+\_\+\+WUP\+\_\+\+POLARITY\+\_\+\+SHIFT}) $\vert$ \textbf{ PWR\+\_\+\+CR3\+\_\+\+EWUP5})
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+3}~\textbf{ PWR\+\_\+\+CR2\+\_\+\+PVME3}
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+4}~\textbf{ PWR\+\_\+\+CR2\+\_\+\+PVME4}
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+\+MODE\+\_\+\+NORMAL}~0x00000000U
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+\+MODE\+\_\+\+IT\+\_\+\+RISING}~0x00010001U
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+\+MODE\+\_\+\+IT\+\_\+\+FALLING}~0x00010002U
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+\+MODE\+\_\+\+IT\+\_\+\+RISING\+\_\+\+FALLING}~0x00010003U
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+\+MODE\+\_\+\+EVENT\+\_\+\+RISING}~0x00020001U
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+\+MODE\+\_\+\+EVENT\+\_\+\+FALLING}~0x00020002U
+\item 
+\#define \textbf{ PWR\+\_\+\+PVM\+\_\+\+MODE\+\_\+\+EVENT\+\_\+\+RISING\+\_\+\+FALLING}~0x00020003U
+\item 
+\#define \textbf{ PWR\+\_\+\+REGULATOR\+\_\+\+VOLTAGE\+\_\+\+SCALE1}~\textbf{ PWR\+\_\+\+CR1\+\_\+\+VOS\+\_\+0}
+\item 
+\#define \textbf{ PWR\+\_\+\+REGULATOR\+\_\+\+VOLTAGE\+\_\+\+SCALE2}~\textbf{ PWR\+\_\+\+CR1\+\_\+\+VOS\+\_\+1}
+\item 
+\#define \textbf{ PWR\+\_\+\+BATTERY\+\_\+\+CHARGING\+\_\+\+RESISTOR\+\_\+5}~0x00000000U
+\item 
+\#define \textbf{ PWR\+\_\+\+BATTERY\+\_\+\+CHARGING\+\_\+\+RESISTOR\+\_\+1\+\_\+5}~\textbf{ PWR\+\_\+\+CR4\+\_\+\+VBRS}
+\item 
+\#define \textbf{ PWR\+\_\+\+BATTERY\+\_\+\+CHARGING\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ PWR\+\_\+\+BATTERY\+\_\+\+CHARGING\+\_\+\+ENABLE}~\textbf{ PWR\+\_\+\+CR4\+\_\+\+VBE}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+0}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA0}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+1}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA1}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+2}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA2}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+3}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA3}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+4}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA4}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+5}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA5}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+6}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA6}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+7}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA7}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+8}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA8}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+9}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA9}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+10}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA10}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+11}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA11}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+12}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA12}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+13}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA13}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+14}~\textbf{ PWR\+\_\+\+PDCRA\+\_\+\+PA14}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+15}~\textbf{ PWR\+\_\+\+PUCRA\+\_\+\+PA15}
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+A}~0x00000000U
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+B}~0x00000001U
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+C}~0x00000002U
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+D}~0x00000003U
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+E}~0x00000004U
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+F}~0x00000005U
+\item 
+\#define \textbf{ PWR\+\_\+\+GPIO\+\_\+G}~0x00000006U
+\item 
+\#define \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3}~0x00000020U
+\item 
+\#define \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4}~0x00000040U
+\item 
+\#define \textbf{ PWR\+\_\+\+EVENT\+\_\+\+LINE\+\_\+\+PVM3}~0x00000020U
+\item 
+\#define \textbf{ PWR\+\_\+\+EVENT\+\_\+\+LINE\+\_\+\+PVM4}~0x00000040U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+WUF1}~0x0020U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+WUF2}~0x0021U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+WUF3}~0x0022U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+WUF4}~0x0023U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+WUF5}~0x0024U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+WU}~\textbf{ PWR\+\_\+\+SR1\+\_\+\+WUF}
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+SB}~0x0028U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+WUFI}~0x002\+FU
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+REGLPS}~0x0048U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+REGLPF}~0x0049U
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+VOSF}~0x004\+AU
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+PVDO}~0x004\+BU
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+PVMO3}~0x004\+EU
+\item 
+\#define \textbf{ PWR\+\_\+\+FLAG\+\_\+\+PVMO4}~0x004\+FU
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+IT}()~SET\+\_\+\+BIT(EXTI-\/$>$IMR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Enable the PVM3 Extended Interrupt Line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+IT}()~CLEAR\+\_\+\+BIT(EXTI-\/$>$IMR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Disable the PVM3 Extended Interrupt Line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+EVENT}()~SET\+\_\+\+BIT(EXTI-\/$>$EMR2, \textbf{ PWR\+\_\+\+EVENT\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Enable the PVM3 Event Line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+EVENT}()~CLEAR\+\_\+\+BIT(EXTI-\/$>$EMR2, \textbf{ PWR\+\_\+\+EVENT\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Disable the PVM3 Event Line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+RISING\+\_\+\+EDGE}()~SET\+\_\+\+BIT(EXTI-\/$>$RTSR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Enable the PVM3 Extended Interrupt Rising Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+RISING\+\_\+\+EDGE}()~CLEAR\+\_\+\+BIT(EXTI-\/$>$RTSR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Disable the PVM3 Extended Interrupt Rising Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+FALLING\+\_\+\+EDGE}()~SET\+\_\+\+BIT(EXTI-\/$>$FTSR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Enable the PVM3 Extended Interrupt Falling Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+FALLING\+\_\+\+EDGE}()~CLEAR\+\_\+\+BIT(EXTI-\/$>$FTSR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Disable the PVM3 Extended Interrupt Falling Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+RISING\+\_\+\+FALLING\+\_\+\+EDGE}()
+\begin{DoxyCompactList}\small\item\em PVM3 EXTI line configuration\+: set rising \& falling edge trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+RISING\+\_\+\+FALLING\+\_\+\+EDGE}()
+\begin{DoxyCompactList}\small\item\em Disable the PVM3 Extended Interrupt Rising \& Falling Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+GENERATE\+\_\+\+SWIT}()~SET\+\_\+\+BIT(EXTI-\/$>$SWIER2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Generate a Software interrupt on selected EXTI line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+GET\+\_\+\+FLAG}()~(EXTI-\/$>$PR2 \& \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Check whether the specified PVM3 EXTI interrupt flag is set or not. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM3\+\_\+\+EXTI\+\_\+\+CLEAR\+\_\+\+FLAG}()~WRITE\+\_\+\+REG(EXTI-\/$>$PR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM3})
+\begin{DoxyCompactList}\small\item\em Clear the PVM3 EXTI flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+IT}()~SET\+\_\+\+BIT(EXTI-\/$>$IMR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Enable the PVM4 Extended Interrupt Line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+IT}()~CLEAR\+\_\+\+BIT(EXTI-\/$>$IMR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Disable the PVM4 Extended Interrupt Line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+EVENT}()~SET\+\_\+\+BIT(EXTI-\/$>$EMR2, \textbf{ PWR\+\_\+\+EVENT\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Enable the PVM4 Event Line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+EVENT}()~CLEAR\+\_\+\+BIT(EXTI-\/$>$EMR2, \textbf{ PWR\+\_\+\+EVENT\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Disable the PVM4 Event Line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+RISING\+\_\+\+EDGE}()~SET\+\_\+\+BIT(EXTI-\/$>$RTSR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Enable the PVM4 Extended Interrupt Rising Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+RISING\+\_\+\+EDGE}()~CLEAR\+\_\+\+BIT(EXTI-\/$>$RTSR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Disable the PVM4 Extended Interrupt Rising Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+FALLING\+\_\+\+EDGE}()~SET\+\_\+\+BIT(EXTI-\/$>$FTSR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Enable the PVM4 Extended Interrupt Falling Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+FALLING\+\_\+\+EDGE}()~CLEAR\+\_\+\+BIT(EXTI-\/$>$FTSR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Disable the PVM4 Extended Interrupt Falling Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+ENABLE\+\_\+\+RISING\+\_\+\+FALLING\+\_\+\+EDGE}()
+\begin{DoxyCompactList}\small\item\em PVM4 EXTI line configuration\+: set rising \& falling edge trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+DISABLE\+\_\+\+RISING\+\_\+\+FALLING\+\_\+\+EDGE}()
+\begin{DoxyCompactList}\small\item\em Disable the PVM4 Extended Interrupt Rising \& Falling Trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+GENERATE\+\_\+\+SWIT}()~SET\+\_\+\+BIT(EXTI-\/$>$SWIER2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Generate a Software interrupt on selected EXTI line. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+GET\+\_\+\+FLAG}()~(EXTI-\/$>$PR2 \& \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Check whether or not the specified PVM4 EXTI interrupt flag is set. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+PVM4\+\_\+\+EXTI\+\_\+\+CLEAR\+\_\+\+FLAG}()~WRITE\+\_\+\+REG(EXTI-\/$>$PR2, \textbf{ PWR\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+PVM4})
+\begin{DoxyCompactList}\small\item\em Clear the PVM4 EXTI flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+VOLTAGESCALING\+\_\+\+CONFIG}(\+\_\+\+\_\+\+REGULATOR\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Configure the main internal regulator output voltage. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+WAKEUP\+\_\+\+PIN}(PIN)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+PVM\+\_\+\+TYPE}(TYPE)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+PVM\+\_\+\+MODE}(MODE)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+VOLTAGE\+\_\+\+SCALING\+\_\+\+RANGE}(RANGE)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+BATTERY\+\_\+\+RESISTOR\+\_\+\+SELECT}(RESISTOR)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+BATTERY\+\_\+\+CHARGING}(CHARGING)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+\+NUMBER}(BIT\+\_\+\+NUMBER)~(((BIT\+\_\+\+NUMBER) \& GPIO\+\_\+\+PIN\+\_\+\+MASK) != (uint32\+\_\+t)0x00U)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+GPIO}(GPIO)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Get\+Voltage\+Range} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Control\+Voltage\+Scaling} (uint32\+\_\+t Voltage\+Scaling)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+Battery\+Charging} (uint32\+\_\+t Resistor\+Selection)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+Battery\+Charging} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+Internal\+Wake\+Up\+Line} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+Internal\+Wake\+Up\+Line} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+GPIOPull\+Up} (uint32\+\_\+t GPIO, uint32\+\_\+t GPIONumber)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+GPIOPull\+Up} (uint32\+\_\+t GPIO, uint32\+\_\+t GPIONumber)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+GPIOPull\+Down} (uint32\+\_\+t GPIO, uint32\+\_\+t GPIONumber)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+GPIOPull\+Down} (uint32\+\_\+t GPIO, uint32\+\_\+t GPIONumber)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+Pull\+Up\+Pull\+Down\+Config} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+Pull\+Up\+Pull\+Down\+Config} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+SRAM2\+Content\+Retention} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+SRAM2\+Content\+Retention} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+PVM3} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+PVM3} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+PVM4} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+PVM4} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Config\+PVM} (\textbf{ PWR\+\_\+\+PVMType\+Def} $\ast$s\+Config\+PVM)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enable\+Low\+Power\+Run\+Mode} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Disable\+Low\+Power\+Run\+Mode} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enter\+STOP0\+Mode} (uint8\+\_\+t STOPEntry)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enter\+STOP1\+Mode} (uint8\+\_\+t STOPEntry)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+Enter\+SHUTDOWNMode} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+PVD\+\_\+\+PVM\+\_\+\+IRQHandler} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+PVM3\+Callback} (void)
+\item 
+void {\bfseries HAL\+\_\+\+PWREx\+\_\+\+PVM4\+Callback} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of PWR HAL Extended module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+

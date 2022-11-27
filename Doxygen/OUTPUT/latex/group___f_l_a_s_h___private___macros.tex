@@ -1,0 +1,434 @@
+\doxysection{FLASH Private Macros}
+\label{group___f_l_a_s_h___private___macros}\index{FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+TYPEERASE}(VALUE)
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+BANK}(BANK)~((BANK) == \textbf{ FLASH\+\_\+\+BANK\+\_\+1})
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+BANK\+\_\+\+EXCLUSIVE}(BANK)~((BANK) == \textbf{ FLASH\+\_\+\+BANK\+\_\+1})
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+TYPEPROGRAM}(VALUE)
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+MAIN\+\_\+\+MEM\+\_\+\+ADDRESS}(ADDRESS)~(((ADDRESS) $>$= \textbf{ FLASH\+\_\+\+BASE}) \&\& ((ADDRESS) $<$ (\textbf{ FLASH\+\_\+\+BASE}+FLASH\+\_\+\+SIZE)))
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+OTP\+\_\+\+ADDRESS}(ADDRESS)~(((ADDRESS) $>$= 0x1\+FFF7000U) \&\& ((ADDRESS) $<$= 0x1\+FFF73\+FFU))
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+PROGRAM\+\_\+\+ADDRESS}(ADDRESS)~(IS\+\_\+\+FLASH\+\_\+\+MAIN\+\_\+\+MEM\+\_\+\+ADDRESS(ADDRESS) $\vert$$\vert$ IS\+\_\+\+FLASH\+\_\+\+OTP\+\_\+\+ADDRESS(ADDRESS))
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+PAGE}(PAGE)~((PAGE) $<$ FLASH\+\_\+\+PAGE\+\_\+\+NB)
+\item 
+\#define \textbf{ IS\+\_\+\+OPTIONBYTE}(VALUE)
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+WRPAREA}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+WRPAREA\+\_\+\+BANK1\+\_\+\+AREAA}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+WRPAREA\+\_\+\+BANK1\+\_\+\+AREAB}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+BOOT\+\_\+\+LOCK}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+BOOT\+\_\+\+LOCK\+\_\+\+ENABLE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+BOOT\+\_\+\+LOCK\+\_\+\+DISABLE}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+RDP\+\_\+\+LEVEL}(LEVEL)
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+TYPE}(TYPE)~(((TYPE) $<$= 0x1\+FFFFU) \&\& ((TYPE) != 0U))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+BOR\+\_\+\+LEVEL}(LEVEL)
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+STOP}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+STOP\+\_\+\+RST}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+STOP\+\_\+\+NORST}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+STANDBY}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+STANDBY\+\_\+\+RST}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+STANDBY\+\_\+\+NORST}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+SHUTDOWN}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+SHUTDOWN\+\_\+\+RST}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+SHUTDOWN\+\_\+\+NORST}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+IWDG}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+HW}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+SW}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+IWDG\+\_\+\+STOP}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+STOP\+\_\+\+FREEZE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+STOP\+\_\+\+RUN}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+IWDG\+\_\+\+STDBY}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+STDBY\+\_\+\+FREEZE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+STDBY\+\_\+\+RUN}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+WWDG}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+WWDG\+\_\+\+HW}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+WWDG\+\_\+\+SW}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+BOOT1}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+BOOT1\+\_\+\+SRAM}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+BOOT1\+\_\+\+SYSTEM}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+SRAM\+\_\+\+PARITY}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+SRAM\+\_\+\+PARITY\+\_\+\+ENABLE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+SRAM\+\_\+\+PARITY\+\_\+\+DISABLE}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+CCMSRAM\+\_\+\+RST}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+CCMSRAM\+\_\+\+RST\+\_\+\+ERASE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+CCMSRAM\+\_\+\+RST\+\_\+\+NOT\+\_\+\+ERASE}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+SWBOOT0}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+BOOT0\+\_\+\+FROM\+\_\+\+OB}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+BOOT0\+\_\+\+FROM\+\_\+\+PIN}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+BOOT0}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+n\+BOOT0\+\_\+\+RESET}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+n\+BOOT0\+\_\+\+SET}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+NRST\+\_\+\+MODE}(VALUE)
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+IRHEN}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+IRH\+\_\+\+ENABLE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+IRH\+\_\+\+DISABLE}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+PCROP\+\_\+\+RDP}(VALUE)~(((VALUE) == \textbf{ OB\+\_\+\+PCROP\+\_\+\+RDP\+\_\+\+NOT\+\_\+\+ERASE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+PCROP\+\_\+\+RDP\+\_\+\+ERASE}))
+\item 
+\#define \textbf{ IS\+\_\+\+OB\+\_\+\+SECMEM\+\_\+\+SIZE}(VALUE)~((VALUE) $<$= FLASH\+\_\+\+PAGE\+\_\+\+NB)
+\item 
+\#define \textbf{ IS\+\_\+\+FLASH\+\_\+\+LATENCY}(LATENCY)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___f_l_a_s_h___private___macros_ga13845f67e09ef81901c6fa683f13f086}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_BANK@{IS\_FLASH\_BANK}}
+\index{IS\_FLASH\_BANK@{IS\_FLASH\_BANK}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_BANK}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+BANK(\begin{DoxyParamCaption}\item[{}]{BANK }\end{DoxyParamCaption})~((BANK) == \textbf{ FLASH\+\_\+\+BANK\+\_\+1})}
+
+
+
+Definition at line \textbf{ 910} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gaba3dd4579560b3724bfd5f6a76260dc1}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_BANK\_EXCLUSIVE@{IS\_FLASH\_BANK\_EXCLUSIVE}}
+\index{IS\_FLASH\_BANK\_EXCLUSIVE@{IS\_FLASH\_BANK\_EXCLUSIVE}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_BANK\_EXCLUSIVE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+BANK\+\_\+\+EXCLUSIVE(\begin{DoxyParamCaption}\item[{}]{BANK }\end{DoxyParamCaption})~((BANK) == \textbf{ FLASH\+\_\+\+BANK\+\_\+1})}
+
+
+
+Definition at line \textbf{ 912} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gafcbd098d482318a622a58bf168547389}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_LATENCY@{IS\_FLASH\_LATENCY}}
+\index{IS\_FLASH\_LATENCY@{IS\_FLASH\_LATENCY}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_LATENCY}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+LATENCY(\begin{DoxyParamCaption}\item[{}]{LATENCY }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                            (((LATENCY) == FLASH\_LATENCY\_0) || ((LATENCY) == FLASH\_LATENCY\_1) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LATENCY) == FLASH\_LATENCY\_2) || ((LATENCY) == FLASH\_LATENCY\_3) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LATENCY) == FLASH\_LATENCY\_4) || ((LATENCY) == FLASH\_LATENCY\_5) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LATENCY) == FLASH\_LATENCY\_6) || ((LATENCY) == FLASH\_LATENCY\_7) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LATENCY) == FLASH\_LATENCY\_8) || ((LATENCY) == FLASH\_LATENCY\_9) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LATENCY) == FLASH\_LATENCY\_10) || ((LATENCY) == FLASH\_LATENCY\_11) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LATENCY) == FLASH\_LATENCY\_12) || ((LATENCY) == FLASH\_LATENCY\_13) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LATENCY) == FLASH\_LATENCY\_14) || ((LATENCY) == FLASH\_LATENCY\_15))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 992} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga470a6a3ed3dcd1469fd7fab546b80cc0}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_MAIN\_MEM\_ADDRESS@{IS\_FLASH\_MAIN\_MEM\_ADDRESS}}
+\index{IS\_FLASH\_MAIN\_MEM\_ADDRESS@{IS\_FLASH\_MAIN\_MEM\_ADDRESS}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_MAIN\_MEM\_ADDRESS}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+MAIN\+\_\+\+MEM\+\_\+\+ADDRESS(\begin{DoxyParamCaption}\item[{}]{ADDRESS }\end{DoxyParamCaption})~(((ADDRESS) $>$= \textbf{ FLASH\+\_\+\+BASE}) \&\& ((ADDRESS) $<$ (\textbf{ FLASH\+\_\+\+BASE}+FLASH\+\_\+\+SIZE)))}
+
+
+
+Definition at line \textbf{ 919} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gad0e1a0babb45691ab1b6807cbefee4ef}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_OTP\_ADDRESS@{IS\_FLASH\_OTP\_ADDRESS}}
+\index{IS\_FLASH\_OTP\_ADDRESS@{IS\_FLASH\_OTP\_ADDRESS}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_OTP\_ADDRESS}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+OTP\+\_\+\+ADDRESS(\begin{DoxyParamCaption}\item[{}]{ADDRESS }\end{DoxyParamCaption})~(((ADDRESS) $>$= 0x1\+FFF7000U) \&\& ((ADDRESS) $<$= 0x1\+FFF73\+FFU))}
+
+
+
+Definition at line \textbf{ 921} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga045f51aaa6427e1a4055b0f2a455c0af}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_PAGE@{IS\_FLASH\_PAGE}}
+\index{IS\_FLASH\_PAGE@{IS\_FLASH\_PAGE}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_PAGE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+PAGE(\begin{DoxyParamCaption}\item[{}]{PAGE }\end{DoxyParamCaption})~((PAGE) $<$ FLASH\+\_\+\+PAGE\+\_\+\+NB)}
+
+
+
+Definition at line \textbf{ 925} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga90c8441d56b937cea616856695a8a20a}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_PROGRAM\_ADDRESS@{IS\_FLASH\_PROGRAM\_ADDRESS}}
+\index{IS\_FLASH\_PROGRAM\_ADDRESS@{IS\_FLASH\_PROGRAM\_ADDRESS}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_PROGRAM\_ADDRESS}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+PROGRAM\+\_\+\+ADDRESS(\begin{DoxyParamCaption}\item[{}]{ADDRESS }\end{DoxyParamCaption})~(IS\+\_\+\+FLASH\+\_\+\+MAIN\+\_\+\+MEM\+\_\+\+ADDRESS(ADDRESS) $\vert$$\vert$ IS\+\_\+\+FLASH\+\_\+\+OTP\+\_\+\+ADDRESS(ADDRESS))}
+
+
+
+Definition at line \textbf{ 923} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gaf15a6822d2421a33b6857059348ab476}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_TYPEERASE@{IS\_FLASH\_TYPEERASE}}
+\index{IS\_FLASH\_TYPEERASE@{IS\_FLASH\_TYPEERASE}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_TYPEERASE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+TYPEERASE(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                            (((VALUE) == FLASH\_TYPEERASE\_PAGES) || \(\backslash\)}
+\DoxyCodeLine{                                            ((VALUE) == FLASH\_TYPEERASE\_MASSERASE))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 899} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gaa189973d36fcbbaf7f758c682247ad39}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_FLASH\_TYPEPROGRAM@{IS\_FLASH\_TYPEPROGRAM}}
+\index{IS\_FLASH\_TYPEPROGRAM@{IS\_FLASH\_TYPEPROGRAM}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_FLASH\_TYPEPROGRAM}
+{\footnotesize\ttfamily \#define IS\+\_\+\+FLASH\+\_\+\+TYPEPROGRAM(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                            (((VALUE) == FLASH\_TYPEPROGRAM\_DOUBLEWORD) || \(\backslash\)}
+\DoxyCodeLine{                                            ((VALUE) == FLASH\_TYPEPROGRAM\_FAST) || \(\backslash\)}
+\DoxyCodeLine{                                            ((VALUE) == FLASH\_TYPEPROGRAM\_FAST\_AND\_LAST))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 915} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga04ec289c276500230a052fd6881cb57a}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_BOOT\_LOCK@{IS\_OB\_BOOT\_LOCK}}
+\index{IS\_OB\_BOOT\_LOCK@{IS\_OB\_BOOT\_LOCK}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_BOOT\_LOCK}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+BOOT\+\_\+\+LOCK(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+BOOT\+\_\+\+LOCK\+\_\+\+ENABLE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+BOOT\+\_\+\+LOCK\+\_\+\+DISABLE}))}
+
+
+
+Definition at line \textbf{ 937} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga031212ce4339c93b7e74b97215e23322}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_PCROP\_RDP@{IS\_OB\_PCROP\_RDP}}
+\index{IS\_OB\_PCROP\_RDP@{IS\_OB\_PCROP\_RDP}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_PCROP\_RDP}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+PCROP\+\_\+\+RDP(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+PCROP\+\_\+\+RDP\+\_\+\+NOT\+\_\+\+ERASE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+PCROP\+\_\+\+RDP\+\_\+\+ERASE}))}
+
+
+
+Definition at line \textbf{ 988} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga8d602a97cd688390b3d1956d9970e712}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_RDP\_LEVEL@{IS\_OB\_RDP\_LEVEL}}
+\index{IS\_OB\_RDP\_LEVEL@{IS\_OB\_RDP\_LEVEL}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_RDP\_LEVEL}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+RDP\+\_\+\+LEVEL(\begin{DoxyParamCaption}\item[{}]{LEVEL }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                            (((LEVEL) == OB\_RDP\_LEVEL\_0) ||\(\backslash\)}
+\DoxyCodeLine{                                            ((LEVEL) == OB\_RDP\_LEVEL\_1) ||\(\backslash\)}
+\DoxyCodeLine{                                            ((LEVEL) == OB\_RDP\_LEVEL\_2))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 939} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga8a012c346fd554e0214aefe2030441fe}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_SECMEM\_SIZE@{IS\_OB\_SECMEM\_SIZE}}
+\index{IS\_OB\_SECMEM\_SIZE@{IS\_OB\_SECMEM\_SIZE}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_SECMEM\_SIZE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+SECMEM\+\_\+\+SIZE(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~((VALUE) $<$= FLASH\+\_\+\+PAGE\+\_\+\+NB)}
+
+
+
+Definition at line \textbf{ 990} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga0efaf2aa620c873483e95016d45378e3}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_BOOT0@{IS\_OB\_USER\_BOOT0}}
+\index{IS\_OB\_USER\_BOOT0@{IS\_OB\_USER\_BOOT0}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_BOOT0}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+BOOT0(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+n\+BOOT0\+\_\+\+RESET}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+n\+BOOT0\+\_\+\+SET}))}
+
+
+
+Definition at line \textbf{ 981} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gaa74b46d0126d15c800525e5c007199e4}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_BOOT1@{IS\_OB\_USER\_BOOT1}}
+\index{IS\_OB\_USER\_BOOT1@{IS\_OB\_USER\_BOOT1}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_BOOT1}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+BOOT1(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+BOOT1\+\_\+\+SRAM}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+BOOT1\+\_\+\+SYSTEM}))}
+
+
+
+Definition at line \textbf{ 973} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gacbb7278fa411dc2a5d814ebb9f8da532}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_BOR\_LEVEL@{IS\_OB\_USER\_BOR\_LEVEL}}
+\index{IS\_OB\_USER\_BOR\_LEVEL@{IS\_OB\_USER\_BOR\_LEVEL}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_BOR\_LEVEL}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+BOR\+\_\+\+LEVEL(\begin{DoxyParamCaption}\item[{}]{LEVEL }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                            (((LEVEL) == OB\_BOR\_LEVEL\_0) || ((LEVEL) == OB\_BOR\_LEVEL\_1) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LEVEL) == OB\_BOR\_LEVEL\_2) || ((LEVEL) == OB\_BOR\_LEVEL\_3) || \(\backslash\)}
+\DoxyCodeLine{                                            ((LEVEL) == OB\_BOR\_LEVEL\_4))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 945} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga6c1b9dfe19df7b5896525c8213f289c9}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_CCMSRAM\_RST@{IS\_OB\_USER\_CCMSRAM\_RST}}
+\index{IS\_OB\_USER\_CCMSRAM\_RST@{IS\_OB\_USER\_CCMSRAM\_RST}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_CCMSRAM\_RST}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+CCMSRAM\+\_\+\+RST(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+CCMSRAM\+\_\+\+RST\+\_\+\+ERASE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+CCMSRAM\+\_\+\+RST\+\_\+\+NOT\+\_\+\+ERASE}))}
+
+
+
+Definition at line \textbf{ 977} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gaa696120397c10001301031e5ebd77246}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_IRHEN@{IS\_OB\_USER\_IRHEN}}
+\index{IS\_OB\_USER\_IRHEN@{IS\_OB\_USER\_IRHEN}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_IRHEN}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+IRHEN(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+IRH\+\_\+\+ENABLE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+IRH\+\_\+\+DISABLE}))}
+
+
+
+Definition at line \textbf{ 986} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga718cb70bbe79b8f418d51dd6b950c11e}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_IWDG@{IS\_OB\_USER\_IWDG}}
+\index{IS\_OB\_USER\_IWDG@{IS\_OB\_USER\_IWDG}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_IWDG}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+IWDG(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+HW}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+SW}))}
+
+
+
+Definition at line \textbf{ 955} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga14d8e49c2f7926e252617e51df838dfd}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_IWDG\_STDBY@{IS\_OB\_USER\_IWDG\_STDBY}}
+\index{IS\_OB\_USER\_IWDG\_STDBY@{IS\_OB\_USER\_IWDG\_STDBY}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_IWDG\_STDBY}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+IWDG\+\_\+\+STDBY(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+STDBY\+\_\+\+FREEZE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+STDBY\+\_\+\+RUN}))}
+
+
+
+Definition at line \textbf{ 959} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga395a9bf65b7afd3d86179d7c12d79578}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_IWDG\_STOP@{IS\_OB\_USER\_IWDG\_STOP}}
+\index{IS\_OB\_USER\_IWDG\_STOP@{IS\_OB\_USER\_IWDG\_STOP}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_IWDG\_STOP}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+IWDG\+\_\+\+STOP(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+STOP\+\_\+\+FREEZE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+IWDG\+\_\+\+STOP\+\_\+\+RUN}))}
+
+
+
+Definition at line \textbf{ 957} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga695d7ead5d0b9f87cbb60179392adb95}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_NRST\_MODE@{IS\_OB\_USER\_NRST\_MODE}}
+\index{IS\_OB\_USER\_NRST\_MODE@{IS\_OB\_USER\_NRST\_MODE}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_NRST\_MODE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+NRST\+\_\+\+MODE(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                            (((VALUE) == OB\_NRST\_MODE\_GPIO) || ((VALUE) == OB\_NRST\_MODE\_INPUT\_ONLY) || \(\backslash\)}
+\DoxyCodeLine{                                            ((VALUE) == OB\_NRST\_MODE\_INPUT\_OUTPUT))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 983} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga693faf4798286929a5463e28ae94835e}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_SHUTDOWN@{IS\_OB\_USER\_SHUTDOWN}}
+\index{IS\_OB\_USER\_SHUTDOWN@{IS\_OB\_USER\_SHUTDOWN}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_SHUTDOWN}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+SHUTDOWN(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+SHUTDOWN\+\_\+\+RST}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+SHUTDOWN\+\_\+\+NORST}))}
+
+
+
+Definition at line \textbf{ 953} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga533a1fe15fcf459d896ccf5e7ffeed71}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_SRAM\_PARITY@{IS\_OB\_USER\_SRAM\_PARITY}}
+\index{IS\_OB\_USER\_SRAM\_PARITY@{IS\_OB\_USER\_SRAM\_PARITY}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_SRAM\_PARITY}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+SRAM\+\_\+\+PARITY(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+SRAM\+\_\+\+PARITY\+\_\+\+ENABLE}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+SRAM\+\_\+\+PARITY\+\_\+\+DISABLE}))}
+
+
+
+Definition at line \textbf{ 975} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga0a3b7292b2258a0cedb5c837d2eadd92}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_STANDBY@{IS\_OB\_USER\_STANDBY}}
+\index{IS\_OB\_USER\_STANDBY@{IS\_OB\_USER\_STANDBY}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_STANDBY}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+STANDBY(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+STANDBY\+\_\+\+RST}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+STANDBY\+\_\+\+NORST}))}
+
+
+
+Definition at line \textbf{ 951} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga2a10e357b6e2b8cc27d0b9b627b628ec}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_STOP@{IS\_OB\_USER\_STOP}}
+\index{IS\_OB\_USER\_STOP@{IS\_OB\_USER\_STOP}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_STOP}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+STOP(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+STOP\+\_\+\+RST}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+STOP\+\_\+\+NORST}))}
+
+
+
+Definition at line \textbf{ 949} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga9fc60dbb3c71f8492a8000f87d0cbd3d}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_SWBOOT0@{IS\_OB\_USER\_SWBOOT0}}
+\index{IS\_OB\_USER\_SWBOOT0@{IS\_OB\_USER\_SWBOOT0}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_SWBOOT0}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+SWBOOT0(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+BOOT0\+\_\+\+FROM\+\_\+\+OB}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+BOOT0\+\_\+\+FROM\+\_\+\+PIN}))}
+
+
+
+Definition at line \textbf{ 979} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga68ff0f976e73a1a0f2b5474fd5973d2d}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_TYPE@{IS\_OB\_USER\_TYPE}}
+\index{IS\_OB\_USER\_TYPE@{IS\_OB\_USER\_TYPE}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_TYPE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{TYPE }\end{DoxyParamCaption})~(((TYPE) $<$= 0x1\+FFFFU) \&\& ((TYPE) != 0U))}
+
+
+
+Definition at line \textbf{ 943} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga01d07cb2890645a371b4fa80aa1bfba6}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_USER\_WWDG@{IS\_OB\_USER\_WWDG}}
+\index{IS\_OB\_USER\_WWDG@{IS\_OB\_USER\_WWDG}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_USER\_WWDG}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+USER\+\_\+\+WWDG(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+WWDG\+\_\+\+HW}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+WWDG\+\_\+\+SW}))}
+
+
+
+Definition at line \textbf{ 961} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_gaf358d23c24d72f69f5e5008a6d5c2f0a}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OB\_WRPAREA@{IS\_OB\_WRPAREA}}
+\index{IS\_OB\_WRPAREA@{IS\_OB\_WRPAREA}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OB\_WRPAREA}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OB\+\_\+\+WRPAREA(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})~(((VALUE) == \textbf{ OB\+\_\+\+WRPAREA\+\_\+\+BANK1\+\_\+\+AREAA}) $\vert$$\vert$ ((VALUE) == \textbf{ OB\+\_\+\+WRPAREA\+\_\+\+BANK1\+\_\+\+AREAB}))}
+
+
+
+Definition at line \textbf{ 934} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___macros_ga87cd48c2373f47668470a38892ed07e3}} 
+\index{FLASH Private Macros@{FLASH Private Macros}!IS\_OPTIONBYTE@{IS\_OPTIONBYTE}}
+\index{IS\_OPTIONBYTE@{IS\_OPTIONBYTE}!FLASH Private Macros@{FLASH Private Macros}}
+\doxysubsubsection{IS\_OPTIONBYTE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+OPTIONBYTE(\begin{DoxyParamCaption}\item[{}]{VALUE }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                            (((VALUE) <= (OPTIONBYTE\_WRP | OPTIONBYTE\_RDP | OPTIONBYTE\_USER | OPTIONBYTE\_PCROP | \(\backslash\)}
+\DoxyCodeLine{                                            OPTIONBYTE\_BOOT\_LOCK | OPTIONBYTE\_SEC)))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 927} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+

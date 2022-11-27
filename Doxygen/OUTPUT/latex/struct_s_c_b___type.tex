@@ -1,0 +1,165 @@
+\doxysection{SCB\+\_\+\+Type Struct Reference}
+\label{struct_s_c_b___type}\index{SCB\_Type@{SCB\_Type}}
+
+
+Structure type to access the System Control Block (SCB).  
+
+
+
+
+{\ttfamily \#include $<$core\+\_\+armv81mml.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ CPUID}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ ICSR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ VTOR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ AIRCR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ SCR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ CCR}
+\item 
+\+\_\+\+\_\+\+IOM uint8\+\_\+t \textbf{ SHPR} [12U]
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ SHCSR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ CFSR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ HFSR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ DFSR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ MMFAR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ BFAR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ AFSR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ID\+\_\+\+PFR} [2U]
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ID\+\_\+\+DFR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ID\+\_\+\+ADR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ID\+\_\+\+MMFR} [4U]
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ID\+\_\+\+ISAR} [6U]
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ CLIDR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ CTR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ CCSIDR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ CSSELR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ CPACR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ NSACR}
+\item 
+uint32\+\_\+t \textbf{ RESERVED3} [92U]
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ STIR}
+\item 
+uint32\+\_\+t \textbf{ RESERVED4} [15U]
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ MVFR0}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ MVFR1}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ MVFR2}
+\item 
+uint32\+\_\+t \textbf{ RESERVED5} [1U]
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ ICIALLU}
+\item 
+uint32\+\_\+t \textbf{ RESERVED6} [1U]
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ ICIMVAU}
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ DCIMVAC}
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ DCISW}
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ DCCMVAU}
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ DCCMVAC}
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ DCCSW}
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ DCCIMVAC}
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ DCCISW}
+\item 
+uint32\+\_\+t \textbf{ RESERVED7} [6U]
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ ITCMCR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ DTCMCR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ AHBPCR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ CACR}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ AHBSCR}
+\item 
+uint32\+\_\+t \textbf{ RESERVED8} [1U]
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ ABFSR}
+\item 
+uint32\+\_\+t \textbf{ RESERVED0}
+\item 
+uint32\+\_\+t \textbf{ RESERVED1}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ SHPR} [2U]
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ SHP} [2U]
+\item 
+\+\_\+\+\_\+\+IOM uint8\+\_\+t \textbf{ SHP} [12U]
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ PFR} [2U]
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ DFR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ADR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ MMFR} [4U]
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ISAR} [5U]
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ID\+\_\+\+AFR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ID\+\_\+\+MFR} [4U]
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ SFCR}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure type to access the System Control Block (SCB). 
+
+Definition at line \textbf{ 498} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+armv81mml.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+armv8mbl.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+armv8mml.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm0.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm0plus.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm1.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm23.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm3.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm33.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm35p.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm4.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+cm7.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+sc000.\+h}\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Include/\textbf{ core\+\_\+sc300.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,729 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+ll\+\_\+rcc.h File Reference}
+\label{stm32g4xx__ll__rcc_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_rcc.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_rcc.h}}
+
+
+Header file of RCC LL module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ RCC\+\_\+\+OFFSET\+\_\+\+CCIPR}~0U
+\item 
+\#define \textbf{ RCC\+\_\+\+OFFSET\+\_\+\+CCIPR2}~0x14U
+\item 
+\#define \textbf{ HSE\+\_\+\+VALUE}~8000000U
+\item 
+\#define \textbf{ HSI\+\_\+\+VALUE}~16000000U
+\item 
+\#define \textbf{ LSE\+\_\+\+VALUE}~32768U
+\item 
+\#define \textbf{ LSI\+\_\+\+VALUE}~32000U
+\item 
+\#define \textbf{ HSI48\+\_\+\+VALUE}~48000000U
+\item 
+\#define \textbf{ EXTERNAL\+\_\+\+CLOCK\+\_\+\+VALUE}~48000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CICR\+\_\+\+LSIRDYC}~RCC\+\_\+\+CICR\+\_\+\+LSIRDYC
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CICR\+\_\+\+LSERDYC}~RCC\+\_\+\+CICR\+\_\+\+LSERDYC
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CICR\+\_\+\+HSIRDYC}~RCC\+\_\+\+CICR\+\_\+\+HSIRDYC
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CICR\+\_\+\+HSERDYC}~RCC\+\_\+\+CICR\+\_\+\+HSERDYC
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CICR\+\_\+\+PLLRDYC}~RCC\+\_\+\+CICR\+\_\+\+PLLRDYC
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CICR\+\_\+\+HSI48\+RDYC}~RCC\+\_\+\+CICR\+\_\+\+HSI48\+RDYC
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CICR\+\_\+\+LSECSSC}~RCC\+\_\+\+CICR\+\_\+\+LSECSSC
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CICR\+\_\+\+CSSC}~RCC\+\_\+\+CICR\+\_\+\+CSSC
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIFR\+\_\+\+LSIRDYF}~RCC\+\_\+\+CIFR\+\_\+\+LSIRDYF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIFR\+\_\+\+LSERDYF}~RCC\+\_\+\+CIFR\+\_\+\+LSERDYF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIFR\+\_\+\+HSIRDYF}~RCC\+\_\+\+CIFR\+\_\+\+HSIRDYF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIFR\+\_\+\+HSERDYF}~RCC\+\_\+\+CIFR\+\_\+\+HSERDYF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIFR\+\_\+\+PLLRDYF}~RCC\+\_\+\+CIFR\+\_\+\+PLLRDYF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIFR\+\_\+\+HSI48\+RDYF}~RCC\+\_\+\+CIFR\+\_\+\+HSI48\+RDYF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIFR\+\_\+\+LSECSSF}~RCC\+\_\+\+CIFR\+\_\+\+LSECSSF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIFR\+\_\+\+CSSF}~RCC\+\_\+\+CIFR\+\_\+\+CSSF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CSR\+\_\+\+LPWRRSTF}~RCC\+\_\+\+CSR\+\_\+\+LPWRRSTF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CSR\+\_\+\+OBLRSTF}~RCC\+\_\+\+CSR\+\_\+\+OBLRSTF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CSR\+\_\+\+PINRSTF}~RCC\+\_\+\+CSR\+\_\+\+PINRSTF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CSR\+\_\+\+SFTRSTF}~RCC\+\_\+\+CSR\+\_\+\+SFTRSTF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CSR\+\_\+\+IWDGRSTF}~RCC\+\_\+\+CSR\+\_\+\+IWDGRSTF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CSR\+\_\+\+WWDGRSTF}~RCC\+\_\+\+CSR\+\_\+\+WWDGRSTF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CSR\+\_\+\+BORRSTF}~RCC\+\_\+\+CSR\+\_\+\+BORRSTF
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIER\+\_\+\+LSIRDYIE}~RCC\+\_\+\+CIER\+\_\+\+LSIRDYIE
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIER\+\_\+\+LSERDYIE}~RCC\+\_\+\+CIER\+\_\+\+LSERDYIE
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIER\+\_\+\+HSIRDYIE}~RCC\+\_\+\+CIER\+\_\+\+HSIRDYIE
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIER\+\_\+\+HSERDYIE}~RCC\+\_\+\+CIER\+\_\+\+HSERDYIE
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIER\+\_\+\+PLLRDYIE}~RCC\+\_\+\+CIER\+\_\+\+PLLRDYIE
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIER\+\_\+\+HSI48\+RDYIE}~RCC\+\_\+\+CIER\+\_\+\+HSI48\+RDYIE
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+CIER\+\_\+\+LSECSSIE}~RCC\+\_\+\+CIER\+\_\+\+LSECSSIE
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LSEDRIVE\+\_\+\+LOW}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LSEDRIVE\+\_\+\+MEDIUMLOW}~\textbf{ RCC\+\_\+\+BDCR\+\_\+\+LSEDRV\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LSEDRIVE\+\_\+\+MEDIUMHIGH}~\textbf{ RCC\+\_\+\+BDCR\+\_\+\+LSEDRV\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LSEDRIVE\+\_\+\+HIGH}~RCC\+\_\+\+BDCR\+\_\+\+LSEDRV
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+CLKSOURCE\+\_\+\+LSI}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+CLKSOURCE\+\_\+\+LSE}~RCC\+\_\+\+BDCR\+\_\+\+LSCOSEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYS\+\_\+\+CLKSOURCE\+\_\+\+HSI}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+SW\+\_\+\+HSI}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYS\+\_\+\+CLKSOURCE\+\_\+\+HSE}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+SW\+\_\+\+HSE}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYS\+\_\+\+CLKSOURCE\+\_\+\+PLL}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+SW\+\_\+\+PLL}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYS\+\_\+\+CLKSOURCE\+\_\+\+STATUS\+\_\+\+HSI}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+SWS\+\_\+\+HSI}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYS\+\_\+\+CLKSOURCE\+\_\+\+STATUS\+\_\+\+HSE}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+SWS\+\_\+\+HSE}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYS\+\_\+\+CLKSOURCE\+\_\+\+STATUS\+\_\+\+PLL}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+SWS\+\_\+\+PLL}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+1}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+2}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV2}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+4}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV4}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+8}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV8}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+16}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV16}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+64}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV64}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+128}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV128}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+256}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV256}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SYSCLK\+\_\+\+DIV\+\_\+512}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+DIV512}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+DIV\+\_\+1}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE1\+\_\+\+DIV1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+DIV\+\_\+2}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE1\+\_\+\+DIV2}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+DIV\+\_\+4}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE1\+\_\+\+DIV4}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+DIV\+\_\+8}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE1\+\_\+\+DIV8}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+DIV\+\_\+16}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE1\+\_\+\+DIV16}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB2\+\_\+\+DIV\+\_\+1}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE2\+\_\+\+DIV1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB2\+\_\+\+DIV\+\_\+2}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE2\+\_\+\+DIV2}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB2\+\_\+\+DIV\+\_\+4}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE2\+\_\+\+DIV4}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB2\+\_\+\+DIV\+\_\+8}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE2\+\_\+\+DIV8}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+APB2\+\_\+\+DIV\+\_\+16}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+PPRE2\+\_\+\+DIV16}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE\+\_\+\+NOCLOCK}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE\+\_\+\+SYSCLK}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE\+\_\+\+HSI}~(\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+0}$\vert$ \textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE\+\_\+\+HSE}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+2}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE\+\_\+\+PLLCLK}~(\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+0}$\vert$\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE\+\_\+\+LSI}~(\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE\+\_\+\+LSE}~(\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+0}$\vert$\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE\+\_\+\+HSI48}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOSEL\+\_\+3}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+\_\+\+DIV\+\_\+1}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOPRE\+\_\+\+DIV1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+\_\+\+DIV\+\_\+2}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOPRE\+\_\+\+DIV2}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+\_\+\+DIV\+\_\+4}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOPRE\+\_\+\+DIV4}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+\_\+\+DIV\+\_\+8}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOPRE\+\_\+\+DIV8}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+MCO1\+\_\+\+DIV\+\_\+16}~\textbf{ RCC\+\_\+\+CFGR\+\_\+\+MCOPRE\+\_\+\+DIV16}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART1\+\_\+\+CLKSOURCE\+\_\+\+PCLK2}~(RCC\+\_\+\+CCIPR\+\_\+\+USART1\+SEL $<$$<$ 16U)
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART1\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~((RCC\+\_\+\+CCIPR\+\_\+\+USART1\+SEL $<$$<$ 16U) $\vert$ \textbf{ RCC\+\_\+\+CCIPR\+\_\+\+USART1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART1\+\_\+\+CLKSOURCE\+\_\+\+HSI}~((RCC\+\_\+\+CCIPR\+\_\+\+USART1\+SEL $<$$<$ 16U) $\vert$ \textbf{ RCC\+\_\+\+CCIPR\+\_\+\+USART1\+SEL\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART1\+\_\+\+CLKSOURCE\+\_\+\+LSE}~((RCC\+\_\+\+CCIPR\+\_\+\+USART1\+SEL $<$$<$ 16U) $\vert$ RCC\+\_\+\+CCIPR\+\_\+\+USART1\+SEL)
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+CLKSOURCE\+\_\+\+PCLK1}~(RCC\+\_\+\+CCIPR\+\_\+\+USART2\+SEL $<$$<$ 16U)
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~((RCC\+\_\+\+CCIPR\+\_\+\+USART2\+SEL $<$$<$ 16U) $\vert$ \textbf{ RCC\+\_\+\+CCIPR\+\_\+\+USART2\+SEL\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+CLKSOURCE\+\_\+\+HSI}~((RCC\+\_\+\+CCIPR\+\_\+\+USART2\+SEL $<$$<$ 16U) $\vert$ \textbf{ RCC\+\_\+\+CCIPR\+\_\+\+USART2\+SEL\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+CLKSOURCE\+\_\+\+LSE}~((RCC\+\_\+\+CCIPR\+\_\+\+USART2\+SEL $<$$<$ 16U) $\vert$ RCC\+\_\+\+CCIPR\+\_\+\+USART2\+SEL)
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+CLKSOURCE\+\_\+\+PCLK1}~(RCC\+\_\+\+CCIPR\+\_\+\+USART3\+SEL $<$$<$ 16U)
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~((RCC\+\_\+\+CCIPR\+\_\+\+USART3\+SEL $<$$<$ 16U) $\vert$ \textbf{ RCC\+\_\+\+CCIPR\+\_\+\+USART3\+SEL\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+CLKSOURCE\+\_\+\+HSI}~((RCC\+\_\+\+CCIPR\+\_\+\+USART3\+SEL $<$$<$ 16U) $\vert$ \textbf{ RCC\+\_\+\+CCIPR\+\_\+\+USART3\+SEL\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+CLKSOURCE\+\_\+\+LSE}~((RCC\+\_\+\+CCIPR\+\_\+\+USART3\+SEL $<$$<$ 16U) $\vert$ RCC\+\_\+\+CCIPR\+\_\+\+USART3\+SEL)
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+CLKSOURCE\+\_\+\+PCLK1}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+LPUART1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+CLKSOURCE\+\_\+\+HSI}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+LPUART1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+CLKSOURCE\+\_\+\+LSE}~RCC\+\_\+\+CCIPR\+\_\+\+LPUART1\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C1\+\_\+\+CLKSOURCE\+\_\+\+PCLK1}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+\+Pos $<$$<$ 16U))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C1\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+0} $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C1\+\_\+\+CLKSOURCE\+\_\+\+HSI}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+1} $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C2\+\_\+\+CLKSOURCE\+\_\+\+PCLK1}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+\+Pos $<$$<$ 16U))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C2\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+0} $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C2\+\_\+\+CLKSOURCE\+\_\+\+HSI}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+1} $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C3\+\_\+\+CLKSOURCE\+\_\+\+PCLK1}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+\+Pos $<$$<$ 16U))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C3\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+0} $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C3\+\_\+\+CLKSOURCE\+\_\+\+HSI}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+1} $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+CLKSOURCE\+\_\+\+PCLK1}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+CLKSOURCE\+\_\+\+LSI}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+LPTIM1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+CLKSOURCE\+\_\+\+HSI}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+LPTIM1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+CLKSOURCE\+\_\+\+LSE}~RCC\+\_\+\+CCIPR\+\_\+\+LPTIM1\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SAI1\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SAI1\+\_\+\+CLKSOURCE\+\_\+\+PLL}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+SAI1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SAI1\+\_\+\+CLKSOURCE\+\_\+\+PIN}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+SAI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SAI1\+\_\+\+CLKSOURCE\+\_\+\+HSI}~(\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+SAI1\+SEL\+\_\+0} $\vert$ \textbf{ RCC\+\_\+\+CCIPR\+\_\+\+SAI1\+SEL\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+S\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+S\+\_\+\+CLKSOURCE\+\_\+\+PLL}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+S23\+SEL\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+S\+\_\+\+CLKSOURCE\+\_\+\+PIN}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+S23\+SEL\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+S\+\_\+\+CLKSOURCE\+\_\+\+HSI}~(\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+S23\+SEL\+\_\+0} $\vert$ \textbf{ RCC\+\_\+\+CCIPR\+\_\+\+I2\+S23\+SEL\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+RNG\+\_\+\+CLKSOURCE\+\_\+\+HSI48}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+RNG\+\_\+\+CLKSOURCE\+\_\+\+PLL}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+CLK48\+SEL\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USB\+\_\+\+CLKSOURCE\+\_\+\+HSI48}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USB\+\_\+\+CLKSOURCE\+\_\+\+PLL}~\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+CLK48\+SEL\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+ADC12\+\_\+\+CLKSOURCE\+\_\+\+NONE}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+\+Pos $<$$<$ 16U))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+ADC12\+\_\+\+CLKSOURCE\+\_\+\+PLL}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+0} $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+ADC12\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (\textbf{ RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+1} $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+QUADSPI\+\_\+\+CLKSOURCE\+\_\+\+SYSCLK}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+QUADSPI\+\_\+\+CLKSOURCE\+\_\+\+HSI}~\textbf{ RCC\+\_\+\+CCIPR2\+\_\+\+QSPISEL\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+QUADSPI\+\_\+\+CLKSOURCE\+\_\+\+PLL}~\textbf{ RCC\+\_\+\+CCIPR2\+\_\+\+QSPISEL\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART1\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+USART1\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+USART2\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+USART3\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+LPUART1\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C1\+\_\+\+CLKSOURCE}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C1\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C2\+\_\+\+CLKSOURCE}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C2\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+C3\+\_\+\+CLKSOURCE}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+I2\+C3\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+LPTIM1\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+SAI1\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+SAI1\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+I2\+S\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+I2\+S23\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+RNG\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+CLK48\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+USB\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR\+\_\+\+CLK48\+SEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+ADC12\+\_\+\+CLKSOURCE}~((RCC\+\_\+\+OFFSET\+\_\+\+CCIPR $<$$<$ 24U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+\+Pos $<$$<$ 16U) $\vert$ (RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL $>$$>$ RCC\+\_\+\+CCIPR\+\_\+\+ADC12\+SEL\+\_\+\+Pos))
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+QUADSPI\+\_\+\+CLKSOURCE}~RCC\+\_\+\+CCIPR2\+\_\+\+QSPISEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+RTC\+\_\+\+CLKSOURCE\+\_\+\+NONE}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+RTC\+\_\+\+CLKSOURCE\+\_\+\+LSE}~\textbf{ RCC\+\_\+\+BDCR\+\_\+\+RTCSEL\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+RTC\+\_\+\+CLKSOURCE\+\_\+\+LSI}~\textbf{ RCC\+\_\+\+BDCR\+\_\+\+RTCSEL\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+RTC\+\_\+\+CLKSOURCE\+\_\+\+HSE\+\_\+\+DIV32}~RCC\+\_\+\+BDCR\+\_\+\+RTCSEL
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLSOURCE\+\_\+\+NONE}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLSOURCE\+\_\+\+HSI}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLSRC\+\_\+\+HSI}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLSOURCE\+\_\+\+HSE}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLSRC\+\_\+\+HSE}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+1}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+2}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+3}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+4}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+5}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+6}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+7}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+8}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+9}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+10}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+11}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+12}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+13}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+14}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+15}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+16}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLR\+\_\+\+DIV\+\_\+2}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLR\+\_\+\+DIV\+\_\+4}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLR\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLR\+\_\+\+DIV\+\_\+6}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLR\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLR\+\_\+\+DIV\+\_\+8}~(RCC\+\_\+\+PLLCFGR\+\_\+\+PLLR)
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+2}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+3}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+4}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+5}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+6}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+7}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+8}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+9}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+10}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+11}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+12}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+13}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+14}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+15}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+16}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+17}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+18}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+19}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+20}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+21}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+22}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+23}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+24}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+25}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+26}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+27}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+28}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+29}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+30}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+DIV\+\_\+31}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+4}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+3}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+2}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+1}$\vert$\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLPDIV\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLQ\+\_\+\+DIV\+\_\+2}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLQ\+\_\+\+DIV\+\_\+4}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLQ\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLQ\+\_\+\+DIV\+\_\+6}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLQ\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLQ\+\_\+\+DIV\+\_\+8}~(RCC\+\_\+\+PLLCFGR\+\_\+\+PLLQ)
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+Write\+Reg}(\+\_\+\+\_\+\+REG\+\_\+\+\_\+,  \+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)~WRITE\+\_\+\+REG(RCC-\/$>$\+\_\+\+\_\+\+REG\+\_\+\+\_\+, \+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Write a value in RCC register. \end{DoxyCompactList}\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+Read\+Reg}(\+\_\+\+\_\+\+REG\+\_\+\+\_\+)~READ\+\_\+\+REG(RCC-\/$>$\+\_\+\+\_\+\+REG\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Read a value in RCC register. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+LL\+\_\+\+RCC\+\_\+\+CALC\+\_\+\+PLLCLK\+\_\+\+FREQ}(\+\_\+\+\_\+\+INPUTFREQ\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLM\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLN\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLR\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the PLLCLK frequency on system domain. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+LL\+\_\+\+RCC\+\_\+\+CALC\+\_\+\+PLLCLK\+\_\+\+ADC\+\_\+\+FREQ}(\+\_\+\+\_\+\+INPUTFREQ\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLM\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLN\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLP\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the PLLCLK frequency used on ADC domain. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+LL\+\_\+\+RCC\+\_\+\+CALC\+\_\+\+PLLCLK\+\_\+48\+M\+\_\+\+FREQ}(\+\_\+\+\_\+\+INPUTFREQ\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLM\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLN\+\_\+\+\_\+,  \+\_\+\+\_\+\+PLLQ\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the PLLCLK frequency used on 48M domain. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+LL\+\_\+\+RCC\+\_\+\+CALC\+\_\+\+HCLK\+\_\+\+FREQ}(\+\_\+\+\_\+\+SYSCLKFREQ\+\_\+\+\_\+,  \+\_\+\+\_\+\+AHBPRESCALER\+\_\+\+\_\+)~((\+\_\+\+\_\+\+SYSCLKFREQ\+\_\+\+\_\+) $>$$>$ (\textbf{ AHBPresc\+Table}[((\+\_\+\+\_\+\+AHBPRESCALER\+\_\+\+\_\+) \& \textbf{ RCC\+\_\+\+CFGR\+\_\+\+HPRE}) $>$$>$  RCC\+\_\+\+CFGR\+\_\+\+HPRE\+\_\+\+Pos] \& 0x1\+FU))
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the HCLK frequency. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+LL\+\_\+\+RCC\+\_\+\+CALC\+\_\+\+PCLK1\+\_\+\+FREQ}(\+\_\+\+\_\+\+HCLKFREQ\+\_\+\+\_\+,  \+\_\+\+\_\+\+APB1\+PRESCALER\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HCLKFREQ\+\_\+\+\_\+) $>$$>$ (\textbf{ APBPresc\+Table}[(\+\_\+\+\_\+\+APB1\+PRESCALER\+\_\+\+\_\+) $>$$>$  RCC\+\_\+\+CFGR\+\_\+\+PPRE1\+\_\+\+Pos] \& 0x1\+FU))
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the PCLK1 frequency (ABP1) \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+LL\+\_\+\+RCC\+\_\+\+CALC\+\_\+\+PCLK2\+\_\+\+FREQ}(\+\_\+\+\_\+\+HCLKFREQ\+\_\+\+\_\+,  \+\_\+\+\_\+\+APB2\+PRESCALER\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HCLKFREQ\+\_\+\+\_\+) $>$$>$ (\textbf{ APBPresc\+Table}[(\+\_\+\+\_\+\+APB2\+PRESCALER\+\_\+\+\_\+) $>$$>$  RCC\+\_\+\+CFGR\+\_\+\+PPRE2\+\_\+\+Pos] \& 0x1\+FU))
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the PCLK2 frequency (ABP2) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Enable\+CSS} (void)
+\begin{DoxyCompactList}\small\item\em Enable the Clock Security System. @rmtoll CR CSSON LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Enable\+CSS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Enable\+Bypass} (void)
+\begin{DoxyCompactList}\small\item\em Enable HSE external oscillator (HSE Bypass) @rmtoll CR HSEBYP LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Enable\+Bypass. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Disable\+Bypass} (void)
+\begin{DoxyCompactList}\small\item\em Disable HSE external oscillator (HSE Bypass) @rmtoll CR HSEBYP LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Disable\+Bypass. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Enable} (void)
+\begin{DoxyCompactList}\small\item\em Enable HSE crystal oscillator (HSE ON) @rmtoll CR HSEON LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Enable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable HSE crystal oscillator (HSE ON) @rmtoll CR HSEON LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Disable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Is\+Ready} (void)
+\begin{DoxyCompactList}\small\item\em Check if HSE oscillator Ready @rmtoll CR HSERDY LL\+\_\+\+RCC\+\_\+\+HSE\+\_\+\+Is\+Ready. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Enable\+In\+Stop\+Mode} (void)
+\begin{DoxyCompactList}\small\item\em Enable HSI even in stop mode. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Disable\+In\+Stop\+Mode} (void)
+\begin{DoxyCompactList}\small\item\em Disable HSI in stop mode @rmtoll CR HSIKERON LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Disable\+In\+Stop\+Mode. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Enable} (void)
+\begin{DoxyCompactList}\small\item\em Enable HSI oscillator @rmtoll CR HSION LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Enable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable HSI oscillator @rmtoll CR HSION LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Disable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Is\+Ready} (void)
+\begin{DoxyCompactList}\small\item\em Check if HSI clock is ready @rmtoll CR HSIRDY LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Is\+Ready. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Get\+Calibration} (void)
+\begin{DoxyCompactList}\small\item\em Get HSI Calibration value. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Set\+Calib\+Trimming} (uint32\+\_\+t Value)
+\begin{DoxyCompactList}\small\item\em Set HSI Calibration trimming. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Get\+Calib\+Trimming} (void)
+\begin{DoxyCompactList}\small\item\em Get HSI Calibration trimming @rmtoll ICSCR HSITRIM LL\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+Get\+Calib\+Trimming. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI48\+\_\+\+Enable} (void)
+\begin{DoxyCompactList}\small\item\em Enable HSI48 @rmtoll CRRCR HSI48\+ON LL\+\_\+\+RCC\+\_\+\+HSI48\+\_\+\+Enable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI48\+\_\+\+Disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable HSI48 @rmtoll CRRCR HSI48\+ON LL\+\_\+\+RCC\+\_\+\+HSI48\+\_\+\+Disable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI48\+\_\+\+Is\+Ready} (void)
+\begin{DoxyCompactList}\small\item\em Check if HSI48 oscillator Ready @rmtoll CRRCR HSI48\+RDY LL\+\_\+\+RCC\+\_\+\+HSI48\+\_\+\+Is\+Ready. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+HSI48\+\_\+\+Get\+Calibration} (void)
+\begin{DoxyCompactList}\small\item\em Get HSI48 Calibration value @rmtoll CRRCR HSI48\+CAL LL\+\_\+\+RCC\+\_\+\+HSI48\+\_\+\+Get\+Calibration. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Enable} (void)
+\begin{DoxyCompactList}\small\item\em Enable Low Speed External (LSE) crystal. @rmtoll BDCR LSEON LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Enable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable Low Speed External (LSE) crystal. @rmtoll BDCR LSEON LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Disable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Enable\+Bypass} (void)
+\begin{DoxyCompactList}\small\item\em Enable external clock source (LSE bypass). @rmtoll BDCR LSEBYP LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Enable\+Bypass. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Disable\+Bypass} (void)
+\begin{DoxyCompactList}\small\item\em Disable external clock source (LSE bypass). @rmtoll BDCR LSEBYP LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Disable\+Bypass. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Set\+Drive\+Capability} (uint32\+\_\+t LSEDrive)
+\begin{DoxyCompactList}\small\item\em Set LSE oscillator drive capability. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Get\+Drive\+Capability} (void)
+\begin{DoxyCompactList}\small\item\em Get LSE oscillator drive capability @rmtoll BDCR LSEDRV LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Get\+Drive\+Capability. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Enable\+CSS} (void)
+\begin{DoxyCompactList}\small\item\em Enable Clock security system on LSE. @rmtoll BDCR LSECSSON LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Enable\+CSS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Disable\+CSS} (void)
+\begin{DoxyCompactList}\small\item\em Disable Clock security system on LSE. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Is\+Ready} (void)
+\begin{DoxyCompactList}\small\item\em Check if LSE oscillator Ready @rmtoll BDCR LSERDY LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Is\+Ready. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Is\+CSSDetected} (void)
+\begin{DoxyCompactList}\small\item\em Check if CSS on LSE failure Detection @rmtoll BDCR LSECSSD LL\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+Is\+CSSDetected. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSI\+\_\+\+Enable} (void)
+\begin{DoxyCompactList}\small\item\em Enable LSI Oscillator @rmtoll CSR LSION LL\+\_\+\+RCC\+\_\+\+LSI\+\_\+\+Enable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSI\+\_\+\+Disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable LSI Oscillator @rmtoll CSR LSION LL\+\_\+\+RCC\+\_\+\+LSI\+\_\+\+Disable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+LSI\+\_\+\+Is\+Ready} (void)
+\begin{DoxyCompactList}\small\item\em Check if LSI is Ready @rmtoll CSR LSIRDY LL\+\_\+\+RCC\+\_\+\+LSI\+\_\+\+Is\+Ready. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+Enable} (void)
+\begin{DoxyCompactList}\small\item\em Enable Low speed clock @rmtoll BDCR LSCOEN LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+Enable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+Disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable Low speed clock @rmtoll BDCR LSCOEN LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+Disable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+Set\+Source} (uint32\+\_\+t Source)
+\begin{DoxyCompactList}\small\item\em Configure Low speed clock selection @rmtoll BDCR LSCOSEL LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+Set\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+Get\+Source} (void)
+\begin{DoxyCompactList}\small\item\em Get Low speed clock selection @rmtoll BDCR LSCOSEL LL\+\_\+\+RCC\+\_\+\+LSCO\+\_\+\+Get\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+Sys\+Clk\+Source} (uint32\+\_\+t Source)
+\begin{DoxyCompactList}\small\item\em Configure the system clock source @rmtoll CFGR SW LL\+\_\+\+RCC\+\_\+\+Set\+Sys\+Clk\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+Sys\+Clk\+Source} (void)
+\begin{DoxyCompactList}\small\item\em Get the system clock source @rmtoll CFGR SWS LL\+\_\+\+RCC\+\_\+\+Get\+Sys\+Clk\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+AHBPrescaler} (uint32\+\_\+t Prescaler)
+\begin{DoxyCompactList}\small\item\em Set AHB prescaler @rmtoll CFGR HPRE LL\+\_\+\+RCC\+\_\+\+Set\+AHBPrescaler. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+APB1\+Prescaler} (uint32\+\_\+t Prescaler)
+\begin{DoxyCompactList}\small\item\em Set APB1 prescaler @rmtoll CFGR PPRE1 LL\+\_\+\+RCC\+\_\+\+Set\+APB1\+Prescaler. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+APB2\+Prescaler} (uint32\+\_\+t Prescaler)
+\begin{DoxyCompactList}\small\item\em Set APB2 prescaler @rmtoll CFGR PPRE2 LL\+\_\+\+RCC\+\_\+\+Set\+APB2\+Prescaler. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+AHBPrescaler} (void)
+\begin{DoxyCompactList}\small\item\em Get AHB prescaler @rmtoll CFGR HPRE LL\+\_\+\+RCC\+\_\+\+Get\+AHBPrescaler. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+APB1\+Prescaler} (void)
+\begin{DoxyCompactList}\small\item\em Get APB1 prescaler @rmtoll CFGR PPRE1 LL\+\_\+\+RCC\+\_\+\+Get\+APB1\+Prescaler. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+APB2\+Prescaler} (void)
+\begin{DoxyCompactList}\small\item\em Get APB2 prescaler @rmtoll CFGR PPRE2 LL\+\_\+\+RCC\+\_\+\+Get\+APB2\+Prescaler. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Config\+MCO} (uint32\+\_\+t MCOx\+Source, uint32\+\_\+t MCOx\+Prescaler)
+\begin{DoxyCompactList}\small\item\em Configure MCOx @rmtoll CFGR MCOSEL LL\+\_\+\+RCC\+\_\+\+Config\+MCO~\newline
+ CFGR MCOPRE LL\+\_\+\+RCC\+\_\+\+Config\+MCO. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+USARTClock\+Source} (uint32\+\_\+t USARTx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure USARTx clock source @rmtoll CCIPR USARTx\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+USARTClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+LPUARTClock\+Source} (uint32\+\_\+t LPUARTx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure LPUART1x clock source @rmtoll CCIPR LPUART1\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+LPUARTClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+I2\+CClock\+Source} (uint32\+\_\+t I2\+Cx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure I2\+Cx clock source @rmtoll CCIPR I2\+Cx\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+I2\+CClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+LPTIMClock\+Source} (uint32\+\_\+t LPTIMx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure LPTIMx clock source @rmtoll CCIPR LPTIM1\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+LPTIMClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+SAIClock\+Source} (uint32\+\_\+t SAIx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure SAIx clock source @rmtoll CCIPR SAI1\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+SAIClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+I2\+SClock\+Source} (uint32\+\_\+t I2\+Sx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure I2S clock source @rmtoll CCIPR I2\+S23\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+I2\+SClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+RNGClock\+Source} (uint32\+\_\+t RNGx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure RNG clock source @rmtoll CCIPR CLK48\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+RNGClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+USBClock\+Source} (uint32\+\_\+t USBx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure USB clock source @rmtoll CCIPR CLK48\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+USBClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+ADCClock\+Source} (uint32\+\_\+t ADCx\+Source)
+\begin{DoxyCompactList}\small\item\em Configure ADC clock source @rmtoll CCIPR ADC12\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+ADCClock\+Source~\newline
+ CCIPR ADC345\+SEL LL\+\_\+\+RCC\+\_\+\+Set\+ADCClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+USARTClock\+Source} (uint32\+\_\+t USARTx)
+\begin{DoxyCompactList}\small\item\em Get USARTx clock source @rmtoll CCIPR USARTx\+SEL LL\+\_\+\+RCC\+\_\+\+Get\+USARTClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+LPUARTClock\+Source} (uint32\+\_\+t LPUARTx)
+\begin{DoxyCompactList}\small\item\em Get LPUARTx clock source @rmtoll CCIPR LPUART1\+SEL LL\+\_\+\+RCC\+\_\+\+Get\+LPUARTClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+I2\+CClock\+Source} (uint32\+\_\+t I2\+Cx)
+\begin{DoxyCompactList}\small\item\em Get I2\+Cx clock source @rmtoll CCIPR I2\+Cx\+SEL LL\+\_\+\+RCC\+\_\+\+Get\+I2\+CClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+LPTIMClock\+Source} (uint32\+\_\+t LPTIMx)
+\begin{DoxyCompactList}\small\item\em Get LPTIMx clock source @rmtoll CCIPR LPTIMx\+SEL LL\+\_\+\+RCC\+\_\+\+Get\+LPTIMClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+SAIClock\+Source} (uint32\+\_\+t SAIx)
+\begin{DoxyCompactList}\small\item\em Get SAIx clock source @rmtoll CCIPR SAI1\+SEL LL\+\_\+\+RCC\+\_\+\+Get\+SAIClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+I2\+SClock\+Source} (uint32\+\_\+t I2\+Sx)
+\begin{DoxyCompactList}\small\item\em Get I2\+Sx clock source @rmtoll CCIPR I2\+S23\+SEL LL\+\_\+\+RCC\+\_\+\+Get\+I2\+SClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+RNGClock\+Source} (uint32\+\_\+t RNGx)
+\begin{DoxyCompactList}\small\item\em Get RNGx clock source @rmtoll CCIPR CLK48\+SEL LL\+\_\+\+RCC\+\_\+\+Get\+RNGClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+USBClock\+Source} (uint32\+\_\+t USBx)
+\begin{DoxyCompactList}\small\item\em Get USBx clock source @rmtoll CCIPR CLK48\+SEL LL\+\_\+\+RCC\+\_\+\+Get\+USBClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+ADCClock\+Source} (uint32\+\_\+t ADCx)
+\begin{DoxyCompactList}\small\item\em Get ADCx clock source @rmtoll CCIPR ADCSEL LL\+\_\+\+RCC\+\_\+\+Get\+ADCClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Set\+RTCClock\+Source} (uint32\+\_\+t Source)
+\begin{DoxyCompactList}\small\item\em Set RTC Clock Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Get\+RTCClock\+Source} (void)
+\begin{DoxyCompactList}\small\item\em Get RTC Clock Source @rmtoll BDCR RTCSEL LL\+\_\+\+RCC\+\_\+\+Get\+RTCClock\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Enable\+RTC} (void)
+\begin{DoxyCompactList}\small\item\em Enable RTC @rmtoll BDCR RTCEN LL\+\_\+\+RCC\+\_\+\+Enable\+RTC. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Disable\+RTC} (void)
+\begin{DoxyCompactList}\small\item\em Disable RTC @rmtoll BDCR RTCEN LL\+\_\+\+RCC\+\_\+\+Disable\+RTC. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+RTC} (void)
+\begin{DoxyCompactList}\small\item\em Check if RTC has been enabled or not @rmtoll BDCR RTCEN LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+RTC. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Force\+Backup\+Domain\+Reset} (void)
+\begin{DoxyCompactList}\small\item\em Force the Backup domain reset @rmtoll BDCR BDRST LL\+\_\+\+RCC\+\_\+\+Force\+Backup\+Domain\+Reset. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Release\+Backup\+Domain\+Reset} (void)
+\begin{DoxyCompactList}\small\item\em Release the Backup domain reset @rmtoll BDCR BDRST LL\+\_\+\+RCC\+\_\+\+Release\+Backup\+Domain\+Reset. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Enable} (void)
+\begin{DoxyCompactList}\small\item\em Enable PLL @rmtoll CR PLLON LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Enable. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Disable} (void)
+\begin{DoxyCompactList}\small\item\em Disable PLL. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Is\+Ready} (void)
+\begin{DoxyCompactList}\small\item\em Check if PLL Ready @rmtoll CR PLLRDY LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Is\+Ready. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Config\+Domain\+\_\+\+SYS} (uint32\+\_\+t Source, uint32\+\_\+t PLLM, uint32\+\_\+t PLLN, uint32\+\_\+t PLLR)
+\begin{DoxyCompactList}\small\item\em Configure PLL used for SYSCLK Domain. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Config\+Domain\+\_\+\+ADC} (uint32\+\_\+t Source, uint32\+\_\+t PLLM, uint32\+\_\+t PLLN, uint32\+\_\+t PLLP)
+\begin{DoxyCompactList}\small\item\em Configure PLL used for ADC domain clock. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Config\+Domain\+\_\+48M} (uint32\+\_\+t Source, uint32\+\_\+t PLLM, uint32\+\_\+t PLLN, uint32\+\_\+t PLLQ)
+\begin{DoxyCompactList}\small\item\em Configure PLL used for 48Mhz domain clock. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Set\+Main\+Source} (uint32\+\_\+t PLLSource)
+\begin{DoxyCompactList}\small\item\em Configure PLL clock source @rmtoll PLLCFGR PLLSRC LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Set\+Main\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Get\+Main\+Source} (void)
+\begin{DoxyCompactList}\small\item\em Get the oscillator used as PLL clock source. @rmtoll PLLCFGR PLLSRC LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Get\+Main\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+GetN} (void)
+\begin{DoxyCompactList}\small\item\em Get Main PLL multiplication factor for VCO @rmtoll PLLCFGR PLLN LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+GetN. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+GetP} (void)
+\begin{DoxyCompactList}\small\item\em Get Main PLL division factor for PLLP. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+GetQ} (void)
+\begin{DoxyCompactList}\small\item\em Get Main PLL division factor for PLLQ. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+GetR} (void)
+\begin{DoxyCompactList}\small\item\em Get Main PLL division factor for PLLR. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Get\+Divider} (void)
+\begin{DoxyCompactList}\small\item\em Get Division factor for the main PLL and other PLL @rmtoll PLLCFGR PLLM LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Get\+Divider. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Enable\+Domain\+\_\+\+ADC} (void)
+\begin{DoxyCompactList}\small\item\em Enable PLL output mapped on ADC domain clock @rmtoll PLLCFGR PLLPEN LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Enable\+Domain\+\_\+\+ADC. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Disable\+Domain\+\_\+\+ADC} (void)
+\begin{DoxyCompactList}\small\item\em Disable PLL output mapped on ADC domain clock. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Is\+Enabled\+Domain\+\_\+\+ADC} (void)
+\begin{DoxyCompactList}\small\item\em Check if PLL output mapped on ADC domain clock is enabled @rmtoll PLLCFGR PLLPEN LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Is\+Enabled\+Domain\+\_\+\+ADC. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Enable\+Domain\+\_\+48M} (void)
+\begin{DoxyCompactList}\small\item\em Enable PLL output mapped on 48MHz domain clock @rmtoll PLLCFGR PLLQEN LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Enable\+Domain\+\_\+48M. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Disable\+Domain\+\_\+48M} (void)
+\begin{DoxyCompactList}\small\item\em Disable PLL output mapped on 48MHz domain clock. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Is\+Enabled\+Domain\+\_\+48M} (void)
+\begin{DoxyCompactList}\small\item\em Check if PLL output mapped on 48MHz domain clock is enabled @rmtoll PLLCFGR PLLQEN LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Is\+Enabled\+Domain\+\_\+48M. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Enable\+Domain\+\_\+\+SYS} (void)
+\begin{DoxyCompactList}\small\item\em Enable PLL output mapped on SYSCLK domain @rmtoll PLLCFGR PLLREN LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Enable\+Domain\+\_\+\+SYS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Disable\+Domain\+\_\+\+SYS} (void)
+\begin{DoxyCompactList}\small\item\em Disable PLL output mapped on SYSCLK domain. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Is\+Enabled\+Domain\+\_\+\+SYS} (void)
+\begin{DoxyCompactList}\small\item\em Check if PLL output mapped on SYSCLK domain clock is enabled @rmtoll PLLCFGR PLLREN LL\+\_\+\+RCC\+\_\+\+PLL\+\_\+\+Is\+Enabled\+Domain\+\_\+\+SYS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+LSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Clear LSI ready interrupt flag @rmtoll CICR LSIRDYC LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+LSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+LSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Clear LSE ready interrupt flag @rmtoll CICR LSERDYC LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+LSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+HSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Clear HSI ready interrupt flag @rmtoll CICR HSIRDYC LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+HSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+HSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Clear HSE ready interrupt flag @rmtoll CICR HSERDYC LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+HSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+PLLRDY} (void)
+\begin{DoxyCompactList}\small\item\em Clear PLL ready interrupt flag @rmtoll CICR PLLRDYC LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+PLLRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+HSI48\+RDY} (void)
+\begin{DoxyCompactList}\small\item\em Clear HSI48 ready interrupt flag @rmtoll CICR HSI48\+RDYC LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+HSI48\+RDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+HSECSS} (void)
+\begin{DoxyCompactList}\small\item\em Clear Clock security system interrupt flag @rmtoll CICR CSSC LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+HSECSS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+LSECSS} (void)
+\begin{DoxyCompactList}\small\item\em Clear LSE Clock security system interrupt flag @rmtoll CICR LSECSSC LL\+\_\+\+RCC\+\_\+\+Clear\+Flag\+\_\+\+LSECSS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+LSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Check if LSI ready interrupt occurred or not @rmtoll CIFR LSIRDYF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+LSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+LSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Check if LSE ready interrupt occurred or not @rmtoll CIFR LSERDYF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+LSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+HSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Check if HSI ready interrupt occurred or not @rmtoll CIFR HSIRDYF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+HSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+HSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Check if HSE ready interrupt occurred or not @rmtoll CIFR HSERDYF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+HSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+PLLRDY} (void)
+\begin{DoxyCompactList}\small\item\em Check if PLL ready interrupt occurred or not @rmtoll CIFR PLLRDYF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+PLLRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+HSI48\+RDY} (void)
+\begin{DoxyCompactList}\small\item\em Check if HSI48 ready interrupt occurred or not @rmtoll CIR HSI48\+RDYF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+HSI48\+RDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+HSECSS} (void)
+\begin{DoxyCompactList}\small\item\em Check if Clock security system interrupt occurred or not @rmtoll CIFR CSSF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+HSECSS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+LSECSS} (void)
+\begin{DoxyCompactList}\small\item\em Check if LSE Clock security system interrupt occurred or not @rmtoll CIFR LSECSSF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+LSECSS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+IWDGRST} (void)
+\begin{DoxyCompactList}\small\item\em Check if RCC flag Independent Watchdog reset is set or not. @rmtoll CSR IWDGRSTF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+IWDGRST. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+LPWRRST} (void)
+\begin{DoxyCompactList}\small\item\em Check if RCC flag Low Power reset is set or not. @rmtoll CSR LPWRRSTF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+LPWRRST. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+OBLRST} (void)
+\begin{DoxyCompactList}\small\item\em Check if RCC flag Option byte reset is set or not. @rmtoll CSR OBLRSTF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+OBLRST. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+PINRST} (void)
+\begin{DoxyCompactList}\small\item\em Check if RCC flag Pin reset is set or not. @rmtoll CSR PINRSTF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+PINRST. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+SFTRST} (void)
+\begin{DoxyCompactList}\small\item\em Check if RCC flag Software reset is set or not. @rmtoll CSR SFTRSTF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+SFTRST. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+WWDGRST} (void)
+\begin{DoxyCompactList}\small\item\em Check if RCC flag Window Watchdog reset is set or not. @rmtoll CSR WWDGRSTF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+WWDGRST. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+BORRST} (void)
+\begin{DoxyCompactList}\small\item\em Check if RCC flag BOR reset is set or not. @rmtoll CSR BORRSTF LL\+\_\+\+RCC\+\_\+\+Is\+Active\+Flag\+\_\+\+BORRST. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Clear\+Reset\+Flags} (void)
+\begin{DoxyCompactList}\small\item\em Set RMVF bit to clear the reset flags. @rmtoll CSR RMVF LL\+\_\+\+RCC\+\_\+\+Clear\+Reset\+Flags. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+LSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Enable LSI ready interrupt @rmtoll CIER LSIRDYIE LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+LSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+LSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Enable LSE ready interrupt @rmtoll CIER LSERDYIE LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+LSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+HSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Enable HSI ready interrupt @rmtoll CIER HSIRDYIE LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+HSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+HSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Enable HSE ready interrupt @rmtoll CIER HSERDYIE LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+HSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+PLLRDY} (void)
+\begin{DoxyCompactList}\small\item\em Enable PLL ready interrupt @rmtoll CIER PLLRDYIE LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+PLLRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+HSI48\+RDY} (void)
+\begin{DoxyCompactList}\small\item\em Enable HSI48 ready interrupt @rmtoll CIER HSI48\+RDYIE LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+HSI48\+RDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+LSECSS} (void)
+\begin{DoxyCompactList}\small\item\em Enable LSE clock security system interrupt @rmtoll CIER LSECSSIE LL\+\_\+\+RCC\+\_\+\+Enable\+IT\+\_\+\+LSECSS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+LSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Disable LSI ready interrupt @rmtoll CIER LSIRDYIE LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+LSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+LSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Disable LSE ready interrupt @rmtoll CIER LSERDYIE LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+LSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+HSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Disable HSI ready interrupt @rmtoll CIER HSIRDYIE LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+HSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+HSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Disable HSE ready interrupt @rmtoll CIER HSERDYIE LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+HSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+PLLRDY} (void)
+\begin{DoxyCompactList}\small\item\em Disable PLL ready interrupt @rmtoll CIER PLLRDYIE LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+PLLRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+HSI48\+RDY} (void)
+\begin{DoxyCompactList}\small\item\em Disable HSI48 ready interrupt @rmtoll CIER HSI48\+RDYIE LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+HSI48\+RDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+LSECSS} (void)
+\begin{DoxyCompactList}\small\item\em Disable LSE clock security system interrupt @rmtoll CIER LSECSSIE LL\+\_\+\+RCC\+\_\+\+Disable\+IT\+\_\+\+LSECSS. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+LSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Checks if LSI ready interrupt source is enabled or disabled. @rmtoll CIER LSIRDYIE LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+LSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+LSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Checks if LSE ready interrupt source is enabled or disabled. @rmtoll CIER LSERDYIE LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+LSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+HSIRDY} (void)
+\begin{DoxyCompactList}\small\item\em Checks if HSI ready interrupt source is enabled or disabled. @rmtoll CIER HSIRDYIE LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+HSIRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+HSERDY} (void)
+\begin{DoxyCompactList}\small\item\em Checks if HSE ready interrupt source is enabled or disabled. @rmtoll CIER HSERDYIE LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+HSERDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+PLLRDY} (void)
+\begin{DoxyCompactList}\small\item\em Checks if PLL ready interrupt source is enabled or disabled. @rmtoll CIER PLLRDYIE LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+PLLRDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+HSI48\+RDY} (void)
+\begin{DoxyCompactList}\small\item\em Checks if HSI48 ready interrupt source is enabled or disabled. @rmtoll CIER HSI48\+RDYIE LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+HSI48\+RDY. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+LSECSS} (void)
+\begin{DoxyCompactList}\small\item\em Checks if LSECSS interrupt source is enabled or disabled. @rmtoll CIER LSECSSIE LL\+\_\+\+RCC\+\_\+\+Is\+Enabled\+IT\+\_\+\+LSECSS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of RCC LL module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+

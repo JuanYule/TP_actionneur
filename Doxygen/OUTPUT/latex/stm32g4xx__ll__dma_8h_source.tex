@@ -1,0 +1,899 @@
+\doxysection{stm32g4xx\+\_\+ll\+\_\+dma.\+h}
+\label{stm32g4xx__ll__dma_8h_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_dma.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_dma.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00019 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020 \textcolor{preprocessor}{\#ifndef \_\_STM32G4xx\_LL\_DMA\_H}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_LL\_DMA\_H}}
+\DoxyCodeLine{00022 }
+\DoxyCodeLine{00023 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00024 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#include "{}stm32g4xx.h"{}}}
+\DoxyCodeLine{00029 \textcolor{preprocessor}{\#include "{}stm32g4xx\_ll\_dmamux.h"{}}}
+\DoxyCodeLine{00030 }
+\DoxyCodeLine{00035 \textcolor{preprocessor}{\#if defined (DMA1) || defined (DMA2)}}
+\DoxyCodeLine{00036 }
+\DoxyCodeLine{00041 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00042 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00046 \textcolor{comment}{/* Array used to get the DMA channel register offset versus channel index LL\_DMA\_CHANNEL\_x */}}
+\DoxyCodeLine{00047 \textcolor{keyword}{static} \textcolor{keyword}{const} uint8\_t CHANNEL\_OFFSET\_TAB[] =}
+\DoxyCodeLine{00048 \{}
+\DoxyCodeLine{00049   (uint8\_t)(DMA1\_Channel1\_BASE -\/ DMA1\_BASE),}
+\DoxyCodeLine{00050   (uint8\_t)(DMA1\_Channel2\_BASE -\/ DMA1\_BASE),}
+\DoxyCodeLine{00051   (uint8\_t)(DMA1\_Channel3\_BASE -\/ DMA1\_BASE),}
+\DoxyCodeLine{00052   (uint8\_t)(DMA1\_Channel4\_BASE -\/ DMA1\_BASE),}
+\DoxyCodeLine{00053   (uint8\_t)(DMA1\_Channel5\_BASE -\/ DMA1\_BASE),}
+\DoxyCodeLine{00054   (uint8\_t)(DMA1\_Channel6\_BASE -\/ DMA1\_BASE)}
+\DoxyCodeLine{00055 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{00056   ,}
+\DoxyCodeLine{00057   (uint8\_t)(DMA1\_Channel7\_BASE -\/ DMA1\_BASE)}
+\DoxyCodeLine{00058 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00059 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{00060   ,}
+\DoxyCodeLine{00061   (uint8\_t)(DMA1\_Channel8\_BASE -\/ DMA1\_BASE)}
+\DoxyCodeLine{00062 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00063 \};}
+\DoxyCodeLine{00068 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00072 \textcolor{comment}{/* Define used to get CSELR register offset */}}
+\DoxyCodeLine{00073 \textcolor{preprocessor}{\#define DMA\_CSELR\_OFFSET                  (uint32\_t)(DMA1\_CSELR\_BASE -\/ DMA1\_BASE)}}
+\DoxyCodeLine{00074 }
+\DoxyCodeLine{00075 \textcolor{comment}{/* Defines used for the bit position in the register and perform offsets */}}
+\DoxyCodeLine{00076 \textcolor{preprocessor}{\#define DMA\_POSITION\_CSELR\_CXS            POSITION\_VAL(DMA\_CSELR\_C1S << ((Channel-\/1U)*4U))}}
+\DoxyCodeLine{00081 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00082 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{00089 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/*USE\_FULL\_LL\_DRIVER*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00090 }
+\DoxyCodeLine{00091 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00092 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{00096 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00097 \{}
+\DoxyCodeLine{00098   uint32\_t PeriphOrM2MSrcAddress;  }
+\DoxyCodeLine{00103   uint32\_t MemoryOrM2MDstAddress;  }
+\DoxyCodeLine{00108   uint32\_t Direction;              }
+\DoxyCodeLine{00114   uint32\_t Mode;                   }
+\DoxyCodeLine{00121   uint32\_t PeriphOrM2MSrcIncMode;  }
+\DoxyCodeLine{00127   uint32\_t MemoryOrM2MDstIncMode;  }
+\DoxyCodeLine{00133   uint32\_t PeriphOrM2MSrcDataSize; }
+\DoxyCodeLine{00139   uint32\_t MemoryOrM2MDstDataSize; }
+\DoxyCodeLine{00145   uint32\_t NbData;                 }
+\DoxyCodeLine{00152   uint32\_t PeriphRequest;          }
+\DoxyCodeLine{00157   uint32\_t Priority;               }
+\DoxyCodeLine{00162 \} LL\_DMA\_InitTypeDef;}
+\DoxyCodeLine{00166 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/*USE\_FULL\_LL\_DRIVER*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00167 }
+\DoxyCodeLine{00168 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00176 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CGIF1                 DMA\_IFCR\_CGIF1        }}
+\DoxyCodeLine{00177 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTCIF1                DMA\_IFCR\_CTCIF1       }}
+\DoxyCodeLine{00178 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CHTIF1                DMA\_IFCR\_CHTIF1       }}
+\DoxyCodeLine{00179 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTEIF1                DMA\_IFCR\_CTEIF1       }}
+\DoxyCodeLine{00180 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CGIF2                 DMA\_IFCR\_CGIF2        }}
+\DoxyCodeLine{00181 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTCIF2                DMA\_IFCR\_CTCIF2       }}
+\DoxyCodeLine{00182 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CHTIF2                DMA\_IFCR\_CHTIF2       }}
+\DoxyCodeLine{00183 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTEIF2                DMA\_IFCR\_CTEIF2       }}
+\DoxyCodeLine{00184 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CGIF3                 DMA\_IFCR\_CGIF3        }}
+\DoxyCodeLine{00185 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTCIF3                DMA\_IFCR\_CTCIF3       }}
+\DoxyCodeLine{00186 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CHTIF3                DMA\_IFCR\_CHTIF3       }}
+\DoxyCodeLine{00187 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTEIF3                DMA\_IFCR\_CTEIF3       }}
+\DoxyCodeLine{00188 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CGIF4                 DMA\_IFCR\_CGIF4        }}
+\DoxyCodeLine{00189 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTCIF4                DMA\_IFCR\_CTCIF4       }}
+\DoxyCodeLine{00190 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CHTIF4                DMA\_IFCR\_CHTIF4       }}
+\DoxyCodeLine{00191 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTEIF4                DMA\_IFCR\_CTEIF4       }}
+\DoxyCodeLine{00192 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CGIF5                 DMA\_IFCR\_CGIF5        }}
+\DoxyCodeLine{00193 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTCIF5                DMA\_IFCR\_CTCIF5       }}
+\DoxyCodeLine{00194 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CHTIF5                DMA\_IFCR\_CHTIF5       }}
+\DoxyCodeLine{00195 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTEIF5                DMA\_IFCR\_CTEIF5       }}
+\DoxyCodeLine{00196 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CGIF6                 DMA\_IFCR\_CGIF6        }}
+\DoxyCodeLine{00197 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTCIF6                DMA\_IFCR\_CTCIF6       }}
+\DoxyCodeLine{00198 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CHTIF6                DMA\_IFCR\_CHTIF6       }}
+\DoxyCodeLine{00199 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTEIF6                DMA\_IFCR\_CTEIF6       }}
+\DoxyCodeLine{00200 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{00201 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CGIF7                 DMA\_IFCR\_CGIF7        }}
+\DoxyCodeLine{00202 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTCIF7                DMA\_IFCR\_CTCIF7       }}
+\DoxyCodeLine{00203 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CHTIF7                DMA\_IFCR\_CHTIF7       }}
+\DoxyCodeLine{00204 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTEIF7                DMA\_IFCR\_CTEIF7       }}
+\DoxyCodeLine{00205 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00206 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{00207 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CGIF8                 DMA\_IFCR\_CGIF8        }}
+\DoxyCodeLine{00208 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTCIF8                DMA\_IFCR\_CTCIF8       }}
+\DoxyCodeLine{00209 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CHTIF8                DMA\_IFCR\_CHTIF8       }}
+\DoxyCodeLine{00210 \textcolor{preprocessor}{\#define LL\_DMA\_IFCR\_CTEIF8                DMA\_IFCR\_CTEIF8       }}
+\DoxyCodeLine{00211 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00220 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_GIF1                   DMA\_ISR\_GIF1          }}
+\DoxyCodeLine{00221 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TCIF1                  DMA\_ISR\_TCIF1         }}
+\DoxyCodeLine{00222 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_HTIF1                  DMA\_ISR\_HTIF1         }}
+\DoxyCodeLine{00223 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TEIF1                  DMA\_ISR\_TEIF1         }}
+\DoxyCodeLine{00224 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_GIF2                   DMA\_ISR\_GIF2          }}
+\DoxyCodeLine{00225 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TCIF2                  DMA\_ISR\_TCIF2         }}
+\DoxyCodeLine{00226 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_HTIF2                  DMA\_ISR\_HTIF2         }}
+\DoxyCodeLine{00227 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TEIF2                  DMA\_ISR\_TEIF2         }}
+\DoxyCodeLine{00228 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_GIF3                   DMA\_ISR\_GIF3          }}
+\DoxyCodeLine{00229 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TCIF3                  DMA\_ISR\_TCIF3         }}
+\DoxyCodeLine{00230 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_HTIF3                  DMA\_ISR\_HTIF3         }}
+\DoxyCodeLine{00231 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TEIF3                  DMA\_ISR\_TEIF3         }}
+\DoxyCodeLine{00232 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_GIF4                   DMA\_ISR\_GIF4          }}
+\DoxyCodeLine{00233 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TCIF4                  DMA\_ISR\_TCIF4         }}
+\DoxyCodeLine{00234 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_HTIF4                  DMA\_ISR\_HTIF4         }}
+\DoxyCodeLine{00235 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TEIF4                  DMA\_ISR\_TEIF4         }}
+\DoxyCodeLine{00236 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_GIF5                   DMA\_ISR\_GIF5          }}
+\DoxyCodeLine{00237 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TCIF5                  DMA\_ISR\_TCIF5         }}
+\DoxyCodeLine{00238 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_HTIF5                  DMA\_ISR\_HTIF5         }}
+\DoxyCodeLine{00239 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TEIF5                  DMA\_ISR\_TEIF5         }}
+\DoxyCodeLine{00240 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_GIF6                   DMA\_ISR\_GIF6          }}
+\DoxyCodeLine{00241 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TCIF6                  DMA\_ISR\_TCIF6         }}
+\DoxyCodeLine{00242 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_HTIF6                  DMA\_ISR\_HTIF6         }}
+\DoxyCodeLine{00243 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TEIF6                  DMA\_ISR\_TEIF6         }}
+\DoxyCodeLine{00244 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{00245 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_GIF7                   DMA\_ISR\_GIF7          }}
+\DoxyCodeLine{00246 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TCIF7                  DMA\_ISR\_TCIF7         }}
+\DoxyCodeLine{00247 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_HTIF7                  DMA\_ISR\_HTIF7         }}
+\DoxyCodeLine{00248 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TEIF7                  DMA\_ISR\_TEIF7         }}
+\DoxyCodeLine{00249 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00250 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{00251 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_GIF8                   DMA\_ISR\_GIF8          }}
+\DoxyCodeLine{00252 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TCIF8                  DMA\_ISR\_TCIF8         }}
+\DoxyCodeLine{00253 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_HTIF8                  DMA\_ISR\_HTIF8         }}
+\DoxyCodeLine{00254 \textcolor{preprocessor}{\#define LL\_DMA\_ISR\_TEIF8                  DMA\_ISR\_TEIF8         }}
+\DoxyCodeLine{00255 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00264 \textcolor{preprocessor}{\#define LL\_DMA\_CCR\_TCIE                   DMA\_CCR\_TCIE          }}
+\DoxyCodeLine{00265 \textcolor{preprocessor}{\#define LL\_DMA\_CCR\_HTIE                   DMA\_CCR\_HTIE          }}
+\DoxyCodeLine{00266 \textcolor{preprocessor}{\#define LL\_DMA\_CCR\_TEIE                   DMA\_CCR\_TEIE          }}
+\DoxyCodeLine{00274 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_1                  0x00000000U }}
+\DoxyCodeLine{00275 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_2                  0x00000001U }}
+\DoxyCodeLine{00276 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_3                  0x00000002U }}
+\DoxyCodeLine{00277 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_4                  0x00000003U }}
+\DoxyCodeLine{00278 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_5                  0x00000004U }}
+\DoxyCodeLine{00279 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_6                  0x00000005U }}
+\DoxyCodeLine{00280 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{00281 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_7                  0x00000006U }}
+\DoxyCodeLine{00282 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00283 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{00284 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_8                  0x00000007U }}
+\DoxyCodeLine{00285 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00286 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{00287 \textcolor{preprocessor}{\#define LL\_DMA\_CHANNEL\_ALL                0xFFFF0000U }}
+\DoxyCodeLine{00288 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/*USE\_FULL\_LL\_DRIVER*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00296 \textcolor{preprocessor}{\#define LL\_DMA\_DIRECTION\_PERIPH\_TO\_MEMORY 0x00000000U             }}
+\DoxyCodeLine{00297 \textcolor{preprocessor}{\#define LL\_DMA\_DIRECTION\_MEMORY\_TO\_PERIPH DMA\_CCR\_DIR             }}
+\DoxyCodeLine{00298 \textcolor{preprocessor}{\#define LL\_DMA\_DIRECTION\_MEMORY\_TO\_MEMORY DMA\_CCR\_MEM2MEM         }}
+\DoxyCodeLine{00306 \textcolor{preprocessor}{\#define LL\_DMA\_MODE\_NORMAL                0x00000000U             }}
+\DoxyCodeLine{00307 \textcolor{preprocessor}{\#define LL\_DMA\_MODE\_CIRCULAR              DMA\_CCR\_CIRC            }}
+\DoxyCodeLine{00315 \textcolor{preprocessor}{\#define LL\_DMA\_PERIPH\_INCREMENT           DMA\_CCR\_PINC            }}
+\DoxyCodeLine{00316 \textcolor{preprocessor}{\#define LL\_DMA\_PERIPH\_NOINCREMENT         0x00000000U             }}
+\DoxyCodeLine{00324 \textcolor{preprocessor}{\#define LL\_DMA\_MEMORY\_INCREMENT           DMA\_CCR\_MINC            }}
+\DoxyCodeLine{00325 \textcolor{preprocessor}{\#define LL\_DMA\_MEMORY\_NOINCREMENT         0x00000000U             }}
+\DoxyCodeLine{00333 \textcolor{preprocessor}{\#define LL\_DMA\_PDATAALIGN\_BYTE            0x00000000U             }}
+\DoxyCodeLine{00334 \textcolor{preprocessor}{\#define LL\_DMA\_PDATAALIGN\_HALFWORD        DMA\_CCR\_PSIZE\_0         }}
+\DoxyCodeLine{00335 \textcolor{preprocessor}{\#define LL\_DMA\_PDATAALIGN\_WORD            DMA\_CCR\_PSIZE\_1         }}
+\DoxyCodeLine{00343 \textcolor{preprocessor}{\#define LL\_DMA\_MDATAALIGN\_BYTE            0x00000000U             }}
+\DoxyCodeLine{00344 \textcolor{preprocessor}{\#define LL\_DMA\_MDATAALIGN\_HALFWORD        DMA\_CCR\_MSIZE\_0         }}
+\DoxyCodeLine{00345 \textcolor{preprocessor}{\#define LL\_DMA\_MDATAALIGN\_WORD            DMA\_CCR\_MSIZE\_1         }}
+\DoxyCodeLine{00353 \textcolor{preprocessor}{\#define LL\_DMA\_PRIORITY\_LOW               0x00000000U             }}
+\DoxyCodeLine{00354 \textcolor{preprocessor}{\#define LL\_DMA\_PRIORITY\_MEDIUM            DMA\_CCR\_PL\_0            }}
+\DoxyCodeLine{00355 \textcolor{preprocessor}{\#define LL\_DMA\_PRIORITY\_HIGH              DMA\_CCR\_PL\_1            }}
+\DoxyCodeLine{00356 \textcolor{preprocessor}{\#define LL\_DMA\_PRIORITY\_VERYHIGH          DMA\_CCR\_PL              }}
+\DoxyCodeLine{00365 \textcolor{comment}{/* Exported macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00380 \textcolor{preprocessor}{\#define LL\_DMA\_WriteReg(\_\_INSTANCE\_\_, \_\_REG\_\_, \_\_VALUE\_\_) WRITE\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_, (\_\_VALUE\_\_))}}
+\DoxyCodeLine{00381 }
+\DoxyCodeLine{00388 \textcolor{preprocessor}{\#define LL\_DMA\_ReadReg(\_\_INSTANCE\_\_, \_\_REG\_\_) READ\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_)}}
+\DoxyCodeLine{00401 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{00402 \textcolor{preprocessor}{\#define \_\_LL\_DMA\_GET\_INSTANCE(\_\_CHANNEL\_INSTANCE\_\_)   \(\backslash\)}}
+\DoxyCodeLine{00403 \textcolor{preprocessor}{  (((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) > ((uint32\_t)DMA1\_Channel8)) ?  DMA2 : DMA1)}}
+\DoxyCodeLine{00404 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00405 \textcolor{preprocessor}{\#define \_\_LL\_DMA\_GET\_INSTANCE(\_\_CHANNEL\_INSTANCE\_\_)   \(\backslash\)}}
+\DoxyCodeLine{00406 \textcolor{preprocessor}{  (((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) > ((uint32\_t)DMA1\_Channel6)) ?  DMA2 : DMA1)}}
+\DoxyCodeLine{00407 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00413 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{00414 \textcolor{preprocessor}{\#define \_\_LL\_DMA\_GET\_CHANNEL(\_\_CHANNEL\_INSTANCE\_\_)   \(\backslash\)}}
+\DoxyCodeLine{00415 \textcolor{preprocessor}{  (((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel1)) ? LL\_DMA\_CHANNEL\_1 : \(\backslash\)}}
+\DoxyCodeLine{00416 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel1)) ? LL\_DMA\_CHANNEL\_1 : \(\backslash\)}}
+\DoxyCodeLine{00417 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel2)) ? LL\_DMA\_CHANNEL\_2 : \(\backslash\)}}
+\DoxyCodeLine{00418 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel2)) ? LL\_DMA\_CHANNEL\_2 : \(\backslash\)}}
+\DoxyCodeLine{00419 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel3)) ? LL\_DMA\_CHANNEL\_3 : \(\backslash\)}}
+\DoxyCodeLine{00420 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel3)) ? LL\_DMA\_CHANNEL\_3 : \(\backslash\)}}
+\DoxyCodeLine{00421 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel4)) ? LL\_DMA\_CHANNEL\_4 : \(\backslash\)}}
+\DoxyCodeLine{00422 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel4)) ? LL\_DMA\_CHANNEL\_4 : \(\backslash\)}}
+\DoxyCodeLine{00423 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel5)) ? LL\_DMA\_CHANNEL\_5 : \(\backslash\)}}
+\DoxyCodeLine{00424 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel5)) ? LL\_DMA\_CHANNEL\_5 : \(\backslash\)}}
+\DoxyCodeLine{00425 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel6)) ? LL\_DMA\_CHANNEL\_6 : \(\backslash\)}}
+\DoxyCodeLine{00426 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel6)) ? LL\_DMA\_CHANNEL\_6 : \(\backslash\)}}
+\DoxyCodeLine{00427 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel7)) ? LL\_DMA\_CHANNEL\_7 : \(\backslash\)}}
+\DoxyCodeLine{00428 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel7)) ? LL\_DMA\_CHANNEL\_7 : \(\backslash\)}}
+\DoxyCodeLine{00429 \textcolor{preprocessor}{   LL\_DMA\_CHANNEL\_8)}}
+\DoxyCodeLine{00430 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00431 \textcolor{preprocessor}{\#define \_\_LL\_DMA\_GET\_CHANNEL(\_\_CHANNEL\_INSTANCE\_\_)   \(\backslash\)}}
+\DoxyCodeLine{00432 \textcolor{preprocessor}{  (((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel1)) ? LL\_DMA\_CHANNEL\_1 : \(\backslash\)}}
+\DoxyCodeLine{00433 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel1)) ? LL\_DMA\_CHANNEL\_1 : \(\backslash\)}}
+\DoxyCodeLine{00434 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel2)) ? LL\_DMA\_CHANNEL\_2 : \(\backslash\)}}
+\DoxyCodeLine{00435 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel2)) ? LL\_DMA\_CHANNEL\_2 : \(\backslash\)}}
+\DoxyCodeLine{00436 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel3)) ? LL\_DMA\_CHANNEL\_3 : \(\backslash\)}}
+\DoxyCodeLine{00437 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel3)) ? LL\_DMA\_CHANNEL\_3 : \(\backslash\)}}
+\DoxyCodeLine{00438 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel4)) ? LL\_DMA\_CHANNEL\_4 : \(\backslash\)}}
+\DoxyCodeLine{00439 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel4)) ? LL\_DMA\_CHANNEL\_4 : \(\backslash\)}}
+\DoxyCodeLine{00440 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA1\_Channel5)) ? LL\_DMA\_CHANNEL\_5 : \(\backslash\)}}
+\DoxyCodeLine{00441 \textcolor{preprocessor}{   ((uint32\_t)(\_\_CHANNEL\_INSTANCE\_\_) == ((uint32\_t)DMA2\_Channel5)) ? LL\_DMA\_CHANNEL\_5 : \(\backslash\)}}
+\DoxyCodeLine{00442 \textcolor{preprocessor}{   LL\_DMA\_CHANNEL\_6)}}
+\DoxyCodeLine{00443 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00444 }
+\DoxyCodeLine{00451 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{00452 \textcolor{preprocessor}{\#define \_\_LL\_DMA\_GET\_CHANNEL\_INSTANCE(\_\_DMA\_INSTANCE\_\_, \_\_CHANNEL\_\_)   \(\backslash\)}}
+\DoxyCodeLine{00453 \textcolor{preprocessor}{  ((((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_1))) ? DMA1\_Channel1 : \(\backslash\)}}
+\DoxyCodeLine{00454 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_1))) ? DMA2\_Channel1 : \(\backslash\)}}
+\DoxyCodeLine{00455 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_2))) ? DMA1\_Channel2 : \(\backslash\)}}
+\DoxyCodeLine{00456 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_2))) ? DMA2\_Channel2 : \(\backslash\)}}
+\DoxyCodeLine{00457 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_3))) ? DMA1\_Channel3 : \(\backslash\)}}
+\DoxyCodeLine{00458 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_3))) ? DMA2\_Channel3 : \(\backslash\)}}
+\DoxyCodeLine{00459 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_4))) ? DMA1\_Channel4 : \(\backslash\)}}
+\DoxyCodeLine{00460 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_4))) ? DMA2\_Channel4 : \(\backslash\)}}
+\DoxyCodeLine{00461 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_5))) ? DMA1\_Channel5 : \(\backslash\)}}
+\DoxyCodeLine{00462 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_5))) ? DMA2\_Channel5 : \(\backslash\)}}
+\DoxyCodeLine{00463 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_6))) ? DMA1\_Channel6 : \(\backslash\)}}
+\DoxyCodeLine{00464 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_6))) ? DMA2\_Channel6 : \(\backslash\)}}
+\DoxyCodeLine{00465 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_7))) ? DMA1\_Channel7 : \(\backslash\)}}
+\DoxyCodeLine{00466 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_7))) ? DMA2\_Channel7 : \(\backslash\)}}
+\DoxyCodeLine{00467 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_8))) ? DMA1\_Channel8 : \(\backslash\)}}
+\DoxyCodeLine{00468 \textcolor{preprocessor}{   DMA2\_Channel8)}}
+\DoxyCodeLine{00469 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00470 \textcolor{preprocessor}{\#define \_\_LL\_DMA\_GET\_CHANNEL\_INSTANCE(\_\_DMA\_INSTANCE\_\_, \_\_CHANNEL\_\_)   \(\backslash\)}}
+\DoxyCodeLine{00471 \textcolor{preprocessor}{  ((((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_1))) ? DMA1\_Channel1 : \(\backslash\)}}
+\DoxyCodeLine{00472 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_1))) ? DMA2\_Channel1 : \(\backslash\)}}
+\DoxyCodeLine{00473 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_2))) ? DMA1\_Channel2 : \(\backslash\)}}
+\DoxyCodeLine{00474 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_2))) ? DMA2\_Channel2 : \(\backslash\)}}
+\DoxyCodeLine{00475 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_3))) ? DMA1\_Channel3 : \(\backslash\)}}
+\DoxyCodeLine{00476 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_3))) ? DMA2\_Channel3 : \(\backslash\)}}
+\DoxyCodeLine{00477 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_4))) ? DMA1\_Channel4 : \(\backslash\)}}
+\DoxyCodeLine{00478 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_4))) ? DMA2\_Channel4 : \(\backslash\)}}
+\DoxyCodeLine{00479 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_5))) ? DMA1\_Channel5 : \(\backslash\)}}
+\DoxyCodeLine{00480 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA2)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_5))) ? DMA2\_Channel5 : \(\backslash\)}}
+\DoxyCodeLine{00481 \textcolor{preprocessor}{   (((uint32\_t)(\_\_DMA\_INSTANCE\_\_) == ((uint32\_t)DMA1)) \&\& ((uint32\_t)(\_\_CHANNEL\_\_) == ((uint32\_t)LL\_DMA\_CHANNEL\_6))) ? DMA1\_Channel6 : \(\backslash\)}}
+\DoxyCodeLine{00482 \textcolor{preprocessor}{   DMA2\_Channel6)}}
+\DoxyCodeLine{00483 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00484 }
+\DoxyCodeLine{00493 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00517 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_EnableChannel(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00518 \{}
+\DoxyCodeLine{00519   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00520   SET\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_EN);}
+\DoxyCodeLine{00521 \}}
+\DoxyCodeLine{00522 }
+\DoxyCodeLine{00539 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_DisableChannel(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00540 \{}
+\DoxyCodeLine{00541   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00542   CLEAR\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_EN);}
+\DoxyCodeLine{00543 \}}
+\DoxyCodeLine{00544 }
+\DoxyCodeLine{00561 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsEnabledChannel(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00562 \{}
+\DoxyCodeLine{00563   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00564   \textcolor{keywordflow}{return} ((READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00565                     DMA\_CCR\_EN) == (DMA\_CCR\_EN)) ? 1UL : 0UL);}
+\DoxyCodeLine{00566 \}}
+\DoxyCodeLine{00567 }
+\DoxyCodeLine{00599 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ConfigTransfer(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t Configuration)}
+\DoxyCodeLine{00600 \{}
+\DoxyCodeLine{00601   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00602   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00603              DMA\_CCR\_DIR | DMA\_CCR\_MEM2MEM | DMA\_CCR\_CIRC | DMA\_CCR\_PINC | DMA\_CCR\_MINC | DMA\_CCR\_PSIZE | DMA\_CCR\_MSIZE | DMA\_CCR\_PL,}
+\DoxyCodeLine{00604              Configuration);}
+\DoxyCodeLine{00605 \}}
+\DoxyCodeLine{00606 }
+\DoxyCodeLine{00628 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetDataTransferDirection(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t Direction)}
+\DoxyCodeLine{00629 \{}
+\DoxyCodeLine{00630   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00631   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00632              DMA\_CCR\_DIR | DMA\_CCR\_MEM2MEM, Direction);}
+\DoxyCodeLine{00633 \}}
+\DoxyCodeLine{00634 }
+\DoxyCodeLine{00655 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetDataTransferDirection(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00656 \{}
+\DoxyCodeLine{00657   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00658   \textcolor{keywordflow}{return} (READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00659                    DMA\_CCR\_DIR | DMA\_CCR\_MEM2MEM));}
+\DoxyCodeLine{00660 \}}
+\DoxyCodeLine{00661 }
+\DoxyCodeLine{00683 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetMode(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t Mode)}
+\DoxyCodeLine{00684 \{}
+\DoxyCodeLine{00685   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00686   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_CIRC,}
+\DoxyCodeLine{00687              Mode);}
+\DoxyCodeLine{00688 \}}
+\DoxyCodeLine{00689 }
+\DoxyCodeLine{00708 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetMode(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00709 \{}
+\DoxyCodeLine{00710   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00711   \textcolor{keywordflow}{return} (READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00712                    DMA\_CCR\_CIRC));}
+\DoxyCodeLine{00713 \}}
+\DoxyCodeLine{00714 }
+\DoxyCodeLine{00734 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetPeriphIncMode(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t PeriphOrM2MSrcIncMode)}
+\DoxyCodeLine{00735 \{}
+\DoxyCodeLine{00736   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00737   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_PINC,}
+\DoxyCodeLine{00738              PeriphOrM2MSrcIncMode);}
+\DoxyCodeLine{00739 \}}
+\DoxyCodeLine{00740 }
+\DoxyCodeLine{00759 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetPeriphIncMode(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00760 \{}
+\DoxyCodeLine{00761   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00762   \textcolor{keywordflow}{return} (READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00763                    DMA\_CCR\_PINC));}
+\DoxyCodeLine{00764 \}}
+\DoxyCodeLine{00765 }
+\DoxyCodeLine{00785 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetMemoryIncMode(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t MemoryOrM2MDstIncMode)}
+\DoxyCodeLine{00786 \{}
+\DoxyCodeLine{00787   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00788   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_MINC,}
+\DoxyCodeLine{00789              MemoryOrM2MDstIncMode);}
+\DoxyCodeLine{00790 \}}
+\DoxyCodeLine{00791 }
+\DoxyCodeLine{00810 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetMemoryIncMode(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00811 \{}
+\DoxyCodeLine{00812   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00813   \textcolor{keywordflow}{return} (READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00814                    DMA\_CCR\_MINC));}
+\DoxyCodeLine{00815 \}}
+\DoxyCodeLine{00816 }
+\DoxyCodeLine{00837 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetPeriphSize(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t PeriphOrM2MSrcDataSize)}
+\DoxyCodeLine{00838 \{}
+\DoxyCodeLine{00839   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00840   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_PSIZE,}
+\DoxyCodeLine{00841              PeriphOrM2MSrcDataSize);}
+\DoxyCodeLine{00842 \}}
+\DoxyCodeLine{00843 }
+\DoxyCodeLine{00863 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetPeriphSize(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00864 \{}
+\DoxyCodeLine{00865   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00866   \textcolor{keywordflow}{return} (READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00867                    DMA\_CCR\_PSIZE));}
+\DoxyCodeLine{00868 \}}
+\DoxyCodeLine{00869 }
+\DoxyCodeLine{00890 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetMemorySize(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t MemoryOrM2MDstDataSize)}
+\DoxyCodeLine{00891 \{}
+\DoxyCodeLine{00892   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00893   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_MSIZE,}
+\DoxyCodeLine{00894              MemoryOrM2MDstDataSize);}
+\DoxyCodeLine{00895 \}}
+\DoxyCodeLine{00896 }
+\DoxyCodeLine{00916 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetMemorySize(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00917 \{}
+\DoxyCodeLine{00918   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00919   \textcolor{keywordflow}{return} (READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00920                    DMA\_CCR\_MSIZE));}
+\DoxyCodeLine{00921 \}}
+\DoxyCodeLine{00922 }
+\DoxyCodeLine{00944 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetChannelPriorityLevel(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t Priority)}
+\DoxyCodeLine{00945 \{}
+\DoxyCodeLine{00946   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00947   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_PL,}
+\DoxyCodeLine{00948              Priority);}
+\DoxyCodeLine{00949 \}}
+\DoxyCodeLine{00950 }
+\DoxyCodeLine{00971 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetChannelPriorityLevel(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{00972 \{}
+\DoxyCodeLine{00973   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{00974   \textcolor{keywordflow}{return} (READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{00975                    DMA\_CCR\_PL));}
+\DoxyCodeLine{00976 \}}
+\DoxyCodeLine{00977 }
+\DoxyCodeLine{00997 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetDataLength(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t NbData)}
+\DoxyCodeLine{00998 \{}
+\DoxyCodeLine{00999   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01000   MODIFY\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CNDTR,}
+\DoxyCodeLine{01001              DMA\_CNDTR\_NDT, NbData);}
+\DoxyCodeLine{01002 \}}
+\DoxyCodeLine{01003 }
+\DoxyCodeLine{01022 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetDataLength(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{01023 \{}
+\DoxyCodeLine{01024   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01025   \textcolor{keywordflow}{return} (READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CNDTR,}
+\DoxyCodeLine{01026                    DMA\_CNDTR\_NDT));}
+\DoxyCodeLine{01027 \}}
+\DoxyCodeLine{01028 }
+\DoxyCodeLine{01054 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ConfigAddresses(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t SrcAddress,}
+\DoxyCodeLine{01055                                             uint32\_t DstAddress, uint32\_t Direction)}
+\DoxyCodeLine{01056 \{}
+\DoxyCodeLine{01057   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01058 }
+\DoxyCodeLine{01059   \textcolor{comment}{/* Direction Memory to Periph */}}
+\DoxyCodeLine{01060   \textcolor{keywordflow}{if} (Direction == LL\_DMA\_DIRECTION\_MEMORY\_TO\_PERIPH)}
+\DoxyCodeLine{01061   \{}
+\DoxyCodeLine{01062     WRITE\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CMAR, SrcAddress);}
+\DoxyCodeLine{01063     WRITE\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CPAR, DstAddress);}
+\DoxyCodeLine{01064   \}}
+\DoxyCodeLine{01065   \textcolor{comment}{/* Direction Periph to Memory and Memory to Memory */}}
+\DoxyCodeLine{01066   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01067   \{}
+\DoxyCodeLine{01068     WRITE\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CPAR, SrcAddress);}
+\DoxyCodeLine{01069     WRITE\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CMAR, DstAddress);}
+\DoxyCodeLine{01070   \}}
+\DoxyCodeLine{01071 \}}
+\DoxyCodeLine{01072 }
+\DoxyCodeLine{01092 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetMemoryAddress(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t MemoryAddress)}
+\DoxyCodeLine{01093 \{}
+\DoxyCodeLine{01094   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01095   WRITE\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CMAR, MemoryAddress);}
+\DoxyCodeLine{01096 \}}
+\DoxyCodeLine{01097 }
+\DoxyCodeLine{01117 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetPeriphAddress(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t PeriphAddress)}
+\DoxyCodeLine{01118 \{}
+\DoxyCodeLine{01119   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01120   WRITE\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CPAR, PeriphAddress);}
+\DoxyCodeLine{01121 \}}
+\DoxyCodeLine{01122 }
+\DoxyCodeLine{01140 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetMemoryAddress(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{01141 \{}
+\DoxyCodeLine{01142   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01143   \textcolor{keywordflow}{return} (READ\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CMAR));}
+\DoxyCodeLine{01144 \}}
+\DoxyCodeLine{01145 }
+\DoxyCodeLine{01163 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetPeriphAddress(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{01164 \{}
+\DoxyCodeLine{01165   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01166   \textcolor{keywordflow}{return} (READ\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CPAR));}
+\DoxyCodeLine{01167 \}}
+\DoxyCodeLine{01168 }
+\DoxyCodeLine{01188 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetM2MSrcAddress(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t MemoryAddress)}
+\DoxyCodeLine{01189 \{}
+\DoxyCodeLine{01190   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01191   WRITE\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CPAR, MemoryAddress);}
+\DoxyCodeLine{01192 \}}
+\DoxyCodeLine{01193 }
+\DoxyCodeLine{01213 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetM2MDstAddress(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t MemoryAddress)}
+\DoxyCodeLine{01214 \{}
+\DoxyCodeLine{01215   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01216   WRITE\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CMAR, MemoryAddress);}
+\DoxyCodeLine{01217 \}}
+\DoxyCodeLine{01218 }
+\DoxyCodeLine{01236 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetM2MSrcAddress(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{01237 \{}
+\DoxyCodeLine{01238   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01239   \textcolor{keywordflow}{return} (READ\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CPAR));}
+\DoxyCodeLine{01240 \}}
+\DoxyCodeLine{01241 }
+\DoxyCodeLine{01259 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetM2MDstAddress(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{01260 \{}
+\DoxyCodeLine{01261   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{01262   \textcolor{keywordflow}{return} (READ\_REG(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CMAR));}
+\DoxyCodeLine{01263 \}}
+\DoxyCodeLine{01264 }
+\DoxyCodeLine{01406 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_SetPeriphRequest(DMA\_TypeDef *DMAx, uint32\_t Channel, uint32\_t PeriphRequest)}
+\DoxyCodeLine{01407 \{}
+\DoxyCodeLine{01408   uint32\_t dmamux\_ccr\_offset = ((((uint32\_t)DMAx \string^ (uint32\_t)DMA1) >> 10U) * 8U);}
+\DoxyCodeLine{01409   MODIFY\_REG((DMAMUX1\_Channel0 + Channel + dmamux\_ccr\_offset)-\/>CCR, DMAMUX\_CxCR\_DMAREQ\_ID, PeriphRequest);}
+\DoxyCodeLine{01410 \}}
+\DoxyCodeLine{01411 }
+\DoxyCodeLine{01551 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_GetPeriphRequest(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{01552 \{}
+\DoxyCodeLine{01553   uint32\_t dmamux\_ccr\_offset = ((((uint32\_t)DMAx \string^ (uint32\_t)DMA1) >> 10U) * 8U);}
+\DoxyCodeLine{01554   \textcolor{keywordflow}{return} (READ\_BIT((DMAMUX1\_Channel0 + Channel + dmamux\_ccr\_offset)-\/>CCR, DMAMUX\_CxCR\_DMAREQ\_ID));}
+\DoxyCodeLine{01555 \}}
+\DoxyCodeLine{01556 }
+\DoxyCodeLine{01571 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_GI1(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01572 \{}
+\DoxyCodeLine{01573   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_GIF1) == (DMA\_ISR\_GIF1)) ? 1UL : 0UL);}
+\DoxyCodeLine{01574 \}}
+\DoxyCodeLine{01575 }
+\DoxyCodeLine{01582 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_GI2(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01583 \{}
+\DoxyCodeLine{01584   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_GIF2) == (DMA\_ISR\_GIF2)) ? 1UL : 0UL);}
+\DoxyCodeLine{01585 \}}
+\DoxyCodeLine{01586 }
+\DoxyCodeLine{01593 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_GI3(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01594 \{}
+\DoxyCodeLine{01595   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_GIF3) == (DMA\_ISR\_GIF3)) ? 1UL : 0UL);}
+\DoxyCodeLine{01596 \}}
+\DoxyCodeLine{01597 }
+\DoxyCodeLine{01604 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_GI4(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01605 \{}
+\DoxyCodeLine{01606   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_GIF4) == (DMA\_ISR\_GIF4)) ? 1UL : 0UL);}
+\DoxyCodeLine{01607 \}}
+\DoxyCodeLine{01608 }
+\DoxyCodeLine{01615 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_GI5(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01616 \{}
+\DoxyCodeLine{01617   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_GIF5) == (DMA\_ISR\_GIF5)) ? 1UL : 0UL);}
+\DoxyCodeLine{01618 \}}
+\DoxyCodeLine{01619 }
+\DoxyCodeLine{01626 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_GI6(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01627 \{}
+\DoxyCodeLine{01628   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_GIF6) == (DMA\_ISR\_GIF6)) ? 1UL : 0UL);}
+\DoxyCodeLine{01629 \}}
+\DoxyCodeLine{01630 }
+\DoxyCodeLine{01631 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{01638 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_GI7(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01639 \{}
+\DoxyCodeLine{01640   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_GIF7) == (DMA\_ISR\_GIF7)) ? 1UL : 0UL);}
+\DoxyCodeLine{01641 \}}
+\DoxyCodeLine{01642 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01643 }
+\DoxyCodeLine{01644 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{01651 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_GI8(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01652 \{}
+\DoxyCodeLine{01653   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_GIF8) == (DMA\_ISR\_GIF8)) ? 1UL : 0UL);}
+\DoxyCodeLine{01654 \}}
+\DoxyCodeLine{01655 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01656 }
+\DoxyCodeLine{01663 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TC1(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01664 \{}
+\DoxyCodeLine{01665   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TCIF1) == (DMA\_ISR\_TCIF1)) ? 1UL : 0UL);}
+\DoxyCodeLine{01666 \}}
+\DoxyCodeLine{01667 }
+\DoxyCodeLine{01674 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TC2(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01675 \{}
+\DoxyCodeLine{01676   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TCIF2) == (DMA\_ISR\_TCIF2)) ? 1UL : 0UL);}
+\DoxyCodeLine{01677 \}}
+\DoxyCodeLine{01678 }
+\DoxyCodeLine{01685 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TC3(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01686 \{}
+\DoxyCodeLine{01687   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TCIF3) == (DMA\_ISR\_TCIF3)) ? 1UL : 0UL);}
+\DoxyCodeLine{01688 \}}
+\DoxyCodeLine{01689 }
+\DoxyCodeLine{01696 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TC4(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01697 \{}
+\DoxyCodeLine{01698   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TCIF4) == (DMA\_ISR\_TCIF4)) ? 1UL : 0UL);}
+\DoxyCodeLine{01699 \}}
+\DoxyCodeLine{01700 }
+\DoxyCodeLine{01707 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TC5(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01708 \{}
+\DoxyCodeLine{01709   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TCIF5) == (DMA\_ISR\_TCIF5)) ? 1UL : 0UL);}
+\DoxyCodeLine{01710 \}}
+\DoxyCodeLine{01711 }
+\DoxyCodeLine{01718 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TC6(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01719 \{}
+\DoxyCodeLine{01720   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TCIF6) == (DMA\_ISR\_TCIF6)) ? 1UL : 0UL);}
+\DoxyCodeLine{01721 \}}
+\DoxyCodeLine{01722 }
+\DoxyCodeLine{01723 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{01730 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TC7(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01731 \{}
+\DoxyCodeLine{01732   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TCIF7) == (DMA\_ISR\_TCIF7)) ? 1UL : 0UL);}
+\DoxyCodeLine{01733 \}}
+\DoxyCodeLine{01734 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01735 }
+\DoxyCodeLine{01736 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{01743 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TC8(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01744 \{}
+\DoxyCodeLine{01745   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TCIF8) == (DMA\_ISR\_TCIF8)) ? 1UL : 0UL);}
+\DoxyCodeLine{01746 \}}
+\DoxyCodeLine{01747 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01748 }
+\DoxyCodeLine{01755 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_HT1(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01756 \{}
+\DoxyCodeLine{01757   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_HTIF1) == (DMA\_ISR\_HTIF1)) ? 1UL : 0UL);}
+\DoxyCodeLine{01758 \}}
+\DoxyCodeLine{01759 }
+\DoxyCodeLine{01766 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_HT2(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01767 \{}
+\DoxyCodeLine{01768   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_HTIF2) == (DMA\_ISR\_HTIF2)) ? 1UL : 0UL);}
+\DoxyCodeLine{01769 \}}
+\DoxyCodeLine{01770 }
+\DoxyCodeLine{01777 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_HT3(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01778 \{}
+\DoxyCodeLine{01779   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_HTIF3) == (DMA\_ISR\_HTIF3)) ? 1UL : 0UL);}
+\DoxyCodeLine{01780 \}}
+\DoxyCodeLine{01781 }
+\DoxyCodeLine{01788 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_HT4(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01789 \{}
+\DoxyCodeLine{01790   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_HTIF4) == (DMA\_ISR\_HTIF4)) ? 1UL : 0UL);}
+\DoxyCodeLine{01791 \}}
+\DoxyCodeLine{01792 }
+\DoxyCodeLine{01799 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_HT5(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01800 \{}
+\DoxyCodeLine{01801   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_HTIF5) == (DMA\_ISR\_HTIF5)) ? 1UL : 0UL);}
+\DoxyCodeLine{01802 \}}
+\DoxyCodeLine{01803 }
+\DoxyCodeLine{01810 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_HT6(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01811 \{}
+\DoxyCodeLine{01812   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_HTIF6) == (DMA\_ISR\_HTIF6)) ? 1UL : 0UL);}
+\DoxyCodeLine{01813 \}}
+\DoxyCodeLine{01814 }
+\DoxyCodeLine{01815 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{01822 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_HT7(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01823 \{}
+\DoxyCodeLine{01824   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_HTIF7) == (DMA\_ISR\_HTIF7)) ? 1UL : 0UL);}
+\DoxyCodeLine{01825 \}}
+\DoxyCodeLine{01826 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01827 }
+\DoxyCodeLine{01828 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{01835 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_HT8(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01836 \{}
+\DoxyCodeLine{01837   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_HTIF8) == (DMA\_ISR\_HTIF8)) ? 1UL : 0UL);}
+\DoxyCodeLine{01838 \}}
+\DoxyCodeLine{01839 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01840 }
+\DoxyCodeLine{01847 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TE1(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01848 \{}
+\DoxyCodeLine{01849   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TEIF1) == (DMA\_ISR\_TEIF1)) ? 1UL : 0UL);}
+\DoxyCodeLine{01850 \}}
+\DoxyCodeLine{01851 }
+\DoxyCodeLine{01858 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TE2(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01859 \{}
+\DoxyCodeLine{01860   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TEIF2) == (DMA\_ISR\_TEIF2)) ? 1UL : 0UL);}
+\DoxyCodeLine{01861 \}}
+\DoxyCodeLine{01862 }
+\DoxyCodeLine{01869 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TE3(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01870 \{}
+\DoxyCodeLine{01871   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TEIF3) == (DMA\_ISR\_TEIF3)) ? 1UL : 0UL);}
+\DoxyCodeLine{01872 \}}
+\DoxyCodeLine{01873 }
+\DoxyCodeLine{01880 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TE4(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01881 \{}
+\DoxyCodeLine{01882   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TEIF4) == (DMA\_ISR\_TEIF4)) ? 1UL : 0UL);}
+\DoxyCodeLine{01883 \}}
+\DoxyCodeLine{01884 }
+\DoxyCodeLine{01891 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TE5(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01892 \{}
+\DoxyCodeLine{01893   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TEIF5) == (DMA\_ISR\_TEIF5)) ? 1UL : 0UL);}
+\DoxyCodeLine{01894 \}}
+\DoxyCodeLine{01895 }
+\DoxyCodeLine{01902 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TE6(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01903 \{}
+\DoxyCodeLine{01904   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TEIF6) == (DMA\_ISR\_TEIF6)) ? 1UL : 0UL);}
+\DoxyCodeLine{01905 \}}
+\DoxyCodeLine{01906 }
+\DoxyCodeLine{01907 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{01914 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TE7(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01915 \{}
+\DoxyCodeLine{01916   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TEIF7) == (DMA\_ISR\_TEIF7)) ? 1UL : 0UL);}
+\DoxyCodeLine{01917 \}}
+\DoxyCodeLine{01918 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01919 }
+\DoxyCodeLine{01920 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{01927 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsActiveFlag\_TE8(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01928 \{}
+\DoxyCodeLine{01929   \textcolor{keywordflow}{return} ((READ\_BIT(DMAx-\/>ISR, DMA\_ISR\_TEIF8) == (DMA\_ISR\_TEIF8)) ? 1UL : 0UL);}
+\DoxyCodeLine{01930 \}}
+\DoxyCodeLine{01931 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01932 }
+\DoxyCodeLine{01943 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_GI1(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01944 \{}
+\DoxyCodeLine{01945   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CGIF1);}
+\DoxyCodeLine{01946 \}}
+\DoxyCodeLine{01947 }
+\DoxyCodeLine{01958 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_GI2(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01959 \{}
+\DoxyCodeLine{01960   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CGIF2);}
+\DoxyCodeLine{01961 \}}
+\DoxyCodeLine{01962 }
+\DoxyCodeLine{01973 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_GI3(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01974 \{}
+\DoxyCodeLine{01975   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CGIF3);}
+\DoxyCodeLine{01976 \}}
+\DoxyCodeLine{01977 }
+\DoxyCodeLine{01988 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_GI4(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{01989 \{}
+\DoxyCodeLine{01990   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CGIF4);}
+\DoxyCodeLine{01991 \}}
+\DoxyCodeLine{01992 }
+\DoxyCodeLine{02003 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_GI5(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02004 \{}
+\DoxyCodeLine{02005   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CGIF5);}
+\DoxyCodeLine{02006 \}}
+\DoxyCodeLine{02007 }
+\DoxyCodeLine{02018 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_GI6(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02019 \{}
+\DoxyCodeLine{02020   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CGIF6);}
+\DoxyCodeLine{02021 \}}
+\DoxyCodeLine{02022 }
+\DoxyCodeLine{02023 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{02034 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_GI7(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02035 \{}
+\DoxyCodeLine{02036   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CGIF7);}
+\DoxyCodeLine{02037 \}}
+\DoxyCodeLine{02038 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02039 }
+\DoxyCodeLine{02040 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{02051 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_GI8(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02052 \{}
+\DoxyCodeLine{02053   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CGIF8);}
+\DoxyCodeLine{02054 \}}
+\DoxyCodeLine{02055 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02056 }
+\DoxyCodeLine{02063 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TC1(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02064 \{}
+\DoxyCodeLine{02065   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTCIF1);}
+\DoxyCodeLine{02066 \}}
+\DoxyCodeLine{02067 }
+\DoxyCodeLine{02074 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TC2(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02075 \{}
+\DoxyCodeLine{02076   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTCIF2);}
+\DoxyCodeLine{02077 \}}
+\DoxyCodeLine{02078 }
+\DoxyCodeLine{02085 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TC3(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02086 \{}
+\DoxyCodeLine{02087   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTCIF3);}
+\DoxyCodeLine{02088 \}}
+\DoxyCodeLine{02089 }
+\DoxyCodeLine{02096 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TC4(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02097 \{}
+\DoxyCodeLine{02098   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTCIF4);}
+\DoxyCodeLine{02099 \}}
+\DoxyCodeLine{02100 }
+\DoxyCodeLine{02107 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TC5(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02108 \{}
+\DoxyCodeLine{02109   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTCIF5);}
+\DoxyCodeLine{02110 \}}
+\DoxyCodeLine{02111 }
+\DoxyCodeLine{02118 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TC6(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02119 \{}
+\DoxyCodeLine{02120   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTCIF6);}
+\DoxyCodeLine{02121 \}}
+\DoxyCodeLine{02122 }
+\DoxyCodeLine{02123 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{02130 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TC7(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02131 \{}
+\DoxyCodeLine{02132   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTCIF7);}
+\DoxyCodeLine{02133 \}}
+\DoxyCodeLine{02134 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02135 }
+\DoxyCodeLine{02136 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{02143 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TC8(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02144 \{}
+\DoxyCodeLine{02145   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTCIF8);}
+\DoxyCodeLine{02146 \}}
+\DoxyCodeLine{02147 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02148 }
+\DoxyCodeLine{02155 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_HT1(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02156 \{}
+\DoxyCodeLine{02157   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CHTIF1);}
+\DoxyCodeLine{02158 \}}
+\DoxyCodeLine{02159 }
+\DoxyCodeLine{02166 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_HT2(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02167 \{}
+\DoxyCodeLine{02168   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CHTIF2);}
+\DoxyCodeLine{02169 \}}
+\DoxyCodeLine{02170 }
+\DoxyCodeLine{02177 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_HT3(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02178 \{}
+\DoxyCodeLine{02179   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CHTIF3);}
+\DoxyCodeLine{02180 \}}
+\DoxyCodeLine{02181 }
+\DoxyCodeLine{02188 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_HT4(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02189 \{}
+\DoxyCodeLine{02190   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CHTIF4);}
+\DoxyCodeLine{02191 \}}
+\DoxyCodeLine{02192 }
+\DoxyCodeLine{02199 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_HT5(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02200 \{}
+\DoxyCodeLine{02201   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CHTIF5);}
+\DoxyCodeLine{02202 \}}
+\DoxyCodeLine{02203 }
+\DoxyCodeLine{02210 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_HT6(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02211 \{}
+\DoxyCodeLine{02212   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CHTIF6);}
+\DoxyCodeLine{02213 \}}
+\DoxyCodeLine{02214 }
+\DoxyCodeLine{02215 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{02222 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_HT7(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02223 \{}
+\DoxyCodeLine{02224   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CHTIF7);}
+\DoxyCodeLine{02225 \}}
+\DoxyCodeLine{02226 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02227 }
+\DoxyCodeLine{02228 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{02235 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_HT8(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02236 \{}
+\DoxyCodeLine{02237   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CHTIF8);}
+\DoxyCodeLine{02238 \}}
+\DoxyCodeLine{02239 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02240 }
+\DoxyCodeLine{02247 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TE1(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02248 \{}
+\DoxyCodeLine{02249   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTEIF1);}
+\DoxyCodeLine{02250 \}}
+\DoxyCodeLine{02251 }
+\DoxyCodeLine{02258 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TE2(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02259 \{}
+\DoxyCodeLine{02260   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTEIF2);}
+\DoxyCodeLine{02261 \}}
+\DoxyCodeLine{02262 }
+\DoxyCodeLine{02269 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TE3(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02270 \{}
+\DoxyCodeLine{02271   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTEIF3);}
+\DoxyCodeLine{02272 \}}
+\DoxyCodeLine{02273 }
+\DoxyCodeLine{02280 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TE4(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02281 \{}
+\DoxyCodeLine{02282   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTEIF4);}
+\DoxyCodeLine{02283 \}}
+\DoxyCodeLine{02284 }
+\DoxyCodeLine{02291 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TE5(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02292 \{}
+\DoxyCodeLine{02293   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTEIF5);}
+\DoxyCodeLine{02294 \}}
+\DoxyCodeLine{02295 }
+\DoxyCodeLine{02302 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TE6(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02303 \{}
+\DoxyCodeLine{02304   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTEIF6);}
+\DoxyCodeLine{02305 \}}
+\DoxyCodeLine{02306 }
+\DoxyCodeLine{02307 \textcolor{preprocessor}{\#if defined (DMA1\_Channel7)}}
+\DoxyCodeLine{02314 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TE7(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02315 \{}
+\DoxyCodeLine{02316   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTEIF7);}
+\DoxyCodeLine{02317 \}}
+\DoxyCodeLine{02318 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02319 }
+\DoxyCodeLine{02320 \textcolor{preprocessor}{\#if defined (DMA1\_Channel8)}}
+\DoxyCodeLine{02327 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_ClearFlag\_TE8(DMA\_TypeDef *DMAx)}
+\DoxyCodeLine{02328 \{}
+\DoxyCodeLine{02329   WRITE\_REG(DMAx-\/>IFCR, DMA\_IFCR\_CTEIF8);}
+\DoxyCodeLine{02330 \}}
+\DoxyCodeLine{02331 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1\_Channel8 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02332 }
+\DoxyCodeLine{02356 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_EnableIT\_TC(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02357 \{}
+\DoxyCodeLine{02358   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02359   SET\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_TCIE);}
+\DoxyCodeLine{02360 \}}
+\DoxyCodeLine{02361 }
+\DoxyCodeLine{02378 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_EnableIT\_HT(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02379 \{}
+\DoxyCodeLine{02380   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02381   SET\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_HTIE);}
+\DoxyCodeLine{02382 \}}
+\DoxyCodeLine{02383 }
+\DoxyCodeLine{02400 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_EnableIT\_TE(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02401 \{}
+\DoxyCodeLine{02402   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02403   SET\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_TEIE);}
+\DoxyCodeLine{02404 \}}
+\DoxyCodeLine{02405 }
+\DoxyCodeLine{02422 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_DisableIT\_TC(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02423 \{}
+\DoxyCodeLine{02424   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02425   CLEAR\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_TCIE);}
+\DoxyCodeLine{02426 \}}
+\DoxyCodeLine{02427 }
+\DoxyCodeLine{02444 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_DisableIT\_HT(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02445 \{}
+\DoxyCodeLine{02446   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02447   CLEAR\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_HTIE);}
+\DoxyCodeLine{02448 \}}
+\DoxyCodeLine{02449 }
+\DoxyCodeLine{02466 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMA\_DisableIT\_TE(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02467 \{}
+\DoxyCodeLine{02468   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02469   CLEAR\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR, DMA\_CCR\_TEIE);}
+\DoxyCodeLine{02470 \}}
+\DoxyCodeLine{02471 }
+\DoxyCodeLine{02488 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsEnabledIT\_TC(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02489 \{}
+\DoxyCodeLine{02490   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02491   \textcolor{keywordflow}{return} ((READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{02492                     DMA\_CCR\_TCIE) == (DMA\_CCR\_TCIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02493 \}}
+\DoxyCodeLine{02494 }
+\DoxyCodeLine{02511 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsEnabledIT\_HT(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02512 \{}
+\DoxyCodeLine{02513   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02514   \textcolor{keywordflow}{return} ((READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{02515                     DMA\_CCR\_HTIE) == (DMA\_CCR\_HTIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02516 \}}
+\DoxyCodeLine{02517 }
+\DoxyCodeLine{02534 \_\_STATIC\_INLINE uint32\_t LL\_DMA\_IsEnabledIT\_TE(DMA\_TypeDef *DMAx, uint32\_t Channel)}
+\DoxyCodeLine{02535 \{}
+\DoxyCodeLine{02536   uint32\_t dma\_base\_addr = (uint32\_t)DMAx;}
+\DoxyCodeLine{02537   \textcolor{keywordflow}{return} ((READ\_BIT(((DMA\_Channel\_TypeDef *)((uint32\_t)(dma\_base\_addr + CHANNEL\_OFFSET\_TAB[Channel])))-\/>CCR,}
+\DoxyCodeLine{02538                     DMA\_CCR\_TEIE) == (DMA\_CCR\_TEIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02539 \}}
+\DoxyCodeLine{02540 }
+\DoxyCodeLine{02545 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{02550 uint32\_t LL\_DMA\_Init(DMA\_TypeDef *DMAx, uint32\_t Channel, LL\_DMA\_InitTypeDef *DMA\_InitStruct);}
+\DoxyCodeLine{02551 uint32\_t LL\_DMA\_DeInit(DMA\_TypeDef *DMAx, uint32\_t Channel);}
+\DoxyCodeLine{02552 \textcolor{keywordtype}{void} LL\_DMA\_StructInit(LL\_DMA\_InitTypeDef *DMA\_InitStruct);}
+\DoxyCodeLine{02553 }
+\DoxyCodeLine{02557 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_FULL\_LL\_DRIVER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02558 }
+\DoxyCodeLine{02567 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMA1 || DMA2 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02568 }
+\DoxyCodeLine{02573 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{02574 \}}
+\DoxyCodeLine{02575 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{02576 }
+\DoxyCodeLine{02577 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_STM32G4xx\_LL\_DMA\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02578 }
+
+\end{DoxyCode}

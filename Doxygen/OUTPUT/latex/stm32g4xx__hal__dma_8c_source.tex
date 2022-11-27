@@ -1,0 +1,808 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+dma.\+c}
+\label{stm32g4xx__hal__dma_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_dma.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_dma.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00089 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00090 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00091 }
+\DoxyCodeLine{00101 \textcolor{preprocessor}{\#ifdef HAL\_DMA\_MODULE\_ENABLED}}
+\DoxyCodeLine{00102 }
+\DoxyCodeLine{00103 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00104 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00105 \textcolor{comment}{/* Private macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00106 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00107 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00111 \textcolor{keyword}{static} \textcolor{keywordtype}{void} DMA\_SetConfig(DMA\_HandleTypeDef *hdma, uint32\_t SrcAddress, uint32\_t DstAddress, uint32\_t DataLength);}
+\DoxyCodeLine{00112 }
+\DoxyCodeLine{00113 \textcolor{keyword}{static} \textcolor{keywordtype}{void} DMA\_CalcDMAMUXChannelBaseAndMask(DMA\_HandleTypeDef *hdma);}
+\DoxyCodeLine{00114 \textcolor{keyword}{static} \textcolor{keywordtype}{void} DMA\_CalcDMAMUXRequestGenBaseAndMask(DMA\_HandleTypeDef *hdma);}
+\DoxyCodeLine{00115 }
+\DoxyCodeLine{00120 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00121 }
+\DoxyCodeLine{00152 HAL\_StatusTypeDef HAL\_DMA\_Init(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{00153 \{}
+\DoxyCodeLine{00154   uint32\_t tmp;}
+\DoxyCodeLine{00155 }
+\DoxyCodeLine{00156   \textcolor{comment}{/* Check the DMA handle allocation */}}
+\DoxyCodeLine{00157   \textcolor{keywordflow}{if} (hdma == NULL)}
+\DoxyCodeLine{00158   \{}
+\DoxyCodeLine{00159     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00160   \}}
+\DoxyCodeLine{00161 }
+\DoxyCodeLine{00162   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00163   assert\_param(IS\_DMA\_ALL\_INSTANCE(hdma-\/>Instance));}
+\DoxyCodeLine{00164   assert\_param(IS\_DMA\_DIRECTION(hdma-\/>Init.Direction));}
+\DoxyCodeLine{00165   assert\_param(IS\_DMA\_PERIPHERAL\_INC\_STATE(hdma-\/>Init.PeriphInc));}
+\DoxyCodeLine{00166   assert\_param(IS\_DMA\_MEMORY\_INC\_STATE(hdma-\/>Init.MemInc));}
+\DoxyCodeLine{00167   assert\_param(IS\_DMA\_PERIPHERAL\_DATA\_SIZE(hdma-\/>Init.PeriphDataAlignment));}
+\DoxyCodeLine{00168   assert\_param(IS\_DMA\_MEMORY\_DATA\_SIZE(hdma-\/>Init.MemDataAlignment));}
+\DoxyCodeLine{00169   assert\_param(IS\_DMA\_MODE(hdma-\/>Init.Mode));}
+\DoxyCodeLine{00170   assert\_param(IS\_DMA\_PRIORITY(hdma-\/>Init.Priority));}
+\DoxyCodeLine{00171 }
+\DoxyCodeLine{00172   assert\_param(IS\_DMA\_ALL\_REQUEST(hdma-\/>Init.Request));}
+\DoxyCodeLine{00173 }
+\DoxyCodeLine{00174   \textcolor{comment}{/* Compute the channel index */}}
+\DoxyCodeLine{00175   \textcolor{keywordflow}{if} ((uint32\_t)(hdma-\/>Instance) < (uint32\_t)(DMA2\_Channel1))}
+\DoxyCodeLine{00176   \{}
+\DoxyCodeLine{00177     \textcolor{comment}{/* DMA1 */}}
+\DoxyCodeLine{00178     hdma-\/>ChannelIndex = (((uint32\_t)hdma-\/>Instance -\/ (uint32\_t)DMA1\_Channel1) / ((uint32\_t)DMA1\_Channel2 -\/ (uint32\_t)DMA1\_Channel1)) << 2;}
+\DoxyCodeLine{00179     hdma-\/>DmaBaseAddress = DMA1;}
+\DoxyCodeLine{00180   \}}
+\DoxyCodeLine{00181   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00182   \{}
+\DoxyCodeLine{00183     \textcolor{comment}{/* DMA2 */}}
+\DoxyCodeLine{00184     hdma-\/>ChannelIndex = (((uint32\_t)hdma-\/>Instance -\/ (uint32\_t)DMA2\_Channel1) / ((uint32\_t)DMA2\_Channel2 -\/ (uint32\_t)DMA2\_Channel1)) << 2;}
+\DoxyCodeLine{00185     hdma-\/>DmaBaseAddress = DMA2;}
+\DoxyCodeLine{00186   \}}
+\DoxyCodeLine{00187 }
+\DoxyCodeLine{00188   \textcolor{comment}{/* Change DMA peripheral state */}}
+\DoxyCodeLine{00189   hdma-\/>State = HAL\_DMA\_STATE\_BUSY;}
+\DoxyCodeLine{00190 }
+\DoxyCodeLine{00191   \textcolor{comment}{/* Get the CR register value */}}
+\DoxyCodeLine{00192   tmp = hdma-\/>Instance-\/>CCR;}
+\DoxyCodeLine{00193 }
+\DoxyCodeLine{00194   \textcolor{comment}{/* Clear PL, MSIZE, PSIZE, MINC, PINC, CIRC, DIR and MEM2MEM bits */}}
+\DoxyCodeLine{00195   tmp \&= ((uint32\_t)\string~(DMA\_CCR\_PL    | DMA\_CCR\_MSIZE  | DMA\_CCR\_PSIZE  |}
+\DoxyCodeLine{00196                       DMA\_CCR\_MINC  | DMA\_CCR\_PINC   | DMA\_CCR\_CIRC   |}
+\DoxyCodeLine{00197                       DMA\_CCR\_DIR   | DMA\_CCR\_MEM2MEM));}
+\DoxyCodeLine{00198 }
+\DoxyCodeLine{00199   \textcolor{comment}{/* Prepare the DMA Channel configuration */}}
+\DoxyCodeLine{00200   tmp |=  hdma-\/>Init.Direction        |}
+\DoxyCodeLine{00201           hdma-\/>Init.PeriphInc           | hdma-\/>Init.MemInc           |}
+\DoxyCodeLine{00202           hdma-\/>Init.PeriphDataAlignment | hdma-\/>Init.MemDataAlignment |}
+\DoxyCodeLine{00203           hdma-\/>Init.Mode                | hdma-\/>Init.Priority;}
+\DoxyCodeLine{00204 }
+\DoxyCodeLine{00205   \textcolor{comment}{/* Write to DMA Channel CR register */}}
+\DoxyCodeLine{00206   hdma-\/>Instance-\/>CCR = tmp;}
+\DoxyCodeLine{00207 }
+\DoxyCodeLine{00208   \textcolor{comment}{/* Initialize parameters for DMAMUX channel :}}
+\DoxyCodeLine{00209 \textcolor{comment}{     DMAmuxChannel, DMAmuxChannelStatus and DMAmuxChannelStatusMask}}
+\DoxyCodeLine{00210 \textcolor{comment}{  */}}
+\DoxyCodeLine{00211   DMA\_CalcDMAMUXChannelBaseAndMask(hdma);}
+\DoxyCodeLine{00212 }
+\DoxyCodeLine{00213   \textcolor{keywordflow}{if} (hdma-\/>Init.Direction == DMA\_MEMORY\_TO\_MEMORY)}
+\DoxyCodeLine{00214   \{}
+\DoxyCodeLine{00215     \textcolor{comment}{/* if memory to memory force the request to 0*/}}
+\DoxyCodeLine{00216     hdma-\/>Init.Request = DMA\_REQUEST\_MEM2MEM;}
+\DoxyCodeLine{00217   \}}
+\DoxyCodeLine{00218 }
+\DoxyCodeLine{00219   \textcolor{comment}{/* Set peripheral request  to DMAMUX channel */}}
+\DoxyCodeLine{00220   hdma-\/>DMAmuxChannel-\/>CCR = (hdma-\/>Init.Request \& DMAMUX\_CxCR\_DMAREQ\_ID);}
+\DoxyCodeLine{00221 }
+\DoxyCodeLine{00222   \textcolor{comment}{/* Clear the DMAMUX synchro overrun flag */}}
+\DoxyCodeLine{00223   hdma-\/>DMAmuxChannelStatus-\/>CFR = hdma-\/>DMAmuxChannelStatusMask;}
+\DoxyCodeLine{00224 }
+\DoxyCodeLine{00225   \textcolor{keywordflow}{if} (((hdma-\/>Init.Request >  0U) \&\& (hdma-\/>Init.Request <= DMA\_REQUEST\_GENERATOR3)))}
+\DoxyCodeLine{00226   \{}
+\DoxyCodeLine{00227     \textcolor{comment}{/* Initialize parameters for DMAMUX request generator :}}
+\DoxyCodeLine{00228 \textcolor{comment}{       DMAmuxRequestGen, DMAmuxRequestGenStatus and DMAmuxRequestGenStatusMask}}
+\DoxyCodeLine{00229 \textcolor{comment}{    */}}
+\DoxyCodeLine{00230     DMA\_CalcDMAMUXRequestGenBaseAndMask(hdma);}
+\DoxyCodeLine{00231 }
+\DoxyCodeLine{00232     \textcolor{comment}{/* Reset the DMAMUX request generator register*/}}
+\DoxyCodeLine{00233     hdma-\/>DMAmuxRequestGen-\/>RGCR = 0U;}
+\DoxyCodeLine{00234 }
+\DoxyCodeLine{00235     \textcolor{comment}{/* Clear the DMAMUX request generator overrun flag */}}
+\DoxyCodeLine{00236     hdma-\/>DMAmuxRequestGenStatus-\/>RGCFR = hdma-\/>DMAmuxRequestGenStatusMask;}
+\DoxyCodeLine{00237   \}}
+\DoxyCodeLine{00238   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00239   \{}
+\DoxyCodeLine{00240     hdma-\/>DMAmuxRequestGen = 0U;}
+\DoxyCodeLine{00241     hdma-\/>DMAmuxRequestGenStatus = 0U;}
+\DoxyCodeLine{00242     hdma-\/>DMAmuxRequestGenStatusMask = 0U;}
+\DoxyCodeLine{00243   \}}
+\DoxyCodeLine{00244 }
+\DoxyCodeLine{00245   \textcolor{comment}{/* Initialize the error code */}}
+\DoxyCodeLine{00246   hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_NONE;}
+\DoxyCodeLine{00247 }
+\DoxyCodeLine{00248   \textcolor{comment}{/* Initialize the DMA state*/}}
+\DoxyCodeLine{00249   hdma-\/>State  = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00250 }
+\DoxyCodeLine{00251   \textcolor{comment}{/* Allocate lock resource and initialize it */}}
+\DoxyCodeLine{00252   hdma-\/>Lock = HAL\_UNLOCKED;}
+\DoxyCodeLine{00253 }
+\DoxyCodeLine{00254   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00255 \}}
+\DoxyCodeLine{00256 }
+\DoxyCodeLine{00263 HAL\_StatusTypeDef HAL\_DMA\_DeInit(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{00264 \{}
+\DoxyCodeLine{00265 }
+\DoxyCodeLine{00266   \textcolor{comment}{/* Check the DMA handle allocation */}}
+\DoxyCodeLine{00267   \textcolor{keywordflow}{if} (NULL == hdma)}
+\DoxyCodeLine{00268   \{}
+\DoxyCodeLine{00269     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00270   \}}
+\DoxyCodeLine{00271 }
+\DoxyCodeLine{00272   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00273   assert\_param(IS\_DMA\_ALL\_INSTANCE(hdma-\/>Instance));}
+\DoxyCodeLine{00274 }
+\DoxyCodeLine{00275   \textcolor{comment}{/* Disable the selected DMA Channelx */}}
+\DoxyCodeLine{00276   \_\_HAL\_DMA\_DISABLE(hdma);}
+\DoxyCodeLine{00277 }
+\DoxyCodeLine{00278   \textcolor{comment}{/* Compute the channel index */}}
+\DoxyCodeLine{00279   \textcolor{keywordflow}{if} ((uint32\_t)(hdma-\/>Instance) < (uint32\_t)(DMA2\_Channel1))}
+\DoxyCodeLine{00280   \{}
+\DoxyCodeLine{00281     \textcolor{comment}{/* DMA1 */}}
+\DoxyCodeLine{00282     hdma-\/>ChannelIndex = (((uint32\_t)hdma-\/>Instance -\/ (uint32\_t)DMA1\_Channel1) / ((uint32\_t)DMA1\_Channel2 -\/ (uint32\_t)DMA1\_Channel1)) << 2;}
+\DoxyCodeLine{00283     hdma-\/>DmaBaseAddress = DMA1;}
+\DoxyCodeLine{00284   \}}
+\DoxyCodeLine{00285   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00286   \{}
+\DoxyCodeLine{00287     \textcolor{comment}{/* DMA2 */}}
+\DoxyCodeLine{00288     hdma-\/>ChannelIndex = (((uint32\_t)hdma-\/>Instance -\/ (uint32\_t)DMA2\_Channel1) / ((uint32\_t)DMA2\_Channel2 -\/ (uint32\_t)DMA2\_Channel1)) << 2;}
+\DoxyCodeLine{00289     hdma-\/>DmaBaseAddress = DMA2;}
+\DoxyCodeLine{00290   \}}
+\DoxyCodeLine{00291 }
+\DoxyCodeLine{00292   \textcolor{comment}{/* Reset DMA Channel control register */}}
+\DoxyCodeLine{00293   hdma-\/>Instance-\/>CCR  = 0;}
+\DoxyCodeLine{00294 }
+\DoxyCodeLine{00295   \textcolor{comment}{/* Clear all flags */}}
+\DoxyCodeLine{00296   hdma-\/>DmaBaseAddress-\/>IFCR = (DMA\_ISR\_GIF1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00297 }
+\DoxyCodeLine{00298   \textcolor{comment}{/* Initialize parameters for DMAMUX channel :}}
+\DoxyCodeLine{00299 \textcolor{comment}{     DMAmuxChannel, DMAmuxChannelStatus and DMAmuxChannelStatusMask */}}
+\DoxyCodeLine{00300 }
+\DoxyCodeLine{00301   DMA\_CalcDMAMUXChannelBaseAndMask(hdma);}
+\DoxyCodeLine{00302 }
+\DoxyCodeLine{00303   \textcolor{comment}{/* Reset the DMAMUX channel that corresponds to the DMA channel */}}
+\DoxyCodeLine{00304   hdma-\/>DMAmuxChannel-\/>CCR = 0;}
+\DoxyCodeLine{00305 }
+\DoxyCodeLine{00306   \textcolor{comment}{/* Clear the DMAMUX synchro overrun flag */}}
+\DoxyCodeLine{00307   hdma-\/>DMAmuxChannelStatus-\/>CFR = hdma-\/>DMAmuxChannelStatusMask;}
+\DoxyCodeLine{00308 }
+\DoxyCodeLine{00309   \textcolor{comment}{/* Reset Request generator parameters if any */}}
+\DoxyCodeLine{00310   \textcolor{keywordflow}{if} (((hdma-\/>Init.Request >  0U) \&\& (hdma-\/>Init.Request <= DMA\_REQUEST\_GENERATOR3)))}
+\DoxyCodeLine{00311   \{}
+\DoxyCodeLine{00312     \textcolor{comment}{/* Initialize parameters for DMAMUX request generator :}}
+\DoxyCodeLine{00313 \textcolor{comment}{       DMAmuxRequestGen, DMAmuxRequestGenStatus and DMAmuxRequestGenStatusMask}}
+\DoxyCodeLine{00314 \textcolor{comment}{    */}}
+\DoxyCodeLine{00315     DMA\_CalcDMAMUXRequestGenBaseAndMask(hdma);}
+\DoxyCodeLine{00316 }
+\DoxyCodeLine{00317     \textcolor{comment}{/* Reset the DMAMUX request generator register*/}}
+\DoxyCodeLine{00318     hdma-\/>DMAmuxRequestGen-\/>RGCR = 0U;}
+\DoxyCodeLine{00319 }
+\DoxyCodeLine{00320     \textcolor{comment}{/* Clear the DMAMUX request generator overrun flag */}}
+\DoxyCodeLine{00321     hdma-\/>DMAmuxRequestGenStatus-\/>RGCFR = hdma-\/>DMAmuxRequestGenStatusMask;}
+\DoxyCodeLine{00322   \}}
+\DoxyCodeLine{00323 }
+\DoxyCodeLine{00324   hdma-\/>DMAmuxRequestGen = 0U;}
+\DoxyCodeLine{00325   hdma-\/>DMAmuxRequestGenStatus = 0U;}
+\DoxyCodeLine{00326   hdma-\/>DMAmuxRequestGenStatusMask = 0U;}
+\DoxyCodeLine{00327 }
+\DoxyCodeLine{00328   \textcolor{comment}{/* Clean callbacks */}}
+\DoxyCodeLine{00329   hdma-\/>XferCpltCallback = NULL;}
+\DoxyCodeLine{00330   hdma-\/>XferHalfCpltCallback = NULL;}
+\DoxyCodeLine{00331   hdma-\/>XferErrorCallback = NULL;}
+\DoxyCodeLine{00332   hdma-\/>XferAbortCallback = NULL;}
+\DoxyCodeLine{00333 }
+\DoxyCodeLine{00334   \textcolor{comment}{/* Initialize the error code */}}
+\DoxyCodeLine{00335   hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_NONE;}
+\DoxyCodeLine{00336 }
+\DoxyCodeLine{00337   \textcolor{comment}{/* Initialize the DMA state */}}
+\DoxyCodeLine{00338   hdma-\/>State = HAL\_DMA\_STATE\_RESET;}
+\DoxyCodeLine{00339 }
+\DoxyCodeLine{00340   \textcolor{comment}{/* Release Lock */}}
+\DoxyCodeLine{00341   \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00342 }
+\DoxyCodeLine{00343   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00344 \}}
+\DoxyCodeLine{00345 }
+\DoxyCodeLine{00378 HAL\_StatusTypeDef HAL\_DMA\_Start(DMA\_HandleTypeDef *hdma, uint32\_t SrcAddress, uint32\_t DstAddress, uint32\_t DataLength)}
+\DoxyCodeLine{00379 \{}
+\DoxyCodeLine{00380   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00381 }
+\DoxyCodeLine{00382   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00383   assert\_param(IS\_DMA\_BUFFER\_SIZE(DataLength));}
+\DoxyCodeLine{00384 }
+\DoxyCodeLine{00385   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00386   \_\_HAL\_LOCK(hdma);}
+\DoxyCodeLine{00387 }
+\DoxyCodeLine{00388   \textcolor{keywordflow}{if} (HAL\_DMA\_STATE\_READY == hdma-\/>State)}
+\DoxyCodeLine{00389   \{}
+\DoxyCodeLine{00390     \textcolor{comment}{/* Change DMA peripheral state */}}
+\DoxyCodeLine{00391     hdma-\/>State = HAL\_DMA\_STATE\_BUSY;}
+\DoxyCodeLine{00392     hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_NONE;}
+\DoxyCodeLine{00393 }
+\DoxyCodeLine{00394     \textcolor{comment}{/* Disable the peripheral */}}
+\DoxyCodeLine{00395     \_\_HAL\_DMA\_DISABLE(hdma);}
+\DoxyCodeLine{00396 }
+\DoxyCodeLine{00397     \textcolor{comment}{/* Configure the source, destination address and the data length \& clear flags*/}}
+\DoxyCodeLine{00398     DMA\_SetConfig(hdma, SrcAddress, DstAddress, DataLength);}
+\DoxyCodeLine{00399 }
+\DoxyCodeLine{00400     \textcolor{comment}{/* Enable the Peripheral */}}
+\DoxyCodeLine{00401     \_\_HAL\_DMA\_ENABLE(hdma);}
+\DoxyCodeLine{00402   \}}
+\DoxyCodeLine{00403   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00404   \{}
+\DoxyCodeLine{00405     \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00406     \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00407     status = HAL\_BUSY;}
+\DoxyCodeLine{00408   \}}
+\DoxyCodeLine{00409   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00410 \}}
+\DoxyCodeLine{00411 }
+\DoxyCodeLine{00421 HAL\_StatusTypeDef HAL\_DMA\_Start\_IT(DMA\_HandleTypeDef *hdma, uint32\_t SrcAddress, uint32\_t DstAddress,}
+\DoxyCodeLine{00422                                    uint32\_t DataLength)}
+\DoxyCodeLine{00423 \{}
+\DoxyCodeLine{00424   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00425 }
+\DoxyCodeLine{00426   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00427   assert\_param(IS\_DMA\_BUFFER\_SIZE(DataLength));}
+\DoxyCodeLine{00428 }
+\DoxyCodeLine{00429   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00430   \_\_HAL\_LOCK(hdma);}
+\DoxyCodeLine{00431 }
+\DoxyCodeLine{00432   \textcolor{keywordflow}{if} (HAL\_DMA\_STATE\_READY == hdma-\/>State)}
+\DoxyCodeLine{00433   \{}
+\DoxyCodeLine{00434     \textcolor{comment}{/* Change DMA peripheral state */}}
+\DoxyCodeLine{00435     hdma-\/>State = HAL\_DMA\_STATE\_BUSY;}
+\DoxyCodeLine{00436     hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_NONE;}
+\DoxyCodeLine{00437 }
+\DoxyCodeLine{00438     \textcolor{comment}{/* Disable the peripheral */}}
+\DoxyCodeLine{00439     \_\_HAL\_DMA\_DISABLE(hdma);}
+\DoxyCodeLine{00440 }
+\DoxyCodeLine{00441     \textcolor{comment}{/* Configure the source, destination address and the data length \& clear flags*/}}
+\DoxyCodeLine{00442     DMA\_SetConfig(hdma, SrcAddress, DstAddress, DataLength);}
+\DoxyCodeLine{00443 }
+\DoxyCodeLine{00444     \textcolor{comment}{/* Enable the transfer complete interrupt */}}
+\DoxyCodeLine{00445     \textcolor{comment}{/* Enable the transfer Error interrupt */}}
+\DoxyCodeLine{00446     \textcolor{keywordflow}{if} (NULL != hdma-\/>XferHalfCpltCallback)}
+\DoxyCodeLine{00447     \{}
+\DoxyCodeLine{00448       \textcolor{comment}{/* Enable the Half transfer complete interrupt as well */}}
+\DoxyCodeLine{00449       \_\_HAL\_DMA\_ENABLE\_IT(hdma, (DMA\_IT\_TC | DMA\_IT\_HT | DMA\_IT\_TE));}
+\DoxyCodeLine{00450     \}}
+\DoxyCodeLine{00451     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00452     \{}
+\DoxyCodeLine{00453       \_\_HAL\_DMA\_DISABLE\_IT(hdma, DMA\_IT\_HT);}
+\DoxyCodeLine{00454       \_\_HAL\_DMA\_ENABLE\_IT(hdma, (DMA\_IT\_TC | DMA\_IT\_TE));}
+\DoxyCodeLine{00455     \}}
+\DoxyCodeLine{00456 }
+\DoxyCodeLine{00457     \textcolor{comment}{/* Check if DMAMUX Synchronization is enabled*/}}
+\DoxyCodeLine{00458     \textcolor{keywordflow}{if} ((hdma-\/>DMAmuxChannel-\/>CCR \& DMAMUX\_CxCR\_SE) != 0U)}
+\DoxyCodeLine{00459     \{}
+\DoxyCodeLine{00460       \textcolor{comment}{/* Enable DMAMUX sync overrun IT*/}}
+\DoxyCodeLine{00461       hdma-\/>DMAmuxChannel-\/>CCR |= DMAMUX\_CxCR\_SOIE;}
+\DoxyCodeLine{00462     \}}
+\DoxyCodeLine{00463 }
+\DoxyCodeLine{00464     \textcolor{keywordflow}{if} (hdma-\/>DMAmuxRequestGen != 0U)}
+\DoxyCodeLine{00465     \{}
+\DoxyCodeLine{00466       \textcolor{comment}{/* if using DMAMUX request generator, enable the DMAMUX request generator overrun IT*/}}
+\DoxyCodeLine{00467       \textcolor{comment}{/* enable the request gen overrun IT*/}}
+\DoxyCodeLine{00468       hdma-\/>DMAmuxRequestGen-\/>RGCR |= DMAMUX\_RGxCR\_OIE;}
+\DoxyCodeLine{00469     \}}
+\DoxyCodeLine{00470 }
+\DoxyCodeLine{00471     \textcolor{comment}{/* Enable the Peripheral */}}
+\DoxyCodeLine{00472     \_\_HAL\_DMA\_ENABLE(hdma);}
+\DoxyCodeLine{00473   \}}
+\DoxyCodeLine{00474   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00475   \{}
+\DoxyCodeLine{00476     \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00477     \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00478 }
+\DoxyCodeLine{00479     \textcolor{comment}{/* Remain BUSY */}}
+\DoxyCodeLine{00480     status = HAL\_BUSY;}
+\DoxyCodeLine{00481   \}}
+\DoxyCodeLine{00482   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00483 \}}
+\DoxyCodeLine{00484 }
+\DoxyCodeLine{00491 HAL\_StatusTypeDef HAL\_DMA\_Abort(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{00492 \{}
+\DoxyCodeLine{00493   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00494 }
+\DoxyCodeLine{00495   \textcolor{keywordflow}{if}(hdma-\/>State != HAL\_DMA\_STATE\_BUSY)}
+\DoxyCodeLine{00496   \{}
+\DoxyCodeLine{00497     \textcolor{comment}{/* no transfer ongoing */}}
+\DoxyCodeLine{00498     hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_NO\_XFER;}
+\DoxyCodeLine{00499 }
+\DoxyCodeLine{00500     status = HAL\_ERROR;}
+\DoxyCodeLine{00501   \}}
+\DoxyCodeLine{00502   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00503   \{}
+\DoxyCodeLine{00504      \textcolor{comment}{/* Disable DMA IT */}}
+\DoxyCodeLine{00505      \_\_HAL\_DMA\_DISABLE\_IT(hdma, (DMA\_IT\_TC | DMA\_IT\_HT | DMA\_IT\_TE));}
+\DoxyCodeLine{00506      }
+\DoxyCodeLine{00507      \textcolor{comment}{/* disable the DMAMUX sync overrun IT*/}}
+\DoxyCodeLine{00508      hdma-\/>DMAmuxChannel-\/>CCR \&= \string~DMAMUX\_CxCR\_SOIE;}
+\DoxyCodeLine{00509      }
+\DoxyCodeLine{00510      \textcolor{comment}{/* Disable the channel */}}
+\DoxyCodeLine{00511      \_\_HAL\_DMA\_DISABLE(hdma);}
+\DoxyCodeLine{00512      }
+\DoxyCodeLine{00513      \textcolor{comment}{/* Clear all flags */}}
+\DoxyCodeLine{00514      hdma-\/>DmaBaseAddress-\/>IFCR = (DMA\_ISR\_GIF1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00515      }
+\DoxyCodeLine{00516      \textcolor{comment}{/* Clear the DMAMUX synchro overrun flag */}}
+\DoxyCodeLine{00517      hdma-\/>DMAmuxChannelStatus-\/>CFR = hdma-\/>DMAmuxChannelStatusMask;}
+\DoxyCodeLine{00518      }
+\DoxyCodeLine{00519      \textcolor{keywordflow}{if} (hdma-\/>DMAmuxRequestGen != 0U)}
+\DoxyCodeLine{00520      \{}
+\DoxyCodeLine{00521        \textcolor{comment}{/* if using DMAMUX request generator, disable the DMAMUX request generator overrun IT*/}}
+\DoxyCodeLine{00522        \textcolor{comment}{/* disable the request gen overrun IT*/}}
+\DoxyCodeLine{00523        hdma-\/>DMAmuxRequestGen-\/>RGCR \&= \string~DMAMUX\_RGxCR\_OIE;}
+\DoxyCodeLine{00524      }
+\DoxyCodeLine{00525        \textcolor{comment}{/* Clear the DMAMUX request generator overrun flag */}}
+\DoxyCodeLine{00526        hdma-\/>DMAmuxRequestGenStatus-\/>RGCFR = hdma-\/>DMAmuxRequestGenStatusMask;}
+\DoxyCodeLine{00527      \}}
+\DoxyCodeLine{00528   \}  }
+\DoxyCodeLine{00529   \textcolor{comment}{/* Change the DMA state */}}
+\DoxyCodeLine{00530   hdma-\/>State = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00531 }
+\DoxyCodeLine{00532   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00533   \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00534 }
+\DoxyCodeLine{00535   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00536 \}}
+\DoxyCodeLine{00537 }
+\DoxyCodeLine{00544 HAL\_StatusTypeDef HAL\_DMA\_Abort\_IT(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{00545 \{}
+\DoxyCodeLine{00546   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00547 }
+\DoxyCodeLine{00548   \textcolor{keywordflow}{if} (HAL\_DMA\_STATE\_BUSY != hdma-\/>State)}
+\DoxyCodeLine{00549   \{}
+\DoxyCodeLine{00550     \textcolor{comment}{/* no transfer ongoing */}}
+\DoxyCodeLine{00551     hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_NO\_XFER;}
+\DoxyCodeLine{00552 }
+\DoxyCodeLine{00553     \textcolor{comment}{/* Change the DMA state */}}
+\DoxyCodeLine{00554     hdma-\/>State = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00555 }
+\DoxyCodeLine{00556     \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00557     \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00558 }
+\DoxyCodeLine{00559     status = HAL\_ERROR;}
+\DoxyCodeLine{00560   \}}
+\DoxyCodeLine{00561   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00562   \{}
+\DoxyCodeLine{00563     \textcolor{comment}{/* Disable DMA IT */}}
+\DoxyCodeLine{00564     \_\_HAL\_DMA\_DISABLE\_IT(hdma, (DMA\_IT\_TC | DMA\_IT\_HT | DMA\_IT\_TE));}
+\DoxyCodeLine{00565 }
+\DoxyCodeLine{00566     \textcolor{comment}{/* Disable the channel */}}
+\DoxyCodeLine{00567     \_\_HAL\_DMA\_DISABLE(hdma);}
+\DoxyCodeLine{00568 }
+\DoxyCodeLine{00569     \textcolor{comment}{/* disable the DMAMUX sync overrun IT*/}}
+\DoxyCodeLine{00570     hdma-\/>DMAmuxChannel-\/>CCR \&= \string~DMAMUX\_CxCR\_SOIE;}
+\DoxyCodeLine{00571 }
+\DoxyCodeLine{00572     \textcolor{comment}{/* Clear all flags */}}
+\DoxyCodeLine{00573     hdma-\/>DmaBaseAddress-\/>IFCR = (DMA\_ISR\_GIF1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00574 }
+\DoxyCodeLine{00575     \textcolor{comment}{/* Clear the DMAMUX synchro overrun flag */}}
+\DoxyCodeLine{00576     hdma-\/>DMAmuxChannelStatus-\/>CFR = hdma-\/>DMAmuxChannelStatusMask;}
+\DoxyCodeLine{00577 }
+\DoxyCodeLine{00578     \textcolor{keywordflow}{if} (hdma-\/>DMAmuxRequestGen != 0U)}
+\DoxyCodeLine{00579     \{}
+\DoxyCodeLine{00580       \textcolor{comment}{/* if using DMAMUX request generator, disable the DMAMUX request generator overrun IT*/}}
+\DoxyCodeLine{00581       \textcolor{comment}{/* disable the request gen overrun IT*/}}
+\DoxyCodeLine{00582       hdma-\/>DMAmuxRequestGen-\/>RGCR \&= \string~DMAMUX\_RGxCR\_OIE;}
+\DoxyCodeLine{00583 }
+\DoxyCodeLine{00584       \textcolor{comment}{/* Clear the DMAMUX request generator overrun flag */}}
+\DoxyCodeLine{00585       hdma-\/>DMAmuxRequestGenStatus-\/>RGCFR = hdma-\/>DMAmuxRequestGenStatusMask;}
+\DoxyCodeLine{00586     \}}
+\DoxyCodeLine{00587 }
+\DoxyCodeLine{00588     \textcolor{comment}{/* Change the DMA state */}}
+\DoxyCodeLine{00589     hdma-\/>State = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00590 }
+\DoxyCodeLine{00591     \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00592     \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00593 }
+\DoxyCodeLine{00594     \textcolor{comment}{/* Call User Abort callback */}}
+\DoxyCodeLine{00595     \textcolor{keywordflow}{if} (hdma-\/>XferAbortCallback != NULL)}
+\DoxyCodeLine{00596     \{}
+\DoxyCodeLine{00597       hdma-\/>XferAbortCallback(hdma);}
+\DoxyCodeLine{00598     \}}
+\DoxyCodeLine{00599   \}}
+\DoxyCodeLine{00600   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00601 \}}
+\DoxyCodeLine{00602 }
+\DoxyCodeLine{00611 HAL\_StatusTypeDef HAL\_DMA\_PollForTransfer(DMA\_HandleTypeDef *hdma, HAL\_DMA\_LevelCompleteTypeDef CompleteLevel,}
+\DoxyCodeLine{00612                                           uint32\_t Timeout)}
+\DoxyCodeLine{00613 \{}
+\DoxyCodeLine{00614   uint32\_t temp;}
+\DoxyCodeLine{00615   uint32\_t tickstart;}
+\DoxyCodeLine{00616 }
+\DoxyCodeLine{00617   \textcolor{keywordflow}{if} (HAL\_DMA\_STATE\_BUSY != hdma-\/>State)}
+\DoxyCodeLine{00618   \{}
+\DoxyCodeLine{00619     \textcolor{comment}{/* no transfer ongoing */}}
+\DoxyCodeLine{00620     hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_NO\_XFER;}
+\DoxyCodeLine{00621     \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00622     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00623   \}}
+\DoxyCodeLine{00624 }
+\DoxyCodeLine{00625   \textcolor{comment}{/* Polling mode not supported in circular mode */}}
+\DoxyCodeLine{00626   \textcolor{keywordflow}{if} (0U != (hdma-\/>Instance-\/>CCR \& DMA\_CCR\_CIRC))}
+\DoxyCodeLine{00627   \{}
+\DoxyCodeLine{00628     hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_NOT\_SUPPORTED;}
+\DoxyCodeLine{00629     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00630   \}}
+\DoxyCodeLine{00631 }
+\DoxyCodeLine{00632   \textcolor{comment}{/* Get the level transfer complete flag */}}
+\DoxyCodeLine{00633   \textcolor{keywordflow}{if} (HAL\_DMA\_FULL\_TRANSFER == CompleteLevel)}
+\DoxyCodeLine{00634   \{}
+\DoxyCodeLine{00635     \textcolor{comment}{/* Transfer Complete flag */}}
+\DoxyCodeLine{00636 }
+\DoxyCodeLine{00637     temp = (uint32\_t)DMA\_FLAG\_TC1 << (hdma-\/>ChannelIndex \& 0x1FU);}
+\DoxyCodeLine{00638   \}}
+\DoxyCodeLine{00639   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00640   \{}
+\DoxyCodeLine{00641     \textcolor{comment}{/* Half Transfer Complete flag */}}
+\DoxyCodeLine{00642     temp = (uint32\_t)DMA\_FLAG\_HT1 << (hdma-\/>ChannelIndex \& 0x1FU);}
+\DoxyCodeLine{00643   \}}
+\DoxyCodeLine{00644 }
+\DoxyCodeLine{00645   \textcolor{comment}{/* Get tick */}}
+\DoxyCodeLine{00646   tickstart = HAL\_GetTick();}
+\DoxyCodeLine{00647 }
+\DoxyCodeLine{00648   \textcolor{keywordflow}{while} (0U == (hdma-\/>DmaBaseAddress-\/>ISR \& temp))}
+\DoxyCodeLine{00649   \{}
+\DoxyCodeLine{00650     \textcolor{keywordflow}{if} ((0U != (hdma-\/>DmaBaseAddress-\/>ISR \& ((uint32\_t)DMA\_FLAG\_TE1 << (hdma-\/>ChannelIndex \& 0x1FU)))))}
+\DoxyCodeLine{00651     \{}
+\DoxyCodeLine{00652       \textcolor{comment}{/* When a DMA transfer error occurs */}}
+\DoxyCodeLine{00653       \textcolor{comment}{/* A hardware clear of its EN bits is performed */}}
+\DoxyCodeLine{00654       \textcolor{comment}{/* Clear all flags */}}
+\DoxyCodeLine{00655       hdma-\/>DmaBaseAddress-\/>IFCR = ((uint32\_t)DMA\_ISR\_GIF1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00656 }
+\DoxyCodeLine{00657       \textcolor{comment}{/* Update error code */}}
+\DoxyCodeLine{00658       hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_TE;}
+\DoxyCodeLine{00659 }
+\DoxyCodeLine{00660       \textcolor{comment}{/* Change the DMA state */}}
+\DoxyCodeLine{00661       hdma-\/>State = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00662 }
+\DoxyCodeLine{00663       \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00664       \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00665 }
+\DoxyCodeLine{00666       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00667     \}}
+\DoxyCodeLine{00668     \textcolor{comment}{/* Check for the Timeout */}}
+\DoxyCodeLine{00669     \textcolor{keywordflow}{if} (Timeout != HAL\_MAX\_DELAY)}
+\DoxyCodeLine{00670     \{}
+\DoxyCodeLine{00671       \textcolor{keywordflow}{if} (((HAL\_GetTick() -\/ tickstart) > Timeout) || (Timeout == 0U))}
+\DoxyCodeLine{00672       \{}
+\DoxyCodeLine{00673         \textcolor{comment}{/* Update error code */}}
+\DoxyCodeLine{00674         hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_TIMEOUT;}
+\DoxyCodeLine{00675 }
+\DoxyCodeLine{00676         \textcolor{comment}{/* Change the DMA state */}}
+\DoxyCodeLine{00677         hdma-\/>State = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00678 }
+\DoxyCodeLine{00679         \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00680         \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00681 }
+\DoxyCodeLine{00682         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00683       \}}
+\DoxyCodeLine{00684     \}}
+\DoxyCodeLine{00685   \}}
+\DoxyCodeLine{00686 }
+\DoxyCodeLine{00687   \textcolor{comment}{/*Check for DMAMUX Request generator (if used) overrun status */}}
+\DoxyCodeLine{00688   \textcolor{keywordflow}{if} (hdma-\/>DMAmuxRequestGen != 0U)}
+\DoxyCodeLine{00689   \{}
+\DoxyCodeLine{00690     \textcolor{comment}{/* if using DMAMUX request generator Check for DMAMUX request generator overrun */}}
+\DoxyCodeLine{00691     \textcolor{keywordflow}{if} ((hdma-\/>DMAmuxRequestGenStatus-\/>RGSR \& hdma-\/>DMAmuxRequestGenStatusMask) != 0U)}
+\DoxyCodeLine{00692     \{}
+\DoxyCodeLine{00693       \textcolor{comment}{/* Disable the request gen overrun interrupt */}}
+\DoxyCodeLine{00694       hdma-\/>DMAmuxRequestGen-\/>RGCR |= DMAMUX\_RGxCR\_OIE;}
+\DoxyCodeLine{00695 }
+\DoxyCodeLine{00696       \textcolor{comment}{/* Clear the DMAMUX request generator overrun flag */}}
+\DoxyCodeLine{00697       hdma-\/>DMAmuxRequestGenStatus-\/>RGCFR = hdma-\/>DMAmuxRequestGenStatusMask;}
+\DoxyCodeLine{00698 }
+\DoxyCodeLine{00699       \textcolor{comment}{/* Update error code */}}
+\DoxyCodeLine{00700       hdma-\/>ErrorCode |= HAL\_DMA\_ERROR\_REQGEN;}
+\DoxyCodeLine{00701     \}}
+\DoxyCodeLine{00702   \}}
+\DoxyCodeLine{00703 }
+\DoxyCodeLine{00704   \textcolor{comment}{/* Check for DMAMUX Synchronization overrun */}}
+\DoxyCodeLine{00705   \textcolor{keywordflow}{if} ((hdma-\/>DMAmuxChannelStatus-\/>CSR \& hdma-\/>DMAmuxChannelStatusMask) != 0U)}
+\DoxyCodeLine{00706   \{}
+\DoxyCodeLine{00707     \textcolor{comment}{/* Clear the DMAMUX synchro overrun flag */}}
+\DoxyCodeLine{00708     hdma-\/>DMAmuxChannelStatus-\/>CFR = hdma-\/>DMAmuxChannelStatusMask;}
+\DoxyCodeLine{00709 }
+\DoxyCodeLine{00710     \textcolor{comment}{/* Update error code */}}
+\DoxyCodeLine{00711     hdma-\/>ErrorCode |= HAL\_DMA\_ERROR\_SYNC;}
+\DoxyCodeLine{00712   \}}
+\DoxyCodeLine{00713 }
+\DoxyCodeLine{00714   \textcolor{keywordflow}{if} (HAL\_DMA\_FULL\_TRANSFER == CompleteLevel)}
+\DoxyCodeLine{00715   \{}
+\DoxyCodeLine{00716     \textcolor{comment}{/* Clear the transfer complete flag */}}
+\DoxyCodeLine{00717     hdma-\/>DmaBaseAddress-\/>IFCR = ((uint32\_t)DMA\_FLAG\_TC1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00718 }
+\DoxyCodeLine{00719     \textcolor{comment}{/* The selected Channelx EN bit is cleared (DMA is disabled and}}
+\DoxyCodeLine{00720 \textcolor{comment}{    all transfers are complete) */}}
+\DoxyCodeLine{00721     hdma-\/>State = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00722   \}}
+\DoxyCodeLine{00723   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00724   \{}
+\DoxyCodeLine{00725     \textcolor{comment}{/* Clear the half transfer complete flag */}}
+\DoxyCodeLine{00726     hdma-\/>DmaBaseAddress-\/>IFCR = ((uint32\_t)DMA\_FLAG\_HT1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00727   \}}
+\DoxyCodeLine{00728 }
+\DoxyCodeLine{00729   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00730   \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00731 }
+\DoxyCodeLine{00732   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00733 \}}
+\DoxyCodeLine{00734 }
+\DoxyCodeLine{00741 \textcolor{keywordtype}{void} HAL\_DMA\_IRQHandler(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{00742 \{}
+\DoxyCodeLine{00743   uint32\_t flag\_it = hdma-\/>DmaBaseAddress-\/>ISR;}
+\DoxyCodeLine{00744   uint32\_t source\_it = hdma-\/>Instance-\/>CCR;}
+\DoxyCodeLine{00745 }
+\DoxyCodeLine{00746   \textcolor{comment}{/* Half Transfer Complete Interrupt management ******************************/}}
+\DoxyCodeLine{00747   \textcolor{keywordflow}{if} ((0U != (flag\_it \& ((uint32\_t)DMA\_FLAG\_HT1 << (hdma-\/>ChannelIndex \& 0x1FU)))) \&\& (0U != (source\_it \& DMA\_IT\_HT)))}
+\DoxyCodeLine{00748   \{}
+\DoxyCodeLine{00749     \textcolor{comment}{/* Disable the half transfer interrupt if the DMA mode is not CIRCULAR */}}
+\DoxyCodeLine{00750     \textcolor{keywordflow}{if} ((hdma-\/>Instance-\/>CCR \& DMA\_CCR\_CIRC) == 0U)}
+\DoxyCodeLine{00751     \{}
+\DoxyCodeLine{00752       \textcolor{comment}{/* Disable the half transfer interrupt */}}
+\DoxyCodeLine{00753       \_\_HAL\_DMA\_DISABLE\_IT(hdma, DMA\_IT\_HT);}
+\DoxyCodeLine{00754     \}}
+\DoxyCodeLine{00755     \textcolor{comment}{/* Clear the half transfer complete flag */}}
+\DoxyCodeLine{00756     hdma-\/>DmaBaseAddress-\/>IFCR = ((uint32\_t)DMA\_ISR\_HTIF1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00757 }
+\DoxyCodeLine{00758     \textcolor{comment}{/* DMA peripheral state is not updated in Half Transfer */}}
+\DoxyCodeLine{00759     \textcolor{comment}{/* but in Transfer Complete case */}}
+\DoxyCodeLine{00760 }
+\DoxyCodeLine{00761     \textcolor{keywordflow}{if} (hdma-\/>XferHalfCpltCallback != NULL)}
+\DoxyCodeLine{00762     \{}
+\DoxyCodeLine{00763       \textcolor{comment}{/* Half transfer callback */}}
+\DoxyCodeLine{00764       hdma-\/>XferHalfCpltCallback(hdma);}
+\DoxyCodeLine{00765     \}}
+\DoxyCodeLine{00766   \}}
+\DoxyCodeLine{00767   \textcolor{comment}{/* Transfer Complete Interrupt management ***********************************/}}
+\DoxyCodeLine{00768   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((0U != (flag\_it \& ((uint32\_t)DMA\_FLAG\_TC1 << (hdma-\/>ChannelIndex \& 0x1FU))))}
+\DoxyCodeLine{00769            \&\& (0U != (source\_it \& DMA\_IT\_TC)))}
+\DoxyCodeLine{00770   \{}
+\DoxyCodeLine{00771     \textcolor{keywordflow}{if} ((hdma-\/>Instance-\/>CCR \& DMA\_CCR\_CIRC) == 0U)}
+\DoxyCodeLine{00772     \{}
+\DoxyCodeLine{00773       \textcolor{comment}{/* Disable the transfer complete and error interrupt */}}
+\DoxyCodeLine{00774       \_\_HAL\_DMA\_DISABLE\_IT(hdma, DMA\_IT\_TE | DMA\_IT\_TC);}
+\DoxyCodeLine{00775 }
+\DoxyCodeLine{00776       \textcolor{comment}{/* Change the DMA state */}}
+\DoxyCodeLine{00777       hdma-\/>State = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00778     \}}
+\DoxyCodeLine{00779     \textcolor{comment}{/* Clear the transfer complete flag */}}
+\DoxyCodeLine{00780     hdma-\/>DmaBaseAddress-\/>IFCR = ((uint32\_t)DMA\_ISR\_TCIF1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00781 }
+\DoxyCodeLine{00782     \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00783     \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00784 }
+\DoxyCodeLine{00785     \textcolor{keywordflow}{if} (hdma-\/>XferCpltCallback != NULL)}
+\DoxyCodeLine{00786     \{}
+\DoxyCodeLine{00787       \textcolor{comment}{/* Transfer complete callback */}}
+\DoxyCodeLine{00788       hdma-\/>XferCpltCallback(hdma);}
+\DoxyCodeLine{00789     \}}
+\DoxyCodeLine{00790   \}}
+\DoxyCodeLine{00791   \textcolor{comment}{/* Transfer Error Interrupt management **************************************/}}
+\DoxyCodeLine{00792   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((0U != (flag\_it \& ((uint32\_t)DMA\_FLAG\_TE1 << (hdma-\/>ChannelIndex \& 0x1FU))))}
+\DoxyCodeLine{00793            \&\& (0U != (source\_it \& DMA\_IT\_TE)))}
+\DoxyCodeLine{00794   \{}
+\DoxyCodeLine{00795     \textcolor{comment}{/* When a DMA transfer error occurs */}}
+\DoxyCodeLine{00796     \textcolor{comment}{/* A hardware clear of its EN bits is performed */}}
+\DoxyCodeLine{00797     \textcolor{comment}{/* Disable ALL DMA IT */}}
+\DoxyCodeLine{00798     \_\_HAL\_DMA\_DISABLE\_IT(hdma, (DMA\_IT\_TC | DMA\_IT\_HT | DMA\_IT\_TE));}
+\DoxyCodeLine{00799 }
+\DoxyCodeLine{00800     \textcolor{comment}{/* Clear all flags */}}
+\DoxyCodeLine{00801     hdma-\/>DmaBaseAddress-\/>IFCR = ((uint32\_t)DMA\_ISR\_GIF1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{00802 }
+\DoxyCodeLine{00803     \textcolor{comment}{/* Update error code */}}
+\DoxyCodeLine{00804     hdma-\/>ErrorCode = HAL\_DMA\_ERROR\_TE;}
+\DoxyCodeLine{00805 }
+\DoxyCodeLine{00806     \textcolor{comment}{/* Change the DMA state */}}
+\DoxyCodeLine{00807     hdma-\/>State = HAL\_DMA\_STATE\_READY;}
+\DoxyCodeLine{00808 }
+\DoxyCodeLine{00809     \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00810     \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00811 }
+\DoxyCodeLine{00812     \textcolor{keywordflow}{if} (hdma-\/>XferErrorCallback != NULL)}
+\DoxyCodeLine{00813     \{}
+\DoxyCodeLine{00814       \textcolor{comment}{/* Transfer error callback */}}
+\DoxyCodeLine{00815       hdma-\/>XferErrorCallback(hdma);}
+\DoxyCodeLine{00816     \}}
+\DoxyCodeLine{00817   \}}
+\DoxyCodeLine{00818   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00819   \{}
+\DoxyCodeLine{00820     \textcolor{comment}{/* Nothing To Do */}}
+\DoxyCodeLine{00821   \}}
+\DoxyCodeLine{00822   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00823 \}}
+\DoxyCodeLine{00824 }
+\DoxyCodeLine{00835 HAL\_StatusTypeDef HAL\_DMA\_RegisterCallback(DMA\_HandleTypeDef *hdma, HAL\_DMA\_CallbackIDTypeDef CallbackID, \textcolor{keywordtype}{void} (* pCallback)(DMA\_HandleTypeDef *\_hdma))}
+\DoxyCodeLine{00836 \{}
+\DoxyCodeLine{00837   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00838 }
+\DoxyCodeLine{00839   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00840   \_\_HAL\_LOCK(hdma);}
+\DoxyCodeLine{00841 }
+\DoxyCodeLine{00842   \textcolor{keywordflow}{if} (HAL\_DMA\_STATE\_READY == hdma-\/>State)}
+\DoxyCodeLine{00843   \{}
+\DoxyCodeLine{00844     \textcolor{keywordflow}{switch} (CallbackID)}
+\DoxyCodeLine{00845     \{}
+\DoxyCodeLine{00846       \textcolor{keywordflow}{case}  HAL\_DMA\_XFER\_CPLT\_CB\_ID:}
+\DoxyCodeLine{00847         hdma-\/>XferCpltCallback = pCallback;}
+\DoxyCodeLine{00848         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00849 }
+\DoxyCodeLine{00850       \textcolor{keywordflow}{case}  HAL\_DMA\_XFER\_HALFCPLT\_CB\_ID:}
+\DoxyCodeLine{00851         hdma-\/>XferHalfCpltCallback = pCallback;}
+\DoxyCodeLine{00852         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00853 }
+\DoxyCodeLine{00854       \textcolor{keywordflow}{case}  HAL\_DMA\_XFER\_ERROR\_CB\_ID:}
+\DoxyCodeLine{00855         hdma-\/>XferErrorCallback = pCallback;}
+\DoxyCodeLine{00856         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00857 }
+\DoxyCodeLine{00858       \textcolor{keywordflow}{case}  HAL\_DMA\_XFER\_ABORT\_CB\_ID:}
+\DoxyCodeLine{00859         hdma-\/>XferAbortCallback = pCallback;}
+\DoxyCodeLine{00860         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00861 }
+\DoxyCodeLine{00862       \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00863         status = HAL\_ERROR;}
+\DoxyCodeLine{00864         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00865     \}}
+\DoxyCodeLine{00866   \}}
+\DoxyCodeLine{00867   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00868   \{}
+\DoxyCodeLine{00869     status = HAL\_ERROR;}
+\DoxyCodeLine{00870   \}}
+\DoxyCodeLine{00871 }
+\DoxyCodeLine{00872   \textcolor{comment}{/* Release Lock */}}
+\DoxyCodeLine{00873   \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00874 }
+\DoxyCodeLine{00875   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00876 \}}
+\DoxyCodeLine{00877 }
+\DoxyCodeLine{00886 HAL\_StatusTypeDef HAL\_DMA\_UnRegisterCallback(DMA\_HandleTypeDef *hdma, HAL\_DMA\_CallbackIDTypeDef CallbackID)}
+\DoxyCodeLine{00887 \{}
+\DoxyCodeLine{00888   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00889 }
+\DoxyCodeLine{00890   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00891   \_\_HAL\_LOCK(hdma);}
+\DoxyCodeLine{00892 }
+\DoxyCodeLine{00893   \textcolor{keywordflow}{if} (HAL\_DMA\_STATE\_READY == hdma-\/>State)}
+\DoxyCodeLine{00894   \{}
+\DoxyCodeLine{00895     \textcolor{keywordflow}{switch} (CallbackID)}
+\DoxyCodeLine{00896     \{}
+\DoxyCodeLine{00897       \textcolor{keywordflow}{case}  HAL\_DMA\_XFER\_CPLT\_CB\_ID:}
+\DoxyCodeLine{00898         hdma-\/>XferCpltCallback = NULL;}
+\DoxyCodeLine{00899         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00900 }
+\DoxyCodeLine{00901       \textcolor{keywordflow}{case}  HAL\_DMA\_XFER\_HALFCPLT\_CB\_ID:}
+\DoxyCodeLine{00902         hdma-\/>XferHalfCpltCallback = NULL;}
+\DoxyCodeLine{00903         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00904 }
+\DoxyCodeLine{00905       \textcolor{keywordflow}{case}  HAL\_DMA\_XFER\_ERROR\_CB\_ID:}
+\DoxyCodeLine{00906         hdma-\/>XferErrorCallback = NULL;}
+\DoxyCodeLine{00907         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00908 }
+\DoxyCodeLine{00909       \textcolor{keywordflow}{case}  HAL\_DMA\_XFER\_ABORT\_CB\_ID:}
+\DoxyCodeLine{00910         hdma-\/>XferAbortCallback = NULL;}
+\DoxyCodeLine{00911         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00912 }
+\DoxyCodeLine{00913       \textcolor{keywordflow}{case}   HAL\_DMA\_XFER\_ALL\_CB\_ID:}
+\DoxyCodeLine{00914         hdma-\/>XferCpltCallback = NULL;}
+\DoxyCodeLine{00915         hdma-\/>XferHalfCpltCallback = NULL;}
+\DoxyCodeLine{00916         hdma-\/>XferErrorCallback = NULL;}
+\DoxyCodeLine{00917         hdma-\/>XferAbortCallback = NULL;}
+\DoxyCodeLine{00918         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00919 }
+\DoxyCodeLine{00920       \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00921         status = HAL\_ERROR;}
+\DoxyCodeLine{00922         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00923     \}}
+\DoxyCodeLine{00924   \}}
+\DoxyCodeLine{00925   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00926   \{}
+\DoxyCodeLine{00927     status = HAL\_ERROR;}
+\DoxyCodeLine{00928   \}}
+\DoxyCodeLine{00929 }
+\DoxyCodeLine{00930   \textcolor{comment}{/* Release Lock */}}
+\DoxyCodeLine{00931   \_\_HAL\_UNLOCK(hdma);}
+\DoxyCodeLine{00932 }
+\DoxyCodeLine{00933   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00934 \}}
+\DoxyCodeLine{00935 }
+\DoxyCodeLine{00964 HAL\_DMA\_StateTypeDef HAL\_DMA\_GetState(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{00965 \{}
+\DoxyCodeLine{00966   \textcolor{comment}{/* Return DMA handle state */}}
+\DoxyCodeLine{00967   \textcolor{keywordflow}{return} hdma-\/>State;}
+\DoxyCodeLine{00968 \}}
+\DoxyCodeLine{00969 }
+\DoxyCodeLine{00976 uint32\_t HAL\_DMA\_GetError(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{00977 \{}
+\DoxyCodeLine{00978   \textcolor{keywordflow}{return} hdma-\/>ErrorCode;}
+\DoxyCodeLine{00979 \}}
+\DoxyCodeLine{00980 }
+\DoxyCodeLine{01002 \textcolor{keyword}{static} \textcolor{keywordtype}{void} DMA\_SetConfig(DMA\_HandleTypeDef *hdma, uint32\_t SrcAddress, uint32\_t DstAddress, uint32\_t DataLength)}
+\DoxyCodeLine{01003 \{}
+\DoxyCodeLine{01004   \textcolor{comment}{/* Clear the DMAMUX synchro overrun flag */}}
+\DoxyCodeLine{01005   hdma-\/>DMAmuxChannelStatus-\/>CFR = hdma-\/>DMAmuxChannelStatusMask;}
+\DoxyCodeLine{01006 }
+\DoxyCodeLine{01007   \textcolor{keywordflow}{if} (hdma-\/>DMAmuxRequestGen != 0U)}
+\DoxyCodeLine{01008   \{}
+\DoxyCodeLine{01009     \textcolor{comment}{/* Clear the DMAMUX request generator overrun flag */}}
+\DoxyCodeLine{01010     hdma-\/>DMAmuxRequestGenStatus-\/>RGCFR = hdma-\/>DMAmuxRequestGenStatusMask;}
+\DoxyCodeLine{01011   \}}
+\DoxyCodeLine{01012 }
+\DoxyCodeLine{01013   \textcolor{comment}{/* Clear all flags */}}
+\DoxyCodeLine{01014   hdma-\/>DmaBaseAddress-\/>IFCR = (DMA\_ISR\_GIF1 << (hdma-\/>ChannelIndex \& 0x1FU));}
+\DoxyCodeLine{01015 }
+\DoxyCodeLine{01016   \textcolor{comment}{/* Configure DMA Channel data length */}}
+\DoxyCodeLine{01017   hdma-\/>Instance-\/>CNDTR = DataLength;}
+\DoxyCodeLine{01018 }
+\DoxyCodeLine{01019   \textcolor{comment}{/* Memory to Peripheral */}}
+\DoxyCodeLine{01020   \textcolor{keywordflow}{if} ((hdma-\/>Init.Direction) == DMA\_MEMORY\_TO\_PERIPH)}
+\DoxyCodeLine{01021   \{}
+\DoxyCodeLine{01022     \textcolor{comment}{/* Configure DMA Channel destination address */}}
+\DoxyCodeLine{01023     hdma-\/>Instance-\/>CPAR = DstAddress;}
+\DoxyCodeLine{01024 }
+\DoxyCodeLine{01025     \textcolor{comment}{/* Configure DMA Channel source address */}}
+\DoxyCodeLine{01026     hdma-\/>Instance-\/>CMAR = SrcAddress;}
+\DoxyCodeLine{01027   \}}
+\DoxyCodeLine{01028   \textcolor{comment}{/* Peripheral to Memory */}}
+\DoxyCodeLine{01029   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01030   \{}
+\DoxyCodeLine{01031     \textcolor{comment}{/* Configure DMA Channel source address */}}
+\DoxyCodeLine{01032     hdma-\/>Instance-\/>CPAR = SrcAddress;}
+\DoxyCodeLine{01033 }
+\DoxyCodeLine{01034     \textcolor{comment}{/* Configure DMA Channel destination address */}}
+\DoxyCodeLine{01035     hdma-\/>Instance-\/>CMAR = DstAddress;}
+\DoxyCodeLine{01036   \}}
+\DoxyCodeLine{01037 \}}
+\DoxyCodeLine{01038 }
+\DoxyCodeLine{01045 \textcolor{keyword}{static} \textcolor{keywordtype}{void} DMA\_CalcDMAMUXChannelBaseAndMask(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{01046 \{}
+\DoxyCodeLine{01047   uint32\_t dmamux\_base\_addr;}
+\DoxyCodeLine{01048   uint32\_t channel\_number;}
+\DoxyCodeLine{01049   DMAMUX\_Channel\_TypeDef *DMAMUX1\_ChannelBase;}
+\DoxyCodeLine{01050 }
+\DoxyCodeLine{01051   \textcolor{comment}{/* check if instance is not outside the DMA channel range */}}
+\DoxyCodeLine{01052   \textcolor{keywordflow}{if} ((uint32\_t)hdma-\/>Instance < (uint32\_t)DMA2\_Channel1)}
+\DoxyCodeLine{01053   \{}
+\DoxyCodeLine{01054     \textcolor{comment}{/* DMA1 */}}
+\DoxyCodeLine{01055     DMAMUX1\_ChannelBase = DMAMUX1\_Channel0;}
+\DoxyCodeLine{01056   \}}
+\DoxyCodeLine{01057   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01058   \{}
+\DoxyCodeLine{01059     \textcolor{comment}{/* DMA2 */}}
+\DoxyCodeLine{01060 \textcolor{preprocessor}{\#if defined (STM32G471xx) || defined (STM32G473xx) || defined (STM32G474xx) || defined (STM32G483xx) || defined (STM32G484xx) || defined (STM32G491xx) || defined (STM32G4A1xx)}}
+\DoxyCodeLine{01061     DMAMUX1\_ChannelBase = DMAMUX1\_Channel8;}
+\DoxyCodeLine{01062 \textcolor{preprocessor}{\#elif defined (STM32G431xx) || defined (STM32G441xx) || defined (STM32GBK1CB)}}
+\DoxyCodeLine{01063     DMAMUX1\_ChannelBase = DMAMUX1\_Channel6;}
+\DoxyCodeLine{01064 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01065     DMAMUX1\_ChannelBase = DMAMUX1\_Channel7;}
+\DoxyCodeLine{01066 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32G4x1xx) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01067   \}}
+\DoxyCodeLine{01068   dmamux\_base\_addr = (uint32\_t)DMAMUX1\_ChannelBase;}
+\DoxyCodeLine{01069   channel\_number = (((uint32\_t)hdma-\/>Instance \& 0xFFU) -\/ 8U) / 20U;}
+\DoxyCodeLine{01070   hdma-\/>DMAmuxChannel = (DMAMUX\_Channel\_TypeDef *)(uint32\_t)(dmamux\_base\_addr + ((hdma-\/>ChannelIndex >> 2U) * ((uint32\_t)DMAMUX1\_Channel1 -\/ (uint32\_t)DMAMUX1\_Channel0)));}
+\DoxyCodeLine{01071   hdma-\/>DMAmuxChannelStatus = DMAMUX1\_ChannelStatus;}
+\DoxyCodeLine{01072   hdma-\/>DMAmuxChannelStatusMask = 1UL << (channel\_number \& 0x1FU);}
+\DoxyCodeLine{01073 \}}
+\DoxyCodeLine{01074 }
+\DoxyCodeLine{01082 \textcolor{keyword}{static} \textcolor{keywordtype}{void} DMA\_CalcDMAMUXRequestGenBaseAndMask(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{01083 \{}
+\DoxyCodeLine{01084   uint32\_t request =  hdma-\/>Init.Request \& DMAMUX\_CxCR\_DMAREQ\_ID;}
+\DoxyCodeLine{01085 }
+\DoxyCodeLine{01086   \textcolor{comment}{/* DMA Channels are connected to DMAMUX1 request generator blocks*/}}
+\DoxyCodeLine{01087   hdma-\/>DMAmuxRequestGen = (DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)(((uint32\_t)DMAMUX1\_RequestGenerator0) + ((request -\/ 1U) * 4U)));}
+\DoxyCodeLine{01088 }
+\DoxyCodeLine{01089   hdma-\/>DMAmuxRequestGenStatus = DMAMUX1\_RequestGenStatus;}
+\DoxyCodeLine{01090 }
+\DoxyCodeLine{01091   hdma-\/>DMAmuxRequestGenStatusMask = 1UL << ((request -\/ 1U) \& 0x1FU);}
+\DoxyCodeLine{01092 \}}
+\DoxyCodeLine{01093 }
+\DoxyCodeLine{01102 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_DMA\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

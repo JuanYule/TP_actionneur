@@ -1,0 +1,164 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.h File Reference}
+\label{stm32g4xx__hal__dma__ex_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_dma\_ex.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_dma\_ex.h}}
+
+
+Header file of DMA HAL extension module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ HAL\+\_\+\+DMA\+\_\+\+Mux\+Sync\+Config\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em HAL DMA Synchro definition. \end{DoxyCompactList}\item 
+struct \textbf{ HAL\+\_\+\+DMA\+\_\+\+Mux\+Request\+Generator\+Config\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em HAL DMAMUX request generator parameters structure definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI0}~0U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI1}~1U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI2}~2U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI3}~3U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI4}~4U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI5}~5U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI6}~6U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI7}~7U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI8}~8U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI9}~9U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI10}~10U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI11}~11U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI12}~12U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI13}~13U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI14}~14U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+EXTI15}~15U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+DMAMUX1\+\_\+\+CH0\+\_\+\+EVT}~16U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+DMAMUX1\+\_\+\+CH1\+\_\+\+EVT}~17U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+DMAMUX1\+\_\+\+CH2\+\_\+\+EVT}~18U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+DMAMUX1\+\_\+\+CH3\+\_\+\+EVT}~19U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+LPTIM1\+\_\+\+OUT}~20U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+NO\+\_\+\+EVENT}~0U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+RISING}~((uint32\+\_\+t)\textbf{ DMAMUX\+\_\+\+Cx\+CR\+\_\+\+SPOL\+\_\+0})
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+FALLING}~((uint32\+\_\+t)\textbf{ DMAMUX\+\_\+\+Cx\+CR\+\_\+\+SPOL\+\_\+1})
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+RISING\+\_\+\+FALLING}~((uint32\+\_\+t)DMAMUX\+\_\+\+Cx\+CR\+\_\+\+SPOL)
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI0}~0U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI1}~1U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI2}~2U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI3}~3U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI4}~4U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI5}~5U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI6}~6U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI7}~7U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI8}~8U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI9}~9U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI10}~10U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI11}~11U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI12}~12U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI13}~13U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI14}~14U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+EXTI15}~15U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+DMAMUX1\+\_\+\+CH0\+\_\+\+EVT}~16U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+DMAMUX1\+\_\+\+CH1\+\_\+\+EVT}~17U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+DMAMUX1\+\_\+\+CH2\+\_\+\+EVT}~18U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+DMAMUX1\+\_\+\+CH3\+\_\+\+EVT}~19U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+LPTIM1\+\_\+\+OUT}~20U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+NO\+\_\+\+EVENT}~0x00000000U
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+RISING}~\textbf{ DMAMUX\+\_\+\+RGx\+CR\+\_\+\+GPOL\+\_\+0}
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+FALLING}~\textbf{ DMAMUX\+\_\+\+RGx\+CR\+\_\+\+GPOL\+\_\+1}
+\item 
+\#define \textbf{ HAL\+\_\+\+DMAMUX\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+RISING\+\_\+\+FALLING}~DMAMUX\+\_\+\+RGx\+CR\+\_\+\+GPOL
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+SIGNAL\+\_\+\+ID}(SIGNAL\+\_\+\+ID)~((SIGNAL\+\_\+\+ID) $<$= \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+LPTIM1\+\_\+\+OUT})
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+REQUEST\+\_\+\+NUMBER}(REQUEST\+\_\+\+NUMBER)~(((REQUEST\+\_\+\+NUMBER) $>$ 0U) \&\& ((REQUEST\+\_\+\+NUMBER) $<$= 32U))
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+POLARITY}(POLARITY)
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+STATE}(SYNC)~(((SYNC) == DISABLE)   $\vert$$\vert$ ((SYNC) == ENABLE))
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+EVENT}(EVENT)
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+SIGNAL\+\_\+\+ID}(SIGNAL\+\_\+\+ID)~((SIGNAL\+\_\+\+ID) $<$= \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+LPTIM1\+\_\+\+OUT})
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+REQUEST\+\_\+\+NUMBER}(REQUEST\+\_\+\+NUMBER)~(((REQUEST\+\_\+\+NUMBER) $>$ 0U) \&\& ((REQUEST\+\_\+\+NUMBER) $<$= 32U))
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+POLARITY}(POLARITY)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+DMAEx\+\_\+\+Config\+Mux\+Request\+Generator} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma, \textbf{ HAL\+\_\+\+DMA\+\_\+\+Mux\+Request\+Generator\+Config\+Type\+Def} $\ast$p\+Request\+Generator\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+DMAEx\+\_\+\+Enable\+Mux\+Request\+Generator} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+DMAEx\+\_\+\+Disable\+Mux\+Request\+Generator} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+DMAEx\+\_\+\+Config\+Mux\+Sync} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma, \textbf{ HAL\+\_\+\+DMA\+\_\+\+Mux\+Sync\+Config\+Type\+Def} $\ast$p\+Sync\+Config)
+\item 
+void {\bfseries HAL\+\_\+\+DMAEx\+\_\+\+MUX\+\_\+\+IRQHandler} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of DMA HAL extension module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+

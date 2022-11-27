@@ -1,0 +1,672 @@
+\doxysection{main.\+c}
+\label{main_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/main.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/main.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 \textcolor{comment}{/* USER CODE BEGIN Header */}}
+\DoxyCodeLine{00018 \textcolor{comment}{/* USER CODE END Header */}}
+\DoxyCodeLine{00019 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020 \textcolor{preprocessor}{\#include "{}main.h"{}}}
+\DoxyCodeLine{00021 }
+\DoxyCodeLine{00022 \textcolor{comment}{/* Private includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00023 \textcolor{comment}{/* USER CODE BEGIN Includes */}}
+\DoxyCodeLine{00024 \textcolor{preprocessor}{\#include "{}stdio.h"{}}}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#include "{}stdlib.h"{}}}
+\DoxyCodeLine{00026 \textcolor{comment}{/* USER CODE END Includes */}}
+\DoxyCodeLine{00027 }
+\DoxyCodeLine{00028 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00029 \textcolor{comment}{/* USER CODE BEGIN PTD */}}
+\DoxyCodeLine{00030 }
+\DoxyCodeLine{00031 \textcolor{comment}{/* USER CODE END PTD */}}
+\DoxyCodeLine{00032 }
+\DoxyCodeLine{00033 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00034 \textcolor{comment}{/* USER CODE BEGIN PD */}}
+\DoxyCodeLine{00035 \textcolor{preprocessor}{\#define UART\_TX\_BUFFER\_SIZE 64}}
+\DoxyCodeLine{00036 \textcolor{preprocessor}{\#define UART\_RX\_BUFFER\_SIZE 1}}
+\DoxyCodeLine{00037 \textcolor{preprocessor}{\#define CMD\_BUFFER\_SIZE 64}}
+\DoxyCodeLine{00038 \textcolor{preprocessor}{\#define MAX\_ARGS 9}}
+\DoxyCodeLine{00039 }
+\DoxyCodeLine{00040 \textcolor{preprocessor}{\#define ARR 1023}}
+\DoxyCodeLine{00041 \textcolor{preprocessor}{\#define ALPHA 50}}
+\DoxyCodeLine{00042 \textcolor{preprocessor}{\#define SPEED\_MAX 100}}
+\DoxyCodeLine{00043 \textcolor{comment}{// LF = line feed, saut de ligne}}
+\DoxyCodeLine{00044 \textcolor{preprocessor}{\#define ASCII\_LF 0x0A}}
+\DoxyCodeLine{00045 \textcolor{comment}{// CR = carriage return, retour chariot}}
+\DoxyCodeLine{00046 \textcolor{preprocessor}{\#define ASCII\_CR 0x0D}}
+\DoxyCodeLine{00047 \textcolor{comment}{// DEL = delete}}
+\DoxyCodeLine{00048 \textcolor{preprocessor}{\#define ASCII\_DEL 0x7F}}
+\DoxyCodeLine{00049 }
+\DoxyCodeLine{00050 \textcolor{comment}{/* USER CODE END PD */}}
+\DoxyCodeLine{00051 }
+\DoxyCodeLine{00052 \textcolor{comment}{/* Private macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00053 \textcolor{comment}{/* USER CODE BEGIN PM */}}
+\DoxyCodeLine{00054 }
+\DoxyCodeLine{00055 \textcolor{comment}{/* USER CODE END PM */}}
+\DoxyCodeLine{00056 }
+\DoxyCodeLine{00057 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00058 ADC\_HandleTypeDef hadc1;}
+\DoxyCodeLine{00059 }
+\DoxyCodeLine{00060 TIM\_HandleTypeDef htim1;}
+\DoxyCodeLine{00061 TIM\_HandleTypeDef htim2;}
+\DoxyCodeLine{00062 }
+\DoxyCodeLine{00063 UART\_HandleTypeDef huart2;}
+\DoxyCodeLine{00064 }
+\DoxyCodeLine{00065 \textcolor{comment}{/* USER CODE BEGIN PV */}}
+\DoxyCodeLine{00066 uint8\_t prompt[]=\textcolor{stringliteral}{"{}user@Nucleo-\/STM32G431>>"{}};}
+\DoxyCodeLine{00067 uint8\_t started[]=}
+\DoxyCodeLine{00068         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*"{}}}
+\DoxyCodeLine{00069         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n| Welcome on Nucleo-\/STM32G431 |"{}}}
+\DoxyCodeLine{00070         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*"{}}}
+\DoxyCodeLine{00071         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{00072 uint8\_t newline[]=\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{00073 uint8\_t cmdNotFound[]=\textcolor{stringliteral}{"{}Command not found\(\backslash\)r\(\backslash\)n"{}};}
+\DoxyCodeLine{00074 uint32\_t uartRxReceived;}
+\DoxyCodeLine{00075 uint8\_t uartRxBuffer[UART\_RX\_BUFFER\_SIZE];}
+\DoxyCodeLine{00076 uint8\_t uartTxBuffer[UART\_TX\_BUFFER\_SIZE];}
+\DoxyCodeLine{00077 }
+\DoxyCodeLine{00078 }
+\DoxyCodeLine{00079 \textcolor{keywordtype}{char} cmd[CMD\_BUFFER\_SIZE]; \textcolor{comment}{// contenant la commande en cours}}
+\DoxyCodeLine{00080 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} idxCmd; \textcolor{comment}{// contenant l'index du prochain caractère à remplir}}
+\DoxyCodeLine{00081 \textcolor{keyword}{const} uint8\_t help[]=}
+\DoxyCodeLine{00082         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*"{}}}
+\DoxyCodeLine{00083         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n| Fonctions disponibles |"{}}}
+\DoxyCodeLine{00084         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*"{}}}
+\DoxyCodeLine{00085         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n pinout : contenant la liste des pin utilisées"{}}}
+\DoxyCodeLine{00086         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n start : allume l'etage de puissance du moteur"{}}}
+\DoxyCodeLine{00087         \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n stop : éteind l'etage de puissance du moteur\(\backslash\)r\(\backslash\)n"{}}; \textcolor{comment}{// contenant le message d'aide, la liste des fonctions}}
+\DoxyCodeLine{00088 \textcolor{keyword}{const} uint8\_t pinout[]=}
+\DoxyCodeLine{00089         \textcolor{stringliteral}{"{}PA5 : LED \(\backslash\)r\(\backslash\)n"{}}; \textcolor{comment}{// contenant la liste des pin utilisées}}
+\DoxyCodeLine{00090 \textcolor{keyword}{const} uint8\_t powerOn[]= \textcolor{stringliteral}{"{}Power ON \(\backslash\)r\(\backslash\)n"{}}; \textcolor{comment}{// contenant le message d'allumage du moteur}}
+\DoxyCodeLine{00091 \textcolor{keyword}{const} uint8\_t powerOff[] = \textcolor{stringliteral}{"{}Power OFF"{}}; \textcolor{comment}{// contenant le message d'extinction du moteur}}
+\DoxyCodeLine{00092 }
+\DoxyCodeLine{00093 \textcolor{keywordtype}{char} speed[4];}
+\DoxyCodeLine{00094 \textcolor{keywordtype}{int} speedInt = 0;}
+\DoxyCodeLine{00095 \textcolor{keywordtype}{int} oldSpeed = 50;}
+\DoxyCodeLine{00096 }
+\DoxyCodeLine{00097 \textcolor{comment}{//Variables pour le PWM}}
+\DoxyCodeLine{00098 uint16\_t CCR1; \textcolor{comment}{// Valeur de ARR du channel 1}}
+\DoxyCodeLine{00099 uint16\_t CCR2; \textcolor{comment}{// Valeur de ARR  du channel 2}}
+\DoxyCodeLine{00100 }
+\DoxyCodeLine{00101 \textcolor{comment}{//Variables pour l'ADC}}
+\DoxyCodeLine{00102 uint16\_t AD\_RES = 0;}
+\DoxyCodeLine{00103 }
+\DoxyCodeLine{00104 \textcolor{comment}{/* USER CODE END PV */}}
+\DoxyCodeLine{00105 }
+\DoxyCodeLine{00106 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00107 \textcolor{keywordtype}{void} SystemClock\_Config(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00108 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_GPIO\_Init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00109 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_TIM1\_Init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00110 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_USART2\_UART\_Init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00111 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_ADC1\_Init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00112 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_TIM2\_Init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00113 \textcolor{comment}{/* USER CODE BEGIN PFP */}}
+\DoxyCodeLine{00114 }
+\DoxyCodeLine{00115 \textcolor{comment}{/* USER CODE END PFP */}}
+\DoxyCodeLine{00116 }
+\DoxyCodeLine{00117 \textcolor{comment}{/* Private user code -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00118 \textcolor{comment}{/* USER CODE BEGIN 0 */}}
+\DoxyCodeLine{00119 \textcolor{keywordtype}{void} configuration()\{}
+\DoxyCodeLine{00120     CCR1= (ARR * ALPHA)/100;}
+\DoxyCodeLine{00121     CCR2= (ARR *(100 -\/ ALPHA))/100;}
+\DoxyCodeLine{00122     TIM1-\/>CCR1 = CCR1;}
+\DoxyCodeLine{00123     TIM1-\/>CCR2 = CCR2;}
+\DoxyCodeLine{00124 }
+\DoxyCodeLine{00125 }
+\DoxyCodeLine{00126     HAL\_TIM\_PWM\_Start(\&htim1, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{00127     HAL\_TIMEx\_PWMN\_Start(\&htim1, TIM\_CHANNEL\_1); \textcolor{comment}{// turn on complementary channel}}
+\DoxyCodeLine{00128     HAL\_TIM\_PWM\_Start(\&htim1, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{00129     HAL\_TIMEx\_PWMN\_Start(\&htim1, TIM\_CHANNEL\_2); \textcolor{comment}{// turn on complementary channel}}
+\DoxyCodeLine{00130 \}}
+\DoxyCodeLine{00131 }
+\DoxyCodeLine{00132 }
+\DoxyCodeLine{00133 }
+\DoxyCodeLine{00134 \textcolor{keywordtype}{void} HAL\_GPIO\_EXTI\_Callback(uint16\_t GPIO\_Pin)\{}
+\DoxyCodeLine{00135     HAL\_GPIO\_TogglePin(LED\_GPIO\_Port, LED\_Pin);}
+\DoxyCodeLine{00136     powerUp();}
+\DoxyCodeLine{00137 \}}
+\DoxyCodeLine{00138 \textcolor{comment}{/* USER CODE END 0 */}}
+\DoxyCodeLine{00139 }
+\DoxyCodeLine{00144 \textcolor{keywordtype}{int} main(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00145 \{}
+\DoxyCodeLine{00146     \textcolor{comment}{/* USER CODE BEGIN 1 */}}
+\DoxyCodeLine{00147     \textcolor{keywordtype}{char}        cmdBuffer[CMD\_BUFFER\_SIZE];}
+\DoxyCodeLine{00148     \textcolor{keywordtype}{int}         idx\_cmd = 0;}
+\DoxyCodeLine{00149     \textcolor{keywordtype}{char}*       argv[MAX\_ARGS];}
+\DoxyCodeLine{00150     \textcolor{keywordtype}{int}         argc = 0;}
+\DoxyCodeLine{00151     \textcolor{keywordtype}{char}*       token;}
+\DoxyCodeLine{00152     \textcolor{keywordtype}{int}         newCmdReady = 0;}
+\DoxyCodeLine{00153     \textcolor{comment}{/* USER CODE END 1 */}}
+\DoxyCodeLine{00154 }
+\DoxyCodeLine{00155     \textcolor{comment}{/* MCU Configuration-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00156 }
+\DoxyCodeLine{00157     \textcolor{comment}{/* Reset of all peripherals, Initializes the Flash interface and the Systick. */}}
+\DoxyCodeLine{00158     HAL\_Init();}
+\DoxyCodeLine{00159 }
+\DoxyCodeLine{00160     \textcolor{comment}{/* USER CODE BEGIN Init */}}
+\DoxyCodeLine{00161 }
+\DoxyCodeLine{00162     \textcolor{comment}{/* USER CODE END Init */}}
+\DoxyCodeLine{00163 }
+\DoxyCodeLine{00164     \textcolor{comment}{/* Configure the system clock */}}
+\DoxyCodeLine{00165     SystemClock\_Config();}
+\DoxyCodeLine{00166 }
+\DoxyCodeLine{00167     \textcolor{comment}{/* USER CODE BEGIN SysInit */}}
+\DoxyCodeLine{00168 }
+\DoxyCodeLine{00169     \textcolor{comment}{/* USER CODE END SysInit */}}
+\DoxyCodeLine{00170 }
+\DoxyCodeLine{00171     \textcolor{comment}{/* Initialize all configured peripherals */}}
+\DoxyCodeLine{00172     MX\_GPIO\_Init();}
+\DoxyCodeLine{00173     MX\_TIM1\_Init();}
+\DoxyCodeLine{00174     MX\_USART2\_UART\_Init();}
+\DoxyCodeLine{00175     MX\_ADC1\_Init();}
+\DoxyCodeLine{00176     MX\_TIM2\_Init();}
+\DoxyCodeLine{00177     \textcolor{comment}{/* USER CODE BEGIN 2 */}}
+\DoxyCodeLine{00178     HAL\_TIM\_PWM\_Start(\&htim2, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{00179     HAL\_ADCEx\_Calibration\_Start(\&hadc1, ADC\_SINGLE\_ENDED);}
+\DoxyCodeLine{00180     configuration();}
+\DoxyCodeLine{00181 }
+\DoxyCodeLine{00182     memset(argv,NULL,MAX\_ARGS*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}*));}
+\DoxyCodeLine{00183     memset(cmdBuffer,NULL,CMD\_BUFFER\_SIZE*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00184     memset(uartRxBuffer,NULL,UART\_RX\_BUFFER\_SIZE*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00185     memset(uartTxBuffer,NULL,UART\_TX\_BUFFER\_SIZE*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00186 }
+\DoxyCodeLine{00187     HAL\_UART\_Receive\_IT(\&huart2, uartRxBuffer, UART\_RX\_BUFFER\_SIZE);}
+\DoxyCodeLine{00188     HAL\_Delay(10);}
+\DoxyCodeLine{00189     HAL\_UART\_Transmit(\&huart2, started, \textcolor{keyword}{sizeof}(started), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00190     HAL\_UART\_Transmit(\&huart2, prompt, \textcolor{keyword}{sizeof}(prompt), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00191     \textcolor{comment}{/* USER CODE END 2 */}}
+\DoxyCodeLine{00192 }
+\DoxyCodeLine{00193     \textcolor{comment}{/* Infinite loop */}}
+\DoxyCodeLine{00194     \textcolor{comment}{/* USER CODE BEGIN WHILE */}}
+\DoxyCodeLine{00195     \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{00196     \{}
+\DoxyCodeLine{00197         \textcolor{comment}{// uartRxReceived is set to 1 when a new character is received on uart 1}}
+\DoxyCodeLine{00198         \textcolor{keywordflow}{if}(uartRxReceived)\{}
+\DoxyCodeLine{00199             \textcolor{keywordflow}{switch}(uartRxBuffer[0])\{}
+\DoxyCodeLine{00200             \textcolor{comment}{// Nouvelle ligne, instruction à traiter}}
+\DoxyCodeLine{00201             \textcolor{keywordflow}{case} ASCII\_CR:}
+\DoxyCodeLine{00202                 HAL\_UART\_Transmit(\&huart2, newline, \textcolor{keyword}{sizeof}(newline), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00203                 cmdBuffer[idx\_cmd] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00204                 argc = 0;}
+\DoxyCodeLine{00205                 token = strtok(cmdBuffer, \textcolor{stringliteral}{"{} "{}});}
+\DoxyCodeLine{00206                 \textcolor{keywordflow}{while}(token!=NULL)\{}
+\DoxyCodeLine{00207                     argv[argc++] = token;}
+\DoxyCodeLine{00208                     token = strtok(NULL, \textcolor{stringliteral}{"{} "{}});}
+\DoxyCodeLine{00209                 \}}
+\DoxyCodeLine{00210 }
+\DoxyCodeLine{00211                 idx\_cmd = 0;}
+\DoxyCodeLine{00212                 newCmdReady = 1;}
+\DoxyCodeLine{00213                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00214                 \textcolor{comment}{// Suppression du dernier caractère}}
+\DoxyCodeLine{00215             \textcolor{keywordflow}{case} ASCII\_DEL:}
+\DoxyCodeLine{00216                 cmdBuffer[idx\_cmd-\/-\/] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00217                 HAL\_UART\_Transmit(\&huart2, uartRxBuffer, UART\_RX\_BUFFER\_SIZE, HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00218                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00219                 \textcolor{comment}{// Nouveau caractère}}
+\DoxyCodeLine{00220             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00221                 cmdBuffer[idx\_cmd++] = uartRxBuffer[0];}
+\DoxyCodeLine{00222                 HAL\_UART\_Transmit(\&huart2, uartRxBuffer, UART\_RX\_BUFFER\_SIZE, HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00223             \}}
+\DoxyCodeLine{00224             uartRxReceived = 0;}
+\DoxyCodeLine{00225         \}}
+\DoxyCodeLine{00226 }
+\DoxyCodeLine{00227         \textcolor{keywordflow}{if}(newCmdReady)\{}
+\DoxyCodeLine{00228             \textcolor{keywordflow}{if}(strcmp(argv[0],\textcolor{stringliteral}{"{}set"{}})==0)\{}
+\DoxyCodeLine{00229                 \textcolor{keywordflow}{if}(strcmp(argv[1],\textcolor{stringliteral}{"{}PA5"{}})==0)\{}
+\DoxyCodeLine{00230                     HAL\_GPIO\_WritePin(LED\_GPIO\_Port, LED\_Pin, atoi(argv[2]));}
+\DoxyCodeLine{00231                     sprintf(uartTxBuffer,\textcolor{stringliteral}{"{}Switch on/off led : \%d\(\backslash\)r\(\backslash\)n"{}},atoi(argv[2]));}
+\DoxyCodeLine{00232                     HAL\_UART\_Transmit(\&huart2, uartTxBuffer, 32, HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00233                 \}}
+\DoxyCodeLine{00234                 \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00235                     HAL\_UART\_Transmit(\&huart2, cmdNotFound, \textcolor{keyword}{sizeof}(cmdNotFound), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00236                 \}}
+\DoxyCodeLine{00237             \}}
+\DoxyCodeLine{00238             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strcmp(argv[0],\textcolor{stringliteral}{"{}get"{}})==0)}
+\DoxyCodeLine{00239             \{}
+\DoxyCodeLine{00240                 HAL\_ADC\_Start\_IT(\&hadc1);}
+\DoxyCodeLine{00241                 TIM2-\/>CCR1 = (AD\_RES<<4);}
+\DoxyCodeLine{00242                 HAL\_Delay(1);}
+\DoxyCodeLine{00243 }
+\DoxyCodeLine{00244                 \textcolor{comment}{//HAL\_UART\_Transmit(\&huart2, cmdNotFound, sizeof(cmdNotFound), HAL\_MAX\_DELAY);}}
+\DoxyCodeLine{00245             \}}
+\DoxyCodeLine{00246             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strcmp(argv[0],\textcolor{stringliteral}{"{}help"{}})==0)}
+\DoxyCodeLine{00247             \{}
+\DoxyCodeLine{00248                 HAL\_UART\_Transmit(\&huart2, help, \textcolor{keyword}{sizeof}(help), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00249             \}}
+\DoxyCodeLine{00250             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strcmp(argv[0],\textcolor{stringliteral}{"{}pinout"{}})==0)}
+\DoxyCodeLine{00251             \{}
+\DoxyCodeLine{00252                 HAL\_UART\_Transmit(\&huart2, pinout, \textcolor{keyword}{sizeof}(pinout), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00253             \}}
+\DoxyCodeLine{00254             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strcmp(argv[0],\textcolor{stringliteral}{"{}start"{}})==0)}
+\DoxyCodeLine{00255             \{}
+\DoxyCodeLine{00256                 HAL\_UART\_Transmit(\&huart2, powerOn, \textcolor{keyword}{sizeof}(powerOn), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00257             \}}
+\DoxyCodeLine{00258             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strcmp(argv[0],\textcolor{stringliteral}{"{}stop"{}})==0)}
+\DoxyCodeLine{00259             \{}
+\DoxyCodeLine{00260                 HAL\_UART\_Transmit(\&huart2, powerOff, \textcolor{keyword}{sizeof}(powerOff), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00261             \}}
+\DoxyCodeLine{00262             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(strlen(argv[0])==10)}
+\DoxyCodeLine{00263             \{}
+\DoxyCodeLine{00264                 memset(speed,0,\textcolor{keyword}{sizeof}(speed));}
+\DoxyCodeLine{00265                 memset(uartTxBuffer,NULL,UART\_TX\_BUFFER\_SIZE*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00266                 speedInt=0;}
+\DoxyCodeLine{00267                 \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i<4;i++)\{}
+\DoxyCodeLine{00268                     speed[i] = cmdBuffer[i+6];}
+\DoxyCodeLine{00269                 \}}
+\DoxyCodeLine{00270                 speedInt = atoi(speed);}
+\DoxyCodeLine{00271                 sprintf(uartTxBuffer,\textcolor{stringliteral}{"{}speedInt value = \%d\(\backslash\)n\(\backslash\)r"{}}, speedInt);}
+\DoxyCodeLine{00272                 HAL\_UART\_Transmit(\&huart2, uartTxBuffer, \textcolor{keyword}{sizeof}(uartTxBuffer), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00273 }
+\DoxyCodeLine{00274 }
+\DoxyCodeLine{00275                 \textcolor{keywordflow}{if}(speedInt > SPEED\_MAX)\{}
+\DoxyCodeLine{00276                     speedInt = SPEED\_MAX;}
+\DoxyCodeLine{00277                     \textcolor{comment}{//                  sprintf(uartTxBuffer,"{}speed value = \%d est le maximum\(\backslash\)n\(\backslash\)r"{}, speedInt);}}
+\DoxyCodeLine{00278                     \textcolor{comment}{//                  HAL\_UART\_Transmit(\&huart2, uartTxBuffer, sizeof(uartTxBuffer), HAL\_MAX\_DELAY);}}
+\DoxyCodeLine{00279                     \textcolor{comment}{//                  CCR1= (ARR * speedInt)/100;}}
+\DoxyCodeLine{00280                     \textcolor{comment}{//                  CCR2= (ARR *(100 -\/ speedInt))/100;}}
+\DoxyCodeLine{00281                     \textcolor{comment}{//                  \_\_HAL\_TIM\_SET\_COMPARE(\&htim1,TIM\_CHANNEL\_1, CCR1);}}
+\DoxyCodeLine{00282                     \textcolor{comment}{//                  \_\_HAL\_TIM\_SET\_COMPARE(\&htim1,TIM\_CHANNEL\_2, CCR2);}}
+\DoxyCodeLine{00283                 \}}
+\DoxyCodeLine{00284                 \textcolor{comment}{//              else\{}}
+\DoxyCodeLine{00285                 \textcolor{comment}{//                  sprintf(uartTxBuffer,"{}speed value = \%d\(\backslash\)n\(\backslash\)r"{}, speedInt);}}
+\DoxyCodeLine{00286                 \textcolor{comment}{//                  HAL\_UART\_Transmit(\&huart2, uartTxBuffer, sizeof(uartTxBuffer), HAL\_MAX\_DELAY);}}
+\DoxyCodeLine{00287                 \textcolor{comment}{//                  CCR1= (ARR * speedInt)/100;}}
+\DoxyCodeLine{00288                 \textcolor{comment}{//                  CCR2= (ARR *(100 -\/ speedInt))/100;}}
+\DoxyCodeLine{00289                 \textcolor{comment}{//                  \_\_HAL\_TIM\_SET\_COMPARE(\&htim1,TIM\_CHANNEL\_1, CCR1);}}
+\DoxyCodeLine{00290                 \textcolor{comment}{//                  \_\_HAL\_TIM\_SET\_COMPARE(\&htim1,TIM\_CHANNEL\_2, CCR2);}}
+\DoxyCodeLine{00291                 \textcolor{comment}{//              \}}}
+\DoxyCodeLine{00292                 \textcolor{keywordflow}{if}(oldSpeed<speedInt)\{}
+\DoxyCodeLine{00293                     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=oldSpeed;i<=speedInt;i++)\{}
+\DoxyCodeLine{00294                         sprintf(uartTxBuffer,\textcolor{stringliteral}{"{}speed value = \%d\(\backslash\)n\(\backslash\)r"{}}, i);}
+\DoxyCodeLine{00295                         HAL\_UART\_Transmit(\&huart2, uartTxBuffer, \textcolor{keyword}{sizeof}(uartTxBuffer), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00296                         CCR1= (ARR * i)/100;}
+\DoxyCodeLine{00297                         CCR2= (ARR *(100 -\/ i))/100;}
+\DoxyCodeLine{00298                         \_\_HAL\_TIM\_SET\_COMPARE(\&htim1,TIM\_CHANNEL\_1, CCR1);}
+\DoxyCodeLine{00299                         \_\_HAL\_TIM\_SET\_COMPARE(\&htim1,TIM\_CHANNEL\_2, CCR2);}
+\DoxyCodeLine{00300                         HAL\_Delay(100);}
+\DoxyCodeLine{00301                     \}}
+\DoxyCodeLine{00302                 \}}
+\DoxyCodeLine{00303                 \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00304                     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=oldSpeed;i>=speedInt;i-\/-\/)\{}
+\DoxyCodeLine{00305                         sprintf(uartTxBuffer,\textcolor{stringliteral}{"{}speed value = \%d\(\backslash\)n\(\backslash\)r"{}}, i);}
+\DoxyCodeLine{00306                         HAL\_UART\_Transmit(\&huart2, uartTxBuffer, \textcolor{keyword}{sizeof}(uartTxBuffer), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00307                         CCR1= (ARR * i)/100;}
+\DoxyCodeLine{00308                         CCR2= (ARR *(100 -\/ i))/100;}
+\DoxyCodeLine{00309                         \_\_HAL\_TIM\_SET\_COMPARE(\&htim1,TIM\_CHANNEL\_1, CCR1);}
+\DoxyCodeLine{00310                         \_\_HAL\_TIM\_SET\_COMPARE(\&htim1,TIM\_CHANNEL\_2, CCR2);}
+\DoxyCodeLine{00311                         HAL\_Delay(100);}
+\DoxyCodeLine{00312 }
+\DoxyCodeLine{00313                     \}}
+\DoxyCodeLine{00314                 \}}
+\DoxyCodeLine{00315                 oldSpeed = speedInt;}
+\DoxyCodeLine{00316             \}}
+\DoxyCodeLine{00317             \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{00318                 HAL\_UART\_Transmit(\&huart2, cmdNotFound, \textcolor{keyword}{sizeof}(cmdNotFound), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00319             \}}
+\DoxyCodeLine{00320             HAL\_UART\_Transmit(\&huart2, prompt, \textcolor{keyword}{sizeof}(prompt), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00321             newCmdReady = 0;}
+\DoxyCodeLine{00322         \}}
+\DoxyCodeLine{00323         \textcolor{comment}{/* USER CODE END WHILE */}}
+\DoxyCodeLine{00324 }
+\DoxyCodeLine{00325         \textcolor{comment}{/* USER CODE BEGIN 3 */}}
+\DoxyCodeLine{00326     \}}
+\DoxyCodeLine{00327     \textcolor{comment}{/* USER CODE END WHILE */}}
+\DoxyCodeLine{00328 }
+\DoxyCodeLine{00329     \textcolor{comment}{/* USER CODE BEGIN 3 */}}
+\DoxyCodeLine{00330 }
+\DoxyCodeLine{00331     \textcolor{comment}{/* USER CODE END 3 */}}
+\DoxyCodeLine{00332 \}}
+\DoxyCodeLine{00333 }
+\DoxyCodeLine{00338 \textcolor{keywordtype}{void} SystemClock\_Config(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00339 \{}
+\DoxyCodeLine{00340     RCC\_OscInitTypeDef RCC\_OscInitStruct = \{0\};}
+\DoxyCodeLine{00341     RCC\_ClkInitTypeDef RCC\_ClkInitStruct = \{0\};}
+\DoxyCodeLine{00342 }
+\DoxyCodeLine{00345     HAL\_PWREx\_ControlVoltageScaling(PWR\_REGULATOR\_VOLTAGE\_SCALE1\_BOOST);}
+\DoxyCodeLine{00346 }
+\DoxyCodeLine{00350     RCC\_OscInitStruct.OscillatorType = RCC\_OSCILLATORTYPE\_HSI;}
+\DoxyCodeLine{00351     RCC\_OscInitStruct.HSIState = RCC\_HSI\_ON;}
+\DoxyCodeLine{00352     RCC\_OscInitStruct.HSICalibrationValue = RCC\_HSICALIBRATION\_DEFAULT;}
+\DoxyCodeLine{00353     RCC\_OscInitStruct.PLL.PLLState = RCC\_PLL\_ON;}
+\DoxyCodeLine{00354     RCC\_OscInitStruct.PLL.PLLSource = RCC\_PLLSOURCE\_HSI;}
+\DoxyCodeLine{00355     RCC\_OscInitStruct.PLL.PLLM = RCC\_PLLM\_DIV4;}
+\DoxyCodeLine{00356     RCC\_OscInitStruct.PLL.PLLN = 85;}
+\DoxyCodeLine{00357     RCC\_OscInitStruct.PLL.PLLP = RCC\_PLLP\_DIV2;}
+\DoxyCodeLine{00358     RCC\_OscInitStruct.PLL.PLLQ = RCC\_PLLQ\_DIV2;}
+\DoxyCodeLine{00359     RCC\_OscInitStruct.PLL.PLLR = RCC\_PLLR\_DIV2;}
+\DoxyCodeLine{00360     \textcolor{keywordflow}{if} (HAL\_RCC\_OscConfig(\&RCC\_OscInitStruct) != HAL\_OK)}
+\DoxyCodeLine{00361     \{}
+\DoxyCodeLine{00362         Error\_Handler();}
+\DoxyCodeLine{00363     \}}
+\DoxyCodeLine{00364 }
+\DoxyCodeLine{00367     RCC\_ClkInitStruct.ClockType = RCC\_CLOCKTYPE\_HCLK|RCC\_CLOCKTYPE\_SYSCLK}
+\DoxyCodeLine{00368             |RCC\_CLOCKTYPE\_PCLK1|RCC\_CLOCKTYPE\_PCLK2;}
+\DoxyCodeLine{00369     RCC\_ClkInitStruct.SYSCLKSource = RCC\_SYSCLKSOURCE\_PLLCLK;}
+\DoxyCodeLine{00370     RCC\_ClkInitStruct.AHBCLKDivider = RCC\_SYSCLK\_DIV1;}
+\DoxyCodeLine{00371     RCC\_ClkInitStruct.APB1CLKDivider = RCC\_HCLK\_DIV1;}
+\DoxyCodeLine{00372     RCC\_ClkInitStruct.APB2CLKDivider = RCC\_HCLK\_DIV1;}
+\DoxyCodeLine{00373 }
+\DoxyCodeLine{00374     \textcolor{keywordflow}{if} (HAL\_RCC\_ClockConfig(\&RCC\_ClkInitStruct, FLASH\_LATENCY\_4) != HAL\_OK)}
+\DoxyCodeLine{00375     \{}
+\DoxyCodeLine{00376         Error\_Handler();}
+\DoxyCodeLine{00377     \}}
+\DoxyCodeLine{00378 \}}
+\DoxyCodeLine{00379 }
+\DoxyCodeLine{00385 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_ADC1\_Init(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00386 \{}
+\DoxyCodeLine{00387 }
+\DoxyCodeLine{00388     \textcolor{comment}{/* USER CODE BEGIN ADC1\_Init 0 */}}
+\DoxyCodeLine{00389 }
+\DoxyCodeLine{00390     \textcolor{comment}{/* USER CODE END ADC1\_Init 0 */}}
+\DoxyCodeLine{00391 }
+\DoxyCodeLine{00392     ADC\_MultiModeTypeDef multimode = \{0\};}
+\DoxyCodeLine{00393     ADC\_ChannelConfTypeDef sConfig = \{0\};}
+\DoxyCodeLine{00394 }
+\DoxyCodeLine{00395     \textcolor{comment}{/* USER CODE BEGIN ADC1\_Init 1 */}}
+\DoxyCodeLine{00396 }
+\DoxyCodeLine{00397     \textcolor{comment}{/* USER CODE END ADC1\_Init 1 */}}
+\DoxyCodeLine{00398 }
+\DoxyCodeLine{00401     hadc1.Instance = ADC1;}
+\DoxyCodeLine{00402     hadc1.Init.ClockPrescaler = ADC\_CLOCK\_SYNC\_PCLK\_DIV4;}
+\DoxyCodeLine{00403     hadc1.Init.Resolution = ADC\_RESOLUTION\_12B;}
+\DoxyCodeLine{00404     hadc1.Init.DataAlign = ADC\_DATAALIGN\_RIGHT;}
+\DoxyCodeLine{00405     hadc1.Init.GainCompensation = 0;}
+\DoxyCodeLine{00406     hadc1.Init.ScanConvMode = ADC\_SCAN\_DISABLE;}
+\DoxyCodeLine{00407     hadc1.Init.EOCSelection = ADC\_EOC\_SINGLE\_CONV;}
+\DoxyCodeLine{00408     hadc1.Init.LowPowerAutoWait = DISABLE;}
+\DoxyCodeLine{00409     hadc1.Init.ContinuousConvMode = DISABLE;}
+\DoxyCodeLine{00410     hadc1.Init.NbrOfConversion = 1;}
+\DoxyCodeLine{00411     hadc1.Init.DiscontinuousConvMode = DISABLE;}
+\DoxyCodeLine{00412     hadc1.Init.ExternalTrigConv = ADC\_SOFTWARE\_START;}
+\DoxyCodeLine{00413     hadc1.Init.ExternalTrigConvEdge = ADC\_EXTERNALTRIGCONVEDGE\_NONE;}
+\DoxyCodeLine{00414     hadc1.Init.DMAContinuousRequests = DISABLE;}
+\DoxyCodeLine{00415     hadc1.Init.Overrun = ADC\_OVR\_DATA\_PRESERVED;}
+\DoxyCodeLine{00416     hadc1.Init.OversamplingMode = DISABLE;}
+\DoxyCodeLine{00417     \textcolor{keywordflow}{if} (HAL\_ADC\_Init(\&hadc1) != HAL\_OK)}
+\DoxyCodeLine{00418     \{}
+\DoxyCodeLine{00419         Error\_Handler();}
+\DoxyCodeLine{00420     \}}
+\DoxyCodeLine{00421 }
+\DoxyCodeLine{00424     multimode.Mode = ADC\_MODE\_INDEPENDENT;}
+\DoxyCodeLine{00425     \textcolor{keywordflow}{if} (HAL\_ADCEx\_MultiModeConfigChannel(\&hadc1, \&multimode) != HAL\_OK)}
+\DoxyCodeLine{00426     \{}
+\DoxyCodeLine{00427         Error\_Handler();}
+\DoxyCodeLine{00428     \}}
+\DoxyCodeLine{00429 }
+\DoxyCodeLine{00432     sConfig.Channel = ADC\_CHANNEL\_1;}
+\DoxyCodeLine{00433     sConfig.Rank = ADC\_REGULAR\_RANK\_1;}
+\DoxyCodeLine{00434     sConfig.SamplingTime = ADC\_SAMPLETIME\_2CYCLES\_5;}
+\DoxyCodeLine{00435     sConfig.SingleDiff = ADC\_SINGLE\_ENDED;}
+\DoxyCodeLine{00436     sConfig.OffsetNumber = ADC\_OFFSET\_NONE;}
+\DoxyCodeLine{00437     sConfig.Offset = 0;}
+\DoxyCodeLine{00438     \textcolor{keywordflow}{if} (HAL\_ADC\_ConfigChannel(\&hadc1, \&sConfig) != HAL\_OK)}
+\DoxyCodeLine{00439     \{}
+\DoxyCodeLine{00440         Error\_Handler();}
+\DoxyCodeLine{00441     \}}
+\DoxyCodeLine{00442     \textcolor{comment}{/* USER CODE BEGIN ADC1\_Init 2 */}}
+\DoxyCodeLine{00443 }
+\DoxyCodeLine{00444     \textcolor{comment}{/* USER CODE END ADC1\_Init 2 */}}
+\DoxyCodeLine{00445 }
+\DoxyCodeLine{00446 \}}
+\DoxyCodeLine{00447 }
+\DoxyCodeLine{00453 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_TIM1\_Init(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00454 \{}
+\DoxyCodeLine{00455 }
+\DoxyCodeLine{00456     \textcolor{comment}{/* USER CODE BEGIN TIM1\_Init 0 */}}
+\DoxyCodeLine{00457 }
+\DoxyCodeLine{00458     \textcolor{comment}{/* USER CODE END TIM1\_Init 0 */}}
+\DoxyCodeLine{00459 }
+\DoxyCodeLine{00460     TIM\_ClockConfigTypeDef sClockSourceConfig = \{0\};}
+\DoxyCodeLine{00461     TIM\_MasterConfigTypeDef sMasterConfig = \{0\};}
+\DoxyCodeLine{00462     TIM\_OC\_InitTypeDef sConfigOC = \{0\};}
+\DoxyCodeLine{00463     TIM\_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = \{0\};}
+\DoxyCodeLine{00464 }
+\DoxyCodeLine{00465     \textcolor{comment}{/* USER CODE BEGIN TIM1\_Init 1 */}}
+\DoxyCodeLine{00466 }
+\DoxyCodeLine{00467     \textcolor{comment}{/* USER CODE END TIM1\_Init 1 */}}
+\DoxyCodeLine{00468     htim1.Instance = TIM1;}
+\DoxyCodeLine{00469     htim1.Init.Prescaler = 5-\/1;}
+\DoxyCodeLine{00470     htim1.Init.CounterMode = TIM\_COUNTERMODE\_CENTERALIGNED1;}
+\DoxyCodeLine{00471     htim1.Init.Period = 1022;}
+\DoxyCodeLine{00472     htim1.Init.ClockDivision = TIM\_CLOCKDIVISION\_DIV1;}
+\DoxyCodeLine{00473     htim1.Init.RepetitionCounter = 0;}
+\DoxyCodeLine{00474     htim1.Init.AutoReloadPreload = TIM\_AUTORELOAD\_PRELOAD\_DISABLE;}
+\DoxyCodeLine{00475     \textcolor{keywordflow}{if} (HAL\_TIM\_Base\_Init(\&htim1) != HAL\_OK)}
+\DoxyCodeLine{00476     \{}
+\DoxyCodeLine{00477         Error\_Handler();}
+\DoxyCodeLine{00478     \}}
+\DoxyCodeLine{00479     sClockSourceConfig.ClockSource = TIM\_CLOCKSOURCE\_INTERNAL;}
+\DoxyCodeLine{00480     \textcolor{keywordflow}{if} (HAL\_TIM\_ConfigClockSource(\&htim1, \&sClockSourceConfig) != HAL\_OK)}
+\DoxyCodeLine{00481     \{}
+\DoxyCodeLine{00482         Error\_Handler();}
+\DoxyCodeLine{00483     \}}
+\DoxyCodeLine{00484     \textcolor{keywordflow}{if} (HAL\_TIM\_PWM\_Init(\&htim1) != HAL\_OK)}
+\DoxyCodeLine{00485     \{}
+\DoxyCodeLine{00486         Error\_Handler();}
+\DoxyCodeLine{00487     \}}
+\DoxyCodeLine{00488     sMasterConfig.MasterOutputTrigger = TIM\_TRGO\_RESET;}
+\DoxyCodeLine{00489     sMasterConfig.MasterOutputTrigger2 = TIM\_TRGO2\_RESET;}
+\DoxyCodeLine{00490     sMasterConfig.MasterSlaveMode = TIM\_MASTERSLAVEMODE\_DISABLE;}
+\DoxyCodeLine{00491     \textcolor{keywordflow}{if} (HAL\_TIMEx\_MasterConfigSynchronization(\&htim1, \&sMasterConfig) != HAL\_OK)}
+\DoxyCodeLine{00492     \{}
+\DoxyCodeLine{00493         Error\_Handler();}
+\DoxyCodeLine{00494     \}}
+\DoxyCodeLine{00495     sConfigOC.OCMode = TIM\_OCMODE\_PWM1;}
+\DoxyCodeLine{00496     sConfigOC.Pulse = 613;}
+\DoxyCodeLine{00497     sConfigOC.OCPolarity = TIM\_OCPOLARITY\_HIGH;}
+\DoxyCodeLine{00498     sConfigOC.OCNPolarity = TIM\_OCNPOLARITY\_HIGH;}
+\DoxyCodeLine{00499     sConfigOC.OCFastMode = TIM\_OCFAST\_DISABLE;}
+\DoxyCodeLine{00500     sConfigOC.OCIdleState = TIM\_OCIDLESTATE\_RESET;}
+\DoxyCodeLine{00501     sConfigOC.OCNIdleState = TIM\_OCNIDLESTATE\_RESET;}
+\DoxyCodeLine{00502     \textcolor{keywordflow}{if} (HAL\_TIM\_PWM\_ConfigChannel(\&htim1, \&sConfigOC, TIM\_CHANNEL\_1) != HAL\_OK)}
+\DoxyCodeLine{00503     \{}
+\DoxyCodeLine{00504         Error\_Handler();}
+\DoxyCodeLine{00505     \}}
+\DoxyCodeLine{00506     \textcolor{keywordflow}{if} (HAL\_TIM\_PWM\_ConfigChannel(\&htim1, \&sConfigOC, TIM\_CHANNEL\_2) != HAL\_OK)}
+\DoxyCodeLine{00507     \{}
+\DoxyCodeLine{00508         Error\_Handler();}
+\DoxyCodeLine{00509     \}}
+\DoxyCodeLine{00510     sBreakDeadTimeConfig.OffStateRunMode = TIM\_OSSR\_DISABLE;}
+\DoxyCodeLine{00511     sBreakDeadTimeConfig.OffStateIDLEMode = TIM\_OSSI\_DISABLE;}
+\DoxyCodeLine{00512     sBreakDeadTimeConfig.LockLevel = TIM\_LOCKLEVEL\_OFF;}
+\DoxyCodeLine{00513     sBreakDeadTimeConfig.DeadTime = 200;}
+\DoxyCodeLine{00514     sBreakDeadTimeConfig.BreakState = TIM\_BREAK\_DISABLE;}
+\DoxyCodeLine{00515     sBreakDeadTimeConfig.BreakPolarity = TIM\_BREAKPOLARITY\_HIGH;}
+\DoxyCodeLine{00516     sBreakDeadTimeConfig.BreakFilter = 0;}
+\DoxyCodeLine{00517     sBreakDeadTimeConfig.BreakAFMode = TIM\_BREAK\_AFMODE\_INPUT;}
+\DoxyCodeLine{00518     sBreakDeadTimeConfig.Break2State = TIM\_BREAK2\_DISABLE;}
+\DoxyCodeLine{00519     sBreakDeadTimeConfig.Break2Polarity = TIM\_BREAK2POLARITY\_HIGH;}
+\DoxyCodeLine{00520     sBreakDeadTimeConfig.Break2Filter = 0;}
+\DoxyCodeLine{00521     sBreakDeadTimeConfig.Break2AFMode = TIM\_BREAK\_AFMODE\_INPUT;}
+\DoxyCodeLine{00522     sBreakDeadTimeConfig.AutomaticOutput = TIM\_AUTOMATICOUTPUT\_DISABLE;}
+\DoxyCodeLine{00523     \textcolor{keywordflow}{if} (HAL\_TIMEx\_ConfigBreakDeadTime(\&htim1, \&sBreakDeadTimeConfig) != HAL\_OK)}
+\DoxyCodeLine{00524     \{}
+\DoxyCodeLine{00525         Error\_Handler();}
+\DoxyCodeLine{00526     \}}
+\DoxyCodeLine{00527     \textcolor{comment}{/* USER CODE BEGIN TIM1\_Init 2 */}}
+\DoxyCodeLine{00528 }
+\DoxyCodeLine{00529     \textcolor{comment}{/* USER CODE END TIM1\_Init 2 */}}
+\DoxyCodeLine{00530     HAL\_TIM\_MspPostInit(\&htim1);}
+\DoxyCodeLine{00531 }
+\DoxyCodeLine{00532 \}}
+\DoxyCodeLine{00533 }
+\DoxyCodeLine{00539 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_TIM2\_Init(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00540 \{}
+\DoxyCodeLine{00541 }
+\DoxyCodeLine{00542     \textcolor{comment}{/* USER CODE BEGIN TIM2\_Init 0 */}}
+\DoxyCodeLine{00543 }
+\DoxyCodeLine{00544     \textcolor{comment}{/* USER CODE END TIM2\_Init 0 */}}
+\DoxyCodeLine{00545 }
+\DoxyCodeLine{00546     TIM\_ClockConfigTypeDef sClockSourceConfig = \{0\};}
+\DoxyCodeLine{00547     TIM\_MasterConfigTypeDef sMasterConfig = \{0\};}
+\DoxyCodeLine{00548     TIM\_OC\_InitTypeDef sConfigOC = \{0\};}
+\DoxyCodeLine{00549 }
+\DoxyCodeLine{00550     \textcolor{comment}{/* USER CODE BEGIN TIM2\_Init 1 */}}
+\DoxyCodeLine{00551 }
+\DoxyCodeLine{00552     \textcolor{comment}{/* USER CODE END TIM2\_Init 1 */}}
+\DoxyCodeLine{00553     htim2.Instance = TIM2;}
+\DoxyCodeLine{00554     htim2.Init.Prescaler = 0;}
+\DoxyCodeLine{00555     htim2.Init.CounterMode = TIM\_COUNTERMODE\_UP;}
+\DoxyCodeLine{00556     htim2.Init.Period = 65535;}
+\DoxyCodeLine{00557     htim2.Init.ClockDivision = TIM\_CLOCKDIVISION\_DIV1;}
+\DoxyCodeLine{00558     htim2.Init.AutoReloadPreload = TIM\_AUTORELOAD\_PRELOAD\_ENABLE;}
+\DoxyCodeLine{00559     \textcolor{keywordflow}{if} (HAL\_TIM\_Base\_Init(\&htim2) != HAL\_OK)}
+\DoxyCodeLine{00560     \{}
+\DoxyCodeLine{00561         Error\_Handler();}
+\DoxyCodeLine{00562     \}}
+\DoxyCodeLine{00563     sClockSourceConfig.ClockSource = TIM\_CLOCKSOURCE\_INTERNAL;}
+\DoxyCodeLine{00564     \textcolor{keywordflow}{if} (HAL\_TIM\_ConfigClockSource(\&htim2, \&sClockSourceConfig) != HAL\_OK)}
+\DoxyCodeLine{00565     \{}
+\DoxyCodeLine{00566         Error\_Handler();}
+\DoxyCodeLine{00567     \}}
+\DoxyCodeLine{00568     \textcolor{keywordflow}{if} (HAL\_TIM\_PWM\_Init(\&htim2) != HAL\_OK)}
+\DoxyCodeLine{00569     \{}
+\DoxyCodeLine{00570         Error\_Handler();}
+\DoxyCodeLine{00571     \}}
+\DoxyCodeLine{00572     sMasterConfig.MasterOutputTrigger = TIM\_TRGO\_RESET;}
+\DoxyCodeLine{00573     sMasterConfig.MasterSlaveMode = TIM\_MASTERSLAVEMODE\_DISABLE;}
+\DoxyCodeLine{00574     \textcolor{keywordflow}{if} (HAL\_TIMEx\_MasterConfigSynchronization(\&htim2, \&sMasterConfig) != HAL\_OK)}
+\DoxyCodeLine{00575     \{}
+\DoxyCodeLine{00576         Error\_Handler();}
+\DoxyCodeLine{00577     \}}
+\DoxyCodeLine{00578     sConfigOC.OCMode = TIM\_OCMODE\_PWM1;}
+\DoxyCodeLine{00579     sConfigOC.Pulse = 0;}
+\DoxyCodeLine{00580     sConfigOC.OCPolarity = TIM\_OCPOLARITY\_HIGH;}
+\DoxyCodeLine{00581     sConfigOC.OCFastMode = TIM\_OCFAST\_DISABLE;}
+\DoxyCodeLine{00582     \textcolor{keywordflow}{if} (HAL\_TIM\_PWM\_ConfigChannel(\&htim2, \&sConfigOC, TIM\_CHANNEL\_1) != HAL\_OK)}
+\DoxyCodeLine{00583     \{}
+\DoxyCodeLine{00584         Error\_Handler();}
+\DoxyCodeLine{00585     \}}
+\DoxyCodeLine{00586     \textcolor{comment}{/* USER CODE BEGIN TIM2\_Init 2 */}}
+\DoxyCodeLine{00587 }
+\DoxyCodeLine{00588     \textcolor{comment}{/* USER CODE END TIM2\_Init 2 */}}
+\DoxyCodeLine{00589     HAL\_TIM\_MspPostInit(\&htim2);}
+\DoxyCodeLine{00590 }
+\DoxyCodeLine{00591 \}}
+\DoxyCodeLine{00592 }
+\DoxyCodeLine{00598 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_USART2\_UART\_Init(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00599 \{}
+\DoxyCodeLine{00600 }
+\DoxyCodeLine{00601     \textcolor{comment}{/* USER CODE BEGIN USART2\_Init 0 */}}
+\DoxyCodeLine{00602 }
+\DoxyCodeLine{00603     \textcolor{comment}{/* USER CODE END USART2\_Init 0 */}}
+\DoxyCodeLine{00604 }
+\DoxyCodeLine{00605     \textcolor{comment}{/* USER CODE BEGIN USART2\_Init 1 */}}
+\DoxyCodeLine{00606 }
+\DoxyCodeLine{00607     \textcolor{comment}{/* USER CODE END USART2\_Init 1 */}}
+\DoxyCodeLine{00608     huart2.Instance = USART2;}
+\DoxyCodeLine{00609     huart2.Init.BaudRate = 115200;}
+\DoxyCodeLine{00610     huart2.Init.WordLength = UART\_WORDLENGTH\_8B;}
+\DoxyCodeLine{00611     huart2.Init.StopBits = UART\_STOPBITS\_1;}
+\DoxyCodeLine{00612     huart2.Init.Parity = UART\_PARITY\_NONE;}
+\DoxyCodeLine{00613     huart2.Init.Mode = UART\_MODE\_TX\_RX;}
+\DoxyCodeLine{00614     huart2.Init.HwFlowCtl = UART\_HWCONTROL\_NONE;}
+\DoxyCodeLine{00615     huart2.Init.OverSampling = UART\_OVERSAMPLING\_16;}
+\DoxyCodeLine{00616     huart2.Init.OneBitSampling = UART\_ONE\_BIT\_SAMPLE\_DISABLE;}
+\DoxyCodeLine{00617     huart2.Init.ClockPrescaler = UART\_PRESCALER\_DIV1;}
+\DoxyCodeLine{00618     huart2.AdvancedInit.AdvFeatureInit = UART\_ADVFEATURE\_NO\_INIT;}
+\DoxyCodeLine{00619     \textcolor{keywordflow}{if} (HAL\_UART\_Init(\&huart2) != HAL\_OK)}
+\DoxyCodeLine{00620     \{}
+\DoxyCodeLine{00621         Error\_Handler();}
+\DoxyCodeLine{00622     \}}
+\DoxyCodeLine{00623     \textcolor{keywordflow}{if} (HAL\_UARTEx\_SetTxFifoThreshold(\&huart2, UART\_TXFIFO\_THRESHOLD\_1\_8) != HAL\_OK)}
+\DoxyCodeLine{00624     \{}
+\DoxyCodeLine{00625         Error\_Handler();}
+\DoxyCodeLine{00626     \}}
+\DoxyCodeLine{00627     \textcolor{keywordflow}{if} (HAL\_UARTEx\_SetRxFifoThreshold(\&huart2, UART\_RXFIFO\_THRESHOLD\_1\_8) != HAL\_OK)}
+\DoxyCodeLine{00628     \{}
+\DoxyCodeLine{00629         Error\_Handler();}
+\DoxyCodeLine{00630     \}}
+\DoxyCodeLine{00631     \textcolor{keywordflow}{if} (HAL\_UARTEx\_DisableFifoMode(\&huart2) != HAL\_OK)}
+\DoxyCodeLine{00632     \{}
+\DoxyCodeLine{00633         Error\_Handler();}
+\DoxyCodeLine{00634     \}}
+\DoxyCodeLine{00635     \textcolor{comment}{/* USER CODE BEGIN USART2\_Init 2 */}}
+\DoxyCodeLine{00636 }
+\DoxyCodeLine{00637     \textcolor{comment}{/* USER CODE END USART2\_Init 2 */}}
+\DoxyCodeLine{00638 }
+\DoxyCodeLine{00639 \}}
+\DoxyCodeLine{00640 }
+\DoxyCodeLine{00646 \textcolor{keyword}{static} \textcolor{keywordtype}{void} MX\_GPIO\_Init(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00647 \{}
+\DoxyCodeLine{00648     GPIO\_InitTypeDef GPIO\_InitStruct = \{0\};}
+\DoxyCodeLine{00649 }
+\DoxyCodeLine{00650     \textcolor{comment}{/* GPIO Ports Clock Enable */}}
+\DoxyCodeLine{00651     \_\_HAL\_RCC\_GPIOC\_CLK\_ENABLE();}
+\DoxyCodeLine{00652     \_\_HAL\_RCC\_GPIOF\_CLK\_ENABLE();}
+\DoxyCodeLine{00653     \_\_HAL\_RCC\_GPIOA\_CLK\_ENABLE();}
+\DoxyCodeLine{00654 }
+\DoxyCodeLine{00655     \textcolor{comment}{/*Configure GPIO pin Output Level */}}
+\DoxyCodeLine{00656     HAL\_GPIO\_WritePin(POWER\_UP\_GPIO\_Port, POWER\_UP\_Pin, GPIO\_PIN\_RESET);}
+\DoxyCodeLine{00657 }
+\DoxyCodeLine{00658     \textcolor{comment}{/*Configure GPIO pin Output Level */}}
+\DoxyCodeLine{00659     HAL\_GPIO\_WritePin(LED\_GPIO\_Port, LED\_Pin, GPIO\_PIN\_RESET);}
+\DoxyCodeLine{00660 }
+\DoxyCodeLine{00661     \textcolor{comment}{/*Configure GPIO pin : BUTTON\_Pin */}}
+\DoxyCodeLine{00662     GPIO\_InitStruct.Pin = BUTTON\_Pin;}
+\DoxyCodeLine{00663     GPIO\_InitStruct.Mode = GPIO\_MODE\_IT\_RISING;}
+\DoxyCodeLine{00664     GPIO\_InitStruct.Pull = GPIO\_NOPULL;}
+\DoxyCodeLine{00665     HAL\_GPIO\_Init(BUTTON\_GPIO\_Port, \&GPIO\_InitStruct);}
+\DoxyCodeLine{00666 }
+\DoxyCodeLine{00667     \textcolor{comment}{/*Configure GPIO pin : POWER\_UP\_Pin */}}
+\DoxyCodeLine{00668     GPIO\_InitStruct.Pin = POWER\_UP\_Pin;}
+\DoxyCodeLine{00669     GPIO\_InitStruct.Mode = GPIO\_MODE\_OUTPUT\_PP;}
+\DoxyCodeLine{00670     GPIO\_InitStruct.Pull = GPIO\_NOPULL;}
+\DoxyCodeLine{00671     GPIO\_InitStruct.Speed = GPIO\_SPEED\_FREQ\_LOW;}
+\DoxyCodeLine{00672     HAL\_GPIO\_Init(POWER\_UP\_GPIO\_Port, \&GPIO\_InitStruct);}
+\DoxyCodeLine{00673 }
+\DoxyCodeLine{00674     \textcolor{comment}{/*Configure GPIO pin : LED\_Pin */}}
+\DoxyCodeLine{00675     GPIO\_InitStruct.Pin = LED\_Pin;}
+\DoxyCodeLine{00676     GPIO\_InitStruct.Mode = GPIO\_MODE\_OUTPUT\_PP;}
+\DoxyCodeLine{00677     GPIO\_InitStruct.Pull = GPIO\_NOPULL;}
+\DoxyCodeLine{00678     GPIO\_InitStruct.Speed = GPIO\_SPEED\_FREQ\_LOW;}
+\DoxyCodeLine{00679     HAL\_GPIO\_Init(LED\_GPIO\_Port, \&GPIO\_InitStruct);}
+\DoxyCodeLine{00680 }
+\DoxyCodeLine{00681     \textcolor{comment}{/* EXTI interrupt init*/}}
+\DoxyCodeLine{00682     HAL\_NVIC\_SetPriority(EXTI15\_10\_IRQn, 0, 0);}
+\DoxyCodeLine{00683     HAL\_NVIC\_EnableIRQ(EXTI15\_10\_IRQn);}
+\DoxyCodeLine{00684 }
+\DoxyCodeLine{00685 \}}
+\DoxyCodeLine{00686 }
+\DoxyCodeLine{00687 \textcolor{comment}{/* USER CODE BEGIN 4 */}}
+\DoxyCodeLine{00688 \textcolor{keywordtype}{void} HAL\_UART\_RxCpltCallback (UART\_HandleTypeDef * huart)\{}
+\DoxyCodeLine{00689     uartRxReceived = 1;}
+\DoxyCodeLine{00690     HAL\_UART\_Receive\_IT(\&huart2, uartRxBuffer, UART\_RX\_BUFFER\_SIZE);}
+\DoxyCodeLine{00691 \}}
+\DoxyCodeLine{00692 }
+\DoxyCodeLine{00693 \textcolor{keywordtype}{void} powerUp(\textcolor{keywordtype}{void})\{}
+\DoxyCodeLine{00694     HAL\_GPIO\_WritePin(POWER\_UP\_GPIO\_Port, POWER\_UP\_Pin, GPIO\_PIN\_SET);}
+\DoxyCodeLine{00695     \textcolor{keywordflow}{for}(\textcolor{keyword}{volatile} count = 0;count<100;count++); \textcolor{comment}{// delay 6 µs}}
+\DoxyCodeLine{00696     HAL\_GPIO\_WritePin(POWER\_UP\_GPIO\_Port, POWER\_UP\_Pin, GPIO\_PIN\_RESET);}
+\DoxyCodeLine{00697 \}}
+\DoxyCodeLine{00698 }
+\DoxyCodeLine{00699 \textcolor{keywordtype}{void} HAL\_ADC\_ConvCpltCallback(ADC\_HandleTypeDef *hadc)\{}
+\DoxyCodeLine{00700     memset(uartTxBuffer,NULL,UART\_TX\_BUFFER\_SIZE*\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{00701     AD\_RES = HAL\_ADC\_GetValue(\&hadc1);}
+\DoxyCodeLine{00702     sprintf(uartTxBuffer,\textcolor{stringliteral}{"{}Current value = \%d\(\backslash\)n\(\backslash\)r"{}}, AD\_RES);}
+\DoxyCodeLine{00703     HAL\_UART\_Transmit(\&huart2, uartTxBuffer, \textcolor{keyword}{sizeof}(uartTxBuffer), HAL\_MAX\_DELAY);}
+\DoxyCodeLine{00704 \}}
+\DoxyCodeLine{00705 }
+\DoxyCodeLine{00706 }
+\DoxyCodeLine{00707 \textcolor{comment}{/* USER CODE END 4 */}}
+\DoxyCodeLine{00708 }
+\DoxyCodeLine{00713 \textcolor{keywordtype}{void} Error\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00714 \{}
+\DoxyCodeLine{00715     \textcolor{comment}{/* USER CODE BEGIN Error\_Handler\_Debug */}}
+\DoxyCodeLine{00716     \textcolor{comment}{/* User can add his own implementation to report the HAL error return state */}}
+\DoxyCodeLine{00717     \_\_disable\_irq();}
+\DoxyCodeLine{00718     \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{00719     \{}
+\DoxyCodeLine{00720     \}}
+\DoxyCodeLine{00721     \textcolor{comment}{/* USER CODE END Error\_Handler\_Debug */}}
+\DoxyCodeLine{00722 \}}
+\DoxyCodeLine{00723 }
+\DoxyCodeLine{00724 \textcolor{preprocessor}{\#ifdef  USE\_FULL\_ASSERT}}
+\DoxyCodeLine{00732 \textcolor{keywordtype}{void} assert\_failed(uint8\_t *file, uint32\_t line)}
+\DoxyCodeLine{00733 \{}
+\DoxyCodeLine{00734     \textcolor{comment}{/* USER CODE BEGIN 6 */}}
+\DoxyCodeLine{00735     \textcolor{comment}{/* User can add his own implementation to report the file name and line number,}}
+\DoxyCodeLine{00736 \textcolor{comment}{     ex: printf("{}Wrong parameters value: file \%s on line \%d\(\backslash\)r\(\backslash\)n"{}, file, line) */}}
+\DoxyCodeLine{00737     \textcolor{comment}{/* USER CODE END 6 */}}
+\DoxyCodeLine{00738 \}}
+\DoxyCodeLine{00739 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_FULL\_ASSERT */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

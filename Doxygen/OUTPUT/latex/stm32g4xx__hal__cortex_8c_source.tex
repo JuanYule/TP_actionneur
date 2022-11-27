@@ -1,0 +1,205 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+cortex.\+c}
+\label{stm32g4xx__hal__cortex_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_cortex.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_cortex.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00103 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00104 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00105 }
+\DoxyCodeLine{00114 \textcolor{preprocessor}{\#ifdef HAL\_CORTEX\_MODULE\_ENABLED}}
+\DoxyCodeLine{00115 }
+\DoxyCodeLine{00116 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00117 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00118 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00119 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00120 \textcolor{comment}{/* Private functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00121 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00122 }
+\DoxyCodeLine{00163 \textcolor{keywordtype}{void} HAL\_NVIC\_SetPriorityGrouping(uint32\_t PriorityGroup)}
+\DoxyCodeLine{00164 \{}
+\DoxyCodeLine{00165   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00166   assert\_param(IS\_NVIC\_PRIORITY\_GROUP(PriorityGroup));}
+\DoxyCodeLine{00167 }
+\DoxyCodeLine{00168   \textcolor{comment}{/* Set the PRIGROUP[10:8] bits according to the PriorityGroup parameter value */}}
+\DoxyCodeLine{00169   NVIC\_SetPriorityGrouping(PriorityGroup);}
+\DoxyCodeLine{00170 \}}
+\DoxyCodeLine{00171 }
+\DoxyCodeLine{00185 \textcolor{keywordtype}{void} HAL\_NVIC\_SetPriority(IRQn\_Type IRQn, uint32\_t PreemptPriority, uint32\_t SubPriority)}
+\DoxyCodeLine{00186 \{}
+\DoxyCodeLine{00187   uint32\_t prioritygroup;}
+\DoxyCodeLine{00188 }
+\DoxyCodeLine{00189   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00190   assert\_param(IS\_NVIC\_SUB\_PRIORITY(SubPriority));}
+\DoxyCodeLine{00191   assert\_param(IS\_NVIC\_PREEMPTION\_PRIORITY(PreemptPriority));}
+\DoxyCodeLine{00192 }
+\DoxyCodeLine{00193   prioritygroup = NVIC\_GetPriorityGrouping();}
+\DoxyCodeLine{00194 }
+\DoxyCodeLine{00195   NVIC\_SetPriority(IRQn, NVIC\_EncodePriority(prioritygroup, PreemptPriority, SubPriority));}
+\DoxyCodeLine{00196 \}}
+\DoxyCodeLine{00197 }
+\DoxyCodeLine{00207 \textcolor{keywordtype}{void} HAL\_NVIC\_EnableIRQ(IRQn\_Type IRQn)}
+\DoxyCodeLine{00208 \{}
+\DoxyCodeLine{00209   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00210   assert\_param(IS\_NVIC\_DEVICE\_IRQ(IRQn));}
+\DoxyCodeLine{00211   }
+\DoxyCodeLine{00212   \textcolor{comment}{/* Enable interrupt */}}
+\DoxyCodeLine{00213   NVIC\_EnableIRQ(IRQn);}
+\DoxyCodeLine{00214 \}}
+\DoxyCodeLine{00215 }
+\DoxyCodeLine{00223 \textcolor{keywordtype}{void} HAL\_NVIC\_DisableIRQ(IRQn\_Type IRQn)}
+\DoxyCodeLine{00224 \{}
+\DoxyCodeLine{00225   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00226   assert\_param(IS\_NVIC\_DEVICE\_IRQ(IRQn));}
+\DoxyCodeLine{00227   }
+\DoxyCodeLine{00228   \textcolor{comment}{/* Disable interrupt */}}
+\DoxyCodeLine{00229   NVIC\_DisableIRQ(IRQn);}
+\DoxyCodeLine{00230 \}}
+\DoxyCodeLine{00231 }
+\DoxyCodeLine{00236 \textcolor{keywordtype}{void} HAL\_NVIC\_SystemReset(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00237 \{}
+\DoxyCodeLine{00238   \textcolor{comment}{/* System Reset */}}
+\DoxyCodeLine{00239   NVIC\_SystemReset();}
+\DoxyCodeLine{00240 \}}
+\DoxyCodeLine{00241 }
+\DoxyCodeLine{00249 uint32\_t HAL\_SYSTICK\_Config(uint32\_t TicksNumb)}
+\DoxyCodeLine{00250 \{}
+\DoxyCodeLine{00251    \textcolor{keywordflow}{return} SysTick\_Config(TicksNumb);}
+\DoxyCodeLine{00252 \}}
+\DoxyCodeLine{00277 uint32\_t HAL\_NVIC\_GetPriorityGrouping(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00278 \{}
+\DoxyCodeLine{00279   \textcolor{comment}{/* Get the PRIGROUP[10:8] field value */}}
+\DoxyCodeLine{00280   \textcolor{keywordflow}{return} NVIC\_GetPriorityGrouping();}
+\DoxyCodeLine{00281 \}}
+\DoxyCodeLine{00282 }
+\DoxyCodeLine{00304 \textcolor{keywordtype}{void} HAL\_NVIC\_GetPriority(IRQn\_Type IRQn, uint32\_t PriorityGroup, uint32\_t *pPreemptPriority, uint32\_t *pSubPriority)}
+\DoxyCodeLine{00305 \{}
+\DoxyCodeLine{00306   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00307   assert\_param(IS\_NVIC\_PRIORITY\_GROUP(PriorityGroup));}
+\DoxyCodeLine{00308  \textcolor{comment}{/* Get priority for Cortex-\/M system or device specific interrupts */}}
+\DoxyCodeLine{00309   NVIC\_DecodePriority(NVIC\_GetPriority(IRQn), PriorityGroup, pPreemptPriority, pSubPriority);}
+\DoxyCodeLine{00310 \}}
+\DoxyCodeLine{00311 }
+\DoxyCodeLine{00319 \textcolor{keywordtype}{void} HAL\_NVIC\_SetPendingIRQ(IRQn\_Type IRQn)}
+\DoxyCodeLine{00320 \{}
+\DoxyCodeLine{00321   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00322   assert\_param(IS\_NVIC\_DEVICE\_IRQ(IRQn));}
+\DoxyCodeLine{00323   }
+\DoxyCodeLine{00324   \textcolor{comment}{/* Set interrupt pending */}}
+\DoxyCodeLine{00325   NVIC\_SetPendingIRQ(IRQn);}
+\DoxyCodeLine{00326 \}}
+\DoxyCodeLine{00327 }
+\DoxyCodeLine{00337 uint32\_t HAL\_NVIC\_GetPendingIRQ(IRQn\_Type IRQn)}
+\DoxyCodeLine{00338 \{}
+\DoxyCodeLine{00339   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00340   assert\_param(IS\_NVIC\_DEVICE\_IRQ(IRQn));}
+\DoxyCodeLine{00341   }
+\DoxyCodeLine{00342   \textcolor{comment}{/* Return 1 if pending else 0 */}}
+\DoxyCodeLine{00343   \textcolor{keywordflow}{return} NVIC\_GetPendingIRQ(IRQn);}
+\DoxyCodeLine{00344 \}}
+\DoxyCodeLine{00345 }
+\DoxyCodeLine{00353 \textcolor{keywordtype}{void} HAL\_NVIC\_ClearPendingIRQ(IRQn\_Type IRQn)}
+\DoxyCodeLine{00354 \{}
+\DoxyCodeLine{00355   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00356   assert\_param(IS\_NVIC\_DEVICE\_IRQ(IRQn));}
+\DoxyCodeLine{00357   }
+\DoxyCodeLine{00358   \textcolor{comment}{/* Clear pending interrupt */}}
+\DoxyCodeLine{00359   NVIC\_ClearPendingIRQ(IRQn);}
+\DoxyCodeLine{00360 \}}
+\DoxyCodeLine{00361 }
+\DoxyCodeLine{00370 uint32\_t HAL\_NVIC\_GetActive(IRQn\_Type IRQn)}
+\DoxyCodeLine{00371 \{}
+\DoxyCodeLine{00372   \textcolor{comment}{/* Return 1 if active else 0 */}}
+\DoxyCodeLine{00373   \textcolor{keywordflow}{return} NVIC\_GetActive(IRQn);}
+\DoxyCodeLine{00374 \}}
+\DoxyCodeLine{00375 }
+\DoxyCodeLine{00384 \textcolor{keywordtype}{void} HAL\_SYSTICK\_CLKSourceConfig(uint32\_t CLKSource)}
+\DoxyCodeLine{00385 \{}
+\DoxyCodeLine{00386   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00387   assert\_param(IS\_SYSTICK\_CLK\_SOURCE(CLKSource));}
+\DoxyCodeLine{00388   \textcolor{keywordflow}{if} (CLKSource == SYSTICK\_CLKSOURCE\_HCLK)}
+\DoxyCodeLine{00389   \{}
+\DoxyCodeLine{00390     SysTick-\/>CTRL |= SYSTICK\_CLKSOURCE\_HCLK;}
+\DoxyCodeLine{00391   \}}
+\DoxyCodeLine{00392   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00393   \{}
+\DoxyCodeLine{00394     SysTick-\/>CTRL \&= \string~SYSTICK\_CLKSOURCE\_HCLK;}
+\DoxyCodeLine{00395   \}}
+\DoxyCodeLine{00396 \}}
+\DoxyCodeLine{00397 }
+\DoxyCodeLine{00402 \textcolor{keywordtype}{void} HAL\_SYSTICK\_IRQHandler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00403 \{}
+\DoxyCodeLine{00404   HAL\_SYSTICK\_Callback();}
+\DoxyCodeLine{00405 \}}
+\DoxyCodeLine{00406 }
+\DoxyCodeLine{00411 \_\_weak \textcolor{keywordtype}{void} HAL\_SYSTICK\_Callback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00412 \{}
+\DoxyCodeLine{00413   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00414 \textcolor{comment}{            the HAL\_SYSTICK\_Callback could be implemented in the user file}}
+\DoxyCodeLine{00415 \textcolor{comment}{   */}}
+\DoxyCodeLine{00416 \}}
+\DoxyCodeLine{00417 }
+\DoxyCodeLine{00418 \textcolor{preprocessor}{\#if (\_\_MPU\_PRESENT == 1)}}
+\DoxyCodeLine{00430 \textcolor{keywordtype}{void} HAL\_MPU\_Enable(uint32\_t MPU\_Control)}
+\DoxyCodeLine{00431 \{}
+\DoxyCodeLine{00432   \textcolor{comment}{/* Enable the MPU */}}
+\DoxyCodeLine{00433   MPU-\/>CTRL = (MPU\_Control | MPU\_CTRL\_ENABLE\_Msk);}
+\DoxyCodeLine{00434 }
+\DoxyCodeLine{00435   \textcolor{comment}{/* Ensure MPU setting take effects */}}
+\DoxyCodeLine{00436   \_\_DSB();}
+\DoxyCodeLine{00437   \_\_ISB();}
+\DoxyCodeLine{00438 \}}
+\DoxyCodeLine{00439 }
+\DoxyCodeLine{00440 }
+\DoxyCodeLine{00445 \textcolor{keywordtype}{void} HAL\_MPU\_Disable(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00446 \{}
+\DoxyCodeLine{00447   \textcolor{comment}{/* Make sure outstanding transfers are done */}}
+\DoxyCodeLine{00448   \_\_DMB();}
+\DoxyCodeLine{00449 }
+\DoxyCodeLine{00450   \textcolor{comment}{/* Disable the MPU and clear the control register*/}}
+\DoxyCodeLine{00451   MPU-\/>CTRL  = 0;}
+\DoxyCodeLine{00452 \}}
+\DoxyCodeLine{00453 }
+\DoxyCodeLine{00454 }
+\DoxyCodeLine{00461 \textcolor{keywordtype}{void} HAL\_MPU\_ConfigRegion(MPU\_Region\_InitTypeDef *MPU\_Init)}
+\DoxyCodeLine{00462 \{}
+\DoxyCodeLine{00463   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00464   assert\_param(IS\_MPU\_REGION\_NUMBER(MPU\_Init-\/>Number));}
+\DoxyCodeLine{00465   assert\_param(IS\_MPU\_REGION\_ENABLE(MPU\_Init-\/>Enable));}
+\DoxyCodeLine{00466 }
+\DoxyCodeLine{00467   \textcolor{comment}{/* Set the Region number */}}
+\DoxyCodeLine{00468   MPU-\/>RNR = MPU\_Init-\/>Number;}
+\DoxyCodeLine{00469 }
+\DoxyCodeLine{00470   \textcolor{keywordflow}{if} ((MPU\_Init-\/>Enable) != 0U)}
+\DoxyCodeLine{00471   \{}
+\DoxyCodeLine{00472     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00473     assert\_param(IS\_MPU\_INSTRUCTION\_ACCESS(MPU\_Init-\/>DisableExec));}
+\DoxyCodeLine{00474     assert\_param(IS\_MPU\_REGION\_PERMISSION\_ATTRIBUTE(MPU\_Init-\/>AccessPermission));}
+\DoxyCodeLine{00475     assert\_param(IS\_MPU\_TEX\_LEVEL(MPU\_Init-\/>TypeExtField));}
+\DoxyCodeLine{00476     assert\_param(IS\_MPU\_ACCESS\_SHAREABLE(MPU\_Init-\/>IsShareable));}
+\DoxyCodeLine{00477     assert\_param(IS\_MPU\_ACCESS\_CACHEABLE(MPU\_Init-\/>IsCacheable));}
+\DoxyCodeLine{00478     assert\_param(IS\_MPU\_ACCESS\_BUFFERABLE(MPU\_Init-\/>IsBufferable));}
+\DoxyCodeLine{00479     assert\_param(IS\_MPU\_SUB\_REGION\_DISABLE(MPU\_Init-\/>SubRegionDisable));}
+\DoxyCodeLine{00480     assert\_param(IS\_MPU\_REGION\_SIZE(MPU\_Init-\/>Size));}
+\DoxyCodeLine{00481 }
+\DoxyCodeLine{00482     MPU-\/>RBAR = MPU\_Init-\/>BaseAddress;}
+\DoxyCodeLine{00483     MPU-\/>RASR = ((uint32\_t)MPU\_Init-\/>DisableExec        << MPU\_RASR\_XN\_Pos)   |}
+\DoxyCodeLine{00484                 ((uint32\_t)MPU\_Init-\/>AccessPermission   << MPU\_RASR\_AP\_Pos)   |}
+\DoxyCodeLine{00485                 ((uint32\_t)MPU\_Init-\/>TypeExtField       << MPU\_RASR\_TEX\_Pos)  |}
+\DoxyCodeLine{00486                 ((uint32\_t)MPU\_Init-\/>IsShareable        << MPU\_RASR\_S\_Pos)    |}
+\DoxyCodeLine{00487                 ((uint32\_t)MPU\_Init-\/>IsCacheable        << MPU\_RASR\_C\_Pos)    |}
+\DoxyCodeLine{00488                 ((uint32\_t)MPU\_Init-\/>IsBufferable       << MPU\_RASR\_B\_Pos)    |}
+\DoxyCodeLine{00489                 ((uint32\_t)MPU\_Init-\/>SubRegionDisable   << MPU\_RASR\_SRD\_Pos)  |}
+\DoxyCodeLine{00490                 ((uint32\_t)MPU\_Init-\/>Size               << MPU\_RASR\_SIZE\_Pos) |}
+\DoxyCodeLine{00491                 ((uint32\_t)MPU\_Init-\/>Enable             << MPU\_RASR\_ENABLE\_Pos);}
+\DoxyCodeLine{00492   \}}
+\DoxyCodeLine{00493   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00494   \{}
+\DoxyCodeLine{00495     MPU-\/>RBAR = 0x00;}
+\DoxyCodeLine{00496     MPU-\/>RASR = 0x00;}
+\DoxyCodeLine{00497   \}}
+\DoxyCodeLine{00498 \}}
+\DoxyCodeLine{00499 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_MPU\_PRESENT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00500 }
+\DoxyCodeLine{00509 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_CORTEX\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

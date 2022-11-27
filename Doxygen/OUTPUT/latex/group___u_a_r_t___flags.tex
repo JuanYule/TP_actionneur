@@ -1,0 +1,364 @@
+\doxysection{UART Status Flags}
+\label{group___u_a_r_t___flags}\index{UART Status Flags@{UART Status Flags}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TXFT}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXFT}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RXFT}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXFT}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RXFF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXFF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TXFE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXFE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+REACK}~\textbf{ USART\+\_\+\+ISR\+\_\+\+REACK}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TEACK}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TEACK}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+WUF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+WUF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RWU}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RWU}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+SBKF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+SBKF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+CMF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+CMF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+BUSY}~\textbf{ USART\+\_\+\+ISR\+\_\+\+BUSY}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+ABRF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+ABRF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+ABRE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+ABRE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RTOF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RTOF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+CTS}~\textbf{ USART\+\_\+\+ISR\+\_\+\+CTS}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+CTSIF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+CTSIF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+LBDF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+LBDF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TXE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXE\+\_\+\+TXFNF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TXFNF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXE\+\_\+\+TXFNF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TC}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TC}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RXNE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXNE\+\_\+\+RXFNE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RXFNE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXNE\+\_\+\+RXFNE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+IDLE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+IDLE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+ORE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+ORE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+NE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+NE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+FE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+FE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+PE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+PE}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Elements values convention\+: 0x\+XXXX
+\begin{DoxyItemize}
+\item 0x\+XXXX \+: Flag mask in the ISR register 
+\end{DoxyItemize}
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___u_a_r_t___flags_ga87853efaab808377c8acb9e8b671a2e8}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_ABRE@{UART\_FLAG\_ABRE}}
+\index{UART\_FLAG\_ABRE@{UART\_FLAG\_ABRE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_ABRE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+ABRE~\textbf{ USART\+\_\+\+ISR\+\_\+\+ABRE}}
+
+UART auto Baud rate error ~\newline
+ 
+
+Definition at line \textbf{ 726} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga9e309874f2c8f71e4049ae6cb702a2eb}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_ABRF@{UART\_FLAG\_ABRF}}
+\index{UART\_FLAG\_ABRF@{UART\_FLAG\_ABRF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_ABRF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+ABRF~\textbf{ USART\+\_\+\+ISR\+\_\+\+ABRF}}
+
+UART auto Baud rate flag ~\newline
+ 
+
+Definition at line \textbf{ 725} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga2d1387d412382a345097acb403748ba3}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_BUSY@{UART\_FLAG\_BUSY}}
+\index{UART\_FLAG\_BUSY@{UART\_FLAG\_BUSY}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_BUSY}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+BUSY~\textbf{ USART\+\_\+\+ISR\+\_\+\+BUSY}}
+
+UART busy flag ~\newline
+ 
+
+Definition at line \textbf{ 724} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga01f2c67d8999a9ee8d91ac3cb5e7fbfe}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_CMF@{UART\_FLAG\_CMF}}
+\index{UART\_FLAG\_CMF@{UART\_FLAG\_CMF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_CMF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+CMF~\textbf{ USART\+\_\+\+ISR\+\_\+\+CMF}}
+
+UART character match flag ~\newline
+ 
+
+Definition at line \textbf{ 723} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga5435edd22ff23de7187654362c48e0b1}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_CTS@{UART\_FLAG\_CTS}}
+\index{UART\_FLAG\_CTS@{UART\_FLAG\_CTS}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_CTS}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+CTS~\textbf{ USART\+\_\+\+ISR\+\_\+\+CTS}}
+
+UART clear to send flag ~\newline
+ 
+
+Definition at line \textbf{ 728} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga0835e6f6bad597b368f03529ed3b96a4}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_CTSIF@{UART\_FLAG\_CTSIF}}
+\index{UART\_FLAG\_CTSIF@{UART\_FLAG\_CTSIF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_CTSIF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+CTSIF~\textbf{ USART\+\_\+\+ISR\+\_\+\+CTSIF}}
+
+UART clear to send interrupt flag ~\newline
+ 
+
+Definition at line \textbf{ 729} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_gafba4891ce21cf5223ca5fede0eac388d}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_FE@{UART\_FLAG\_FE}}
+\index{UART\_FLAG\_FE@{UART\_FLAG\_FE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_FE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+FE~\textbf{ USART\+\_\+\+ISR\+\_\+\+FE}}
+
+UART frame error ~\newline
+ 
+
+Definition at line \textbf{ 739} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga5d7a320c505672f7508e3bd99f532a69}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_IDLE@{UART\_FLAG\_IDLE}}
+\index{UART\_FLAG\_IDLE@{UART\_FLAG\_IDLE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_IDLE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+IDLE~\textbf{ USART\+\_\+\+ISR\+\_\+\+IDLE}}
+
+UART idle flag ~\newline
+ 
+
+Definition at line \textbf{ 736} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga77b81c3c843b49af940862fe4d6ab933}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_LBDF@{UART\_FLAG\_LBDF}}
+\index{UART\_FLAG\_LBDF@{UART\_FLAG\_LBDF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_LBDF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+LBDF~\textbf{ USART\+\_\+\+ISR\+\_\+\+LBDF}}
+
+UART LIN break detection flag ~\newline
+ 
+
+Definition at line \textbf{ 730} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga665981434d02ff5296361782c1a7d4b5}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_NE@{UART\_FLAG\_NE}}
+\index{UART\_FLAG\_NE@{UART\_FLAG\_NE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_NE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+NE~\textbf{ USART\+\_\+\+ISR\+\_\+\+NE}}
+
+UART noise error ~\newline
+ 
+
+Definition at line \textbf{ 738} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga335a5b0f61512223bbc406b38c95b2d6}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_ORE@{UART\_FLAG\_ORE}}
+\index{UART\_FLAG\_ORE@{UART\_FLAG\_ORE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_ORE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+ORE~\textbf{ USART\+\_\+\+ISR\+\_\+\+ORE}}
+
+UART overrun error ~\newline
+ 
+
+Definition at line \textbf{ 737} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_gad5b96f73f6d3a0b58f07e2e9d7bf14d9}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_PE@{UART\_FLAG\_PE}}
+\index{UART\_FLAG\_PE@{UART\_FLAG\_PE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_PE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+PE~\textbf{ USART\+\_\+\+ISR\+\_\+\+PE}}
+
+UART parity error ~\newline
+ 
+
+Definition at line \textbf{ 740} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga18f2d6a153838d8fd53911352a4d87ad}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_REACK@{UART\_FLAG\_REACK}}
+\index{UART\_FLAG\_REACK@{UART\_FLAG\_REACK}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_REACK}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+REACK~\textbf{ USART\+\_\+\+ISR\+\_\+\+REACK}}
+
+UART receive enable acknowledge flag ~\newline
+ 
+
+Definition at line \textbf{ 718} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga69afec3b174a6b5969e71ea25d973958}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_RTOF@{UART\_FLAG\_RTOF}}
+\index{UART\_FLAG\_RTOF@{UART\_FLAG\_RTOF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_RTOF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+RTOF~\textbf{ USART\+\_\+\+ISR\+\_\+\+RTOF}}
+
+UART receiver timeout flag ~\newline
+ 
+
+Definition at line \textbf{ 727} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga5d5f6f91093bfb222baa277a86f6b75b}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_RWU@{UART\_FLAG\_RWU}}
+\index{UART\_FLAG\_RWU@{UART\_FLAG\_RWU}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_RWU}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+RWU~\textbf{ USART\+\_\+\+ISR\+\_\+\+RWU}}
+
+UART receiver wake-\/up from mute mode flag 
+
+Definition at line \textbf{ 721} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_gaf17b4d48c103bab82a7633911ebdeba0}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_RXFF@{UART\_FLAG\_RXFF}}
+\index{UART\_FLAG\_RXFF@{UART\_FLAG\_RXFF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_RXFF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+RXFF~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXFF}}
+
+UART RXFIFO Full flag ~\newline
+ 
+
+Definition at line \textbf{ 716} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga59facde9c848f4988b98fdd5f68376a4}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_RXFNE@{UART\_FLAG\_RXFNE}}
+\index{UART\_FLAG\_RXFNE@{UART\_FLAG\_RXFNE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_RXFNE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+RXFNE~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXNE\+\_\+\+RXFNE}}
+
+UART RXFIFO not empty ~\newline
+ 
+
+Definition at line \textbf{ 735} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga4ae5692f6a720737fd3c4d8a11330ad0}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_RXFT@{UART\_FLAG\_RXFT}}
+\index{UART\_FLAG\_RXFT@{UART\_FLAG\_RXFT}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_RXFT}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+RXFT~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXFT}}
+
+UART RXFIFO threshold flag ~\newline
+ 
+
+Definition at line \textbf{ 715} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga9d1b2860d84a87abb05c3b2fed3c108c}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_RXNE@{UART\_FLAG\_RXNE}}
+\index{UART\_FLAG\_RXNE@{UART\_FLAG\_RXNE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_RXNE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+RXNE~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXNE\+\_\+\+RXFNE}}
+
+UART read data register not empty ~\newline
+ 
+
+Definition at line \textbf{ 734} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_gaea7a67e1f6a8af78e2adfaed59d1a4be}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_SBKF@{UART\_FLAG\_SBKF}}
+\index{UART\_FLAG\_SBKF@{UART\_FLAG\_SBKF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_SBKF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+SBKF~\textbf{ USART\+\_\+\+ISR\+\_\+\+SBKF}}
+
+UART send break flag ~\newline
+ 
+
+Definition at line \textbf{ 722} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga82e68a0ee4a8b987a47c66fc6f744894}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_TC@{UART\_FLAG\_TC}}
+\index{UART\_FLAG\_TC@{UART\_FLAG\_TC}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_TC}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+TC~\textbf{ USART\+\_\+\+ISR\+\_\+\+TC}}
+
+UART transmission complete ~\newline
+ 
+
+Definition at line \textbf{ 733} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_gaf4a4ade6fd987ea7f22786269317f94a}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_TEACK@{UART\_FLAG\_TEACK}}
+\index{UART\_FLAG\_TEACK@{UART\_FLAG\_TEACK}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_TEACK}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+TEACK~\textbf{ USART\+\_\+\+ISR\+\_\+\+TEACK}}
+
+UART transmit enable acknowledge flag ~\newline
+ 
+
+Definition at line \textbf{ 719} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_gad39c017d415a7774c82eb07413a9dbe4}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_TXE@{UART\_FLAG\_TXE}}
+\index{UART\_FLAG\_TXE@{UART\_FLAG\_TXE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_TXE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+TXE~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXE\+\_\+\+TXFNF}}
+
+UART transmit data register empty ~\newline
+ 
+
+Definition at line \textbf{ 731} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga1b8dde82360cc90f7bb383911bf164ec}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_TXFE@{UART\_FLAG\_TXFE}}
+\index{UART\_FLAG\_TXFE@{UART\_FLAG\_TXFE}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_TXFE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+TXFE~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXFE}}
+
+UART TXFIFO Empty flag ~\newline
+ 
+
+Definition at line \textbf{ 717} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga5034eef38dce6da2fb2459c1598b1506}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_TXFNF@{UART\_FLAG\_TXFNF}}
+\index{UART\_FLAG\_TXFNF@{UART\_FLAG\_TXFNF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_TXFNF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+TXFNF~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXE\+\_\+\+TXFNF}}
+
+UART TXFIFO not full ~\newline
+ 
+
+Definition at line \textbf{ 732} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_ga84a75a51675d1eb13d70e425efbe0d81}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_TXFT@{UART\_FLAG\_TXFT}}
+\index{UART\_FLAG\_TXFT@{UART\_FLAG\_TXFT}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_TXFT}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+TXFT~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXFT}}
+
+UART TXFIFO threshold flag ~\newline
+ 
+
+Definition at line \textbf{ 714} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+
+\mbox{\label{group___u_a_r_t___flags_gada80ee73404da204801766e42cbf7163}} 
+\index{UART Status Flags@{UART Status Flags}!UART\_FLAG\_WUF@{UART\_FLAG\_WUF}}
+\index{UART\_FLAG\_WUF@{UART\_FLAG\_WUF}!UART Status Flags@{UART Status Flags}}
+\doxysubsubsection{UART\_FLAG\_WUF}
+{\footnotesize\ttfamily \#define UART\+\_\+\+FLAG\+\_\+\+WUF~\textbf{ USART\+\_\+\+ISR\+\_\+\+WUF}}
+
+UART wake-\/up from stop mode flag ~\newline
+ 
+
+Definition at line \textbf{ 720} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+

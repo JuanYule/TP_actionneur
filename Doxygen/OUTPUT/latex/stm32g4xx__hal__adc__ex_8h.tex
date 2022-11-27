@@ -1,0 +1,268 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+hal\+\_\+adc\+\_\+ex.h File Reference}
+\label{stm32g4xx__hal__adc__ex_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_adc\_ex.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_adc\_ex.h}}
+
+
+Header file of ADC HAL extended module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ ADC\+\_\+\+Inj\+Oversampling\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em ADC Injected Conversion Oversampling structure definition. \end{DoxyCompactList}\item 
+struct \textbf{ ADC\+\_\+\+Injection\+Conf\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em Structure definition of ADC group injected and ADC channel affected to ADC group injected. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ ADC\+\_\+\+INJECTED\+\_\+\+SOFTWARE\+\_\+\+START}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+SOFTWARE)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T1\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T1\+\_\+\+TRGO2}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+TRGO2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T1\+\_\+\+CC3}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+CH3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T1\+\_\+\+CC4}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+CH4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T2\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM2\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T2\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM2\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T3\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM3\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T3\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM3\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T3\+\_\+\+CC3}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM3\+\_\+\+CH3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T3\+\_\+\+CC4}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM3\+\_\+\+CH4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T4\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM4\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T4\+\_\+\+CC3}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM4\+\_\+\+CH3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T4\+\_\+\+CC4}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM4\+\_\+\+CH4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T6\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM6\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T7\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM7\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T8\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM8\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T8\+\_\+\+TRGO2}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM8\+\_\+\+TRGO2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T8\+\_\+\+CC2}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM8\+\_\+\+CH2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T8\+\_\+\+CC4}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM8\+\_\+\+CH4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T15\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM15\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T16\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM16\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T20\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T20\+\_\+\+TRGO2}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+TRGO2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T20\+\_\+\+CC2}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+CH2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+T20\+\_\+\+CC4}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+CH4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG1}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG2}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG3}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG4}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG5}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG5)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG6}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG6)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG7}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG7)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG8}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG8)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG9}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG9)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+HRTIM\+\_\+\+TRG10}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG10)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+EXT\+\_\+\+IT3}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+EXTI\+\_\+\+LINE3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+EXT\+\_\+\+IT15}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+EXTI\+\_\+\+LINE15)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJEC\+\_\+\+LPTIM\+\_\+\+OUT}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+LPTIM\+\_\+\+OUT)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJECCONV\+\_\+\+EDGE\+\_\+\+NONE}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJECCONV\+\_\+\+EDGE\+\_\+\+RISING}~(\textbf{ ADC\+\_\+\+JSQR\+\_\+\+JEXTEN\+\_\+0})
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJECCONV\+\_\+\+EDGE\+\_\+\+FALLING}~(\textbf{ ADC\+\_\+\+JSQR\+\_\+\+JEXTEN\+\_\+1})
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGINJECCONV\+\_\+\+EDGE\+\_\+\+RISINGFALLING}~(\textbf{ ADC\+\_\+\+JSQR\+\_\+\+JEXTEN})
+\item 
+\#define \textbf{ ADC\+\_\+\+SINGLE\+\_\+\+ENDED}~(LL\+\_\+\+ADC\+\_\+\+SINGLE\+\_\+\+ENDED)
+\item 
+\#define \textbf{ ADC\+\_\+\+DIFFERENTIAL\+\_\+\+ENDED}~(LL\+\_\+\+ADC\+\_\+\+DIFFERENTIAL\+\_\+\+ENDED)
+\item 
+\#define \textbf{ ADC\+\_\+\+OFFSET\+\_\+\+NONE}~(\textbf{ ADC\+\_\+\+OFFSET\+\_\+4} + 1U)
+\item 
+\#define \textbf{ ADC\+\_\+\+OFFSET\+\_\+1}~(LL\+\_\+\+ADC\+\_\+\+OFFSET\+\_\+1)
+\item 
+\#define \textbf{ ADC\+\_\+\+OFFSET\+\_\+2}~(LL\+\_\+\+ADC\+\_\+\+OFFSET\+\_\+2)
+\item 
+\#define \textbf{ ADC\+\_\+\+OFFSET\+\_\+3}~(LL\+\_\+\+ADC\+\_\+\+OFFSET\+\_\+3)
+\item 
+\#define \textbf{ ADC\+\_\+\+OFFSET\+\_\+4}~(LL\+\_\+\+ADC\+\_\+\+OFFSET\+\_\+4)
+\item 
+\#define \textbf{ ADC\+\_\+\+OFFSET\+\_\+\+SIGN\+\_\+\+NEGATIVE}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+OFFSET\+\_\+\+SIGN\+\_\+\+POSITIVE}~(\textbf{ ADC\+\_\+\+OFR1\+\_\+\+OFFSETPOS})
+\item 
+\#define \textbf{ ADC\+\_\+\+INJECTED\+\_\+\+RANK\+\_\+1}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+RANK\+\_\+1)
+\item 
+\#define \textbf{ ADC\+\_\+\+INJECTED\+\_\+\+RANK\+\_\+2}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+RANK\+\_\+2)
+\item 
+\#define \textbf{ ADC\+\_\+\+INJECTED\+\_\+\+RANK\+\_\+3}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+RANK\+\_\+3)
+\item 
+\#define \textbf{ ADC\+\_\+\+INJECTED\+\_\+\+RANK\+\_\+4}~(LL\+\_\+\+ADC\+\_\+\+INJ\+\_\+\+RANK\+\_\+4)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+GROUP}~(LL\+\_\+\+ADC\+\_\+\+GROUP\+\_\+\+REGULAR)
+\item 
+\#define \textbf{ ADC\+\_\+\+INJECTED\+\_\+\+GROUP}~(LL\+\_\+\+ADC\+\_\+\+GROUP\+\_\+\+INJECTED)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+INJECTED\+\_\+\+GROUP}~(LL\+\_\+\+ADC\+\_\+\+GROUP\+\_\+\+REGULAR\+\_\+\+INJECTED)
+\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+FIELDS}
+\item 
+\#define \textbf{ ADC\+\_\+\+SMPR1\+\_\+\+FIELDS}
+\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+FIELDS\+\_\+2}~((\textbf{ ADC\+\_\+\+CFGR\+\_\+\+DMACFG} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+AUTDLY}))
+\item 
+\#define \textbf{ ADC\+\_\+\+IS\+\_\+\+SOFTWARE\+\_\+\+START\+\_\+\+INJECTED}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~  (((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$JSQR \& \textbf{ ADC\+\_\+\+JSQR\+\_\+\+JEXTEN}) == 0\+UL)
+\begin{DoxyCompactList}\small\item\em Test if conversion trigger of injected group is software start or external trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+JSQR\+\_\+\+RK}(\+\_\+\+\_\+\+CHANNELNB\+\_\+\+\_\+,  \+\_\+\+\_\+\+RANKNB\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Check whether or not ADC is independent. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+INJECT\+\_\+\+CONTEXT\+\_\+\+QUEUE}(\+\_\+\+\_\+\+INJECT\+\_\+\+CONTEXT\+\_\+\+QUEUE\+\_\+\+MODE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+INJECT\+\_\+\+CONTEXT\+\_\+\+QUEUE\+\_\+\+MODE\+\_\+\+\_\+) $<$$<$ ADC\+\_\+\+CFGR\+\_\+\+JQM\+\_\+\+Pos)
+\begin{DoxyCompactList}\small\item\em Configure ADC injected context queue. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+INJECT\+\_\+\+DISCCONTINUOUS}(\+\_\+\+\_\+\+INJECT\+\_\+\+DISCONTINUOUS\+\_\+\+MODE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+INJECT\+\_\+\+DISCONTINUOUS\+\_\+\+MODE\+\_\+\+\_\+) $<$$<$  ADC\+\_\+\+CFGR\+\_\+\+JDISCEN\+\_\+\+Pos)
+\begin{DoxyCompactList}\small\item\em Configure ADC discontinuous conversion mode for injected group. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+REG\+\_\+\+DISCONTINUOUS}(\+\_\+\+\_\+\+REG\+\_\+\+DISCONTINUOUS\+\_\+\+MODE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+REG\+\_\+\+DISCONTINUOUS\+\_\+\+MODE\+\_\+\+\_\+) $<$$<$ ADC\+\_\+\+CFGR\+\_\+\+DISCEN\+\_\+\+Pos)
+\begin{DoxyCompactList}\small\item\em Configure ADC discontinuous conversion mode for regular group. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+DISCONTINUOUS\+\_\+\+NUM}(\+\_\+\+\_\+\+NBR\+\_\+\+DISCONTINUOUS\+\_\+\+CONV\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+NBR\+\_\+\+DISCONTINUOUS\+\_\+\+CONV\+\_\+\+\_\+) -\/ 1UL) $<$$<$ ADC\+\_\+\+CFGR\+\_\+\+DISCNUM\+\_\+\+Pos)
+\begin{DoxyCompactList}\small\item\em Configure the number of discontinuous conversions for regular group. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+AUTOWAIT}(\+\_\+\+\_\+\+AUTOWAIT\+\_\+\+\_\+)~((\+\_\+\+\_\+\+AUTOWAIT\+\_\+\+\_\+) $<$$<$ ADC\+\_\+\+CFGR\+\_\+\+AUTDLY\+\_\+\+Pos)
+\begin{DoxyCompactList}\small\item\em Configure the ADC auto delay mode. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+CONTINUOUS}(\+\_\+\+\_\+\+CONTINUOUS\+\_\+\+MODE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+CONTINUOUS\+\_\+\+MODE\+\_\+\+\_\+) $<$$<$ ADC\+\_\+\+CFGR\+\_\+\+CONT\+\_\+\+Pos)
+\begin{DoxyCompactList}\small\item\em Configure ADC continuous conversion mode. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+DMACONTREQ}(\+\_\+\+\_\+\+DMACONTREQ\+\_\+\+MODE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+DMACONTREQ\+\_\+\+MODE\+\_\+\+\_\+) $<$$<$  ADC\+\_\+\+CFGR\+\_\+\+DMACFG\+\_\+\+Pos)
+\begin{DoxyCompactList}\small\item\em Configure the ADC DMA continuous request. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+OFFSET\+\_\+\+SHIFT\+\_\+\+RESOLUTION}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+OFFSET\+\_\+\+\_\+)~  ((\+\_\+\+\_\+\+OFFSET\+\_\+\+\_\+) $<$$<$ ((((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$CFGR \& \textbf{ ADC\+\_\+\+CFGR\+\_\+\+RES}) $>$$>$ 3UL) $\ast$ 2UL))
+\begin{DoxyCompactList}\small\item\em Shift the offset with respect to the selected ADC resolution. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+AWD1\+THRESHOLD\+\_\+\+SHIFT\+\_\+\+RESOLUTION}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+)~  ((\+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+) $<$$<$ ((((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$CFGR \& \textbf{ ADC\+\_\+\+CFGR\+\_\+\+RES}) $>$$>$ 3UL) $\ast$ 2UL))
+\begin{DoxyCompactList}\small\item\em Shift the AWD1 threshold with respect to the selected ADC resolution. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+AWD23\+THRESHOLD\+\_\+\+SHIFT\+\_\+\+RESOLUTION}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Shift the AWD2 and AWD3 threshold with respect to the selected ADC resolution. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+VREFINT\+\_\+\+INSTANCE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance) != ADC2)
+\begin{DoxyCompactList}\small\item\em Clear Common Control Register. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+INJECTED\+\_\+\+NB\+\_\+\+CONV}(\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+) $>$= (1U)) \&\& ((\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+) $<$= (4U)))
+\begin{DoxyCompactList}\small\item\em Verify the length of scheduled injected conversions group. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+CALFACT}(\+\_\+\+\_\+\+CALIBRATION\+\_\+\+FACTOR\+\_\+\+\_\+)~((\+\_\+\+\_\+\+CALIBRATION\+\_\+\+FACTOR\+\_\+\+\_\+) $<$= (0x7\+FU))
+\begin{DoxyCompactList}\small\item\em Calibration factor size verification (7 bits maximum). \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+SINGLE\+\_\+\+DIFFERENTIAL}(\+\_\+\+\_\+\+SING\+\_\+\+DIFF\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC channel setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+OFFSET\+\_\+\+NUMBER}(\+\_\+\+\_\+\+OFFSET\+\_\+\+NUMBER\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC offset management setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+OFFSET\+\_\+\+SIGN}(\+\_\+\+\_\+\+OFFSET\+\_\+\+SIGN\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC offset sign setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+INJECTED\+\_\+\+RANK}(\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC injected channel setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+EXTTRIGINJEC\+\_\+\+EDGE}(\+\_\+\+\_\+\+EDGE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC injected conversions external trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+ANALOG\+\_\+\+WATCHDOG\+\_\+\+NUMBER}(\+\_\+\+\_\+\+WATCHDOG\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC analog watchdog setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+ANALOG\+\_\+\+WATCHDOG\+\_\+\+MODE}(\+\_\+\+\_\+\+WATCHDOG\+\_\+\+MODE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC analog watchdog mode setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+ANALOG\+\_\+\+WATCHDOG\+\_\+\+FILTERING\+\_\+\+MODE}(\+\_\+\+\_\+\+FILTERING\+\_\+\+MODE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC analog watchdog filtering setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+CONVERSION\+\_\+\+GROUP}(\+\_\+\+\_\+\+CONVERSION\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC conversion (regular or injected or both). \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+EVENT\+\_\+\+TYPE}(\+\_\+\+\_\+\+EVENT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC event type. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO}(\+\_\+\+\_\+\+RATIO\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC oversampling ratio. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+RIGHT\+\_\+\+BIT\+\_\+\+SHIFT}(\+\_\+\+\_\+\+SHIFT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC oversampling shift. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+TRIGGERED\+\_\+\+OVERSAMPLING\+\_\+\+MODE}(\+\_\+\+\_\+\+MODE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC oversampling triggered mode. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+REGOVERSAMPLING\+\_\+\+MODE}(\+\_\+\+\_\+\+MODE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC oversampling regular conversion resumed or continued mode. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+DFSDMCFG\+\_\+\+MODE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~(SET)
+\begin{DoxyCompactList}\small\item\em Verify the DFSDM mode configuration. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CFGR\+\_\+\+DFSDM}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~(0x0\+UL)
+\begin{DoxyCompactList}\small\item\em Return the DFSDM configuration mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Calibration\+\_\+\+Start} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t Single\+Diff)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Calibration\+\_\+\+Get\+Value} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t Single\+Diff)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Calibration\+\_\+\+Set\+Value} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t Single\+Diff, uint32\+\_\+t Calibration\+Factor)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Start} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Stop} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Poll\+For\+Conversion} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t Timeout)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Start\+\_\+\+IT} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Stop\+\_\+\+IT} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Get\+Value} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t Injected\+Rank)
+\item 
+void {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Conv\+Cplt\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Queue\+Overflow\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Level\+Out\+Of\+Window2\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Level\+Out\+Of\+Window3\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+End\+Of\+Sampling\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Regular\+Stop} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Regular\+Stop\+\_\+\+IT} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Regular\+Stop\+\_\+\+DMA} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Injected\+Config\+Channel} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, \textbf{ ADC\+\_\+\+Injection\+Conf\+Type\+Def} $\ast$s\+Config\+Injected)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Enable\+Injected\+Queue} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Disable\+Injected\+Queue} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Disable\+Voltage\+Regulator} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADCEx\+\_\+\+Enter\+ADCDeep\+Power\+Down\+Mode} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of ADC HAL extended module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc\+\_\+ex.\+h}.
+

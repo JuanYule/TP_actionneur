@@ -1,0 +1,101 @@
+\doxysection{ADC Analog Watchdog Mode}
+\label{group___a_d_c__analog__watchdog__mode}\index{ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+NONE}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+REG}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+INJEC}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+REGINJEC}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+REG}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+INJEC}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+REGINJEC}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___a_d_c__analog__watchdog__mode_gacf2ee0d67e728fd6258270b239823713}} 
+\index{ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}!ADC\_ANALOGWATCHDOG\_ALL\_INJEC@{ADC\_ANALOGWATCHDOG\_ALL\_INJEC}}
+\index{ADC\_ANALOGWATCHDOG\_ALL\_INJEC@{ADC\_ANALOGWATCHDOG\_ALL\_INJEC}!ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}}
+\doxysubsubsection{ADC\_ANALOGWATCHDOG\_ALL\_INJEC}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+INJEC~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})}
+
+Analog watchdog applied to injected group all channels ~\newline
+ 
+
+Definition at line \textbf{ 716} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
+\mbox{\label{group___a_d_c__analog__watchdog__mode_gad9d25140644089dd34084cb4dfa7ebd8}} 
+\index{ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}!ADC\_ANALOGWATCHDOG\_ALL\_REG@{ADC\_ANALOGWATCHDOG\_ALL\_REG}}
+\index{ADC\_ANALOGWATCHDOG\_ALL\_REG@{ADC\_ANALOGWATCHDOG\_ALL\_REG}!ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}}
+\doxysubsubsection{ADC\_ANALOGWATCHDOG\_ALL\_REG}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+REG~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN})}
+
+Analog watchdog applied to regular group all channels ~\newline
+ 
+
+Definition at line \textbf{ 715} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
+\mbox{\label{group___a_d_c__analog__watchdog__mode_ga8ab72f0e7dfee943acb5cccacff7e4a0}} 
+\index{ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}!ADC\_ANALOGWATCHDOG\_ALL\_REGINJEC@{ADC\_ANALOGWATCHDOG\_ALL\_REGINJEC}}
+\index{ADC\_ANALOGWATCHDOG\_ALL\_REGINJEC@{ADC\_ANALOGWATCHDOG\_ALL\_REGINJEC}!ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}}
+\doxysubsubsection{ADC\_ANALOGWATCHDOG\_ALL\_REGINJEC}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+REGINJEC~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})}
+
+Analog watchdog applied to regular and injected groups all channels ~\newline
+ 
+
+Definition at line \textbf{ 717} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
+\mbox{\label{group___a_d_c__analog__watchdog__mode_gad173f9dd01d4585c9b7c8c324de399c0}} 
+\index{ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}!ADC\_ANALOGWATCHDOG\_NONE@{ADC\_ANALOGWATCHDOG\_NONE}}
+\index{ADC\_ANALOGWATCHDOG\_NONE@{ADC\_ANALOGWATCHDOG\_NONE}!ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}}
+\doxysubsubsection{ADC\_ANALOGWATCHDOG\_NONE}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+NONE~(0x00000000\+UL)}
+
+No analog watchdog selected ~\newline
+ 
+
+Definition at line \textbf{ 711} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
+\mbox{\label{group___a_d_c__analog__watchdog__mode_ga47d8850a833f799ceb433491a3d6659c}} 
+\index{ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}!ADC\_ANALOGWATCHDOG\_SINGLE\_INJEC@{ADC\_ANALOGWATCHDOG\_SINGLE\_INJEC}}
+\index{ADC\_ANALOGWATCHDOG\_SINGLE\_INJEC@{ADC\_ANALOGWATCHDOG\_SINGLE\_INJEC}!ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}}
+\doxysubsubsection{ADC\_ANALOGWATCHDOG\_SINGLE\_INJEC}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+INJEC~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})}
+
+Analog watchdog applied to an injected group single channel ~\newline
+ 
+
+Definition at line \textbf{ 713} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
+\mbox{\label{group___a_d_c__analog__watchdog__mode_gad4cf176e721fd2382fbc7937e352db67}} 
+\index{ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}!ADC\_ANALOGWATCHDOG\_SINGLE\_REG@{ADC\_ANALOGWATCHDOG\_SINGLE\_REG}}
+\index{ADC\_ANALOGWATCHDOG\_SINGLE\_REG@{ADC\_ANALOGWATCHDOG\_SINGLE\_REG}!ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}}
+\doxysubsubsection{ADC\_ANALOGWATCHDOG\_SINGLE\_REG}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+REG~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN})}
+
+Analog watchdog applied to a regular group single channel ~\newline
+ 
+
+Definition at line \textbf{ 712} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
+\mbox{\label{group___a_d_c__analog__watchdog__mode_gaa0c246b49622fa85c7df6e11f583dffb}} 
+\index{ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}!ADC\_ANALOGWATCHDOG\_SINGLE\_REGINJEC@{ADC\_ANALOGWATCHDOG\_SINGLE\_REGINJEC}}
+\index{ADC\_ANALOGWATCHDOG\_SINGLE\_REGINJEC@{ADC\_ANALOGWATCHDOG\_SINGLE\_REGINJEC}!ADC Analog Watchdog Mode@{ADC Analog Watchdog Mode}}
+\doxysubsubsection{ADC\_ANALOGWATCHDOG\_SINGLE\_REGINJEC}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+REGINJEC~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})}
+
+Analog watchdog applied to a regular and injected groups single channel 
+
+Definition at line \textbf{ 714} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+

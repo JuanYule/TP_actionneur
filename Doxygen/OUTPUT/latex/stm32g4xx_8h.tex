@@ -1,0 +1,98 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+CMSIS/\+Device/\+ST/\+STM32\+G4xx/\+Include/stm32g4xx.h File Reference}
+\label{stm32g4xx_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h}}
+
+
+CMSIS STM32\+G4xx Device Peripheral Access Layer Header File.  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ STM32\+G4}
+\begin{DoxyCompactList}\small\item\em STM32 Family. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+MAIN}~(0x01U)
+\begin{DoxyCompactList}\small\item\em Comment the line below if you will not use the peripherals drivers. In this case, these drivers will not be included and the application code will be based on direct access to peripherals registers. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+SUB1}~(0x02U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+SUB2}~(0x02U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+RC}~(0x00U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION}
+\item 
+\#define \textbf{ IS\+\_\+\+FUNCTIONAL\+\_\+\+STATE}(STATE)~(((STATE) == DISABLE) $\vert$$\vert$ ((STATE) == ENABLE))
+\item 
+\#define \textbf{ SET\+\_\+\+BIT}(REG,  BIT)~((REG) $\vert$= (BIT))
+\item 
+\#define \textbf{ CLEAR\+\_\+\+BIT}(REG,  BIT)~((REG) \&= $\sim$(BIT))
+\item 
+\#define \textbf{ READ\+\_\+\+BIT}(REG,  BIT)~((REG) \& (BIT))
+\item 
+\#define \textbf{ CLEAR\+\_\+\+REG}(REG)~((REG) = (0x0))
+\item 
+\#define \textbf{ WRITE\+\_\+\+REG}(REG,  VAL)~((REG) = (VAL))
+\item 
+\#define \textbf{ READ\+\_\+\+REG}(REG)~((REG))
+\item 
+\#define \textbf{ MODIFY\+\_\+\+REG}(REG,  CLEARMASK,  SETMASK)~WRITE\+\_\+\+REG((REG), (((READ\+\_\+\+REG(REG)) \& ($\sim$(CLEARMASK))) $\vert$ (SETMASK)))
+\item 
+\#define \textbf{ POSITION\+\_\+\+VAL}(VAL)~(\textbf{ \+\_\+\+\_\+\+CLZ}(\textbf{ \+\_\+\+\_\+\+RBIT}(VAL)))
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+SET\+\_\+\+BIT}(REG,  BIT)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+CLEAR\+\_\+\+BIT}(REG,  BIT)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+MODIFY\+\_\+\+REG}(REG,  CLEARMSK,  SETMASK)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+SETH\+\_\+\+BIT}(REG,  BIT)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+CLEARH\+\_\+\+BIT}(REG,  BIT)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+MODIFYH\+\_\+\+REG}(REG,  CLEARMSK,  SETMASK)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum Flag\+Status {\bfseries ITStatus}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Flag\+Status} \{ {\bfseries RESET} = 0
+, {\bfseries SET} = !\+RESET
+ \}
+\item 
+enum {\bfseries Functional\+State} \{ {\bfseries DISABLE} = 0
+, {\bfseries ENABLE} = !\+DISABLE
+ \}
+\item 
+enum {\bfseries Error\+Status} \{ {\bfseries SUCCESS} = 0
+, {\bfseries ERROR} = !\+SUCCESS
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+CMSIS STM32\+G4xx Device Peripheral Access Layer Header File. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team \begin{DoxyVerb}     The file is the unique include file that the application programmer
+     is using in the C source code, usually in main.c. This file contains:
+      - Configuration section that allows to select:
+         - The STM32G4xx device used in the target application
+         - To use or not the peripheral’s drivers in application code(i.e.
+           code will be based on direct access to peripheral’s registers
+           rather than drivers API), this option is controlled by
+           "#define USE_HAL_DRIVER"
+\end{DoxyVerb}
+
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx.\+h}.
+

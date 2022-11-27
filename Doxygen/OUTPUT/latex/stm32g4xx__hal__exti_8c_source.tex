@@ -1,0 +1,437 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+exti.\+c}
+\label{stm32g4xx__hal__exti_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_exti.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_exti.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00086 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00087 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00088 }
+\DoxyCodeLine{00104 \textcolor{preprocessor}{\#ifdef HAL\_EXTI\_MODULE\_ENABLED}}
+\DoxyCodeLine{00105 }
+\DoxyCodeLine{00106 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00107 \textcolor{comment}{/* Private defines -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00111 \textcolor{preprocessor}{\#define EXTI\_MODE\_OFFSET                    0x08U   }\textcolor{comment}{/* 0x20: offset between MCU IMR/EMR registers */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00112 \textcolor{preprocessor}{\#define EXTI\_CONFIG\_OFFSET                  0x08U   }\textcolor{comment}{/* 0x20: offset between MCU Rising/Falling configuration registers */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00117 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00118 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00119 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00120 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00121 }
+\DoxyCodeLine{00144 HAL\_StatusTypeDef HAL\_EXTI\_SetConfigLine(EXTI\_HandleTypeDef *hexti, EXTI\_ConfigTypeDef *pExtiConfig)}
+\DoxyCodeLine{00145 \{}
+\DoxyCodeLine{00146   \_\_IO uint32\_t *regaddr;}
+\DoxyCodeLine{00147   uint32\_t regval;}
+\DoxyCodeLine{00148   uint32\_t linepos;}
+\DoxyCodeLine{00149   uint32\_t maskline;}
+\DoxyCodeLine{00150   uint32\_t offset;}
+\DoxyCodeLine{00151 }
+\DoxyCodeLine{00152   \textcolor{comment}{/* Check null pointer */}}
+\DoxyCodeLine{00153   \textcolor{keywordflow}{if} ((hexti == NULL) || (pExtiConfig == NULL))}
+\DoxyCodeLine{00154   \{}
+\DoxyCodeLine{00155     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00156   \}}
+\DoxyCodeLine{00157 }
+\DoxyCodeLine{00158   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{00159   assert\_param(IS\_EXTI\_LINE(pExtiConfig-\/>Line));}
+\DoxyCodeLine{00160   assert\_param(IS\_EXTI\_MODE(pExtiConfig-\/>Mode));}
+\DoxyCodeLine{00161 }
+\DoxyCodeLine{00162   \textcolor{comment}{/* Assign line number to handle */}}
+\DoxyCodeLine{00163   hexti-\/>Line = pExtiConfig-\/>Line;}
+\DoxyCodeLine{00164 }
+\DoxyCodeLine{00165   \textcolor{comment}{/* Compute line register offset */}}
+\DoxyCodeLine{00166   offset = ((pExtiConfig-\/>Line \& EXTI\_REG\_MASK) >> EXTI\_REG\_SHIFT);}
+\DoxyCodeLine{00167   \textcolor{comment}{/* Compute line position */}}
+\DoxyCodeLine{00168   linepos = (pExtiConfig-\/>Line \& EXTI\_PIN\_MASK);}
+\DoxyCodeLine{00169   \textcolor{comment}{/* Compute line mask */}}
+\DoxyCodeLine{00170   maskline = (1uL << linepos);}
+\DoxyCodeLine{00171 }
+\DoxyCodeLine{00172   \textcolor{comment}{/* Configure triggers for configurable lines */}}
+\DoxyCodeLine{00173   \textcolor{keywordflow}{if} ((pExtiConfig-\/>Line \& EXTI\_CONFIG) != 0x00u)}
+\DoxyCodeLine{00174   \{}
+\DoxyCodeLine{00175     assert\_param(IS\_EXTI\_TRIGGER(pExtiConfig-\/>Trigger));}
+\DoxyCodeLine{00176 }
+\DoxyCodeLine{00177     \textcolor{comment}{/* Configure rising trigger */}}
+\DoxyCodeLine{00178     regaddr = (\&EXTI-\/>RTSR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00179     regval = *regaddr;}
+\DoxyCodeLine{00180 }
+\DoxyCodeLine{00181     \textcolor{comment}{/* Mask or set line */}}
+\DoxyCodeLine{00182     \textcolor{keywordflow}{if} ((pExtiConfig-\/>Trigger \& EXTI\_TRIGGER\_RISING) != 0x00u)}
+\DoxyCodeLine{00183     \{}
+\DoxyCodeLine{00184       regval |= maskline;}
+\DoxyCodeLine{00185     \}}
+\DoxyCodeLine{00186     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00187     \{}
+\DoxyCodeLine{00188       regval \&= \string~maskline;}
+\DoxyCodeLine{00189     \}}
+\DoxyCodeLine{00190 }
+\DoxyCodeLine{00191     \textcolor{comment}{/* Store rising trigger mode */}}
+\DoxyCodeLine{00192     *regaddr = regval;}
+\DoxyCodeLine{00193 }
+\DoxyCodeLine{00194     \textcolor{comment}{/* Configure falling trigger */}}
+\DoxyCodeLine{00195     regaddr = (\&EXTI-\/>FTSR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00196     regval = *regaddr;}
+\DoxyCodeLine{00197 }
+\DoxyCodeLine{00198     \textcolor{comment}{/* Mask or set line */}}
+\DoxyCodeLine{00199     \textcolor{keywordflow}{if} ((pExtiConfig-\/>Trigger \& EXTI\_TRIGGER\_FALLING) != 0x00u)}
+\DoxyCodeLine{00200     \{}
+\DoxyCodeLine{00201       regval |= maskline;}
+\DoxyCodeLine{00202     \}}
+\DoxyCodeLine{00203     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00204     \{}
+\DoxyCodeLine{00205       regval \&= \string~maskline;}
+\DoxyCodeLine{00206     \}}
+\DoxyCodeLine{00207 }
+\DoxyCodeLine{00208     \textcolor{comment}{/* Store falling trigger mode */}}
+\DoxyCodeLine{00209     *regaddr = regval;}
+\DoxyCodeLine{00210 }
+\DoxyCodeLine{00211     \textcolor{comment}{/* Configure gpio port selection in case of gpio exti line */}}
+\DoxyCodeLine{00212     \textcolor{keywordflow}{if} ((pExtiConfig-\/>Line \& EXTI\_GPIO) == EXTI\_GPIO)}
+\DoxyCodeLine{00213     \{}
+\DoxyCodeLine{00214       assert\_param(IS\_EXTI\_GPIO\_PORT(pExtiConfig-\/>GPIOSel));}
+\DoxyCodeLine{00215       assert\_param(IS\_EXTI\_GPIO\_PIN(linepos));}
+\DoxyCodeLine{00216 }
+\DoxyCodeLine{00217       regval = SYSCFG-\/>EXTICR[linepos >> 2u];}
+\DoxyCodeLine{00218       regval \&= \string~(SYSCFG\_EXTICR1\_EXTI0 << (SYSCFG\_EXTICR1\_EXTI1\_Pos * (linepos \& 0x03u)));}
+\DoxyCodeLine{00219       regval |= (pExtiConfig-\/>GPIOSel << (SYSCFG\_EXTICR1\_EXTI1\_Pos * (linepos \& 0x03u)));}
+\DoxyCodeLine{00220       SYSCFG-\/>EXTICR[linepos >> 2u] = regval;}
+\DoxyCodeLine{00221     \}}
+\DoxyCodeLine{00222   \}}
+\DoxyCodeLine{00223 }
+\DoxyCodeLine{00224   \textcolor{comment}{/* Configure interrupt mode : read current mode */}}
+\DoxyCodeLine{00225   regaddr = (\&EXTI-\/>IMR1 + (EXTI\_MODE\_OFFSET * offset));}
+\DoxyCodeLine{00226   regval = *regaddr;}
+\DoxyCodeLine{00227 }
+\DoxyCodeLine{00228   \textcolor{comment}{/* Mask or set line */}}
+\DoxyCodeLine{00229   \textcolor{keywordflow}{if} ((pExtiConfig-\/>Mode \& EXTI\_MODE\_INTERRUPT) != 0x00u)}
+\DoxyCodeLine{00230   \{}
+\DoxyCodeLine{00231     regval |= maskline;}
+\DoxyCodeLine{00232   \}}
+\DoxyCodeLine{00233   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00234   \{}
+\DoxyCodeLine{00235     regval \&= \string~maskline;}
+\DoxyCodeLine{00236   \}}
+\DoxyCodeLine{00237 }
+\DoxyCodeLine{00238   \textcolor{comment}{/* Store interrupt mode */}}
+\DoxyCodeLine{00239   *regaddr = regval;}
+\DoxyCodeLine{00240 }
+\DoxyCodeLine{00241   \textcolor{comment}{/* Configure event mode : read current mode */}}
+\DoxyCodeLine{00242   regaddr = (\&EXTI-\/>EMR1 + (EXTI\_MODE\_OFFSET * offset));}
+\DoxyCodeLine{00243   regval = *regaddr;}
+\DoxyCodeLine{00244 }
+\DoxyCodeLine{00245   \textcolor{comment}{/* Mask or set line */}}
+\DoxyCodeLine{00246   \textcolor{keywordflow}{if} ((pExtiConfig-\/>Mode \& EXTI\_MODE\_EVENT) != 0x00u)}
+\DoxyCodeLine{00247   \{}
+\DoxyCodeLine{00248     regval |= maskline;}
+\DoxyCodeLine{00249   \}}
+\DoxyCodeLine{00250   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00251   \{}
+\DoxyCodeLine{00252     regval \&= \string~maskline;}
+\DoxyCodeLine{00253   \}}
+\DoxyCodeLine{00254 }
+\DoxyCodeLine{00255   \textcolor{comment}{/* Store event mode */}}
+\DoxyCodeLine{00256   *regaddr = regval;}
+\DoxyCodeLine{00257 }
+\DoxyCodeLine{00258   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00259 \}}
+\DoxyCodeLine{00260 }
+\DoxyCodeLine{00261 }
+\DoxyCodeLine{00268 HAL\_StatusTypeDef HAL\_EXTI\_GetConfigLine(EXTI\_HandleTypeDef *hexti, EXTI\_ConfigTypeDef *pExtiConfig)}
+\DoxyCodeLine{00269 \{}
+\DoxyCodeLine{00270   \_\_IO uint32\_t *regaddr;}
+\DoxyCodeLine{00271   uint32\_t regval;}
+\DoxyCodeLine{00272   uint32\_t linepos;}
+\DoxyCodeLine{00273   uint32\_t maskline;}
+\DoxyCodeLine{00274   uint32\_t offset;}
+\DoxyCodeLine{00275 }
+\DoxyCodeLine{00276   \textcolor{comment}{/* Check null pointer */}}
+\DoxyCodeLine{00277   \textcolor{keywordflow}{if} ((hexti == NULL) || (pExtiConfig == NULL))}
+\DoxyCodeLine{00278   \{}
+\DoxyCodeLine{00279     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00280   \}}
+\DoxyCodeLine{00281 }
+\DoxyCodeLine{00282   \textcolor{comment}{/* Check the parameter */}}
+\DoxyCodeLine{00283   assert\_param(IS\_EXTI\_LINE(hexti-\/>Line));}
+\DoxyCodeLine{00284 }
+\DoxyCodeLine{00285   \textcolor{comment}{/* Store handle line number to configuration structure */}}
+\DoxyCodeLine{00286   pExtiConfig-\/>Line = hexti-\/>Line;}
+\DoxyCodeLine{00287 }
+\DoxyCodeLine{00288   \textcolor{comment}{/* Compute line register offset and line mask */}}
+\DoxyCodeLine{00289   offset = ((pExtiConfig-\/>Line \& EXTI\_REG\_MASK) >> EXTI\_REG\_SHIFT);}
+\DoxyCodeLine{00290   \textcolor{comment}{/* Compute line position */}}
+\DoxyCodeLine{00291   linepos = (pExtiConfig-\/>Line \& EXTI\_PIN\_MASK);}
+\DoxyCodeLine{00292   \textcolor{comment}{/* Compute mask */}}
+\DoxyCodeLine{00293   maskline = (1uL << linepos);}
+\DoxyCodeLine{00294 }
+\DoxyCodeLine{00295   \textcolor{comment}{/* 1] Get core mode : interrupt */}}
+\DoxyCodeLine{00296   regaddr = (\&EXTI-\/>IMR1 + (EXTI\_MODE\_OFFSET * offset));}
+\DoxyCodeLine{00297   regval = *regaddr;}
+\DoxyCodeLine{00298 }
+\DoxyCodeLine{00299   \textcolor{comment}{/* Check if selected line is enable */}}
+\DoxyCodeLine{00300   \textcolor{keywordflow}{if} ((regval \& maskline) != 0x00u)}
+\DoxyCodeLine{00301   \{}
+\DoxyCodeLine{00302     pExtiConfig-\/>Mode = EXTI\_MODE\_INTERRUPT;}
+\DoxyCodeLine{00303   \}}
+\DoxyCodeLine{00304   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00305   \{}
+\DoxyCodeLine{00306     pExtiConfig-\/>Mode = EXTI\_MODE\_NONE;}
+\DoxyCodeLine{00307   \}}
+\DoxyCodeLine{00308 }
+\DoxyCodeLine{00309   \textcolor{comment}{/* Get event mode */}}
+\DoxyCodeLine{00310   regaddr = (\&EXTI-\/>EMR1 + (EXTI\_MODE\_OFFSET * offset));}
+\DoxyCodeLine{00311   regval = *regaddr;}
+\DoxyCodeLine{00312 }
+\DoxyCodeLine{00313   \textcolor{comment}{/* Check if selected line is enable */}}
+\DoxyCodeLine{00314   \textcolor{keywordflow}{if} ((regval \& maskline) != 0x00u)}
+\DoxyCodeLine{00315   \{}
+\DoxyCodeLine{00316     pExtiConfig-\/>Mode |= EXTI\_MODE\_EVENT;}
+\DoxyCodeLine{00317   \}}
+\DoxyCodeLine{00318 }
+\DoxyCodeLine{00319   \textcolor{comment}{/* Get default Trigger and GPIOSel configuration */}}
+\DoxyCodeLine{00320   pExtiConfig-\/>Trigger = EXTI\_TRIGGER\_NONE;}
+\DoxyCodeLine{00321   pExtiConfig-\/>GPIOSel = 0x00u;}
+\DoxyCodeLine{00322 }
+\DoxyCodeLine{00323   \textcolor{comment}{/* 2] Get trigger for configurable lines : rising */}}
+\DoxyCodeLine{00324   \textcolor{keywordflow}{if} ((pExtiConfig-\/>Line \& EXTI\_CONFIG) != 0x00u)}
+\DoxyCodeLine{00325   \{}
+\DoxyCodeLine{00326     regaddr = (\&EXTI-\/>RTSR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00327     regval = *regaddr;}
+\DoxyCodeLine{00328 }
+\DoxyCodeLine{00329     \textcolor{comment}{/* Check if configuration of selected line is enable */}}
+\DoxyCodeLine{00330     \textcolor{keywordflow}{if} ((regval \& maskline) != 0x00u)}
+\DoxyCodeLine{00331     \{}
+\DoxyCodeLine{00332       pExtiConfig-\/>Trigger = EXTI\_TRIGGER\_RISING;}
+\DoxyCodeLine{00333     \}}
+\DoxyCodeLine{00334 }
+\DoxyCodeLine{00335     \textcolor{comment}{/* Get falling configuration */}}
+\DoxyCodeLine{00336     regaddr = (\&EXTI-\/>FTSR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00337     regval = *regaddr;}
+\DoxyCodeLine{00338 }
+\DoxyCodeLine{00339     \textcolor{comment}{/* Check if configuration of selected line is enable */}}
+\DoxyCodeLine{00340     \textcolor{keywordflow}{if} ((regval \& maskline) != 0x00u)}
+\DoxyCodeLine{00341     \{}
+\DoxyCodeLine{00342       pExtiConfig-\/>Trigger |= EXTI\_TRIGGER\_FALLING;}
+\DoxyCodeLine{00343     \}}
+\DoxyCodeLine{00344 }
+\DoxyCodeLine{00345     \textcolor{comment}{/* Get Gpio port selection for gpio lines */}}
+\DoxyCodeLine{00346     \textcolor{keywordflow}{if} ((pExtiConfig-\/>Line \& EXTI\_GPIO) == EXTI\_GPIO)}
+\DoxyCodeLine{00347     \{}
+\DoxyCodeLine{00348       assert\_param(IS\_EXTI\_GPIO\_PIN(linepos));}
+\DoxyCodeLine{00349 }
+\DoxyCodeLine{00350       regval = SYSCFG-\/>EXTICR[linepos >> 2u];}
+\DoxyCodeLine{00351       pExtiConfig-\/>GPIOSel = ((regval >> (SYSCFG\_EXTICR1\_EXTI1\_Pos * ((linepos \& 0x03u)))));}
+\DoxyCodeLine{00352     \}}
+\DoxyCodeLine{00353   \}}
+\DoxyCodeLine{00354 }
+\DoxyCodeLine{00355   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00356 \}}
+\DoxyCodeLine{00357 }
+\DoxyCodeLine{00358 }
+\DoxyCodeLine{00364 HAL\_StatusTypeDef HAL\_EXTI\_ClearConfigLine(EXTI\_HandleTypeDef *hexti)}
+\DoxyCodeLine{00365 \{}
+\DoxyCodeLine{00366   \_\_IO uint32\_t *regaddr;}
+\DoxyCodeLine{00367   uint32\_t regval;}
+\DoxyCodeLine{00368   uint32\_t linepos;}
+\DoxyCodeLine{00369   uint32\_t maskline;}
+\DoxyCodeLine{00370   uint32\_t offset;}
+\DoxyCodeLine{00371 }
+\DoxyCodeLine{00372   \textcolor{comment}{/* Check null pointer */}}
+\DoxyCodeLine{00373   \textcolor{keywordflow}{if} (hexti == NULL)}
+\DoxyCodeLine{00374   \{}
+\DoxyCodeLine{00375     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00376   \}}
+\DoxyCodeLine{00377 }
+\DoxyCodeLine{00378   \textcolor{comment}{/* Check the parameter */}}
+\DoxyCodeLine{00379   assert\_param(IS\_EXTI\_LINE(hexti-\/>Line));}
+\DoxyCodeLine{00380 }
+\DoxyCodeLine{00381   \textcolor{comment}{/* compute line register offset and line mask */}}
+\DoxyCodeLine{00382   offset = ((hexti-\/>Line \& EXTI\_REG\_MASK) >> EXTI\_REG\_SHIFT);}
+\DoxyCodeLine{00383   \textcolor{comment}{/* compute line position */}}
+\DoxyCodeLine{00384   linepos = (hexti-\/>Line \& EXTI\_PIN\_MASK);}
+\DoxyCodeLine{00385   \textcolor{comment}{/* compute line mask */}}
+\DoxyCodeLine{00386   maskline = (1uL << linepos);}
+\DoxyCodeLine{00387 }
+\DoxyCodeLine{00388   \textcolor{comment}{/* 1] Clear interrupt mode */}}
+\DoxyCodeLine{00389   regaddr = (\&EXTI-\/>IMR1 + (EXTI\_MODE\_OFFSET * offset));}
+\DoxyCodeLine{00390   regval = (*regaddr \& \string~maskline);}
+\DoxyCodeLine{00391   *regaddr = regval;}
+\DoxyCodeLine{00392 }
+\DoxyCodeLine{00393   \textcolor{comment}{/* 2] Clear event mode */}}
+\DoxyCodeLine{00394   regaddr = (\&EXTI-\/>EMR1 + (EXTI\_MODE\_OFFSET * offset));}
+\DoxyCodeLine{00395   regval = (*regaddr \& \string~maskline);}
+\DoxyCodeLine{00396   *regaddr = regval;}
+\DoxyCodeLine{00397 }
+\DoxyCodeLine{00398   \textcolor{comment}{/* 3] Clear triggers in case of configurable lines */}}
+\DoxyCodeLine{00399   \textcolor{keywordflow}{if} ((hexti-\/>Line \& EXTI\_CONFIG) != 0x00u)}
+\DoxyCodeLine{00400   \{}
+\DoxyCodeLine{00401     regaddr = (\&EXTI-\/>RTSR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00402     regval = (*regaddr \& \string~maskline);}
+\DoxyCodeLine{00403     *regaddr = regval;}
+\DoxyCodeLine{00404 }
+\DoxyCodeLine{00405     regaddr = (\&EXTI-\/>FTSR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00406     regval = (*regaddr \& \string~maskline);}
+\DoxyCodeLine{00407     *regaddr = regval;}
+\DoxyCodeLine{00408 }
+\DoxyCodeLine{00409     \textcolor{comment}{/* Get Gpio port selection for gpio lines */}}
+\DoxyCodeLine{00410     \textcolor{keywordflow}{if} ((hexti-\/>Line \& EXTI\_GPIO) == EXTI\_GPIO)}
+\DoxyCodeLine{00411     \{}
+\DoxyCodeLine{00412       assert\_param(IS\_EXTI\_GPIO\_PIN(linepos));}
+\DoxyCodeLine{00413 }
+\DoxyCodeLine{00414       regval = SYSCFG-\/>EXTICR[linepos >> 2u];}
+\DoxyCodeLine{00415       regval \&= \string~(SYSCFG\_EXTICR1\_EXTI0 << (SYSCFG\_EXTICR1\_EXTI1\_Pos * (linepos \& 0x03u)));}
+\DoxyCodeLine{00416       SYSCFG-\/>EXTICR[linepos >> 2u] = regval;}
+\DoxyCodeLine{00417     \}}
+\DoxyCodeLine{00418   \}}
+\DoxyCodeLine{00419 }
+\DoxyCodeLine{00420   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00421 \}}
+\DoxyCodeLine{00422 }
+\DoxyCodeLine{00423 }
+\DoxyCodeLine{00432 HAL\_StatusTypeDef HAL\_EXTI\_RegisterCallback(EXTI\_HandleTypeDef *hexti, EXTI\_CallbackIDTypeDef CallbackID, \textcolor{keywordtype}{void} (*pPendingCbfn)(\textcolor{keywordtype}{void}))}
+\DoxyCodeLine{00433 \{}
+\DoxyCodeLine{00434   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00435 }
+\DoxyCodeLine{00436   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00437   assert\_param(IS\_EXTI\_CB(CallbackID));}
+\DoxyCodeLine{00438 }
+\DoxyCodeLine{00439   \textcolor{keywordflow}{switch} (CallbackID)}
+\DoxyCodeLine{00440   \{}
+\DoxyCodeLine{00441     \textcolor{comment}{/* set common callback */}}
+\DoxyCodeLine{00442     \textcolor{keywordflow}{case}  HAL\_EXTI\_COMMON\_CB\_ID:}
+\DoxyCodeLine{00443       hexti-\/>PendingCallback = pPendingCbfn;}
+\DoxyCodeLine{00444       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00445 }
+\DoxyCodeLine{00446     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00447       hexti-\/>PendingCallback = NULL;}
+\DoxyCodeLine{00448       status = HAL\_ERROR;}
+\DoxyCodeLine{00449       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00450   \}}
+\DoxyCodeLine{00451 }
+\DoxyCodeLine{00452   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00453 \}}
+\DoxyCodeLine{00454 }
+\DoxyCodeLine{00455 }
+\DoxyCodeLine{00463 HAL\_StatusTypeDef HAL\_EXTI\_GetHandle(EXTI\_HandleTypeDef *hexti, uint32\_t ExtiLine)}
+\DoxyCodeLine{00464 \{}
+\DoxyCodeLine{00465   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00466   assert\_param(IS\_EXTI\_LINE(ExtiLine));}
+\DoxyCodeLine{00467 }
+\DoxyCodeLine{00468   \textcolor{comment}{/* Check null pointer */}}
+\DoxyCodeLine{00469   \textcolor{keywordflow}{if} (hexti == NULL)}
+\DoxyCodeLine{00470   \{}
+\DoxyCodeLine{00471     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00472   \}}
+\DoxyCodeLine{00473   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00474   \{}
+\DoxyCodeLine{00475     \textcolor{comment}{/* Store line number as handle private field */}}
+\DoxyCodeLine{00476     hexti-\/>Line = ExtiLine;}
+\DoxyCodeLine{00477 }
+\DoxyCodeLine{00478     \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00479   \}}
+\DoxyCodeLine{00480 \}}
+\DoxyCodeLine{00481 }
+\DoxyCodeLine{00482 }
+\DoxyCodeLine{00504 \textcolor{keywordtype}{void} HAL\_EXTI\_IRQHandler(EXTI\_HandleTypeDef *hexti)}
+\DoxyCodeLine{00505 \{}
+\DoxyCodeLine{00506   \_\_IO uint32\_t *regaddr;}
+\DoxyCodeLine{00507   uint32\_t regval;}
+\DoxyCodeLine{00508   uint32\_t maskline;}
+\DoxyCodeLine{00509   uint32\_t offset;}
+\DoxyCodeLine{00510 }
+\DoxyCodeLine{00511   \textcolor{comment}{/* Compute line register offset */}}
+\DoxyCodeLine{00512   offset = ((hexti-\/>Line \& EXTI\_REG\_MASK) >> EXTI\_REG\_SHIFT);}
+\DoxyCodeLine{00513   \textcolor{comment}{/* compute line mask */}}
+\DoxyCodeLine{00514   maskline = (1uL << (hexti-\/>Line \& EXTI\_PIN\_MASK));}
+\DoxyCodeLine{00515 }
+\DoxyCodeLine{00516   \textcolor{comment}{/* Get pending bit  */}}
+\DoxyCodeLine{00517   regaddr = (\&EXTI-\/>PR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00518   regval = (*regaddr \& maskline);}
+\DoxyCodeLine{00519 }
+\DoxyCodeLine{00520   \textcolor{keywordflow}{if} (regval != 0x00u)}
+\DoxyCodeLine{00521   \{}
+\DoxyCodeLine{00522     \textcolor{comment}{/* Clear pending bit */}}
+\DoxyCodeLine{00523     *regaddr = maskline;}
+\DoxyCodeLine{00524 }
+\DoxyCodeLine{00525     \textcolor{comment}{/* Call pending callback */}}
+\DoxyCodeLine{00526     \textcolor{keywordflow}{if} (hexti-\/>PendingCallback != NULL)}
+\DoxyCodeLine{00527     \{}
+\DoxyCodeLine{00528       hexti-\/>PendingCallback();}
+\DoxyCodeLine{00529     \}}
+\DoxyCodeLine{00530   \}}
+\DoxyCodeLine{00531 \}}
+\DoxyCodeLine{00532 }
+\DoxyCodeLine{00539 uint32\_t HAL\_EXTI\_GetPending(EXTI\_HandleTypeDef *hexti, uint32\_t Edge)}
+\DoxyCodeLine{00540 \{}
+\DoxyCodeLine{00541   \_\_IO uint32\_t *regaddr;}
+\DoxyCodeLine{00542   uint32\_t regval;}
+\DoxyCodeLine{00543   uint32\_t linepos;}
+\DoxyCodeLine{00544   uint32\_t maskline;}
+\DoxyCodeLine{00545   uint32\_t offset;}
+\DoxyCodeLine{00546 }
+\DoxyCodeLine{00547   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{00548   assert\_param(IS\_EXTI\_LINE(hexti-\/>Line));}
+\DoxyCodeLine{00549   assert\_param(IS\_EXTI\_CONFIG\_LINE(hexti-\/>Line));}
+\DoxyCodeLine{00550   UNUSED(Edge);}
+\DoxyCodeLine{00551 }
+\DoxyCodeLine{00552   \textcolor{comment}{/* Compute line register offset */}}
+\DoxyCodeLine{00553   offset = ((hexti-\/>Line \& EXTI\_REG\_MASK) >> EXTI\_REG\_SHIFT);}
+\DoxyCodeLine{00554   \textcolor{comment}{/* Compute line position */}}
+\DoxyCodeLine{00555   linepos = (hexti-\/>Line \& EXTI\_PIN\_MASK);}
+\DoxyCodeLine{00556   \textcolor{comment}{/* Compute line mask */}}
+\DoxyCodeLine{00557   maskline = (1uL << linepos);}
+\DoxyCodeLine{00558 }
+\DoxyCodeLine{00559   \textcolor{comment}{/* Get pending bit */}}
+\DoxyCodeLine{00560   regaddr = (\&EXTI-\/>PR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00561 }
+\DoxyCodeLine{00562   \textcolor{comment}{/* return 1 if bit is set else 0 */}}
+\DoxyCodeLine{00563   regval = ((*regaddr \& maskline) >> linepos);}
+\DoxyCodeLine{00564   \textcolor{keywordflow}{return} regval;}
+\DoxyCodeLine{00565 \}}
+\DoxyCodeLine{00566 }
+\DoxyCodeLine{00567 }
+\DoxyCodeLine{00574 \textcolor{keywordtype}{void} HAL\_EXTI\_ClearPending(EXTI\_HandleTypeDef *hexti, uint32\_t Edge)}
+\DoxyCodeLine{00575 \{}
+\DoxyCodeLine{00576   \_\_IO uint32\_t *regaddr;}
+\DoxyCodeLine{00577   uint32\_t maskline;}
+\DoxyCodeLine{00578   uint32\_t offset;}
+\DoxyCodeLine{00579 }
+\DoxyCodeLine{00580   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{00581   assert\_param(IS\_EXTI\_LINE(hexti-\/>Line));}
+\DoxyCodeLine{00582   assert\_param(IS\_EXTI\_CONFIG\_LINE(hexti-\/>Line));}
+\DoxyCodeLine{00583   UNUSED(Edge);}
+\DoxyCodeLine{00584 }
+\DoxyCodeLine{00585   \textcolor{comment}{/* Compute line register offset */}}
+\DoxyCodeLine{00586   offset = ((hexti-\/>Line \& EXTI\_REG\_MASK) >> EXTI\_REG\_SHIFT);}
+\DoxyCodeLine{00587   \textcolor{comment}{/* Compute line mask */}}
+\DoxyCodeLine{00588   maskline = (1uL << (hexti-\/>Line \& EXTI\_PIN\_MASK));}
+\DoxyCodeLine{00589 }
+\DoxyCodeLine{00590   \textcolor{comment}{/* Get pending register address */}}
+\DoxyCodeLine{00591   regaddr = (\&EXTI-\/>PR1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00592 }
+\DoxyCodeLine{00593   \textcolor{comment}{/* Clear Pending bit */}}
+\DoxyCodeLine{00594   *regaddr =  maskline;}
+\DoxyCodeLine{00595 \}}
+\DoxyCodeLine{00596 }
+\DoxyCodeLine{00597 }
+\DoxyCodeLine{00603 \textcolor{keywordtype}{void} HAL\_EXTI\_GenerateSWI(EXTI\_HandleTypeDef *hexti)}
+\DoxyCodeLine{00604 \{}
+\DoxyCodeLine{00605   \_\_IO uint32\_t *regaddr;}
+\DoxyCodeLine{00606   uint32\_t maskline;}
+\DoxyCodeLine{00607   uint32\_t offset;}
+\DoxyCodeLine{00608 }
+\DoxyCodeLine{00609   \textcolor{comment}{/* Check parameter */}}
+\DoxyCodeLine{00610   assert\_param(IS\_EXTI\_LINE(hexti-\/>Line));}
+\DoxyCodeLine{00611   assert\_param(IS\_EXTI\_CONFIG\_LINE(hexti-\/>Line));}
+\DoxyCodeLine{00612 }
+\DoxyCodeLine{00613   \textcolor{comment}{/* compute line register offset */}}
+\DoxyCodeLine{00614   offset = ((hexti-\/>Line \& EXTI\_REG\_MASK) >> EXTI\_REG\_SHIFT);}
+\DoxyCodeLine{00615   \textcolor{comment}{/* compute line mask */}}
+\DoxyCodeLine{00616   maskline = (1uL << (hexti-\/>Line \& EXTI\_PIN\_MASK));}
+\DoxyCodeLine{00617 }
+\DoxyCodeLine{00618   regaddr = (\&EXTI-\/>SWIER1 + (EXTI\_CONFIG\_OFFSET * offset));}
+\DoxyCodeLine{00619   *regaddr = maskline;}
+\DoxyCodeLine{00620 \}}
+\DoxyCodeLine{00621 }
+\DoxyCodeLine{00622 }
+\DoxyCodeLine{00631 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_EXTI\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

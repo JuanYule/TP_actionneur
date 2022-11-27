@@ -1,0 +1,104 @@
+\doxysection{system\+\_\+stm32g4xx.\+c}
+\label{system__stm32g4xx_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/system\_stm32g4xx.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/system\_stm32g4xx.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00078 \textcolor{preprocessor}{\#include "{}stm32g4xx.h"{}}}
+\DoxyCodeLine{00079 }
+\DoxyCodeLine{00080 \textcolor{preprocessor}{\#if !defined  (HSE\_VALUE)}}
+\DoxyCodeLine{00081 \textcolor{preprocessor}{  \#define HSE\_VALUE     24000000U }}
+\DoxyCodeLine{00082 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HSE\_VALUE */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00083 }
+\DoxyCodeLine{00084 \textcolor{preprocessor}{\#if !defined  (HSI\_VALUE)}}
+\DoxyCodeLine{00085 \textcolor{preprocessor}{  \#define HSI\_VALUE    16000000U }}
+\DoxyCodeLine{00086 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HSI\_VALUE */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00087 }
+\DoxyCodeLine{00104 \textcolor{comment}{/************************* Miscellaneous Configuration ************************/}}
+\DoxyCodeLine{00105 \textcolor{comment}{/* Note: Following vector table addresses must be defined in line with linker}}
+\DoxyCodeLine{00106 \textcolor{comment}{         configuration. */}}
+\DoxyCodeLine{00110 \textcolor{comment}{/* \#define USER\_VECT\_TAB\_ADDRESS */}}
+\DoxyCodeLine{00111 }
+\DoxyCodeLine{00112 \textcolor{preprocessor}{\#if defined(USER\_VECT\_TAB\_ADDRESS)}}
+\DoxyCodeLine{00115 \textcolor{comment}{/* \#define VECT\_TAB\_SRAM */}}
+\DoxyCodeLine{00116 \textcolor{preprocessor}{\#if defined(VECT\_TAB\_SRAM)}}
+\DoxyCodeLine{00117 \textcolor{preprocessor}{\#define VECT\_TAB\_BASE\_ADDRESS   SRAM\_BASE       }}
+\DoxyCodeLine{00119 \textcolor{preprocessor}{\#define VECT\_TAB\_OFFSET         0x00000000U     }}
+\DoxyCodeLine{00121 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00122 \textcolor{preprocessor}{\#define VECT\_TAB\_BASE\_ADDRESS   FLASH\_BASE      }}
+\DoxyCodeLine{00124 \textcolor{preprocessor}{\#define VECT\_TAB\_OFFSET         0x00000000U     }}
+\DoxyCodeLine{00126 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* VECT\_TAB\_SRAM */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00127 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USER\_VECT\_TAB\_ADDRESS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00128 \textcolor{comment}{/******************************************************************************/}}
+\DoxyCodeLine{00144   \textcolor{comment}{/* The SystemCoreClock variable is updated in three ways:}}
+\DoxyCodeLine{00145 \textcolor{comment}{      1) by calling CMSIS function SystemCoreClockUpdate()}}
+\DoxyCodeLine{00146 \textcolor{comment}{      2) by calling HAL API function HAL\_RCC\_GetHCLKFreq()}}
+\DoxyCodeLine{00147 \textcolor{comment}{      3) each time HAL\_RCC\_ClockConfig() is called to configure the system clock frequency}}
+\DoxyCodeLine{00148 \textcolor{comment}{         Note: If you use this function to configure the system clock; then there}}
+\DoxyCodeLine{00149 \textcolor{comment}{               is no need to call the 2 first functions listed above, since SystemCoreClock}}
+\DoxyCodeLine{00150 \textcolor{comment}{               variable is updated automatically.}}
+\DoxyCodeLine{00151 \textcolor{comment}{  */}}
+\DoxyCodeLine{00152   uint32\_t SystemCoreClock = HSI\_VALUE;}
+\DoxyCodeLine{00153 }
+\DoxyCodeLine{00154   \textcolor{keyword}{const} uint8\_t AHBPrescTable[16] = \{0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 1U, 2U, 3U, 4U, 6U, 7U, 8U, 9U\};}
+\DoxyCodeLine{00155   \textcolor{keyword}{const} uint8\_t APBPrescTable[8] =  \{0U, 0U, 0U, 0U, 1U, 2U, 3U, 4U\};}
+\DoxyCodeLine{00156 }
+\DoxyCodeLine{00179 \textcolor{keywordtype}{void} SystemInit(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00180 \{}
+\DoxyCodeLine{00181   \textcolor{comment}{/* FPU settings -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00182 \textcolor{preprocessor}{  \#if (\_\_FPU\_PRESENT == 1) \&\& (\_\_FPU\_USED == 1)}}
+\DoxyCodeLine{00183     SCB-\/>CPACR |= ((3UL << (10*2))|(3UL << (11*2)));  \textcolor{comment}{/* set CP10 and CP11 Full Access */}}
+\DoxyCodeLine{00184 \textcolor{preprocessor}{  \#endif}}
+\DoxyCodeLine{00185 }
+\DoxyCodeLine{00186   \textcolor{comment}{/* Configure the Vector Table location add offset address -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00187 \textcolor{preprocessor}{\#if defined(USER\_VECT\_TAB\_ADDRESS)}}
+\DoxyCodeLine{00188   SCB-\/>VTOR = VECT\_TAB\_BASE\_ADDRESS | VECT\_TAB\_OFFSET; \textcolor{comment}{/* Vector Table Relocation in Internal SRAM */}}
+\DoxyCodeLine{00189 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USER\_VECT\_TAB\_ADDRESS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00190 \}}
+\DoxyCodeLine{00191 }
+\DoxyCodeLine{00228 \textcolor{keywordtype}{void} SystemCoreClockUpdate(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00229 \{}
+\DoxyCodeLine{00230   uint32\_t tmp, pllvco, pllr, pllsource, pllm;}
+\DoxyCodeLine{00231 }
+\DoxyCodeLine{00232   \textcolor{comment}{/* Get SYSCLK source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00233   \textcolor{keywordflow}{switch} (RCC-\/>CFGR \& RCC\_CFGR\_SWS)}
+\DoxyCodeLine{00234   \{}
+\DoxyCodeLine{00235     \textcolor{keywordflow}{case} 0x04:  \textcolor{comment}{/* HSI used as system clock source */}}
+\DoxyCodeLine{00236       SystemCoreClock = HSI\_VALUE;}
+\DoxyCodeLine{00237       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00238 }
+\DoxyCodeLine{00239     \textcolor{keywordflow}{case} 0x08:  \textcolor{comment}{/* HSE used as system clock source */}}
+\DoxyCodeLine{00240       SystemCoreClock = HSE\_VALUE;}
+\DoxyCodeLine{00241       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00242 }
+\DoxyCodeLine{00243     \textcolor{keywordflow}{case} 0x0C:  \textcolor{comment}{/* PLL used as system clock  source */}}
+\DoxyCodeLine{00244       \textcolor{comment}{/* PLL\_VCO = (HSE\_VALUE or HSI\_VALUE / PLLM) * PLLN}}
+\DoxyCodeLine{00245 \textcolor{comment}{         SYSCLK = PLL\_VCO / PLLR}}
+\DoxyCodeLine{00246 \textcolor{comment}{         */}}
+\DoxyCodeLine{00247       pllsource = (RCC-\/>PLLCFGR \& RCC\_PLLCFGR\_PLLSRC);}
+\DoxyCodeLine{00248       pllm = ((RCC-\/>PLLCFGR \& RCC\_PLLCFGR\_PLLM) >> 4) + 1U ;}
+\DoxyCodeLine{00249       \textcolor{keywordflow}{if} (pllsource == 0x02UL) \textcolor{comment}{/* HSI used as PLL clock source */}}
+\DoxyCodeLine{00250       \{}
+\DoxyCodeLine{00251         pllvco = (HSI\_VALUE / pllm);}
+\DoxyCodeLine{00252       \}}
+\DoxyCodeLine{00253       \textcolor{keywordflow}{else}                   \textcolor{comment}{/* HSE used as PLL clock source */}}
+\DoxyCodeLine{00254       \{}
+\DoxyCodeLine{00255         pllvco = (HSE\_VALUE / pllm);}
+\DoxyCodeLine{00256       \}}
+\DoxyCodeLine{00257       pllvco = pllvco * ((RCC-\/>PLLCFGR \& RCC\_PLLCFGR\_PLLN) >> 8);}
+\DoxyCodeLine{00258       pllr = (((RCC-\/>PLLCFGR \& RCC\_PLLCFGR\_PLLR) >> 25) + 1U) * 2U;}
+\DoxyCodeLine{00259       SystemCoreClock = pllvco/pllr;}
+\DoxyCodeLine{00260       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00261 }
+\DoxyCodeLine{00262     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00263       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00264   \}}
+\DoxyCodeLine{00265   \textcolor{comment}{/* Compute HCLK clock frequency -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00266   \textcolor{comment}{/* Get HCLK prescaler */}}
+\DoxyCodeLine{00267   tmp = AHBPrescTable[((RCC-\/>CFGR \& RCC\_CFGR\_HPRE) >> 4)];}
+\DoxyCodeLine{00268   \textcolor{comment}{/* HCLK clock frequency */}}
+\DoxyCodeLine{00269   SystemCoreClock >>= tmp;}
+\DoxyCodeLine{00270 \}}
+\DoxyCodeLine{00271 }
+\DoxyCodeLine{00272 }
+
+\end{DoxyCode}

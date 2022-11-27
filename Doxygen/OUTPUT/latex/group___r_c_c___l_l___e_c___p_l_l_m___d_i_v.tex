@@ -1,0 +1,203 @@
+\doxysection{PLL division factor}
+\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v}\index{PLL division factor@{PLL division factor}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+1}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+2}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+3}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+4}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+5}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+6}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+7}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+8}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+9}~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3}
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+10}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+11}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+12}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+13}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+14}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+15}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})
+\item 
+\#define \textbf{ LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+16}~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gabebea61bf9311026af93837f6b4edc2b}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_1@{LL\_RCC\_PLLM\_DIV\_1}}
+\index{LL\_RCC\_PLLM\_DIV\_1@{LL\_RCC\_PLLM\_DIV\_1}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_1}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+1~0x00000000U}
+
+PLL division factor by 1 
+
+Definition at line \textbf{ 609} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_ga94c363b53c77ffec11cab0dfe3b4d163}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_10@{LL\_RCC\_PLLM\_DIV\_10}}
+\index{LL\_RCC\_PLLM\_DIV\_10@{LL\_RCC\_PLLM\_DIV\_10}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_10}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+10~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})}
+
+PLL division factor by 10 
+
+Definition at line \textbf{ 618} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_ga1499bff2e796ed9791f2a1882d6edde7}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_11@{LL\_RCC\_PLLM\_DIV\_11}}
+\index{LL\_RCC\_PLLM\_DIV\_11@{LL\_RCC\_PLLM\_DIV\_11}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_11}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+11~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})}
+
+PLL division factor by 11 
+
+Definition at line \textbf{ 619} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gaf714b0704e3a58639f7a22adcca0255d}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_12@{LL\_RCC\_PLLM\_DIV\_12}}
+\index{LL\_RCC\_PLLM\_DIV\_12@{LL\_RCC\_PLLM\_DIV\_12}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_12}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+12~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})}
+
+PLL division factor by 12 
+
+Definition at line \textbf{ 620} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_ga8acbd833732976d12555631478208ec4}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_13@{LL\_RCC\_PLLM\_DIV\_13}}
+\index{LL\_RCC\_PLLM\_DIV\_13@{LL\_RCC\_PLLM\_DIV\_13}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_13}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+13~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2})}
+
+PLL division factor by 13 
+
+Definition at line \textbf{ 621} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gaeec81f5619ee987139148bed80eee61a}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_14@{LL\_RCC\_PLLM\_DIV\_14}}
+\index{LL\_RCC\_PLLM\_DIV\_14@{LL\_RCC\_PLLM\_DIV\_14}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_14}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+14~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})}
+
+PLL division factor by 14 
+
+Definition at line \textbf{ 622} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gab48bc188d9a40159a287bc14d05c5dc9}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_15@{LL\_RCC\_PLLM\_DIV\_15}}
+\index{LL\_RCC\_PLLM\_DIV\_15@{LL\_RCC\_PLLM\_DIV\_15}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_15}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+15~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})}
+
+PLL division factor by 15 
+
+Definition at line \textbf{ 623} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_ga0d0c0f311ad441943661a8cf2f354a24}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_16@{LL\_RCC\_PLLM\_DIV\_16}}
+\index{LL\_RCC\_PLLM\_DIV\_16@{LL\_RCC\_PLLM\_DIV\_16}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_16}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+16~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})}
+
+PLL division factor by 16 
+
+Definition at line \textbf{ 624} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gac24f9fd7bd4b98cfd66e6439d8ea6468}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_2@{LL\_RCC\_PLLM\_DIV\_2}}
+\index{LL\_RCC\_PLLM\_DIV\_2@{LL\_RCC\_PLLM\_DIV\_2}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_2}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+2~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0}}
+
+PLL division factor by 2 
+
+Definition at line \textbf{ 610} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_ga84c779907aef2a45b744187bfaa5a7ac}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_3@{LL\_RCC\_PLLM\_DIV\_3}}
+\index{LL\_RCC\_PLLM\_DIV\_3@{LL\_RCC\_PLLM\_DIV\_3}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_3}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+3~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1}}
+
+PLL division factor by 3 
+
+Definition at line \textbf{ 611} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_ga0c370c08ce98f8025cc122d3453ba72e}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_4@{LL\_RCC\_PLLM\_DIV\_4}}
+\index{LL\_RCC\_PLLM\_DIV\_4@{LL\_RCC\_PLLM\_DIV\_4}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_4}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+4~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})}
+
+PLL division factor by 4 
+
+Definition at line \textbf{ 612} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gad2bc0d39cf3bf69c75be87bf94c68fb9}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_5@{LL\_RCC\_PLLM\_DIV\_5}}
+\index{LL\_RCC\_PLLM\_DIV\_5@{LL\_RCC\_PLLM\_DIV\_5}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_5}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+5~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2}}
+
+PLL division factor by 5 
+
+Definition at line \textbf{ 613} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_ga29223ad8f6ab1fbcda8cc303b4d22f37}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_6@{LL\_RCC\_PLLM\_DIV\_6}}
+\index{LL\_RCC\_PLLM\_DIV\_6@{LL\_RCC\_PLLM\_DIV\_6}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_6}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+6~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})}
+
+PLL division factor by 6 
+
+Definition at line \textbf{ 614} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gaf7d3200118b71984e365f868a9ecf4fe}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_7@{LL\_RCC\_PLLM\_DIV\_7}}
+\index{LL\_RCC\_PLLM\_DIV\_7@{LL\_RCC\_PLLM\_DIV\_7}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_7}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+7~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1})}
+
+PLL division factor by 7 
+
+Definition at line \textbf{ 615} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gacc20d37373e295e42048a50f71f5d337}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_8@{LL\_RCC\_PLLM\_DIV\_8}}
+\index{LL\_RCC\_PLLM\_DIV\_8@{LL\_RCC\_PLLM\_DIV\_8}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_8}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+8~(\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+2} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+1} $\vert$ \textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+0})}
+
+PLL division factor by 8 
+
+Definition at line \textbf{ 616} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___l_l___e_c___p_l_l_m___d_i_v_gaa13233eefc6d1f17cc8e7c9093362026}} 
+\index{PLL division factor@{PLL division factor}!LL\_RCC\_PLLM\_DIV\_9@{LL\_RCC\_PLLM\_DIV\_9}}
+\index{LL\_RCC\_PLLM\_DIV\_9@{LL\_RCC\_PLLM\_DIV\_9}!PLL division factor@{PLL division factor}}
+\doxysubsubsection{LL\_RCC\_PLLM\_DIV\_9}
+{\footnotesize\ttfamily \#define LL\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+DIV\+\_\+9~\textbf{ RCC\+\_\+\+PLLCFGR\+\_\+\+PLLM\+\_\+3}}
+
+PLL division factor by 9 
+
+Definition at line \textbf{ 617} of file \textbf{ stm32g4xx\+\_\+ll\+\_\+rcc.\+h}.
+

@@ -1,0 +1,786 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+c}
+\label{stm32g4xx__hal__pwr__ex_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_pwr\_ex.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_pwr\_ex.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00024 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00036 \textcolor{preprocessor}{\#ifdef HAL\_PWR\_MODULE\_ENABLED}}
+\DoxyCodeLine{00037 }
+\DoxyCodeLine{00038 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00039 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00040 }
+\DoxyCodeLine{00041 }
+\DoxyCodeLine{00042 \textcolor{preprocessor}{\#if defined (STM32G471xx) || defined (STM32G473xx) || defined (STM32G474xx) || defined (STM32G483xx) || defined (STM32G484xx)}}
+\DoxyCodeLine{00043 \textcolor{preprocessor}{\#define PWR\_PORTF\_AVAILABLE\_PINS   0x0000FFFFU }\textcolor{comment}{/* PF0..PF15 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00044 \textcolor{preprocessor}{\#define PWR\_PORTG\_AVAILABLE\_PINS   0x000007FFU }\textcolor{comment}{/* PG0..PG10 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00045 \textcolor{preprocessor}{\#elif defined (STM32G431xx) || defined (STM32G441xx) || defined (STM32GBK1CB) || defined (STM32G491xx) || defined (STM32G4A1xx)}}
+\DoxyCodeLine{00046 \textcolor{preprocessor}{\#define PWR\_PORTF\_AVAILABLE\_PINS   0x00000607U }\textcolor{comment}{/* PF0..PF2 and PF9 and PF10 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00047 \textcolor{preprocessor}{\#define PWR\_PORTG\_AVAILABLE\_PINS   0x00000400U }\textcolor{comment}{/* PG10 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00048 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00049 }
+\DoxyCodeLine{00057 \textcolor{preprocessor}{\#define PVM\_MODE\_IT               0x00010000U    }}
+\DoxyCodeLine{00058 \textcolor{preprocessor}{\#define PVM\_MODE\_EVT              0x00020000U    }}
+\DoxyCodeLine{00059 \textcolor{preprocessor}{\#define PVM\_RISING\_EDGE           0x00000001U    }}
+\DoxyCodeLine{00060 \textcolor{preprocessor}{\#define PVM\_FALLING\_EDGE          0x00000002U    }}
+\DoxyCodeLine{00068 \textcolor{preprocessor}{\#define PWR\_FLAG\_SETTING\_DELAY\_US                      50UL   }}
+\DoxyCodeLine{00081 \textcolor{comment}{/* Private macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00082 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00083 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00084 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00085 }
+\DoxyCodeLine{00109 uint32\_t HAL\_PWREx\_GetVoltageRange(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00110 \{}
+\DoxyCodeLine{00111   \textcolor{keywordflow}{if} (READ\_BIT(PWR-\/>CR1, PWR\_CR1\_VOS) == PWR\_REGULATOR\_VOLTAGE\_SCALE2)}
+\DoxyCodeLine{00112   \{}
+\DoxyCodeLine{00113     \textcolor{keywordflow}{return} PWR\_REGULATOR\_VOLTAGE\_SCALE2;}
+\DoxyCodeLine{00114   \}}
+\DoxyCodeLine{00115   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (READ\_BIT(PWR-\/>CR5, PWR\_CR5\_R1MODE) == PWR\_CR5\_R1MODE)}
+\DoxyCodeLine{00116   \{}
+\DoxyCodeLine{00117     \textcolor{comment}{/* PWR\_CR5\_R1MODE bit set means that Range 1 Boost is disabled */}}
+\DoxyCodeLine{00118     \textcolor{keywordflow}{return} PWR\_REGULATOR\_VOLTAGE\_SCALE1;}
+\DoxyCodeLine{00119   \}}
+\DoxyCodeLine{00120   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00121   \{}
+\DoxyCodeLine{00122     \textcolor{keywordflow}{return} PWR\_REGULATOR\_VOLTAGE\_SCALE1\_BOOST;}
+\DoxyCodeLine{00123   \}}
+\DoxyCodeLine{00124 \}}
+\DoxyCodeLine{00125 }
+\DoxyCodeLine{00126 }
+\DoxyCodeLine{00127 }
+\DoxyCodeLine{00153 HAL\_StatusTypeDef HAL\_PWREx\_ControlVoltageScaling(uint32\_t VoltageScaling)}
+\DoxyCodeLine{00154 \{}
+\DoxyCodeLine{00155   uint32\_t wait\_loop\_index;}
+\DoxyCodeLine{00156 }
+\DoxyCodeLine{00157   assert\_param(IS\_PWR\_VOLTAGE\_SCALING\_RANGE(VoltageScaling));}
+\DoxyCodeLine{00158 }
+\DoxyCodeLine{00159   \textcolor{keywordflow}{if} (VoltageScaling == PWR\_REGULATOR\_VOLTAGE\_SCALE1\_BOOST)}
+\DoxyCodeLine{00160   \{}
+\DoxyCodeLine{00161     \textcolor{comment}{/* If current range is range 2 */}}
+\DoxyCodeLine{00162     \textcolor{keywordflow}{if} (READ\_BIT(PWR-\/>CR1, PWR\_CR1\_VOS) == PWR\_REGULATOR\_VOLTAGE\_SCALE2)}
+\DoxyCodeLine{00163     \{}
+\DoxyCodeLine{00164       \textcolor{comment}{/* Make sure Range 1 Boost is enabled */}}
+\DoxyCodeLine{00165       CLEAR\_BIT(PWR-\/>CR5, PWR\_CR5\_R1MODE);}
+\DoxyCodeLine{00166 }
+\DoxyCodeLine{00167       \textcolor{comment}{/* Set Range 1 */}}
+\DoxyCodeLine{00168       MODIFY\_REG(PWR-\/>CR1, PWR\_CR1\_VOS, PWR\_REGULATOR\_VOLTAGE\_SCALE1);}
+\DoxyCodeLine{00169 }
+\DoxyCodeLine{00170       \textcolor{comment}{/* Wait until VOSF is cleared */}}
+\DoxyCodeLine{00171       wait\_loop\_index = ((PWR\_FLAG\_SETTING\_DELAY\_US * SystemCoreClock) / 1000000U) + 1U;}
+\DoxyCodeLine{00172       \textcolor{keywordflow}{while} ((HAL\_IS\_BIT\_SET(PWR-\/>SR2, PWR\_SR2\_VOSF)) \&\& (wait\_loop\_index != 0U))}
+\DoxyCodeLine{00173       \{}
+\DoxyCodeLine{00174         wait\_loop\_index-\/-\/;}
+\DoxyCodeLine{00175       \}}
+\DoxyCodeLine{00176       \textcolor{keywordflow}{if} (HAL\_IS\_BIT\_SET(PWR-\/>SR2, PWR\_SR2\_VOSF))}
+\DoxyCodeLine{00177       \{}
+\DoxyCodeLine{00178         \textcolor{keywordflow}{return} HAL\_TIMEOUT;}
+\DoxyCodeLine{00179       \}}
+\DoxyCodeLine{00180     \}}
+\DoxyCodeLine{00181     \textcolor{comment}{/* If current range is range 1 normal or boost mode */}}
+\DoxyCodeLine{00182     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00183     \{}
+\DoxyCodeLine{00184       \textcolor{comment}{/* Enable Range 1 Boost (no issue if bit already reset) */}}
+\DoxyCodeLine{00185       CLEAR\_BIT(PWR-\/>CR5, PWR\_CR5\_R1MODE);}
+\DoxyCodeLine{00186     \}}
+\DoxyCodeLine{00187   \}}
+\DoxyCodeLine{00188   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (VoltageScaling == PWR\_REGULATOR\_VOLTAGE\_SCALE1)}
+\DoxyCodeLine{00189   \{}
+\DoxyCodeLine{00190     \textcolor{comment}{/* If current range is range 2 */}}
+\DoxyCodeLine{00191     \textcolor{keywordflow}{if} (READ\_BIT(PWR-\/>CR1, PWR\_CR1\_VOS) == PWR\_REGULATOR\_VOLTAGE\_SCALE2)}
+\DoxyCodeLine{00192     \{}
+\DoxyCodeLine{00193       \textcolor{comment}{/* Make sure Range 1 Boost is disabled */}}
+\DoxyCodeLine{00194       SET\_BIT(PWR-\/>CR5, PWR\_CR5\_R1MODE);}
+\DoxyCodeLine{00195 }
+\DoxyCodeLine{00196       \textcolor{comment}{/* Set Range 1 */}}
+\DoxyCodeLine{00197       MODIFY\_REG(PWR-\/>CR1, PWR\_CR1\_VOS, PWR\_REGULATOR\_VOLTAGE\_SCALE1);}
+\DoxyCodeLine{00198 }
+\DoxyCodeLine{00199       \textcolor{comment}{/* Wait until VOSF is cleared */}}
+\DoxyCodeLine{00200       wait\_loop\_index = ((PWR\_FLAG\_SETTING\_DELAY\_US * SystemCoreClock) / 1000000U) + 1U;}
+\DoxyCodeLine{00201       \textcolor{keywordflow}{while} ((HAL\_IS\_BIT\_SET(PWR-\/>SR2, PWR\_SR2\_VOSF)) \&\& (wait\_loop\_index != 0U))}
+\DoxyCodeLine{00202       \{}
+\DoxyCodeLine{00203         wait\_loop\_index-\/-\/;}
+\DoxyCodeLine{00204       \}}
+\DoxyCodeLine{00205       \textcolor{keywordflow}{if} (HAL\_IS\_BIT\_SET(PWR-\/>SR2, PWR\_SR2\_VOSF))}
+\DoxyCodeLine{00206       \{}
+\DoxyCodeLine{00207         \textcolor{keywordflow}{return} HAL\_TIMEOUT;}
+\DoxyCodeLine{00208       \}}
+\DoxyCodeLine{00209     \}}
+\DoxyCodeLine{00210      \textcolor{comment}{/* If current range is range 1 normal or boost mode */}}
+\DoxyCodeLine{00211     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00212     \{}
+\DoxyCodeLine{00213       \textcolor{comment}{/* Disable Range 1 Boost (no issue if bit already set) */}}
+\DoxyCodeLine{00214       SET\_BIT(PWR-\/>CR5, PWR\_CR5\_R1MODE);}
+\DoxyCodeLine{00215     \}}
+\DoxyCodeLine{00216   \}}
+\DoxyCodeLine{00217   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00218   \{}
+\DoxyCodeLine{00219     \textcolor{comment}{/* Set Range 2 */}}
+\DoxyCodeLine{00220     MODIFY\_REG(PWR-\/>CR1, PWR\_CR1\_VOS, PWR\_REGULATOR\_VOLTAGE\_SCALE2);}
+\DoxyCodeLine{00221     \textcolor{comment}{/* No need to wait for VOSF to be cleared for this transition */}}
+\DoxyCodeLine{00222     \textcolor{comment}{/* PWR\_CR5\_R1MODE bit setting has no effect in Range 2        */}}
+\DoxyCodeLine{00223   \}}
+\DoxyCodeLine{00224 }
+\DoxyCodeLine{00225   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00226 \}}
+\DoxyCodeLine{00227 }
+\DoxyCodeLine{00228 }
+\DoxyCodeLine{00238 \textcolor{keywordtype}{void} HAL\_PWREx\_EnableBatteryCharging(uint32\_t ResistorSelection)}
+\DoxyCodeLine{00239 \{}
+\DoxyCodeLine{00240   assert\_param(IS\_PWR\_BATTERY\_RESISTOR\_SELECT(ResistorSelection));}
+\DoxyCodeLine{00241 }
+\DoxyCodeLine{00242   \textcolor{comment}{/* Specify resistor selection */}}
+\DoxyCodeLine{00243   MODIFY\_REG(PWR-\/>CR4, PWR\_CR4\_VBRS, ResistorSelection);}
+\DoxyCodeLine{00244 }
+\DoxyCodeLine{00245   \textcolor{comment}{/* Enable battery charging */}}
+\DoxyCodeLine{00246   SET\_BIT(PWR-\/>CR4, PWR\_CR4\_VBE);}
+\DoxyCodeLine{00247 \}}
+\DoxyCodeLine{00248 }
+\DoxyCodeLine{00249 }
+\DoxyCodeLine{00254 \textcolor{keywordtype}{void} HAL\_PWREx\_DisableBatteryCharging(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00255 \{}
+\DoxyCodeLine{00256   CLEAR\_BIT(PWR-\/>CR4, PWR\_CR4\_VBE);}
+\DoxyCodeLine{00257 \}}
+\DoxyCodeLine{00258 }
+\DoxyCodeLine{00259 }
+\DoxyCodeLine{00264 \textcolor{keywordtype}{void} HAL\_PWREx\_EnableInternalWakeUpLine(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00265 \{}
+\DoxyCodeLine{00266   SET\_BIT(PWR-\/>CR3, PWR\_CR3\_EIWF);}
+\DoxyCodeLine{00267 \}}
+\DoxyCodeLine{00268 }
+\DoxyCodeLine{00269 }
+\DoxyCodeLine{00274 \textcolor{keywordtype}{void} HAL\_PWREx\_DisableInternalWakeUpLine(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00275 \{}
+\DoxyCodeLine{00276   CLEAR\_BIT(PWR-\/>CR3, PWR\_CR3\_EIWF);}
+\DoxyCodeLine{00277 \}}
+\DoxyCodeLine{00278 }
+\DoxyCodeLine{00279 }
+\DoxyCodeLine{00280 }
+\DoxyCodeLine{00302 HAL\_StatusTypeDef HAL\_PWREx\_EnableGPIOPullUp(uint32\_t GPIO, uint32\_t GPIONumber)}
+\DoxyCodeLine{00303 \{}
+\DoxyCodeLine{00304   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00305 }
+\DoxyCodeLine{00306   assert\_param(IS\_PWR\_GPIO(GPIO));}
+\DoxyCodeLine{00307   assert\_param(IS\_PWR\_GPIO\_BIT\_NUMBER(GPIONumber));}
+\DoxyCodeLine{00308 }
+\DoxyCodeLine{00309   \textcolor{keywordflow}{switch} (GPIO)}
+\DoxyCodeLine{00310   \{}
+\DoxyCodeLine{00311     \textcolor{keywordflow}{case} PWR\_GPIO\_A:}
+\DoxyCodeLine{00312        SET\_BIT(PWR-\/>PUCRA, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_14))));}
+\DoxyCodeLine{00313        CLEAR\_BIT(PWR-\/>PDCRA, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_13|PWR\_GPIO\_BIT\_15))));}
+\DoxyCodeLine{00314        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00315     \textcolor{keywordflow}{case} PWR\_GPIO\_B:}
+\DoxyCodeLine{00316        SET\_BIT(PWR-\/>PUCRB, GPIONumber);}
+\DoxyCodeLine{00317        CLEAR\_BIT(PWR-\/>PDCRB, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_4))));}
+\DoxyCodeLine{00318        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00319     \textcolor{keywordflow}{case} PWR\_GPIO\_C:}
+\DoxyCodeLine{00320        SET\_BIT(PWR-\/>PUCRC, GPIONumber);}
+\DoxyCodeLine{00321        CLEAR\_BIT(PWR-\/>PDCRC, GPIONumber);}
+\DoxyCodeLine{00322        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00323     \textcolor{keywordflow}{case} PWR\_GPIO\_D:}
+\DoxyCodeLine{00324        SET\_BIT(PWR-\/>PUCRD, GPIONumber);}
+\DoxyCodeLine{00325        CLEAR\_BIT(PWR-\/>PDCRD, GPIONumber);}
+\DoxyCodeLine{00326        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00327     \textcolor{keywordflow}{case} PWR\_GPIO\_E:}
+\DoxyCodeLine{00328        SET\_BIT(PWR-\/>PUCRE, GPIONumber);}
+\DoxyCodeLine{00329        CLEAR\_BIT(PWR-\/>PDCRE, GPIONumber);}
+\DoxyCodeLine{00330        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00331     \textcolor{keywordflow}{case} PWR\_GPIO\_F:}
+\DoxyCodeLine{00332        SET\_BIT(PWR-\/>PUCRF, (GPIONumber \& PWR\_PORTF\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00333        CLEAR\_BIT(PWR-\/>PDCRF, (GPIONumber \& PWR\_PORTF\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00334        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00335     \textcolor{keywordflow}{case} PWR\_GPIO\_G:}
+\DoxyCodeLine{00336        SET\_BIT(PWR-\/>PUCRG, (GPIONumber \& PWR\_PORTG\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00337        CLEAR\_BIT(PWR-\/>PDCRG, ((GPIONumber \& PWR\_PORTG\_AVAILABLE\_PINS) \& (\string~(PWR\_GPIO\_BIT\_10))));}
+\DoxyCodeLine{00338        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00339     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00340       status = HAL\_ERROR;}
+\DoxyCodeLine{00341       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00342   \}}
+\DoxyCodeLine{00343 }
+\DoxyCodeLine{00344   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00345 \}}
+\DoxyCodeLine{00346 }
+\DoxyCodeLine{00347 }
+\DoxyCodeLine{00363 HAL\_StatusTypeDef HAL\_PWREx\_DisableGPIOPullUp(uint32\_t GPIO, uint32\_t GPIONumber)}
+\DoxyCodeLine{00364 \{}
+\DoxyCodeLine{00365   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00366 }
+\DoxyCodeLine{00367   assert\_param(IS\_PWR\_GPIO(GPIO));}
+\DoxyCodeLine{00368   assert\_param(IS\_PWR\_GPIO\_BIT\_NUMBER(GPIONumber));}
+\DoxyCodeLine{00369 }
+\DoxyCodeLine{00370   \textcolor{keywordflow}{switch} (GPIO)}
+\DoxyCodeLine{00371   \{}
+\DoxyCodeLine{00372     \textcolor{keywordflow}{case} PWR\_GPIO\_A:}
+\DoxyCodeLine{00373        CLEAR\_BIT(PWR-\/>PUCRA, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_14))));}
+\DoxyCodeLine{00374        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00375     \textcolor{keywordflow}{case} PWR\_GPIO\_B:}
+\DoxyCodeLine{00376        CLEAR\_BIT(PWR-\/>PUCRB, GPIONumber);}
+\DoxyCodeLine{00377        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00378     \textcolor{keywordflow}{case} PWR\_GPIO\_C:}
+\DoxyCodeLine{00379        CLEAR\_BIT(PWR-\/>PUCRC, GPIONumber);}
+\DoxyCodeLine{00380        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00381     \textcolor{keywordflow}{case} PWR\_GPIO\_D:}
+\DoxyCodeLine{00382        CLEAR\_BIT(PWR-\/>PUCRD, GPIONumber);}
+\DoxyCodeLine{00383        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00384     \textcolor{keywordflow}{case} PWR\_GPIO\_E:}
+\DoxyCodeLine{00385        CLEAR\_BIT(PWR-\/>PUCRE, GPIONumber);}
+\DoxyCodeLine{00386        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00387     \textcolor{keywordflow}{case} PWR\_GPIO\_F:}
+\DoxyCodeLine{00388        CLEAR\_BIT(PWR-\/>PUCRF, (GPIONumber \& PWR\_PORTF\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00389        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00390     \textcolor{keywordflow}{case} PWR\_GPIO\_G:}
+\DoxyCodeLine{00391        CLEAR\_BIT(PWR-\/>PUCRG, (GPIONumber \& PWR\_PORTG\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00392        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00393     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00394        status = HAL\_ERROR;}
+\DoxyCodeLine{00395        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00396   \}}
+\DoxyCodeLine{00397 }
+\DoxyCodeLine{00398   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00399 \}}
+\DoxyCodeLine{00400 }
+\DoxyCodeLine{00401 }
+\DoxyCodeLine{00402 }
+\DoxyCodeLine{00424 HAL\_StatusTypeDef HAL\_PWREx\_EnableGPIOPullDown(uint32\_t GPIO, uint32\_t GPIONumber)}
+\DoxyCodeLine{00425 \{}
+\DoxyCodeLine{00426   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00427 }
+\DoxyCodeLine{00428   assert\_param(IS\_PWR\_GPIO(GPIO));}
+\DoxyCodeLine{00429   assert\_param(IS\_PWR\_GPIO\_BIT\_NUMBER(GPIONumber));}
+\DoxyCodeLine{00430 }
+\DoxyCodeLine{00431   \textcolor{keywordflow}{switch} (GPIO)}
+\DoxyCodeLine{00432   \{}
+\DoxyCodeLine{00433     \textcolor{keywordflow}{case} PWR\_GPIO\_A:}
+\DoxyCodeLine{00434        SET\_BIT(PWR-\/>PDCRA, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_13|PWR\_GPIO\_BIT\_15))));}
+\DoxyCodeLine{00435        CLEAR\_BIT(PWR-\/>PUCRA, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_14))));}
+\DoxyCodeLine{00436        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00437     \textcolor{keywordflow}{case} PWR\_GPIO\_B:}
+\DoxyCodeLine{00438        SET\_BIT(PWR-\/>PDCRB, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_4))));}
+\DoxyCodeLine{00439        CLEAR\_BIT(PWR-\/>PUCRB, GPIONumber);}
+\DoxyCodeLine{00440        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00441     \textcolor{keywordflow}{case} PWR\_GPIO\_C:}
+\DoxyCodeLine{00442        SET\_BIT(PWR-\/>PDCRC, GPIONumber);}
+\DoxyCodeLine{00443        CLEAR\_BIT(PWR-\/>PUCRC, GPIONumber);}
+\DoxyCodeLine{00444        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00445     \textcolor{keywordflow}{case} PWR\_GPIO\_D:}
+\DoxyCodeLine{00446        SET\_BIT(PWR-\/>PDCRD, GPIONumber);}
+\DoxyCodeLine{00447        CLEAR\_BIT(PWR-\/>PUCRD, GPIONumber);}
+\DoxyCodeLine{00448        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00449     \textcolor{keywordflow}{case} PWR\_GPIO\_E:}
+\DoxyCodeLine{00450        SET\_BIT(PWR-\/>PDCRE, GPIONumber);}
+\DoxyCodeLine{00451        CLEAR\_BIT(PWR-\/>PUCRE, GPIONumber);}
+\DoxyCodeLine{00452        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00453     \textcolor{keywordflow}{case} PWR\_GPIO\_F:}
+\DoxyCodeLine{00454        SET\_BIT(PWR-\/>PDCRF, (GPIONumber \& PWR\_PORTF\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00455        CLEAR\_BIT(PWR-\/>PUCRF, (GPIONumber \& PWR\_PORTF\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00456        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00457     \textcolor{keywordflow}{case} PWR\_GPIO\_G:}
+\DoxyCodeLine{00458        SET\_BIT(PWR-\/>PDCRG, ((GPIONumber \& PWR\_PORTG\_AVAILABLE\_PINS) \& (\string~(PWR\_GPIO\_BIT\_10))));}
+\DoxyCodeLine{00459        CLEAR\_BIT(PWR-\/>PUCRG, (GPIONumber \& PWR\_PORTG\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00460        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00461     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00462       status = HAL\_ERROR;}
+\DoxyCodeLine{00463       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00464   \}}
+\DoxyCodeLine{00465 }
+\DoxyCodeLine{00466   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00467 \}}
+\DoxyCodeLine{00468 }
+\DoxyCodeLine{00469 }
+\DoxyCodeLine{00485 HAL\_StatusTypeDef HAL\_PWREx\_DisableGPIOPullDown(uint32\_t GPIO, uint32\_t GPIONumber)}
+\DoxyCodeLine{00486 \{}
+\DoxyCodeLine{00487   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00488 }
+\DoxyCodeLine{00489   assert\_param(IS\_PWR\_GPIO(GPIO));}
+\DoxyCodeLine{00490   assert\_param(IS\_PWR\_GPIO\_BIT\_NUMBER(GPIONumber));}
+\DoxyCodeLine{00491 }
+\DoxyCodeLine{00492   \textcolor{keywordflow}{switch} (GPIO)}
+\DoxyCodeLine{00493   \{}
+\DoxyCodeLine{00494     \textcolor{keywordflow}{case} PWR\_GPIO\_A:}
+\DoxyCodeLine{00495        CLEAR\_BIT(PWR-\/>PDCRA, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_13|PWR\_GPIO\_BIT\_15))));}
+\DoxyCodeLine{00496        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00497     \textcolor{keywordflow}{case} PWR\_GPIO\_B:}
+\DoxyCodeLine{00498        CLEAR\_BIT(PWR-\/>PDCRB, (GPIONumber \& (\string~(PWR\_GPIO\_BIT\_4))));}
+\DoxyCodeLine{00499        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00500     \textcolor{keywordflow}{case} PWR\_GPIO\_C:}
+\DoxyCodeLine{00501        CLEAR\_BIT(PWR-\/>PDCRC, GPIONumber);}
+\DoxyCodeLine{00502        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00503     \textcolor{keywordflow}{case} PWR\_GPIO\_D:}
+\DoxyCodeLine{00504        CLEAR\_BIT(PWR-\/>PDCRD, GPIONumber);}
+\DoxyCodeLine{00505        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00506     \textcolor{keywordflow}{case} PWR\_GPIO\_E:}
+\DoxyCodeLine{00507        CLEAR\_BIT(PWR-\/>PDCRE, GPIONumber);}
+\DoxyCodeLine{00508        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00509     \textcolor{keywordflow}{case} PWR\_GPIO\_F:}
+\DoxyCodeLine{00510        CLEAR\_BIT(PWR-\/>PDCRF, (GPIONumber \& PWR\_PORTF\_AVAILABLE\_PINS));}
+\DoxyCodeLine{00511        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00512     \textcolor{keywordflow}{case} PWR\_GPIO\_G:}
+\DoxyCodeLine{00513        CLEAR\_BIT(PWR-\/>PDCRG, ((GPIONumber \& PWR\_PORTG\_AVAILABLE\_PINS) \& (\string~(PWR\_GPIO\_BIT\_10))));}
+\DoxyCodeLine{00514        \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00515     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00516       status = HAL\_ERROR;}
+\DoxyCodeLine{00517       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00518   \}}
+\DoxyCodeLine{00519 }
+\DoxyCodeLine{00520   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00521 \}}
+\DoxyCodeLine{00522 }
+\DoxyCodeLine{00523 }
+\DoxyCodeLine{00524 }
+\DoxyCodeLine{00535 \textcolor{keywordtype}{void} HAL\_PWREx\_EnablePullUpPullDownConfig(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00536 \{}
+\DoxyCodeLine{00537   SET\_BIT(PWR-\/>CR3, PWR\_CR3\_APC);}
+\DoxyCodeLine{00538 \}}
+\DoxyCodeLine{00539 }
+\DoxyCodeLine{00540 }
+\DoxyCodeLine{00547 \textcolor{keywordtype}{void} HAL\_PWREx\_DisablePullUpPullDownConfig(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00548 \{}
+\DoxyCodeLine{00549   CLEAR\_BIT(PWR-\/>CR3, PWR\_CR3\_APC);}
+\DoxyCodeLine{00550 \}}
+\DoxyCodeLine{00551 }
+\DoxyCodeLine{00552 }
+\DoxyCodeLine{00553 }
+\DoxyCodeLine{00560 \textcolor{keywordtype}{void} HAL\_PWREx\_EnableSRAM2ContentRetention(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00561 \{}
+\DoxyCodeLine{00562   SET\_BIT(PWR-\/>CR3, PWR\_CR3\_RRS);}
+\DoxyCodeLine{00563 \}}
+\DoxyCodeLine{00564 }
+\DoxyCodeLine{00565 }
+\DoxyCodeLine{00572 \textcolor{keywordtype}{void} HAL\_PWREx\_DisableSRAM2ContentRetention(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00573 \{}
+\DoxyCodeLine{00574   CLEAR\_BIT(PWR-\/>CR3, PWR\_CR3\_RRS);}
+\DoxyCodeLine{00575 \}}
+\DoxyCodeLine{00576 }
+\DoxyCodeLine{00577 }
+\DoxyCodeLine{00578 }
+\DoxyCodeLine{00579 }
+\DoxyCodeLine{00580 \textcolor{preprocessor}{\#if defined(PWR\_CR2\_PVME1)}}
+\DoxyCodeLine{00585 \textcolor{keywordtype}{void} HAL\_PWREx\_EnablePVM1(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00586 \{}
+\DoxyCodeLine{00587   SET\_BIT(PWR-\/>CR2, PWR\_PVM\_1);}
+\DoxyCodeLine{00588 \}}
+\DoxyCodeLine{00589 }
+\DoxyCodeLine{00594 \textcolor{keywordtype}{void} HAL\_PWREx\_DisablePVM1(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00595 \{}
+\DoxyCodeLine{00596   CLEAR\_BIT(PWR-\/>CR2, PWR\_PVM\_1);}
+\DoxyCodeLine{00597 \}}
+\DoxyCodeLine{00598 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR2\_PVME1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00599 }
+\DoxyCodeLine{00600 }
+\DoxyCodeLine{00601 \textcolor{preprocessor}{\#if defined(PWR\_CR2\_PVME2)}}
+\DoxyCodeLine{00606 \textcolor{keywordtype}{void} HAL\_PWREx\_EnablePVM2(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00607 \{}
+\DoxyCodeLine{00608   SET\_BIT(PWR-\/>CR2, PWR\_PVM\_2);}
+\DoxyCodeLine{00609 \}}
+\DoxyCodeLine{00610 }
+\DoxyCodeLine{00615 \textcolor{keywordtype}{void} HAL\_PWREx\_DisablePVM2(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00616 \{}
+\DoxyCodeLine{00617   CLEAR\_BIT(PWR-\/>CR2, PWR\_PVM\_2);}
+\DoxyCodeLine{00618 \}}
+\DoxyCodeLine{00619 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR2\_PVME2 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00620 }
+\DoxyCodeLine{00621 }
+\DoxyCodeLine{00626 \textcolor{keywordtype}{void} HAL\_PWREx\_EnablePVM3(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00627 \{}
+\DoxyCodeLine{00628   SET\_BIT(PWR-\/>CR2, PWR\_PVM\_3);}
+\DoxyCodeLine{00629 \}}
+\DoxyCodeLine{00630 }
+\DoxyCodeLine{00635 \textcolor{keywordtype}{void} HAL\_PWREx\_DisablePVM3(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00636 \{}
+\DoxyCodeLine{00637   CLEAR\_BIT(PWR-\/>CR2, PWR\_PVM\_3);}
+\DoxyCodeLine{00638 \}}
+\DoxyCodeLine{00639 }
+\DoxyCodeLine{00640 }
+\DoxyCodeLine{00645 \textcolor{keywordtype}{void} HAL\_PWREx\_EnablePVM4(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00646 \{}
+\DoxyCodeLine{00647   SET\_BIT(PWR-\/>CR2, PWR\_PVM\_4);}
+\DoxyCodeLine{00648 \}}
+\DoxyCodeLine{00649 }
+\DoxyCodeLine{00654 \textcolor{keywordtype}{void} HAL\_PWREx\_DisablePVM4(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00655 \{}
+\DoxyCodeLine{00656   CLEAR\_BIT(PWR-\/>CR2, PWR\_PVM\_4);}
+\DoxyCodeLine{00657 \}}
+\DoxyCodeLine{00658 }
+\DoxyCodeLine{00659 }
+\DoxyCodeLine{00660 }
+\DoxyCodeLine{00661 }
+\DoxyCodeLine{00674 HAL\_StatusTypeDef HAL\_PWREx\_ConfigPVM(PWR\_PVMTypeDef *sConfigPVM)}
+\DoxyCodeLine{00675 \{}
+\DoxyCodeLine{00676   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00677 }
+\DoxyCodeLine{00678   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00679   assert\_param(IS\_PWR\_PVM\_TYPE(sConfigPVM-\/>PVMType));}
+\DoxyCodeLine{00680   assert\_param(IS\_PWR\_PVM\_MODE(sConfigPVM-\/>Mode));}
+\DoxyCodeLine{00681 }
+\DoxyCodeLine{00682 }
+\DoxyCodeLine{00683   \textcolor{comment}{/* Configure EXTI 35 to 38 interrupts if so required:}}
+\DoxyCodeLine{00684 \textcolor{comment}{     scan through PVMType to detect which PVMx is set and}}
+\DoxyCodeLine{00685 \textcolor{comment}{     configure the corresponding EXTI line accordingly. */}}
+\DoxyCodeLine{00686   \textcolor{keywordflow}{switch} (sConfigPVM-\/>PVMType)}
+\DoxyCodeLine{00687   \{}
+\DoxyCodeLine{00688 \textcolor{preprocessor}{\#if defined(PWR\_CR2\_PVME1)}}
+\DoxyCodeLine{00689     \textcolor{keywordflow}{case} PWR\_PVM\_1:}
+\DoxyCodeLine{00690       \textcolor{comment}{/* Clear any previous config. Keep it clear if no event or IT mode is selected */}}
+\DoxyCodeLine{00691       \_\_HAL\_PWR\_PVM1\_EXTI\_DISABLE\_EVENT();}
+\DoxyCodeLine{00692       \_\_HAL\_PWR\_PVM1\_EXTI\_DISABLE\_IT();}
+\DoxyCodeLine{00693       \_\_HAL\_PWR\_PVM1\_EXTI\_DISABLE\_FALLING\_EDGE();}
+\DoxyCodeLine{00694       \_\_HAL\_PWR\_PVM1\_EXTI\_DISABLE\_RISING\_EDGE();}
+\DoxyCodeLine{00695 }
+\DoxyCodeLine{00696       \textcolor{comment}{/* Configure interrupt mode */}}
+\DoxyCodeLine{00697       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_MODE\_IT) == PVM\_MODE\_IT)}
+\DoxyCodeLine{00698       \{}
+\DoxyCodeLine{00699         \_\_HAL\_PWR\_PVM1\_EXTI\_ENABLE\_IT();}
+\DoxyCodeLine{00700       \}}
+\DoxyCodeLine{00701 }
+\DoxyCodeLine{00702       \textcolor{comment}{/* Configure event mode */}}
+\DoxyCodeLine{00703       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_MODE\_EVT) == PVM\_MODE\_EVT)}
+\DoxyCodeLine{00704       \{}
+\DoxyCodeLine{00705         \_\_HAL\_PWR\_PVM1\_EXTI\_ENABLE\_EVENT();}
+\DoxyCodeLine{00706       \}}
+\DoxyCodeLine{00707 }
+\DoxyCodeLine{00708       \textcolor{comment}{/* Configure the edge */}}
+\DoxyCodeLine{00709       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_RISING\_EDGE) == PVM\_RISING\_EDGE)}
+\DoxyCodeLine{00710       \{}
+\DoxyCodeLine{00711         \_\_HAL\_PWR\_PVM1\_EXTI\_ENABLE\_RISING\_EDGE();}
+\DoxyCodeLine{00712       \}}
+\DoxyCodeLine{00713 }
+\DoxyCodeLine{00714       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_FALLING\_EDGE) == PVM\_FALLING\_EDGE)}
+\DoxyCodeLine{00715       \{}
+\DoxyCodeLine{00716         \_\_HAL\_PWR\_PVM1\_EXTI\_ENABLE\_FALLING\_EDGE();}
+\DoxyCodeLine{00717       \}}
+\DoxyCodeLine{00718       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00719 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR2\_PVME1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00720 }
+\DoxyCodeLine{00721 \textcolor{preprocessor}{\#if defined(PWR\_CR2\_PVME2)}}
+\DoxyCodeLine{00722     \textcolor{keywordflow}{case} PWR\_PVM\_2:}
+\DoxyCodeLine{00723       \textcolor{comment}{/* Clear any previous config. Keep it clear if no event or IT mode is selected */}}
+\DoxyCodeLine{00724       \_\_HAL\_PWR\_PVM2\_EXTI\_DISABLE\_EVENT();}
+\DoxyCodeLine{00725       \_\_HAL\_PWR\_PVM2\_EXTI\_DISABLE\_IT();}
+\DoxyCodeLine{00726       \_\_HAL\_PWR\_PVM2\_EXTI\_DISABLE\_FALLING\_EDGE();}
+\DoxyCodeLine{00727       \_\_HAL\_PWR\_PVM2\_EXTI\_DISABLE\_RISING\_EDGE();}
+\DoxyCodeLine{00728 }
+\DoxyCodeLine{00729       \textcolor{comment}{/* Configure interrupt mode */}}
+\DoxyCodeLine{00730       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_MODE\_IT) == PVM\_MODE\_IT)}
+\DoxyCodeLine{00731       \{}
+\DoxyCodeLine{00732         \_\_HAL\_PWR\_PVM2\_EXTI\_ENABLE\_IT();}
+\DoxyCodeLine{00733       \}}
+\DoxyCodeLine{00734 }
+\DoxyCodeLine{00735       \textcolor{comment}{/* Configure event mode */}}
+\DoxyCodeLine{00736       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_MODE\_EVT) == PVM\_MODE\_EVT)}
+\DoxyCodeLine{00737       \{}
+\DoxyCodeLine{00738         \_\_HAL\_PWR\_PVM2\_EXTI\_ENABLE\_EVENT();}
+\DoxyCodeLine{00739       \}}
+\DoxyCodeLine{00740 }
+\DoxyCodeLine{00741       \textcolor{comment}{/* Configure the edge */}}
+\DoxyCodeLine{00742       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_RISING\_EDGE) == PVM\_RISING\_EDGE)}
+\DoxyCodeLine{00743       \{}
+\DoxyCodeLine{00744         \_\_HAL\_PWR\_PVM2\_EXTI\_ENABLE\_RISING\_EDGE();}
+\DoxyCodeLine{00745       \}}
+\DoxyCodeLine{00746 }
+\DoxyCodeLine{00747       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_FALLING\_EDGE) == PVM\_FALLING\_EDGE)}
+\DoxyCodeLine{00748       \{}
+\DoxyCodeLine{00749         \_\_HAL\_PWR\_PVM2\_EXTI\_ENABLE\_FALLING\_EDGE();}
+\DoxyCodeLine{00750       \}}
+\DoxyCodeLine{00751       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00752 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR2\_PVME2 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00753 }
+\DoxyCodeLine{00754     \textcolor{keywordflow}{case} PWR\_PVM\_3:}
+\DoxyCodeLine{00755       \textcolor{comment}{/* Clear any previous config. Keep it clear if no event or IT mode is selected */}}
+\DoxyCodeLine{00756       \_\_HAL\_PWR\_PVM3\_EXTI\_DISABLE\_EVENT();}
+\DoxyCodeLine{00757       \_\_HAL\_PWR\_PVM3\_EXTI\_DISABLE\_IT();}
+\DoxyCodeLine{00758       \_\_HAL\_PWR\_PVM3\_EXTI\_DISABLE\_FALLING\_EDGE();}
+\DoxyCodeLine{00759       \_\_HAL\_PWR\_PVM3\_EXTI\_DISABLE\_RISING\_EDGE();}
+\DoxyCodeLine{00760 }
+\DoxyCodeLine{00761       \textcolor{comment}{/* Configure interrupt mode */}}
+\DoxyCodeLine{00762       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_MODE\_IT) == PVM\_MODE\_IT)}
+\DoxyCodeLine{00763       \{}
+\DoxyCodeLine{00764         \_\_HAL\_PWR\_PVM3\_EXTI\_ENABLE\_IT();}
+\DoxyCodeLine{00765       \}}
+\DoxyCodeLine{00766 }
+\DoxyCodeLine{00767       \textcolor{comment}{/* Configure event mode */}}
+\DoxyCodeLine{00768       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_MODE\_EVT) == PVM\_MODE\_EVT)}
+\DoxyCodeLine{00769       \{}
+\DoxyCodeLine{00770         \_\_HAL\_PWR\_PVM3\_EXTI\_ENABLE\_EVENT();}
+\DoxyCodeLine{00771       \}}
+\DoxyCodeLine{00772 }
+\DoxyCodeLine{00773       \textcolor{comment}{/* Configure the edge */}}
+\DoxyCodeLine{00774       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_RISING\_EDGE) == PVM\_RISING\_EDGE)}
+\DoxyCodeLine{00775       \{}
+\DoxyCodeLine{00776         \_\_HAL\_PWR\_PVM3\_EXTI\_ENABLE\_RISING\_EDGE();}
+\DoxyCodeLine{00777       \}}
+\DoxyCodeLine{00778 }
+\DoxyCodeLine{00779       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_FALLING\_EDGE) == PVM\_FALLING\_EDGE)}
+\DoxyCodeLine{00780       \{}
+\DoxyCodeLine{00781         \_\_HAL\_PWR\_PVM3\_EXTI\_ENABLE\_FALLING\_EDGE();}
+\DoxyCodeLine{00782       \}}
+\DoxyCodeLine{00783       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00784 }
+\DoxyCodeLine{00785     \textcolor{keywordflow}{case} PWR\_PVM\_4:}
+\DoxyCodeLine{00786       \textcolor{comment}{/* Clear any previous config. Keep it clear if no event or IT mode is selected */}}
+\DoxyCodeLine{00787       \_\_HAL\_PWR\_PVM4\_EXTI\_DISABLE\_EVENT();}
+\DoxyCodeLine{00788       \_\_HAL\_PWR\_PVM4\_EXTI\_DISABLE\_IT();}
+\DoxyCodeLine{00789       \_\_HAL\_PWR\_PVM4\_EXTI\_DISABLE\_FALLING\_EDGE();}
+\DoxyCodeLine{00790       \_\_HAL\_PWR\_PVM4\_EXTI\_DISABLE\_RISING\_EDGE();}
+\DoxyCodeLine{00791 }
+\DoxyCodeLine{00792       \textcolor{comment}{/* Configure interrupt mode */}}
+\DoxyCodeLine{00793       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_MODE\_IT) == PVM\_MODE\_IT)}
+\DoxyCodeLine{00794       \{}
+\DoxyCodeLine{00795         \_\_HAL\_PWR\_PVM4\_EXTI\_ENABLE\_IT();}
+\DoxyCodeLine{00796       \}}
+\DoxyCodeLine{00797 }
+\DoxyCodeLine{00798       \textcolor{comment}{/* Configure event mode */}}
+\DoxyCodeLine{00799       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_MODE\_EVT) == PVM\_MODE\_EVT)}
+\DoxyCodeLine{00800       \{}
+\DoxyCodeLine{00801         \_\_HAL\_PWR\_PVM4\_EXTI\_ENABLE\_EVENT();}
+\DoxyCodeLine{00802       \}}
+\DoxyCodeLine{00803 }
+\DoxyCodeLine{00804       \textcolor{comment}{/* Configure the edge */}}
+\DoxyCodeLine{00805       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_RISING\_EDGE) == PVM\_RISING\_EDGE)}
+\DoxyCodeLine{00806       \{}
+\DoxyCodeLine{00807         \_\_HAL\_PWR\_PVM4\_EXTI\_ENABLE\_RISING\_EDGE();}
+\DoxyCodeLine{00808       \}}
+\DoxyCodeLine{00809 }
+\DoxyCodeLine{00810       \textcolor{keywordflow}{if}((sConfigPVM-\/>Mode \& PVM\_FALLING\_EDGE) == PVM\_FALLING\_EDGE)}
+\DoxyCodeLine{00811       \{}
+\DoxyCodeLine{00812         \_\_HAL\_PWR\_PVM4\_EXTI\_ENABLE\_FALLING\_EDGE();}
+\DoxyCodeLine{00813       \}}
+\DoxyCodeLine{00814       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00815 }
+\DoxyCodeLine{00816     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00817       status = HAL\_ERROR;}
+\DoxyCodeLine{00818       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00819   \}}
+\DoxyCodeLine{00820 }
+\DoxyCodeLine{00821   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00822 \}}
+\DoxyCodeLine{00823 }
+\DoxyCodeLine{00824 }
+\DoxyCodeLine{00835 \textcolor{keywordtype}{void} HAL\_PWREx\_EnableLowPowerRunMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00836 \{}
+\DoxyCodeLine{00837   \textcolor{comment}{/* Set Regulator parameter */}}
+\DoxyCodeLine{00838   SET\_BIT(PWR-\/>CR1, PWR\_CR1\_LPR);}
+\DoxyCodeLine{00839 \}}
+\DoxyCodeLine{00840 }
+\DoxyCodeLine{00841 }
+\DoxyCodeLine{00850 HAL\_StatusTypeDef HAL\_PWREx\_DisableLowPowerRunMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00851 \{}
+\DoxyCodeLine{00852   uint32\_t wait\_loop\_index;}
+\DoxyCodeLine{00853 }
+\DoxyCodeLine{00854   \textcolor{comment}{/* Clear LPR bit */}}
+\DoxyCodeLine{00855   CLEAR\_BIT(PWR-\/>CR1, PWR\_CR1\_LPR);}
+\DoxyCodeLine{00856 }
+\DoxyCodeLine{00857   \textcolor{comment}{/* Wait until REGLPF is reset */}}
+\DoxyCodeLine{00858   wait\_loop\_index = (PWR\_FLAG\_SETTING\_DELAY\_US * (SystemCoreClock / 1000000U));}
+\DoxyCodeLine{00859   \textcolor{keywordflow}{while} ((HAL\_IS\_BIT\_SET(PWR-\/>SR2, PWR\_SR2\_REGLPF)) \&\& (wait\_loop\_index != 0U))}
+\DoxyCodeLine{00860   \{}
+\DoxyCodeLine{00861     wait\_loop\_index-\/-\/;}
+\DoxyCodeLine{00862   \}}
+\DoxyCodeLine{00863   \textcolor{keywordflow}{if} (HAL\_IS\_BIT\_SET(PWR-\/>SR2, PWR\_SR2\_REGLPF))}
+\DoxyCodeLine{00864   \{}
+\DoxyCodeLine{00865     \textcolor{keywordflow}{return} HAL\_TIMEOUT;}
+\DoxyCodeLine{00866   \}}
+\DoxyCodeLine{00867 }
+\DoxyCodeLine{00868   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00869 \}}
+\DoxyCodeLine{00870 }
+\DoxyCodeLine{00871 }
+\DoxyCodeLine{00894 \textcolor{keywordtype}{void} HAL\_PWREx\_EnterSTOP0Mode(uint8\_t STOPEntry)}
+\DoxyCodeLine{00895 \{}
+\DoxyCodeLine{00896   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00897   assert\_param(IS\_PWR\_STOP\_ENTRY(STOPEntry));}
+\DoxyCodeLine{00898 }
+\DoxyCodeLine{00899   \textcolor{comment}{/* Stop 0 mode with Main Regulator */}}
+\DoxyCodeLine{00900   MODIFY\_REG(PWR-\/>CR1, PWR\_CR1\_LPMS, PWR\_CR1\_LPMS\_STOP0);}
+\DoxyCodeLine{00901 }
+\DoxyCodeLine{00902   \textcolor{comment}{/* Set SLEEPDEEP bit of Cortex System Control Register */}}
+\DoxyCodeLine{00903   SET\_BIT(SCB-\/>SCR, ((uint32\_t)SCB\_SCR\_SLEEPDEEP\_Msk));}
+\DoxyCodeLine{00904 }
+\DoxyCodeLine{00905   \textcolor{comment}{/* Select Stop mode entry -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00906   \textcolor{keywordflow}{if}(STOPEntry == PWR\_STOPENTRY\_WFI)}
+\DoxyCodeLine{00907   \{}
+\DoxyCodeLine{00908     \textcolor{comment}{/* Request Wait For Interrupt */}}
+\DoxyCodeLine{00909     \_\_WFI();}
+\DoxyCodeLine{00910   \}}
+\DoxyCodeLine{00911   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00912   \{}
+\DoxyCodeLine{00913     \textcolor{comment}{/* Request Wait For Event */}}
+\DoxyCodeLine{00914     \_\_SEV();}
+\DoxyCodeLine{00915     \_\_WFE();}
+\DoxyCodeLine{00916     \_\_WFE();}
+\DoxyCodeLine{00917   \}}
+\DoxyCodeLine{00918 }
+\DoxyCodeLine{00919   \textcolor{comment}{/* Reset SLEEPDEEP bit of Cortex System Control Register */}}
+\DoxyCodeLine{00920   CLEAR\_BIT(SCB-\/>SCR, ((uint32\_t)SCB\_SCR\_SLEEPDEEP\_Msk));}
+\DoxyCodeLine{00921 \}}
+\DoxyCodeLine{00922 }
+\DoxyCodeLine{00923 }
+\DoxyCodeLine{00945 \textcolor{keywordtype}{void} HAL\_PWREx\_EnterSTOP1Mode(uint8\_t STOPEntry)}
+\DoxyCodeLine{00946 \{}
+\DoxyCodeLine{00947   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00948   assert\_param(IS\_PWR\_STOP\_ENTRY(STOPEntry));}
+\DoxyCodeLine{00949 }
+\DoxyCodeLine{00950   \textcolor{comment}{/* Stop 1 mode with Low-\/Power Regulator */}}
+\DoxyCodeLine{00951   MODIFY\_REG(PWR-\/>CR1, PWR\_CR1\_LPMS, PWR\_CR1\_LPMS\_STOP1);}
+\DoxyCodeLine{00952 }
+\DoxyCodeLine{00953   \textcolor{comment}{/* Set SLEEPDEEP bit of Cortex System Control Register */}}
+\DoxyCodeLine{00954   SET\_BIT(SCB-\/>SCR, ((uint32\_t)SCB\_SCR\_SLEEPDEEP\_Msk));}
+\DoxyCodeLine{00955 }
+\DoxyCodeLine{00956   \textcolor{comment}{/* Select Stop mode entry -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00957   \textcolor{keywordflow}{if}(STOPEntry == PWR\_STOPENTRY\_WFI)}
+\DoxyCodeLine{00958   \{}
+\DoxyCodeLine{00959     \textcolor{comment}{/* Request Wait For Interrupt */}}
+\DoxyCodeLine{00960     \_\_WFI();}
+\DoxyCodeLine{00961   \}}
+\DoxyCodeLine{00962   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00963   \{}
+\DoxyCodeLine{00964     \textcolor{comment}{/* Request Wait For Event */}}
+\DoxyCodeLine{00965     \_\_SEV();}
+\DoxyCodeLine{00966     \_\_WFE();}
+\DoxyCodeLine{00967     \_\_WFE();}
+\DoxyCodeLine{00968   \}}
+\DoxyCodeLine{00969 }
+\DoxyCodeLine{00970   \textcolor{comment}{/* Reset SLEEPDEEP bit of Cortex System Control Register */}}
+\DoxyCodeLine{00971   CLEAR\_BIT(SCB-\/>SCR, ((uint32\_t)SCB\_SCR\_SLEEPDEEP\_Msk));}
+\DoxyCodeLine{00972 \}}
+\DoxyCodeLine{00973 }
+\DoxyCodeLine{00974 }
+\DoxyCodeLine{00975 }
+\DoxyCodeLine{00976 }
+\DoxyCodeLine{00986 \textcolor{keywordtype}{void} HAL\_PWREx\_EnterSHUTDOWNMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00987 \{}
+\DoxyCodeLine{00988 }
+\DoxyCodeLine{00989   \textcolor{comment}{/* Set Shutdown mode */}}
+\DoxyCodeLine{00990   MODIFY\_REG(PWR-\/>CR1, PWR\_CR1\_LPMS, PWR\_CR1\_LPMS\_SHUTDOWN);}
+\DoxyCodeLine{00991 }
+\DoxyCodeLine{00992   \textcolor{comment}{/* Set SLEEPDEEP bit of Cortex System Control Register */}}
+\DoxyCodeLine{00993   SET\_BIT(SCB-\/>SCR, ((uint32\_t)SCB\_SCR\_SLEEPDEEP\_Msk));}
+\DoxyCodeLine{00994 }
+\DoxyCodeLine{00995 \textcolor{comment}{/* This option is used to ensure that store operations are completed */}}
+\DoxyCodeLine{00996 \textcolor{preprocessor}{\#if defined ( \_\_CC\_ARM)}}
+\DoxyCodeLine{00997   \_\_force\_stores();}
+\DoxyCodeLine{00998 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00999   \textcolor{comment}{/* Request Wait For Interrupt */}}
+\DoxyCodeLine{01000   \_\_WFI();}
+\DoxyCodeLine{01001 \}}
+\DoxyCodeLine{01002 }
+\DoxyCodeLine{01003 }
+\DoxyCodeLine{01004 }
+\DoxyCodeLine{01005 }
+\DoxyCodeLine{01011 \textcolor{keywordtype}{void} HAL\_PWREx\_PVD\_PVM\_IRQHandler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01012 \{}
+\DoxyCodeLine{01013   \textcolor{comment}{/* Check PWR exti flag */}}
+\DoxyCodeLine{01014   \textcolor{keywordflow}{if}(\_\_HAL\_PWR\_PVD\_EXTI\_GET\_FLAG() != 0U)}
+\DoxyCodeLine{01015   \{}
+\DoxyCodeLine{01016     \textcolor{comment}{/* PWR PVD interrupt user callback */}}
+\DoxyCodeLine{01017     HAL\_PWR\_PVDCallback();}
+\DoxyCodeLine{01018 }
+\DoxyCodeLine{01019     \textcolor{comment}{/* Clear PVD exti pending bit */}}
+\DoxyCodeLine{01020     \_\_HAL\_PWR\_PVD\_EXTI\_CLEAR\_FLAG();}
+\DoxyCodeLine{01021   \}}
+\DoxyCodeLine{01022   \textcolor{comment}{/* Next, successively check PVMx exti flags */}}
+\DoxyCodeLine{01023 \textcolor{preprocessor}{\#if defined(PWR\_CR2\_PVME1)}}
+\DoxyCodeLine{01024   \textcolor{keywordflow}{if}(\_\_HAL\_PWR\_PVM1\_EXTI\_GET\_FLAG() != 0U)}
+\DoxyCodeLine{01025   \{}
+\DoxyCodeLine{01026     \textcolor{comment}{/* PWR PVM1 interrupt user callback */}}
+\DoxyCodeLine{01027     HAL\_PWREx\_PVM1Callback();}
+\DoxyCodeLine{01028 }
+\DoxyCodeLine{01029     \textcolor{comment}{/* Clear PVM1 exti pending bit */}}
+\DoxyCodeLine{01030     \_\_HAL\_PWR\_PVM1\_EXTI\_CLEAR\_FLAG();}
+\DoxyCodeLine{01031   \}}
+\DoxyCodeLine{01032 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR2\_PVME1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01033 \textcolor{preprocessor}{\#if defined(PWR\_CR2\_PVME2)}}
+\DoxyCodeLine{01034   \textcolor{keywordflow}{if}(\_\_HAL\_PWR\_PVM2\_EXTI\_GET\_FLAG() != 0U)}
+\DoxyCodeLine{01035   \{}
+\DoxyCodeLine{01036     \textcolor{comment}{/* PWR PVM2 interrupt user callback */}}
+\DoxyCodeLine{01037     HAL\_PWREx\_PVM2Callback();}
+\DoxyCodeLine{01038 }
+\DoxyCodeLine{01039     \textcolor{comment}{/* Clear PVM2 exti pending bit */}}
+\DoxyCodeLine{01040     \_\_HAL\_PWR\_PVM2\_EXTI\_CLEAR\_FLAG();}
+\DoxyCodeLine{01041   \}}
+\DoxyCodeLine{01042 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR2\_PVME2 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01043   \textcolor{keywordflow}{if}(\_\_HAL\_PWR\_PVM3\_EXTI\_GET\_FLAG() != 0U)}
+\DoxyCodeLine{01044   \{}
+\DoxyCodeLine{01045     \textcolor{comment}{/* PWR PVM3 interrupt user callback */}}
+\DoxyCodeLine{01046     HAL\_PWREx\_PVM3Callback();}
+\DoxyCodeLine{01047 }
+\DoxyCodeLine{01048     \textcolor{comment}{/* Clear PVM3 exti pending bit */}}
+\DoxyCodeLine{01049     \_\_HAL\_PWR\_PVM3\_EXTI\_CLEAR\_FLAG();}
+\DoxyCodeLine{01050   \}}
+\DoxyCodeLine{01051   \textcolor{keywordflow}{if}(\_\_HAL\_PWR\_PVM4\_EXTI\_GET\_FLAG() != 0U)}
+\DoxyCodeLine{01052   \{}
+\DoxyCodeLine{01053     \textcolor{comment}{/* PWR PVM4 interrupt user callback */}}
+\DoxyCodeLine{01054     HAL\_PWREx\_PVM4Callback();}
+\DoxyCodeLine{01055 }
+\DoxyCodeLine{01056     \textcolor{comment}{/* Clear PVM4 exti pending bit */}}
+\DoxyCodeLine{01057     \_\_HAL\_PWR\_PVM4\_EXTI\_CLEAR\_FLAG();}
+\DoxyCodeLine{01058   \}}
+\DoxyCodeLine{01059 \}}
+\DoxyCodeLine{01060 }
+\DoxyCodeLine{01061 }
+\DoxyCodeLine{01062 \textcolor{preprocessor}{\#if defined(PWR\_CR2\_PVME1)}}
+\DoxyCodeLine{01067 \_\_weak \textcolor{keywordtype}{void} HAL\_PWREx\_PVM1Callback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01068 \{}
+\DoxyCodeLine{01069   \textcolor{comment}{/* NOTE : This function should not be modified; when the callback is needed,}}
+\DoxyCodeLine{01070 \textcolor{comment}{            HAL\_PWREx\_PVM1Callback() API can be implemented in the user file}}
+\DoxyCodeLine{01071 \textcolor{comment}{   */}}
+\DoxyCodeLine{01072 \}}
+\DoxyCodeLine{01073 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR2\_PVME1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01074 }
+\DoxyCodeLine{01075 \textcolor{preprocessor}{\#if defined(PWR\_CR2\_PVME2)}}
+\DoxyCodeLine{01080 \_\_weak \textcolor{keywordtype}{void} HAL\_PWREx\_PVM2Callback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01081 \{}
+\DoxyCodeLine{01082   \textcolor{comment}{/* NOTE : This function should not be modified; when the callback is needed,}}
+\DoxyCodeLine{01083 \textcolor{comment}{            HAL\_PWREx\_PVM2Callback() API can be implemented in the user file}}
+\DoxyCodeLine{01084 \textcolor{comment}{   */}}
+\DoxyCodeLine{01085 \}}
+\DoxyCodeLine{01086 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR2\_PVME2 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01087 }
+\DoxyCodeLine{01092 \_\_weak \textcolor{keywordtype}{void} HAL\_PWREx\_PVM3Callback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01093 \{}
+\DoxyCodeLine{01094   \textcolor{comment}{/* NOTE : This function should not be modified; when the callback is needed,}}
+\DoxyCodeLine{01095 \textcolor{comment}{            HAL\_PWREx\_PVM3Callback() API can be implemented in the user file}}
+\DoxyCodeLine{01096 \textcolor{comment}{   */}}
+\DoxyCodeLine{01097 \}}
+\DoxyCodeLine{01098 }
+\DoxyCodeLine{01103 \_\_weak \textcolor{keywordtype}{void} HAL\_PWREx\_PVM4Callback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01104 \{}
+\DoxyCodeLine{01105   \textcolor{comment}{/* NOTE : This function should not be modified; when the callback is needed,}}
+\DoxyCodeLine{01106 \textcolor{comment}{            HAL\_PWREx\_PVM4Callback() API can be implemented in the user file}}
+\DoxyCodeLine{01107 \textcolor{comment}{   */}}
+\DoxyCodeLine{01108 \}}
+\DoxyCodeLine{01109 }
+\DoxyCodeLine{01110 \textcolor{preprocessor}{\#if defined(PWR\_CR3\_UCPD\_STDBY)}}
+\DoxyCodeLine{01115 \textcolor{keywordtype}{void} HAL\_PWREx\_EnableUCPDStandbyMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01116 \{}
+\DoxyCodeLine{01117   \textcolor{comment}{/* Memorize UCPD configuration when entering standby mode */}}
+\DoxyCodeLine{01118   SET\_BIT(PWR-\/>CR3, PWR\_CR3\_UCPD\_STDBY);}
+\DoxyCodeLine{01119 \}}
+\DoxyCodeLine{01120 }
+\DoxyCodeLine{01127 \textcolor{keywordtype}{void} HAL\_PWREx\_DisableUCPDStandbyMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01128 \{}
+\DoxyCodeLine{01129   \textcolor{comment}{/* Write 0 immediately after Standby exit when using UCPD,}}
+\DoxyCodeLine{01130 \textcolor{comment}{     and before writing any UCPD registers */}}
+\DoxyCodeLine{01131   CLEAR\_BIT(PWR-\/>CR3, PWR\_CR3\_UCPD\_STDBY);}
+\DoxyCodeLine{01132 \}}
+\DoxyCodeLine{01133 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR3\_UCPD\_STDBY */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01134 }
+\DoxyCodeLine{01135 \textcolor{preprocessor}{\#if defined(PWR\_CR3\_UCPD\_DBDIS)}}
+\DoxyCodeLine{01141 \textcolor{keywordtype}{void} HAL\_PWREx\_EnableUCPDDeadBattery(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01142 \{}
+\DoxyCodeLine{01143   \textcolor{comment}{/* Write 0 to enable the USB Type-\/C dead battery pull-\/down behavior */}}
+\DoxyCodeLine{01144   CLEAR\_BIT(PWR-\/>CR3, PWR\_CR3\_UCPD\_DBDIS);}
+\DoxyCodeLine{01145 \}}
+\DoxyCodeLine{01146 }
+\DoxyCodeLine{01157 \textcolor{keywordtype}{void} HAL\_PWREx\_DisableUCPDDeadBattery(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01158 \{}
+\DoxyCodeLine{01159   \textcolor{comment}{/* Write 1 to disable the USB Type-\/C dead battery pull-\/down behavior */}}
+\DoxyCodeLine{01160   SET\_BIT(PWR-\/>CR3, PWR\_CR3\_UCPD\_DBDIS);}
+\DoxyCodeLine{01161 \}}
+\DoxyCodeLine{01162 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PWR\_CR3\_UCPD\_DBDIS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01163 }
+\DoxyCodeLine{01164 }
+\DoxyCodeLine{01165 }
+\DoxyCodeLine{01174 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_PWR\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

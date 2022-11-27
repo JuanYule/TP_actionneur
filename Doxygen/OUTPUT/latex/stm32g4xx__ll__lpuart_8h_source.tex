@@ -1,0 +1,1043 @@
+\doxysection{stm32g4xx\+\_\+ll\+\_\+lpuart.\+h}
+\label{stm32g4xx__ll__lpuart_8h_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_lpuart.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_lpuart.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00019 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020 \textcolor{preprocessor}{\#ifndef STM32G4xx\_LL\_LPUART\_H}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#define STM32G4xx\_LL\_LPUART\_H}}
+\DoxyCodeLine{00022 }
+\DoxyCodeLine{00023 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00024 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#include "{}stm32g4xx.h"{}}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00034 \textcolor{preprocessor}{\#if defined (LPUART1)}}
+\DoxyCodeLine{00035 }
+\DoxyCodeLine{00040 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00041 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00045 \textcolor{comment}{/* Array used to get the LPUART prescaler division decimal values versus @ref LPUART\_LL\_EC\_PRESCALER values */}}
+\DoxyCodeLine{00046 \textcolor{keyword}{static} \textcolor{keyword}{const} uint16\_t LPUART\_PRESCALER\_TAB[] =}
+\DoxyCodeLine{00047 \{}
+\DoxyCodeLine{00048   (uint16\_t)1,}
+\DoxyCodeLine{00049   (uint16\_t)2,}
+\DoxyCodeLine{00050   (uint16\_t)4,}
+\DoxyCodeLine{00051   (uint16\_t)6,}
+\DoxyCodeLine{00052   (uint16\_t)8,}
+\DoxyCodeLine{00053   (uint16\_t)10,}
+\DoxyCodeLine{00054   (uint16\_t)12,}
+\DoxyCodeLine{00055   (uint16\_t)16,}
+\DoxyCodeLine{00056   (uint16\_t)32,}
+\DoxyCodeLine{00057   (uint16\_t)64,}
+\DoxyCodeLine{00058   (uint16\_t)128,}
+\DoxyCodeLine{00059   (uint16\_t)256}
+\DoxyCodeLine{00060 \};}
+\DoxyCodeLine{00065 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00069 \textcolor{comment}{/* Defines used in Baud Rate related macros and corresponding register setting computation */}}
+\DoxyCodeLine{00070 \textcolor{preprocessor}{\#define LPUART\_LPUARTDIV\_FREQ\_MUL     256U}}
+\DoxyCodeLine{00071 \textcolor{preprocessor}{\#define LPUART\_BRR\_MASK               0x000FFFFFU}}
+\DoxyCodeLine{00072 \textcolor{preprocessor}{\#define LPUART\_BRR\_MIN\_VALUE          0x00000300U}}
+\DoxyCodeLine{00078 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00079 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{00086 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/*USE\_FULL\_LL\_DRIVER*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00087 }
+\DoxyCodeLine{00088 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00089 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{00097 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00098 \{}
+\DoxyCodeLine{00099   uint32\_t PrescalerValue;            }
+\DoxyCodeLine{00105   uint32\_t BaudRate;                  }
+\DoxyCodeLine{00110   uint32\_t DataWidth;                 }
+\DoxyCodeLine{00116   uint32\_t StopBits;                  }
+\DoxyCodeLine{00122   uint32\_t Parity;                    }
+\DoxyCodeLine{00128   uint32\_t TransferDirection;         }
+\DoxyCodeLine{00134   uint32\_t HardwareFlowControl;       }
+\DoxyCodeLine{00140 \} LL\_LPUART\_InitTypeDef;}
+\DoxyCodeLine{00141 }
+\DoxyCodeLine{00145 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_FULL\_LL\_DRIVER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00146 }
+\DoxyCodeLine{00147 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00156 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_PECF                 USART\_ICR\_PECF                }}
+\DoxyCodeLine{00157 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_FECF                 USART\_ICR\_FECF                }}
+\DoxyCodeLine{00158 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_NCF                  USART\_ICR\_NECF                }}
+\DoxyCodeLine{00159 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_ORECF                USART\_ICR\_ORECF               }}
+\DoxyCodeLine{00160 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_IDLECF               USART\_ICR\_IDLECF              }}
+\DoxyCodeLine{00161 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_TCCF                 USART\_ICR\_TCCF                }}
+\DoxyCodeLine{00162 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_CTSCF                USART\_ICR\_CTSCF               }}
+\DoxyCodeLine{00163 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_CMCF                 USART\_ICR\_CMCF                }}
+\DoxyCodeLine{00164 \textcolor{preprocessor}{\#define LL\_LPUART\_ICR\_WUCF                 USART\_ICR\_WUCF                }}
+\DoxyCodeLine{00173 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_PE               USART\_ISR\_PE         }}
+\DoxyCodeLine{00174 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_FE               USART\_ISR\_FE         }}
+\DoxyCodeLine{00175 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_NE               USART\_ISR\_NE         }}
+\DoxyCodeLine{00176 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_ORE              USART\_ISR\_ORE        }}
+\DoxyCodeLine{00177 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_IDLE             USART\_ISR\_IDLE       }}
+\DoxyCodeLine{00178 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_RXNE\_RXFNE       USART\_ISR\_RXNE\_RXFNE }}
+\DoxyCodeLine{00179 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_TC               USART\_ISR\_TC         }}
+\DoxyCodeLine{00180 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_TXE\_TXFNF        USART\_ISR\_TXE\_TXFNF  }}
+\DoxyCodeLine{00181 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_CTSIF            USART\_ISR\_CTSIF      }}
+\DoxyCodeLine{00182 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_CTS              USART\_ISR\_CTS        }}
+\DoxyCodeLine{00183 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_BUSY             USART\_ISR\_BUSY       }}
+\DoxyCodeLine{00184 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_CMF              USART\_ISR\_CMF        }}
+\DoxyCodeLine{00185 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_SBKF             USART\_ISR\_SBKF       }}
+\DoxyCodeLine{00186 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_RWU              USART\_ISR\_RWU        }}
+\DoxyCodeLine{00187 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_WUF              USART\_ISR\_WUF        }}
+\DoxyCodeLine{00188 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_TEACK            USART\_ISR\_TEACK      }}
+\DoxyCodeLine{00189 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_REACK            USART\_ISR\_REACK      }}
+\DoxyCodeLine{00190 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_TXFE             USART\_ISR\_TXFE       }}
+\DoxyCodeLine{00191 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_RXFF             USART\_ISR\_RXFF       }}
+\DoxyCodeLine{00192 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_RXFT             USART\_ISR\_RXFT       }}
+\DoxyCodeLine{00193 \textcolor{preprocessor}{\#define LL\_LPUART\_ISR\_TXFT             USART\_ISR\_TXFT       }}
+\DoxyCodeLine{00202 \textcolor{preprocessor}{\#define LL\_LPUART\_CR1\_IDLEIE         USART\_CR1\_IDLEIE         }}
+\DoxyCodeLine{00203 \textcolor{preprocessor}{\#define LL\_LPUART\_CR1\_RXNEIE\_RXFNEIE USART\_CR1\_RXNEIE\_RXFNEIE }}
+\DoxyCodeLine{00205 \textcolor{preprocessor}{\#define LL\_LPUART\_CR1\_TCIE           USART\_CR1\_TCIE           }}
+\DoxyCodeLine{00206 \textcolor{preprocessor}{\#define LL\_LPUART\_CR1\_TXEIE\_TXFNFIE  USART\_CR1\_TXEIE\_TXFNFIE  }}
+\DoxyCodeLine{00208 \textcolor{preprocessor}{\#define LL\_LPUART\_CR1\_PEIE           USART\_CR1\_PEIE           }}
+\DoxyCodeLine{00209 \textcolor{preprocessor}{\#define LL\_LPUART\_CR1\_CMIE           USART\_CR1\_CMIE           }}
+\DoxyCodeLine{00210 \textcolor{preprocessor}{\#define LL\_LPUART\_CR1\_TXFEIE         USART\_CR1\_TXFEIE         }}
+\DoxyCodeLine{00211 \textcolor{preprocessor}{\#define LL\_LPUART\_CR1\_RXFFIE         USART\_CR1\_RXFFIE         }}
+\DoxyCodeLine{00212 \textcolor{preprocessor}{\#define LL\_LPUART\_CR3\_EIE            USART\_CR3\_EIE            }}
+\DoxyCodeLine{00213 \textcolor{preprocessor}{\#define LL\_LPUART\_CR3\_CTSIE          USART\_CR3\_CTSIE          }}
+\DoxyCodeLine{00214 \textcolor{preprocessor}{\#define LL\_LPUART\_CR3\_WUFIE          USART\_CR3\_WUFIE          }}
+\DoxyCodeLine{00215 \textcolor{preprocessor}{\#define LL\_LPUART\_CR3\_TXFTIE         USART\_CR3\_TXFTIE         }}
+\DoxyCodeLine{00216 \textcolor{preprocessor}{\#define LL\_LPUART\_CR3\_RXFTIE         USART\_CR3\_RXFTIE         }}
+\DoxyCodeLine{00224 \textcolor{preprocessor}{\#define LL\_LPUART\_FIFOTHRESHOLD\_1\_8        0x00000000U }}
+\DoxyCodeLine{00225 \textcolor{preprocessor}{\#define LL\_LPUART\_FIFOTHRESHOLD\_1\_4        0x00000001U }}
+\DoxyCodeLine{00226 \textcolor{preprocessor}{\#define LL\_LPUART\_FIFOTHRESHOLD\_1\_2        0x00000002U }}
+\DoxyCodeLine{00227 \textcolor{preprocessor}{\#define LL\_LPUART\_FIFOTHRESHOLD\_3\_4        0x00000003U }}
+\DoxyCodeLine{00228 \textcolor{preprocessor}{\#define LL\_LPUART\_FIFOTHRESHOLD\_7\_8        0x00000004U }}
+\DoxyCodeLine{00229 \textcolor{preprocessor}{\#define LL\_LPUART\_FIFOTHRESHOLD\_8\_8        0x00000005U }}
+\DoxyCodeLine{00237 \textcolor{preprocessor}{\#define LL\_LPUART\_DIRECTION\_NONE  0x00000000U                  }}
+\DoxyCodeLine{00238 \textcolor{preprocessor}{\#define LL\_LPUART\_DIRECTION\_RX    USART\_CR1\_RE                 }}
+\DoxyCodeLine{00239 \textcolor{preprocessor}{\#define LL\_LPUART\_DIRECTION\_TX    USART\_CR1\_TE                 }}
+\DoxyCodeLine{00240 \textcolor{preprocessor}{\#define LL\_LPUART\_DIRECTION\_TX\_RX (USART\_CR1\_TE |USART\_CR1\_RE) }}
+\DoxyCodeLine{00248 \textcolor{preprocessor}{\#define LL\_LPUART\_PARITY\_NONE 0x00000000U                    }}
+\DoxyCodeLine{00249 \textcolor{preprocessor}{\#define LL\_LPUART\_PARITY\_EVEN USART\_CR1\_PCE                  }}
+\DoxyCodeLine{00250 \textcolor{preprocessor}{\#define LL\_LPUART\_PARITY\_ODD  (USART\_CR1\_PCE | USART\_CR1\_PS) }}
+\DoxyCodeLine{00258 \textcolor{preprocessor}{\#define LL\_LPUART\_WAKEUP\_IDLELINE    0x00000000U    }}
+\DoxyCodeLine{00259 \textcolor{preprocessor}{\#define LL\_LPUART\_WAKEUP\_ADDRESSMARK USART\_CR1\_WAKE }}
+\DoxyCodeLine{00267 \textcolor{preprocessor}{\#define LL\_LPUART\_DATAWIDTH\_7B USART\_CR1\_M1 }}
+\DoxyCodeLine{00268 \textcolor{preprocessor}{\#define LL\_LPUART\_DATAWIDTH\_8B 0x00000000U  }}
+\DoxyCodeLine{00269 \textcolor{preprocessor}{\#define LL\_LPUART\_DATAWIDTH\_9B USART\_CR1\_M0 }}
+\DoxyCodeLine{00277 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV1   0x00000000U                    }}
+\DoxyCodeLine{00278 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV2   (USART\_PRESC\_PRESCALER\_0)      }}
+\DoxyCodeLine{00279 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV4   (USART\_PRESC\_PRESCALER\_1)      }}
+\DoxyCodeLine{00280 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV6   (USART\_PRESC\_PRESCALER\_1 |\(\backslash\)}}
+\DoxyCodeLine{00281 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_0)      }}
+\DoxyCodeLine{00282 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV8   (USART\_PRESC\_PRESCALER\_2)      }}
+\DoxyCodeLine{00283 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV10  (USART\_PRESC\_PRESCALER\_2 |\(\backslash\)}}
+\DoxyCodeLine{00284 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_0)      }}
+\DoxyCodeLine{00285 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV12  (USART\_PRESC\_PRESCALER\_2 |\(\backslash\)}}
+\DoxyCodeLine{00286 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_1)      }}
+\DoxyCodeLine{00287 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV16  (USART\_PRESC\_PRESCALER\_2 |\(\backslash\)}}
+\DoxyCodeLine{00288 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_1 |\(\backslash\)}}
+\DoxyCodeLine{00289 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_0)      }}
+\DoxyCodeLine{00290 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV32  (USART\_PRESC\_PRESCALER\_3)      }}
+\DoxyCodeLine{00291 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV64  (USART\_PRESC\_PRESCALER\_3 |\(\backslash\)}}
+\DoxyCodeLine{00292 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_0)      }}
+\DoxyCodeLine{00293 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV128 (USART\_PRESC\_PRESCALER\_3 |\(\backslash\)}}
+\DoxyCodeLine{00294 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_1)      }}
+\DoxyCodeLine{00295 \textcolor{preprocessor}{\#define LL\_LPUART\_PRESCALER\_DIV256 (USART\_PRESC\_PRESCALER\_3 |\(\backslash\)}}
+\DoxyCodeLine{00296 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_1 |\(\backslash\)}}
+\DoxyCodeLine{00297 \textcolor{preprocessor}{                                    USART\_PRESC\_PRESCALER\_0)      }}
+\DoxyCodeLine{00305 \textcolor{preprocessor}{\#define LL\_LPUART\_STOPBITS\_1         0x00000000U             }}
+\DoxyCodeLine{00306 \textcolor{preprocessor}{\#define LL\_LPUART\_STOPBITS\_2         USART\_CR2\_STOP\_1        }}
+\DoxyCodeLine{00314 \textcolor{preprocessor}{\#define LL\_LPUART\_TXRX\_STANDARD      0x00000000U        }}
+\DoxyCodeLine{00315 \textcolor{preprocessor}{\#define LL\_LPUART\_TXRX\_SWAPPED       (USART\_CR2\_SWAP)   }}
+\DoxyCodeLine{00323 \textcolor{preprocessor}{\#define LL\_LPUART\_RXPIN\_LEVEL\_STANDARD   0x00000000U       }}
+\DoxyCodeLine{00324 \textcolor{preprocessor}{\#define LL\_LPUART\_RXPIN\_LEVEL\_INVERTED   (USART\_CR2\_RXINV) }}
+\DoxyCodeLine{00332 \textcolor{preprocessor}{\#define LL\_LPUART\_TXPIN\_LEVEL\_STANDARD  0x00000000U       }}
+\DoxyCodeLine{00333 \textcolor{preprocessor}{\#define LL\_LPUART\_TXPIN\_LEVEL\_INVERTED  (USART\_CR2\_TXINV) }}
+\DoxyCodeLine{00341 \textcolor{preprocessor}{\#define LL\_LPUART\_BINARY\_LOGIC\_POSITIVE 0x00000000U       }}
+\DoxyCodeLine{00343 \textcolor{preprocessor}{\#define LL\_LPUART\_BINARY\_LOGIC\_NEGATIVE USART\_CR2\_DATAINV }}
+\DoxyCodeLine{00353 \textcolor{preprocessor}{\#define LL\_LPUART\_BITORDER\_LSBFIRST 0x00000000U        }}
+\DoxyCodeLine{00355 \textcolor{preprocessor}{\#define LL\_LPUART\_BITORDER\_MSBFIRST USART\_CR2\_MSBFIRST }}
+\DoxyCodeLine{00364 \textcolor{preprocessor}{\#define LL\_LPUART\_ADDRESS\_DETECT\_4B 0x00000000U     }}
+\DoxyCodeLine{00365 \textcolor{preprocessor}{\#define LL\_LPUART\_ADDRESS\_DETECT\_7B USART\_CR2\_ADDM7 }}
+\DoxyCodeLine{00373 \textcolor{preprocessor}{\#define LL\_LPUART\_HWCONTROL\_NONE    0x00000000U                       }}
+\DoxyCodeLine{00374 \textcolor{preprocessor}{\#define LL\_LPUART\_HWCONTROL\_RTS     USART\_CR3\_RTSE                    }}
+\DoxyCodeLine{00376 \textcolor{preprocessor}{\#define LL\_LPUART\_HWCONTROL\_CTS     USART\_CR3\_CTSE                    }}
+\DoxyCodeLine{00378 \textcolor{preprocessor}{\#define LL\_LPUART\_HWCONTROL\_RTS\_CTS (USART\_CR3\_RTSE | USART\_CR3\_CTSE) }}
+\DoxyCodeLine{00386 \textcolor{preprocessor}{\#define LL\_LPUART\_WAKEUP\_ON\_ADDRESS   0x00000000U                          }}
+\DoxyCodeLine{00387 \textcolor{preprocessor}{\#define LL\_LPUART\_WAKEUP\_ON\_STARTBIT  USART\_CR3\_WUS\_1                      }}
+\DoxyCodeLine{00388 \textcolor{preprocessor}{\#define LL\_LPUART\_WAKEUP\_ON\_RXNE      (USART\_CR3\_WUS\_0 | USART\_CR3\_WUS\_1)  }}
+\DoxyCodeLine{00396 \textcolor{preprocessor}{\#define LL\_LPUART\_DE\_POLARITY\_HIGH         0x00000000U    }}
+\DoxyCodeLine{00397 \textcolor{preprocessor}{\#define LL\_LPUART\_DE\_POLARITY\_LOW          USART\_CR3\_DEP  }}
+\DoxyCodeLine{00405 \textcolor{preprocessor}{\#define LL\_LPUART\_DMA\_REG\_DATA\_TRANSMIT    0x00000000U    }}
+\DoxyCodeLine{00406 \textcolor{preprocessor}{\#define LL\_LPUART\_DMA\_REG\_DATA\_RECEIVE     0x00000001U    }}
+\DoxyCodeLine{00415 \textcolor{comment}{/* Exported macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00431 \textcolor{preprocessor}{\#define LL\_LPUART\_WriteReg(\_\_INSTANCE\_\_, \_\_REG\_\_, \_\_VALUE\_\_) WRITE\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_, (\_\_VALUE\_\_))}}
+\DoxyCodeLine{00432 }
+\DoxyCodeLine{00439 \textcolor{preprocessor}{\#define LL\_LPUART\_ReadReg(\_\_INSTANCE\_\_, \_\_REG\_\_) READ\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_)}}
+\DoxyCodeLine{00468 \textcolor{preprocessor}{\#define \_\_LL\_LPUART\_DIV(\_\_PERIPHCLK\_\_, \_\_PRESCALER\_\_, \_\_BAUDRATE\_\_) (uint32\_t)\(\backslash\)}}
+\DoxyCodeLine{00469 \textcolor{preprocessor}{  ((((((uint64\_t)(\_\_PERIPHCLK\_\_)/(uint64\_t)(LPUART\_PRESCALER\_TAB[(uint16\_t)(\_\_PRESCALER\_\_)]))\(\backslash\)}}
+\DoxyCodeLine{00470 \textcolor{preprocessor}{      * LPUART\_LPUARTDIV\_FREQ\_MUL) + (uint32\_t)((\_\_BAUDRATE\_\_)/2U))/(\_\_BAUDRATE\_\_)) \& LPUART\_BRR\_MASK)}}
+\DoxyCodeLine{00471 }
+\DoxyCodeLine{00480 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00495 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_Enable(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00496 \{}
+\DoxyCodeLine{00497   SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_UE);}
+\DoxyCodeLine{00498 \}}
+\DoxyCodeLine{00499 }
+\DoxyCodeLine{00514 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_Disable(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00515 \{}
+\DoxyCodeLine{00516   CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_UE);}
+\DoxyCodeLine{00517 \}}
+\DoxyCodeLine{00518 }
+\DoxyCodeLine{00525 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabled(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00526 \{}
+\DoxyCodeLine{00527   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_UE) == (USART\_CR1\_UE)) ? 1UL : 0UL);}
+\DoxyCodeLine{00528 \}}
+\DoxyCodeLine{00529 }
+\DoxyCodeLine{00536 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableFIFO(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00537 \{}
+\DoxyCodeLine{00538   SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_FIFOEN);}
+\DoxyCodeLine{00539 \}}
+\DoxyCodeLine{00540 }
+\DoxyCodeLine{00547 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableFIFO(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00548 \{}
+\DoxyCodeLine{00549   CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_FIFOEN);}
+\DoxyCodeLine{00550 \}}
+\DoxyCodeLine{00551 }
+\DoxyCodeLine{00558 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledFIFO(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00559 \{}
+\DoxyCodeLine{00560   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_FIFOEN) == (USART\_CR1\_FIFOEN)) ? 1UL : 0UL);}
+\DoxyCodeLine{00561 \}}
+\DoxyCodeLine{00562 }
+\DoxyCodeLine{00576 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetTXFIFOThreshold(USART\_TypeDef *LPUARTx, uint32\_t Threshold)}
+\DoxyCodeLine{00577 \{}
+\DoxyCodeLine{00578   ATOMIC\_MODIFY\_REG(LPUARTx-\/>CR3, USART\_CR3\_TXFTCFG, Threshold << USART\_CR3\_TXFTCFG\_Pos);}
+\DoxyCodeLine{00579 \}}
+\DoxyCodeLine{00580 }
+\DoxyCodeLine{00593 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetTXFIFOThreshold(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00594 \{}
+\DoxyCodeLine{00595   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_TXFTCFG) >> USART\_CR3\_TXFTCFG\_Pos);}
+\DoxyCodeLine{00596 \}}
+\DoxyCodeLine{00597 }
+\DoxyCodeLine{00611 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetRXFIFOThreshold(USART\_TypeDef *LPUARTx, uint32\_t Threshold)}
+\DoxyCodeLine{00612 \{}
+\DoxyCodeLine{00613   ATOMIC\_MODIFY\_REG(LPUARTx-\/>CR3, USART\_CR3\_RXFTCFG, Threshold << USART\_CR3\_RXFTCFG\_Pos);}
+\DoxyCodeLine{00614 \}}
+\DoxyCodeLine{00615 }
+\DoxyCodeLine{00628 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetRXFIFOThreshold(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00629 \{}
+\DoxyCodeLine{00630   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_RXFTCFG) >> USART\_CR3\_RXFTCFG\_Pos);}
+\DoxyCodeLine{00631 \}}
+\DoxyCodeLine{00632 }
+\DoxyCodeLine{00654 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ConfigFIFOsThreshold(USART\_TypeDef *LPUARTx, uint32\_t TXThreshold, uint32\_t RXThreshold)}
+\DoxyCodeLine{00655 \{}
+\DoxyCodeLine{00656   ATOMIC\_MODIFY\_REG(LPUARTx-\/>CR3, USART\_CR3\_TXFTCFG | USART\_CR3\_RXFTCFG, (TXThreshold << USART\_CR3\_TXFTCFG\_Pos) | \(\backslash\)}
+\DoxyCodeLine{00657                     (RXThreshold << USART\_CR3\_RXFTCFG\_Pos));}
+\DoxyCodeLine{00658 \}}
+\DoxyCodeLine{00659 }
+\DoxyCodeLine{00668 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableInStopMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00669 \{}
+\DoxyCodeLine{00670   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_UESM);}
+\DoxyCodeLine{00671 \}}
+\DoxyCodeLine{00672 }
+\DoxyCodeLine{00680 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableInStopMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00681 \{}
+\DoxyCodeLine{00682   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_UESM);}
+\DoxyCodeLine{00683 \}}
+\DoxyCodeLine{00684 }
+\DoxyCodeLine{00692 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledInStopMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00693 \{}
+\DoxyCodeLine{00694   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_UESM) == (USART\_CR1\_UESM)) ? 1UL : 0UL);}
+\DoxyCodeLine{00695 \}}
+\DoxyCodeLine{00696 }
+\DoxyCodeLine{00703 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableDirectionRx(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00704 \{}
+\DoxyCodeLine{00705   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RE);}
+\DoxyCodeLine{00706 \}}
+\DoxyCodeLine{00707 }
+\DoxyCodeLine{00714 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableDirectionRx(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00715 \{}
+\DoxyCodeLine{00716   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RE);}
+\DoxyCodeLine{00717 \}}
+\DoxyCodeLine{00718 }
+\DoxyCodeLine{00725 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableDirectionTx(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00726 \{}
+\DoxyCodeLine{00727   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TE);}
+\DoxyCodeLine{00728 \}}
+\DoxyCodeLine{00729 }
+\DoxyCodeLine{00736 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableDirectionTx(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00737 \{}
+\DoxyCodeLine{00738   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TE);}
+\DoxyCodeLine{00739 \}}
+\DoxyCodeLine{00740 }
+\DoxyCodeLine{00754 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetTransferDirection(USART\_TypeDef *LPUARTx, uint32\_t TransferDirection)}
+\DoxyCodeLine{00755 \{}
+\DoxyCodeLine{00756   ATOMIC\_MODIFY\_REG(LPUARTx-\/>CR1, USART\_CR1\_RE | USART\_CR1\_TE, TransferDirection);}
+\DoxyCodeLine{00757 \}}
+\DoxyCodeLine{00758 }
+\DoxyCodeLine{00770 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetTransferDirection(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00771 \{}
+\DoxyCodeLine{00772   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RE | USART\_CR1\_TE));}
+\DoxyCodeLine{00773 \}}
+\DoxyCodeLine{00774 }
+\DoxyCodeLine{00789 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetParity(USART\_TypeDef *LPUARTx, uint32\_t Parity)}
+\DoxyCodeLine{00790 \{}
+\DoxyCodeLine{00791   MODIFY\_REG(LPUARTx-\/>CR1, USART\_CR1\_PS | USART\_CR1\_PCE, Parity);}
+\DoxyCodeLine{00792 \}}
+\DoxyCodeLine{00793 }
+\DoxyCodeLine{00804 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetParity(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00805 \{}
+\DoxyCodeLine{00806   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_PS | USART\_CR1\_PCE));}
+\DoxyCodeLine{00807 \}}
+\DoxyCodeLine{00808 }
+\DoxyCodeLine{00818 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetWakeUpMethod(USART\_TypeDef *LPUARTx, uint32\_t Method)}
+\DoxyCodeLine{00819 \{}
+\DoxyCodeLine{00820   MODIFY\_REG(LPUARTx-\/>CR1, USART\_CR1\_WAKE, Method);}
+\DoxyCodeLine{00821 \}}
+\DoxyCodeLine{00822 }
+\DoxyCodeLine{00831 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetWakeUpMethod(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00832 \{}
+\DoxyCodeLine{00833   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_WAKE));}
+\DoxyCodeLine{00834 \}}
+\DoxyCodeLine{00835 }
+\DoxyCodeLine{00846 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetDataWidth(USART\_TypeDef *LPUARTx, uint32\_t DataWidth)}
+\DoxyCodeLine{00847 \{}
+\DoxyCodeLine{00848   MODIFY\_REG(LPUARTx-\/>CR1, USART\_CR1\_M, DataWidth);}
+\DoxyCodeLine{00849 \}}
+\DoxyCodeLine{00850 }
+\DoxyCodeLine{00860 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetDataWidth(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00861 \{}
+\DoxyCodeLine{00862   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_M));}
+\DoxyCodeLine{00863 \}}
+\DoxyCodeLine{00864 }
+\DoxyCodeLine{00871 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableMuteMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00872 \{}
+\DoxyCodeLine{00873   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_MME);}
+\DoxyCodeLine{00874 \}}
+\DoxyCodeLine{00875 }
+\DoxyCodeLine{00882 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableMuteMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00883 \{}
+\DoxyCodeLine{00884   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_MME);}
+\DoxyCodeLine{00885 \}}
+\DoxyCodeLine{00886 }
+\DoxyCodeLine{00893 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledMuteMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00894 \{}
+\DoxyCodeLine{00895   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_MME) == (USART\_CR1\_MME)) ? 1UL : 0UL);}
+\DoxyCodeLine{00896 \}}
+\DoxyCodeLine{00897 }
+\DoxyCodeLine{00917 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetPrescaler(USART\_TypeDef *LPUARTx, uint32\_t PrescalerValue)}
+\DoxyCodeLine{00918 \{}
+\DoxyCodeLine{00919   MODIFY\_REG(LPUARTx-\/>PRESC, USART\_PRESC\_PRESCALER, (uint16\_t)PrescalerValue);}
+\DoxyCodeLine{00920 \}}
+\DoxyCodeLine{00921 }
+\DoxyCodeLine{00940 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetPrescaler(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00941 \{}
+\DoxyCodeLine{00942   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>PRESC, USART\_PRESC\_PRESCALER));}
+\DoxyCodeLine{00943 \}}
+\DoxyCodeLine{00944 }
+\DoxyCodeLine{00954 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetStopBitsLength(USART\_TypeDef *LPUARTx, uint32\_t StopBits)}
+\DoxyCodeLine{00955 \{}
+\DoxyCodeLine{00956   MODIFY\_REG(LPUARTx-\/>CR2, USART\_CR2\_STOP, StopBits);}
+\DoxyCodeLine{00957 \}}
+\DoxyCodeLine{00958 }
+\DoxyCodeLine{00967 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetStopBitsLength(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{00968 \{}
+\DoxyCodeLine{00969   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR2, USART\_CR2\_STOP));}
+\DoxyCodeLine{00970 \}}
+\DoxyCodeLine{00971 }
+\DoxyCodeLine{00996 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ConfigCharacter(USART\_TypeDef *LPUARTx, uint32\_t DataWidth, uint32\_t Parity,}
+\DoxyCodeLine{00997                                                uint32\_t StopBits)}
+\DoxyCodeLine{00998 \{}
+\DoxyCodeLine{00999   MODIFY\_REG(LPUARTx-\/>CR1, USART\_CR1\_PS | USART\_CR1\_PCE | USART\_CR1\_M, Parity | DataWidth);}
+\DoxyCodeLine{01000   MODIFY\_REG(LPUARTx-\/>CR2, USART\_CR2\_STOP, StopBits);}
+\DoxyCodeLine{01001 \}}
+\DoxyCodeLine{01002 }
+\DoxyCodeLine{01012 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetTXRXSwap(USART\_TypeDef *LPUARTx, uint32\_t SwapConfig)}
+\DoxyCodeLine{01013 \{}
+\DoxyCodeLine{01014   MODIFY\_REG(LPUARTx-\/>CR2, USART\_CR2\_SWAP, SwapConfig);}
+\DoxyCodeLine{01015 \}}
+\DoxyCodeLine{01016 }
+\DoxyCodeLine{01025 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetTXRXSwap(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01026 \{}
+\DoxyCodeLine{01027   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR2, USART\_CR2\_SWAP));}
+\DoxyCodeLine{01028 \}}
+\DoxyCodeLine{01029 }
+\DoxyCodeLine{01039 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetRXPinLevel(USART\_TypeDef *LPUARTx, uint32\_t PinInvMethod)}
+\DoxyCodeLine{01040 \{}
+\DoxyCodeLine{01041   MODIFY\_REG(LPUARTx-\/>CR2, USART\_CR2\_RXINV, PinInvMethod);}
+\DoxyCodeLine{01042 \}}
+\DoxyCodeLine{01043 }
+\DoxyCodeLine{01052 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetRXPinLevel(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01053 \{}
+\DoxyCodeLine{01054   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR2, USART\_CR2\_RXINV));}
+\DoxyCodeLine{01055 \}}
+\DoxyCodeLine{01056 }
+\DoxyCodeLine{01066 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetTXPinLevel(USART\_TypeDef *LPUARTx, uint32\_t PinInvMethod)}
+\DoxyCodeLine{01067 \{}
+\DoxyCodeLine{01068   MODIFY\_REG(LPUARTx-\/>CR2, USART\_CR2\_TXINV, PinInvMethod);}
+\DoxyCodeLine{01069 \}}
+\DoxyCodeLine{01070 }
+\DoxyCodeLine{01079 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetTXPinLevel(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01080 \{}
+\DoxyCodeLine{01081   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR2, USART\_CR2\_TXINV));}
+\DoxyCodeLine{01082 \}}
+\DoxyCodeLine{01083 }
+\DoxyCodeLine{01096 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetBinaryDataLogic(USART\_TypeDef *LPUARTx, uint32\_t DataLogic)}
+\DoxyCodeLine{01097 \{}
+\DoxyCodeLine{01098   MODIFY\_REG(LPUARTx-\/>CR2, USART\_CR2\_DATAINV, DataLogic);}
+\DoxyCodeLine{01099 \}}
+\DoxyCodeLine{01100 }
+\DoxyCodeLine{01109 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetBinaryDataLogic(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01110 \{}
+\DoxyCodeLine{01111   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR2, USART\_CR2\_DATAINV));}
+\DoxyCodeLine{01112 \}}
+\DoxyCodeLine{01113 }
+\DoxyCodeLine{01125 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetTransferBitOrder(USART\_TypeDef *LPUARTx, uint32\_t BitOrder)}
+\DoxyCodeLine{01126 \{}
+\DoxyCodeLine{01127   MODIFY\_REG(LPUARTx-\/>CR2, USART\_CR2\_MSBFIRST, BitOrder);}
+\DoxyCodeLine{01128 \}}
+\DoxyCodeLine{01129 }
+\DoxyCodeLine{01140 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetTransferBitOrder(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01141 \{}
+\DoxyCodeLine{01142   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR2, USART\_CR2\_MSBFIRST));}
+\DoxyCodeLine{01143 \}}
+\DoxyCodeLine{01144 }
+\DoxyCodeLine{01168 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ConfigNodeAddress(USART\_TypeDef *LPUARTx, uint32\_t AddressLen, uint32\_t NodeAddress)}
+\DoxyCodeLine{01169 \{}
+\DoxyCodeLine{01170   MODIFY\_REG(LPUARTx-\/>CR2, USART\_CR2\_ADD | USART\_CR2\_ADDM7,}
+\DoxyCodeLine{01171              (uint32\_t)(AddressLen | (NodeAddress << USART\_CR2\_ADD\_Pos)));}
+\DoxyCodeLine{01172 \}}
+\DoxyCodeLine{01173 }
+\DoxyCodeLine{01184 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetNodeAddress(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01185 \{}
+\DoxyCodeLine{01186   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR2, USART\_CR2\_ADD) >> USART\_CR2\_ADD\_Pos);}
+\DoxyCodeLine{01187 \}}
+\DoxyCodeLine{01188 }
+\DoxyCodeLine{01197 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetNodeAddressLen(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01198 \{}
+\DoxyCodeLine{01199   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR2, USART\_CR2\_ADDM7));}
+\DoxyCodeLine{01200 \}}
+\DoxyCodeLine{01201 }
+\DoxyCodeLine{01208 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableRTSHWFlowCtrl(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01209 \{}
+\DoxyCodeLine{01210   SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_RTSE);}
+\DoxyCodeLine{01211 \}}
+\DoxyCodeLine{01212 }
+\DoxyCodeLine{01219 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableRTSHWFlowCtrl(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01220 \{}
+\DoxyCodeLine{01221   CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_RTSE);}
+\DoxyCodeLine{01222 \}}
+\DoxyCodeLine{01223 }
+\DoxyCodeLine{01230 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableCTSHWFlowCtrl(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01231 \{}
+\DoxyCodeLine{01232   SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_CTSE);}
+\DoxyCodeLine{01233 \}}
+\DoxyCodeLine{01234 }
+\DoxyCodeLine{01241 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableCTSHWFlowCtrl(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01242 \{}
+\DoxyCodeLine{01243   CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_CTSE);}
+\DoxyCodeLine{01244 \}}
+\DoxyCodeLine{01245 }
+\DoxyCodeLine{01258 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetHWFlowCtrl(USART\_TypeDef *LPUARTx, uint32\_t HardwareFlowControl)}
+\DoxyCodeLine{01259 \{}
+\DoxyCodeLine{01260   MODIFY\_REG(LPUARTx-\/>CR3, USART\_CR3\_RTSE | USART\_CR3\_CTSE, HardwareFlowControl);}
+\DoxyCodeLine{01261 \}}
+\DoxyCodeLine{01262 }
+\DoxyCodeLine{01274 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetHWFlowCtrl(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01275 \{}
+\DoxyCodeLine{01276   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_RTSE | USART\_CR3\_CTSE));}
+\DoxyCodeLine{01277 \}}
+\DoxyCodeLine{01278 }
+\DoxyCodeLine{01285 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableOverrunDetect(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01286 \{}
+\DoxyCodeLine{01287   CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_OVRDIS);}
+\DoxyCodeLine{01288 \}}
+\DoxyCodeLine{01289 }
+\DoxyCodeLine{01296 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableOverrunDetect(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01297 \{}
+\DoxyCodeLine{01298   SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_OVRDIS);}
+\DoxyCodeLine{01299 \}}
+\DoxyCodeLine{01300 }
+\DoxyCodeLine{01307 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledOverrunDetect(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01308 \{}
+\DoxyCodeLine{01309   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_OVRDIS) != USART\_CR3\_OVRDIS) ? 1UL : 0UL);}
+\DoxyCodeLine{01310 \}}
+\DoxyCodeLine{01311 }
+\DoxyCodeLine{01322 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetWKUPType(USART\_TypeDef *LPUARTx, uint32\_t Type)}
+\DoxyCodeLine{01323 \{}
+\DoxyCodeLine{01324   MODIFY\_REG(LPUARTx-\/>CR3, USART\_CR3\_WUS, Type);}
+\DoxyCodeLine{01325 \}}
+\DoxyCodeLine{01326 }
+\DoxyCodeLine{01336 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetWKUPType(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01337 \{}
+\DoxyCodeLine{01338   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_WUS));}
+\DoxyCodeLine{01339 \}}
+\DoxyCodeLine{01340 }
+\DoxyCodeLine{01370 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetBaudRate(USART\_TypeDef *LPUARTx, uint32\_t PeriphClk, uint32\_t PrescalerValue,}
+\DoxyCodeLine{01371                                            uint32\_t BaudRate)}
+\DoxyCodeLine{01372 \{}
+\DoxyCodeLine{01373   \textcolor{keywordflow}{if} (BaudRate != 0U)}
+\DoxyCodeLine{01374   \{}
+\DoxyCodeLine{01375     LPUARTx-\/>BRR = \_\_LL\_LPUART\_DIV(PeriphClk, PrescalerValue, BaudRate);}
+\DoxyCodeLine{01376   \}}
+\DoxyCodeLine{01377 \}}
+\DoxyCodeLine{01378 }
+\DoxyCodeLine{01401 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetBaudRate(USART\_TypeDef *LPUARTx, uint32\_t PeriphClk, uint32\_t PrescalerValue)}
+\DoxyCodeLine{01402 \{}
+\DoxyCodeLine{01403   uint32\_t lpuartdiv;}
+\DoxyCodeLine{01404   uint32\_t brrresult;}
+\DoxyCodeLine{01405   uint32\_t periphclkpresc = (uint32\_t)(PeriphClk / (LPUART\_PRESCALER\_TAB[(uint16\_t)PrescalerValue]));}
+\DoxyCodeLine{01406 }
+\DoxyCodeLine{01407   lpuartdiv = LPUARTx-\/>BRR \& LPUART\_BRR\_MASK;}
+\DoxyCodeLine{01408 }
+\DoxyCodeLine{01409   \textcolor{keywordflow}{if} (lpuartdiv >= LPUART\_BRR\_MIN\_VALUE)}
+\DoxyCodeLine{01410   \{}
+\DoxyCodeLine{01411     brrresult = (uint32\_t)(((uint64\_t)(periphclkpresc) * LPUART\_LPUARTDIV\_FREQ\_MUL) / lpuartdiv);}
+\DoxyCodeLine{01412   \}}
+\DoxyCodeLine{01413   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01414   \{}
+\DoxyCodeLine{01415     brrresult = 0x0UL;}
+\DoxyCodeLine{01416   \}}
+\DoxyCodeLine{01417 }
+\DoxyCodeLine{01418   \textcolor{keywordflow}{return} (brrresult);}
+\DoxyCodeLine{01419 \}}
+\DoxyCodeLine{01420 }
+\DoxyCodeLine{01435 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableHalfDuplex(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01436 \{}
+\DoxyCodeLine{01437   SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_HDSEL);}
+\DoxyCodeLine{01438 \}}
+\DoxyCodeLine{01439 }
+\DoxyCodeLine{01446 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableHalfDuplex(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01447 \{}
+\DoxyCodeLine{01448   CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_HDSEL);}
+\DoxyCodeLine{01449 \}}
+\DoxyCodeLine{01450 }
+\DoxyCodeLine{01457 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledHalfDuplex(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01458 \{}
+\DoxyCodeLine{01459   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_HDSEL) == (USART\_CR3\_HDSEL)) ? 1UL : 0UL);}
+\DoxyCodeLine{01460 \}}
+\DoxyCodeLine{01461 }
+\DoxyCodeLine{01477 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetDEDeassertionTime(USART\_TypeDef *LPUARTx, uint32\_t Time)}
+\DoxyCodeLine{01478 \{}
+\DoxyCodeLine{01479   MODIFY\_REG(LPUARTx-\/>CR1, USART\_CR1\_DEDT, Time << USART\_CR1\_DEDT\_Pos);}
+\DoxyCodeLine{01480 \}}
+\DoxyCodeLine{01481 }
+\DoxyCodeLine{01488 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetDEDeassertionTime(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01489 \{}
+\DoxyCodeLine{01490   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_DEDT) >> USART\_CR1\_DEDT\_Pos);}
+\DoxyCodeLine{01491 \}}
+\DoxyCodeLine{01492 }
+\DoxyCodeLine{01500 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetDEAssertionTime(USART\_TypeDef *LPUARTx, uint32\_t Time)}
+\DoxyCodeLine{01501 \{}
+\DoxyCodeLine{01502   MODIFY\_REG(LPUARTx-\/>CR1, USART\_CR1\_DEAT, Time << USART\_CR1\_DEAT\_Pos);}
+\DoxyCodeLine{01503 \}}
+\DoxyCodeLine{01504 }
+\DoxyCodeLine{01511 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetDEAssertionTime(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01512 \{}
+\DoxyCodeLine{01513   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_DEAT) >> USART\_CR1\_DEAT\_Pos);}
+\DoxyCodeLine{01514 \}}
+\DoxyCodeLine{01515 }
+\DoxyCodeLine{01522 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableDEMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01523 \{}
+\DoxyCodeLine{01524   SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DEM);}
+\DoxyCodeLine{01525 \}}
+\DoxyCodeLine{01526 }
+\DoxyCodeLine{01533 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableDEMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01534 \{}
+\DoxyCodeLine{01535   CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DEM);}
+\DoxyCodeLine{01536 \}}
+\DoxyCodeLine{01537 }
+\DoxyCodeLine{01544 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledDEMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01545 \{}
+\DoxyCodeLine{01546   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DEM) == (USART\_CR3\_DEM)) ? 1UL : 0UL);}
+\DoxyCodeLine{01547 \}}
+\DoxyCodeLine{01548 }
+\DoxyCodeLine{01558 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_SetDESignalPolarity(USART\_TypeDef *LPUARTx, uint32\_t Polarity)}
+\DoxyCodeLine{01559 \{}
+\DoxyCodeLine{01560   MODIFY\_REG(LPUARTx-\/>CR3, USART\_CR3\_DEP, Polarity);}
+\DoxyCodeLine{01561 \}}
+\DoxyCodeLine{01562 }
+\DoxyCodeLine{01571 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_GetDESignalPolarity(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01572 \{}
+\DoxyCodeLine{01573   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DEP));}
+\DoxyCodeLine{01574 \}}
+\DoxyCodeLine{01575 }
+\DoxyCodeLine{01590 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_PE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01591 \{}
+\DoxyCodeLine{01592   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_PE) == (USART\_ISR\_PE)) ? 1UL : 0UL);}
+\DoxyCodeLine{01593 \}}
+\DoxyCodeLine{01594 }
+\DoxyCodeLine{01601 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_FE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01602 \{}
+\DoxyCodeLine{01603   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_FE) == (USART\_ISR\_FE)) ? 1UL : 0UL);}
+\DoxyCodeLine{01604 \}}
+\DoxyCodeLine{01605 }
+\DoxyCodeLine{01612 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_NE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01613 \{}
+\DoxyCodeLine{01614   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_NE) == (USART\_ISR\_NE)) ? 1UL : 0UL);}
+\DoxyCodeLine{01615 \}}
+\DoxyCodeLine{01616 }
+\DoxyCodeLine{01623 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_ORE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01624 \{}
+\DoxyCodeLine{01625   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_ORE) == (USART\_ISR\_ORE)) ? 1UL : 0UL);}
+\DoxyCodeLine{01626 \}}
+\DoxyCodeLine{01627 }
+\DoxyCodeLine{01634 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_IDLE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01635 \{}
+\DoxyCodeLine{01636   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_IDLE) == (USART\_ISR\_IDLE)) ? 1UL : 0UL);}
+\DoxyCodeLine{01637 \}}
+\DoxyCodeLine{01638 }
+\DoxyCodeLine{01639 \textcolor{comment}{/* Legacy define */}}
+\DoxyCodeLine{01640 \textcolor{preprocessor}{\#define LL\_LPUART\_IsActiveFlag\_RXNE  LL\_LPUART\_IsActiveFlag\_RXNE\_RXFNE}}
+\DoxyCodeLine{01641 }
+\DoxyCodeLine{01648 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_RXNE\_RXFNE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01649 \{}
+\DoxyCodeLine{01650   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_RXNE\_RXFNE) == (USART\_ISR\_RXNE\_RXFNE)) ? 1UL : 0UL);}
+\DoxyCodeLine{01651 \}}
+\DoxyCodeLine{01652 }
+\DoxyCodeLine{01659 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_TC(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01660 \{}
+\DoxyCodeLine{01661   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_TC) == (USART\_ISR\_TC)) ? 1UL : 0UL);}
+\DoxyCodeLine{01662 \}}
+\DoxyCodeLine{01663 }
+\DoxyCodeLine{01664 \textcolor{comment}{/* Legacy define */}}
+\DoxyCodeLine{01665 \textcolor{preprocessor}{\#define LL\_LPUART\_IsActiveFlag\_TXE  LL\_LPUART\_IsActiveFlag\_TXE\_TXFNF}}
+\DoxyCodeLine{01666 }
+\DoxyCodeLine{01673 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_TXE\_TXFNF(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01674 \{}
+\DoxyCodeLine{01675   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_TXE\_TXFNF) == (USART\_ISR\_TXE\_TXFNF)) ? 1UL : 0UL);}
+\DoxyCodeLine{01676 \}}
+\DoxyCodeLine{01677 }
+\DoxyCodeLine{01684 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_nCTS(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01685 \{}
+\DoxyCodeLine{01686   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_CTSIF) == (USART\_ISR\_CTSIF)) ? 1UL : 0UL);}
+\DoxyCodeLine{01687 \}}
+\DoxyCodeLine{01688 }
+\DoxyCodeLine{01695 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_CTS(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01696 \{}
+\DoxyCodeLine{01697   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_CTS) == (USART\_ISR\_CTS)) ? 1UL : 0UL);}
+\DoxyCodeLine{01698 \}}
+\DoxyCodeLine{01699 }
+\DoxyCodeLine{01706 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_BUSY(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01707 \{}
+\DoxyCodeLine{01708   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_BUSY) == (USART\_ISR\_BUSY)) ? 1UL : 0UL);}
+\DoxyCodeLine{01709 \}}
+\DoxyCodeLine{01710 }
+\DoxyCodeLine{01717 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_CM(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01718 \{}
+\DoxyCodeLine{01719   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_CMF) == (USART\_ISR\_CMF)) ? 1UL : 0UL);}
+\DoxyCodeLine{01720 \}}
+\DoxyCodeLine{01721 }
+\DoxyCodeLine{01728 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_SBK(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01729 \{}
+\DoxyCodeLine{01730   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_SBKF) == (USART\_ISR\_SBKF)) ? 1UL : 0UL);}
+\DoxyCodeLine{01731 \}}
+\DoxyCodeLine{01732 }
+\DoxyCodeLine{01739 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_RWU(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01740 \{}
+\DoxyCodeLine{01741   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_RWU) == (USART\_ISR\_RWU)) ? 1UL : 0UL);}
+\DoxyCodeLine{01742 \}}
+\DoxyCodeLine{01743 }
+\DoxyCodeLine{01750 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_WKUP(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01751 \{}
+\DoxyCodeLine{01752   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_WUF) == (USART\_ISR\_WUF)) ? 1UL : 0UL);}
+\DoxyCodeLine{01753 \}}
+\DoxyCodeLine{01754 }
+\DoxyCodeLine{01761 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_TEACK(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01762 \{}
+\DoxyCodeLine{01763   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_TEACK) == (USART\_ISR\_TEACK)) ? 1UL : 0UL);}
+\DoxyCodeLine{01764 \}}
+\DoxyCodeLine{01765 }
+\DoxyCodeLine{01772 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_REACK(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01773 \{}
+\DoxyCodeLine{01774   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_REACK) == (USART\_ISR\_REACK)) ? 1UL : 0UL);}
+\DoxyCodeLine{01775 \}}
+\DoxyCodeLine{01776 }
+\DoxyCodeLine{01783 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_TXFE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01784 \{}
+\DoxyCodeLine{01785   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_TXFE) == (USART\_ISR\_TXFE)) ? 1UL : 0UL);}
+\DoxyCodeLine{01786 \}}
+\DoxyCodeLine{01787 }
+\DoxyCodeLine{01794 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_RXFF(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01795 \{}
+\DoxyCodeLine{01796   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_RXFF) == (USART\_ISR\_RXFF)) ? 1UL : 0UL);}
+\DoxyCodeLine{01797 \}}
+\DoxyCodeLine{01798 }
+\DoxyCodeLine{01805 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_TXFT(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01806 \{}
+\DoxyCodeLine{01807   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_TXFT) == (USART\_ISR\_TXFT)) ? 1UL : 0UL);}
+\DoxyCodeLine{01808 \}}
+\DoxyCodeLine{01809 }
+\DoxyCodeLine{01816 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsActiveFlag\_RXFT(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01817 \{}
+\DoxyCodeLine{01818   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>ISR, USART\_ISR\_RXFT) == (USART\_ISR\_RXFT)) ? 1UL : 0UL);}
+\DoxyCodeLine{01819 \}}
+\DoxyCodeLine{01820 }
+\DoxyCodeLine{01827 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_PE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01828 \{}
+\DoxyCodeLine{01829   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_PECF);}
+\DoxyCodeLine{01830 \}}
+\DoxyCodeLine{01831 }
+\DoxyCodeLine{01838 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_FE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01839 \{}
+\DoxyCodeLine{01840   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_FECF);}
+\DoxyCodeLine{01841 \}}
+\DoxyCodeLine{01842 }
+\DoxyCodeLine{01849 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_NE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01850 \{}
+\DoxyCodeLine{01851   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_NECF);}
+\DoxyCodeLine{01852 \}}
+\DoxyCodeLine{01853 }
+\DoxyCodeLine{01860 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_ORE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01861 \{}
+\DoxyCodeLine{01862   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_ORECF);}
+\DoxyCodeLine{01863 \}}
+\DoxyCodeLine{01864 }
+\DoxyCodeLine{01871 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_IDLE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01872 \{}
+\DoxyCodeLine{01873   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_IDLECF);}
+\DoxyCodeLine{01874 \}}
+\DoxyCodeLine{01875 }
+\DoxyCodeLine{01882 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_TC(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01883 \{}
+\DoxyCodeLine{01884   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_TCCF);}
+\DoxyCodeLine{01885 \}}
+\DoxyCodeLine{01886 }
+\DoxyCodeLine{01893 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_nCTS(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01894 \{}
+\DoxyCodeLine{01895   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_CTSCF);}
+\DoxyCodeLine{01896 \}}
+\DoxyCodeLine{01897 }
+\DoxyCodeLine{01904 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_CM(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01905 \{}
+\DoxyCodeLine{01906   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_CMCF);}
+\DoxyCodeLine{01907 \}}
+\DoxyCodeLine{01908 }
+\DoxyCodeLine{01915 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_ClearFlag\_WKUP(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01916 \{}
+\DoxyCodeLine{01917   WRITE\_REG(LPUARTx-\/>ICR, USART\_ICR\_WUCF);}
+\DoxyCodeLine{01918 \}}
+\DoxyCodeLine{01919 }
+\DoxyCodeLine{01934 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_IDLE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01935 \{}
+\DoxyCodeLine{01936   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_IDLEIE);}
+\DoxyCodeLine{01937 \}}
+\DoxyCodeLine{01938 }
+\DoxyCodeLine{01939 \textcolor{comment}{/* Legacy define */}}
+\DoxyCodeLine{01940 \textcolor{preprocessor}{\#define LL\_LPUART\_EnableIT\_RXNE  LL\_LPUART\_EnableIT\_RXNE\_RXFNE}}
+\DoxyCodeLine{01941 }
+\DoxyCodeLine{01948 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_RXNE\_RXFNE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01949 \{}
+\DoxyCodeLine{01950   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RXNEIE\_RXFNEIE);}
+\DoxyCodeLine{01951 \}}
+\DoxyCodeLine{01952 }
+\DoxyCodeLine{01959 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_TC(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01960 \{}
+\DoxyCodeLine{01961   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TCIE);}
+\DoxyCodeLine{01962 \}}
+\DoxyCodeLine{01963 }
+\DoxyCodeLine{01964 \textcolor{comment}{/* Legacy define */}}
+\DoxyCodeLine{01965 \textcolor{preprocessor}{\#define LL\_LPUART\_EnableIT\_TXE  LL\_LPUART\_EnableIT\_TXE\_TXFNF}}
+\DoxyCodeLine{01966 }
+\DoxyCodeLine{01973 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_TXE\_TXFNF(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01974 \{}
+\DoxyCodeLine{01975   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TXEIE\_TXFNFIE);}
+\DoxyCodeLine{01976 \}}
+\DoxyCodeLine{01977 }
+\DoxyCodeLine{01984 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_PE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01985 \{}
+\DoxyCodeLine{01986   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_PEIE);}
+\DoxyCodeLine{01987 \}}
+\DoxyCodeLine{01988 }
+\DoxyCodeLine{01995 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_CM(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{01996 \{}
+\DoxyCodeLine{01997   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_CMIE);}
+\DoxyCodeLine{01998 \}}
+\DoxyCodeLine{01999 }
+\DoxyCodeLine{02006 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_TXFE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02007 \{}
+\DoxyCodeLine{02008   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TXFEIE);}
+\DoxyCodeLine{02009 \}}
+\DoxyCodeLine{02010 }
+\DoxyCodeLine{02017 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_RXFF(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02018 \{}
+\DoxyCodeLine{02019   ATOMIC\_SET\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RXFFIE);}
+\DoxyCodeLine{02020 \}}
+\DoxyCodeLine{02021 }
+\DoxyCodeLine{02032 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_ERROR(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02033 \{}
+\DoxyCodeLine{02034   ATOMIC\_SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_EIE);}
+\DoxyCodeLine{02035 \}}
+\DoxyCodeLine{02036 }
+\DoxyCodeLine{02043 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_CTS(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02044 \{}
+\DoxyCodeLine{02045   ATOMIC\_SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_CTSIE);}
+\DoxyCodeLine{02046 \}}
+\DoxyCodeLine{02047 }
+\DoxyCodeLine{02054 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_WKUP(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02055 \{}
+\DoxyCodeLine{02056   ATOMIC\_SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_WUFIE);}
+\DoxyCodeLine{02057 \}}
+\DoxyCodeLine{02058 }
+\DoxyCodeLine{02065 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_TXFT(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02066 \{}
+\DoxyCodeLine{02067   ATOMIC\_SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_TXFTIE);}
+\DoxyCodeLine{02068 \}}
+\DoxyCodeLine{02069 }
+\DoxyCodeLine{02076 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableIT\_RXFT(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02077 \{}
+\DoxyCodeLine{02078   ATOMIC\_SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_RXFTIE);}
+\DoxyCodeLine{02079 \}}
+\DoxyCodeLine{02080 }
+\DoxyCodeLine{02087 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_IDLE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02088 \{}
+\DoxyCodeLine{02089   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_IDLEIE);}
+\DoxyCodeLine{02090 \}}
+\DoxyCodeLine{02091 }
+\DoxyCodeLine{02092 \textcolor{comment}{/* Legacy define */}}
+\DoxyCodeLine{02093 \textcolor{preprocessor}{\#define LL\_LPUART\_DisableIT\_RXNE  LL\_LPUART\_DisableIT\_RXNE\_RXFNE}}
+\DoxyCodeLine{02094 }
+\DoxyCodeLine{02101 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_RXNE\_RXFNE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02102 \{}
+\DoxyCodeLine{02103   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RXNEIE\_RXFNEIE);}
+\DoxyCodeLine{02104 \}}
+\DoxyCodeLine{02105 }
+\DoxyCodeLine{02112 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_TC(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02113 \{}
+\DoxyCodeLine{02114   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TCIE);}
+\DoxyCodeLine{02115 \}}
+\DoxyCodeLine{02116 }
+\DoxyCodeLine{02117 \textcolor{comment}{/* Legacy define */}}
+\DoxyCodeLine{02118 \textcolor{preprocessor}{\#define LL\_LPUART\_DisableIT\_TXE  LL\_LPUART\_DisableIT\_TXE\_TXFNF}}
+\DoxyCodeLine{02119 }
+\DoxyCodeLine{02126 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_TXE\_TXFNF(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02127 \{}
+\DoxyCodeLine{02128   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TXEIE\_TXFNFIE);}
+\DoxyCodeLine{02129 \}}
+\DoxyCodeLine{02130 }
+\DoxyCodeLine{02137 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_PE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02138 \{}
+\DoxyCodeLine{02139   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_PEIE);}
+\DoxyCodeLine{02140 \}}
+\DoxyCodeLine{02141 }
+\DoxyCodeLine{02148 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_CM(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02149 \{}
+\DoxyCodeLine{02150   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_CMIE);}
+\DoxyCodeLine{02151 \}}
+\DoxyCodeLine{02152 }
+\DoxyCodeLine{02159 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_TXFE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02160 \{}
+\DoxyCodeLine{02161   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TXFEIE);}
+\DoxyCodeLine{02162 \}}
+\DoxyCodeLine{02163 }
+\DoxyCodeLine{02170 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_RXFF(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02171 \{}
+\DoxyCodeLine{02172   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RXFFIE);}
+\DoxyCodeLine{02173 \}}
+\DoxyCodeLine{02174 }
+\DoxyCodeLine{02185 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_ERROR(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02186 \{}
+\DoxyCodeLine{02187   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_EIE);}
+\DoxyCodeLine{02188 \}}
+\DoxyCodeLine{02189 }
+\DoxyCodeLine{02196 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_CTS(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02197 \{}
+\DoxyCodeLine{02198   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_CTSIE);}
+\DoxyCodeLine{02199 \}}
+\DoxyCodeLine{02200 }
+\DoxyCodeLine{02207 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_WKUP(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02208 \{}
+\DoxyCodeLine{02209   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_WUFIE);}
+\DoxyCodeLine{02210 \}}
+\DoxyCodeLine{02211 }
+\DoxyCodeLine{02218 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_TXFT(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02219 \{}
+\DoxyCodeLine{02220   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_TXFTIE);}
+\DoxyCodeLine{02221 \}}
+\DoxyCodeLine{02222 }
+\DoxyCodeLine{02229 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableIT\_RXFT(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02230 \{}
+\DoxyCodeLine{02231   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_RXFTIE);}
+\DoxyCodeLine{02232 \}}
+\DoxyCodeLine{02233 }
+\DoxyCodeLine{02240 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_IDLE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02241 \{}
+\DoxyCodeLine{02242   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_IDLEIE) == (USART\_CR1\_IDLEIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02243 \}}
+\DoxyCodeLine{02244 }
+\DoxyCodeLine{02245 \textcolor{comment}{/* Legacy define */}}
+\DoxyCodeLine{02246 \textcolor{preprocessor}{\#define LL\_LPUART\_IsEnabledIT\_RXNE  LL\_LPUART\_IsEnabledIT\_RXNE\_RXFNE}}
+\DoxyCodeLine{02247 }
+\DoxyCodeLine{02254 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_RXNE\_RXFNE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02255 \{}
+\DoxyCodeLine{02256   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RXNEIE\_RXFNEIE) == (USART\_CR1\_RXNEIE\_RXFNEIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02257 \}}
+\DoxyCodeLine{02258 }
+\DoxyCodeLine{02265 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_TC(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02266 \{}
+\DoxyCodeLine{02267   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TCIE) == (USART\_CR1\_TCIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02268 \}}
+\DoxyCodeLine{02269 }
+\DoxyCodeLine{02270 \textcolor{comment}{/* Legacy define */}}
+\DoxyCodeLine{02271 \textcolor{preprocessor}{\#define LL\_LPUART\_IsEnabledIT\_TXE  LL\_LPUART\_IsEnabledIT\_TXE\_TXFNF}}
+\DoxyCodeLine{02272 }
+\DoxyCodeLine{02279 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_TXE\_TXFNF(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02280 \{}
+\DoxyCodeLine{02281   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TXEIE\_TXFNFIE) == (USART\_CR1\_TXEIE\_TXFNFIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02282 \}}
+\DoxyCodeLine{02283 }
+\DoxyCodeLine{02290 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_PE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02291 \{}
+\DoxyCodeLine{02292   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_PEIE) == (USART\_CR1\_PEIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02293 \}}
+\DoxyCodeLine{02294 }
+\DoxyCodeLine{02301 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_CM(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02302 \{}
+\DoxyCodeLine{02303   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_CMIE) == (USART\_CR1\_CMIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02304 \}}
+\DoxyCodeLine{02305 }
+\DoxyCodeLine{02312 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_TXFE(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02313 \{}
+\DoxyCodeLine{02314   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_TXFEIE) == (USART\_CR1\_TXFEIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02315 \}}
+\DoxyCodeLine{02316 }
+\DoxyCodeLine{02323 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_RXFF(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02324 \{}
+\DoxyCodeLine{02325   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR1, USART\_CR1\_RXFFIE) == (USART\_CR1\_RXFFIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02326 \}}
+\DoxyCodeLine{02327 }
+\DoxyCodeLine{02334 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_ERROR(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02335 \{}
+\DoxyCodeLine{02336   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_EIE) == (USART\_CR3\_EIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02337 \}}
+\DoxyCodeLine{02338 }
+\DoxyCodeLine{02345 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_CTS(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02346 \{}
+\DoxyCodeLine{02347   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_CTSIE) == (USART\_CR3\_CTSIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02348 \}}
+\DoxyCodeLine{02349 }
+\DoxyCodeLine{02356 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_WKUP(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02357 \{}
+\DoxyCodeLine{02358   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_WUFIE) == (USART\_CR3\_WUFIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02359 \}}
+\DoxyCodeLine{02360 }
+\DoxyCodeLine{02367 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_TXFT(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02368 \{}
+\DoxyCodeLine{02369   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_TXFTIE) == (USART\_CR3\_TXFTIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02370 \}}
+\DoxyCodeLine{02371 }
+\DoxyCodeLine{02378 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledIT\_RXFT(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02379 \{}
+\DoxyCodeLine{02380   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_RXFTIE) == (USART\_CR3\_RXFTIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02381 \}}
+\DoxyCodeLine{02382 }
+\DoxyCodeLine{02397 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableDMAReq\_RX(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02398 \{}
+\DoxyCodeLine{02399   ATOMIC\_SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DMAR);}
+\DoxyCodeLine{02400 \}}
+\DoxyCodeLine{02401 }
+\DoxyCodeLine{02408 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableDMAReq\_RX(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02409 \{}
+\DoxyCodeLine{02410   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DMAR);}
+\DoxyCodeLine{02411 \}}
+\DoxyCodeLine{02412 }
+\DoxyCodeLine{02419 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledDMAReq\_RX(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02420 \{}
+\DoxyCodeLine{02421   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DMAR) == (USART\_CR3\_DMAR)) ? 1UL : 0UL);}
+\DoxyCodeLine{02422 \}}
+\DoxyCodeLine{02423 }
+\DoxyCodeLine{02430 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableDMAReq\_TX(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02431 \{}
+\DoxyCodeLine{02432   ATOMIC\_SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DMAT);}
+\DoxyCodeLine{02433 \}}
+\DoxyCodeLine{02434 }
+\DoxyCodeLine{02441 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableDMAReq\_TX(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02442 \{}
+\DoxyCodeLine{02443   ATOMIC\_CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DMAT);}
+\DoxyCodeLine{02444 \}}
+\DoxyCodeLine{02445 }
+\DoxyCodeLine{02452 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledDMAReq\_TX(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02453 \{}
+\DoxyCodeLine{02454   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DMAT) == (USART\_CR3\_DMAT)) ? 1UL : 0UL);}
+\DoxyCodeLine{02455 \}}
+\DoxyCodeLine{02456 }
+\DoxyCodeLine{02463 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_EnableDMADeactOnRxErr(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02464 \{}
+\DoxyCodeLine{02465   SET\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DDRE);}
+\DoxyCodeLine{02466 \}}
+\DoxyCodeLine{02467 }
+\DoxyCodeLine{02474 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_DisableDMADeactOnRxErr(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02475 \{}
+\DoxyCodeLine{02476   CLEAR\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DDRE);}
+\DoxyCodeLine{02477 \}}
+\DoxyCodeLine{02478 }
+\DoxyCodeLine{02485 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_IsEnabledDMADeactOnRxErr(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02486 \{}
+\DoxyCodeLine{02487   \textcolor{keywordflow}{return} ((READ\_BIT(LPUARTx-\/>CR3, USART\_CR3\_DDRE) == (USART\_CR3\_DDRE)) ? 1UL : 0UL);}
+\DoxyCodeLine{02488 \}}
+\DoxyCodeLine{02489 }
+\DoxyCodeLine{02500 \_\_STATIC\_INLINE uint32\_t LL\_LPUART\_DMA\_GetRegAddr(USART\_TypeDef *LPUARTx, uint32\_t Direction)}
+\DoxyCodeLine{02501 \{}
+\DoxyCodeLine{02502   uint32\_t data\_reg\_addr;}
+\DoxyCodeLine{02503 }
+\DoxyCodeLine{02504   \textcolor{keywordflow}{if} (Direction == LL\_LPUART\_DMA\_REG\_DATA\_TRANSMIT)}
+\DoxyCodeLine{02505   \{}
+\DoxyCodeLine{02506     \textcolor{comment}{/* return address of TDR register */}}
+\DoxyCodeLine{02507     data\_reg\_addr = (uint32\_t) \&(LPUARTx-\/>TDR);}
+\DoxyCodeLine{02508   \}}
+\DoxyCodeLine{02509   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{02510   \{}
+\DoxyCodeLine{02511     \textcolor{comment}{/* return address of RDR register */}}
+\DoxyCodeLine{02512     data\_reg\_addr = (uint32\_t) \&(LPUARTx-\/>RDR);}
+\DoxyCodeLine{02513   \}}
+\DoxyCodeLine{02514 }
+\DoxyCodeLine{02515   \textcolor{keywordflow}{return} data\_reg\_addr;}
+\DoxyCodeLine{02516 \}}
+\DoxyCodeLine{02517 }
+\DoxyCodeLine{02532 \_\_STATIC\_INLINE uint8\_t LL\_LPUART\_ReceiveData8(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02533 \{}
+\DoxyCodeLine{02534   \textcolor{keywordflow}{return} (uint8\_t)(READ\_BIT(LPUARTx-\/>RDR, USART\_RDR\_RDR) \& 0xFFU);}
+\DoxyCodeLine{02535 \}}
+\DoxyCodeLine{02536 }
+\DoxyCodeLine{02543 \_\_STATIC\_INLINE uint16\_t LL\_LPUART\_ReceiveData9(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02544 \{}
+\DoxyCodeLine{02545   \textcolor{keywordflow}{return} (uint16\_t)(READ\_BIT(LPUARTx-\/>RDR, USART\_RDR\_RDR));}
+\DoxyCodeLine{02546 \}}
+\DoxyCodeLine{02547 }
+\DoxyCodeLine{02555 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_TransmitData8(USART\_TypeDef *LPUARTx, uint8\_t Value)}
+\DoxyCodeLine{02556 \{}
+\DoxyCodeLine{02557   LPUARTx-\/>TDR = Value;}
+\DoxyCodeLine{02558 \}}
+\DoxyCodeLine{02559 }
+\DoxyCodeLine{02567 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_TransmitData9(USART\_TypeDef *LPUARTx, uint16\_t Value)}
+\DoxyCodeLine{02568 \{}
+\DoxyCodeLine{02569   LPUARTx-\/>TDR = Value \& 0x1FFUL;}
+\DoxyCodeLine{02570 \}}
+\DoxyCodeLine{02571 }
+\DoxyCodeLine{02586 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_RequestBreakSending(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02587 \{}
+\DoxyCodeLine{02588   SET\_BIT(LPUARTx-\/>RQR, (uint16\_t)USART\_RQR\_SBKRQ);}
+\DoxyCodeLine{02589 \}}
+\DoxyCodeLine{02590 }
+\DoxyCodeLine{02597 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_RequestEnterMuteMode(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02598 \{}
+\DoxyCodeLine{02599   SET\_BIT(LPUARTx-\/>RQR, (uint16\_t)USART\_RQR\_MMRQ);}
+\DoxyCodeLine{02600 \}}
+\DoxyCodeLine{02601 }
+\DoxyCodeLine{02610 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_LPUART\_RequestRxDataFlush(USART\_TypeDef *LPUARTx)}
+\DoxyCodeLine{02611 \{}
+\DoxyCodeLine{02612   SET\_BIT(LPUARTx-\/>RQR, (uint16\_t)USART\_RQR\_RXFRQ);}
+\DoxyCodeLine{02613 \}}
+\DoxyCodeLine{02614 }
+\DoxyCodeLine{02619 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{02623 ErrorStatus LL\_LPUART\_DeInit(USART\_TypeDef *LPUARTx);}
+\DoxyCodeLine{02624 ErrorStatus LL\_LPUART\_Init(USART\_TypeDef *LPUARTx, LL\_LPUART\_InitTypeDef *LPUART\_InitStruct);}
+\DoxyCodeLine{02625 \textcolor{keywordtype}{void}        LL\_LPUART\_StructInit(LL\_LPUART\_InitTypeDef *LPUART\_InitStruct);}
+\DoxyCodeLine{02629 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_FULL\_LL\_DRIVER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02630 }
+\DoxyCodeLine{02639 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* LPUART1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02640 }
+\DoxyCodeLine{02645 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{02646 \}}
+\DoxyCodeLine{02647 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{02648 }
+\DoxyCodeLine{02649 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32G4xx\_LL\_LPUART\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02650 }
+
+\end{DoxyCode}

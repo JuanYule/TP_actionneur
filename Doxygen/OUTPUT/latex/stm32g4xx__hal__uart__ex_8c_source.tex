@@ -1,0 +1,617 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+c}
+\label{stm32g4xx__hal__uart__ex_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_uart\_ex.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_uart\_ex.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00043 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00044 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00045 }
+\DoxyCodeLine{00055 \textcolor{preprocessor}{\#ifdef HAL\_UART\_MODULE\_ENABLED}}
+\DoxyCodeLine{00056 }
+\DoxyCodeLine{00057 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00058 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00062 \textcolor{comment}{/* UART RX FIFO depth */}}
+\DoxyCodeLine{00063 \textcolor{preprocessor}{\#define RX\_FIFO\_DEPTH 8U}}
+\DoxyCodeLine{00064 }
+\DoxyCodeLine{00065 \textcolor{comment}{/* UART TX FIFO depth */}}
+\DoxyCodeLine{00066 \textcolor{preprocessor}{\#define TX\_FIFO\_DEPTH 8U}}
+\DoxyCodeLine{00071 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00072 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00073 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00077 \textcolor{keyword}{static} \textcolor{keywordtype}{void} UARTEx\_Wakeup\_AddressConfig(UART\_HandleTypeDef *huart, UART\_WakeUpTypeDef WakeUpSelection);}
+\DoxyCodeLine{00078 \textcolor{keyword}{static} \textcolor{keywordtype}{void} UARTEx\_SetNbDataToProcess(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{00083 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00084 }
+\DoxyCodeLine{00166 HAL\_StatusTypeDef HAL\_RS485Ex\_Init(UART\_HandleTypeDef *huart, uint32\_t Polarity, uint32\_t AssertionTime,}
+\DoxyCodeLine{00167                                    uint32\_t DeassertionTime)}
+\DoxyCodeLine{00168 \{}
+\DoxyCodeLine{00169   uint32\_t temp;}
+\DoxyCodeLine{00170 }
+\DoxyCodeLine{00171   \textcolor{comment}{/* Check the UART handle allocation */}}
+\DoxyCodeLine{00172   \textcolor{keywordflow}{if} (huart == NULL)}
+\DoxyCodeLine{00173   \{}
+\DoxyCodeLine{00174     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00175   \}}
+\DoxyCodeLine{00176   \textcolor{comment}{/* Check the Driver Enable UART instance */}}
+\DoxyCodeLine{00177   assert\_param(IS\_UART\_DRIVER\_ENABLE\_INSTANCE(huart-\/>Instance));}
+\DoxyCodeLine{00178 }
+\DoxyCodeLine{00179   \textcolor{comment}{/* Check the Driver Enable polarity */}}
+\DoxyCodeLine{00180   assert\_param(IS\_UART\_DE\_POLARITY(Polarity));}
+\DoxyCodeLine{00181 }
+\DoxyCodeLine{00182   \textcolor{comment}{/* Check the Driver Enable assertion time */}}
+\DoxyCodeLine{00183   assert\_param(IS\_UART\_ASSERTIONTIME(AssertionTime));}
+\DoxyCodeLine{00184 }
+\DoxyCodeLine{00185   \textcolor{comment}{/* Check the Driver Enable deassertion time */}}
+\DoxyCodeLine{00186   assert\_param(IS\_UART\_DEASSERTIONTIME(DeassertionTime));}
+\DoxyCodeLine{00187 }
+\DoxyCodeLine{00188   \textcolor{keywordflow}{if} (huart-\/>gState == HAL\_UART\_STATE\_RESET)}
+\DoxyCodeLine{00189   \{}
+\DoxyCodeLine{00190     \textcolor{comment}{/* Allocate lock resource and initialize it */}}
+\DoxyCodeLine{00191     huart-\/>Lock = HAL\_UNLOCKED;}
+\DoxyCodeLine{00192 }
+\DoxyCodeLine{00193 \textcolor{preprocessor}{\#if (USE\_HAL\_UART\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{00194     UART\_InitCallbacksToDefault(huart);}
+\DoxyCodeLine{00195 }
+\DoxyCodeLine{00196     \textcolor{keywordflow}{if} (huart-\/>MspInitCallback == NULL)}
+\DoxyCodeLine{00197     \{}
+\DoxyCodeLine{00198       huart-\/>MspInitCallback = HAL\_UART\_MspInit;}
+\DoxyCodeLine{00199     \}}
+\DoxyCodeLine{00200 }
+\DoxyCodeLine{00201     \textcolor{comment}{/* Init the low level hardware */}}
+\DoxyCodeLine{00202     huart-\/>MspInitCallback(huart);}
+\DoxyCodeLine{00203 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00204     \textcolor{comment}{/* Init the low level hardware : GPIO, CLOCK, CORTEX */}}
+\DoxyCodeLine{00205     HAL\_UART\_MspInit(huart);}
+\DoxyCodeLine{00206 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* (USE\_HAL\_UART\_REGISTER\_CALLBACKS) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00207   \}}
+\DoxyCodeLine{00208 }
+\DoxyCodeLine{00209   huart-\/>gState = HAL\_UART\_STATE\_BUSY;}
+\DoxyCodeLine{00210 }
+\DoxyCodeLine{00211   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{00212   \_\_HAL\_UART\_DISABLE(huart);}
+\DoxyCodeLine{00213 }
+\DoxyCodeLine{00214   \textcolor{comment}{/* Set the UART Communication parameters */}}
+\DoxyCodeLine{00215   \textcolor{keywordflow}{if} (UART\_SetConfig(huart) == HAL\_ERROR)}
+\DoxyCodeLine{00216   \{}
+\DoxyCodeLine{00217     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00218   \}}
+\DoxyCodeLine{00219 }
+\DoxyCodeLine{00220   \textcolor{keywordflow}{if} (huart-\/>AdvancedInit.AdvFeatureInit != UART\_ADVFEATURE\_NO\_INIT)}
+\DoxyCodeLine{00221   \{}
+\DoxyCodeLine{00222     UART\_AdvFeatureConfig(huart);}
+\DoxyCodeLine{00223   \}}
+\DoxyCodeLine{00224 }
+\DoxyCodeLine{00225   \textcolor{comment}{/* Enable the Driver Enable mode by setting the DEM bit in the CR3 register */}}
+\DoxyCodeLine{00226   SET\_BIT(huart-\/>Instance-\/>CR3, USART\_CR3\_DEM);}
+\DoxyCodeLine{00227 }
+\DoxyCodeLine{00228   \textcolor{comment}{/* Set the Driver Enable polarity */}}
+\DoxyCodeLine{00229   MODIFY\_REG(huart-\/>Instance-\/>CR3, USART\_CR3\_DEP, Polarity);}
+\DoxyCodeLine{00230 }
+\DoxyCodeLine{00231   \textcolor{comment}{/* Set the Driver Enable assertion and deassertion times */}}
+\DoxyCodeLine{00232   temp = (AssertionTime << UART\_CR1\_DEAT\_ADDRESS\_LSB\_POS);}
+\DoxyCodeLine{00233   temp |= (DeassertionTime << UART\_CR1\_DEDT\_ADDRESS\_LSB\_POS);}
+\DoxyCodeLine{00234   MODIFY\_REG(huart-\/>Instance-\/>CR1, (USART\_CR1\_DEDT | USART\_CR1\_DEAT), temp);}
+\DoxyCodeLine{00235 }
+\DoxyCodeLine{00236   \textcolor{comment}{/* Enable the Peripheral */}}
+\DoxyCodeLine{00237   \_\_HAL\_UART\_ENABLE(huart);}
+\DoxyCodeLine{00238 }
+\DoxyCodeLine{00239   \textcolor{comment}{/* TEACK and/or REACK to check before moving huart-\/>gState and huart-\/>RxState to Ready */}}
+\DoxyCodeLine{00240   \textcolor{keywordflow}{return} (UART\_CheckIdleState(huart));}
+\DoxyCodeLine{00241 \}}
+\DoxyCodeLine{00242 }
+\DoxyCodeLine{00272 \_\_weak \textcolor{keywordtype}{void} HAL\_UARTEx\_WakeupCallback(UART\_HandleTypeDef *huart)}
+\DoxyCodeLine{00273 \{}
+\DoxyCodeLine{00274   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{00275   UNUSED(huart);}
+\DoxyCodeLine{00276 }
+\DoxyCodeLine{00277   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00278 \textcolor{comment}{            the HAL\_UARTEx\_WakeupCallback can be implemented in the user file.}}
+\DoxyCodeLine{00279 \textcolor{comment}{   */}}
+\DoxyCodeLine{00280 \}}
+\DoxyCodeLine{00281 }
+\DoxyCodeLine{00287 \_\_weak \textcolor{keywordtype}{void} HAL\_UARTEx\_RxFifoFullCallback(UART\_HandleTypeDef *huart)}
+\DoxyCodeLine{00288 \{}
+\DoxyCodeLine{00289   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{00290   UNUSED(huart);}
+\DoxyCodeLine{00291 }
+\DoxyCodeLine{00292   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00293 \textcolor{comment}{            the HAL\_UARTEx\_RxFifoFullCallback can be implemented in the user file.}}
+\DoxyCodeLine{00294 \textcolor{comment}{   */}}
+\DoxyCodeLine{00295 \}}
+\DoxyCodeLine{00296 }
+\DoxyCodeLine{00302 \_\_weak \textcolor{keywordtype}{void} HAL\_UARTEx\_TxFifoEmptyCallback(UART\_HandleTypeDef *huart)}
+\DoxyCodeLine{00303 \{}
+\DoxyCodeLine{00304   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{00305   UNUSED(huart);}
+\DoxyCodeLine{00306 }
+\DoxyCodeLine{00307   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00308 \textcolor{comment}{            the HAL\_UARTEx\_TxFifoEmptyCallback can be implemented in the user file.}}
+\DoxyCodeLine{00309 \textcolor{comment}{   */}}
+\DoxyCodeLine{00310 \}}
+\DoxyCodeLine{00311 }
+\DoxyCodeLine{00387 HAL\_StatusTypeDef HAL\_MultiProcessorEx\_AddressLength\_Set(UART\_HandleTypeDef *huart, uint32\_t AddressLength)}
+\DoxyCodeLine{00388 \{}
+\DoxyCodeLine{00389   \textcolor{comment}{/* Check the UART handle allocation */}}
+\DoxyCodeLine{00390   \textcolor{keywordflow}{if} (huart == NULL)}
+\DoxyCodeLine{00391   \{}
+\DoxyCodeLine{00392     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00393   \}}
+\DoxyCodeLine{00394 }
+\DoxyCodeLine{00395   \textcolor{comment}{/* Check the address length parameter */}}
+\DoxyCodeLine{00396   assert\_param(IS\_UART\_ADDRESSLENGTH\_DETECT(AddressLength));}
+\DoxyCodeLine{00397 }
+\DoxyCodeLine{00398   huart-\/>gState = HAL\_UART\_STATE\_BUSY;}
+\DoxyCodeLine{00399 }
+\DoxyCodeLine{00400   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{00401   \_\_HAL\_UART\_DISABLE(huart);}
+\DoxyCodeLine{00402 }
+\DoxyCodeLine{00403   \textcolor{comment}{/* Set the address length */}}
+\DoxyCodeLine{00404   MODIFY\_REG(huart-\/>Instance-\/>CR2, USART\_CR2\_ADDM7, AddressLength);}
+\DoxyCodeLine{00405 }
+\DoxyCodeLine{00406   \textcolor{comment}{/* Enable the Peripheral */}}
+\DoxyCodeLine{00407   \_\_HAL\_UART\_ENABLE(huart);}
+\DoxyCodeLine{00408 }
+\DoxyCodeLine{00409   \textcolor{comment}{/* TEACK and/or REACK to check before moving huart-\/>gState to Ready */}}
+\DoxyCodeLine{00410   \textcolor{keywordflow}{return} (UART\_CheckIdleState(huart));}
+\DoxyCodeLine{00411 \}}
+\DoxyCodeLine{00412 }
+\DoxyCodeLine{00425 HAL\_StatusTypeDef HAL\_UARTEx\_StopModeWakeUpSourceConfig(UART\_HandleTypeDef *huart, UART\_WakeUpTypeDef WakeUpSelection)}
+\DoxyCodeLine{00426 \{}
+\DoxyCodeLine{00427   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00428   uint32\_t tickstart;}
+\DoxyCodeLine{00429 }
+\DoxyCodeLine{00430   \textcolor{comment}{/* check the wake-\/up from stop mode UART instance */}}
+\DoxyCodeLine{00431   assert\_param(IS\_UART\_WAKEUP\_FROMSTOP\_INSTANCE(huart-\/>Instance));}
+\DoxyCodeLine{00432   \textcolor{comment}{/* check the wake-\/up selection parameter */}}
+\DoxyCodeLine{00433   assert\_param(IS\_UART\_WAKEUP\_SELECTION(WakeUpSelection.WakeUpEvent));}
+\DoxyCodeLine{00434 }
+\DoxyCodeLine{00435   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{00436   \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00437 }
+\DoxyCodeLine{00438   huart-\/>gState = HAL\_UART\_STATE\_BUSY;}
+\DoxyCodeLine{00439 }
+\DoxyCodeLine{00440   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{00441   \_\_HAL\_UART\_DISABLE(huart);}
+\DoxyCodeLine{00442 }
+\DoxyCodeLine{00443   \textcolor{comment}{/* Set the wake-\/up selection scheme */}}
+\DoxyCodeLine{00444   MODIFY\_REG(huart-\/>Instance-\/>CR3, USART\_CR3\_WUS, WakeUpSelection.WakeUpEvent);}
+\DoxyCodeLine{00445 }
+\DoxyCodeLine{00446   \textcolor{keywordflow}{if} (WakeUpSelection.WakeUpEvent == UART\_WAKEUP\_ON\_ADDRESS)}
+\DoxyCodeLine{00447   \{}
+\DoxyCodeLine{00448     UARTEx\_Wakeup\_AddressConfig(huart, WakeUpSelection);}
+\DoxyCodeLine{00449   \}}
+\DoxyCodeLine{00450 }
+\DoxyCodeLine{00451   \textcolor{comment}{/* Enable the Peripheral */}}
+\DoxyCodeLine{00452   \_\_HAL\_UART\_ENABLE(huart);}
+\DoxyCodeLine{00453 }
+\DoxyCodeLine{00454   \textcolor{comment}{/* Init tickstart for timeout management */}}
+\DoxyCodeLine{00455   tickstart = HAL\_GetTick();}
+\DoxyCodeLine{00456 }
+\DoxyCodeLine{00457   \textcolor{comment}{/* Wait until REACK flag is set */}}
+\DoxyCodeLine{00458   \textcolor{keywordflow}{if} (UART\_WaitOnFlagUntilTimeout(huart, USART\_ISR\_REACK, RESET, tickstart, HAL\_UART\_TIMEOUT\_VALUE) != HAL\_OK)}
+\DoxyCodeLine{00459   \{}
+\DoxyCodeLine{00460     status = HAL\_TIMEOUT;}
+\DoxyCodeLine{00461   \}}
+\DoxyCodeLine{00462   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00463   \{}
+\DoxyCodeLine{00464     \textcolor{comment}{/* Initialize the UART State */}}
+\DoxyCodeLine{00465     huart-\/>gState = HAL\_UART\_STATE\_READY;}
+\DoxyCodeLine{00466   \}}
+\DoxyCodeLine{00467 }
+\DoxyCodeLine{00468   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00469   \_\_HAL\_UNLOCK(huart);}
+\DoxyCodeLine{00470 }
+\DoxyCodeLine{00471   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00472 \}}
+\DoxyCodeLine{00473 }
+\DoxyCodeLine{00480 HAL\_StatusTypeDef HAL\_UARTEx\_EnableStopMode(UART\_HandleTypeDef *huart)}
+\DoxyCodeLine{00481 \{}
+\DoxyCodeLine{00482   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{00483   \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00484 }
+\DoxyCodeLine{00485   \textcolor{comment}{/* Set UESM bit */}}
+\DoxyCodeLine{00486   ATOMIC\_SET\_BIT(huart-\/>Instance-\/>CR1, USART\_CR1\_UESM);}
+\DoxyCodeLine{00487 }
+\DoxyCodeLine{00488   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00489   \_\_HAL\_UNLOCK(huart);}
+\DoxyCodeLine{00490 }
+\DoxyCodeLine{00491   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00492 \}}
+\DoxyCodeLine{00493 }
+\DoxyCodeLine{00499 HAL\_StatusTypeDef HAL\_UARTEx\_DisableStopMode(UART\_HandleTypeDef *huart)}
+\DoxyCodeLine{00500 \{}
+\DoxyCodeLine{00501   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{00502   \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00503 }
+\DoxyCodeLine{00504   \textcolor{comment}{/* Clear UESM bit */}}
+\DoxyCodeLine{00505   ATOMIC\_CLEAR\_BIT(huart-\/>Instance-\/>CR1, USART\_CR1\_UESM);}
+\DoxyCodeLine{00506 }
+\DoxyCodeLine{00507   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00508   \_\_HAL\_UNLOCK(huart);}
+\DoxyCodeLine{00509 }
+\DoxyCodeLine{00510   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00511 \}}
+\DoxyCodeLine{00512 }
+\DoxyCodeLine{00518 HAL\_StatusTypeDef HAL\_UARTEx\_EnableFifoMode(UART\_HandleTypeDef *huart)}
+\DoxyCodeLine{00519 \{}
+\DoxyCodeLine{00520   uint32\_t tmpcr1;}
+\DoxyCodeLine{00521 }
+\DoxyCodeLine{00522   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{00523   assert\_param(IS\_UART\_FIFO\_INSTANCE(huart-\/>Instance));}
+\DoxyCodeLine{00524 }
+\DoxyCodeLine{00525   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{00526   \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00527 }
+\DoxyCodeLine{00528   huart-\/>gState = HAL\_UART\_STATE\_BUSY;}
+\DoxyCodeLine{00529 }
+\DoxyCodeLine{00530   \textcolor{comment}{/* Save actual UART configuration */}}
+\DoxyCodeLine{00531   tmpcr1 = READ\_REG(huart-\/>Instance-\/>CR1);}
+\DoxyCodeLine{00532 }
+\DoxyCodeLine{00533   \textcolor{comment}{/* Disable UART */}}
+\DoxyCodeLine{00534   \_\_HAL\_UART\_DISABLE(huart);}
+\DoxyCodeLine{00535 }
+\DoxyCodeLine{00536   \textcolor{comment}{/* Enable FIFO mode */}}
+\DoxyCodeLine{00537   SET\_BIT(tmpcr1, USART\_CR1\_FIFOEN);}
+\DoxyCodeLine{00538   huart-\/>FifoMode = UART\_FIFOMODE\_ENABLE;}
+\DoxyCodeLine{00539 }
+\DoxyCodeLine{00540   \textcolor{comment}{/* Restore UART configuration */}}
+\DoxyCodeLine{00541   WRITE\_REG(huart-\/>Instance-\/>CR1, tmpcr1);}
+\DoxyCodeLine{00542 }
+\DoxyCodeLine{00543   \textcolor{comment}{/* Determine the number of data to process during RX/TX ISR execution */}}
+\DoxyCodeLine{00544   UARTEx\_SetNbDataToProcess(huart);}
+\DoxyCodeLine{00545 }
+\DoxyCodeLine{00546   huart-\/>gState = HAL\_UART\_STATE\_READY;}
+\DoxyCodeLine{00547 }
+\DoxyCodeLine{00548   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00549   \_\_HAL\_UNLOCK(huart);}
+\DoxyCodeLine{00550 }
+\DoxyCodeLine{00551   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00552 \}}
+\DoxyCodeLine{00553 }
+\DoxyCodeLine{00559 HAL\_StatusTypeDef HAL\_UARTEx\_DisableFifoMode(UART\_HandleTypeDef *huart)}
+\DoxyCodeLine{00560 \{}
+\DoxyCodeLine{00561   uint32\_t tmpcr1;}
+\DoxyCodeLine{00562 }
+\DoxyCodeLine{00563   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{00564   assert\_param(IS\_UART\_FIFO\_INSTANCE(huart-\/>Instance));}
+\DoxyCodeLine{00565 }
+\DoxyCodeLine{00566   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{00567   \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00568 }
+\DoxyCodeLine{00569   huart-\/>gState = HAL\_UART\_STATE\_BUSY;}
+\DoxyCodeLine{00570 }
+\DoxyCodeLine{00571   \textcolor{comment}{/* Save actual UART configuration */}}
+\DoxyCodeLine{00572   tmpcr1 = READ\_REG(huart-\/>Instance-\/>CR1);}
+\DoxyCodeLine{00573 }
+\DoxyCodeLine{00574   \textcolor{comment}{/* Disable UART */}}
+\DoxyCodeLine{00575   \_\_HAL\_UART\_DISABLE(huart);}
+\DoxyCodeLine{00576 }
+\DoxyCodeLine{00577   \textcolor{comment}{/* Enable FIFO mode */}}
+\DoxyCodeLine{00578   CLEAR\_BIT(tmpcr1, USART\_CR1\_FIFOEN);}
+\DoxyCodeLine{00579   huart-\/>FifoMode = UART\_FIFOMODE\_DISABLE;}
+\DoxyCodeLine{00580 }
+\DoxyCodeLine{00581   \textcolor{comment}{/* Restore UART configuration */}}
+\DoxyCodeLine{00582   WRITE\_REG(huart-\/>Instance-\/>CR1, tmpcr1);}
+\DoxyCodeLine{00583 }
+\DoxyCodeLine{00584   huart-\/>gState = HAL\_UART\_STATE\_READY;}
+\DoxyCodeLine{00585 }
+\DoxyCodeLine{00586   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00587   \_\_HAL\_UNLOCK(huart);}
+\DoxyCodeLine{00588 }
+\DoxyCodeLine{00589   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00590 \}}
+\DoxyCodeLine{00591 }
+\DoxyCodeLine{00605 HAL\_StatusTypeDef HAL\_UARTEx\_SetTxFifoThreshold(UART\_HandleTypeDef *huart, uint32\_t Threshold)}
+\DoxyCodeLine{00606 \{}
+\DoxyCodeLine{00607   uint32\_t tmpcr1;}
+\DoxyCodeLine{00608 }
+\DoxyCodeLine{00609   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{00610   assert\_param(IS\_UART\_FIFO\_INSTANCE(huart-\/>Instance));}
+\DoxyCodeLine{00611   assert\_param(IS\_UART\_TXFIFO\_THRESHOLD(Threshold));}
+\DoxyCodeLine{00612 }
+\DoxyCodeLine{00613   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{00614   \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00615 }
+\DoxyCodeLine{00616   huart-\/>gState = HAL\_UART\_STATE\_BUSY;}
+\DoxyCodeLine{00617 }
+\DoxyCodeLine{00618   \textcolor{comment}{/* Save actual UART configuration */}}
+\DoxyCodeLine{00619   tmpcr1 = READ\_REG(huart-\/>Instance-\/>CR1);}
+\DoxyCodeLine{00620 }
+\DoxyCodeLine{00621   \textcolor{comment}{/* Disable UART */}}
+\DoxyCodeLine{00622   \_\_HAL\_UART\_DISABLE(huart);}
+\DoxyCodeLine{00623 }
+\DoxyCodeLine{00624   \textcolor{comment}{/* Update TX threshold configuration */}}
+\DoxyCodeLine{00625   MODIFY\_REG(huart-\/>Instance-\/>CR3, USART\_CR3\_TXFTCFG, Threshold);}
+\DoxyCodeLine{00626 }
+\DoxyCodeLine{00627   \textcolor{comment}{/* Determine the number of data to process during RX/TX ISR execution */}}
+\DoxyCodeLine{00628   UARTEx\_SetNbDataToProcess(huart);}
+\DoxyCodeLine{00629 }
+\DoxyCodeLine{00630   \textcolor{comment}{/* Restore UART configuration */}}
+\DoxyCodeLine{00631   WRITE\_REG(huart-\/>Instance-\/>CR1, tmpcr1);}
+\DoxyCodeLine{00632 }
+\DoxyCodeLine{00633   huart-\/>gState = HAL\_UART\_STATE\_READY;}
+\DoxyCodeLine{00634 }
+\DoxyCodeLine{00635   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00636   \_\_HAL\_UNLOCK(huart);}
+\DoxyCodeLine{00637 }
+\DoxyCodeLine{00638   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00639 \}}
+\DoxyCodeLine{00640 }
+\DoxyCodeLine{00654 HAL\_StatusTypeDef HAL\_UARTEx\_SetRxFifoThreshold(UART\_HandleTypeDef *huart, uint32\_t Threshold)}
+\DoxyCodeLine{00655 \{}
+\DoxyCodeLine{00656   uint32\_t tmpcr1;}
+\DoxyCodeLine{00657 }
+\DoxyCodeLine{00658   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00659   assert\_param(IS\_UART\_FIFO\_INSTANCE(huart-\/>Instance));}
+\DoxyCodeLine{00660   assert\_param(IS\_UART\_RXFIFO\_THRESHOLD(Threshold));}
+\DoxyCodeLine{00661 }
+\DoxyCodeLine{00662   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{00663   \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00664 }
+\DoxyCodeLine{00665   huart-\/>gState = HAL\_UART\_STATE\_BUSY;}
+\DoxyCodeLine{00666 }
+\DoxyCodeLine{00667   \textcolor{comment}{/* Save actual UART configuration */}}
+\DoxyCodeLine{00668   tmpcr1 = READ\_REG(huart-\/>Instance-\/>CR1);}
+\DoxyCodeLine{00669 }
+\DoxyCodeLine{00670   \textcolor{comment}{/* Disable UART */}}
+\DoxyCodeLine{00671   \_\_HAL\_UART\_DISABLE(huart);}
+\DoxyCodeLine{00672 }
+\DoxyCodeLine{00673   \textcolor{comment}{/* Update RX threshold configuration */}}
+\DoxyCodeLine{00674   MODIFY\_REG(huart-\/>Instance-\/>CR3, USART\_CR3\_RXFTCFG, Threshold);}
+\DoxyCodeLine{00675 }
+\DoxyCodeLine{00676   \textcolor{comment}{/* Determine the number of data to process during RX/TX ISR execution */}}
+\DoxyCodeLine{00677   UARTEx\_SetNbDataToProcess(huart);}
+\DoxyCodeLine{00678 }
+\DoxyCodeLine{00679   \textcolor{comment}{/* Restore UART configuration */}}
+\DoxyCodeLine{00680   WRITE\_REG(huart-\/>Instance-\/>CR1, tmpcr1);}
+\DoxyCodeLine{00681 }
+\DoxyCodeLine{00682   huart-\/>gState = HAL\_UART\_STATE\_READY;}
+\DoxyCodeLine{00683 }
+\DoxyCodeLine{00684   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00685   \_\_HAL\_UNLOCK(huart);}
+\DoxyCodeLine{00686 }
+\DoxyCodeLine{00687   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00688 \}}
+\DoxyCodeLine{00689 }
+\DoxyCodeLine{00711 HAL\_StatusTypeDef HAL\_UARTEx\_ReceiveToIdle(UART\_HandleTypeDef *huart, uint8\_t *pData, uint16\_t Size, uint16\_t *RxLen,}
+\DoxyCodeLine{00712                                            uint32\_t Timeout)}
+\DoxyCodeLine{00713 \{}
+\DoxyCodeLine{00714   uint8\_t  *pdata8bits;}
+\DoxyCodeLine{00715   uint16\_t *pdata16bits;}
+\DoxyCodeLine{00716   uint16\_t uhMask;}
+\DoxyCodeLine{00717   uint32\_t tickstart;}
+\DoxyCodeLine{00718 }
+\DoxyCodeLine{00719   \textcolor{comment}{/* Check that a Rx process is not already ongoing */}}
+\DoxyCodeLine{00720   \textcolor{keywordflow}{if} (huart-\/>RxState == HAL\_UART\_STATE\_READY)}
+\DoxyCodeLine{00721   \{}
+\DoxyCodeLine{00722     \textcolor{keywordflow}{if} ((pData == NULL) || (Size == 0U))}
+\DoxyCodeLine{00723     \{}
+\DoxyCodeLine{00724       \textcolor{keywordflow}{return}  HAL\_ERROR;}
+\DoxyCodeLine{00725     \}}
+\DoxyCodeLine{00726 }
+\DoxyCodeLine{00727     \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00728 }
+\DoxyCodeLine{00729     huart-\/>ErrorCode = HAL\_UART\_ERROR\_NONE;}
+\DoxyCodeLine{00730     huart-\/>RxState = HAL\_UART\_STATE\_BUSY\_RX;}
+\DoxyCodeLine{00731     huart-\/>ReceptionType = HAL\_UART\_RECEPTION\_TOIDLE;}
+\DoxyCodeLine{00732 }
+\DoxyCodeLine{00733     \textcolor{comment}{/* Init tickstart for timeout management */}}
+\DoxyCodeLine{00734     tickstart = HAL\_GetTick();}
+\DoxyCodeLine{00735 }
+\DoxyCodeLine{00736     huart-\/>RxXferSize  = Size;}
+\DoxyCodeLine{00737     huart-\/>RxXferCount = Size;}
+\DoxyCodeLine{00738 }
+\DoxyCodeLine{00739     \textcolor{comment}{/* Computation of UART mask to apply to RDR register */}}
+\DoxyCodeLine{00740     UART\_MASK\_COMPUTATION(huart);}
+\DoxyCodeLine{00741     uhMask = huart-\/>Mask;}
+\DoxyCodeLine{00742 }
+\DoxyCodeLine{00743     \textcolor{comment}{/* In case of 9bits/No Parity transfer, pRxData needs to be handled as a uint16\_t pointer */}}
+\DoxyCodeLine{00744     \textcolor{keywordflow}{if} ((huart-\/>Init.WordLength == UART\_WORDLENGTH\_9B) \&\& (huart-\/>Init.Parity == UART\_PARITY\_NONE))}
+\DoxyCodeLine{00745     \{}
+\DoxyCodeLine{00746       pdata8bits  = NULL;}
+\DoxyCodeLine{00747       pdata16bits = (uint16\_t *) pData;}
+\DoxyCodeLine{00748     \}}
+\DoxyCodeLine{00749     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00750     \{}
+\DoxyCodeLine{00751       pdata8bits  = pData;}
+\DoxyCodeLine{00752       pdata16bits = NULL;}
+\DoxyCodeLine{00753     \}}
+\DoxyCodeLine{00754 }
+\DoxyCodeLine{00755     \_\_HAL\_UNLOCK(huart);}
+\DoxyCodeLine{00756 }
+\DoxyCodeLine{00757     \textcolor{comment}{/* Initialize output number of received elements */}}
+\DoxyCodeLine{00758     *RxLen = 0U;}
+\DoxyCodeLine{00759 }
+\DoxyCodeLine{00760     \textcolor{comment}{/* as long as data have to be received */}}
+\DoxyCodeLine{00761     \textcolor{keywordflow}{while} (huart-\/>RxXferCount > 0U)}
+\DoxyCodeLine{00762     \{}
+\DoxyCodeLine{00763       \textcolor{comment}{/* Check if IDLE flag is set */}}
+\DoxyCodeLine{00764       \textcolor{keywordflow}{if} (\_\_HAL\_UART\_GET\_FLAG(huart, UART\_FLAG\_IDLE))}
+\DoxyCodeLine{00765       \{}
+\DoxyCodeLine{00766         \textcolor{comment}{/* Clear IDLE flag in ISR */}}
+\DoxyCodeLine{00767         \_\_HAL\_UART\_CLEAR\_FLAG(huart, UART\_CLEAR\_IDLEF);}
+\DoxyCodeLine{00768 }
+\DoxyCodeLine{00769         \textcolor{comment}{/* If Set, but no data ever received, clear flag without exiting loop */}}
+\DoxyCodeLine{00770         \textcolor{comment}{/* If Set, and data has already been received, this means Idle Event is valid : End reception */}}
+\DoxyCodeLine{00771         \textcolor{keywordflow}{if} (*RxLen > 0U)}
+\DoxyCodeLine{00772         \{}
+\DoxyCodeLine{00773           huart-\/>RxState = HAL\_UART\_STATE\_READY;}
+\DoxyCodeLine{00774 }
+\DoxyCodeLine{00775           \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00776         \}}
+\DoxyCodeLine{00777       \}}
+\DoxyCodeLine{00778 }
+\DoxyCodeLine{00779       \textcolor{comment}{/* Check if RXNE flag is set */}}
+\DoxyCodeLine{00780       \textcolor{keywordflow}{if} (\_\_HAL\_UART\_GET\_FLAG(huart, UART\_FLAG\_RXNE))}
+\DoxyCodeLine{00781       \{}
+\DoxyCodeLine{00782         \textcolor{keywordflow}{if} (pdata8bits == NULL)}
+\DoxyCodeLine{00783         \{}
+\DoxyCodeLine{00784           *pdata16bits = (uint16\_t)(huart-\/>Instance-\/>RDR \& uhMask);}
+\DoxyCodeLine{00785           pdata16bits++;}
+\DoxyCodeLine{00786         \}}
+\DoxyCodeLine{00787         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00788         \{}
+\DoxyCodeLine{00789           *pdata8bits = (uint8\_t)(huart-\/>Instance-\/>RDR \& (uint8\_t)uhMask);}
+\DoxyCodeLine{00790           pdata8bits++;}
+\DoxyCodeLine{00791         \}}
+\DoxyCodeLine{00792         \textcolor{comment}{/* Increment number of received elements */}}
+\DoxyCodeLine{00793         *RxLen += 1U;}
+\DoxyCodeLine{00794         huart-\/>RxXferCount-\/-\/;}
+\DoxyCodeLine{00795       \}}
+\DoxyCodeLine{00796 }
+\DoxyCodeLine{00797       \textcolor{comment}{/* Check for the Timeout */}}
+\DoxyCodeLine{00798       \textcolor{keywordflow}{if} (Timeout != HAL\_MAX\_DELAY)}
+\DoxyCodeLine{00799       \{}
+\DoxyCodeLine{00800         \textcolor{keywordflow}{if} (((HAL\_GetTick() -\/ tickstart) > Timeout) || (Timeout == 0U))}
+\DoxyCodeLine{00801         \{}
+\DoxyCodeLine{00802           huart-\/>RxState = HAL\_UART\_STATE\_READY;}
+\DoxyCodeLine{00803 }
+\DoxyCodeLine{00804           \textcolor{keywordflow}{return} HAL\_TIMEOUT;}
+\DoxyCodeLine{00805         \}}
+\DoxyCodeLine{00806       \}}
+\DoxyCodeLine{00807     \}}
+\DoxyCodeLine{00808 }
+\DoxyCodeLine{00809     \textcolor{comment}{/* Set number of received elements in output parameter : RxLen */}}
+\DoxyCodeLine{00810     *RxLen = huart-\/>RxXferSize -\/ huart-\/>RxXferCount;}
+\DoxyCodeLine{00811     \textcolor{comment}{/* At end of Rx process, restore huart-\/>RxState to Ready */}}
+\DoxyCodeLine{00812     huart-\/>RxState = HAL\_UART\_STATE\_READY;}
+\DoxyCodeLine{00813 }
+\DoxyCodeLine{00814     \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00815   \}}
+\DoxyCodeLine{00816   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00817   \{}
+\DoxyCodeLine{00818     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{00819   \}}
+\DoxyCodeLine{00820 \}}
+\DoxyCodeLine{00821 }
+\DoxyCodeLine{00836 HAL\_StatusTypeDef HAL\_UARTEx\_ReceiveToIdle\_IT(UART\_HandleTypeDef *huart, uint8\_t *pData, uint16\_t Size)}
+\DoxyCodeLine{00837 \{}
+\DoxyCodeLine{00838   HAL\_StatusTypeDef status;}
+\DoxyCodeLine{00839 }
+\DoxyCodeLine{00840   \textcolor{comment}{/* Check that a Rx process is not already ongoing */}}
+\DoxyCodeLine{00841   \textcolor{keywordflow}{if} (huart-\/>RxState == HAL\_UART\_STATE\_READY)}
+\DoxyCodeLine{00842   \{}
+\DoxyCodeLine{00843     \textcolor{keywordflow}{if} ((pData == NULL) || (Size == 0U))}
+\DoxyCodeLine{00844     \{}
+\DoxyCodeLine{00845       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00846     \}}
+\DoxyCodeLine{00847 }
+\DoxyCodeLine{00848     \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00849 }
+\DoxyCodeLine{00850     \textcolor{comment}{/* Set Reception type to reception till IDLE Event*/}}
+\DoxyCodeLine{00851     huart-\/>ReceptionType = HAL\_UART\_RECEPTION\_TOIDLE;}
+\DoxyCodeLine{00852 }
+\DoxyCodeLine{00853     status =  UART\_Start\_Receive\_IT(huart, pData, Size);}
+\DoxyCodeLine{00854 }
+\DoxyCodeLine{00855     \textcolor{comment}{/* Check Rx process has been successfully started */}}
+\DoxyCodeLine{00856     \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{00857     \{}
+\DoxyCodeLine{00858       \textcolor{keywordflow}{if} (huart-\/>ReceptionType == HAL\_UART\_RECEPTION\_TOIDLE)}
+\DoxyCodeLine{00859       \{}
+\DoxyCodeLine{00860         \_\_HAL\_UART\_CLEAR\_FLAG(huart, UART\_CLEAR\_IDLEF);}
+\DoxyCodeLine{00861         ATOMIC\_SET\_BIT(huart-\/>Instance-\/>CR1, USART\_CR1\_IDLEIE);}
+\DoxyCodeLine{00862       \}}
+\DoxyCodeLine{00863       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00864       \{}
+\DoxyCodeLine{00865         \textcolor{comment}{/* In case of errors already pending when reception is started,}}
+\DoxyCodeLine{00866 \textcolor{comment}{           Interrupts may have already been raised and lead to reception abortion.}}
+\DoxyCodeLine{00867 \textcolor{comment}{           (Overrun error for instance).}}
+\DoxyCodeLine{00868 \textcolor{comment}{           In such case Reception Type has been reset to HAL\_UART\_RECEPTION\_STANDARD. */}}
+\DoxyCodeLine{00869         status = HAL\_ERROR;}
+\DoxyCodeLine{00870       \}}
+\DoxyCodeLine{00871     \}}
+\DoxyCodeLine{00872 }
+\DoxyCodeLine{00873     \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00874   \}}
+\DoxyCodeLine{00875   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00876   \{}
+\DoxyCodeLine{00877     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{00878   \}}
+\DoxyCodeLine{00879 \}}
+\DoxyCodeLine{00880 }
+\DoxyCodeLine{00898 HAL\_StatusTypeDef HAL\_UARTEx\_ReceiveToIdle\_DMA(UART\_HandleTypeDef *huart, uint8\_t *pData, uint16\_t Size)}
+\DoxyCodeLine{00899 \{}
+\DoxyCodeLine{00900   HAL\_StatusTypeDef status;}
+\DoxyCodeLine{00901 }
+\DoxyCodeLine{00902   \textcolor{comment}{/* Check that a Rx process is not already ongoing */}}
+\DoxyCodeLine{00903   \textcolor{keywordflow}{if} (huart-\/>RxState == HAL\_UART\_STATE\_READY)}
+\DoxyCodeLine{00904   \{}
+\DoxyCodeLine{00905     \textcolor{keywordflow}{if} ((pData == NULL) || (Size == 0U))}
+\DoxyCodeLine{00906     \{}
+\DoxyCodeLine{00907       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00908     \}}
+\DoxyCodeLine{00909 }
+\DoxyCodeLine{00910     \_\_HAL\_LOCK(huart);}
+\DoxyCodeLine{00911 }
+\DoxyCodeLine{00912     \textcolor{comment}{/* Set Reception type to reception till IDLE Event*/}}
+\DoxyCodeLine{00913     huart-\/>ReceptionType = HAL\_UART\_RECEPTION\_TOIDLE;}
+\DoxyCodeLine{00914 }
+\DoxyCodeLine{00915     status =  UART\_Start\_Receive\_DMA(huart, pData, Size);}
+\DoxyCodeLine{00916 }
+\DoxyCodeLine{00917     \textcolor{comment}{/* Check Rx process has been successfully started */}}
+\DoxyCodeLine{00918     \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{00919     \{}
+\DoxyCodeLine{00920       \textcolor{keywordflow}{if} (huart-\/>ReceptionType == HAL\_UART\_RECEPTION\_TOIDLE)}
+\DoxyCodeLine{00921       \{}
+\DoxyCodeLine{00922         \_\_HAL\_UART\_CLEAR\_FLAG(huart, UART\_CLEAR\_IDLEF);}
+\DoxyCodeLine{00923         ATOMIC\_SET\_BIT(huart-\/>Instance-\/>CR1, USART\_CR1\_IDLEIE);}
+\DoxyCodeLine{00924       \}}
+\DoxyCodeLine{00925       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00926       \{}
+\DoxyCodeLine{00927         \textcolor{comment}{/* In case of errors already pending when reception is started,}}
+\DoxyCodeLine{00928 \textcolor{comment}{           Interrupts may have already been raised and lead to reception abortion.}}
+\DoxyCodeLine{00929 \textcolor{comment}{           (Overrun error for instance).}}
+\DoxyCodeLine{00930 \textcolor{comment}{           In such case Reception Type has been reset to HAL\_UART\_RECEPTION\_STANDARD. */}}
+\DoxyCodeLine{00931         status = HAL\_ERROR;}
+\DoxyCodeLine{00932       \}}
+\DoxyCodeLine{00933     \}}
+\DoxyCodeLine{00934 }
+\DoxyCodeLine{00935     \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00936   \}}
+\DoxyCodeLine{00937   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00938   \{}
+\DoxyCodeLine{00939     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{00940   \}}
+\DoxyCodeLine{00941 \}}
+\DoxyCodeLine{00942 }
+\DoxyCodeLine{00961 \textcolor{keyword}{static} \textcolor{keywordtype}{void} UARTEx\_Wakeup\_AddressConfig(UART\_HandleTypeDef *huart, UART\_WakeUpTypeDef WakeUpSelection)}
+\DoxyCodeLine{00962 \{}
+\DoxyCodeLine{00963   assert\_param(IS\_UART\_ADDRESSLENGTH\_DETECT(WakeUpSelection.AddressLength));}
+\DoxyCodeLine{00964 }
+\DoxyCodeLine{00965   \textcolor{comment}{/* Set the USART address length */}}
+\DoxyCodeLine{00966   MODIFY\_REG(huart-\/>Instance-\/>CR2, USART\_CR2\_ADDM7, WakeUpSelection.AddressLength);}
+\DoxyCodeLine{00967 }
+\DoxyCodeLine{00968   \textcolor{comment}{/* Set the USART address node */}}
+\DoxyCodeLine{00969   MODIFY\_REG(huart-\/>Instance-\/>CR2, USART\_CR2\_ADD, ((uint32\_t)WakeUpSelection.Address << UART\_CR2\_ADDRESS\_LSB\_POS));}
+\DoxyCodeLine{00970 \}}
+\DoxyCodeLine{00971 }
+\DoxyCodeLine{00979 \textcolor{keyword}{static} \textcolor{keywordtype}{void} UARTEx\_SetNbDataToProcess(UART\_HandleTypeDef *huart)}
+\DoxyCodeLine{00980 \{}
+\DoxyCodeLine{00981   uint8\_t rx\_fifo\_depth;}
+\DoxyCodeLine{00982   uint8\_t tx\_fifo\_depth;}
+\DoxyCodeLine{00983   uint8\_t rx\_fifo\_threshold;}
+\DoxyCodeLine{00984   uint8\_t tx\_fifo\_threshold;}
+\DoxyCodeLine{00985   \textcolor{keyword}{static} \textcolor{keyword}{const} uint8\_t numerator[] = \{1U, 1U, 1U, 3U, 7U, 1U, 0U, 0U\};}
+\DoxyCodeLine{00986   \textcolor{keyword}{static} \textcolor{keyword}{const} uint8\_t denominator[] = \{8U, 4U, 2U, 4U, 8U, 1U, 1U, 1U\};}
+\DoxyCodeLine{00987 }
+\DoxyCodeLine{00988   \textcolor{keywordflow}{if} (huart-\/>FifoMode == UART\_FIFOMODE\_DISABLE)}
+\DoxyCodeLine{00989   \{}
+\DoxyCodeLine{00990     huart-\/>NbTxDataToProcess = 1U;}
+\DoxyCodeLine{00991     huart-\/>NbRxDataToProcess = 1U;}
+\DoxyCodeLine{00992   \}}
+\DoxyCodeLine{00993   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00994   \{}
+\DoxyCodeLine{00995     rx\_fifo\_depth = RX\_FIFO\_DEPTH;}
+\DoxyCodeLine{00996     tx\_fifo\_depth = TX\_FIFO\_DEPTH;}
+\DoxyCodeLine{00997     rx\_fifo\_threshold = (uint8\_t)(READ\_BIT(huart-\/>Instance-\/>CR3, USART\_CR3\_RXFTCFG) >> USART\_CR3\_RXFTCFG\_Pos);}
+\DoxyCodeLine{00998     tx\_fifo\_threshold = (uint8\_t)(READ\_BIT(huart-\/>Instance-\/>CR3, USART\_CR3\_TXFTCFG) >> USART\_CR3\_TXFTCFG\_Pos);}
+\DoxyCodeLine{00999     huart-\/>NbTxDataToProcess = ((uint16\_t)tx\_fifo\_depth * numerator[tx\_fifo\_threshold]) /}
+\DoxyCodeLine{01000                                (uint16\_t)denominator[tx\_fifo\_threshold];}
+\DoxyCodeLine{01001     huart-\/>NbRxDataToProcess = ((uint16\_t)rx\_fifo\_depth * numerator[rx\_fifo\_threshold]) /}
+\DoxyCodeLine{01002                                (uint16\_t)denominator[rx\_fifo\_threshold];}
+\DoxyCodeLine{01003   \}}
+\DoxyCodeLine{01004 \}}
+\DoxyCodeLine{01009 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_UART\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01010 }
+
+\end{DoxyCode}

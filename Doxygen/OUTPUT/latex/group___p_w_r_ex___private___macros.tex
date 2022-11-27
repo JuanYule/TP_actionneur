@@ -1,0 +1,174 @@
+\doxysection{PWR Extended Private Macros}
+\label{group___p_w_r_ex___private___macros}\index{PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+WAKEUP\+\_\+\+PIN}(PIN)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+PVM\+\_\+\+TYPE}(TYPE)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+PVM\+\_\+\+MODE}(MODE)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+VOLTAGE\+\_\+\+SCALING\+\_\+\+RANGE}(RANGE)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+BATTERY\+\_\+\+RESISTOR\+\_\+\+SELECT}(RESISTOR)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+BATTERY\+\_\+\+CHARGING}(CHARGING)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+\+NUMBER}(BIT\+\_\+\+NUMBER)~(((BIT\+\_\+\+NUMBER) \& GPIO\+\_\+\+PIN\+\_\+\+MASK) != (uint32\+\_\+t)0x00U)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+GPIO}(GPIO)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___p_w_r_ex___private___macros_ga195caa7e530c7c937bb0b7e5f0049b44}} 
+\index{PWR Extended Private Macros@{PWR Extended Private Macros}!IS\_PWR\_BATTERY\_CHARGING@{IS\_PWR\_BATTERY\_CHARGING}}
+\index{IS\_PWR\_BATTERY\_CHARGING@{IS\_PWR\_BATTERY\_CHARGING}!PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsubsection{IS\_PWR\_BATTERY\_CHARGING}
+{\footnotesize\ttfamily \#define IS\+\_\+\+PWR\+\_\+\+BATTERY\+\_\+\+CHARGING(\begin{DoxyParamCaption}\item[{}]{CHARGING }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                           (((CHARGING) == PWR\_BATTERY\_CHARGING\_DISABLE) ||\(\backslash\)}
+\DoxyCodeLine{                                           ((CHARGING) == PWR\_BATTERY\_CHARGING\_ENABLE))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 713} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+
+\mbox{\label{group___p_w_r_ex___private___macros_ga3fa01a4ed0f3f68986664d2b117b3640}} 
+\index{PWR Extended Private Macros@{PWR Extended Private Macros}!IS\_PWR\_BATTERY\_RESISTOR\_SELECT@{IS\_PWR\_BATTERY\_RESISTOR\_SELECT}}
+\index{IS\_PWR\_BATTERY\_RESISTOR\_SELECT@{IS\_PWR\_BATTERY\_RESISTOR\_SELECT}!PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsubsection{IS\_PWR\_BATTERY\_RESISTOR\_SELECT}
+{\footnotesize\ttfamily \#define IS\+\_\+\+PWR\+\_\+\+BATTERY\+\_\+\+RESISTOR\+\_\+\+SELECT(\begin{DoxyParamCaption}\item[{}]{RESISTOR }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                                  (((RESISTOR) == PWR\_BATTERY\_CHARGING\_RESISTOR\_5) ||\(\backslash\)}
+\DoxyCodeLine{                                                  ((RESISTOR) == PWR\_BATTERY\_CHARGING\_RESISTOR\_1\_5))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 710} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+
+\mbox{\label{group___p_w_r_ex___private___macros_ga32fc5d1337f1f0984f6034c2c582e6fe}} 
+\index{PWR Extended Private Macros@{PWR Extended Private Macros}!IS\_PWR\_GPIO@{IS\_PWR\_GPIO}}
+\index{IS\_PWR\_GPIO@{IS\_PWR\_GPIO}!PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsubsection{IS\_PWR\_GPIO}
+{\footnotesize\ttfamily \#define IS\+\_\+\+PWR\+\_\+\+GPIO(\begin{DoxyParamCaption}\item[{}]{GPIO }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                           (((GPIO) == PWR\_GPIO\_A) ||\(\backslash\)}
+\DoxyCodeLine{                           ((GPIO) == PWR\_GPIO\_B) ||\(\backslash\)}
+\DoxyCodeLine{                           ((GPIO) == PWR\_GPIO\_C) ||\(\backslash\)}
+\DoxyCodeLine{                           ((GPIO) == PWR\_GPIO\_D) ||\(\backslash\)}
+\DoxyCodeLine{                           ((GPIO) == PWR\_GPIO\_E) ||\(\backslash\)}
+\DoxyCodeLine{                           ((GPIO) == PWR\_GPIO\_F) ||\(\backslash\)}
+\DoxyCodeLine{                           ((GPIO) == PWR\_GPIO\_G))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 717} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+
+\mbox{\label{group___p_w_r_ex___private___macros_ga6d03ede8c3b6a365694f254f790fbe72}} 
+\index{PWR Extended Private Macros@{PWR Extended Private Macros}!IS\_PWR\_GPIO\_BIT\_NUMBER@{IS\_PWR\_GPIO\_BIT\_NUMBER}}
+\index{IS\_PWR\_GPIO\_BIT\_NUMBER@{IS\_PWR\_GPIO\_BIT\_NUMBER}!PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsubsection{IS\_PWR\_GPIO\_BIT\_NUMBER}
+{\footnotesize\ttfamily \#define IS\+\_\+\+PWR\+\_\+\+GPIO\+\_\+\+BIT\+\_\+\+NUMBER(\begin{DoxyParamCaption}\item[{}]{BIT\+\_\+\+NUMBER }\end{DoxyParamCaption})~(((BIT\+\_\+\+NUMBER) \& GPIO\+\_\+\+PIN\+\_\+\+MASK) != (uint32\+\_\+t)0x00U)}
+
+
+
+Definition at line \textbf{ 716} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+
+\mbox{\label{group___p_w_r_ex___private___macros_ga5b2a8b140093af19e61dc7bef31cd2f9}} 
+\index{PWR Extended Private Macros@{PWR Extended Private Macros}!IS\_PWR\_PVM\_MODE@{IS\_PWR\_PVM\_MODE}}
+\index{IS\_PWR\_PVM\_MODE@{IS\_PWR\_PVM\_MODE}!PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsubsection{IS\_PWR\_PVM\_MODE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+PWR\+\_\+\+PVM\+\_\+\+MODE(\begin{DoxyParamCaption}\item[{}]{MODE }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                (((MODE) == PWR\_PVM\_MODE\_NORMAL)              ||\(\backslash\)}
+\DoxyCodeLine{                                ((MODE) == PWR\_PVM\_MODE\_IT\_RISING)           ||\(\backslash\)}
+\DoxyCodeLine{                                ((MODE) == PWR\_PVM\_MODE\_IT\_FALLING)          ||\(\backslash\)}
+\DoxyCodeLine{                                ((MODE) == PWR\_PVM\_MODE\_IT\_RISING\_FALLING)   ||\(\backslash\)}
+\DoxyCodeLine{                                ((MODE) == PWR\_PVM\_MODE\_EVENT\_RISING)        ||\(\backslash\)}
+\DoxyCodeLine{                                ((MODE) == PWR\_PVM\_MODE\_EVENT\_FALLING)       ||\(\backslash\)}
+\DoxyCodeLine{                                ((MODE) == PWR\_PVM\_MODE\_EVENT\_RISING\_FALLING))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 692} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+
+\mbox{\label{group___p_w_r_ex___private___macros_ga7547d3dc786e6c6837163ba243df5938}} 
+\index{PWR Extended Private Macros@{PWR Extended Private Macros}!IS\_PWR\_PVM\_TYPE@{IS\_PWR\_PVM\_TYPE}}
+\index{IS\_PWR\_PVM\_TYPE@{IS\_PWR\_PVM\_TYPE}!PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsubsection{IS\_PWR\_PVM\_TYPE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+PWR\+\_\+\+PVM\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{TYPE }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                               (((TYPE) == PWR\_PVM\_1) ||\(\backslash\)}
+\DoxyCodeLine{                               ((TYPE) == PWR\_PVM\_2) ||\(\backslash\)}
+\DoxyCodeLine{                               ((TYPE) == PWR\_PVM\_3) ||\(\backslash\)}
+\DoxyCodeLine{                               ((TYPE) == PWR\_PVM\_4))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 687} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+
+\mbox{\label{group___p_w_r_ex___private___macros_ga35f3636d8fff27feb210e9860076ef2f}} 
+\index{PWR Extended Private Macros@{PWR Extended Private Macros}!IS\_PWR\_VOLTAGE\_SCALING\_RANGE@{IS\_PWR\_VOLTAGE\_SCALING\_RANGE}}
+\index{IS\_PWR\_VOLTAGE\_SCALING\_RANGE@{IS\_PWR\_VOLTAGE\_SCALING\_RANGE}!PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsubsection{IS\_PWR\_VOLTAGE\_SCALING\_RANGE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+PWR\+\_\+\+VOLTAGE\+\_\+\+SCALING\+\_\+\+RANGE(\begin{DoxyParamCaption}\item[{}]{RANGE }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                             (((RANGE) == PWR\_REGULATOR\_VOLTAGE\_SCALE1) || \(\backslash\)}
+\DoxyCodeLine{                                             ((RANGE) == PWR\_REGULATOR\_VOLTAGE\_SCALE2))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 705} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+
+\mbox{\label{group___p_w_r_ex___private___macros_gac6fcc59d6ff95b8feda1b228517f9c3f}} 
+\index{PWR Extended Private Macros@{PWR Extended Private Macros}!IS\_PWR\_WAKEUP\_PIN@{IS\_PWR\_WAKEUP\_PIN}}
+\index{IS\_PWR\_WAKEUP\_PIN@{IS\_PWR\_WAKEUP\_PIN}!PWR Extended Private Macros@{PWR Extended Private Macros}}
+\doxysubsubsection{IS\_PWR\_WAKEUP\_PIN}
+{\footnotesize\ttfamily \#define IS\+\_\+\+PWR\+\_\+\+WAKEUP\+\_\+\+PIN(\begin{DoxyParamCaption}\item[{}]{PIN }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                (((PIN) == PWR\_WAKEUP\_PIN1) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN2) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN3) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN4) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN5) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN1\_HIGH) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN2\_HIGH) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN3\_HIGH) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN4\_HIGH) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN5\_HIGH) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN1\_LOW) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN2\_LOW) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN3\_LOW) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN4\_LOW) || \(\backslash\)}
+\DoxyCodeLine{                                ((PIN) == PWR\_WAKEUP\_PIN5\_LOW))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 671} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+pwr\+\_\+ex.\+h}.
+

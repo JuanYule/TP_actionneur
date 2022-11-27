@@ -1,0 +1,307 @@
+\doxysection{stm32g4xx\+\_\+ll\+\_\+crs.\+h}
+\label{stm32g4xx__ll__crs_8h_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_crs.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_crs.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00019 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020 \textcolor{preprocessor}{\#ifndef \_\_STM32G4xx\_LL\_CRS\_H}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_LL\_CRS\_H}}
+\DoxyCodeLine{00022 }
+\DoxyCodeLine{00023 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00024 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#include "{}stm32g4xx.h"{}}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00034 \textcolor{preprocessor}{\#if defined(CRS)}}
+\DoxyCodeLine{00035 }
+\DoxyCodeLine{00040 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00041 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00042 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00043 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00044 }
+\DoxyCodeLine{00045 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00046 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00055 \textcolor{preprocessor}{\#define LL\_CRS\_ISR\_SYNCOKF                 CRS\_ISR\_SYNCOKF}}
+\DoxyCodeLine{00056 \textcolor{preprocessor}{\#define LL\_CRS\_ISR\_SYNCWARNF               CRS\_ISR\_SYNCWARNF}}
+\DoxyCodeLine{00057 \textcolor{preprocessor}{\#define LL\_CRS\_ISR\_ERRF                    CRS\_ISR\_ERRF}}
+\DoxyCodeLine{00058 \textcolor{preprocessor}{\#define LL\_CRS\_ISR\_ESYNCF                  CRS\_ISR\_ESYNCF}}
+\DoxyCodeLine{00059 \textcolor{preprocessor}{\#define LL\_CRS\_ISR\_SYNCERR                 CRS\_ISR\_SYNCERR}}
+\DoxyCodeLine{00060 \textcolor{preprocessor}{\#define LL\_CRS\_ISR\_SYNCMISS                CRS\_ISR\_SYNCMISS}}
+\DoxyCodeLine{00061 \textcolor{preprocessor}{\#define LL\_CRS\_ISR\_TRIMOVF                 CRS\_ISR\_TRIMOVF}}
+\DoxyCodeLine{00070 \textcolor{preprocessor}{\#define LL\_CRS\_CR\_SYNCOKIE                 CRS\_CR\_SYNCOKIE}}
+\DoxyCodeLine{00071 \textcolor{preprocessor}{\#define LL\_CRS\_CR\_SYNCWARNIE               CRS\_CR\_SYNCWARNIE}}
+\DoxyCodeLine{00072 \textcolor{preprocessor}{\#define LL\_CRS\_CR\_ERRIE                    CRS\_CR\_ERRIE}}
+\DoxyCodeLine{00073 \textcolor{preprocessor}{\#define LL\_CRS\_CR\_ESYNCIE                  CRS\_CR\_ESYNCIE}}
+\DoxyCodeLine{00081 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_DIV\_1                  ((uint32\_t)0x00U)                         }}
+\DoxyCodeLine{00082 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_DIV\_2                  CRS\_CFGR\_SYNCDIV\_0                        }}
+\DoxyCodeLine{00083 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_DIV\_4                  CRS\_CFGR\_SYNCDIV\_1                        }}
+\DoxyCodeLine{00084 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_DIV\_8                  (CRS\_CFGR\_SYNCDIV\_1 | CRS\_CFGR\_SYNCDIV\_0) }}
+\DoxyCodeLine{00085 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_DIV\_16                 CRS\_CFGR\_SYNCDIV\_2                        }}
+\DoxyCodeLine{00086 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_DIV\_32                 (CRS\_CFGR\_SYNCDIV\_2 | CRS\_CFGR\_SYNCDIV\_0) }}
+\DoxyCodeLine{00087 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_DIV\_64                 (CRS\_CFGR\_SYNCDIV\_2 | CRS\_CFGR\_SYNCDIV\_1) }}
+\DoxyCodeLine{00088 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_DIV\_128                CRS\_CFGR\_SYNCDIV                          }}
+\DoxyCodeLine{00096 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_SOURCE\_GPIO            ((uint32\_t)0x00U)       }}
+\DoxyCodeLine{00097 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_SOURCE\_LSE             CRS\_CFGR\_SYNCSRC\_0      }}
+\DoxyCodeLine{00098 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_SOURCE\_USB             CRS\_CFGR\_SYNCSRC\_1      }}
+\DoxyCodeLine{00106 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_POLARITY\_RISING        ((uint32\_t)0x00U)     }}
+\DoxyCodeLine{00107 \textcolor{preprocessor}{\#define LL\_CRS\_SYNC\_POLARITY\_FALLING       CRS\_CFGR\_SYNCPOL      }}
+\DoxyCodeLine{00115 \textcolor{preprocessor}{\#define LL\_CRS\_FREQ\_ERROR\_DIR\_UP             ((uint32\_t)0x00U)         }}
+\DoxyCodeLine{00116 \textcolor{preprocessor}{\#define LL\_CRS\_FREQ\_ERROR\_DIR\_DOWN           ((uint32\_t)CRS\_ISR\_FEDIR) }}
+\DoxyCodeLine{00129 \textcolor{preprocessor}{\#define LL\_CRS\_RELOADVALUE\_DEFAULT         ((uint32\_t)0xBB7FU)}}
+\DoxyCodeLine{00130 }
+\DoxyCodeLine{00134 \textcolor{preprocessor}{\#define LL\_CRS\_ERRORLIMIT\_DEFAULT          ((uint32\_t)0x22U)}}
+\DoxyCodeLine{00135 }
+\DoxyCodeLine{00142 \textcolor{preprocessor}{\#define LL\_CRS\_HSI48CALIBRATION\_DEFAULT    ((uint32\_t)0x40U)}}
+\DoxyCodeLine{00150 \textcolor{comment}{/* Exported macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00166 \textcolor{preprocessor}{\#define LL\_CRS\_WriteReg(\_\_INSTANCE\_\_, \_\_REG\_\_, \_\_VALUE\_\_) WRITE\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_, (\_\_VALUE\_\_))}}
+\DoxyCodeLine{00167 }
+\DoxyCodeLine{00174 \textcolor{preprocessor}{\#define LL\_CRS\_ReadReg(\_\_INSTANCE\_\_, \_\_REG\_\_) READ\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_)}}
+\DoxyCodeLine{00194 \textcolor{preprocessor}{\#define \_\_LL\_CRS\_CALC\_CALCULATE\_RELOADVALUE(\_\_FTARGET\_\_, \_\_FSYNC\_\_) (((\_\_FTARGET\_\_) / (\_\_FSYNC\_\_)) -\/ 1U)}}
+\DoxyCodeLine{00195 }
+\DoxyCodeLine{00204 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00219 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_EnableFreqErrorCounter(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00220 \{}
+\DoxyCodeLine{00221   SET\_BIT(CRS-\/>CR, CRS\_CR\_CEN);}
+\DoxyCodeLine{00222 \}}
+\DoxyCodeLine{00223 }
+\DoxyCodeLine{00229 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_DisableFreqErrorCounter(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00230 \{}
+\DoxyCodeLine{00231   CLEAR\_BIT(CRS-\/>CR, CRS\_CR\_CEN);}
+\DoxyCodeLine{00232 \}}
+\DoxyCodeLine{00233 }
+\DoxyCodeLine{00239 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsEnabledFreqErrorCounter(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00240 \{}
+\DoxyCodeLine{00241   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>CR, CRS\_CR\_CEN) == (CRS\_CR\_CEN)) ? 1UL : 0UL);}
+\DoxyCodeLine{00242 \}}
+\DoxyCodeLine{00243 }
+\DoxyCodeLine{00249 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_EnableAutoTrimming(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00250 \{}
+\DoxyCodeLine{00251   SET\_BIT(CRS-\/>CR, CRS\_CR\_AUTOTRIMEN);}
+\DoxyCodeLine{00252 \}}
+\DoxyCodeLine{00253 }
+\DoxyCodeLine{00259 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_DisableAutoTrimming(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00260 \{}
+\DoxyCodeLine{00261   CLEAR\_BIT(CRS-\/>CR, CRS\_CR\_AUTOTRIMEN);}
+\DoxyCodeLine{00262 \}}
+\DoxyCodeLine{00263 }
+\DoxyCodeLine{00269 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsEnabledAutoTrimming(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00270 \{}
+\DoxyCodeLine{00271   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>CR, CRS\_CR\_AUTOTRIMEN) == (CRS\_CR\_AUTOTRIMEN)) ? 1UL : 0UL);}
+\DoxyCodeLine{00272 \}}
+\DoxyCodeLine{00273 }
+\DoxyCodeLine{00282 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_SetHSI48SmoothTrimming(uint32\_t Value)}
+\DoxyCodeLine{00283 \{}
+\DoxyCodeLine{00284   MODIFY\_REG(CRS-\/>CR, CRS\_CR\_TRIM, Value << CRS\_CR\_TRIM\_Pos);}
+\DoxyCodeLine{00285 \}}
+\DoxyCodeLine{00286 }
+\DoxyCodeLine{00292 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_GetHSI48SmoothTrimming(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00293 \{}
+\DoxyCodeLine{00294   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(CRS-\/>CR, CRS\_CR\_TRIM) >> CRS\_CR\_TRIM\_Pos);}
+\DoxyCodeLine{00295 \}}
+\DoxyCodeLine{00296 }
+\DoxyCodeLine{00305 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_SetReloadCounter(uint32\_t Value)}
+\DoxyCodeLine{00306 \{}
+\DoxyCodeLine{00307   MODIFY\_REG(CRS-\/>CFGR, CRS\_CFGR\_RELOAD, Value);}
+\DoxyCodeLine{00308 \}}
+\DoxyCodeLine{00309 }
+\DoxyCodeLine{00315 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_GetReloadCounter(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00316 \{}
+\DoxyCodeLine{00317   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(CRS-\/>CFGR, CRS\_CFGR\_RELOAD));}
+\DoxyCodeLine{00318 \}}
+\DoxyCodeLine{00319 }
+\DoxyCodeLine{00327 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_SetFreqErrorLimit(uint32\_t Value)}
+\DoxyCodeLine{00328 \{}
+\DoxyCodeLine{00329   MODIFY\_REG(CRS-\/>CFGR, CRS\_CFGR\_FELIM, Value << CRS\_CFGR\_FELIM\_Pos);}
+\DoxyCodeLine{00330 \}}
+\DoxyCodeLine{00331 }
+\DoxyCodeLine{00337 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_GetFreqErrorLimit(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00338 \{}
+\DoxyCodeLine{00339   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(CRS-\/>CFGR, CRS\_CFGR\_FELIM) >> CRS\_CFGR\_FELIM\_Pos);}
+\DoxyCodeLine{00340 \}}
+\DoxyCodeLine{00341 }
+\DoxyCodeLine{00356 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_SetSyncDivider(uint32\_t Divider)}
+\DoxyCodeLine{00357 \{}
+\DoxyCodeLine{00358   MODIFY\_REG(CRS-\/>CFGR, CRS\_CFGR\_SYNCDIV, Divider);}
+\DoxyCodeLine{00359 \}}
+\DoxyCodeLine{00360 }
+\DoxyCodeLine{00374 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_GetSyncDivider(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00375 \{}
+\DoxyCodeLine{00376   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(CRS-\/>CFGR, CRS\_CFGR\_SYNCDIV));}
+\DoxyCodeLine{00377 \}}
+\DoxyCodeLine{00378 }
+\DoxyCodeLine{00388 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_SetSyncSignalSource(uint32\_t Source)}
+\DoxyCodeLine{00389 \{}
+\DoxyCodeLine{00390   MODIFY\_REG(CRS-\/>CFGR, CRS\_CFGR\_SYNCSRC, Source);}
+\DoxyCodeLine{00391 \}}
+\DoxyCodeLine{00392 }
+\DoxyCodeLine{00401 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_GetSyncSignalSource(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00402 \{}
+\DoxyCodeLine{00403   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(CRS-\/>CFGR, CRS\_CFGR\_SYNCSRC));}
+\DoxyCodeLine{00404 \}}
+\DoxyCodeLine{00405 }
+\DoxyCodeLine{00414 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_SetSyncPolarity(uint32\_t Polarity)}
+\DoxyCodeLine{00415 \{}
+\DoxyCodeLine{00416   MODIFY\_REG(CRS-\/>CFGR, CRS\_CFGR\_SYNCPOL, Polarity);}
+\DoxyCodeLine{00417 \}}
+\DoxyCodeLine{00418 }
+\DoxyCodeLine{00426 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_GetSyncPolarity(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00427 \{}
+\DoxyCodeLine{00428   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(CRS-\/>CFGR, CRS\_CFGR\_SYNCPOL));}
+\DoxyCodeLine{00429 \}}
+\DoxyCodeLine{00430 }
+\DoxyCodeLine{00449 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_ConfigSynchronization(uint32\_t HSI48CalibrationValue, uint32\_t ErrorLimitValue,}
+\DoxyCodeLine{00450                                                   uint32\_t ReloadValue, uint32\_t Settings)}
+\DoxyCodeLine{00451 \{}
+\DoxyCodeLine{00452   MODIFY\_REG(CRS-\/>CR, CRS\_CR\_TRIM, HSI48CalibrationValue);}
+\DoxyCodeLine{00453   MODIFY\_REG(CRS-\/>CFGR,}
+\DoxyCodeLine{00454              CRS\_CFGR\_RELOAD | CRS\_CFGR\_FELIM | CRS\_CFGR\_SYNCDIV | CRS\_CFGR\_SYNCSRC | CRS\_CFGR\_SYNCPOL,}
+\DoxyCodeLine{00455              ReloadValue | (ErrorLimitValue << CRS\_CFGR\_FELIM\_Pos) | Settings);}
+\DoxyCodeLine{00456 \}}
+\DoxyCodeLine{00457 }
+\DoxyCodeLine{00471 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_GenerateEvent\_SWSYNC(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00472 \{}
+\DoxyCodeLine{00473   SET\_BIT(CRS-\/>CR, CRS\_CR\_SWSYNC);}
+\DoxyCodeLine{00474 \}}
+\DoxyCodeLine{00475 }
+\DoxyCodeLine{00484 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_GetFreqErrorDirection(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00485 \{}
+\DoxyCodeLine{00486   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(CRS-\/>ISR, CRS\_ISR\_FEDIR));}
+\DoxyCodeLine{00487 \}}
+\DoxyCodeLine{00488 }
+\DoxyCodeLine{00494 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_GetFreqErrorCapture(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00495 \{}
+\DoxyCodeLine{00496   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(CRS-\/>ISR, CRS\_ISR\_FECAP) >> CRS\_ISR\_FECAP\_Pos);}
+\DoxyCodeLine{00497 \}}
+\DoxyCodeLine{00498 }
+\DoxyCodeLine{00512 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsActiveFlag\_SYNCOK(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00513 \{}
+\DoxyCodeLine{00514   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>ISR, CRS\_ISR\_SYNCOKF) == (CRS\_ISR\_SYNCOKF)) ? 1UL : 0UL);}
+\DoxyCodeLine{00515 \}}
+\DoxyCodeLine{00516 }
+\DoxyCodeLine{00522 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsActiveFlag\_SYNCWARN(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00523 \{}
+\DoxyCodeLine{00524   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>ISR, CRS\_ISR\_SYNCWARNF) == (CRS\_ISR\_SYNCWARNF)) ? 1UL : 0UL);}
+\DoxyCodeLine{00525 \}}
+\DoxyCodeLine{00526 }
+\DoxyCodeLine{00532 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsActiveFlag\_ERR(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00533 \{}
+\DoxyCodeLine{00534   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>ISR, CRS\_ISR\_ERRF) == (CRS\_ISR\_ERRF)) ? 1UL : 0UL);}
+\DoxyCodeLine{00535 \}}
+\DoxyCodeLine{00536 }
+\DoxyCodeLine{00542 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsActiveFlag\_ESYNC(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00543 \{}
+\DoxyCodeLine{00544   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>ISR, CRS\_ISR\_ESYNCF) == (CRS\_ISR\_ESYNCF)) ? 1UL : 0UL);}
+\DoxyCodeLine{00545 \}}
+\DoxyCodeLine{00546 }
+\DoxyCodeLine{00552 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsActiveFlag\_SYNCERR(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00553 \{}
+\DoxyCodeLine{00554   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>ISR, CRS\_ISR\_SYNCERR) == (CRS\_ISR\_SYNCERR)) ? 1UL : 0UL);}
+\DoxyCodeLine{00555 \}}
+\DoxyCodeLine{00556 }
+\DoxyCodeLine{00562 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsActiveFlag\_SYNCMISS(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00563 \{}
+\DoxyCodeLine{00564   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>ISR, CRS\_ISR\_SYNCMISS) == (CRS\_ISR\_SYNCMISS)) ? 1UL : 0UL);}
+\DoxyCodeLine{00565 \}}
+\DoxyCodeLine{00566 }
+\DoxyCodeLine{00572 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsActiveFlag\_TRIMOVF(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00573 \{}
+\DoxyCodeLine{00574   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>ISR, CRS\_ISR\_TRIMOVF) == (CRS\_ISR\_TRIMOVF)) ? 1UL : 0UL);}
+\DoxyCodeLine{00575 \}}
+\DoxyCodeLine{00576 }
+\DoxyCodeLine{00582 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_ClearFlag\_SYNCOK(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00583 \{}
+\DoxyCodeLine{00584   WRITE\_REG(CRS-\/>ICR, CRS\_ICR\_SYNCOKC);}
+\DoxyCodeLine{00585 \}}
+\DoxyCodeLine{00586 }
+\DoxyCodeLine{00592 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_ClearFlag\_SYNCWARN(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00593 \{}
+\DoxyCodeLine{00594   WRITE\_REG(CRS-\/>ICR, CRS\_ICR\_SYNCWARNC);}
+\DoxyCodeLine{00595 \}}
+\DoxyCodeLine{00596 }
+\DoxyCodeLine{00603 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_ClearFlag\_ERR(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00604 \{}
+\DoxyCodeLine{00605   WRITE\_REG(CRS-\/>ICR, CRS\_ICR\_ERRC);}
+\DoxyCodeLine{00606 \}}
+\DoxyCodeLine{00607 }
+\DoxyCodeLine{00613 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_ClearFlag\_ESYNC(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00614 \{}
+\DoxyCodeLine{00615   WRITE\_REG(CRS-\/>ICR, CRS\_ICR\_ESYNCC);}
+\DoxyCodeLine{00616 \}}
+\DoxyCodeLine{00617 }
+\DoxyCodeLine{00631 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_EnableIT\_SYNCOK(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00632 \{}
+\DoxyCodeLine{00633   SET\_BIT(CRS-\/>CR, CRS\_CR\_SYNCOKIE);}
+\DoxyCodeLine{00634 \}}
+\DoxyCodeLine{00635 }
+\DoxyCodeLine{00641 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_DisableIT\_SYNCOK(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00642 \{}
+\DoxyCodeLine{00643   CLEAR\_BIT(CRS-\/>CR, CRS\_CR\_SYNCOKIE);}
+\DoxyCodeLine{00644 \}}
+\DoxyCodeLine{00645 }
+\DoxyCodeLine{00651 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsEnabledIT\_SYNCOK(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00652 \{}
+\DoxyCodeLine{00653   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>CR, CRS\_CR\_SYNCOKIE) == (CRS\_CR\_SYNCOKIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{00654 \}}
+\DoxyCodeLine{00655 }
+\DoxyCodeLine{00661 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_EnableIT\_SYNCWARN(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00662 \{}
+\DoxyCodeLine{00663   SET\_BIT(CRS-\/>CR, CRS\_CR\_SYNCWARNIE);}
+\DoxyCodeLine{00664 \}}
+\DoxyCodeLine{00665 }
+\DoxyCodeLine{00671 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_DisableIT\_SYNCWARN(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00672 \{}
+\DoxyCodeLine{00673   CLEAR\_BIT(CRS-\/>CR, CRS\_CR\_SYNCWARNIE);}
+\DoxyCodeLine{00674 \}}
+\DoxyCodeLine{00675 }
+\DoxyCodeLine{00681 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsEnabledIT\_SYNCWARN(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00682 \{}
+\DoxyCodeLine{00683   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>CR, CRS\_CR\_SYNCWARNIE) == (CRS\_CR\_SYNCWARNIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{00684 \}}
+\DoxyCodeLine{00685 }
+\DoxyCodeLine{00691 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_EnableIT\_ERR(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00692 \{}
+\DoxyCodeLine{00693   SET\_BIT(CRS-\/>CR, CRS\_CR\_ERRIE);}
+\DoxyCodeLine{00694 \}}
+\DoxyCodeLine{00695 }
+\DoxyCodeLine{00701 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_DisableIT\_ERR(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00702 \{}
+\DoxyCodeLine{00703   CLEAR\_BIT(CRS-\/>CR, CRS\_CR\_ERRIE);}
+\DoxyCodeLine{00704 \}}
+\DoxyCodeLine{00705 }
+\DoxyCodeLine{00711 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsEnabledIT\_ERR(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00712 \{}
+\DoxyCodeLine{00713   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>CR, CRS\_CR\_ERRIE) == (CRS\_CR\_ERRIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{00714 \}}
+\DoxyCodeLine{00715 }
+\DoxyCodeLine{00721 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_EnableIT\_ESYNC(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00722 \{}
+\DoxyCodeLine{00723   SET\_BIT(CRS-\/>CR, CRS\_CR\_ESYNCIE);}
+\DoxyCodeLine{00724 \}}
+\DoxyCodeLine{00725 }
+\DoxyCodeLine{00731 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_CRS\_DisableIT\_ESYNC(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00732 \{}
+\DoxyCodeLine{00733   CLEAR\_BIT(CRS-\/>CR, CRS\_CR\_ESYNCIE);}
+\DoxyCodeLine{00734 \}}
+\DoxyCodeLine{00735 }
+\DoxyCodeLine{00741 \_\_STATIC\_INLINE uint32\_t LL\_CRS\_IsEnabledIT\_ESYNC(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00742 \{}
+\DoxyCodeLine{00743   \textcolor{keywordflow}{return} ((READ\_BIT(CRS-\/>CR, CRS\_CR\_ESYNCIE) == (CRS\_CR\_ESYNCIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{00744 \}}
+\DoxyCodeLine{00745 }
+\DoxyCodeLine{00750 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{00755 ErrorStatus LL\_CRS\_DeInit(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00756 }
+\DoxyCodeLine{00760 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_FULL\_LL\_DRIVER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00761 }
+\DoxyCodeLine{00770 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* defined(CRS) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00771 }
+\DoxyCodeLine{00776 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00777 \}}
+\DoxyCodeLine{00778 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00779 }
+\DoxyCodeLine{00780 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_STM32G4xx\_LL\_CRS\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00781 }
+
+\end{DoxyCode}

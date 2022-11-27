@@ -1,0 +1,383 @@
+\doxysection{stm32g4xx\+\_\+hal.\+c}
+\label{stm32g4xx__hal_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00034 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00035 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00036 }
+\DoxyCodeLine{00046 \textcolor{preprocessor}{\#ifdef HAL\_MODULE\_ENABLED}}
+\DoxyCodeLine{00047 }
+\DoxyCodeLine{00048 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00049 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00053 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_HAL\_VERSION\_MAIN   (0x01U) }}
+\DoxyCodeLine{00054 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_HAL\_VERSION\_SUB1   (0x02U) }}
+\DoxyCodeLine{00055 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_HAL\_VERSION\_SUB2   (0x02U) }}
+\DoxyCodeLine{00056 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_HAL\_VERSION\_RC     (0x00U) }}
+\DoxyCodeLine{00057 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_HAL\_VERSION         ((\_\_STM32G4xx\_HAL\_VERSION\_MAIN << 24U)\(\backslash\)}}
+\DoxyCodeLine{00058 \textcolor{preprocessor}{                                         |(\_\_STM32G4xx\_HAL\_VERSION\_SUB1 << 16U)\(\backslash\)}}
+\DoxyCodeLine{00059 \textcolor{preprocessor}{                                         |(\_\_STM32G4xx\_HAL\_VERSION\_SUB2 << 8U )\(\backslash\)}}
+\DoxyCodeLine{00060 \textcolor{preprocessor}{                                         |(\_\_STM32G4xx\_HAL\_VERSION\_RC))}}
+\DoxyCodeLine{00061 }
+\DoxyCodeLine{00062 \textcolor{preprocessor}{\#if defined(VREFBUF)}}
+\DoxyCodeLine{00063 \textcolor{preprocessor}{\#define VREFBUF\_TIMEOUT\_VALUE     10U   }\textcolor{comment}{/* 10 ms */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00064 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* VREFBUF */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00065 }
+\DoxyCodeLine{00066 \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ SYSCFG registers bit address in the alias region -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ */}}
+\DoxyCodeLine{00067 \textcolor{preprocessor}{\#define SYSCFG\_OFFSET             (SYSCFG\_BASE -\/ PERIPH\_BASE)}}
+\DoxyCodeLine{00068 \textcolor{comment}{/* -\/-\/-\/  MEMRMP Register -\/-\/-\/*/}}
+\DoxyCodeLine{00069 \textcolor{comment}{/* Alias word address of FB\_MODE bit */}}
+\DoxyCodeLine{00070 \textcolor{preprocessor}{\#define MEMRMP\_OFFSET           SYSCFG\_OFFSET}}
+\DoxyCodeLine{00071 \textcolor{preprocessor}{\#define FB\_MODE\_BitNumber       ((uint8\_t)0x8)}}
+\DoxyCodeLine{00072 \textcolor{preprocessor}{\#define FB\_MODE\_BB              (PERIPH\_BB\_BASE + (MEMRMP\_OFFSET * 32) + (FB\_MODE\_BitNumber * 4))}}
+\DoxyCodeLine{00073 }
+\DoxyCodeLine{00074 \textcolor{comment}{/* -\/-\/-\/ GPC Register -\/-\/-\/*/}}
+\DoxyCodeLine{00075 \textcolor{comment}{/* Alias word address of CCMER bit */}}
+\DoxyCodeLine{00076 \textcolor{preprocessor}{\#define SCSR\_OFFSET             (SYSCFG\_OFFSET + 0x18)}}
+\DoxyCodeLine{00077 \textcolor{preprocessor}{\#define CCMER\_BitNumber         ((uint8\_t)0x0)}}
+\DoxyCodeLine{00078 \textcolor{preprocessor}{\#define SCSR\_CCMER\_BB           (PERIPH\_BB\_BASE + (SCSR\_OFFSET * 32) + (CCMER\_BitNumber * 4))}}
+\DoxyCodeLine{00079 }
+\DoxyCodeLine{00080 \textcolor{comment}{/* Private macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00081 \textcolor{comment}{/* Exported variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00085 \_\_IO uint32\_t uwTick;}
+\DoxyCodeLine{00086 uint32\_t uwTickPrio = (1UL << \_\_NVIC\_PRIO\_BITS); \textcolor{comment}{/* Invalid PRIO */}}
+\DoxyCodeLine{00087 uint32\_t uwTickFreq = HAL\_TICK\_FREQ\_DEFAULT;  \textcolor{comment}{/* 1KHz */}}
+\DoxyCodeLine{00092 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00093 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00094 }
+\DoxyCodeLine{00148 HAL\_StatusTypeDef HAL\_Init(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00149 \{}
+\DoxyCodeLine{00150   HAL\_StatusTypeDef  status = HAL\_OK;}
+\DoxyCodeLine{00151   \textcolor{comment}{/* Configure Flash prefetch, Instruction cache, Data cache */}}
+\DoxyCodeLine{00152   \textcolor{comment}{/* Default configuration at reset is:                      */}}
+\DoxyCodeLine{00153   \textcolor{comment}{/* -\/ Prefetch disabled                                     */}}
+\DoxyCodeLine{00154   \textcolor{comment}{/* -\/ Instruction cache enabled                             */}}
+\DoxyCodeLine{00155   \textcolor{comment}{/* -\/ Data cache enabled                                    */}}
+\DoxyCodeLine{00156 \textcolor{preprocessor}{\#if (INSTRUCTION\_CACHE\_ENABLE == 0U)}}
+\DoxyCodeLine{00157   \_\_HAL\_FLASH\_INSTRUCTION\_CACHE\_DISABLE();}
+\DoxyCodeLine{00158 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* INSTRUCTION\_CACHE\_ENABLE */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00159 }
+\DoxyCodeLine{00160 \textcolor{preprocessor}{\#if (DATA\_CACHE\_ENABLE == 0U)}}
+\DoxyCodeLine{00161   \_\_HAL\_FLASH\_DATA\_CACHE\_DISABLE();}
+\DoxyCodeLine{00162 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DATA\_CACHE\_ENABLE */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00163 }
+\DoxyCodeLine{00164 \textcolor{preprocessor}{\#if (PREFETCH\_ENABLE != 0U)}}
+\DoxyCodeLine{00165   \_\_HAL\_FLASH\_PREFETCH\_BUFFER\_ENABLE();}
+\DoxyCodeLine{00166 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PREFETCH\_ENABLE */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00167 }
+\DoxyCodeLine{00168   \textcolor{comment}{/* Set Interrupt Group Priority */}}
+\DoxyCodeLine{00169   HAL\_NVIC\_SetPriorityGrouping(NVIC\_PRIORITYGROUP\_4);}
+\DoxyCodeLine{00170 }
+\DoxyCodeLine{00171   \textcolor{comment}{/* Use SysTick as time base source and configure 1ms tick (default clock after Reset is HSI) */}}
+\DoxyCodeLine{00172   \textcolor{keywordflow}{if} (HAL\_InitTick(TICK\_INT\_PRIORITY) != HAL\_OK)}
+\DoxyCodeLine{00173   \{}
+\DoxyCodeLine{00174     status = HAL\_ERROR;}
+\DoxyCodeLine{00175   \}}
+\DoxyCodeLine{00176   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00177   \{}
+\DoxyCodeLine{00178     \textcolor{comment}{/* Init the low level hardware */}}
+\DoxyCodeLine{00179     HAL\_MspInit();}
+\DoxyCodeLine{00180   \}}
+\DoxyCodeLine{00181 }
+\DoxyCodeLine{00182   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00183   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00184 }
+\DoxyCodeLine{00185 \}}
+\DoxyCodeLine{00186 }
+\DoxyCodeLine{00192 HAL\_StatusTypeDef HAL\_DeInit(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00193 \{}
+\DoxyCodeLine{00194   \textcolor{comment}{/* Reset of all peripherals */}}
+\DoxyCodeLine{00195   \_\_HAL\_RCC\_APB1\_FORCE\_RESET();}
+\DoxyCodeLine{00196   \_\_HAL\_RCC\_APB1\_RELEASE\_RESET();}
+\DoxyCodeLine{00197 }
+\DoxyCodeLine{00198   \_\_HAL\_RCC\_APB2\_FORCE\_RESET();}
+\DoxyCodeLine{00199   \_\_HAL\_RCC\_APB2\_RELEASE\_RESET();}
+\DoxyCodeLine{00200 }
+\DoxyCodeLine{00201   \_\_HAL\_RCC\_AHB1\_FORCE\_RESET();}
+\DoxyCodeLine{00202   \_\_HAL\_RCC\_AHB1\_RELEASE\_RESET();}
+\DoxyCodeLine{00203 }
+\DoxyCodeLine{00204   \_\_HAL\_RCC\_AHB2\_FORCE\_RESET();}
+\DoxyCodeLine{00205   \_\_HAL\_RCC\_AHB2\_RELEASE\_RESET();}
+\DoxyCodeLine{00206 }
+\DoxyCodeLine{00207   \_\_HAL\_RCC\_AHB3\_FORCE\_RESET();}
+\DoxyCodeLine{00208   \_\_HAL\_RCC\_AHB3\_RELEASE\_RESET();}
+\DoxyCodeLine{00209 }
+\DoxyCodeLine{00210   \textcolor{comment}{/* De-\/Init the low level hardware */}}
+\DoxyCodeLine{00211   HAL\_MspDeInit();}
+\DoxyCodeLine{00212 }
+\DoxyCodeLine{00213   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00214   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00215 \}}
+\DoxyCodeLine{00216 }
+\DoxyCodeLine{00221 \_\_weak \textcolor{keywordtype}{void} HAL\_MspInit(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00222 \{}
+\DoxyCodeLine{00223   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00224 \textcolor{comment}{            the HAL\_MspInit could be implemented in the user file}}
+\DoxyCodeLine{00225 \textcolor{comment}{   */}}
+\DoxyCodeLine{00226 \}}
+\DoxyCodeLine{00227 }
+\DoxyCodeLine{00232 \_\_weak \textcolor{keywordtype}{void} HAL\_MspDeInit(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00233 \{}
+\DoxyCodeLine{00234   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00235 \textcolor{comment}{            the HAL\_MspDeInit could be implemented in the user file}}
+\DoxyCodeLine{00236 \textcolor{comment}{   */}}
+\DoxyCodeLine{00237 \}}
+\DoxyCodeLine{00238 }
+\DoxyCodeLine{00255 \_\_weak HAL\_StatusTypeDef HAL\_InitTick(uint32\_t TickPriority)}
+\DoxyCodeLine{00256 \{}
+\DoxyCodeLine{00257   HAL\_StatusTypeDef  status = HAL\_OK;}
+\DoxyCodeLine{00258 }
+\DoxyCodeLine{00259   \textcolor{keywordflow}{if} (uwTickFreq != 0U)}
+\DoxyCodeLine{00260   \{}
+\DoxyCodeLine{00261     \textcolor{comment}{/* Configure the SysTick to have interrupt in 1ms time basis*/}}
+\DoxyCodeLine{00262     \textcolor{keywordflow}{if} (HAL\_SYSTICK\_Config(SystemCoreClock / (1000U / uwTickFreq)) == 0U)}
+\DoxyCodeLine{00263     \{}
+\DoxyCodeLine{00264       \textcolor{comment}{/* Configure the SysTick IRQ priority */}}
+\DoxyCodeLine{00265       \textcolor{keywordflow}{if} (TickPriority < (1UL << \_\_NVIC\_PRIO\_BITS))}
+\DoxyCodeLine{00266       \{}
+\DoxyCodeLine{00267         HAL\_NVIC\_SetPriority(SysTick\_IRQn, TickPriority, 0U);}
+\DoxyCodeLine{00268         uwTickPrio = TickPriority;}
+\DoxyCodeLine{00269       \}}
+\DoxyCodeLine{00270       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00271       \{}
+\DoxyCodeLine{00272         status = HAL\_ERROR;}
+\DoxyCodeLine{00273       \}}
+\DoxyCodeLine{00274     \}}
+\DoxyCodeLine{00275     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00276     \{}
+\DoxyCodeLine{00277       status = HAL\_ERROR;}
+\DoxyCodeLine{00278     \}}
+\DoxyCodeLine{00279   \}}
+\DoxyCodeLine{00280   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00281   \{}
+\DoxyCodeLine{00282     status = HAL\_ERROR;}
+\DoxyCodeLine{00283   \}}
+\DoxyCodeLine{00284 }
+\DoxyCodeLine{00285   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00286   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00287 \}}
+\DoxyCodeLine{00288 }
+\DoxyCodeLine{00322 \_\_weak \textcolor{keywordtype}{void} HAL\_IncTick(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00323 \{}
+\DoxyCodeLine{00324   uwTick += uwTickFreq;}
+\DoxyCodeLine{00325 \}}
+\DoxyCodeLine{00326 }
+\DoxyCodeLine{00333 \_\_weak uint32\_t HAL\_GetTick(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00334 \{}
+\DoxyCodeLine{00335   \textcolor{keywordflow}{return} uwTick;}
+\DoxyCodeLine{00336 \}}
+\DoxyCodeLine{00337 }
+\DoxyCodeLine{00342 uint32\_t HAL\_GetTickPrio(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00343 \{}
+\DoxyCodeLine{00344   \textcolor{keywordflow}{return} uwTickPrio;}
+\DoxyCodeLine{00345 \}}
+\DoxyCodeLine{00346 }
+\DoxyCodeLine{00351 HAL\_StatusTypeDef HAL\_SetTickFreq(uint32\_t Freq)}
+\DoxyCodeLine{00352 \{}
+\DoxyCodeLine{00353   HAL\_StatusTypeDef status  = HAL\_OK;}
+\DoxyCodeLine{00354   uint32\_t prevTickFreq;}
+\DoxyCodeLine{00355 }
+\DoxyCodeLine{00356   assert\_param(IS\_TICKFREQ(Freq));}
+\DoxyCodeLine{00357 }
+\DoxyCodeLine{00358   \textcolor{keywordflow}{if} (uwTickFreq != Freq)}
+\DoxyCodeLine{00359   \{}
+\DoxyCodeLine{00360     \textcolor{comment}{/* Back up uwTickFreq frequency */}}
+\DoxyCodeLine{00361     prevTickFreq = uwTickFreq;}
+\DoxyCodeLine{00362 }
+\DoxyCodeLine{00363     \textcolor{comment}{/* Update uwTickFreq global variable used by HAL\_InitTick() */}}
+\DoxyCodeLine{00364     uwTickFreq = Freq;}
+\DoxyCodeLine{00365 }
+\DoxyCodeLine{00366     \textcolor{comment}{/* Apply the new tick Freq  */}}
+\DoxyCodeLine{00367     status = HAL\_InitTick(uwTickPrio);}
+\DoxyCodeLine{00368 }
+\DoxyCodeLine{00369     \textcolor{keywordflow}{if} (status != HAL\_OK)}
+\DoxyCodeLine{00370     \{}
+\DoxyCodeLine{00371       \textcolor{comment}{/* Restore previous tick frequency */}}
+\DoxyCodeLine{00372       uwTickFreq = prevTickFreq;}
+\DoxyCodeLine{00373     \}}
+\DoxyCodeLine{00374   \}}
+\DoxyCodeLine{00375 }
+\DoxyCodeLine{00376   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00377 \}}
+\DoxyCodeLine{00378 }
+\DoxyCodeLine{00383 uint32\_t HAL\_GetTickFreq(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00384 \{}
+\DoxyCodeLine{00385   \textcolor{keywordflow}{return} uwTickFreq;}
+\DoxyCodeLine{00386 \}}
+\DoxyCodeLine{00387 }
+\DoxyCodeLine{00399 \_\_weak \textcolor{keywordtype}{void} HAL\_Delay(uint32\_t Delay)}
+\DoxyCodeLine{00400 \{}
+\DoxyCodeLine{00401   uint32\_t tickstart = HAL\_GetTick();}
+\DoxyCodeLine{00402   uint32\_t wait = Delay;}
+\DoxyCodeLine{00403 }
+\DoxyCodeLine{00404   \textcolor{comment}{/* Add a freq to guarantee minimum wait */}}
+\DoxyCodeLine{00405   \textcolor{keywordflow}{if} (wait < HAL\_MAX\_DELAY)}
+\DoxyCodeLine{00406   \{}
+\DoxyCodeLine{00407     wait += (uint32\_t)(uwTickFreq);}
+\DoxyCodeLine{00408   \}}
+\DoxyCodeLine{00409 }
+\DoxyCodeLine{00410   \textcolor{keywordflow}{while} ((HAL\_GetTick() -\/ tickstart) < wait)}
+\DoxyCodeLine{00411   \{}
+\DoxyCodeLine{00412   \}}
+\DoxyCodeLine{00413 \}}
+\DoxyCodeLine{00414 }
+\DoxyCodeLine{00425 \_\_weak \textcolor{keywordtype}{void} HAL\_SuspendTick(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00426 \{}
+\DoxyCodeLine{00427   \textcolor{comment}{/* Disable SysTick Interrupt */}}
+\DoxyCodeLine{00428   CLEAR\_BIT(SysTick-\/>CTRL, SysTick\_CTRL\_TICKINT\_Msk);}
+\DoxyCodeLine{00429 \}}
+\DoxyCodeLine{00430 }
+\DoxyCodeLine{00441 \_\_weak \textcolor{keywordtype}{void} HAL\_ResumeTick(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00442 \{}
+\DoxyCodeLine{00443   \textcolor{comment}{/* Enable SysTick Interrupt */}}
+\DoxyCodeLine{00444   SET\_BIT(SysTick-\/>CTRL, SysTick\_CTRL\_TICKINT\_Msk);}
+\DoxyCodeLine{00445 \}}
+\DoxyCodeLine{00446 }
+\DoxyCodeLine{00451 uint32\_t HAL\_GetHalVersion(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00452 \{}
+\DoxyCodeLine{00453   \textcolor{keywordflow}{return} \_\_STM32G4xx\_HAL\_VERSION;}
+\DoxyCodeLine{00454 \}}
+\DoxyCodeLine{00455 }
+\DoxyCodeLine{00460 uint32\_t HAL\_GetREVID(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00461 \{}
+\DoxyCodeLine{00462   \textcolor{keywordflow}{return} ((DBGMCU-\/>IDCODE \& DBGMCU\_IDCODE\_REV\_ID) >> 16U);}
+\DoxyCodeLine{00463 \}}
+\DoxyCodeLine{00464 }
+\DoxyCodeLine{00469 uint32\_t HAL\_GetDEVID(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00470 \{}
+\DoxyCodeLine{00471   \textcolor{keywordflow}{return} (DBGMCU-\/>IDCODE \& DBGMCU\_IDCODE\_DEV\_ID);}
+\DoxyCodeLine{00472 \}}
+\DoxyCodeLine{00473 }
+\DoxyCodeLine{00498 \textcolor{keywordtype}{void} HAL\_DBGMCU\_EnableDBGSleepMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00499 \{}
+\DoxyCodeLine{00500   SET\_BIT(DBGMCU-\/>CR, DBGMCU\_CR\_DBG\_SLEEP);}
+\DoxyCodeLine{00501 \}}
+\DoxyCodeLine{00502 }
+\DoxyCodeLine{00507 \textcolor{keywordtype}{void} HAL\_DBGMCU\_DisableDBGSleepMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00508 \{}
+\DoxyCodeLine{00509   CLEAR\_BIT(DBGMCU-\/>CR, DBGMCU\_CR\_DBG\_SLEEP);}
+\DoxyCodeLine{00510 \}}
+\DoxyCodeLine{00511 }
+\DoxyCodeLine{00516 \textcolor{keywordtype}{void} HAL\_DBGMCU\_EnableDBGStopMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00517 \{}
+\DoxyCodeLine{00518   SET\_BIT(DBGMCU-\/>CR, DBGMCU\_CR\_DBG\_STOP);}
+\DoxyCodeLine{00519 \}}
+\DoxyCodeLine{00520 }
+\DoxyCodeLine{00525 \textcolor{keywordtype}{void} HAL\_DBGMCU\_DisableDBGStopMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00526 \{}
+\DoxyCodeLine{00527   CLEAR\_BIT(DBGMCU-\/>CR, DBGMCU\_CR\_DBG\_STOP);}
+\DoxyCodeLine{00528 \}}
+\DoxyCodeLine{00529 }
+\DoxyCodeLine{00534 \textcolor{keywordtype}{void} HAL\_DBGMCU\_EnableDBGStandbyMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00535 \{}
+\DoxyCodeLine{00536   SET\_BIT(DBGMCU-\/>CR, DBGMCU\_CR\_DBG\_STANDBY);}
+\DoxyCodeLine{00537 \}}
+\DoxyCodeLine{00538 }
+\DoxyCodeLine{00543 \textcolor{keywordtype}{void} HAL\_DBGMCU\_DisableDBGStandbyMode(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00544 \{}
+\DoxyCodeLine{00545   CLEAR\_BIT(DBGMCU-\/>CR, DBGMCU\_CR\_DBG\_STANDBY);}
+\DoxyCodeLine{00546 \}}
+\DoxyCodeLine{00547 }
+\DoxyCodeLine{00576 \textcolor{keywordtype}{void} HAL\_SYSCFG\_CCMSRAMErase(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00577 \{}
+\DoxyCodeLine{00578   \textcolor{comment}{/* unlock the write protection of the CCMER bit */}}
+\DoxyCodeLine{00579   SYSCFG-\/>SKR = 0xCA;}
+\DoxyCodeLine{00580   SYSCFG-\/>SKR = 0x53;}
+\DoxyCodeLine{00581   \textcolor{comment}{/* Starts a hardware CCMSRAM erase operation*/}}
+\DoxyCodeLine{00582   SET\_BIT(SYSCFG-\/>SCSR, SYSCFG\_SCSR\_CCMER);}
+\DoxyCodeLine{00583 \}}
+\DoxyCodeLine{00584 }
+\DoxyCodeLine{00595 \textcolor{keywordtype}{void} HAL\_SYSCFG\_EnableMemorySwappingBank(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00596 \{}
+\DoxyCodeLine{00597   SET\_BIT(SYSCFG-\/>MEMRMP, SYSCFG\_MEMRMP\_FB\_MODE);}
+\DoxyCodeLine{00598 \}}
+\DoxyCodeLine{00599 }
+\DoxyCodeLine{00610 \textcolor{keywordtype}{void} HAL\_SYSCFG\_DisableMemorySwappingBank(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00611 \{}
+\DoxyCodeLine{00612   CLEAR\_BIT(SYSCFG-\/>MEMRMP, SYSCFG\_MEMRMP\_FB\_MODE);}
+\DoxyCodeLine{00613 \}}
+\DoxyCodeLine{00614 }
+\DoxyCodeLine{00615 \textcolor{preprocessor}{\#if defined(VREFBUF)}}
+\DoxyCodeLine{00628 \textcolor{keywordtype}{void} HAL\_SYSCFG\_VREFBUF\_VoltageScalingConfig(uint32\_t VoltageScaling)}
+\DoxyCodeLine{00629 \{}
+\DoxyCodeLine{00630   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00631   assert\_param(IS\_SYSCFG\_VREFBUF\_VOLTAGE\_SCALE(VoltageScaling));}
+\DoxyCodeLine{00632 }
+\DoxyCodeLine{00633   MODIFY\_REG(VREFBUF-\/>CSR, VREFBUF\_CSR\_VRS, VoltageScaling);}
+\DoxyCodeLine{00634 \}}
+\DoxyCodeLine{00635 }
+\DoxyCodeLine{00644 \textcolor{keywordtype}{void} HAL\_SYSCFG\_VREFBUF\_HighImpedanceConfig(uint32\_t Mode)}
+\DoxyCodeLine{00645 \{}
+\DoxyCodeLine{00646   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00647   assert\_param(IS\_SYSCFG\_VREFBUF\_HIGH\_IMPEDANCE(Mode));}
+\DoxyCodeLine{00648 }
+\DoxyCodeLine{00649   MODIFY\_REG(VREFBUF-\/>CSR, VREFBUF\_CSR\_HIZ, Mode);}
+\DoxyCodeLine{00650 \}}
+\DoxyCodeLine{00651 }
+\DoxyCodeLine{00658 \textcolor{keywordtype}{void} HAL\_SYSCFG\_VREFBUF\_TrimmingConfig(uint32\_t TrimmingValue)}
+\DoxyCodeLine{00659 \{}
+\DoxyCodeLine{00660   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00661   assert\_param(IS\_SYSCFG\_VREFBUF\_TRIMMING(TrimmingValue));}
+\DoxyCodeLine{00662 }
+\DoxyCodeLine{00663   MODIFY\_REG(VREFBUF-\/>CCR, VREFBUF\_CCR\_TRIM, TrimmingValue);}
+\DoxyCodeLine{00664 \}}
+\DoxyCodeLine{00665 }
+\DoxyCodeLine{00670 HAL\_StatusTypeDef HAL\_SYSCFG\_EnableVREFBUF(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00671 \{}
+\DoxyCodeLine{00672   uint32\_t tickstart;}
+\DoxyCodeLine{00673 }
+\DoxyCodeLine{00674   SET\_BIT(VREFBUF-\/>CSR, VREFBUF\_CSR\_ENVR);}
+\DoxyCodeLine{00675 }
+\DoxyCodeLine{00676   \textcolor{comment}{/* Get Start Tick*/}}
+\DoxyCodeLine{00677   tickstart = HAL\_GetTick();}
+\DoxyCodeLine{00678 }
+\DoxyCodeLine{00679   \textcolor{comment}{/* Wait for VRR bit  */}}
+\DoxyCodeLine{00680   \textcolor{keywordflow}{while} (READ\_BIT(VREFBUF-\/>CSR, VREFBUF\_CSR\_VRR) == 0x00U)}
+\DoxyCodeLine{00681   \{}
+\DoxyCodeLine{00682     \textcolor{keywordflow}{if} ((HAL\_GetTick() -\/ tickstart) > VREFBUF\_TIMEOUT\_VALUE)}
+\DoxyCodeLine{00683     \{}
+\DoxyCodeLine{00684       \textcolor{keywordflow}{return} HAL\_TIMEOUT;}
+\DoxyCodeLine{00685     \}}
+\DoxyCodeLine{00686   \}}
+\DoxyCodeLine{00687 }
+\DoxyCodeLine{00688   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00689 \}}
+\DoxyCodeLine{00690 }
+\DoxyCodeLine{00696 \textcolor{keywordtype}{void} HAL\_SYSCFG\_DisableVREFBUF(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00697 \{}
+\DoxyCodeLine{00698   CLEAR\_BIT(VREFBUF-\/>CSR, VREFBUF\_CSR\_ENVR);}
+\DoxyCodeLine{00699 \}}
+\DoxyCodeLine{00700 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* VREFBUF */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00701 }
+\DoxyCodeLine{00707 \textcolor{keywordtype}{void} HAL\_SYSCFG\_EnableIOSwitchBooster(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00708 \{}
+\DoxyCodeLine{00709   SET\_BIT(SYSCFG-\/>CFGR1, SYSCFG\_CFGR1\_BOOSTEN);}
+\DoxyCodeLine{00710 \}}
+\DoxyCodeLine{00711 }
+\DoxyCodeLine{00717 \textcolor{keywordtype}{void} HAL\_SYSCFG\_DisableIOSwitchBooster(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00718 \{}
+\DoxyCodeLine{00719   CLEAR\_BIT(SYSCFG-\/>CFGR1, SYSCFG\_CFGR1\_BOOSTEN);}
+\DoxyCodeLine{00720 \}}
+\DoxyCodeLine{00721 }
+\DoxyCodeLine{00727 \textcolor{keywordtype}{void} HAL\_SYSCFG\_EnableIOSwitchVDD(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00728 \{}
+\DoxyCodeLine{00729   SET\_BIT(SYSCFG-\/>CFGR1, SYSCFG\_CFGR1\_ANASWVDD);}
+\DoxyCodeLine{00730 \}}
+\DoxyCodeLine{00731 }
+\DoxyCodeLine{00737 \textcolor{keywordtype}{void} HAL\_SYSCFG\_DisableIOSwitchVDD(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00738 \{}
+\DoxyCodeLine{00739   CLEAR\_BIT(SYSCFG-\/>CFGR1, SYSCFG\_CFGR1\_ANASWVDD);}
+\DoxyCodeLine{00740 \}}
+\DoxyCodeLine{00741 }
+\DoxyCodeLine{00742 }
+\DoxyCodeLine{00748 \textcolor{keywordtype}{void} HAL\_SYSCFG\_CCMSRAM\_WriteProtectionEnable(uint32\_t Page)}
+\DoxyCodeLine{00749 \{}
+\DoxyCodeLine{00750   assert\_param(IS\_SYSCFG\_CCMSRAMWRP\_PAGE(Page));}
+\DoxyCodeLine{00751 }
+\DoxyCodeLine{00752   SET\_BIT(SYSCFG-\/>SWPR, (uint32\_t)(Page));}
+\DoxyCodeLine{00753 \}}
+\DoxyCodeLine{00754 }
+\DoxyCodeLine{00755 }
+\DoxyCodeLine{00764 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,119 @@
+\doxysection{Library\+\_\+configuration\+\_\+section}
+\label{group___library__configuration__section}\index{Library\_configuration\_section@{Library\_configuration\_section}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ STM32\+G4}
+\begin{DoxyCompactList}\small\item\em STM32 Family. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+MAIN}~(0x01U)
+\begin{DoxyCompactList}\small\item\em Comment the line below if you will not use the peripherals drivers. In this case, these drivers will not be included and the application code will be based on direct access to peripherals registers. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+SUB1}~(0x02U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+SUB2}~(0x02U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+RC}~(0x00U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___library__configuration__section_ga4b8a502f178f4b719cb4d0054f6eb082}} 
+\index{Library\_configuration\_section@{Library\_configuration\_section}!\_\_STM32G4\_CMSIS\_VERSION@{\_\_STM32G4\_CMSIS\_VERSION}}
+\index{\_\_STM32G4\_CMSIS\_VERSION@{\_\_STM32G4\_CMSIS\_VERSION}!Library\_configuration\_section@{Library\_configuration\_section}}
+\doxysubsubsection{\_\_STM32G4\_CMSIS\_VERSION}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                       ((\_\_STM32G4\_CMSIS\_VERSION\_MAIN << 24)\(\backslash\)}
+\DoxyCodeLine{                                       |(\_\_STM32G4\_CMSIS\_VERSION\_SUB1 << 16)\(\backslash\)}
+\DoxyCodeLine{                                       |(\_\_STM32G4\_CMSIS\_VERSION\_SUB2 << 8 )\(\backslash\)}
+\DoxyCodeLine{                                       |(\_\_STM32G4\_CMSIS\_VERSION\_RC))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 93} of file \textbf{ stm32g4xx.\+h}.
+
+\mbox{\label{group___library__configuration__section_gae893395814f91cdefe9542a3a70f1ab5}} 
+\index{Library\_configuration\_section@{Library\_configuration\_section}!\_\_STM32G4\_CMSIS\_VERSION\_MAIN@{\_\_STM32G4\_CMSIS\_VERSION\_MAIN}}
+\index{\_\_STM32G4\_CMSIS\_VERSION\_MAIN@{\_\_STM32G4\_CMSIS\_VERSION\_MAIN}!Library\_configuration\_section@{Library\_configuration\_section}}
+\doxysubsubsection{\_\_STM32G4\_CMSIS\_VERSION\_MAIN}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+MAIN~(0x01U)}
+
+
+
+Comment the line below if you will not use the peripherals drivers. In this case, these drivers will not be included and the application code will be based on direct access to peripherals registers. 
+
+$<$ STM32\+G431xx Devices
+
+$<$ STM32\+G441xx Devices
+
+$<$ STM32\+G471xx Devices
+
+$<$ STM32\+G473xx Devices
+
+$<$ STM32\+G483xx Devices
+
+$<$ STM32\+G474xx Devices
+
+$<$ STM32\+G484xx Devices
+
+$<$ STM32\+G491xx Devices
+
+$<$ STM32\+G4\+A1xx Devices
+
+$<$ STM32\+GBK1\+CB Devices
+
+CMSIS Device version number V1.\+2.\+2 [31\+:24] main version 
+
+Definition at line \textbf{ 89} of file \textbf{ stm32g4xx.\+h}.
+
+\mbox{\label{group___library__configuration__section_ga48a762d955a8828aab1cf345a66c30c8}} 
+\index{Library\_configuration\_section@{Library\_configuration\_section}!\_\_STM32G4\_CMSIS\_VERSION\_RC@{\_\_STM32G4\_CMSIS\_VERSION\_RC}}
+\index{\_\_STM32G4\_CMSIS\_VERSION\_RC@{\_\_STM32G4\_CMSIS\_VERSION\_RC}!Library\_configuration\_section@{Library\_configuration\_section}}
+\doxysubsubsection{\_\_STM32G4\_CMSIS\_VERSION\_RC}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+RC~(0x00U)}
+
+[7\+:0] release candidate 
+
+Definition at line \textbf{ 92} of file \textbf{ stm32g4xx.\+h}.
+
+\mbox{\label{group___library__configuration__section_gab04b9e361cb377ec9b5952bb3057ae95}} 
+\index{Library\_configuration\_section@{Library\_configuration\_section}!\_\_STM32G4\_CMSIS\_VERSION\_SUB1@{\_\_STM32G4\_CMSIS\_VERSION\_SUB1}}
+\index{\_\_STM32G4\_CMSIS\_VERSION\_SUB1@{\_\_STM32G4\_CMSIS\_VERSION\_SUB1}!Library\_configuration\_section@{Library\_configuration\_section}}
+\doxysubsubsection{\_\_STM32G4\_CMSIS\_VERSION\_SUB1}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+SUB1~(0x02U)}
+
+[23\+:16] sub1 version 
+
+Definition at line \textbf{ 90} of file \textbf{ stm32g4xx.\+h}.
+
+\mbox{\label{group___library__configuration__section_ga68233aae2139c5c77608dc4b3602f611}} 
+\index{Library\_configuration\_section@{Library\_configuration\_section}!\_\_STM32G4\_CMSIS\_VERSION\_SUB2@{\_\_STM32G4\_CMSIS\_VERSION\_SUB2}}
+\index{\_\_STM32G4\_CMSIS\_VERSION\_SUB2@{\_\_STM32G4\_CMSIS\_VERSION\_SUB2}!Library\_configuration\_section@{Library\_configuration\_section}}
+\doxysubsubsection{\_\_STM32G4\_CMSIS\_VERSION\_SUB2}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+STM32\+G4\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+SUB2~(0x02U)}
+
+[15\+:8] sub2 version 
+
+Definition at line \textbf{ 91} of file \textbf{ stm32g4xx.\+h}.
+
+\mbox{\label{group___library__configuration__section_gaa17fc6b9c2c0e85f2b84667473fa7cc7}} 
+\index{Library\_configuration\_section@{Library\_configuration\_section}!STM32G4@{STM32G4}}
+\index{STM32G4@{STM32G4}!Library\_configuration\_section@{Library\_configuration\_section}}
+\doxysubsubsection{STM32G4}
+{\footnotesize\ttfamily \#define STM32\+G4}
+
+
+
+STM32 Family. 
+
+
+
+Definition at line \textbf{ 52} of file \textbf{ stm32g4xx.\+h}.
+

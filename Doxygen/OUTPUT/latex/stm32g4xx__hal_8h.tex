@@ -1,0 +1,242 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+hal.h File Reference}
+\label{stm32g4xx__hal_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal.h}}
+
+
+This file contains all the functions prototypes for the HAL module driver.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+conf.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ HAL\+\_\+\+TICK\+\_\+\+FREQ\+\_\+10\+HZ}~100U
+\item 
+\#define \textbf{ HAL\+\_\+\+TICK\+\_\+\+FREQ\+\_\+100\+HZ}~10U
+\item 
+\#define \textbf{ HAL\+\_\+\+TICK\+\_\+\+FREQ\+\_\+1\+KHZ}~1U
+\item 
+\#define \textbf{ HAL\+\_\+\+TICK\+\_\+\+FREQ\+\_\+\+DEFAULT}~HAL\+\_\+\+TICK\+\_\+\+FREQ\+\_\+1\+KHZ
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+BOOT\+\_\+\+MAINFLASH}~0x00000000U
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+BOOT\+\_\+\+SYSTEMFLASH}~SYSCFG\+\_\+\+MEMMEMRMP\+\_\+\+MODE\+\_\+0
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+BOOT\+\_\+\+SRAM}~(SYSCFG\+\_\+\+MEMMEMRMP\+\_\+\+MODE\+\_\+1 $\vert$ SYSCFG\+\_\+\+MEMMEMRMP\+\_\+\+MODE\+\_\+0)
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+IT\+\_\+\+FPU\+\_\+\+IOC}~\textbf{ SYSCFG\+\_\+\+CFGR1\+\_\+\+FPU\+\_\+\+IE\+\_\+0}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+IT\+\_\+\+FPU\+\_\+\+DZC}~\textbf{ SYSCFG\+\_\+\+CFGR1\+\_\+\+FPU\+\_\+\+IE\+\_\+1}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+IT\+\_\+\+FPU\+\_\+\+UFC}~\textbf{ SYSCFG\+\_\+\+CFGR1\+\_\+\+FPU\+\_\+\+IE\+\_\+2}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+IT\+\_\+\+FPU\+\_\+\+OFC}~\textbf{ SYSCFG\+\_\+\+CFGR1\+\_\+\+FPU\+\_\+\+IE\+\_\+3}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+IT\+\_\+\+FPU\+\_\+\+IDC}~\textbf{ SYSCFG\+\_\+\+CFGR1\+\_\+\+FPU\+\_\+\+IE\+\_\+4}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+IT\+\_\+\+FPU\+\_\+\+IXC}~\textbf{ SYSCFG\+\_\+\+CFGR1\+\_\+\+FPU\+\_\+\+IE\+\_\+5}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE0}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE0}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE1}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE1}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE2}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE2}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE3}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE3}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE4}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE4}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE5}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE5}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE6}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE6}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE7}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE7}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE8}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE8}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE9}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE9}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE10}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE10}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE11}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE11}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE12}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE12}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE13}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE13}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE14}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE14}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE15}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE15}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE16}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE16}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE17}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE17}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE18}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE18}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE19}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE19}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE20}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE20}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE21}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE21}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE22}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE22}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE23}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE23}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE24}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE24}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE25}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE25}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE26}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE26}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE27}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE27}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE28}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE28}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE29}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE29}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE30}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE30}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+CCMSRAMWRP\+\_\+\+PAGE31}~\textbf{ SYSCFG\+\_\+\+SWPR\+\_\+\+PAGE31}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+FLAG\+\_\+\+SRAM\+\_\+\+PE}~\textbf{ SYSCFG\+\_\+\+CFGR2\+\_\+\+SPF}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+FLAG\+\_\+\+CCMSRAM\+\_\+\+BUSY}~\textbf{ SYSCFG\+\_\+\+SCSR\+\_\+\+CCMBSY}
+\item 
+\#define \textbf{ SYSCFG\+\_\+\+FASTMODEPLUS\+\_\+\+PB6}~\textbf{ SYSCFG\+\_\+\+CFGR1\+\_\+\+I2\+C\+\_\+\+PB6\+\_\+\+FMP}
+\begin{DoxyCompactList}\small\item\em Fast-\/mode Plus driving capability on a specific GPIO. \end{DoxyCompactList}\item 
+\#define \textbf{ SYSCFG\+\_\+\+FASTMODEPLUS\+\_\+\+PB7}~\textbf{ SYSCFG\+\_\+\+CFGR1\+\_\+\+I2\+C\+\_\+\+PB7\+\_\+\+FMP}
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+REMAPMEMORY\+\_\+\+FLASH}()~CLEAR\+\_\+\+BIT(SYSCFG-\/$>$MEMRMP, \textbf{ SYSCFG\+\_\+\+MEMRMP\+\_\+\+MEM\+\_\+\+MODE})
+\begin{DoxyCompactList}\small\item\em Main Flash memory mapped at 0x00000000. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+REMAPMEMORY\+\_\+\+SYSTEMFLASH}()~MODIFY\+\_\+\+REG(SYSCFG-\/$>$MEMRMP, \textbf{ SYSCFG\+\_\+\+MEMRMP\+\_\+\+MEM\+\_\+\+MODE}, \textbf{ SYSCFG\+\_\+\+MEMRMP\+\_\+\+MEM\+\_\+\+MODE\+\_\+0})
+\begin{DoxyCompactList}\small\item\em System Flash memory mapped at 0x00000000. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+REMAPMEMORY\+\_\+\+SRAM}()~MODIFY\+\_\+\+REG(SYSCFG-\/$>$MEMRMP, \textbf{ SYSCFG\+\_\+\+MEMRMP\+\_\+\+MEM\+\_\+\+MODE}, (\textbf{ SYSCFG\+\_\+\+MEMRMP\+\_\+\+MEM\+\_\+\+MODE\+\_\+1}$\vert$\textbf{ SYSCFG\+\_\+\+MEMRMP\+\_\+\+MEM\+\_\+\+MODE\+\_\+0}))
+\begin{DoxyCompactList}\small\item\em Embedded SRAM mapped at 0x00000000. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+GET\+\_\+\+BOOT\+\_\+\+MODE}()~READ\+\_\+\+BIT(SYSCFG-\/$>$MEMRMP, \textbf{ SYSCFG\+\_\+\+MEMRMP\+\_\+\+MEM\+\_\+\+MODE})
+\begin{DoxyCompactList}\small\item\em Return the boot mode as configured by user. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+CCMSRAM\+\_\+\+WRP\+\_\+1\+\_\+31\+\_\+\+ENABLE}~\+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+CCMSRAM\+\_\+\+WRP\+\_\+0\+\_\+31\+\_\+\+ENABLE
+\begin{DoxyCompactList}\small\item\em CCMSRAM page write protection enable macro. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+CCMSRAM\+\_\+\+WRP\+\_\+0\+\_\+31\+\_\+\+ENABLE}(\+\_\+\+\_\+\+CCMSRAMWRP\+\_\+\+\_\+)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+CCMSRAM\+\_\+\+WRP\+\_\+\+UNLOCK}()
+\begin{DoxyCompactList}\small\item\em CCMSRAM page write protection unlock prior to erase. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+CCMSRAM\+\_\+\+ERASE}()~SET\+\_\+\+BIT(SYSCFG-\/$>$SCSR, \textbf{ SYSCFG\+\_\+\+SCSR\+\_\+\+CCMER})
+\begin{DoxyCompactList}\small\item\em CCMSRAM erase. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+FPU\+\_\+\+INTERRUPT\+\_\+\+ENABLE}(\+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Floating Point Unit interrupt enable/disable macros. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+FPU\+\_\+\+INTERRUPT\+\_\+\+DISABLE}(\+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+BREAK\+\_\+\+ECC\+\_\+\+LOCK}()~SET\+\_\+\+BIT(SYSCFG-\/$>$CFGR2, \textbf{ SYSCFG\+\_\+\+CFGR2\+\_\+\+ECCL})
+\begin{DoxyCompactList}\small\item\em SYSCFG Break ECC lock. Enable and lock the connection of Flash ECC error connection to TIM1/8/15/16/17 Break input. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+BREAK\+\_\+\+LOCKUP\+\_\+\+LOCK}()~SET\+\_\+\+BIT(SYSCFG-\/$>$CFGR2, \textbf{ SYSCFG\+\_\+\+CFGR2\+\_\+\+CLL})
+\begin{DoxyCompactList}\small\item\em SYSCFG Break Cortex-\/\+M4 Lockup lock. Enable and lock the connection of Cortex-\/\+M4 LOCKUP (Hardfault) output to TIM1/8/15/16/17 Break input. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+BREAK\+\_\+\+PVD\+\_\+\+LOCK}()~SET\+\_\+\+BIT(SYSCFG-\/$>$CFGR2, \textbf{ SYSCFG\+\_\+\+CFGR2\+\_\+\+PVDL})
+\begin{DoxyCompactList}\small\item\em SYSCFG Break PVD lock. Enable and lock the PVD connection to Timer1/8/15/16/17 Break input, as well as the PVDE and PLS[2\+:0] in the PWR\+\_\+\+CR2 register. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+BREAK\+\_\+\+SRAMPARITY\+\_\+\+LOCK}()~SET\+\_\+\+BIT(SYSCFG-\/$>$CFGR2, \textbf{ SYSCFG\+\_\+\+CFGR2\+\_\+\+SPL})
+\begin{DoxyCompactList}\small\item\em SYSCFG Break SRAM parity lock. Enable and lock the SRAM parity error (first 32kB of SRAM1 + CCM SRAM) signal connection to TIM1/8/15/16/17 Break input. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+GET\+\_\+\+FLAG}(\+\_\+\+\_\+\+FLAG\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Check SYSCFG flag is set or not. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+CLEAR\+\_\+\+FLAG}()~SET\+\_\+\+BIT(SYSCFG-\/$>$CFGR2, \textbf{ SYSCFG\+\_\+\+CFGR2\+\_\+\+SPF})
+\begin{DoxyCompactList}\small\item\em Set the SPF bit to clear the SRAM Parity Error Flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+FASTMODEPLUS\+\_\+\+ENABLE}(\+\_\+\+\_\+\+FASTMODEPLUS\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Fast-\/mode Plus driving capability enable/disable macros. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+SYSCFG\+\_\+\+FASTMODEPLUS\+\_\+\+DISABLE}(\+\_\+\+\_\+\+FASTMODEPLUS\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+SYSCFG\+\_\+\+FPU\+\_\+\+INTERRUPT}(\+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+SYSCFG\+\_\+\+BREAK\+\_\+\+CONFIG}(\+\_\+\+\_\+\+CONFIG\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+SYSCFG\+\_\+\+FASTMODEPLUS}(\+\_\+\+\_\+\+PIN\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TICKFREQ}(FREQ)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Init} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+De\+Init} (void)
+\item 
+void \textbf{ HAL\+\_\+\+Msp\+Init} (void)
+\item 
+void {\bfseries HAL\+\_\+\+Msp\+De\+Init} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Init\+Tick} (uint32\+\_\+t Tick\+Priority)
+\item 
+void {\bfseries HAL\+\_\+\+Inc\+Tick} (void)
+\item 
+void {\bfseries HAL\+\_\+\+Delay} (uint32\+\_\+t Delay)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+Get\+Tick} (void)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+Get\+Tick\+Prio} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Set\+Tick\+Freq} (uint32\+\_\+t Freq)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+Get\+Tick\+Freq} (void)
+\item 
+void {\bfseries HAL\+\_\+\+Suspend\+Tick} (void)
+\item 
+void {\bfseries HAL\+\_\+\+Resume\+Tick} (void)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+Get\+Hal\+Version} (void)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+Get\+REVID} (void)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+Get\+DEVID} (void)
+\item 
+void {\bfseries HAL\+\_\+\+DBGMCU\+\_\+\+Enable\+DBGSleep\+Mode} (void)
+\item 
+void {\bfseries HAL\+\_\+\+DBGMCU\+\_\+\+Disable\+DBGSleep\+Mode} (void)
+\item 
+void {\bfseries HAL\+\_\+\+DBGMCU\+\_\+\+Enable\+DBGStop\+Mode} (void)
+\item 
+void {\bfseries HAL\+\_\+\+DBGMCU\+\_\+\+Disable\+DBGStop\+Mode} (void)
+\item 
+void {\bfseries HAL\+\_\+\+DBGMCU\+\_\+\+Enable\+DBGStandby\+Mode} (void)
+\item 
+void {\bfseries HAL\+\_\+\+DBGMCU\+\_\+\+Disable\+DBGStandby\+Mode} (void)
+\item 
+void {\bfseries HAL\+\_\+\+SYSCFG\+\_\+\+CCMSRAMErase} (void)
+\item 
+void {\bfseries HAL\+\_\+\+SYSCFG\+\_\+\+Enable\+Memory\+Swapping\+Bank} (void)
+\item 
+void {\bfseries HAL\+\_\+\+SYSCFG\+\_\+\+Disable\+Memory\+Swapping\+Bank} (void)
+\item 
+void {\bfseries HAL\+\_\+\+SYSCFG\+\_\+\+Enable\+IOSwitch\+Booster} (void)
+\item 
+void {\bfseries HAL\+\_\+\+SYSCFG\+\_\+\+Disable\+IOSwitch\+Booster} (void)
+\item 
+void {\bfseries HAL\+\_\+\+SYSCFG\+\_\+\+Enable\+IOSwitch\+VDD} (void)
+\item 
+void {\bfseries HAL\+\_\+\+SYSCFG\+\_\+\+Disable\+IOSwitch\+VDD} (void)
+\item 
+void {\bfseries HAL\+\_\+\+SYSCFG\+\_\+\+CCMSRAM\+\_\+\+Write\+Protection\+Enable} (uint32\+\_\+t Page)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t {\bfseries uw\+Tick}
+\item 
+uint32\+\_\+t {\bfseries uw\+Tick\+Prio}
+\item 
+uint32\+\_\+t {\bfseries uw\+Tick\+Freq}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains all the functions prototypes for the HAL module driver. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+hal.\+h}.
+

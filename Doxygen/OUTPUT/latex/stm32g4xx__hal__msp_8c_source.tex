@@ -1,0 +1,281 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+msp.\+c}
+\label{stm32g4xx__hal__msp_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/stm32g4xx\_hal\_msp.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/stm32g4xx\_hal\_msp.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 \textcolor{comment}{/* USER CODE BEGIN Header */}}
+\DoxyCodeLine{00019 \textcolor{comment}{/* USER CODE END Header */}}
+\DoxyCodeLine{00020 }
+\DoxyCodeLine{00021 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00022 \textcolor{preprocessor}{\#include "{}main.h"{}}}
+\DoxyCodeLine{00023 \textcolor{comment}{/* USER CODE BEGIN Includes */}}
+\DoxyCodeLine{00024 }
+\DoxyCodeLine{00025 \textcolor{comment}{/* USER CODE END Includes */}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{comment}{/* USER CODE BEGIN TD */}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00030 \textcolor{comment}{/* USER CODE END TD */}}
+\DoxyCodeLine{00031 }
+\DoxyCodeLine{00032 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00033 \textcolor{comment}{/* USER CODE BEGIN Define */}}
+\DoxyCodeLine{00034 }
+\DoxyCodeLine{00035 \textcolor{comment}{/* USER CODE END Define */}}
+\DoxyCodeLine{00036 }
+\DoxyCodeLine{00037 \textcolor{comment}{/* Private macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00038 \textcolor{comment}{/* USER CODE BEGIN Macro */}}
+\DoxyCodeLine{00039 }
+\DoxyCodeLine{00040 \textcolor{comment}{/* USER CODE END Macro */}}
+\DoxyCodeLine{00041 }
+\DoxyCodeLine{00042 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00043 \textcolor{comment}{/* USER CODE BEGIN PV */}}
+\DoxyCodeLine{00044 }
+\DoxyCodeLine{00045 \textcolor{comment}{/* USER CODE END PV */}}
+\DoxyCodeLine{00046 }
+\DoxyCodeLine{00047 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00048 \textcolor{comment}{/* USER CODE BEGIN PFP */}}
+\DoxyCodeLine{00049 }
+\DoxyCodeLine{00050 \textcolor{comment}{/* USER CODE END PFP */}}
+\DoxyCodeLine{00051 }
+\DoxyCodeLine{00052 \textcolor{comment}{/* External functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00053 \textcolor{comment}{/* USER CODE BEGIN ExternalFunctions */}}
+\DoxyCodeLine{00054 }
+\DoxyCodeLine{00055 \textcolor{comment}{/* USER CODE END ExternalFunctions */}}
+\DoxyCodeLine{00056 }
+\DoxyCodeLine{00057 \textcolor{comment}{/* USER CODE BEGIN 0 */}}
+\DoxyCodeLine{00058 }
+\DoxyCodeLine{00059 \textcolor{comment}{/* USER CODE END 0 */}}
+\DoxyCodeLine{00060 }
+\DoxyCodeLine{00061 \textcolor{keywordtype}{void} HAL\_TIM\_MspPostInit(TIM\_HandleTypeDef *htim);}
+\DoxyCodeLine{00065 \textcolor{keywordtype}{void} HAL\_MspInit(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00066 \{}
+\DoxyCodeLine{00067   \textcolor{comment}{/* USER CODE BEGIN MspInit 0 */}}
+\DoxyCodeLine{00068 }
+\DoxyCodeLine{00069   \textcolor{comment}{/* USER CODE END MspInit 0 */}}
+\DoxyCodeLine{00070 }
+\DoxyCodeLine{00071   \_\_HAL\_RCC\_SYSCFG\_CLK\_ENABLE();}
+\DoxyCodeLine{00072   \_\_HAL\_RCC\_PWR\_CLK\_ENABLE();}
+\DoxyCodeLine{00073 }
+\DoxyCodeLine{00074   \textcolor{comment}{/* System interrupt init*/}}
+\DoxyCodeLine{00075 }
+\DoxyCodeLine{00078   HAL\_PWREx\_DisableUCPDDeadBattery();}
+\DoxyCodeLine{00079 }
+\DoxyCodeLine{00080   \textcolor{comment}{/* USER CODE BEGIN MspInit 1 */}}
+\DoxyCodeLine{00081 }
+\DoxyCodeLine{00082   \textcolor{comment}{/* USER CODE END MspInit 1 */}}
+\DoxyCodeLine{00083 \}}
+\DoxyCodeLine{00084 }
+\DoxyCodeLine{00091 \textcolor{keywordtype}{void} HAL\_ADC\_MspInit(ADC\_HandleTypeDef* hadc)}
+\DoxyCodeLine{00092 \{}
+\DoxyCodeLine{00093   GPIO\_InitTypeDef GPIO\_InitStruct = \{0\};}
+\DoxyCodeLine{00094   RCC\_PeriphCLKInitTypeDef PeriphClkInit = \{0\};}
+\DoxyCodeLine{00095   \textcolor{keywordflow}{if}(hadc-\/>Instance==ADC1)}
+\DoxyCodeLine{00096   \{}
+\DoxyCodeLine{00097   \textcolor{comment}{/* USER CODE BEGIN ADC1\_MspInit 0 */}}
+\DoxyCodeLine{00098 }
+\DoxyCodeLine{00099   \textcolor{comment}{/* USER CODE END ADC1\_MspInit 0 */}}
+\DoxyCodeLine{00100 }
+\DoxyCodeLine{00103     PeriphClkInit.PeriphClockSelection = RCC\_PERIPHCLK\_ADC12;}
+\DoxyCodeLine{00104     PeriphClkInit.Adc12ClockSelection = RCC\_ADC12CLKSOURCE\_SYSCLK;}
+\DoxyCodeLine{00105     \textcolor{keywordflow}{if} (HAL\_RCCEx\_PeriphCLKConfig(\&PeriphClkInit) != HAL\_OK)}
+\DoxyCodeLine{00106     \{}
+\DoxyCodeLine{00107       Error\_Handler();}
+\DoxyCodeLine{00108     \}}
+\DoxyCodeLine{00109 }
+\DoxyCodeLine{00110     \textcolor{comment}{/* Peripheral clock enable */}}
+\DoxyCodeLine{00111     \_\_HAL\_RCC\_ADC12\_CLK\_ENABLE();}
+\DoxyCodeLine{00112 }
+\DoxyCodeLine{00113     \_\_HAL\_RCC\_GPIOA\_CLK\_ENABLE();}
+\DoxyCodeLine{00117     GPIO\_InitStruct.Pin = GPIO\_PIN\_0;}
+\DoxyCodeLine{00118     GPIO\_InitStruct.Mode = GPIO\_MODE\_ANALOG;}
+\DoxyCodeLine{00119     GPIO\_InitStruct.Pull = GPIO\_NOPULL;}
+\DoxyCodeLine{00120     HAL\_GPIO\_Init(GPIOA, \&GPIO\_InitStruct);}
+\DoxyCodeLine{00121 }
+\DoxyCodeLine{00122     \textcolor{comment}{/* ADC1 interrupt Init */}}
+\DoxyCodeLine{00123     HAL\_NVIC\_SetPriority(ADC1\_2\_IRQn, 0, 0);}
+\DoxyCodeLine{00124     HAL\_NVIC\_EnableIRQ(ADC1\_2\_IRQn);}
+\DoxyCodeLine{00125   \textcolor{comment}{/* USER CODE BEGIN ADC1\_MspInit 1 */}}
+\DoxyCodeLine{00126 }
+\DoxyCodeLine{00127   \textcolor{comment}{/* USER CODE END ADC1\_MspInit 1 */}}
+\DoxyCodeLine{00128   \}}
+\DoxyCodeLine{00129 }
+\DoxyCodeLine{00130 \}}
+\DoxyCodeLine{00131 }
+\DoxyCodeLine{00138 \textcolor{keywordtype}{void} HAL\_ADC\_MspDeInit(ADC\_HandleTypeDef* hadc)}
+\DoxyCodeLine{00139 \{}
+\DoxyCodeLine{00140   \textcolor{keywordflow}{if}(hadc-\/>Instance==ADC1)}
+\DoxyCodeLine{00141   \{}
+\DoxyCodeLine{00142   \textcolor{comment}{/* USER CODE BEGIN ADC1\_MspDeInit 0 */}}
+\DoxyCodeLine{00143 }
+\DoxyCodeLine{00144   \textcolor{comment}{/* USER CODE END ADC1\_MspDeInit 0 */}}
+\DoxyCodeLine{00145     \textcolor{comment}{/* Peripheral clock disable */}}
+\DoxyCodeLine{00146     \_\_HAL\_RCC\_ADC12\_CLK\_DISABLE();}
+\DoxyCodeLine{00147 }
+\DoxyCodeLine{00151     HAL\_GPIO\_DeInit(GPIOA, GPIO\_PIN\_0);}
+\DoxyCodeLine{00152 }
+\DoxyCodeLine{00153     \textcolor{comment}{/* ADC1 interrupt DeInit */}}
+\DoxyCodeLine{00154     HAL\_NVIC\_DisableIRQ(ADC1\_2\_IRQn);}
+\DoxyCodeLine{00155   \textcolor{comment}{/* USER CODE BEGIN ADC1\_MspDeInit 1 */}}
+\DoxyCodeLine{00156 }
+\DoxyCodeLine{00157   \textcolor{comment}{/* USER CODE END ADC1\_MspDeInit 1 */}}
+\DoxyCodeLine{00158   \}}
+\DoxyCodeLine{00159 }
+\DoxyCodeLine{00160 \}}
+\DoxyCodeLine{00161 }
+\DoxyCodeLine{00168 \textcolor{keywordtype}{void} HAL\_TIM\_Base\_MspInit(TIM\_HandleTypeDef* htim\_base)}
+\DoxyCodeLine{00169 \{}
+\DoxyCodeLine{00170   \textcolor{keywordflow}{if}(htim\_base-\/>Instance==TIM1)}
+\DoxyCodeLine{00171   \{}
+\DoxyCodeLine{00172   \textcolor{comment}{/* USER CODE BEGIN TIM1\_MspInit 0 */}}
+\DoxyCodeLine{00173 }
+\DoxyCodeLine{00174   \textcolor{comment}{/* USER CODE END TIM1\_MspInit 0 */}}
+\DoxyCodeLine{00175     \textcolor{comment}{/* Peripheral clock enable */}}
+\DoxyCodeLine{00176     \_\_HAL\_RCC\_TIM1\_CLK\_ENABLE();}
+\DoxyCodeLine{00177   \textcolor{comment}{/* USER CODE BEGIN TIM1\_MspInit 1 */}}
+\DoxyCodeLine{00178 }
+\DoxyCodeLine{00179   \textcolor{comment}{/* USER CODE END TIM1\_MspInit 1 */}}
+\DoxyCodeLine{00180   \}}
+\DoxyCodeLine{00181   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(htim\_base-\/>Instance==TIM2)}
+\DoxyCodeLine{00182   \{}
+\DoxyCodeLine{00183   \textcolor{comment}{/* USER CODE BEGIN TIM2\_MspInit 0 */}}
+\DoxyCodeLine{00184 }
+\DoxyCodeLine{00185   \textcolor{comment}{/* USER CODE END TIM2\_MspInit 0 */}}
+\DoxyCodeLine{00186     \textcolor{comment}{/* Peripheral clock enable */}}
+\DoxyCodeLine{00187     \_\_HAL\_RCC\_TIM2\_CLK\_ENABLE();}
+\DoxyCodeLine{00188   \textcolor{comment}{/* USER CODE BEGIN TIM2\_MspInit 1 */}}
+\DoxyCodeLine{00189 }
+\DoxyCodeLine{00190   \textcolor{comment}{/* USER CODE END TIM2\_MspInit 1 */}}
+\DoxyCodeLine{00191   \}}
+\DoxyCodeLine{00192 }
+\DoxyCodeLine{00193 \}}
+\DoxyCodeLine{00194 }
+\DoxyCodeLine{00195 \textcolor{keywordtype}{void} HAL\_TIM\_MspPostInit(TIM\_HandleTypeDef* htim)}
+\DoxyCodeLine{00196 \{}
+\DoxyCodeLine{00197   GPIO\_InitTypeDef GPIO\_InitStruct = \{0\};}
+\DoxyCodeLine{00198   \textcolor{keywordflow}{if}(htim-\/>Instance==TIM1)}
+\DoxyCodeLine{00199   \{}
+\DoxyCodeLine{00200   \textcolor{comment}{/* USER CODE BEGIN TIM1\_MspPostInit 0 */}}
+\DoxyCodeLine{00201 }
+\DoxyCodeLine{00202   \textcolor{comment}{/* USER CODE END TIM1\_MspPostInit 0 */}}
+\DoxyCodeLine{00203     \_\_HAL\_RCC\_GPIOA\_CLK\_ENABLE();}
+\DoxyCodeLine{00210     GPIO\_InitStruct.Pin = GPIO\_PIN\_8|GPIO\_PIN\_9|GPIO\_PIN\_11|GPIO\_PIN\_12;}
+\DoxyCodeLine{00211     GPIO\_InitStruct.Mode = GPIO\_MODE\_AF\_PP;}
+\DoxyCodeLine{00212     GPIO\_InitStruct.Pull = GPIO\_NOPULL;}
+\DoxyCodeLine{00213     GPIO\_InitStruct.Speed = GPIO\_SPEED\_FREQ\_LOW;}
+\DoxyCodeLine{00214     GPIO\_InitStruct.Alternate = GPIO\_AF6\_TIM1;}
+\DoxyCodeLine{00215     HAL\_GPIO\_Init(GPIOA, \&GPIO\_InitStruct);}
+\DoxyCodeLine{00216 }
+\DoxyCodeLine{00217   \textcolor{comment}{/* USER CODE BEGIN TIM1\_MspPostInit 1 */}}
+\DoxyCodeLine{00218 }
+\DoxyCodeLine{00219   \textcolor{comment}{/* USER CODE END TIM1\_MspPostInit 1 */}}
+\DoxyCodeLine{00220   \}}
+\DoxyCodeLine{00221   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(htim-\/>Instance==TIM2)}
+\DoxyCodeLine{00222   \{}
+\DoxyCodeLine{00223   \textcolor{comment}{/* USER CODE BEGIN TIM2\_MspPostInit 0 */}}
+\DoxyCodeLine{00224 }
+\DoxyCodeLine{00225   \textcolor{comment}{/* USER CODE END TIM2\_MspPostInit 0 */}}
+\DoxyCodeLine{00226 }
+\DoxyCodeLine{00227     \_\_HAL\_RCC\_GPIOA\_CLK\_ENABLE();}
+\DoxyCodeLine{00231     GPIO\_InitStruct.Pin = GPIO\_PIN\_15;}
+\DoxyCodeLine{00232     GPIO\_InitStruct.Mode = GPIO\_MODE\_AF\_PP;}
+\DoxyCodeLine{00233     GPIO\_InitStruct.Pull = GPIO\_NOPULL;}
+\DoxyCodeLine{00234     GPIO\_InitStruct.Speed = GPIO\_SPEED\_FREQ\_LOW;}
+\DoxyCodeLine{00235     GPIO\_InitStruct.Alternate = GPIO\_AF1\_TIM2;}
+\DoxyCodeLine{00236     HAL\_GPIO\_Init(GPIOA, \&GPIO\_InitStruct);}
+\DoxyCodeLine{00237 }
+\DoxyCodeLine{00238   \textcolor{comment}{/* USER CODE BEGIN TIM2\_MspPostInit 1 */}}
+\DoxyCodeLine{00239 }
+\DoxyCodeLine{00240   \textcolor{comment}{/* USER CODE END TIM2\_MspPostInit 1 */}}
+\DoxyCodeLine{00241   \}}
+\DoxyCodeLine{00242 }
+\DoxyCodeLine{00243 \}}
+\DoxyCodeLine{00250 \textcolor{keywordtype}{void} HAL\_TIM\_Base\_MspDeInit(TIM\_HandleTypeDef* htim\_base)}
+\DoxyCodeLine{00251 \{}
+\DoxyCodeLine{00252   \textcolor{keywordflow}{if}(htim\_base-\/>Instance==TIM1)}
+\DoxyCodeLine{00253   \{}
+\DoxyCodeLine{00254   \textcolor{comment}{/* USER CODE BEGIN TIM1\_MspDeInit 0 */}}
+\DoxyCodeLine{00255 }
+\DoxyCodeLine{00256   \textcolor{comment}{/* USER CODE END TIM1\_MspDeInit 0 */}}
+\DoxyCodeLine{00257     \textcolor{comment}{/* Peripheral clock disable */}}
+\DoxyCodeLine{00258     \_\_HAL\_RCC\_TIM1\_CLK\_DISABLE();}
+\DoxyCodeLine{00259   \textcolor{comment}{/* USER CODE BEGIN TIM1\_MspDeInit 1 */}}
+\DoxyCodeLine{00260 }
+\DoxyCodeLine{00261   \textcolor{comment}{/* USER CODE END TIM1\_MspDeInit 1 */}}
+\DoxyCodeLine{00262   \}}
+\DoxyCodeLine{00263   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(htim\_base-\/>Instance==TIM2)}
+\DoxyCodeLine{00264   \{}
+\DoxyCodeLine{00265   \textcolor{comment}{/* USER CODE BEGIN TIM2\_MspDeInit 0 */}}
+\DoxyCodeLine{00266 }
+\DoxyCodeLine{00267   \textcolor{comment}{/* USER CODE END TIM2\_MspDeInit 0 */}}
+\DoxyCodeLine{00268     \textcolor{comment}{/* Peripheral clock disable */}}
+\DoxyCodeLine{00269     \_\_HAL\_RCC\_TIM2\_CLK\_DISABLE();}
+\DoxyCodeLine{00270   \textcolor{comment}{/* USER CODE BEGIN TIM2\_MspDeInit 1 */}}
+\DoxyCodeLine{00271 }
+\DoxyCodeLine{00272   \textcolor{comment}{/* USER CODE END TIM2\_MspDeInit 1 */}}
+\DoxyCodeLine{00273   \}}
+\DoxyCodeLine{00274 }
+\DoxyCodeLine{00275 \}}
+\DoxyCodeLine{00276 }
+\DoxyCodeLine{00283 \textcolor{keywordtype}{void} HAL\_UART\_MspInit(UART\_HandleTypeDef* huart)}
+\DoxyCodeLine{00284 \{}
+\DoxyCodeLine{00285   GPIO\_InitTypeDef GPIO\_InitStruct = \{0\};}
+\DoxyCodeLine{00286   RCC\_PeriphCLKInitTypeDef PeriphClkInit = \{0\};}
+\DoxyCodeLine{00287   \textcolor{keywordflow}{if}(huart-\/>Instance==USART2)}
+\DoxyCodeLine{00288   \{}
+\DoxyCodeLine{00289   \textcolor{comment}{/* USER CODE BEGIN USART2\_MspInit 0 */}}
+\DoxyCodeLine{00290 }
+\DoxyCodeLine{00291   \textcolor{comment}{/* USER CODE END USART2\_MspInit 0 */}}
+\DoxyCodeLine{00292 }
+\DoxyCodeLine{00295     PeriphClkInit.PeriphClockSelection = RCC\_PERIPHCLK\_USART2;}
+\DoxyCodeLine{00296     PeriphClkInit.Usart2ClockSelection = RCC\_USART2CLKSOURCE\_PCLK1;}
+\DoxyCodeLine{00297     \textcolor{keywordflow}{if} (HAL\_RCCEx\_PeriphCLKConfig(\&PeriphClkInit) != HAL\_OK)}
+\DoxyCodeLine{00298     \{}
+\DoxyCodeLine{00299       Error\_Handler();}
+\DoxyCodeLine{00300     \}}
+\DoxyCodeLine{00301 }
+\DoxyCodeLine{00302     \textcolor{comment}{/* Peripheral clock enable */}}
+\DoxyCodeLine{00303     \_\_HAL\_RCC\_USART2\_CLK\_ENABLE();}
+\DoxyCodeLine{00304 }
+\DoxyCodeLine{00305     \_\_HAL\_RCC\_GPIOA\_CLK\_ENABLE();}
+\DoxyCodeLine{00310     GPIO\_InitStruct.Pin = GPIO\_PIN\_2|GPIO\_PIN\_3;}
+\DoxyCodeLine{00311     GPIO\_InitStruct.Mode = GPIO\_MODE\_AF\_PP;}
+\DoxyCodeLine{00312     GPIO\_InitStruct.Pull = GPIO\_NOPULL;}
+\DoxyCodeLine{00313     GPIO\_InitStruct.Speed = GPIO\_SPEED\_FREQ\_LOW;}
+\DoxyCodeLine{00314     GPIO\_InitStruct.Alternate = GPIO\_AF7\_USART2;}
+\DoxyCodeLine{00315     HAL\_GPIO\_Init(GPIOA, \&GPIO\_InitStruct);}
+\DoxyCodeLine{00316 }
+\DoxyCodeLine{00317     \textcolor{comment}{/* USART2 interrupt Init */}}
+\DoxyCodeLine{00318     HAL\_NVIC\_SetPriority(USART2\_IRQn, 0, 0);}
+\DoxyCodeLine{00319     HAL\_NVIC\_EnableIRQ(USART2\_IRQn);}
+\DoxyCodeLine{00320   \textcolor{comment}{/* USER CODE BEGIN USART2\_MspInit 1 */}}
+\DoxyCodeLine{00321 }
+\DoxyCodeLine{00322   \textcolor{comment}{/* USER CODE END USART2\_MspInit 1 */}}
+\DoxyCodeLine{00323   \}}
+\DoxyCodeLine{00324 }
+\DoxyCodeLine{00325 \}}
+\DoxyCodeLine{00326 }
+\DoxyCodeLine{00333 \textcolor{keywordtype}{void} HAL\_UART\_MspDeInit(UART\_HandleTypeDef* huart)}
+\DoxyCodeLine{00334 \{}
+\DoxyCodeLine{00335   \textcolor{keywordflow}{if}(huart-\/>Instance==USART2)}
+\DoxyCodeLine{00336   \{}
+\DoxyCodeLine{00337   \textcolor{comment}{/* USER CODE BEGIN USART2\_MspDeInit 0 */}}
+\DoxyCodeLine{00338 }
+\DoxyCodeLine{00339   \textcolor{comment}{/* USER CODE END USART2\_MspDeInit 0 */}}
+\DoxyCodeLine{00340     \textcolor{comment}{/* Peripheral clock disable */}}
+\DoxyCodeLine{00341     \_\_HAL\_RCC\_USART2\_CLK\_DISABLE();}
+\DoxyCodeLine{00342 }
+\DoxyCodeLine{00347     HAL\_GPIO\_DeInit(GPIOA, GPIO\_PIN\_2|GPIO\_PIN\_3);}
+\DoxyCodeLine{00348 }
+\DoxyCodeLine{00349     \textcolor{comment}{/* USART2 interrupt DeInit */}}
+\DoxyCodeLine{00350     HAL\_NVIC\_DisableIRQ(USART2\_IRQn);}
+\DoxyCodeLine{00351   \textcolor{comment}{/* USER CODE BEGIN USART2\_MspDeInit 1 */}}
+\DoxyCodeLine{00352 }
+\DoxyCodeLine{00353   \textcolor{comment}{/* USER CODE END USART2\_MspDeInit 1 */}}
+\DoxyCodeLine{00354   \}}
+\DoxyCodeLine{00355 }
+\DoxyCodeLine{00356 \}}
+\DoxyCodeLine{00357 }
+\DoxyCodeLine{00358 \textcolor{comment}{/* USER CODE BEGIN 1 */}}
+\DoxyCodeLine{00359 }
+\DoxyCodeLine{00360 \textcolor{comment}{/* USER CODE END 1 */}}
+
+\end{DoxyCode}

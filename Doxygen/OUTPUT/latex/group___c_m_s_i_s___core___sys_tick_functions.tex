@@ -1,0 +1,1923 @@
+\doxysection{Sys\+Tick Functions}
+\label{group___c_m_s_i_s___core___sys_tick_functions}\index{SysTick Functions@{SysTick Functions}}
+
+
+Functions that configure the System.  
+
+
+\doxysubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ITM Functions}
+\begin{DoxyCompactList}\small\item\em Functions that access the ITM debug interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:28
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:28\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:23
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:23\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:15
+\item 
+uint32\+\_\+t \textbf{ T}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:3
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:15\\
+\>uint32\_t \textbf{ T}:1\\
+\>uint32\_t \textbf{ \_reserved1}:3\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ n\+PRIV}\+:1
+\item 
+uint32\+\_\+t \textbf{ SPSEL}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:30
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ nPRIV}:1\\
+\>uint32\_t \textbf{ SPSEL}:1\\
+\>uint32\_t \textbf{ \_reserved1}:30\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ IPR} [124U]
+\item 
+uint32\+\_\+t \textbf{ RESERVED0}
+\item 
+uint32\+\_\+t \textbf{ RESERVED1}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ SHPR} [2U]
+\item 
+uint32\+\_\+t \textbf{ RESERVED0} [6U]
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ PSCR}
+\item 
+\+\_\+\+\_\+\+OM uint32\+\_\+t \textbf{ LAR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ LSR}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ TYPE}
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:28
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:28\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:23
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:23\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:15
+\item 
+uint32\+\_\+t \textbf{ T}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:3
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:15\\
+\>uint32\_t \textbf{ T}:1\\
+\>uint32\_t \textbf{ \_reserved1}:3\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:1
+\item 
+uint32\+\_\+t \textbf{ SPSEL}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:30
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:1\\
+\>uint32\_t \textbf{ SPSEL}:1\\
+\>uint32\_t \textbf{ \_reserved1}:30\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ RESERVED1} [31U]
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ IP} [8U]
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ SHP} [2U]
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:28
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:28\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:23
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:23\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:15
+\item 
+uint32\+\_\+t \textbf{ T}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:3
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:15\\
+\>uint32\_t \textbf{ T}:1\\
+\>uint32\_t \textbf{ \_reserved1}:3\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ n\+PRIV}\+:1
+\item 
+uint32\+\_\+t \textbf{ SPSEL}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:30
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ nPRIV}:1\\
+\>uint32\_t \textbf{ SPSEL}:1\\
+\>uint32\_t \textbf{ \_reserved1}:30\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:28
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:28\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:23
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:23\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:15
+\item 
+uint32\+\_\+t \textbf{ T}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:3
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:15\\
+\>uint32\_t \textbf{ T}:1\\
+\>uint32\_t \textbf{ \_reserved1}:3\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:1
+\item 
+uint32\+\_\+t \textbf{ SPSEL}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:30
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:1\\
+\>uint32\_t \textbf{ SPSEL}:1\\
+\>uint32\_t \textbf{ \_reserved1}:30\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:28
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:28\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:23
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:23\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:15
+\item 
+uint32\+\_\+t \textbf{ T}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:3
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:15\\
+\>uint32\_t \textbf{ T}:1\\
+\>uint32\_t \textbf{ \_reserved1}:3\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ n\+PRIV}\+:1
+\item 
+uint32\+\_\+t \textbf{ SPSEL}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:30
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ nPRIV}:1\\
+\>uint32\_t \textbf{ SPSEL}:1\\
+\>uint32\_t \textbf{ \_reserved1}:30\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ITFTTD0}
+\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ ITATBCTR2}
+\item 
+\+\_\+\+\_\+\+IM uint32\+\_\+t \textbf{ ITFTTD1}
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:28
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:28\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:23
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:23\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ ISR}\+:9
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:15
+\item 
+uint32\+\_\+t \textbf{ T}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:3
+\item 
+uint32\+\_\+t \textbf{ V}\+:1
+\item 
+uint32\+\_\+t \textbf{ C}\+:1
+\item 
+uint32\+\_\+t \textbf{ Z}\+:1
+\item 
+uint32\+\_\+t \textbf{ N}\+:1
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ ISR}:9\\
+\>uint32\_t \textbf{ \_reserved0}:15\\
+\>uint32\_t \textbf{ T}:1\\
+\>uint32\_t \textbf{ \_reserved1}:3\\
+\>uint32\_t \textbf{ V}:1\\
+\>uint32\_t \textbf{ C}:1\\
+\>uint32\_t \textbf{ Z}:1\\
+\>uint32\_t \textbf{ N}:1\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved0}\+:1
+\item 
+uint32\+\_\+t \textbf{ SPSEL}\+:1
+\item 
+uint32\+\_\+t \textbf{ \+\_\+reserved1}\+:30
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>uint32\_t \textbf{ \_reserved0}:1\\
+\>uint32\_t \textbf{ SPSEL}:1\\
+\>uint32\_t \textbf{ \_reserved1}:30\\
+\} \textbf{ b}\\
+
+\end{tabbing}\item 
+\+\_\+\+\_\+\+IOM uint32\+\_\+t \textbf{ SFCR}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions that configure the System. 
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [1/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0..27 Reserved 
+
+Definition at line \textbf{ 237} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [2/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..31 Reserved 
+
+Definition at line \textbf{ 268} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [3/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..23 Reserved 
+
+Definition at line \textbf{ 286} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [4/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0..27 Reserved 
+
+Definition at line \textbf{ 203} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [5/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..31 Reserved 
+
+Definition at line \textbf{ 234} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [6/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..23 Reserved 
+
+Definition at line \textbf{ 252} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [7/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0 Reserved 
+
+Definition at line \textbf{ 290} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [8/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0 Reserved
+
+bit\+: 3..31 Reserved 
+
+Definition at line \textbf{ 290} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [9/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0..27 Reserved 
+
+Definition at line \textbf{ 214} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [10/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..31 Reserved 
+
+Definition at line \textbf{ 245} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [11/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..23 Reserved 
+
+Definition at line \textbf{ 263} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [12/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0..27 Reserved 
+
+Definition at line \textbf{ 203} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [13/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..31 Reserved 
+
+Definition at line \textbf{ 234} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [14/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..23 Reserved 
+
+Definition at line \textbf{ 252} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [15/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0 Reserved 
+
+Definition at line \textbf{ 290} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [16/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0..27 Reserved 
+
+Definition at line \textbf{ 237} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [17/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..31 Reserved 
+
+Definition at line \textbf{ 268} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [18/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..23 Reserved 
+
+Definition at line \textbf{ 286} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [19/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0..27 Reserved 
+
+Definition at line \textbf{ 209} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [20/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..31 Reserved 
+
+Definition at line \textbf{ 240} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [21/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 9..23 Reserved 
+
+Definition at line \textbf{ 258} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac8a6a13838a897c8d0b8bc991bbaf7c1}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved0@{\_reserved0}}
+\index{\_reserved0@{\_reserved0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved0\hspace{0.1cm}{\footnotesize\ttfamily [22/22]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved0}
+
+bit\+: 0 Reserved 
+
+Definition at line \textbf{ 296} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 25..27 Reserved 
+
+Definition at line \textbf{ 288} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 2..31 Reserved 
+
+Definition at line \textbf{ 326} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 25..27 Reserved 
+
+Definition at line \textbf{ 254} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 2..31 Reserved 
+
+Definition at line \textbf{ 292} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 25..27 Reserved 
+
+Definition at line \textbf{ 265} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 2..31 Reserved 
+
+Definition at line \textbf{ 303} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 25..27 Reserved 
+
+Definition at line \textbf{ 254} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 2..31 Reserved 
+
+Definition at line \textbf{ 292} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 25..27 Reserved 
+
+Definition at line \textbf{ 288} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 2..31 Reserved 
+
+Definition at line \textbf{ 326} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 25..27 Reserved 
+
+Definition at line \textbf{ 260} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga959a73d8faee56599b7e792a7c5a2d16}} 
+\index{SysTick Functions@{SysTick Functions}!\_reserved1@{\_reserved1}}
+\index{\_reserved1@{\_reserved1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\_reserved1\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t \+\_\+reserved1}
+
+bit\+: 2..31 Reserved 
+
+Definition at line \textbf{ 298} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga32a2dd868cf2cbfcf201dc8274e50e80}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [1/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaaf75ff9f957783d0111846b25efe2977}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [2/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga6dc5f5da83b980196155ebd0e8260b73}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [3/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabebf7b37aed5cff100d395293cf8a15e}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [4/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaa7e9925cf616978baefb876257515b43}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [5/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaa2df12cbeb9a2ee4c4b90e38ecce05c6}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [6/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaa0d0d6588be64eb47b6d8c56d2b77311}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [7/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaeba196dfa61adb4b5ac2e1452ab39818}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [8/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga63f6167038215aff0bb25f1821289dac}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [9/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaba64684505ba169c103761b5beb8af09}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [10/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga51dbe612a53e3d5580378d850953d823}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [11/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gae1adeae3ea4c983d26c49daaddda7121}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [12/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5fa099d4d331b74d925a3088f89302e6}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [13/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5c0d7333c4f438d501143e909697a103}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [14/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaf40df18a94e09bab658f42f8a2aa6a63}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [15/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga15f4b71da60b80ebf365694c08f85bfb}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [16/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaf0fc10994a03d2ec1b5cc5ad2fd6d1dd}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [17/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac2841ce696381df6f887af760133a86b}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [18/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga0bd5ce509e238f569764686f70f91927}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [19/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad9d971d9d0ea13b665fe8516bef6a5d4}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [20/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga4867425ccb5663193d5c29f77b55f143}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [21/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga0529a1da6aec817ce9a898b12dfa20ec}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [22/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga64a41335a91d0bcf1dfadd563cf7da73}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [23/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad8d97a9f60f9d3886c52febac929b4d3}} 
+\index{SysTick Functions@{SysTick Functions}!b@{b}}
+\index{b@{b}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{\hspace{0.1cm}{\footnotesize\ttfamily [24/24]}}
+{\footnotesize\ttfamily struct  \{ ... \}  b}
+
+Structure used for bit access \mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 239} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 290} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 205} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 256} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 216} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 267} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 205} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 256} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 239} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 290} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 211} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7a1caf92f32fe9ebd8d1fe89b06c7776}} 
+\index{SysTick Functions@{SysTick Functions}!C@{C}}
+\index{C@{C}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{C\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t C}
+
+bit\+: 29 Carry condition code flag 
+
+Definition at line \textbf{ 262} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga1787506107747d2dedae05295d3532da}} 
+\index{SysTick Functions@{SysTick Functions}!IP@{IP}}
+\index{IP@{IP}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{IP}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IOM uint8\+\_\+t IP}
+
+Offset\+: 0x300 (R/W) Interrupt Priority Register
+
+Offset\+: 0x300 (R/W) Interrupt Priority Register (8Bit wide) 
+
+Definition at line \textbf{ 325} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5a3763fa8e079c90b6a8e09c0587eef4}} 
+\index{SysTick Functions@{SysTick Functions}!IPR@{IPR}}
+\index{IPR@{IPR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{IPR}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IOM uint32\+\_\+t IPR[124U]}
+
+Offset\+: 0x300 (R/W) Interrupt Priority Register 
+
+Definition at line \textbf{ 365} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 267} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 285} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 233} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 251} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 244} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 262} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 233} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 251} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 267} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 285} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 239} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gad502ba7dbb2aab5f87c782b28f02622d}} 
+\index{SysTick Functions@{SysTick Functions}!ISR@{ISR}}
+\index{ISR@{ISR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ISR\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t ISR}
+
+bit\+: 0.. 8 Exception number 
+
+Definition at line \textbf{ 257} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga49859dd8fc90723f440ee4e750a3d752}} 
+\index{SysTick Functions@{SysTick Functions}!ITATBCTR2@{ITATBCTR2}}
+\index{ITATBCTR2@{ITATBCTR2}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ITATBCTR2}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IOM uint32\+\_\+t ITATBCTR2}
+
+Offset\+: 0x\+EF0 (R/W) Integration Test ATB Control Register 2 
+
+Definition at line \textbf{ 740} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga986b12d0c4f33d326504fe705228bd7b}} 
+\index{SysTick Functions@{SysTick Functions}!ITFTTD0@{ITFTTD0}}
+\index{ITFTTD0@{ITFTTD0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ITFTTD0}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IM uint32\+\_\+t ITFTTD0}
+
+Offset\+: 0x\+EEC (R/ ) Integration Test FIFO Test Data 0 Register 
+
+Definition at line \textbf{ 739} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga4ab517b49e30734dced6bed9befb1f4a}} 
+\index{SysTick Functions@{SysTick Functions}!ITFTTD1@{ITFTTD1}}
+\index{ITFTTD1@{ITFTTD1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{ITFTTD1}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IM uint32\+\_\+t ITFTTD1}
+
+Offset\+: 0x\+EFC (R/ ) Integration Test FIFO Test Data 1 Register 
+
+Definition at line \textbf{ 743} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacc9e51f871c357a9094105435b150d13}} 
+\index{SysTick Functions@{SysTick Functions}!LAR@{LAR}}
+\index{LAR@{LAR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{LAR}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+OM uint32\+\_\+t LAR}
+
+Offset\+: 0x\+FB0 ( /W) Software Lock Access Register 
+
+Definition at line \textbf{ 738} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga7219432d03f6cd1d220f4fe10aef4880}} 
+\index{SysTick Functions@{SysTick Functions}!LSR@{LSR}}
+\index{LSR@{LSR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{LSR}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IM uint32\+\_\+t LSR}
+
+Offset\+: 0x\+FB4 (R/ ) Software Lock Status Register 
+
+Definition at line \textbf{ 739} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 241} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 292} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 207} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 258} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 218} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 269} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 207} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 258} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 241} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 292} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 213} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gabae0610bc2a97bbf7f689e953e0b451f}} 
+\index{SysTick Functions@{SysTick Functions}!N@{N}}
+\index{N@{N}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{N\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t N}
+
+bit\+: 31 Negative condition code flag 
+
+Definition at line \textbf{ 264} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga2a6e513e8a6bf4e58db169e312172332}} 
+\index{SysTick Functions@{SysTick Functions}!nPRIV@{nPRIV}}
+\index{nPRIV@{nPRIV}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{nPRIV\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily uint32\+\_\+t n\+PRIV}
+
+bit\+: 0 Execution privilege in Thread mode 
+
+Definition at line \textbf{ 324} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga2a6e513e8a6bf4e58db169e312172332}} 
+\index{SysTick Functions@{SysTick Functions}!nPRIV@{nPRIV}}
+\index{nPRIV@{nPRIV}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{nPRIV\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily uint32\+\_\+t n\+PRIV}
+
+bit\+: 0 Execution privilege in Thread mode 
+
+Definition at line \textbf{ 301} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga2a6e513e8a6bf4e58db169e312172332}} 
+\index{SysTick Functions@{SysTick Functions}!nPRIV@{nPRIV}}
+\index{nPRIV@{nPRIV}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{nPRIV\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily uint32\+\_\+t n\+PRIV}
+
+bit\+: 0 Execution privilege in Thread mode 
+
+Definition at line \textbf{ 324} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga3fbc5c84a2a24bd6195e970ff8898024}} 
+\index{SysTick Functions@{SysTick Functions}!PSCR@{PSCR}}
+\index{PSCR@{PSCR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{PSCR}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IOM uint32\+\_\+t PSCR}
+
+Offset\+: 0x308 (R/W) Periodic Synchronization Control Register 
+
+Definition at line \textbf{ 736} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaf86c61a5d38a4fc9cef942a12744486b}} 
+\index{SysTick Functions@{SysTick Functions}!RESERVED0@{RESERVED0}}
+\index{RESERVED0@{RESERVED0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{RESERVED0\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily uint32\+\_\+t RESERVED0}
+
+
+
+Definition at line \textbf{ 388} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga67a4fc1b84d0b73e6db59fadf990f3a4}} 
+\index{SysTick Functions@{SysTick Functions}!RESERVED0@{RESERVED0}}
+\index{RESERVED0@{RESERVED0}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{RESERVED0\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily uint32\+\_\+t RESERVED0}
+
+
+
+Definition at line \textbf{ 613} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gac4ac04e673b5b8320d53f7b0947db902}} 
+\index{SysTick Functions@{SysTick Functions}!RESERVED1@{RESERVED1}}
+\index{RESERVED1@{RESERVED1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{RESERVED1\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily uint32\+\_\+t RESERVED1}
+
+
+
+Definition at line \textbf{ 393} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaf9ad019f87b73c544bb2acf1a5623737}} 
+\index{SysTick Functions@{SysTick Functions}!RESERVED1@{RESERVED1}}
+\index{RESERVED1@{RESERVED1}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{RESERVED1\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily uint32\+\_\+t RESERVED1}
+
+
+
+Definition at line \textbf{ 319} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaaddfff3b57de6faf60bfcc938c7229c9}} 
+\index{SysTick Functions@{SysTick Functions}!SFCR@{SFCR}}
+\index{SFCR@{SFCR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SFCR}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IOM uint32\+\_\+t SFCR}
+
+Offset\+: 0x290 (R/W) Security Features Control Register 
+
+Definition at line \textbf{ 359} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaa043193516e3fc0abbf58ce7cf8cfb4e}} 
+\index{SysTick Functions@{SysTick Functions}!SHP@{SHP}}
+\index{SHP@{SHP}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SHP}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IOM uint8\+\_\+t SHP}
+
+Offset\+: 0x01C (R/W) System Handlers Priority Registers. [0] is RESERVED
+
+Offset\+: 0x018 (R/W) System Handlers Priority Registers (4-\/7, 8-\/11, 12-\/15) 
+
+Definition at line \textbf{ 350} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga67fd6058e3196a723d64df2d22ae6daa}} 
+\index{SysTick Functions@{SysTick Functions}!SHPR@{SHPR}}
+\index{SHPR@{SHPR}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SHPR}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IOM uint32\+\_\+t SHPR[2U]}
+
+Offset\+: 0x01C (R/W) System Handlers Priority Registers. [0] is RESERVED 
+
+Definition at line \textbf{ 394} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gae185aac93686ffc78e998a9daf41415b}} 
+\index{SysTick Functions@{SysTick Functions}!SPSEL@{SPSEL}}
+\index{SPSEL@{SPSEL}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SPSEL\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t SPSEL}
+
+bit\+: 1 Stack-\/pointer select 
+
+Definition at line \textbf{ 325} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gae185aac93686ffc78e998a9daf41415b}} 
+\index{SysTick Functions@{SysTick Functions}!SPSEL@{SPSEL}}
+\index{SPSEL@{SPSEL}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SPSEL\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t SPSEL}
+
+bit\+: 1 Stack to be used 
+
+Definition at line \textbf{ 291} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gae185aac93686ffc78e998a9daf41415b}} 
+\index{SysTick Functions@{SysTick Functions}!SPSEL@{SPSEL}}
+\index{SPSEL@{SPSEL}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SPSEL\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t SPSEL}
+
+bit\+: 1 Stack to be used 
+
+Definition at line \textbf{ 302} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gae185aac93686ffc78e998a9daf41415b}} 
+\index{SysTick Functions@{SysTick Functions}!SPSEL@{SPSEL}}
+\index{SPSEL@{SPSEL}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SPSEL\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t SPSEL}
+
+bit\+: 1 Stack to be used 
+
+Definition at line \textbf{ 291} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gae185aac93686ffc78e998a9daf41415b}} 
+\index{SysTick Functions@{SysTick Functions}!SPSEL@{SPSEL}}
+\index{SPSEL@{SPSEL}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SPSEL\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t SPSEL}
+
+bit\+: 1 Stack-\/pointer select 
+
+Definition at line \textbf{ 325} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gae185aac93686ffc78e998a9daf41415b}} 
+\index{SysTick Functions@{SysTick Functions}!SPSEL@{SPSEL}}
+\index{SPSEL@{SPSEL}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{SPSEL\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t SPSEL}
+
+bit\+: 1 Stack to be used 
+
+Definition at line \textbf{ 297} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga6e1cf12e53a20224f6f62c001d9be972}} 
+\index{SysTick Functions@{SysTick Functions}!T@{T}}
+\index{T@{T}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{T\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t T}
+
+bit\+: 24 Thumb bit (read 0) 
+
+Definition at line \textbf{ 287} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga6e1cf12e53a20224f6f62c001d9be972}} 
+\index{SysTick Functions@{SysTick Functions}!T@{T}}
+\index{T@{T}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{T\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t T}
+
+bit\+: 24 Thumb bit (read 0) 
+
+Definition at line \textbf{ 253} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga6e1cf12e53a20224f6f62c001d9be972}} 
+\index{SysTick Functions@{SysTick Functions}!T@{T}}
+\index{T@{T}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{T\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t T}
+
+bit\+: 24 Thumb bit (read 0) 
+
+Definition at line \textbf{ 264} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga6e1cf12e53a20224f6f62c001d9be972}} 
+\index{SysTick Functions@{SysTick Functions}!T@{T}}
+\index{T@{T}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{T\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t T}
+
+bit\+: 24 Thumb bit (read 0) 
+
+Definition at line \textbf{ 253} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga6e1cf12e53a20224f6f62c001d9be972}} 
+\index{SysTick Functions@{SysTick Functions}!T@{T}}
+\index{T@{T}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{T\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t T}
+
+bit\+: 24 Thumb bit (read 0) 
+
+Definition at line \textbf{ 287} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga6e1cf12e53a20224f6f62c001d9be972}} 
+\index{SysTick Functions@{SysTick Functions}!T@{T}}
+\index{T@{T}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{T\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily uint32\+\_\+t T}
+
+bit\+: 24 Thumb bit (read 0) 
+
+Definition at line \textbf{ 259} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gaee6e8f4171b9024d763ba87f3ce92e73}} 
+\index{SysTick Functions@{SysTick Functions}!TYPE@{TYPE}}
+\index{TYPE@{TYPE}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{TYPE}
+{\footnotesize\ttfamily \+\_\+\+\_\+\+IM uint32\+\_\+t TYPE}
+
+Offset\+: 0x\+FC8 (R/ ) Device Identifier Register 
+
+Definition at line \textbf{ 741} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 238} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 289} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 204} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 255} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 215} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 266} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 204} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 255} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 238} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 289} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 210} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_gacd4a2b64faee91e4a9eef300667fa222}} 
+\index{SysTick Functions@{SysTick Functions}!V@{V}}
+\index{V@{V}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{V\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t V}
+
+bit\+: 28 Overflow condition code flag 
+
+Definition at line \textbf{ 261} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 240} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 291} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 206} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 257} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 217} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 268} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 206} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 257} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 240} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 291} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 212} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s___core___sys_tick_functions_ga5ae954cbd9986cd64625d7fa00943c8e}} 
+\index{SysTick Functions@{SysTick Functions}!Z@{Z}}
+\index{Z@{Z}!SysTick Functions@{SysTick Functions}}
+\doxysubsubsection{Z\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily uint32\+\_\+t Z}
+
+bit\+: 30 Zero condition code flag 
+
+Definition at line \textbf{ 263} of file \textbf{ core\+\_\+sc000.\+h}.
+

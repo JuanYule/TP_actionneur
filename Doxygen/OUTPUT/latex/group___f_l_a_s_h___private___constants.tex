@@ -1,0 +1,95 @@
+\doxysection{FLASH Private Constants}
+\label{group___f_l_a_s_h___private___constants}\index{FLASH Private Constants@{FLASH Private Constants}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ FLASH\+\_\+\+SIZE\+\_\+\+DATA\+\_\+\+REGISTER}~\textbf{ FLASHSIZE\+\_\+\+BASE}
+\item 
+\#define \textbf{ FLASH\+\_\+\+SIZE}
+\item 
+\#define \textbf{ FLASH\+\_\+\+BANK\+\_\+\+SIZE}~(FLASH\+\_\+\+SIZE)
+\item 
+\#define \textbf{ FLASH\+\_\+\+PAGE\+\_\+\+NB}
+\item 
+\#define \textbf{ FLASH\+\_\+\+PAGE\+\_\+\+SIZE}~0x800U  /$\ast$ 2 KB $\ast$/
+\item 
+\#define \textbf{ FLASH\+\_\+\+TIMEOUT\+\_\+\+VALUE}~1000U   /$\ast$ 1 s  $\ast$/
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___f_l_a_s_h___private___constants_gaa9034a4a03acf9350fa141303b5ab86a}} 
+\index{FLASH Private Constants@{FLASH Private Constants}!FLASH\_BANK\_SIZE@{FLASH\_BANK\_SIZE}}
+\index{FLASH\_BANK\_SIZE@{FLASH\_BANK\_SIZE}!FLASH Private Constants@{FLASH Private Constants}}
+\doxysubsubsection{FLASH\_BANK\_SIZE}
+{\footnotesize\ttfamily \#define FLASH\+\_\+\+BANK\+\_\+\+SIZE~(FLASH\+\_\+\+SIZE)}
+
+
+
+Definition at line \textbf{ 881} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___constants_ga3d98541dcb89735b8d2fd559b75d1ebf}} 
+\index{FLASH Private Constants@{FLASH Private Constants}!FLASH\_PAGE\_NB@{FLASH\_PAGE\_NB}}
+\index{FLASH\_PAGE\_NB@{FLASH\_PAGE\_NB}!FLASH Private Constants@{FLASH Private Constants}}
+\doxysubsubsection{FLASH\_PAGE\_NB}
+{\footnotesize\ttfamily \#define FLASH\+\_\+\+PAGE\+\_\+\+NB}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                        ((FLASH\_SIZE == 0x00080000U) ? 256U : \(\backslash\)}
+\DoxyCodeLine{                                        ((FLASH\_SIZE == 0x00040000U) ? 128U : 64U))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 882} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___constants_ga4cc14e2c99ae7f8e5a8e371d03c8532c}} 
+\index{FLASH Private Constants@{FLASH Private Constants}!FLASH\_PAGE\_SIZE@{FLASH\_PAGE\_SIZE}}
+\index{FLASH\_PAGE\_SIZE@{FLASH\_PAGE\_SIZE}!FLASH Private Constants@{FLASH Private Constants}}
+\doxysubsubsection{FLASH\_PAGE\_SIZE}
+{\footnotesize\ttfamily \#define FLASH\+\_\+\+PAGE\+\_\+\+SIZE~0x800U  /$\ast$ 2 KB $\ast$/}
+
+
+
+Definition at line \textbf{ 886} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___constants_gae69620948dea1b76e0ab7843ab719db7}} 
+\index{FLASH Private Constants@{FLASH Private Constants}!FLASH\_SIZE@{FLASH\_SIZE}}
+\index{FLASH\_SIZE@{FLASH\_SIZE}!FLASH Private Constants@{FLASH Private Constants}}
+\doxysubsubsection{FLASH\_SIZE}
+{\footnotesize\ttfamily \#define FLASH\+\_\+\+SIZE}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                        ((((*((uint16\_t *)FLASH\_SIZE\_DATA\_REGISTER)) == 0xFFFFU)) ? (0x80UL << 10U) : \(\backslash\)}
+\DoxyCodeLine{                                        (((*((uint32\_t *)FLASH\_SIZE\_DATA\_REGISTER)) \& 0xFFFFUL) << 10U))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 879} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___constants_ga2329f89a17061e62bf5d160cc0962e5c}} 
+\index{FLASH Private Constants@{FLASH Private Constants}!FLASH\_SIZE\_DATA\_REGISTER@{FLASH\_SIZE\_DATA\_REGISTER}}
+\index{FLASH\_SIZE\_DATA\_REGISTER@{FLASH\_SIZE\_DATA\_REGISTER}!FLASH Private Constants@{FLASH Private Constants}}
+\doxysubsubsection{FLASH\_SIZE\_DATA\_REGISTER}
+{\footnotesize\ttfamily \#define FLASH\+\_\+\+SIZE\+\_\+\+DATA\+\_\+\+REGISTER~\textbf{ FLASHSIZE\+\_\+\+BASE}}
+
+
+
+Definition at line \textbf{ 870} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___private___constants_ga76e8ea58ef37913dcdb61efae2d6ab8f}} 
+\index{FLASH Private Constants@{FLASH Private Constants}!FLASH\_TIMEOUT\_VALUE@{FLASH\_TIMEOUT\_VALUE}}
+\index{FLASH\_TIMEOUT\_VALUE@{FLASH\_TIMEOUT\_VALUE}!FLASH Private Constants@{FLASH Private Constants}}
+\doxysubsubsection{FLASH\_TIMEOUT\_VALUE}
+{\footnotesize\ttfamily \#define FLASH\+\_\+\+TIMEOUT\+\_\+\+VALUE~1000U   /$\ast$ 1 s  $\ast$/}
+
+
+
+Definition at line \textbf{ 888} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+

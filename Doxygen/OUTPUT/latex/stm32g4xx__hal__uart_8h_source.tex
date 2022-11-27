@@ -1,0 +1,654 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+uart.\+h}
+\label{stm32g4xx__hal__uart_8h_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_uart.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_uart.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00019 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020 \textcolor{preprocessor}{\#ifndef STM32G4xx\_HAL\_UART\_H}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#define STM32G4xx\_HAL\_UART\_H}}
+\DoxyCodeLine{00022 }
+\DoxyCodeLine{00023 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00024 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal\_def.h"{}}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00038 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00046 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00047 \{}
+\DoxyCodeLine{00048   uint32\_t BaudRate;                }
+\DoxyCodeLine{00066   uint32\_t WordLength;              }
+\DoxyCodeLine{00069   uint32\_t StopBits;                }
+\DoxyCodeLine{00072   uint32\_t Parity;                  }
+\DoxyCodeLine{00079   uint32\_t Mode;                    }
+\DoxyCodeLine{00082   uint32\_t HwFlowCtl;               }
+\DoxyCodeLine{00086   uint32\_t OverSampling;            }
+\DoxyCodeLine{00090   uint32\_t OneBitSampling;          }
+\DoxyCodeLine{00094   uint32\_t ClockPrescaler;          }
+\DoxyCodeLine{00097 \} UART\_InitTypeDef;}
+\DoxyCodeLine{00098 }
+\DoxyCodeLine{00102 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00103 \{}
+\DoxyCodeLine{00104   uint32\_t AdvFeatureInit;        }
+\DoxyCodeLine{00109   uint32\_t TxPinLevelInvert;      }
+\DoxyCodeLine{00112   uint32\_t RxPinLevelInvert;      }
+\DoxyCodeLine{00115   uint32\_t DataInvert;            }
+\DoxyCodeLine{00119   uint32\_t Swap;                  }
+\DoxyCodeLine{00122   uint32\_t OverrunDisable;        }
+\DoxyCodeLine{00125   uint32\_t DMADisableonRxError;   }
+\DoxyCodeLine{00128   uint32\_t AutoBaudRateEnable;    }
+\DoxyCodeLine{00131   uint32\_t AutoBaudRateMode;      }
+\DoxyCodeLine{00135   uint32\_t MSBFirst;              }
+\DoxyCodeLine{00137 \} UART\_AdvFeatureInitTypeDef;}
+\DoxyCodeLine{00138 }
+\DoxyCodeLine{00179 \textcolor{keyword}{typedef} uint32\_t HAL\_UART\_StateTypeDef;}
+\DoxyCodeLine{00180 }
+\DoxyCodeLine{00184 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{00185 \{}
+\DoxyCodeLine{00186   UART\_CLOCKSOURCE\_PCLK1      = 0x00U,    }
+\DoxyCodeLine{00187   UART\_CLOCKSOURCE\_PCLK2      = 0x01U,    }
+\DoxyCodeLine{00188   UART\_CLOCKSOURCE\_HSI        = 0x02U,    }
+\DoxyCodeLine{00189   UART\_CLOCKSOURCE\_SYSCLK     = 0x04U,    }
+\DoxyCodeLine{00190   UART\_CLOCKSOURCE\_LSE        = 0x08U,    }
+\DoxyCodeLine{00191   UART\_CLOCKSOURCE\_UNDEFINED  = 0x10U     }
+\DoxyCodeLine{00192 \} UART\_ClockSourceTypeDef;}
+\DoxyCodeLine{00193 }
+\DoxyCodeLine{00203 \textcolor{keyword}{typedef} uint32\_t HAL\_UART\_RxTypeTypeDef;}
+\DoxyCodeLine{00204 }
+\DoxyCodeLine{00208 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\_\_UART\_HandleTypeDef}
+\DoxyCodeLine{00209 \{}
+\DoxyCodeLine{00210   USART\_TypeDef            *Instance;                }
+\DoxyCodeLine{00212   UART\_InitTypeDef         Init;                     }
+\DoxyCodeLine{00214   UART\_AdvFeatureInitTypeDef AdvancedInit;           }
+\DoxyCodeLine{00216   \textcolor{keyword}{const} uint8\_t            *pTxBuffPtr;              }
+\DoxyCodeLine{00218   uint16\_t                 TxXferSize;               }
+\DoxyCodeLine{00220   \_\_IO uint16\_t            TxXferCount;              }
+\DoxyCodeLine{00222   uint8\_t                  *pRxBuffPtr;              }
+\DoxyCodeLine{00224   uint16\_t                 RxXferSize;               }
+\DoxyCodeLine{00226   \_\_IO uint16\_t            RxXferCount;              }
+\DoxyCodeLine{00228   uint16\_t                 Mask;                     }
+\DoxyCodeLine{00230   uint32\_t                 FifoMode;                 }
+\DoxyCodeLine{00233   uint16\_t                 NbRxDataToProcess;        }
+\DoxyCodeLine{00235   uint16\_t                 NbTxDataToProcess;        }
+\DoxyCodeLine{00237   \_\_IO HAL\_UART\_RxTypeTypeDef ReceptionType;         }
+\DoxyCodeLine{00239   void (*RxISR)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart); }
+\DoxyCodeLine{00241   void (*TxISR)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart); }
+\DoxyCodeLine{00243   DMA\_HandleTypeDef        *hdmatx;                  }
+\DoxyCodeLine{00245   DMA\_HandleTypeDef        *hdmarx;                  }
+\DoxyCodeLine{00247   HAL\_LockTypeDef           Lock;                    }
+\DoxyCodeLine{00249   \_\_IO HAL\_UART\_StateTypeDef    gState;              }
+\DoxyCodeLine{00253   \_\_IO HAL\_UART\_StateTypeDef    RxState;             }
+\DoxyCodeLine{00256   \_\_IO uint32\_t                 ErrorCode;           }
+\DoxyCodeLine{00258 \textcolor{preprocessor}{\#if (USE\_HAL\_UART\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{00259   void (* TxHalfCpltCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);        }
+\DoxyCodeLine{00260   void (* TxCpltCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);            }
+\DoxyCodeLine{00261   void (* RxHalfCpltCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);        }
+\DoxyCodeLine{00262   void (* RxCpltCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);            }
+\DoxyCodeLine{00263   void (* ErrorCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);             }
+\DoxyCodeLine{00264   void (* AbortCpltCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);         }
+\DoxyCodeLine{00265   void (* AbortTransmitCpltCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart); }
+\DoxyCodeLine{00266   void (* AbortReceiveCpltCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);  }
+\DoxyCodeLine{00267   void (* WakeupCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);            }
+\DoxyCodeLine{00268   void (* RxFifoFullCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);        }
+\DoxyCodeLine{00269   void (* TxFifoEmptyCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);       }
+\DoxyCodeLine{00270   void (* RxEventCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart, uint16\_t Pos); }
+\DoxyCodeLine{00272   void (* MspInitCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);           }
+\DoxyCodeLine{00273   void (* MspDeInitCallback)(\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart);         }
+\DoxyCodeLine{00274 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{/* USE\_HAL\_UART\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00275 }
+\DoxyCodeLine{00276 \} UART\_HandleTypeDef;}
+\DoxyCodeLine{00277 }
+\DoxyCodeLine{00278 \textcolor{preprocessor}{\#if (USE\_HAL\_UART\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{00282 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{00283 \{}
+\DoxyCodeLine{00284   HAL\_UART\_TX\_HALFCOMPLETE\_CB\_ID         = 0x00U,    }
+\DoxyCodeLine{00285   HAL\_UART\_TX\_COMPLETE\_CB\_ID             = 0x01U,    }
+\DoxyCodeLine{00286   HAL\_UART\_RX\_HALFCOMPLETE\_CB\_ID         = 0x02U,    }
+\DoxyCodeLine{00287   HAL\_UART\_RX\_COMPLETE\_CB\_ID             = 0x03U,    }
+\DoxyCodeLine{00288   HAL\_UART\_ERROR\_CB\_ID                   = 0x04U,    }
+\DoxyCodeLine{00289   HAL\_UART\_ABORT\_COMPLETE\_CB\_ID          = 0x05U,    }
+\DoxyCodeLine{00290   HAL\_UART\_ABORT\_TRANSMIT\_COMPLETE\_CB\_ID = 0x06U,    }
+\DoxyCodeLine{00291   HAL\_UART\_ABORT\_RECEIVE\_COMPLETE\_CB\_ID  = 0x07U,    }
+\DoxyCodeLine{00292   HAL\_UART\_WAKEUP\_CB\_ID                  = 0x08U,    }
+\DoxyCodeLine{00293   HAL\_UART\_RX\_FIFO\_FULL\_CB\_ID            = 0x09U,    }
+\DoxyCodeLine{00294   HAL\_UART\_TX\_FIFO\_EMPTY\_CB\_ID           = 0x0AU,    }
+\DoxyCodeLine{00296   HAL\_UART\_MSPINIT\_CB\_ID                 = 0x0BU,    }
+\DoxyCodeLine{00297   HAL\_UART\_MSPDEINIT\_CB\_ID               = 0x0CU     }
+\DoxyCodeLine{00299 \} HAL\_UART\_CallbackIDTypeDef;}
+\DoxyCodeLine{00300 }
+\DoxyCodeLine{00304 \textcolor{keyword}{typedef}  void (*pUART\_CallbackTypeDef)(UART\_HandleTypeDef *huart); }
+\DoxyCodeLine{00305 \textcolor{keyword}{typedef}  void (*pUART\_RxEventCallbackTypeDef)}
+\DoxyCodeLine{00306 (\textcolor{keyword}{struct }\_\_UART\_HandleTypeDef *huart, uint16\_t Pos); }
+\DoxyCodeLine{00308 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_UART\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00309 }
+\DoxyCodeLine{00314 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00322 \textcolor{preprocessor}{\#define  HAL\_UART\_STATE\_RESET         0x00000000U    }}
+\DoxyCodeLine{00324 \textcolor{preprocessor}{\#define  HAL\_UART\_STATE\_READY         0x00000020U    }}
+\DoxyCodeLine{00326 \textcolor{preprocessor}{\#define  HAL\_UART\_STATE\_BUSY          0x00000024U    }}
+\DoxyCodeLine{00328 \textcolor{preprocessor}{\#define  HAL\_UART\_STATE\_BUSY\_TX       0x00000021U    }}
+\DoxyCodeLine{00330 \textcolor{preprocessor}{\#define  HAL\_UART\_STATE\_BUSY\_RX       0x00000022U    }}
+\DoxyCodeLine{00332 \textcolor{preprocessor}{\#define  HAL\_UART\_STATE\_BUSY\_TX\_RX    0x00000023U    }}
+\DoxyCodeLine{00335 \textcolor{preprocessor}{\#define  HAL\_UART\_STATE\_TIMEOUT       0x000000A0U    }}
+\DoxyCodeLine{00337 \textcolor{preprocessor}{\#define  HAL\_UART\_STATE\_ERROR         0x000000E0U    }}
+\DoxyCodeLine{00346 \textcolor{preprocessor}{\#define  HAL\_UART\_ERROR\_NONE             (0x00000000U)    }}
+\DoxyCodeLine{00347 \textcolor{preprocessor}{\#define  HAL\_UART\_ERROR\_PE               (0x00000001U)    }}
+\DoxyCodeLine{00348 \textcolor{preprocessor}{\#define  HAL\_UART\_ERROR\_NE               (0x00000002U)    }}
+\DoxyCodeLine{00349 \textcolor{preprocessor}{\#define  HAL\_UART\_ERROR\_FE               (0x00000004U)    }}
+\DoxyCodeLine{00350 \textcolor{preprocessor}{\#define  HAL\_UART\_ERROR\_ORE              (0x00000008U)    }}
+\DoxyCodeLine{00351 \textcolor{preprocessor}{\#define  HAL\_UART\_ERROR\_DMA              (0x00000010U)    }}
+\DoxyCodeLine{00352 \textcolor{preprocessor}{\#define  HAL\_UART\_ERROR\_RTO              (0x00000020U)    }}
+\DoxyCodeLine{00354 \textcolor{preprocessor}{\#if (USE\_HAL\_UART\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{00355 \textcolor{preprocessor}{\#define  HAL\_UART\_ERROR\_INVALID\_CALLBACK (0x00000040U)    }}
+\DoxyCodeLine{00356 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_UART\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00364 \textcolor{preprocessor}{\#define UART\_STOPBITS\_0\_5                    USART\_CR2\_STOP\_0                     }}
+\DoxyCodeLine{00365 \textcolor{preprocessor}{\#define UART\_STOPBITS\_1                     0x00000000U                           }}
+\DoxyCodeLine{00366 \textcolor{preprocessor}{\#define UART\_STOPBITS\_1\_5                   (USART\_CR2\_STOP\_0 | USART\_CR2\_STOP\_1) }}
+\DoxyCodeLine{00367 \textcolor{preprocessor}{\#define UART\_STOPBITS\_2                      USART\_CR2\_STOP\_1                     }}
+\DoxyCodeLine{00375 \textcolor{preprocessor}{\#define UART\_PARITY\_NONE                    0x00000000U                        }}
+\DoxyCodeLine{00376 \textcolor{preprocessor}{\#define UART\_PARITY\_EVEN                    USART\_CR1\_PCE                      }}
+\DoxyCodeLine{00377 \textcolor{preprocessor}{\#define UART\_PARITY\_ODD                     (USART\_CR1\_PCE | USART\_CR1\_PS)     }}
+\DoxyCodeLine{00385 \textcolor{preprocessor}{\#define UART\_HWCONTROL\_NONE                  0x00000000U                          }}
+\DoxyCodeLine{00386 \textcolor{preprocessor}{\#define UART\_HWCONTROL\_RTS                   USART\_CR3\_RTSE                       }}
+\DoxyCodeLine{00387 \textcolor{preprocessor}{\#define UART\_HWCONTROL\_CTS                   USART\_CR3\_CTSE                       }}
+\DoxyCodeLine{00388 \textcolor{preprocessor}{\#define UART\_HWCONTROL\_RTS\_CTS               (USART\_CR3\_RTSE | USART\_CR3\_CTSE)    }}
+\DoxyCodeLine{00396 \textcolor{preprocessor}{\#define UART\_MODE\_RX                        USART\_CR1\_RE                    }}
+\DoxyCodeLine{00397 \textcolor{preprocessor}{\#define UART\_MODE\_TX                        USART\_CR1\_TE                    }}
+\DoxyCodeLine{00398 \textcolor{preprocessor}{\#define UART\_MODE\_TX\_RX                     (USART\_CR1\_TE |USART\_CR1\_RE)    }}
+\DoxyCodeLine{00406 \textcolor{preprocessor}{\#define UART\_STATE\_DISABLE                  0x00000000U         }}
+\DoxyCodeLine{00407 \textcolor{preprocessor}{\#define UART\_STATE\_ENABLE                   USART\_CR1\_UE        }}
+\DoxyCodeLine{00415 \textcolor{preprocessor}{\#define UART\_OVERSAMPLING\_16                0x00000000U         }}
+\DoxyCodeLine{00416 \textcolor{preprocessor}{\#define UART\_OVERSAMPLING\_8                 USART\_CR1\_OVER8     }}
+\DoxyCodeLine{00424 \textcolor{preprocessor}{\#define UART\_ONE\_BIT\_SAMPLE\_DISABLE         0x00000000U         }}
+\DoxyCodeLine{00425 \textcolor{preprocessor}{\#define UART\_ONE\_BIT\_SAMPLE\_ENABLE          USART\_CR3\_ONEBIT    }}
+\DoxyCodeLine{00433 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV1    0x00000000U  }}
+\DoxyCodeLine{00434 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV2    0x00000001U  }}
+\DoxyCodeLine{00435 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV4    0x00000002U  }}
+\DoxyCodeLine{00436 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV6    0x00000003U  }}
+\DoxyCodeLine{00437 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV8    0x00000004U  }}
+\DoxyCodeLine{00438 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV10   0x00000005U  }}
+\DoxyCodeLine{00439 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV12   0x00000006U  }}
+\DoxyCodeLine{00440 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV16   0x00000007U  }}
+\DoxyCodeLine{00441 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV32   0x00000008U  }}
+\DoxyCodeLine{00442 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV64   0x00000009U  }}
+\DoxyCodeLine{00443 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV128  0x0000000AU  }}
+\DoxyCodeLine{00444 \textcolor{preprocessor}{\#define UART\_PRESCALER\_DIV256  0x0000000BU  }}
+\DoxyCodeLine{00452 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_AUTOBAUDRATE\_ONSTARTBIT    0x00000000U           }}
+\DoxyCodeLine{00454 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_AUTOBAUDRATE\_ONFALLINGEDGE USART\_CR2\_ABRMODE\_0   }}
+\DoxyCodeLine{00456 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_AUTOBAUDRATE\_ON0X7FFRAME   USART\_CR2\_ABRMODE\_1   }}
+\DoxyCodeLine{00458 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_AUTOBAUDRATE\_ON0X55FRAME   USART\_CR2\_ABRMODE     }}
+\DoxyCodeLine{00467 \textcolor{preprocessor}{\#define UART\_RECEIVER\_TIMEOUT\_DISABLE       0x00000000U                }}
+\DoxyCodeLine{00468 \textcolor{preprocessor}{\#define UART\_RECEIVER\_TIMEOUT\_ENABLE        USART\_CR2\_RTOEN            }}
+\DoxyCodeLine{00476 \textcolor{preprocessor}{\#define UART\_LIN\_DISABLE                    0x00000000U                }}
+\DoxyCodeLine{00477 \textcolor{preprocessor}{\#define UART\_LIN\_ENABLE                     USART\_CR2\_LINEN            }}
+\DoxyCodeLine{00485 \textcolor{preprocessor}{\#define UART\_LINBREAKDETECTLENGTH\_10B       0x00000000U                }}
+\DoxyCodeLine{00486 \textcolor{preprocessor}{\#define UART\_LINBREAKDETECTLENGTH\_11B       USART\_CR2\_LBDL             }}
+\DoxyCodeLine{00494 \textcolor{preprocessor}{\#define UART\_DMA\_TX\_DISABLE                 0x00000000U                }}
+\DoxyCodeLine{00495 \textcolor{preprocessor}{\#define UART\_DMA\_TX\_ENABLE                  USART\_CR3\_DMAT             }}
+\DoxyCodeLine{00503 \textcolor{preprocessor}{\#define UART\_DMA\_RX\_DISABLE                 0x00000000U                 }}
+\DoxyCodeLine{00504 \textcolor{preprocessor}{\#define UART\_DMA\_RX\_ENABLE                  USART\_CR3\_DMAR              }}
+\DoxyCodeLine{00512 \textcolor{preprocessor}{\#define UART\_HALF\_DUPLEX\_DISABLE            0x00000000U                 }}
+\DoxyCodeLine{00513 \textcolor{preprocessor}{\#define UART\_HALF\_DUPLEX\_ENABLE             USART\_CR3\_HDSEL             }}
+\DoxyCodeLine{00521 \textcolor{preprocessor}{\#define UART\_WAKEUPMETHOD\_IDLELINE          0x00000000U                 }}
+\DoxyCodeLine{00522 \textcolor{preprocessor}{\#define UART\_WAKEUPMETHOD\_ADDRESSMARK       USART\_CR1\_WAKE              }}
+\DoxyCodeLine{00530 \textcolor{preprocessor}{\#define UART\_AUTOBAUD\_REQUEST               USART\_RQR\_ABRRQ        }}
+\DoxyCodeLine{00531 \textcolor{preprocessor}{\#define UART\_SENDBREAK\_REQUEST              USART\_RQR\_SBKRQ        }}
+\DoxyCodeLine{00532 \textcolor{preprocessor}{\#define UART\_MUTE\_MODE\_REQUEST              USART\_RQR\_MMRQ         }}
+\DoxyCodeLine{00533 \textcolor{preprocessor}{\#define UART\_RXDATA\_FLUSH\_REQUEST           USART\_RQR\_RXFRQ        }}
+\DoxyCodeLine{00534 \textcolor{preprocessor}{\#define UART\_TXDATA\_FLUSH\_REQUEST           USART\_RQR\_TXFRQ        }}
+\DoxyCodeLine{00542 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_NO\_INIT                 0x00000000U          }}
+\DoxyCodeLine{00543 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_TXINVERT\_INIT           0x00000001U          }}
+\DoxyCodeLine{00544 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_RXINVERT\_INIT           0x00000002U          }}
+\DoxyCodeLine{00545 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_DATAINVERT\_INIT         0x00000004U          }}
+\DoxyCodeLine{00546 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_SWAP\_INIT               0x00000008U          }}
+\DoxyCodeLine{00547 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_RXOVERRUNDISABLE\_INIT   0x00000010U          }}
+\DoxyCodeLine{00548 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_DMADISABLEONERROR\_INIT  0x00000020U          }}
+\DoxyCodeLine{00549 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_AUTOBAUDRATE\_INIT       0x00000040U          }}
+\DoxyCodeLine{00550 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_MSBFIRST\_INIT           0x00000080U          }}
+\DoxyCodeLine{00558 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_TXINV\_DISABLE       0x00000000U             }}
+\DoxyCodeLine{00559 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_TXINV\_ENABLE        USART\_CR2\_TXINV         }}
+\DoxyCodeLine{00567 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_RXINV\_DISABLE       0x00000000U             }}
+\DoxyCodeLine{00568 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_RXINV\_ENABLE        USART\_CR2\_RXINV         }}
+\DoxyCodeLine{00576 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_DATAINV\_DISABLE     0x00000000U             }}
+\DoxyCodeLine{00577 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_DATAINV\_ENABLE      USART\_CR2\_DATAINV       }}
+\DoxyCodeLine{00585 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_SWAP\_DISABLE        0x00000000U             }}
+\DoxyCodeLine{00586 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_SWAP\_ENABLE         USART\_CR2\_SWAP          }}
+\DoxyCodeLine{00594 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_OVERRUN\_ENABLE      0x00000000U             }}
+\DoxyCodeLine{00595 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_OVERRUN\_DISABLE     USART\_CR3\_OVRDIS        }}
+\DoxyCodeLine{00603 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_AUTOBAUDRATE\_DISABLE   0x00000000U          }}
+\DoxyCodeLine{00604 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_AUTOBAUDRATE\_ENABLE    USART\_CR2\_ABREN      }}
+\DoxyCodeLine{00612 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_DMA\_ENABLEONRXERROR    0x00000000U          }}
+\DoxyCodeLine{00613 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_DMA\_DISABLEONRXERROR   USART\_CR3\_DDRE       }}
+\DoxyCodeLine{00621 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_MSBFIRST\_DISABLE    0x00000000U             }}
+\DoxyCodeLine{00623 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_MSBFIRST\_ENABLE     USART\_CR2\_MSBFIRST      }}
+\DoxyCodeLine{00632 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_STOPMODE\_DISABLE    0x00000000U             }}
+\DoxyCodeLine{00633 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_STOPMODE\_ENABLE     USART\_CR1\_UESM          }}
+\DoxyCodeLine{00641 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_MUTEMODE\_DISABLE    0x00000000U             }}
+\DoxyCodeLine{00642 \textcolor{preprocessor}{\#define UART\_ADVFEATURE\_MUTEMODE\_ENABLE     USART\_CR1\_MME           }}
+\DoxyCodeLine{00650 \textcolor{preprocessor}{\#define UART\_CR2\_ADDRESS\_LSB\_POS             24U             }}
+\DoxyCodeLine{00658 \textcolor{preprocessor}{\#define UART\_WAKEUP\_ON\_ADDRESS              0x00000000U             }}
+\DoxyCodeLine{00659 \textcolor{preprocessor}{\#define UART\_WAKEUP\_ON\_STARTBIT             USART\_CR3\_WUS\_1         }}
+\DoxyCodeLine{00660 \textcolor{preprocessor}{\#define UART\_WAKEUP\_ON\_READDATA\_NONEMPTY    USART\_CR3\_WUS           }}
+\DoxyCodeLine{00669 \textcolor{preprocessor}{\#define UART\_DE\_POLARITY\_HIGH               0x00000000U             }}
+\DoxyCodeLine{00670 \textcolor{preprocessor}{\#define UART\_DE\_POLARITY\_LOW                USART\_CR3\_DEP           }}
+\DoxyCodeLine{00678 \textcolor{preprocessor}{\#define UART\_CR1\_DEAT\_ADDRESS\_LSB\_POS       21U      }}
+\DoxyCodeLine{00687 \textcolor{preprocessor}{\#define UART\_CR1\_DEDT\_ADDRESS\_LSB\_POS       16U      }}
+\DoxyCodeLine{00696 \textcolor{preprocessor}{\#define UART\_IT\_MASK                        0x001FU  }}
+\DoxyCodeLine{00704 \textcolor{preprocessor}{\#define HAL\_UART\_TIMEOUT\_VALUE              0x1FFFFFFU  }}
+\DoxyCodeLine{00714 \textcolor{preprocessor}{\#define UART\_FLAG\_TXFT                      USART\_ISR\_TXFT          }}
+\DoxyCodeLine{00715 \textcolor{preprocessor}{\#define UART\_FLAG\_RXFT                      USART\_ISR\_RXFT          }}
+\DoxyCodeLine{00716 \textcolor{preprocessor}{\#define UART\_FLAG\_RXFF                      USART\_ISR\_RXFF          }}
+\DoxyCodeLine{00717 \textcolor{preprocessor}{\#define UART\_FLAG\_TXFE                      USART\_ISR\_TXFE          }}
+\DoxyCodeLine{00718 \textcolor{preprocessor}{\#define UART\_FLAG\_REACK                     USART\_ISR\_REACK         }}
+\DoxyCodeLine{00719 \textcolor{preprocessor}{\#define UART\_FLAG\_TEACK                     USART\_ISR\_TEACK         }}
+\DoxyCodeLine{00720 \textcolor{preprocessor}{\#define UART\_FLAG\_WUF                       USART\_ISR\_WUF           }}
+\DoxyCodeLine{00721 \textcolor{preprocessor}{\#define UART\_FLAG\_RWU                       USART\_ISR\_RWU           }}
+\DoxyCodeLine{00722 \textcolor{preprocessor}{\#define UART\_FLAG\_SBKF                      USART\_ISR\_SBKF          }}
+\DoxyCodeLine{00723 \textcolor{preprocessor}{\#define UART\_FLAG\_CMF                       USART\_ISR\_CMF           }}
+\DoxyCodeLine{00724 \textcolor{preprocessor}{\#define UART\_FLAG\_BUSY                      USART\_ISR\_BUSY          }}
+\DoxyCodeLine{00725 \textcolor{preprocessor}{\#define UART\_FLAG\_ABRF                      USART\_ISR\_ABRF          }}
+\DoxyCodeLine{00726 \textcolor{preprocessor}{\#define UART\_FLAG\_ABRE                      USART\_ISR\_ABRE          }}
+\DoxyCodeLine{00727 \textcolor{preprocessor}{\#define UART\_FLAG\_RTOF                      USART\_ISR\_RTOF          }}
+\DoxyCodeLine{00728 \textcolor{preprocessor}{\#define UART\_FLAG\_CTS                       USART\_ISR\_CTS           }}
+\DoxyCodeLine{00729 \textcolor{preprocessor}{\#define UART\_FLAG\_CTSIF                     USART\_ISR\_CTSIF         }}
+\DoxyCodeLine{00730 \textcolor{preprocessor}{\#define UART\_FLAG\_LBDF                      USART\_ISR\_LBDF          }}
+\DoxyCodeLine{00731 \textcolor{preprocessor}{\#define UART\_FLAG\_TXE                       USART\_ISR\_TXE\_TXFNF     }}
+\DoxyCodeLine{00732 \textcolor{preprocessor}{\#define UART\_FLAG\_TXFNF                     USART\_ISR\_TXE\_TXFNF     }}
+\DoxyCodeLine{00733 \textcolor{preprocessor}{\#define UART\_FLAG\_TC                        USART\_ISR\_TC            }}
+\DoxyCodeLine{00734 \textcolor{preprocessor}{\#define UART\_FLAG\_RXNE                      USART\_ISR\_RXNE\_RXFNE    }}
+\DoxyCodeLine{00735 \textcolor{preprocessor}{\#define UART\_FLAG\_RXFNE                     USART\_ISR\_RXNE\_RXFNE    }}
+\DoxyCodeLine{00736 \textcolor{preprocessor}{\#define UART\_FLAG\_IDLE                      USART\_ISR\_IDLE          }}
+\DoxyCodeLine{00737 \textcolor{preprocessor}{\#define UART\_FLAG\_ORE                       USART\_ISR\_ORE           }}
+\DoxyCodeLine{00738 \textcolor{preprocessor}{\#define UART\_FLAG\_NE                        USART\_ISR\_NE            }}
+\DoxyCodeLine{00739 \textcolor{preprocessor}{\#define UART\_FLAG\_FE                        USART\_ISR\_FE            }}
+\DoxyCodeLine{00740 \textcolor{preprocessor}{\#define UART\_FLAG\_PE                        USART\_ISR\_PE            }}
+\DoxyCodeLine{00763 \textcolor{preprocessor}{\#define UART\_IT\_PE                          0x0028U              }}
+\DoxyCodeLine{00764 \textcolor{preprocessor}{\#define UART\_IT\_TXE                         0x0727U              }}
+\DoxyCodeLine{00765 \textcolor{preprocessor}{\#define UART\_IT\_TXFNF                       0x0727U              }}
+\DoxyCodeLine{00766 \textcolor{preprocessor}{\#define UART\_IT\_TC                          0x0626U              }}
+\DoxyCodeLine{00767 \textcolor{preprocessor}{\#define UART\_IT\_RXNE                        0x0525U              }}
+\DoxyCodeLine{00768 \textcolor{preprocessor}{\#define UART\_IT\_RXFNE                       0x0525U              }}
+\DoxyCodeLine{00769 \textcolor{preprocessor}{\#define UART\_IT\_IDLE                        0x0424U              }}
+\DoxyCodeLine{00770 \textcolor{preprocessor}{\#define UART\_IT\_LBD                         0x0846U              }}
+\DoxyCodeLine{00771 \textcolor{preprocessor}{\#define UART\_IT\_CTS                         0x096AU              }}
+\DoxyCodeLine{00772 \textcolor{preprocessor}{\#define UART\_IT\_CM                          0x112EU              }}
+\DoxyCodeLine{00773 \textcolor{preprocessor}{\#define UART\_IT\_WUF                         0x1476U              }}
+\DoxyCodeLine{00774 \textcolor{preprocessor}{\#define UART\_IT\_RXFF                        0x183FU              }}
+\DoxyCodeLine{00775 \textcolor{preprocessor}{\#define UART\_IT\_TXFE                        0x173EU              }}
+\DoxyCodeLine{00776 \textcolor{preprocessor}{\#define UART\_IT\_RXFT                        0x1A7CU              }}
+\DoxyCodeLine{00777 \textcolor{preprocessor}{\#define UART\_IT\_TXFT                        0x1B77U              }}
+\DoxyCodeLine{00778 \textcolor{preprocessor}{\#define UART\_IT\_RTO                         0x0B3AU              }}
+\DoxyCodeLine{00780 \textcolor{preprocessor}{\#define UART\_IT\_ERR                         0x0060U              }}
+\DoxyCodeLine{00782 \textcolor{preprocessor}{\#define UART\_IT\_ORE                         0x0300U              }}
+\DoxyCodeLine{00783 \textcolor{preprocessor}{\#define UART\_IT\_NE                          0x0200U              }}
+\DoxyCodeLine{00784 \textcolor{preprocessor}{\#define UART\_IT\_FE                          0x0100U              }}
+\DoxyCodeLine{00792 \textcolor{preprocessor}{\#define UART\_CLEAR\_PEF                       USART\_ICR\_PECF            }}
+\DoxyCodeLine{00793 \textcolor{preprocessor}{\#define UART\_CLEAR\_FEF                       USART\_ICR\_FECF            }}
+\DoxyCodeLine{00794 \textcolor{preprocessor}{\#define UART\_CLEAR\_NEF                       USART\_ICR\_NECF            }}
+\DoxyCodeLine{00795 \textcolor{preprocessor}{\#define UART\_CLEAR\_OREF                      USART\_ICR\_ORECF           }}
+\DoxyCodeLine{00796 \textcolor{preprocessor}{\#define UART\_CLEAR\_IDLEF                     USART\_ICR\_IDLECF          }}
+\DoxyCodeLine{00797 \textcolor{preprocessor}{\#define UART\_CLEAR\_TXFECF                    USART\_ICR\_TXFECF          }}
+\DoxyCodeLine{00798 \textcolor{preprocessor}{\#define UART\_CLEAR\_TCF                       USART\_ICR\_TCCF            }}
+\DoxyCodeLine{00799 \textcolor{preprocessor}{\#define UART\_CLEAR\_LBDF                      USART\_ICR\_LBDCF           }}
+\DoxyCodeLine{00800 \textcolor{preprocessor}{\#define UART\_CLEAR\_CTSF                      USART\_ICR\_CTSCF           }}
+\DoxyCodeLine{00801 \textcolor{preprocessor}{\#define UART\_CLEAR\_CMF                       USART\_ICR\_CMCF            }}
+\DoxyCodeLine{00802 \textcolor{preprocessor}{\#define UART\_CLEAR\_WUF                       USART\_ICR\_WUCF            }}
+\DoxyCodeLine{00803 \textcolor{preprocessor}{\#define UART\_CLEAR\_RTOF                      USART\_ICR\_RTOCF           }}
+\DoxyCodeLine{00811 \textcolor{preprocessor}{\#define HAL\_UART\_RECEPTION\_STANDARD          (0x00000000U)             }}
+\DoxyCodeLine{00812 \textcolor{preprocessor}{\#define HAL\_UART\_RECEPTION\_TOIDLE            (0x00000001U)             }}
+\DoxyCodeLine{00813 \textcolor{preprocessor}{\#define HAL\_UART\_RECEPTION\_TORTO             (0x00000002U)             }}
+\DoxyCodeLine{00814 \textcolor{preprocessor}{\#define HAL\_UART\_RECEPTION\_TOCHARMATCH       (0x00000003U)             }}
+\DoxyCodeLine{00823 \textcolor{comment}{/* Exported macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00832 \textcolor{preprocessor}{\#if (USE\_HAL\_UART\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{00833 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_RESET\_HANDLE\_STATE(\_\_HANDLE\_\_)  do\{                                                   \(\backslash\)}}
+\DoxyCodeLine{00834 \textcolor{preprocessor}{                                                       (\_\_HANDLE\_\_)-\/>gState = HAL\_UART\_STATE\_RESET;      \(\backslash\)}}
+\DoxyCodeLine{00835 \textcolor{preprocessor}{                                                       (\_\_HANDLE\_\_)-\/>RxState = HAL\_UART\_STATE\_RESET;     \(\backslash\)}}
+\DoxyCodeLine{00836 \textcolor{preprocessor}{                                                       (\_\_HANDLE\_\_)-\/>MspInitCallback = NULL;             \(\backslash\)}}
+\DoxyCodeLine{00837 \textcolor{preprocessor}{                                                       (\_\_HANDLE\_\_)-\/>MspDeInitCallback = NULL;           \(\backslash\)}}
+\DoxyCodeLine{00838 \textcolor{preprocessor}{                                                     \} while(0U)}}
+\DoxyCodeLine{00839 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00840 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_RESET\_HANDLE\_STATE(\_\_HANDLE\_\_)  do\{                                                   \(\backslash\)}}
+\DoxyCodeLine{00841 \textcolor{preprocessor}{                                                       (\_\_HANDLE\_\_)-\/>gState = HAL\_UART\_STATE\_RESET;      \(\backslash\)}}
+\DoxyCodeLine{00842 \textcolor{preprocessor}{                                                       (\_\_HANDLE\_\_)-\/>RxState = HAL\_UART\_STATE\_RESET;     \(\backslash\)}}
+\DoxyCodeLine{00843 \textcolor{preprocessor}{                                                     \} while(0U)}}
+\DoxyCodeLine{00844 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/*USE\_HAL\_UART\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00845 }
+\DoxyCodeLine{00850 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_FLUSH\_DRREGISTER(\_\_HANDLE\_\_)  \(\backslash\)}}
+\DoxyCodeLine{00851 \textcolor{preprocessor}{  do\{                \(\backslash\)}}
+\DoxyCodeLine{00852 \textcolor{preprocessor}{    SET\_BIT((\_\_HANDLE\_\_)-\/>Instance-\/>RQR, UART\_RXDATA\_FLUSH\_REQUEST); \(\backslash\)}}
+\DoxyCodeLine{00853 \textcolor{preprocessor}{    SET\_BIT((\_\_HANDLE\_\_)-\/>Instance-\/>RQR, UART\_TXDATA\_FLUSH\_REQUEST); \(\backslash\)}}
+\DoxyCodeLine{00854 \textcolor{preprocessor}{  \}  while(0U)}}
+\DoxyCodeLine{00855 }
+\DoxyCodeLine{00874 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_CLEAR\_FLAG(\_\_HANDLE\_\_, \_\_FLAG\_\_) ((\_\_HANDLE\_\_)-\/>Instance-\/>ICR = (\_\_FLAG\_\_))}}
+\DoxyCodeLine{00875 }
+\DoxyCodeLine{00880 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_CLEAR\_PEFLAG(\_\_HANDLE\_\_)   \_\_HAL\_UART\_CLEAR\_FLAG((\_\_HANDLE\_\_), UART\_CLEAR\_PEF)}}
+\DoxyCodeLine{00881 }
+\DoxyCodeLine{00886 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_CLEAR\_FEFLAG(\_\_HANDLE\_\_)   \_\_HAL\_UART\_CLEAR\_FLAG((\_\_HANDLE\_\_), UART\_CLEAR\_FEF)}}
+\DoxyCodeLine{00887 }
+\DoxyCodeLine{00892 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_CLEAR\_NEFLAG(\_\_HANDLE\_\_)  \_\_HAL\_UART\_CLEAR\_FLAG((\_\_HANDLE\_\_), UART\_CLEAR\_NEF)}}
+\DoxyCodeLine{00893 }
+\DoxyCodeLine{00898 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_CLEAR\_OREFLAG(\_\_HANDLE\_\_)   \_\_HAL\_UART\_CLEAR\_FLAG((\_\_HANDLE\_\_), UART\_CLEAR\_OREF)}}
+\DoxyCodeLine{00899 }
+\DoxyCodeLine{00904 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_CLEAR\_IDLEFLAG(\_\_HANDLE\_\_)   \_\_HAL\_UART\_CLEAR\_FLAG((\_\_HANDLE\_\_), UART\_CLEAR\_IDLEF)}}
+\DoxyCodeLine{00905 }
+\DoxyCodeLine{00910 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_CLEAR\_TXFECF(\_\_HANDLE\_\_)   \_\_HAL\_UART\_CLEAR\_FLAG((\_\_HANDLE\_\_), UART\_CLEAR\_TXFECF)}}
+\DoxyCodeLine{00911 }
+\DoxyCodeLine{00944 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_GET\_FLAG(\_\_HANDLE\_\_, \_\_FLAG\_\_) (((\_\_HANDLE\_\_)-\/>Instance-\/>ISR \& (\_\_FLAG\_\_)) == (\_\_FLAG\_\_))}}
+\DoxyCodeLine{00945 }
+\DoxyCodeLine{00969 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_ENABLE\_IT(\_\_HANDLE\_\_, \_\_INTERRUPT\_\_)   (\(\backslash\)}}
+\DoxyCodeLine{00970 \textcolor{preprocessor}{                                                           ((((uint8\_t)(\_\_INTERRUPT\_\_)) >> 5U) == 1U)?\(\backslash\)}}
+\DoxyCodeLine{00971 \textcolor{preprocessor}{                                                           ((\_\_HANDLE\_\_)-\/>Instance-\/>CR1 |= (1U <<\(\backslash\)}}
+\DoxyCodeLine{00972 \textcolor{preprocessor}{                                                               ((\_\_INTERRUPT\_\_) \& UART\_IT\_MASK))): \(\backslash\)}}
+\DoxyCodeLine{00973 \textcolor{preprocessor}{                                                           ((((uint8\_t)(\_\_INTERRUPT\_\_)) >> 5U) == 2U)?\(\backslash\)}}
+\DoxyCodeLine{00974 \textcolor{preprocessor}{                                                           ((\_\_HANDLE\_\_)-\/>Instance-\/>CR2 |= (1U <<\(\backslash\)}}
+\DoxyCodeLine{00975 \textcolor{preprocessor}{                                                               ((\_\_INTERRUPT\_\_) \& UART\_IT\_MASK))): \(\backslash\)}}
+\DoxyCodeLine{00976 \textcolor{preprocessor}{                                                           ((\_\_HANDLE\_\_)-\/>Instance-\/>CR3 |= (1U <<\(\backslash\)}}
+\DoxyCodeLine{00977 \textcolor{preprocessor}{                                                               ((\_\_INTERRUPT\_\_) \& UART\_IT\_MASK))))}}
+\DoxyCodeLine{00978 }
+\DoxyCodeLine{01002 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_DISABLE\_IT(\_\_HANDLE\_\_, \_\_INTERRUPT\_\_)  (\(\backslash\)}}
+\DoxyCodeLine{01003 \textcolor{preprocessor}{                                                           ((((uint8\_t)(\_\_INTERRUPT\_\_)) >> 5U) == 1U)?\(\backslash\)}}
+\DoxyCodeLine{01004 \textcolor{preprocessor}{                                                           ((\_\_HANDLE\_\_)-\/>Instance-\/>CR1 \&= \string~ (1U <<\(\backslash\)}}
+\DoxyCodeLine{01005 \textcolor{preprocessor}{                                                               ((\_\_INTERRUPT\_\_) \& UART\_IT\_MASK))): \(\backslash\)}}
+\DoxyCodeLine{01006 \textcolor{preprocessor}{                                                           ((((uint8\_t)(\_\_INTERRUPT\_\_)) >> 5U) == 2U)?\(\backslash\)}}
+\DoxyCodeLine{01007 \textcolor{preprocessor}{                                                           ((\_\_HANDLE\_\_)-\/>Instance-\/>CR2 \&= \string~ (1U <<\(\backslash\)}}
+\DoxyCodeLine{01008 \textcolor{preprocessor}{                                                               ((\_\_INTERRUPT\_\_) \& UART\_IT\_MASK))): \(\backslash\)}}
+\DoxyCodeLine{01009 \textcolor{preprocessor}{                                                           ((\_\_HANDLE\_\_)-\/>Instance-\/>CR3 \&= \string~ (1U <<\(\backslash\)}}
+\DoxyCodeLine{01010 \textcolor{preprocessor}{                                                               ((\_\_INTERRUPT\_\_) \& UART\_IT\_MASK))))}}
+\DoxyCodeLine{01011 }
+\DoxyCodeLine{01035 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_GET\_IT(\_\_HANDLE\_\_, \_\_INTERRUPT\_\_) ((((\_\_HANDLE\_\_)-\/>Instance-\/>ISR\(\backslash\)}}
+\DoxyCodeLine{01036 \textcolor{preprocessor}{                                                        \& (1U << ((\_\_INTERRUPT\_\_)>> 8U))) != RESET) ? SET : RESET)}}
+\DoxyCodeLine{01037 }
+\DoxyCodeLine{01061 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_GET\_IT\_SOURCE(\_\_HANDLE\_\_, \_\_INTERRUPT\_\_) ((((((((uint8\_t)(\_\_INTERRUPT\_\_)) >> 5U) == 1U) ?\(\backslash\)}}
+\DoxyCodeLine{01062 \textcolor{preprocessor}{                                                                (\_\_HANDLE\_\_)-\/>Instance-\/>CR1 : \(\backslash\)}}
+\DoxyCodeLine{01063 \textcolor{preprocessor}{                                                                (((((uint8\_t)(\_\_INTERRUPT\_\_)) >> 5U) == 2U) ?\(\backslash\)}}
+\DoxyCodeLine{01064 \textcolor{preprocessor}{                                                                 (\_\_HANDLE\_\_)-\/>Instance-\/>CR2 : \(\backslash\)}}
+\DoxyCodeLine{01065 \textcolor{preprocessor}{                                                                 (\_\_HANDLE\_\_)-\/>Instance-\/>CR3)) \& (1U <<\(\backslash\)}}
+\DoxyCodeLine{01066 \textcolor{preprocessor}{                                                                     (((uint16\_t)(\_\_INTERRUPT\_\_)) \&\(\backslash\)}}
+\DoxyCodeLine{01067 \textcolor{preprocessor}{                                                                      UART\_IT\_MASK)))  != RESET) ? SET : RESET)}}
+\DoxyCodeLine{01068 }
+\DoxyCodeLine{01088 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_CLEAR\_IT(\_\_HANDLE\_\_, \_\_IT\_CLEAR\_\_) ((\_\_HANDLE\_\_)-\/>Instance-\/>ICR = (uint32\_t)(\_\_IT\_CLEAR\_\_))}}
+\DoxyCodeLine{01089 }
+\DoxyCodeLine{01101 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_SEND\_REQ(\_\_HANDLE\_\_, \_\_REQ\_\_) ((\_\_HANDLE\_\_)-\/>Instance-\/>RQR |= (uint16\_t)(\_\_REQ\_\_))}}
+\DoxyCodeLine{01102 }
+\DoxyCodeLine{01107 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_ONE\_BIT\_SAMPLE\_ENABLE(\_\_HANDLE\_\_) ((\_\_HANDLE\_\_)-\/>Instance-\/>CR3|= USART\_CR3\_ONEBIT)}}
+\DoxyCodeLine{01108 }
+\DoxyCodeLine{01113 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_ONE\_BIT\_SAMPLE\_DISABLE(\_\_HANDLE\_\_) ((\_\_HANDLE\_\_)-\/>Instance-\/>CR3 \&= \string~USART\_CR3\_ONEBIT)}}
+\DoxyCodeLine{01114 }
+\DoxyCodeLine{01119 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_ENABLE(\_\_HANDLE\_\_)                   ((\_\_HANDLE\_\_)-\/>Instance-\/>CR1 |= USART\_CR1\_UE)}}
+\DoxyCodeLine{01120 }
+\DoxyCodeLine{01125 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_DISABLE(\_\_HANDLE\_\_)                  ((\_\_HANDLE\_\_)-\/>Instance-\/>CR1 \&= \string~USART\_CR1\_UE)}}
+\DoxyCodeLine{01126 }
+\DoxyCodeLine{01140 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_HWCONTROL\_CTS\_ENABLE(\_\_HANDLE\_\_)               \(\backslash\)}}
+\DoxyCodeLine{01141 \textcolor{preprocessor}{  do\{                                                             \(\backslash\)}}
+\DoxyCodeLine{01142 \textcolor{preprocessor}{    ATOMIC\_SET\_BIT((\_\_HANDLE\_\_)-\/>Instance-\/>CR3, USART\_CR3\_CTSE);  \(\backslash\)}}
+\DoxyCodeLine{01143 \textcolor{preprocessor}{    (\_\_HANDLE\_\_)-\/>Init.HwFlowCtl |= USART\_CR3\_CTSE;               \(\backslash\)}}
+\DoxyCodeLine{01144 \textcolor{preprocessor}{  \} while(0U)}}
+\DoxyCodeLine{01145 }
+\DoxyCodeLine{01159 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_HWCONTROL\_CTS\_DISABLE(\_\_HANDLE\_\_)               \(\backslash\)}}
+\DoxyCodeLine{01160 \textcolor{preprocessor}{  do\{                                                              \(\backslash\)}}
+\DoxyCodeLine{01161 \textcolor{preprocessor}{    ATOMIC\_CLEAR\_BIT((\_\_HANDLE\_\_)-\/>Instance-\/>CR3, USART\_CR3\_CTSE); \(\backslash\)}}
+\DoxyCodeLine{01162 \textcolor{preprocessor}{    (\_\_HANDLE\_\_)-\/>Init.HwFlowCtl \&= \string~(USART\_CR3\_CTSE);             \(\backslash\)}}
+\DoxyCodeLine{01163 \textcolor{preprocessor}{  \} while(0U)}}
+\DoxyCodeLine{01164 }
+\DoxyCodeLine{01178 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_HWCONTROL\_RTS\_ENABLE(\_\_HANDLE\_\_)              \(\backslash\)}}
+\DoxyCodeLine{01179 \textcolor{preprocessor}{  do\{                                                            \(\backslash\)}}
+\DoxyCodeLine{01180 \textcolor{preprocessor}{    ATOMIC\_SET\_BIT((\_\_HANDLE\_\_)-\/>Instance-\/>CR3, USART\_CR3\_RTSE); \(\backslash\)}}
+\DoxyCodeLine{01181 \textcolor{preprocessor}{    (\_\_HANDLE\_\_)-\/>Init.HwFlowCtl |= USART\_CR3\_RTSE;              \(\backslash\)}}
+\DoxyCodeLine{01182 \textcolor{preprocessor}{  \} while(0U)}}
+\DoxyCodeLine{01183 }
+\DoxyCodeLine{01197 \textcolor{preprocessor}{\#define \_\_HAL\_UART\_HWCONTROL\_RTS\_DISABLE(\_\_HANDLE\_\_)              \(\backslash\)}}
+\DoxyCodeLine{01198 \textcolor{preprocessor}{  do\{                                                             \(\backslash\)}}
+\DoxyCodeLine{01199 \textcolor{preprocessor}{    ATOMIC\_CLEAR\_BIT((\_\_HANDLE\_\_)-\/>Instance-\/>CR3, USART\_CR3\_RTSE);\(\backslash\)}}
+\DoxyCodeLine{01200 \textcolor{preprocessor}{    (\_\_HANDLE\_\_)-\/>Init.HwFlowCtl \&= \string~(USART\_CR3\_RTSE);            \(\backslash\)}}
+\DoxyCodeLine{01201 \textcolor{preprocessor}{  \} while(0U)}}
+\DoxyCodeLine{01206 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{01214 \textcolor{preprocessor}{\#define UART\_GET\_DIV\_FACTOR(\_\_CLOCKPRESCALER\_\_) \(\backslash\)}}
+\DoxyCodeLine{01215 \textcolor{preprocessor}{  (((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV1)   ? 1U :       \(\backslash\)}}
+\DoxyCodeLine{01216 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV2)   ? 2U :       \(\backslash\)}}
+\DoxyCodeLine{01217 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV4)   ? 4U :       \(\backslash\)}}
+\DoxyCodeLine{01218 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV6)   ? 6U :       \(\backslash\)}}
+\DoxyCodeLine{01219 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV8)   ? 8U :       \(\backslash\)}}
+\DoxyCodeLine{01220 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV10)  ? 10U :      \(\backslash\)}}
+\DoxyCodeLine{01221 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV12)  ? 12U :      \(\backslash\)}}
+\DoxyCodeLine{01222 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV16)  ? 16U :      \(\backslash\)}}
+\DoxyCodeLine{01223 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV32)  ? 32U :      \(\backslash\)}}
+\DoxyCodeLine{01224 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV64)  ? 64U :      \(\backslash\)}}
+\DoxyCodeLine{01225 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV128) ? 128U :     \(\backslash\)}}
+\DoxyCodeLine{01226 \textcolor{preprocessor}{   ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV256) ? 256U : 1U)}}
+\DoxyCodeLine{01227 }
+\DoxyCodeLine{01234 \textcolor{preprocessor}{\#define UART\_DIV\_LPUART(\_\_PCLK\_\_, \_\_BAUD\_\_, \_\_CLOCKPRESCALER\_\_)                        \(\backslash\)}}
+\DoxyCodeLine{01235 \textcolor{preprocessor}{  ((uint32\_t)((((((uint64\_t)(\_\_PCLK\_\_))/(UARTPrescTable[(\_\_CLOCKPRESCALER\_\_)]))*256U)+ \(\backslash\)}}
+\DoxyCodeLine{01236 \textcolor{preprocessor}{               (uint32\_t)((\_\_BAUD\_\_)/2U)) / (\_\_BAUD\_\_))                                \(\backslash\)}}
+\DoxyCodeLine{01237 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{01238 }
+\DoxyCodeLine{01245 \textcolor{preprocessor}{\#define UART\_DIV\_SAMPLING8(\_\_PCLK\_\_, \_\_BAUD\_\_, \_\_CLOCKPRESCALER\_\_)                        \(\backslash\)}}
+\DoxyCodeLine{01246 \textcolor{preprocessor}{  (((((\_\_PCLK\_\_)/UARTPrescTable[(\_\_CLOCKPRESCALER\_\_)])*2U) + ((\_\_BAUD\_\_)/2U)) / (\_\_BAUD\_\_))}}
+\DoxyCodeLine{01247 }
+\DoxyCodeLine{01254 \textcolor{preprocessor}{\#define UART\_DIV\_SAMPLING16(\_\_PCLK\_\_, \_\_BAUD\_\_, \_\_CLOCKPRESCALER\_\_)                       \(\backslash\)}}
+\DoxyCodeLine{01255 \textcolor{preprocessor}{  ((((\_\_PCLK\_\_)/UARTPrescTable[(\_\_CLOCKPRESCALER\_\_)]) + ((\_\_BAUD\_\_)/2U)) / (\_\_BAUD\_\_))}}
+\DoxyCodeLine{01256 }
+\DoxyCodeLine{01261 \textcolor{preprocessor}{\#define UART\_INSTANCE\_LOWPOWER(\_\_HANDLE\_\_) (IS\_LPUART\_INSTANCE((\_\_HANDLE\_\_)-\/>Instance))}}
+\DoxyCodeLine{01262 }
+\DoxyCodeLine{01269 \textcolor{preprocessor}{\#define IS\_UART\_BAUDRATE(\_\_BAUDRATE\_\_) ((\_\_BAUDRATE\_\_) < 18750001U)}}
+\DoxyCodeLine{01270 }
+\DoxyCodeLine{01275 \textcolor{preprocessor}{\#define IS\_UART\_ASSERTIONTIME(\_\_TIME\_\_)    ((\_\_TIME\_\_) <= 0x1FU)}}
+\DoxyCodeLine{01276 }
+\DoxyCodeLine{01281 \textcolor{preprocessor}{\#define IS\_UART\_DEASSERTIONTIME(\_\_TIME\_\_) ((\_\_TIME\_\_) <= 0x1FU)}}
+\DoxyCodeLine{01282 }
+\DoxyCodeLine{01288 \textcolor{preprocessor}{\#define IS\_UART\_STOPBITS(\_\_STOPBITS\_\_) (((\_\_STOPBITS\_\_) == UART\_STOPBITS\_0\_5) || \(\backslash\)}}
+\DoxyCodeLine{01289 \textcolor{preprocessor}{                                        ((\_\_STOPBITS\_\_) == UART\_STOPBITS\_1)   || \(\backslash\)}}
+\DoxyCodeLine{01290 \textcolor{preprocessor}{                                        ((\_\_STOPBITS\_\_) == UART\_STOPBITS\_1\_5) || \(\backslash\)}}
+\DoxyCodeLine{01291 \textcolor{preprocessor}{                                        ((\_\_STOPBITS\_\_) == UART\_STOPBITS\_2))}}
+\DoxyCodeLine{01292 }
+\DoxyCodeLine{01298 \textcolor{preprocessor}{\#define IS\_LPUART\_STOPBITS(\_\_STOPBITS\_\_) (((\_\_STOPBITS\_\_) == UART\_STOPBITS\_1) || \(\backslash\)}}
+\DoxyCodeLine{01299 \textcolor{preprocessor}{                                          ((\_\_STOPBITS\_\_) == UART\_STOPBITS\_2))}}
+\DoxyCodeLine{01300 }
+\DoxyCodeLine{01306 \textcolor{preprocessor}{\#define IS\_UART\_PARITY(\_\_PARITY\_\_) (((\_\_PARITY\_\_) == UART\_PARITY\_NONE) || \(\backslash\)}}
+\DoxyCodeLine{01307 \textcolor{preprocessor}{                                    ((\_\_PARITY\_\_) == UART\_PARITY\_EVEN) || \(\backslash\)}}
+\DoxyCodeLine{01308 \textcolor{preprocessor}{                                    ((\_\_PARITY\_\_) == UART\_PARITY\_ODD))}}
+\DoxyCodeLine{01309 }
+\DoxyCodeLine{01315 \textcolor{preprocessor}{\#define IS\_UART\_HARDWARE\_FLOW\_CONTROL(\_\_CONTROL\_\_)\(\backslash\)}}
+\DoxyCodeLine{01316 \textcolor{preprocessor}{  (((\_\_CONTROL\_\_) == UART\_HWCONTROL\_NONE) || \(\backslash\)}}
+\DoxyCodeLine{01317 \textcolor{preprocessor}{   ((\_\_CONTROL\_\_) == UART\_HWCONTROL\_RTS)  || \(\backslash\)}}
+\DoxyCodeLine{01318 \textcolor{preprocessor}{   ((\_\_CONTROL\_\_) == UART\_HWCONTROL\_CTS)  || \(\backslash\)}}
+\DoxyCodeLine{01319 \textcolor{preprocessor}{   ((\_\_CONTROL\_\_) == UART\_HWCONTROL\_RTS\_CTS))}}
+\DoxyCodeLine{01320 }
+\DoxyCodeLine{01326 \textcolor{preprocessor}{\#define IS\_UART\_MODE(\_\_MODE\_\_) ((((\_\_MODE\_\_) \& (\string~((uint32\_t)(UART\_MODE\_TX\_RX)))) == 0x00U) \&\& ((\_\_MODE\_\_) != 0x00U))}}
+\DoxyCodeLine{01327 }
+\DoxyCodeLine{01333 \textcolor{preprocessor}{\#define IS\_UART\_STATE(\_\_STATE\_\_) (((\_\_STATE\_\_) == UART\_STATE\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01334 \textcolor{preprocessor}{                                  ((\_\_STATE\_\_) == UART\_STATE\_ENABLE))}}
+\DoxyCodeLine{01335 }
+\DoxyCodeLine{01341 \textcolor{preprocessor}{\#define IS\_UART\_OVERSAMPLING(\_\_SAMPLING\_\_) (((\_\_SAMPLING\_\_) == UART\_OVERSAMPLING\_16) || \(\backslash\)}}
+\DoxyCodeLine{01342 \textcolor{preprocessor}{                                            ((\_\_SAMPLING\_\_) == UART\_OVERSAMPLING\_8))}}
+\DoxyCodeLine{01343 }
+\DoxyCodeLine{01349 \textcolor{preprocessor}{\#define IS\_UART\_ONE\_BIT\_SAMPLE(\_\_ONEBIT\_\_) (((\_\_ONEBIT\_\_) == UART\_ONE\_BIT\_SAMPLE\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01350 \textcolor{preprocessor}{                                            ((\_\_ONEBIT\_\_) == UART\_ONE\_BIT\_SAMPLE\_ENABLE))}}
+\DoxyCodeLine{01351 }
+\DoxyCodeLine{01357 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_AUTOBAUDRATEMODE(\_\_MODE\_\_)  (((\_\_MODE\_\_) == UART\_ADVFEATURE\_AUTOBAUDRATE\_ONSTARTBIT)    || \(\backslash\)}}
+\DoxyCodeLine{01358 \textcolor{preprocessor}{                                                        ((\_\_MODE\_\_) == UART\_ADVFEATURE\_AUTOBAUDRATE\_ONFALLINGEDGE) || \(\backslash\)}}
+\DoxyCodeLine{01359 \textcolor{preprocessor}{                                                        ((\_\_MODE\_\_) == UART\_ADVFEATURE\_AUTOBAUDRATE\_ON0X7FFRAME)   || \(\backslash\)}}
+\DoxyCodeLine{01360 \textcolor{preprocessor}{                                                        ((\_\_MODE\_\_) == UART\_ADVFEATURE\_AUTOBAUDRATE\_ON0X55FRAME))}}
+\DoxyCodeLine{01361 }
+\DoxyCodeLine{01367 \textcolor{preprocessor}{\#define IS\_UART\_RECEIVER\_TIMEOUT(\_\_TIMEOUT\_\_)  (((\_\_TIMEOUT\_\_) == UART\_RECEIVER\_TIMEOUT\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01368 \textcolor{preprocessor}{                                                ((\_\_TIMEOUT\_\_) == UART\_RECEIVER\_TIMEOUT\_ENABLE))}}
+\DoxyCodeLine{01369 }
+\DoxyCodeLine{01375 \textcolor{preprocessor}{\#define IS\_UART\_RECEIVER\_TIMEOUT\_VALUE(\_\_TIMEOUTVALUE\_\_)  ((\_\_TIMEOUTVALUE\_\_) <= 0xFFFFFFU)}}
+\DoxyCodeLine{01376 }
+\DoxyCodeLine{01382 \textcolor{preprocessor}{\#define IS\_UART\_LIN(\_\_LIN\_\_)        (((\_\_LIN\_\_) == UART\_LIN\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01383 \textcolor{preprocessor}{                                     ((\_\_LIN\_\_) == UART\_LIN\_ENABLE))}}
+\DoxyCodeLine{01384 }
+\DoxyCodeLine{01390 \textcolor{preprocessor}{\#define IS\_UART\_LIN\_BREAK\_DETECT\_LENGTH(\_\_LENGTH\_\_) (((\_\_LENGTH\_\_) == UART\_LINBREAKDETECTLENGTH\_10B) || \(\backslash\)}}
+\DoxyCodeLine{01391 \textcolor{preprocessor}{                                                     ((\_\_LENGTH\_\_) == UART\_LINBREAKDETECTLENGTH\_11B))}}
+\DoxyCodeLine{01392 }
+\DoxyCodeLine{01398 \textcolor{preprocessor}{\#define IS\_UART\_DMA\_TX(\_\_DMATX\_\_)     (((\_\_DMATX\_\_) == UART\_DMA\_TX\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01399 \textcolor{preprocessor}{                                       ((\_\_DMATX\_\_) == UART\_DMA\_TX\_ENABLE))}}
+\DoxyCodeLine{01400 }
+\DoxyCodeLine{01406 \textcolor{preprocessor}{\#define IS\_UART\_DMA\_RX(\_\_DMARX\_\_)     (((\_\_DMARX\_\_) == UART\_DMA\_RX\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01407 \textcolor{preprocessor}{                                       ((\_\_DMARX\_\_) == UART\_DMA\_RX\_ENABLE))}}
+\DoxyCodeLine{01408 }
+\DoxyCodeLine{01414 \textcolor{preprocessor}{\#define IS\_UART\_HALF\_DUPLEX(\_\_HDSEL\_\_)     (((\_\_HDSEL\_\_) == UART\_HALF\_DUPLEX\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01415 \textcolor{preprocessor}{                                            ((\_\_HDSEL\_\_) == UART\_HALF\_DUPLEX\_ENABLE))}}
+\DoxyCodeLine{01416 }
+\DoxyCodeLine{01422 \textcolor{preprocessor}{\#define IS\_UART\_WAKEUPMETHOD(\_\_WAKEUP\_\_) (((\_\_WAKEUP\_\_) == UART\_WAKEUPMETHOD\_IDLELINE) || \(\backslash\)}}
+\DoxyCodeLine{01423 \textcolor{preprocessor}{                                          ((\_\_WAKEUP\_\_) == UART\_WAKEUPMETHOD\_ADDRESSMARK))}}
+\DoxyCodeLine{01424 }
+\DoxyCodeLine{01430 \textcolor{preprocessor}{\#define IS\_UART\_REQUEST\_PARAMETER(\_\_PARAM\_\_) (((\_\_PARAM\_\_) == UART\_AUTOBAUD\_REQUEST)     || \(\backslash\)}}
+\DoxyCodeLine{01431 \textcolor{preprocessor}{                                              ((\_\_PARAM\_\_) == UART\_SENDBREAK\_REQUEST)    || \(\backslash\)}}
+\DoxyCodeLine{01432 \textcolor{preprocessor}{                                              ((\_\_PARAM\_\_) == UART\_MUTE\_MODE\_REQUEST)    || \(\backslash\)}}
+\DoxyCodeLine{01433 \textcolor{preprocessor}{                                              ((\_\_PARAM\_\_) == UART\_RXDATA\_FLUSH\_REQUEST) || \(\backslash\)}}
+\DoxyCodeLine{01434 \textcolor{preprocessor}{                                              ((\_\_PARAM\_\_) == UART\_TXDATA\_FLUSH\_REQUEST))}}
+\DoxyCodeLine{01435 }
+\DoxyCodeLine{01441 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_INIT(\_\_INIT\_\_)   ((\_\_INIT\_\_) <= (UART\_ADVFEATURE\_NO\_INIT                | \(\backslash\)}}
+\DoxyCodeLine{01442 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_TXINVERT\_INIT          | \(\backslash\)}}
+\DoxyCodeLine{01443 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_RXINVERT\_INIT          | \(\backslash\)}}
+\DoxyCodeLine{01444 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_DATAINVERT\_INIT        | \(\backslash\)}}
+\DoxyCodeLine{01445 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_SWAP\_INIT              | \(\backslash\)}}
+\DoxyCodeLine{01446 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_RXOVERRUNDISABLE\_INIT  | \(\backslash\)}}
+\DoxyCodeLine{01447 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_DMADISABLEONERROR\_INIT | \(\backslash\)}}
+\DoxyCodeLine{01448 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_AUTOBAUDRATE\_INIT      | \(\backslash\)}}
+\DoxyCodeLine{01449 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_MSBFIRST\_INIT))}}
+\DoxyCodeLine{01450 }
+\DoxyCodeLine{01456 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_TXINV(\_\_TXINV\_\_) (((\_\_TXINV\_\_) == UART\_ADVFEATURE\_TXINV\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01457 \textcolor{preprocessor}{                                             ((\_\_TXINV\_\_) == UART\_ADVFEATURE\_TXINV\_ENABLE))}}
+\DoxyCodeLine{01458 }
+\DoxyCodeLine{01464 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_RXINV(\_\_RXINV\_\_) (((\_\_RXINV\_\_) == UART\_ADVFEATURE\_RXINV\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01465 \textcolor{preprocessor}{                                             ((\_\_RXINV\_\_) == UART\_ADVFEATURE\_RXINV\_ENABLE))}}
+\DoxyCodeLine{01466 }
+\DoxyCodeLine{01472 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_DATAINV(\_\_DATAINV\_\_) (((\_\_DATAINV\_\_) == UART\_ADVFEATURE\_DATAINV\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01473 \textcolor{preprocessor}{                                                 ((\_\_DATAINV\_\_) == UART\_ADVFEATURE\_DATAINV\_ENABLE))}}
+\DoxyCodeLine{01474 }
+\DoxyCodeLine{01480 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_SWAP(\_\_SWAP\_\_) (((\_\_SWAP\_\_) == UART\_ADVFEATURE\_SWAP\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01481 \textcolor{preprocessor}{                                           ((\_\_SWAP\_\_) == UART\_ADVFEATURE\_SWAP\_ENABLE))}}
+\DoxyCodeLine{01482 }
+\DoxyCodeLine{01488 \textcolor{preprocessor}{\#define IS\_UART\_OVERRUN(\_\_OVERRUN\_\_)     (((\_\_OVERRUN\_\_) == UART\_ADVFEATURE\_OVERRUN\_ENABLE) || \(\backslash\)}}
+\DoxyCodeLine{01489 \textcolor{preprocessor}{                                          ((\_\_OVERRUN\_\_) == UART\_ADVFEATURE\_OVERRUN\_DISABLE))}}
+\DoxyCodeLine{01490 }
+\DoxyCodeLine{01496 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_AUTOBAUDRATE(\_\_AUTOBAUDRATE\_\_) (((\_\_AUTOBAUDRATE\_\_) == \(\backslash\)}}
+\DoxyCodeLine{01497 \textcolor{preprocessor}{                                                            UART\_ADVFEATURE\_AUTOBAUDRATE\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01498 \textcolor{preprocessor}{                                                           ((\_\_AUTOBAUDRATE\_\_) == UART\_ADVFEATURE\_AUTOBAUDRATE\_ENABLE))}}
+\DoxyCodeLine{01499 }
+\DoxyCodeLine{01505 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_DMAONRXERROR(\_\_DMA\_\_)  (((\_\_DMA\_\_) == UART\_ADVFEATURE\_DMA\_ENABLEONRXERROR) || \(\backslash\)}}
+\DoxyCodeLine{01506 \textcolor{preprocessor}{                                                   ((\_\_DMA\_\_) == UART\_ADVFEATURE\_DMA\_DISABLEONRXERROR))}}
+\DoxyCodeLine{01507 }
+\DoxyCodeLine{01513 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_MSBFIRST(\_\_MSBFIRST\_\_) (((\_\_MSBFIRST\_\_) == UART\_ADVFEATURE\_MSBFIRST\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01514 \textcolor{preprocessor}{                                                   ((\_\_MSBFIRST\_\_) == UART\_ADVFEATURE\_MSBFIRST\_ENABLE))}}
+\DoxyCodeLine{01515 }
+\DoxyCodeLine{01521 \textcolor{preprocessor}{\#define IS\_UART\_ADVFEATURE\_STOPMODE(\_\_STOPMODE\_\_) (((\_\_STOPMODE\_\_) == UART\_ADVFEATURE\_STOPMODE\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01522 \textcolor{preprocessor}{                                                   ((\_\_STOPMODE\_\_) == UART\_ADVFEATURE\_STOPMODE\_ENABLE))}}
+\DoxyCodeLine{01523 }
+\DoxyCodeLine{01529 \textcolor{preprocessor}{\#define IS\_UART\_MUTE\_MODE(\_\_MUTE\_\_)       (((\_\_MUTE\_\_) == UART\_ADVFEATURE\_MUTEMODE\_DISABLE) || \(\backslash\)}}
+\DoxyCodeLine{01530 \textcolor{preprocessor}{                                           ((\_\_MUTE\_\_) == UART\_ADVFEATURE\_MUTEMODE\_ENABLE))}}
+\DoxyCodeLine{01531 }
+\DoxyCodeLine{01537 \textcolor{preprocessor}{\#define IS\_UART\_WAKEUP\_SELECTION(\_\_WAKE\_\_) (((\_\_WAKE\_\_) == UART\_WAKEUP\_ON\_ADDRESS)           || \(\backslash\)}}
+\DoxyCodeLine{01538 \textcolor{preprocessor}{                                            ((\_\_WAKE\_\_) == UART\_WAKEUP\_ON\_STARTBIT)          || \(\backslash\)}}
+\DoxyCodeLine{01539 \textcolor{preprocessor}{                                            ((\_\_WAKE\_\_) == UART\_WAKEUP\_ON\_READDATA\_NONEMPTY))}}
+\DoxyCodeLine{01540 }
+\DoxyCodeLine{01546 \textcolor{preprocessor}{\#define IS\_UART\_DE\_POLARITY(\_\_POLARITY\_\_)    (((\_\_POLARITY\_\_) == UART\_DE\_POLARITY\_HIGH) || \(\backslash\)}}
+\DoxyCodeLine{01547 \textcolor{preprocessor}{                                              ((\_\_POLARITY\_\_) == UART\_DE\_POLARITY\_LOW))}}
+\DoxyCodeLine{01548 }
+\DoxyCodeLine{01554 \textcolor{preprocessor}{\#define IS\_UART\_PRESCALER(\_\_CLOCKPRESCALER\_\_) (((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV1)   || \(\backslash\)}}
+\DoxyCodeLine{01555 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV2)   || \(\backslash\)}}
+\DoxyCodeLine{01556 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV4)   || \(\backslash\)}}
+\DoxyCodeLine{01557 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV6)   || \(\backslash\)}}
+\DoxyCodeLine{01558 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV8)   || \(\backslash\)}}
+\DoxyCodeLine{01559 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV10)  || \(\backslash\)}}
+\DoxyCodeLine{01560 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV12)  || \(\backslash\)}}
+\DoxyCodeLine{01561 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV16)  || \(\backslash\)}}
+\DoxyCodeLine{01562 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV32)  || \(\backslash\)}}
+\DoxyCodeLine{01563 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV64)  || \(\backslash\)}}
+\DoxyCodeLine{01564 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV128) || \(\backslash\)}}
+\DoxyCodeLine{01565 \textcolor{preprocessor}{                                               ((\_\_CLOCKPRESCALER\_\_) == UART\_PRESCALER\_DIV256))}}
+\DoxyCodeLine{01566 }
+\DoxyCodeLine{01571 \textcolor{comment}{/* Include UART HAL Extended module */}}
+\DoxyCodeLine{01572 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal\_uart\_ex.h"{}}}
+\DoxyCodeLine{01573 }
+\DoxyCodeLine{01574 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{01583 \textcolor{comment}{/* Initialization and de-\/initialization functions  ****************************/}}
+\DoxyCodeLine{01584 HAL\_StatusTypeDef HAL\_UART\_Init(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01585 HAL\_StatusTypeDef HAL\_HalfDuplex\_Init(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01586 HAL\_StatusTypeDef HAL\_LIN\_Init(UART\_HandleTypeDef *huart, uint32\_t BreakDetectLength);}
+\DoxyCodeLine{01587 HAL\_StatusTypeDef HAL\_MultiProcessor\_Init(UART\_HandleTypeDef *huart, uint8\_t Address, uint32\_t WakeUpMethod);}
+\DoxyCodeLine{01588 HAL\_StatusTypeDef HAL\_UART\_DeInit(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01589 \textcolor{keywordtype}{void} HAL\_UART\_MspInit(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01590 \textcolor{keywordtype}{void} HAL\_UART\_MspDeInit(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01591 }
+\DoxyCodeLine{01592 \textcolor{comment}{/* Callbacks Register/UnRegister functions  ***********************************/}}
+\DoxyCodeLine{01593 \textcolor{preprocessor}{\#if (USE\_HAL\_UART\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{01594 HAL\_StatusTypeDef HAL\_UART\_RegisterCallback(UART\_HandleTypeDef *huart, HAL\_UART\_CallbackIDTypeDef CallbackID,}
+\DoxyCodeLine{01595                                             pUART\_CallbackTypeDef pCallback);}
+\DoxyCodeLine{01596 HAL\_StatusTypeDef HAL\_UART\_UnRegisterCallback(UART\_HandleTypeDef *huart, HAL\_UART\_CallbackIDTypeDef CallbackID);}
+\DoxyCodeLine{01597 }
+\DoxyCodeLine{01598 HAL\_StatusTypeDef HAL\_UART\_RegisterRxEventCallback(UART\_HandleTypeDef *huart, pUART\_RxEventCallbackTypeDef pCallback);}
+\DoxyCodeLine{01599 HAL\_StatusTypeDef HAL\_UART\_UnRegisterRxEventCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01600 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_UART\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01601 }
+\DoxyCodeLine{01610 \textcolor{comment}{/* IO operation functions *****************************************************/}}
+\DoxyCodeLine{01611 HAL\_StatusTypeDef HAL\_UART\_Transmit(UART\_HandleTypeDef *huart, \textcolor{keyword}{const} uint8\_t *pData, uint16\_t Size, uint32\_t Timeout);}
+\DoxyCodeLine{01612 HAL\_StatusTypeDef HAL\_UART\_Receive(UART\_HandleTypeDef *huart, uint8\_t *pData, uint16\_t Size, uint32\_t Timeout);}
+\DoxyCodeLine{01613 HAL\_StatusTypeDef HAL\_UART\_Transmit\_IT(UART\_HandleTypeDef *huart, \textcolor{keyword}{const} uint8\_t *pData, uint16\_t Size);}
+\DoxyCodeLine{01614 HAL\_StatusTypeDef HAL\_UART\_Receive\_IT(UART\_HandleTypeDef *huart, uint8\_t *pData, uint16\_t Size);}
+\DoxyCodeLine{01615 HAL\_StatusTypeDef HAL\_UART\_Transmit\_DMA(UART\_HandleTypeDef *huart, \textcolor{keyword}{const} uint8\_t *pData, uint16\_t Size);}
+\DoxyCodeLine{01616 HAL\_StatusTypeDef HAL\_UART\_Receive\_DMA(UART\_HandleTypeDef *huart, uint8\_t *pData, uint16\_t Size);}
+\DoxyCodeLine{01617 HAL\_StatusTypeDef HAL\_UART\_DMAPause(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01618 HAL\_StatusTypeDef HAL\_UART\_DMAResume(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01619 HAL\_StatusTypeDef HAL\_UART\_DMAStop(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01620 \textcolor{comment}{/* Transfer Abort functions */}}
+\DoxyCodeLine{01621 HAL\_StatusTypeDef HAL\_UART\_Abort(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01622 HAL\_StatusTypeDef HAL\_UART\_AbortTransmit(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01623 HAL\_StatusTypeDef HAL\_UART\_AbortReceive(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01624 HAL\_StatusTypeDef HAL\_UART\_Abort\_IT(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01625 HAL\_StatusTypeDef HAL\_UART\_AbortTransmit\_IT(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01626 HAL\_StatusTypeDef HAL\_UART\_AbortReceive\_IT(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01627 }
+\DoxyCodeLine{01628 \textcolor{keywordtype}{void} HAL\_UART\_IRQHandler(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01629 \textcolor{keywordtype}{void} HAL\_UART\_TxHalfCpltCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01630 \textcolor{keywordtype}{void} HAL\_UART\_TxCpltCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01631 \textcolor{keywordtype}{void} HAL\_UART\_RxHalfCpltCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01632 \textcolor{keywordtype}{void} HAL\_UART\_RxCpltCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01633 \textcolor{keywordtype}{void} HAL\_UART\_ErrorCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01634 \textcolor{keywordtype}{void} HAL\_UART\_AbortCpltCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01635 \textcolor{keywordtype}{void} HAL\_UART\_AbortTransmitCpltCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01636 \textcolor{keywordtype}{void} HAL\_UART\_AbortReceiveCpltCallback(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01637 }
+\DoxyCodeLine{01638 \textcolor{keywordtype}{void} HAL\_UARTEx\_RxEventCallback(UART\_HandleTypeDef *huart, uint16\_t Size);}
+\DoxyCodeLine{01639 }
+\DoxyCodeLine{01648 \textcolor{comment}{/* Peripheral Control functions  ************************************************/}}
+\DoxyCodeLine{01649 \textcolor{keywordtype}{void} HAL\_UART\_ReceiverTimeout\_Config(UART\_HandleTypeDef *huart, uint32\_t TimeoutValue);}
+\DoxyCodeLine{01650 HAL\_StatusTypeDef HAL\_UART\_EnableReceiverTimeout(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01651 HAL\_StatusTypeDef HAL\_UART\_DisableReceiverTimeout(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01652 }
+\DoxyCodeLine{01653 HAL\_StatusTypeDef HAL\_LIN\_SendBreak(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01654 HAL\_StatusTypeDef HAL\_MultiProcessor\_EnableMuteMode(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01655 HAL\_StatusTypeDef HAL\_MultiProcessor\_DisableMuteMode(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01656 \textcolor{keywordtype}{void} HAL\_MultiProcessor\_EnterMuteMode(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01657 HAL\_StatusTypeDef HAL\_HalfDuplex\_EnableTransmitter(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01658 HAL\_StatusTypeDef HAL\_HalfDuplex\_EnableReceiver(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01659 }
+\DoxyCodeLine{01668 \textcolor{comment}{/* Peripheral State and Errors functions  **************************************************/}}
+\DoxyCodeLine{01669 HAL\_UART\_StateTypeDef HAL\_UART\_GetState(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01670 uint32\_t              HAL\_UART\_GetError(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01671 }
+\DoxyCodeLine{01680 \textcolor{comment}{/* Private functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{01684 \textcolor{preprocessor}{\#if (USE\_HAL\_UART\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{01685 \textcolor{keywordtype}{void}              UART\_InitCallbacksToDefault(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01686 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_UART\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01687 HAL\_StatusTypeDef UART\_SetConfig(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01688 HAL\_StatusTypeDef UART\_CheckIdleState(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01689 HAL\_StatusTypeDef UART\_WaitOnFlagUntilTimeout(UART\_HandleTypeDef *huart, uint32\_t Flag, FlagStatus Status,}
+\DoxyCodeLine{01690                                               uint32\_t Tickstart, uint32\_t Timeout);}
+\DoxyCodeLine{01691 \textcolor{keywordtype}{void}              UART\_AdvFeatureConfig(UART\_HandleTypeDef *huart);}
+\DoxyCodeLine{01692 HAL\_StatusTypeDef UART\_Start\_Receive\_IT(UART\_HandleTypeDef *huart, uint8\_t *pData, uint16\_t Size);}
+\DoxyCodeLine{01693 HAL\_StatusTypeDef UART\_Start\_Receive\_DMA(UART\_HandleTypeDef *huart, uint8\_t *pData, uint16\_t Size);}
+\DoxyCodeLine{01694 }
+\DoxyCodeLine{01699 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{01703 \textcolor{comment}{/* Prescaler Table used in BRR computation macros.}}
+\DoxyCodeLine{01704 \textcolor{comment}{   Declared as extern here to allow use of private UART macros, outside of HAL UART functions */}}
+\DoxyCodeLine{01705 \textcolor{keyword}{extern} \textcolor{keyword}{const} uint16\_t UARTPrescTable[12];}
+\DoxyCodeLine{01718 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{01719 \}}
+\DoxyCodeLine{01720 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01721 }
+\DoxyCodeLine{01722 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32G4xx\_HAL\_UART\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01723 }
+
+\end{DoxyCode}

@@ -1,0 +1,715 @@
+\doxysection{stm32g4xx\+\_\+ll\+\_\+dmamux.\+h}
+\label{stm32g4xx__ll__dmamux_8h_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_dmamux.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_dmamux.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00019 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020 \textcolor{preprocessor}{\#ifndef \_\_STM32G4xx\_LL\_DMAMUX\_H}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_LL\_DMAMUX\_H}}
+\DoxyCodeLine{00022 }
+\DoxyCodeLine{00023 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00024 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#include "{}stm32g4xx.h"{}}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00034 \textcolor{preprocessor}{\#if defined (DMAMUX1)}}
+\DoxyCodeLine{00035 }
+\DoxyCodeLine{00040 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00041 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00042 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00046 \textcolor{comment}{/* Define used to get DMAMUX CCR register size */}}
+\DoxyCodeLine{00047 \textcolor{preprocessor}{\#define DMAMUX\_CCR\_SIZE                   0x00000004U}}
+\DoxyCodeLine{00048 }
+\DoxyCodeLine{00049 \textcolor{comment}{/* Define used to get DMAMUX RGCR register size */}}
+\DoxyCodeLine{00050 \textcolor{preprocessor}{\#define DMAMUX\_RGCR\_SIZE                  0x00000004U}}
+\DoxyCodeLine{00055 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00059 \textcolor{preprocessor}{\#define UNUSED(X) (void)X}}
+\DoxyCodeLine{00064 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00065 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00073 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF0               DMAMUX\_CFR\_CSOF0       }}
+\DoxyCodeLine{00074 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF1               DMAMUX\_CFR\_CSOF1       }}
+\DoxyCodeLine{00075 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF2               DMAMUX\_CFR\_CSOF2       }}
+\DoxyCodeLine{00076 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF3               DMAMUX\_CFR\_CSOF3       }}
+\DoxyCodeLine{00077 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF4               DMAMUX\_CFR\_CSOF4       }}
+\DoxyCodeLine{00078 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF5               DMAMUX\_CFR\_CSOF5       }}
+\DoxyCodeLine{00079 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF6               DMAMUX\_CFR\_CSOF6       }}
+\DoxyCodeLine{00080 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF7               DMAMUX\_CFR\_CSOF7       }}
+\DoxyCodeLine{00081 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF8               DMAMUX\_CFR\_CSOF8       }}
+\DoxyCodeLine{00082 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF9               DMAMUX\_CFR\_CSOF9       }}
+\DoxyCodeLine{00083 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF10              DMAMUX\_CFR\_CSOF10      }}
+\DoxyCodeLine{00084 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF11              DMAMUX\_CFR\_CSOF11      }}
+\DoxyCodeLine{00085 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF12              DMAMUX\_CFR\_CSOF12      }}
+\DoxyCodeLine{00086 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF13              DMAMUX\_CFR\_CSOF13      }}
+\DoxyCodeLine{00087 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF14              DMAMUX\_CFR\_CSOF14      }}
+\DoxyCodeLine{00088 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CFR\_CSOF15              DMAMUX\_CFR\_CSOF15      }}
+\DoxyCodeLine{00089 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGCFR\_RGCOF0            DMAMUX\_RGCFR\_COF0      }}
+\DoxyCodeLine{00090 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGCFR\_RGCOF1            DMAMUX\_RGCFR\_COF1      }}
+\DoxyCodeLine{00091 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGCFR\_RGCOF2            DMAMUX\_RGCFR\_COF2      }}
+\DoxyCodeLine{00092 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGCFR\_RGCOF3            DMAMUX\_RGCFR\_COF3      }}
+\DoxyCodeLine{00101 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF0                DMAMUX\_CSR\_SOF0       }}
+\DoxyCodeLine{00102 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF1                DMAMUX\_CSR\_SOF1       }}
+\DoxyCodeLine{00103 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF2                DMAMUX\_CSR\_SOF2       }}
+\DoxyCodeLine{00104 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF3                DMAMUX\_CSR\_SOF3       }}
+\DoxyCodeLine{00105 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF4                DMAMUX\_CSR\_SOF4       }}
+\DoxyCodeLine{00106 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF5                DMAMUX\_CSR\_SOF5       }}
+\DoxyCodeLine{00107 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF6                DMAMUX\_CSR\_SOF6       }}
+\DoxyCodeLine{00108 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF7                DMAMUX\_CSR\_SOF7       }}
+\DoxyCodeLine{00109 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF8                DMAMUX\_CSR\_SOF8       }}
+\DoxyCodeLine{00110 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF9                DMAMUX\_CSR\_SOF9       }}
+\DoxyCodeLine{00111 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF10               DMAMUX\_CSR\_SOF10      }}
+\DoxyCodeLine{00112 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF11               DMAMUX\_CSR\_SOF11      }}
+\DoxyCodeLine{00113 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF12               DMAMUX\_CSR\_SOF12      }}
+\DoxyCodeLine{00114 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF13               DMAMUX\_CSR\_SOF13      }}
+\DoxyCodeLine{00115 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF14               DMAMUX\_CSR\_SOF14      }}
+\DoxyCodeLine{00116 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CSR\_SOF15               DMAMUX\_CSR\_SOF15      }}
+\DoxyCodeLine{00117 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGSR\_RGOF0              DMAMUX\_RGSR\_OF0       }}
+\DoxyCodeLine{00118 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGSR\_RGOF1              DMAMUX\_RGSR\_OF1       }}
+\DoxyCodeLine{00119 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGSR\_RGOF2              DMAMUX\_RGSR\_OF2       }}
+\DoxyCodeLine{00120 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGSR\_RGOF3              DMAMUX\_RGSR\_OF3       }}
+\DoxyCodeLine{00129 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CCR\_SOIE                DMAMUX\_CxCR\_SOIE          }}
+\DoxyCodeLine{00130 \textcolor{preprocessor}{\#define LL\_DMAMUX\_RGCR\_RGOIE              DMAMUX\_RGxCR\_OIE          }}
+\DoxyCodeLine{00138 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_MEM2MEM         0x00000000U  }}
+\DoxyCodeLine{00139 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GENERATOR0      0x00000001U  }}
+\DoxyCodeLine{00140 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GENERATOR1      0x00000002U  }}
+\DoxyCodeLine{00141 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GENERATOR2      0x00000003U  }}
+\DoxyCodeLine{00142 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GENERATOR3      0x00000004U  }}
+\DoxyCodeLine{00143 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_ADC1            0x00000005U  }}
+\DoxyCodeLine{00144 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_DAC1\_CH1        0x00000006U  }}
+\DoxyCodeLine{00145 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_DAC1\_CH2        0x00000007U  }}
+\DoxyCodeLine{00146 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM6\_UP         0x00000008U  }}
+\DoxyCodeLine{00147 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM7\_UP         0x00000009U  }}
+\DoxyCodeLine{00148 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SPI1\_RX         0x0000000AU  }}
+\DoxyCodeLine{00149 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SPI1\_TX         0x0000000BU  }}
+\DoxyCodeLine{00150 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SPI2\_RX         0x0000000CU  }}
+\DoxyCodeLine{00151 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SPI2\_TX         0x0000000DU  }}
+\DoxyCodeLine{00152 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SPI3\_RX         0x0000000EU  }}
+\DoxyCodeLine{00153 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SPI3\_TX         0x0000000FU  }}
+\DoxyCodeLine{00154 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_I2C1\_RX         0x00000010U  }}
+\DoxyCodeLine{00155 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_I2C1\_TX         0x00000011U  }}
+\DoxyCodeLine{00156 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_I2C2\_RX         0x00000012U  }}
+\DoxyCodeLine{00157 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_I2C2\_TX         0x00000013U  }}
+\DoxyCodeLine{00158 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_I2C3\_RX         0x00000014U  }}
+\DoxyCodeLine{00159 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_I2C3\_TX         0x00000015U  }}
+\DoxyCodeLine{00160 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_I2C4\_RX         0x00000016U  }}
+\DoxyCodeLine{00161 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_I2C4\_TX         0x00000017U  }}
+\DoxyCodeLine{00162 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_USART1\_RX       0x00000018U  }}
+\DoxyCodeLine{00163 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_USART1\_TX       0x00000019U  }}
+\DoxyCodeLine{00164 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_USART2\_RX       0x0000001AU  }}
+\DoxyCodeLine{00165 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_USART2\_TX       0x0000001BU  }}
+\DoxyCodeLine{00166 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_USART3\_RX       0x0000001CU  }}
+\DoxyCodeLine{00167 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_USART3\_TX       0x0000001DU  }}
+\DoxyCodeLine{00168 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_UART4\_RX        0x0000001EU  }}
+\DoxyCodeLine{00169 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_UART4\_TX        0x0000001FU  }}
+\DoxyCodeLine{00170 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_UART5\_RX        0x00000020U  }}
+\DoxyCodeLine{00171 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_UART5\_TX        0x00000021U  }}
+\DoxyCodeLine{00172 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_LPUART1\_RX      0x00000022U  }}
+\DoxyCodeLine{00173 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_LPUART1\_TX      0x00000023U  }}
+\DoxyCodeLine{00174 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_ADC2            0x00000024U  }}
+\DoxyCodeLine{00175 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_ADC3            0x00000025U  }}
+\DoxyCodeLine{00176 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_ADC4            0x00000026U  }}
+\DoxyCodeLine{00177 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_ADC5            0x00000027U  }}
+\DoxyCodeLine{00178 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_QSPI            0x00000028U  }}
+\DoxyCodeLine{00179 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_DAC2\_CH1        0x00000029U  }}
+\DoxyCodeLine{00180 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM1\_CH1        0x0000002AU  }}
+\DoxyCodeLine{00181 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM1\_CH2        0x0000002BU  }}
+\DoxyCodeLine{00182 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM1\_CH3        0x0000002CU  }}
+\DoxyCodeLine{00183 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM1\_CH4        0x0000002DU  }}
+\DoxyCodeLine{00184 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM1\_UP         0x0000002EU  }}
+\DoxyCodeLine{00185 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM1\_TRIG       0x0000002FU  }}
+\DoxyCodeLine{00186 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM1\_COM        0x00000030U  }}
+\DoxyCodeLine{00187 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM8\_CH1        0x00000031U  }}
+\DoxyCodeLine{00188 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM8\_CH2        0x00000032U  }}
+\DoxyCodeLine{00189 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM8\_CH3        0x00000033U  }}
+\DoxyCodeLine{00190 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM8\_CH4        0x00000034U  }}
+\DoxyCodeLine{00191 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM8\_UP         0x00000035U  }}
+\DoxyCodeLine{00192 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM8\_TRIG       0x00000036U  }}
+\DoxyCodeLine{00193 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM8\_COM        0x00000037U  }}
+\DoxyCodeLine{00194 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM2\_CH1        0x00000038U  }}
+\DoxyCodeLine{00195 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM2\_CH2        0x00000039U  }}
+\DoxyCodeLine{00196 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM2\_CH3        0x0000003AU  }}
+\DoxyCodeLine{00197 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM2\_CH4        0x0000003BU  }}
+\DoxyCodeLine{00198 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM2\_UP         0x0000003CU  }}
+\DoxyCodeLine{00199 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM3\_CH1        0x0000003DU  }}
+\DoxyCodeLine{00200 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM3\_CH2        0x0000003EU  }}
+\DoxyCodeLine{00201 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM3\_CH3        0x0000003FU  }}
+\DoxyCodeLine{00202 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM3\_CH4        0x00000040U  }}
+\DoxyCodeLine{00203 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM3\_UP         0x00000041U  }}
+\DoxyCodeLine{00204 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM3\_TRIG       0x00000042U  }}
+\DoxyCodeLine{00205 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM4\_CH1        0x00000043U  }}
+\DoxyCodeLine{00206 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM4\_CH2        0x00000044U  }}
+\DoxyCodeLine{00207 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM4\_CH3        0x00000045U  }}
+\DoxyCodeLine{00208 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM4\_CH4        0x00000046U  }}
+\DoxyCodeLine{00209 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM4\_UP         0x00000047U  }}
+\DoxyCodeLine{00210 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM5\_CH1        0x00000048U  }}
+\DoxyCodeLine{00211 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM5\_CH2        0x00000049U  }}
+\DoxyCodeLine{00212 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM5\_CH3        0x0000004AU  }}
+\DoxyCodeLine{00213 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM5\_CH4        0x0000004BU  }}
+\DoxyCodeLine{00214 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM5\_UP         0x0000004CU  }}
+\DoxyCodeLine{00215 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM5\_TRIG       0x0000004DU  }}
+\DoxyCodeLine{00216 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM15\_CH1       0x0000004EU  }}
+\DoxyCodeLine{00217 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM15\_UP        0x0000004FU  }}
+\DoxyCodeLine{00218 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM15\_TRIG      0x00000050U  }}
+\DoxyCodeLine{00219 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM15\_COM       0x00000051U  }}
+\DoxyCodeLine{00220 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM16\_CH1       0x00000052U  }}
+\DoxyCodeLine{00221 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM16\_UP        0x00000053U  }}
+\DoxyCodeLine{00222 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM17\_CH1       0x00000054U  }}
+\DoxyCodeLine{00223 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM17\_UP        0x00000055U  }}
+\DoxyCodeLine{00224 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM20\_CH1       0x00000056U  }}
+\DoxyCodeLine{00225 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM20\_CH2       0x00000057U  }}
+\DoxyCodeLine{00226 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM20\_CH3       0x00000058U  }}
+\DoxyCodeLine{00227 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM20\_CH4       0x00000059U  }}
+\DoxyCodeLine{00228 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM20\_UP        0x0000005AU  }}
+\DoxyCodeLine{00229 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_AES\_IN          0x0000005BU  }}
+\DoxyCodeLine{00230 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_AES\_OUT         0x0000005CU  }}
+\DoxyCodeLine{00231 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM20\_TRIG      0x0000005DU  }}
+\DoxyCodeLine{00232 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_TIM20\_COM       0x0000005EU  }}
+\DoxyCodeLine{00233 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_HRTIM1\_M        0x0000005FU  }}
+\DoxyCodeLine{00234 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_HRTIM1\_A        0x00000060U  }}
+\DoxyCodeLine{00235 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_HRTIM1\_B        0x00000061U  }}
+\DoxyCodeLine{00236 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_HRTIM1\_C        0x00000062U  }}
+\DoxyCodeLine{00237 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_HRTIM1\_D        0x00000063U  }}
+\DoxyCodeLine{00238 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_HRTIM1\_E        0x00000064U  }}
+\DoxyCodeLine{00239 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_HRTIM1\_F        0x00000065U  }}
+\DoxyCodeLine{00240 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_DAC3\_CH1        0x00000066U  }}
+\DoxyCodeLine{00241 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_DAC3\_CH2        0x00000067U  }}
+\DoxyCodeLine{00242 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_DAC4\_CH1        0x00000068U  }}
+\DoxyCodeLine{00243 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_DAC4\_CH2        0x00000069U  }}
+\DoxyCodeLine{00244 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SPI4\_RX         0x0000006AU  }}
+\DoxyCodeLine{00245 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SPI4\_TX         0x0000006BU  }}
+\DoxyCodeLine{00246 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SAI1\_A          0x0000006CU  }}
+\DoxyCodeLine{00247 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_SAI1\_B          0x0000006DU  }}
+\DoxyCodeLine{00248 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_FMAC\_READ       0x0000006EU  }}
+\DoxyCodeLine{00249 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_FMAC\_WRITE      0x0000006FU  }}
+\DoxyCodeLine{00250 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_CORDIC\_READ     0x00000070U  }}
+\DoxyCodeLine{00251 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_CORDIC\_WRITE    0x00000071U  }}
+\DoxyCodeLine{00252 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_UCPD1\_RX        0x00000072U  }}
+\DoxyCodeLine{00253 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_UCPD1\_TX        0x00000073U  }}
+\DoxyCodeLine{00262 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_0               0x00000000U               }}
+\DoxyCodeLine{00263 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_1               0x00000001U               }}
+\DoxyCodeLine{00264 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_2               0x00000002U               }}
+\DoxyCodeLine{00265 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_3               0x00000003U               }}
+\DoxyCodeLine{00266 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_4               0x00000004U               }}
+\DoxyCodeLine{00267 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_5               0x00000005U               }}
+\DoxyCodeLine{00268 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_6               0x00000006U               }}
+\DoxyCodeLine{00269 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_7               0x00000007U               }}
+\DoxyCodeLine{00270 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_8               0x00000008U               }}
+\DoxyCodeLine{00271 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_9               0x00000009U               }}
+\DoxyCodeLine{00272 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_10              0x0000000AU               }}
+\DoxyCodeLine{00273 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_11              0x0000000BU               }}
+\DoxyCodeLine{00274 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_12              0x0000000CU               }}
+\DoxyCodeLine{00275 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_13              0x0000000DU               }}
+\DoxyCodeLine{00276 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_14              0x0000000EU               }}
+\DoxyCodeLine{00277 \textcolor{preprocessor}{\#define LL\_DMAMUX\_CHANNEL\_15              0x0000000FU               }}
+\DoxyCodeLine{00285 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_NO\_EVENT            0x00000000U                               }}
+\DoxyCodeLine{00286 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_POL\_RISING          DMAMUX\_CxCR\_SPOL\_0                        }}
+\DoxyCodeLine{00287 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_POL\_FALLING         DMAMUX\_CxCR\_SPOL\_1                        }}
+\DoxyCodeLine{00288 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_POL\_RISING\_FALLING  (DMAMUX\_CxCR\_SPOL\_0 | DMAMUX\_CxCR\_SPOL\_1) }}
+\DoxyCodeLine{00296 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE0      0x00000000U                                                                                     }}
+\DoxyCodeLine{00297 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE1      DMAMUX\_CxCR\_SYNC\_ID\_0                                                                           }}
+\DoxyCodeLine{00298 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE2      DMAMUX\_CxCR\_SYNC\_ID\_1                                                                           }}
+\DoxyCodeLine{00299 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE3      (DMAMUX\_CxCR\_SYNC\_ID\_1 |DMAMUX\_CxCR\_SYNC\_ID\_0)                                                  }}
+\DoxyCodeLine{00300 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE4      DMAMUX\_CxCR\_SYNC\_ID\_2                                                                           }}
+\DoxyCodeLine{00301 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE5      (DMAMUX\_CxCR\_SYNC\_ID\_2 | DMAMUX\_CxCR\_SYNC\_ID\_0)                                                 }}
+\DoxyCodeLine{00302 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE6      (DMAMUX\_CxCR\_SYNC\_ID\_2 | DMAMUX\_CxCR\_SYNC\_ID\_1)                                                 }}
+\DoxyCodeLine{00303 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE7      (DMAMUX\_CxCR\_SYNC\_ID\_2 | DMAMUX\_CxCR\_SYNC\_ID\_1 | DMAMUX\_CxCR\_SYNC\_ID\_0)                         }}
+\DoxyCodeLine{00304 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE8      DMAMUX\_CxCR\_SYNC\_ID\_3                                                                           }}
+\DoxyCodeLine{00305 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE9      (DMAMUX\_CxCR\_SYNC\_ID\_3 | DMAMUX\_CxCR\_SYNC\_ID\_0)                                                 }}
+\DoxyCodeLine{00306 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE10     (DMAMUX\_CxCR\_SYNC\_ID\_3 | DMAMUX\_CxCR\_SYNC\_ID\_1)                                                 }}
+\DoxyCodeLine{00307 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE11     (DMAMUX\_CxCR\_SYNC\_ID\_3 | DMAMUX\_CxCR\_SYNC\_ID\_1 | DMAMUX\_CxCR\_SYNC\_ID\_0)                         }}
+\DoxyCodeLine{00308 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE12     (DMAMUX\_CxCR\_SYNC\_ID\_3 | DMAMUX\_CxCR\_SYNC\_ID\_2)                                                 }}
+\DoxyCodeLine{00309 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE13     (DMAMUX\_CxCR\_SYNC\_ID\_3 | DMAMUX\_CxCR\_SYNC\_ID\_2 | DMAMUX\_CxCR\_SYNC\_ID\_0)                         }}
+\DoxyCodeLine{00310 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE14     (DMAMUX\_CxCR\_SYNC\_ID\_3 | DMAMUX\_CxCR\_SYNC\_ID\_2 | DMAMUX\_CxCR\_SYNC\_ID\_1)                         }}
+\DoxyCodeLine{00311 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_EXTI\_LINE15     (DMAMUX\_CxCR\_SYNC\_ID\_3 | DMAMUX\_CxCR\_SYNC\_ID\_2 | DMAMUX\_CxCR\_SYNC\_ID\_1 | DMAMUX\_CxCR\_SYNC\_ID\_0) }}
+\DoxyCodeLine{00312 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_DMAMUX\_CH0      DMAMUX\_CxCR\_SYNC\_ID\_4                                                                           }}
+\DoxyCodeLine{00313 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_DMAMUX\_CH1      (DMAMUX\_CxCR\_SYNC\_ID\_4 | DMAMUX\_CxCR\_SYNC\_ID\_0)                                                 }}
+\DoxyCodeLine{00314 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_DMAMUX\_CH2      (DMAMUX\_CxCR\_SYNC\_ID\_4 | DMAMUX\_CxCR\_SYNC\_ID\_1)                                                 }}
+\DoxyCodeLine{00315 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_DMAMUX\_CH3      (DMAMUX\_CxCR\_SYNC\_ID\_4 | DMAMUX\_CxCR\_SYNC\_ID\_1 | DMAMUX\_CxCR\_SYNC\_ID\_0)                         }}
+\DoxyCodeLine{00316 \textcolor{preprocessor}{\#define LL\_DMAMUX\_SYNC\_LPTIM1\_OUT      (DMAMUX\_CxCR\_SYNC\_ID\_4 | DMAMUX\_CxCR\_SYNC\_ID\_2)                                                 }}
+\DoxyCodeLine{00324 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_0           0x00000000U}}
+\DoxyCodeLine{00325 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_1           0x00000001U}}
+\DoxyCodeLine{00326 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_2           0x00000002U}}
+\DoxyCodeLine{00327 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_3           0x00000003U}}
+\DoxyCodeLine{00335 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_NO\_EVENT                  0x00000000U                                  }}
+\DoxyCodeLine{00336 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_POL\_RISING                DMAMUX\_RGxCR\_GPOL\_0                          }}
+\DoxyCodeLine{00337 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_POL\_FALLING               DMAMUX\_RGxCR\_GPOL\_1                          }}
+\DoxyCodeLine{00338 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_POL\_RISING\_FALLING        (DMAMUX\_RGxCR\_GPOL\_0 | DMAMUX\_RGxCR\_GPOL\_1)  }}
+\DoxyCodeLine{00346 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE0      0x00000000U                                                                                     }}
+\DoxyCodeLine{00347 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE1      DMAMUX\_RGxCR\_SIG\_ID\_0                                                                           }}
+\DoxyCodeLine{00348 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE2      DMAMUX\_RGxCR\_SIG\_ID\_1                                                                           }}
+\DoxyCodeLine{00349 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE3      (DMAMUX\_RGxCR\_SIG\_ID\_1 |DMAMUX\_RGxCR\_SIG\_ID\_0)                                                  }}
+\DoxyCodeLine{00350 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE4      DMAMUX\_RGxCR\_SIG\_ID\_2                                                                           }}
+\DoxyCodeLine{00351 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE5      (DMAMUX\_RGxCR\_SIG\_ID\_2 | DMAMUX\_RGxCR\_SIG\_ID\_0)                                                 }}
+\DoxyCodeLine{00352 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE6      (DMAMUX\_RGxCR\_SIG\_ID\_2 | DMAMUX\_RGxCR\_SIG\_ID\_1)                                                 }}
+\DoxyCodeLine{00353 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE7      (DMAMUX\_RGxCR\_SIG\_ID\_2 | DMAMUX\_RGxCR\_SIG\_ID\_1 | DMAMUX\_RGxCR\_SIG\_ID\_0)                         }}
+\DoxyCodeLine{00354 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE8      DMAMUX\_RGxCR\_SIG\_ID\_3                                                                           }}
+\DoxyCodeLine{00355 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE9      (DMAMUX\_RGxCR\_SIG\_ID\_3 | DMAMUX\_RGxCR\_SIG\_ID\_0)                                                 }}
+\DoxyCodeLine{00356 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE10     (DMAMUX\_RGxCR\_SIG\_ID\_3 | DMAMUX\_RGxCR\_SIG\_ID\_1)                                                 }}
+\DoxyCodeLine{00357 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE11     (DMAMUX\_RGxCR\_SIG\_ID\_3 | DMAMUX\_RGxCR\_SIG\_ID\_1 | DMAMUX\_RGxCR\_SIG\_ID\_0)                         }}
+\DoxyCodeLine{00358 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE12     (DMAMUX\_RGxCR\_SIG\_ID\_3 | DMAMUX\_RGxCR\_SIG\_ID\_2)                                                 }}
+\DoxyCodeLine{00359 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE13     (DMAMUX\_RGxCR\_SIG\_ID\_3 | DMAMUX\_RGxCR\_SIG\_ID\_2 | DMAMUX\_RGxCR\_SIG\_ID\_0)                         }}
+\DoxyCodeLine{00360 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE14     (DMAMUX\_RGxCR\_SIG\_ID\_3 | DMAMUX\_RGxCR\_SIG\_ID\_2 | DMAMUX\_RGxCR\_SIG\_ID\_1)                         }}
+\DoxyCodeLine{00361 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_EXTI\_LINE15     (DMAMUX\_RGxCR\_SIG\_ID\_3 | DMAMUX\_RGxCR\_SIG\_ID\_2 | DMAMUX\_RGxCR\_SIG\_ID\_1 | DMAMUX\_RGxCR\_SIG\_ID\_0) }}
+\DoxyCodeLine{00362 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_DMAMUX\_CH0      DMAMUX\_RGxCR\_SIG\_ID\_4                                                                           }}
+\DoxyCodeLine{00363 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_DMAMUX\_CH1      (DMAMUX\_RGxCR\_SIG\_ID\_4 | DMAMUX\_RGxCR\_SIG\_ID\_0)                                                 }}
+\DoxyCodeLine{00364 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_DMAMUX\_CH2      (DMAMUX\_RGxCR\_SIG\_ID\_4 | DMAMUX\_RGxCR\_SIG\_ID\_1)                                                 }}
+\DoxyCodeLine{00365 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_DMAMUX\_CH3      (DMAMUX\_RGxCR\_SIG\_ID\_4 | DMAMUX\_RGxCR\_SIG\_ID\_1 | DMAMUX\_RGxCR\_SIG\_ID\_0)                         }}
+\DoxyCodeLine{00366 \textcolor{preprocessor}{\#define LL\_DMAMUX\_REQ\_GEN\_LPTIM1\_OUT      (DMAMUX\_RGxCR\_SIG\_ID\_4 | DMAMUX\_RGxCR\_SIG\_ID\_2)                                                 }}
+\DoxyCodeLine{00375 \textcolor{comment}{/* Exported macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00389 \textcolor{preprocessor}{\#define LL\_DMAMUX\_WriteReg(\_\_INSTANCE\_\_, \_\_REG\_\_, \_\_VALUE\_\_) WRITE\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_, (\_\_VALUE\_\_))}}
+\DoxyCodeLine{00390 }
+\DoxyCodeLine{00397 \textcolor{preprocessor}{\#define LL\_DMAMUX\_ReadReg(\_\_INSTANCE\_\_, \_\_REG\_\_) READ\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_)}}
+\DoxyCodeLine{00406 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00557 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_SetRequestID(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel, uint32\_t Request)}
+\DoxyCodeLine{00558 \{}
+\DoxyCodeLine{00559   (void)(DMAMUXx);}
+\DoxyCodeLine{00560   MODIFY\_REG((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_DMAREQ\_ID, Request);}
+\DoxyCodeLine{00561 \}}
+\DoxyCodeLine{00562 }
+\DoxyCodeLine{00707 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_GetRequestID(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{00708 \{}
+\DoxyCodeLine{00709   (void)(DMAMUXx);}
+\DoxyCodeLine{00710   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_DMAREQ\_ID));}
+\DoxyCodeLine{00711 \}}
+\DoxyCodeLine{00712 }
+\DoxyCodeLine{00737 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_SetSyncRequestNb(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel, uint32\_t RequestNb)}
+\DoxyCodeLine{00738 \{}
+\DoxyCodeLine{00739   (void)(DMAMUXx);}
+\DoxyCodeLine{00740   MODIFY\_REG((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_NBREQ, ((RequestNb -\/ 1U) << DMAMUX\_CxCR\_NBREQ\_Pos));}
+\DoxyCodeLine{00741 \}}
+\DoxyCodeLine{00742 }
+\DoxyCodeLine{00766 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_GetSyncRequestNb(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{00767 \{}
+\DoxyCodeLine{00768   (void)(DMAMUXx);}
+\DoxyCodeLine{00769   \textcolor{keywordflow}{return} (uint32\_t)(((READ\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_NBREQ)) >> DMAMUX\_CxCR\_NBREQ\_Pos) + 1U);}
+\DoxyCodeLine{00770 \}}
+\DoxyCodeLine{00771 }
+\DoxyCodeLine{00800 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_SetSyncPolarity(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel, uint32\_t Polarity)}
+\DoxyCodeLine{00801 \{}
+\DoxyCodeLine{00802   (void)(DMAMUXx);}
+\DoxyCodeLine{00803   MODIFY\_REG((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SPOL, Polarity);}
+\DoxyCodeLine{00804 \}}
+\DoxyCodeLine{00805 }
+\DoxyCodeLine{00833 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_GetSyncPolarity(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{00834 \{}
+\DoxyCodeLine{00835   (void)(DMAMUXx);}
+\DoxyCodeLine{00836   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SPOL));}
+\DoxyCodeLine{00837 \}}
+\DoxyCodeLine{00838 }
+\DoxyCodeLine{00862 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_EnableEventGeneration(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{00863 \{}
+\DoxyCodeLine{00864   (void)(DMAMUXx);}
+\DoxyCodeLine{00865   SET\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_EGE);}
+\DoxyCodeLine{00866 \}}
+\DoxyCodeLine{00867 }
+\DoxyCodeLine{00891 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_DisableEventGeneration(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{00892 \{}
+\DoxyCodeLine{00893   (void)(DMAMUXx);}
+\DoxyCodeLine{00894   CLEAR\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_EGE);}
+\DoxyCodeLine{00895 \}}
+\DoxyCodeLine{00896 }
+\DoxyCodeLine{00920 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsEnabledEventGeneration(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{00921 \{}
+\DoxyCodeLine{00922   (void)(DMAMUXx);}
+\DoxyCodeLine{00923   \textcolor{keywordflow}{return} ((READ\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_EGE) == (DMAMUX\_CxCR\_EGE))? 1UL : 0UL);}
+\DoxyCodeLine{00924 \}}
+\DoxyCodeLine{00925 }
+\DoxyCodeLine{00949 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_EnableSync(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{00950 \{}
+\DoxyCodeLine{00951   (void)(DMAMUXx);}
+\DoxyCodeLine{00952   SET\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SE);}
+\DoxyCodeLine{00953 \}}
+\DoxyCodeLine{00954 }
+\DoxyCodeLine{00978 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_DisableSync(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{00979 \{}
+\DoxyCodeLine{00980   (void)(DMAMUXx);}
+\DoxyCodeLine{00981   CLEAR\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SE);}
+\DoxyCodeLine{00982 \}}
+\DoxyCodeLine{00983 }
+\DoxyCodeLine{01007 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsEnabledSync(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{01008 \{}
+\DoxyCodeLine{01009   (void)(DMAMUXx);}
+\DoxyCodeLine{01010   \textcolor{keywordflow}{return} ((READ\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SE) == (DMAMUX\_CxCR\_SE))? 1UL : 0UL);}
+\DoxyCodeLine{01011 \}}
+\DoxyCodeLine{01012 }
+\DoxyCodeLine{01058 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_SetSyncID(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel, uint32\_t SyncID)}
+\DoxyCodeLine{01059 \{}
+\DoxyCodeLine{01060   (void)(DMAMUXx);}
+\DoxyCodeLine{01061   MODIFY\_REG((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SYNC\_ID, SyncID);}
+\DoxyCodeLine{01062 \}}
+\DoxyCodeLine{01063 }
+\DoxyCodeLine{01108 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_GetSyncID(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{01109 \{}
+\DoxyCodeLine{01110   (void)(DMAMUXx);}
+\DoxyCodeLine{01111   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SYNC\_ID));}
+\DoxyCodeLine{01112 \}}
+\DoxyCodeLine{01113 }
+\DoxyCodeLine{01125 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_EnableRequestGen(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01126 \{}
+\DoxyCodeLine{01127   (void)(DMAMUXx);}
+\DoxyCodeLine{01128   SET\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE * (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_GE);}
+\DoxyCodeLine{01129 \}}
+\DoxyCodeLine{01130 }
+\DoxyCodeLine{01142 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_DisableRequestGen(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01143 \{}
+\DoxyCodeLine{01144   (void)(DMAMUXx);}
+\DoxyCodeLine{01145   CLEAR\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE * (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_GE);}
+\DoxyCodeLine{01146 \}}
+\DoxyCodeLine{01147 }
+\DoxyCodeLine{01159 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsEnabledRequestGen(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01160 \{}
+\DoxyCodeLine{01161   (void)(DMAMUXx);}
+\DoxyCodeLine{01162   \textcolor{keywordflow}{return} ((READ\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE * (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_GE) == (DMAMUX\_RGxCR\_GE))? 1UL : 0UL);}
+\DoxyCodeLine{01163 \}}
+\DoxyCodeLine{01164 }
+\DoxyCodeLine{01181 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_SetRequestGenPolarity(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel,}
+\DoxyCodeLine{01182                                                      uint32\_t Polarity)}
+\DoxyCodeLine{01183 \{}
+\DoxyCodeLine{01184   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01185   MODIFY\_REG(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01186                                                        (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_GPOL, Polarity);}
+\DoxyCodeLine{01187 \}}
+\DoxyCodeLine{01188 }
+\DoxyCodeLine{01204 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_GetRequestGenPolarity(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01205 \{}
+\DoxyCodeLine{01206   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01207   \textcolor{keywordflow}{return} (READ\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01208                                                              (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_GPOL));}
+\DoxyCodeLine{01209 \}}
+\DoxyCodeLine{01210 }
+\DoxyCodeLine{01224 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_SetGenRequestNb(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel,}
+\DoxyCodeLine{01225                                                uint32\_t RequestNb)}
+\DoxyCodeLine{01226 \{}
+\DoxyCodeLine{01227   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01228   MODIFY\_REG(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01229                                                        (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_GNBREQ, (RequestNb -\/ 1U) << DMAMUX\_RGxCR\_GNBREQ\_Pos);}
+\DoxyCodeLine{01230 \}}
+\DoxyCodeLine{01231 }
+\DoxyCodeLine{01243 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_GetGenRequestNb(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01244 \{}
+\DoxyCodeLine{01245   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01246   \textcolor{keywordflow}{return} ((READ\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01247                                                               (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_GNBREQ) >> DMAMUX\_RGxCR\_GNBREQ\_Pos) + 1U);}
+\DoxyCodeLine{01248 \}}
+\DoxyCodeLine{01249 }
+\DoxyCodeLine{01283 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_SetRequestSignalID(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel,}
+\DoxyCodeLine{01284                                                   uint32\_t RequestSignalID)}
+\DoxyCodeLine{01285 \{}
+\DoxyCodeLine{01286   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01287   MODIFY\_REG(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01288                                                        (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_SIG\_ID, RequestSignalID);}
+\DoxyCodeLine{01289 \}}
+\DoxyCodeLine{01290 }
+\DoxyCodeLine{01323 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_GetRequestSignalID(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01324 \{}
+\DoxyCodeLine{01325   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01326   \textcolor{keywordflow}{return} (READ\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01327                                                              (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_SIG\_ID));}
+\DoxyCodeLine{01328 \}}
+\DoxyCodeLine{01329 }
+\DoxyCodeLine{01344 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO0(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01345 \{}
+\DoxyCodeLine{01346   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01347   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF0) == (DMAMUX\_CSR\_SOF0)) ? 1UL : 0UL);}
+\DoxyCodeLine{01348 \}}
+\DoxyCodeLine{01349 }
+\DoxyCodeLine{01356 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO1(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01357 \{}
+\DoxyCodeLine{01358   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01359   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF1) == (DMAMUX\_CSR\_SOF1)) ? 1UL : 0UL);}
+\DoxyCodeLine{01360 \}}
+\DoxyCodeLine{01361 }
+\DoxyCodeLine{01368 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO2(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01369 \{}
+\DoxyCodeLine{01370   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01371   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF2) == (DMAMUX\_CSR\_SOF2)) ? 1UL : 0UL);}
+\DoxyCodeLine{01372 \}}
+\DoxyCodeLine{01373 }
+\DoxyCodeLine{01380 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO3(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01381 \{}
+\DoxyCodeLine{01382   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01383   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF3) == (DMAMUX\_CSR\_SOF3)) ? 1UL : 0UL);}
+\DoxyCodeLine{01384 \}}
+\DoxyCodeLine{01385 }
+\DoxyCodeLine{01392 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO4(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01393 \{}
+\DoxyCodeLine{01394   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01395   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF4) == (DMAMUX\_CSR\_SOF4)) ? 1UL : 0UL);}
+\DoxyCodeLine{01396 \}}
+\DoxyCodeLine{01397 }
+\DoxyCodeLine{01404 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO5(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01405 \{}
+\DoxyCodeLine{01406   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01407   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF5) == (DMAMUX\_CSR\_SOF5)) ? 1UL : 0UL);}
+\DoxyCodeLine{01408 \}}
+\DoxyCodeLine{01409 }
+\DoxyCodeLine{01416 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO6(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01417 \{}
+\DoxyCodeLine{01418   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01419   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF6) == (DMAMUX\_CSR\_SOF6)) ? 1UL : 0UL);}
+\DoxyCodeLine{01420 \}}
+\DoxyCodeLine{01421 }
+\DoxyCodeLine{01428 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO7(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01429 \{}
+\DoxyCodeLine{01430   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01431   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF7) == (DMAMUX\_CSR\_SOF7)) ? 1UL : 0UL);}
+\DoxyCodeLine{01432 \}}
+\DoxyCodeLine{01433 }
+\DoxyCodeLine{01440 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO8(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01441 \{}
+\DoxyCodeLine{01442   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01443   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF8) == (DMAMUX\_CSR\_SOF8)) ? 1UL : 0UL);}
+\DoxyCodeLine{01444 \}}
+\DoxyCodeLine{01445 }
+\DoxyCodeLine{01452 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO9(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01453 \{}
+\DoxyCodeLine{01454   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01455   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF9) == (DMAMUX\_CSR\_SOF9)) ? 1UL : 0UL);}
+\DoxyCodeLine{01456 \}}
+\DoxyCodeLine{01457 }
+\DoxyCodeLine{01464 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO10(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01465 \{}
+\DoxyCodeLine{01466   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01467   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF10) == (DMAMUX\_CSR\_SOF10)) ? 1UL : 0UL);}
+\DoxyCodeLine{01468 \}}
+\DoxyCodeLine{01469 }
+\DoxyCodeLine{01476 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO11(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01477 \{}
+\DoxyCodeLine{01478   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01479   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF11) == (DMAMUX\_CSR\_SOF11)) ? 1UL : 0UL);}
+\DoxyCodeLine{01480 \}}
+\DoxyCodeLine{01481 }
+\DoxyCodeLine{01482 \textcolor{preprocessor}{\#if defined (DMAMUX\_CSR\_SOF12)}}
+\DoxyCodeLine{01489 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO12(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01490 \{}
+\DoxyCodeLine{01491   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01492   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF12) == (DMAMUX\_CSR\_SOF12)) ? 1UL : 0UL);}
+\DoxyCodeLine{01493 \}}
+\DoxyCodeLine{01494 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX\_CSR\_SOF12 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01495 }
+\DoxyCodeLine{01496 \textcolor{preprocessor}{\#if defined (DMAMUX\_CSR\_SOF13)}}
+\DoxyCodeLine{01503 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO13(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01504 \{}
+\DoxyCodeLine{01505   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01506   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF13) == (DMAMUX\_CSR\_SOF13)) ? 1UL : 0UL);}
+\DoxyCodeLine{01507 \}}
+\DoxyCodeLine{01508 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX\_CSR\_SOF13 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01509 }
+\DoxyCodeLine{01510 \textcolor{preprocessor}{\#if defined (DMAMUX\_CSR\_SOF14)}}
+\DoxyCodeLine{01517 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO14(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01518 \{}
+\DoxyCodeLine{01519   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01520   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF14) == (DMAMUX\_CSR\_SOF14)) ? 1UL : 0UL);}
+\DoxyCodeLine{01521 \}}
+\DoxyCodeLine{01522 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX\_CSR\_SOF14 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01523 }
+\DoxyCodeLine{01524 \textcolor{preprocessor}{\#if defined (DMAMUX\_CSR\_SOF15)}}
+\DoxyCodeLine{01531 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_SO15(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01532 \{}
+\DoxyCodeLine{01533   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01534   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_ChannelStatus-\/>CSR, DMAMUX\_CSR\_SOF15) == (DMAMUX\_CSR\_SOF15)) ? 1UL : 0UL);}
+\DoxyCodeLine{01535 \}}
+\DoxyCodeLine{01536 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX\_CSR\_SOF15 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01537 }
+\DoxyCodeLine{01544 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_RGO0(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01545 \{}
+\DoxyCodeLine{01546   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01547   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_RequestGenStatus-\/>RGSR, DMAMUX\_RGSR\_OF0) == (DMAMUX\_RGSR\_OF0)) ? 1UL : 0UL);}
+\DoxyCodeLine{01548 \}}
+\DoxyCodeLine{01549 }
+\DoxyCodeLine{01556 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_RGO1(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01557 \{}
+\DoxyCodeLine{01558   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01559   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_RequestGenStatus-\/>RGSR, DMAMUX\_RGSR\_OF1) == (DMAMUX\_RGSR\_OF1)) ? 1UL : 0UL);}
+\DoxyCodeLine{01560 \}}
+\DoxyCodeLine{01561 }
+\DoxyCodeLine{01568 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_RGO2(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01569 \{}
+\DoxyCodeLine{01570   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01571   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_RequestGenStatus-\/>RGSR, DMAMUX\_RGSR\_OF2) == (DMAMUX\_RGSR\_OF2)) ? 1UL : 0UL);}
+\DoxyCodeLine{01572 \}}
+\DoxyCodeLine{01573 }
+\DoxyCodeLine{01580 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsActiveFlag\_RGO3(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01581 \{}
+\DoxyCodeLine{01582   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01583   \textcolor{keywordflow}{return} ((READ\_BIT(DMAMUX1\_RequestGenStatus-\/>RGSR, DMAMUX\_RGSR\_OF3) == (DMAMUX\_RGSR\_OF3)) ? 1UL : 0UL);}
+\DoxyCodeLine{01584 \}}
+\DoxyCodeLine{01585 }
+\DoxyCodeLine{01592 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO0(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01593 \{}
+\DoxyCodeLine{01594   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01595   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF0);}
+\DoxyCodeLine{01596 \}}
+\DoxyCodeLine{01597 }
+\DoxyCodeLine{01604 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO1(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01605 \{}
+\DoxyCodeLine{01606   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01607   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF1);}
+\DoxyCodeLine{01608 \}}
+\DoxyCodeLine{01609 }
+\DoxyCodeLine{01616 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO2(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01617 \{}
+\DoxyCodeLine{01618   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01619   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF2);}
+\DoxyCodeLine{01620 \}}
+\DoxyCodeLine{01621 }
+\DoxyCodeLine{01628 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO3(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01629 \{}
+\DoxyCodeLine{01630   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01631   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF3);}
+\DoxyCodeLine{01632 \}}
+\DoxyCodeLine{01633 }
+\DoxyCodeLine{01640 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO4(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01641 \{}
+\DoxyCodeLine{01642   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01643   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF4);}
+\DoxyCodeLine{01644 \}}
+\DoxyCodeLine{01645 }
+\DoxyCodeLine{01652 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO5(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01653 \{}
+\DoxyCodeLine{01654   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01655   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF5);}
+\DoxyCodeLine{01656 \}}
+\DoxyCodeLine{01657 }
+\DoxyCodeLine{01664 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO6(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01665 \{}
+\DoxyCodeLine{01666   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01667   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF6);}
+\DoxyCodeLine{01668 \}}
+\DoxyCodeLine{01669 }
+\DoxyCodeLine{01676 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO7(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01677 \{}
+\DoxyCodeLine{01678   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01679   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF7);}
+\DoxyCodeLine{01680 \}}
+\DoxyCodeLine{01681 }
+\DoxyCodeLine{01688 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO8(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01689 \{}
+\DoxyCodeLine{01690   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01691   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF8);}
+\DoxyCodeLine{01692 \}}
+\DoxyCodeLine{01693 }
+\DoxyCodeLine{01700 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO9(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01701 \{}
+\DoxyCodeLine{01702   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01703   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF9);}
+\DoxyCodeLine{01704 \}}
+\DoxyCodeLine{01705 }
+\DoxyCodeLine{01712 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO10(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01713 \{}
+\DoxyCodeLine{01714   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01715   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF10);}
+\DoxyCodeLine{01716 \}}
+\DoxyCodeLine{01717 }
+\DoxyCodeLine{01724 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO11(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01725 \{}
+\DoxyCodeLine{01726   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01727   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF11);}
+\DoxyCodeLine{01728 \}}
+\DoxyCodeLine{01729 }
+\DoxyCodeLine{01730 \textcolor{preprocessor}{\#if defined (DMAMUX\_CFR\_CSOF12)}}
+\DoxyCodeLine{01737 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO12(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01738 \{}
+\DoxyCodeLine{01739   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01740   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF12);}
+\DoxyCodeLine{01741 \}}
+\DoxyCodeLine{01742 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX\_CFR\_CSOF12 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01743 }
+\DoxyCodeLine{01744 \textcolor{preprocessor}{\#if defined (DMAMUX\_CFR\_CSOF13)}}
+\DoxyCodeLine{01751 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO13(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01752 \{}
+\DoxyCodeLine{01753   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01754   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF13);}
+\DoxyCodeLine{01755 \}}
+\DoxyCodeLine{01756 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX\_CFR\_CSOF13 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01757 }
+\DoxyCodeLine{01758 \textcolor{preprocessor}{\#if defined (DMAMUX\_CFR\_CSOF14)}}
+\DoxyCodeLine{01765 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO14(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01766 \{}
+\DoxyCodeLine{01767   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01768   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF14);}
+\DoxyCodeLine{01769 \}}
+\DoxyCodeLine{01770 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX\_CFR\_CSOF14 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01771 }
+\DoxyCodeLine{01772 \textcolor{preprocessor}{\#if defined (DMAMUX\_CFR\_CSOF15)}}
+\DoxyCodeLine{01779 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_SO15(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01780 \{}
+\DoxyCodeLine{01781   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01782   SET\_BIT(DMAMUX1\_ChannelStatus-\/>CFR, DMAMUX\_CFR\_CSOF15);}
+\DoxyCodeLine{01783 \}}
+\DoxyCodeLine{01784 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX\_CFR\_CSOF15 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01785 }
+\DoxyCodeLine{01792 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_RGO0(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01793 \{}
+\DoxyCodeLine{01794   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01795   SET\_BIT(DMAMUX1\_RequestGenStatus-\/>RGCFR, DMAMUX\_RGCFR\_COF0);}
+\DoxyCodeLine{01796 \}}
+\DoxyCodeLine{01797 }
+\DoxyCodeLine{01804 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_RGO1(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01805 \{}
+\DoxyCodeLine{01806   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01807   SET\_BIT(DMAMUX1\_RequestGenStatus-\/>RGCFR, DMAMUX\_RGCFR\_COF1);}
+\DoxyCodeLine{01808 \}}
+\DoxyCodeLine{01809 }
+\DoxyCodeLine{01816 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_RGO2(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01817 \{}
+\DoxyCodeLine{01818   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01819   SET\_BIT(DMAMUX1\_RequestGenStatus-\/>RGCFR, DMAMUX\_RGCFR\_COF2);}
+\DoxyCodeLine{01820 \}}
+\DoxyCodeLine{01821 }
+\DoxyCodeLine{01828 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_ClearFlag\_RGO3(DMAMUX\_Channel\_TypeDef *DMAMUXx)}
+\DoxyCodeLine{01829 \{}
+\DoxyCodeLine{01830   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01831   SET\_BIT(DMAMUX1\_RequestGenStatus-\/>RGCFR, DMAMUX\_RGCFR\_COF3);}
+\DoxyCodeLine{01832 \}}
+\DoxyCodeLine{01833 }
+\DoxyCodeLine{01865 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_EnableIT\_SO(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{01866 \{}
+\DoxyCodeLine{01867   (void)(DMAMUXx);}
+\DoxyCodeLine{01868   SET\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SOIE);}
+\DoxyCodeLine{01869 \}}
+\DoxyCodeLine{01870 }
+\DoxyCodeLine{01894 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_DisableIT\_SO(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{01895 \{}
+\DoxyCodeLine{01896   (void)(DMAMUXx);}
+\DoxyCodeLine{01897   CLEAR\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SOIE);}
+\DoxyCodeLine{01898 \}}
+\DoxyCodeLine{01899 }
+\DoxyCodeLine{01923 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsEnabledIT\_SO(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t Channel)}
+\DoxyCodeLine{01924 \{}
+\DoxyCodeLine{01925   (void)(DMAMUXx);}
+\DoxyCodeLine{01926   \textcolor{keywordflow}{return} (((READ\_BIT((DMAMUX1\_Channel0 + Channel)-\/>CCR, DMAMUX\_CxCR\_SOIE)) == (DMAMUX\_CxCR\_SOIE))? 1UL : 0UL);}
+\DoxyCodeLine{01927 \}}
+\DoxyCodeLine{01928 }
+\DoxyCodeLine{01940 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_EnableIT\_RGO(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01941 \{}
+\DoxyCodeLine{01942   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01943   SET\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01944                                                     (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_OIE);}
+\DoxyCodeLine{01945 \}}
+\DoxyCodeLine{01946 }
+\DoxyCodeLine{01958 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_DMAMUX\_DisableIT\_RGO(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01959 \{}
+\DoxyCodeLine{01960   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01961   CLEAR\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01962                                                       (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_OIE);}
+\DoxyCodeLine{01963 \}}
+\DoxyCodeLine{01964 }
+\DoxyCodeLine{01976 \_\_STATIC\_INLINE uint32\_t LL\_DMAMUX\_IsEnabledIT\_RGO(DMAMUX\_Channel\_TypeDef *DMAMUXx, uint32\_t RequestGenChannel)}
+\DoxyCodeLine{01977 \{}
+\DoxyCodeLine{01978   UNUSED(DMAMUXx);}
+\DoxyCodeLine{01979   \textcolor{keywordflow}{return} ((READ\_BIT(((DMAMUX\_RequestGen\_TypeDef *)((uint32\_t)((uint32\_t)DMAMUX1\_RequestGenerator0 + (DMAMUX\_RGCR\_SIZE *}
+\DoxyCodeLine{01980                                                               (RequestGenChannel)))))-\/>RGCR, DMAMUX\_RGxCR\_OIE) == (DMAMUX\_RGxCR\_OIE)) ? 1UL : 0UL);}
+\DoxyCodeLine{01981 \}}
+\DoxyCodeLine{01982 }
+\DoxyCodeLine{01995 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* DMAMUX1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01996 }
+\DoxyCodeLine{02001 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{02002 \}}
+\DoxyCodeLine{02003 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{02004 }
+\DoxyCodeLine{02005 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_STM32G4xx\_LL\_DMAMUX\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02006 }
+
+\end{DoxyCode}

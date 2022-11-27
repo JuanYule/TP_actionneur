@@ -1,0 +1,200 @@
+\doxysection{stm32g4xx\+\_\+it.\+c}
+\label{stm32g4xx__it_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/stm32g4xx\_it.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/stm32g4xx\_it.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 \textcolor{comment}{/* USER CODE BEGIN Header */}}
+\DoxyCodeLine{00018 \textcolor{comment}{/* USER CODE END Header */}}
+\DoxyCodeLine{00019 }
+\DoxyCodeLine{00020 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#include "{}main.h"{}}}
+\DoxyCodeLine{00022 \textcolor{preprocessor}{\#include "{}stm32g4xx\_it.h"{}}}
+\DoxyCodeLine{00023 \textcolor{comment}{/* Private includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00024 \textcolor{comment}{/* USER CODE BEGIN Includes */}}
+\DoxyCodeLine{00025 \textcolor{comment}{/* USER CODE END Includes */}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{comment}{/* USER CODE BEGIN TD */}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00030 \textcolor{comment}{/* USER CODE END TD */}}
+\DoxyCodeLine{00031 }
+\DoxyCodeLine{00032 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00033 \textcolor{comment}{/* USER CODE BEGIN PD */}}
+\DoxyCodeLine{00034 }
+\DoxyCodeLine{00035 \textcolor{comment}{/* USER CODE END PD */}}
+\DoxyCodeLine{00036 }
+\DoxyCodeLine{00037 \textcolor{comment}{/* Private macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00038 \textcolor{comment}{/* USER CODE BEGIN PM */}}
+\DoxyCodeLine{00039 }
+\DoxyCodeLine{00040 \textcolor{comment}{/* USER CODE END PM */}}
+\DoxyCodeLine{00041 }
+\DoxyCodeLine{00042 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00043 \textcolor{comment}{/* USER CODE BEGIN PV */}}
+\DoxyCodeLine{00044 }
+\DoxyCodeLine{00045 \textcolor{comment}{/* USER CODE END PV */}}
+\DoxyCodeLine{00046 }
+\DoxyCodeLine{00047 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00048 \textcolor{comment}{/* USER CODE BEGIN PFP */}}
+\DoxyCodeLine{00049 }
+\DoxyCodeLine{00050 \textcolor{comment}{/* USER CODE END PFP */}}
+\DoxyCodeLine{00051 }
+\DoxyCodeLine{00052 \textcolor{comment}{/* Private user code -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00053 \textcolor{comment}{/* USER CODE BEGIN 0 */}}
+\DoxyCodeLine{00054 }
+\DoxyCodeLine{00055 \textcolor{comment}{/* USER CODE END 0 */}}
+\DoxyCodeLine{00056 }
+\DoxyCodeLine{00057 \textcolor{comment}{/* External variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00058 \textcolor{keyword}{extern} ADC\_HandleTypeDef hadc1;}
+\DoxyCodeLine{00059 \textcolor{keyword}{extern} UART\_HandleTypeDef huart2;}
+\DoxyCodeLine{00060 \textcolor{comment}{/* USER CODE BEGIN EV */}}
+\DoxyCodeLine{00061 }
+\DoxyCodeLine{00062 \textcolor{comment}{/* USER CODE END EV */}}
+\DoxyCodeLine{00063 }
+\DoxyCodeLine{00064 \textcolor{comment}{/******************************************************************************/}}
+\DoxyCodeLine{00065 \textcolor{comment}{/*           Cortex-\/M4 Processor Interruption and Exception Handlers          */}}
+\DoxyCodeLine{00066 \textcolor{comment}{/******************************************************************************/}}
+\DoxyCodeLine{00070 \textcolor{keywordtype}{void} NMI\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00071 \{}
+\DoxyCodeLine{00072   \textcolor{comment}{/* USER CODE BEGIN NonMaskableInt\_IRQn 0 */}}
+\DoxyCodeLine{00073 }
+\DoxyCodeLine{00074   \textcolor{comment}{/* USER CODE END NonMaskableInt\_IRQn 0 */}}
+\DoxyCodeLine{00075   \textcolor{comment}{/* USER CODE BEGIN NonMaskableInt\_IRQn 1 */}}
+\DoxyCodeLine{00076     \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{00077     \{}
+\DoxyCodeLine{00078     \}}
+\DoxyCodeLine{00079   \textcolor{comment}{/* USER CODE END NonMaskableInt\_IRQn 1 */}}
+\DoxyCodeLine{00080 \}}
+\DoxyCodeLine{00081 }
+\DoxyCodeLine{00085 \textcolor{keywordtype}{void} HardFault\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00086 \{}
+\DoxyCodeLine{00087   \textcolor{comment}{/* USER CODE BEGIN HardFault\_IRQn 0 */}}
+\DoxyCodeLine{00088 }
+\DoxyCodeLine{00089   \textcolor{comment}{/* USER CODE END HardFault\_IRQn 0 */}}
+\DoxyCodeLine{00090   \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{00091   \{}
+\DoxyCodeLine{00092     \textcolor{comment}{/* USER CODE BEGIN W1\_HardFault\_IRQn 0 */}}
+\DoxyCodeLine{00093     \textcolor{comment}{/* USER CODE END W1\_HardFault\_IRQn 0 */}}
+\DoxyCodeLine{00094   \}}
+\DoxyCodeLine{00095 \}}
+\DoxyCodeLine{00096 }
+\DoxyCodeLine{00100 \textcolor{keywordtype}{void} MemManage\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00101 \{}
+\DoxyCodeLine{00102   \textcolor{comment}{/* USER CODE BEGIN MemoryManagement\_IRQn 0 */}}
+\DoxyCodeLine{00103 }
+\DoxyCodeLine{00104   \textcolor{comment}{/* USER CODE END MemoryManagement\_IRQn 0 */}}
+\DoxyCodeLine{00105   \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{00106   \{}
+\DoxyCodeLine{00107     \textcolor{comment}{/* USER CODE BEGIN W1\_MemoryManagement\_IRQn 0 */}}
+\DoxyCodeLine{00108     \textcolor{comment}{/* USER CODE END W1\_MemoryManagement\_IRQn 0 */}}
+\DoxyCodeLine{00109   \}}
+\DoxyCodeLine{00110 \}}
+\DoxyCodeLine{00111 }
+\DoxyCodeLine{00115 \textcolor{keywordtype}{void} BusFault\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00116 \{}
+\DoxyCodeLine{00117   \textcolor{comment}{/* USER CODE BEGIN BusFault\_IRQn 0 */}}
+\DoxyCodeLine{00118 }
+\DoxyCodeLine{00119   \textcolor{comment}{/* USER CODE END BusFault\_IRQn 0 */}}
+\DoxyCodeLine{00120   \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{00121   \{}
+\DoxyCodeLine{00122     \textcolor{comment}{/* USER CODE BEGIN W1\_BusFault\_IRQn 0 */}}
+\DoxyCodeLine{00123     \textcolor{comment}{/* USER CODE END W1\_BusFault\_IRQn 0 */}}
+\DoxyCodeLine{00124   \}}
+\DoxyCodeLine{00125 \}}
+\DoxyCodeLine{00126 }
+\DoxyCodeLine{00130 \textcolor{keywordtype}{void} UsageFault\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00131 \{}
+\DoxyCodeLine{00132   \textcolor{comment}{/* USER CODE BEGIN UsageFault\_IRQn 0 */}}
+\DoxyCodeLine{00133 }
+\DoxyCodeLine{00134   \textcolor{comment}{/* USER CODE END UsageFault\_IRQn 0 */}}
+\DoxyCodeLine{00135   \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{00136   \{}
+\DoxyCodeLine{00137     \textcolor{comment}{/* USER CODE BEGIN W1\_UsageFault\_IRQn 0 */}}
+\DoxyCodeLine{00138     \textcolor{comment}{/* USER CODE END W1\_UsageFault\_IRQn 0 */}}
+\DoxyCodeLine{00139   \}}
+\DoxyCodeLine{00140 \}}
+\DoxyCodeLine{00141 }
+\DoxyCodeLine{00145 \textcolor{keywordtype}{void} SVC\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00146 \{}
+\DoxyCodeLine{00147   \textcolor{comment}{/* USER CODE BEGIN SVCall\_IRQn 0 */}}
+\DoxyCodeLine{00148 }
+\DoxyCodeLine{00149   \textcolor{comment}{/* USER CODE END SVCall\_IRQn 0 */}}
+\DoxyCodeLine{00150   \textcolor{comment}{/* USER CODE BEGIN SVCall\_IRQn 1 */}}
+\DoxyCodeLine{00151 }
+\DoxyCodeLine{00152   \textcolor{comment}{/* USER CODE END SVCall\_IRQn 1 */}}
+\DoxyCodeLine{00153 \}}
+\DoxyCodeLine{00154 }
+\DoxyCodeLine{00158 \textcolor{keywordtype}{void} DebugMon\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00159 \{}
+\DoxyCodeLine{00160   \textcolor{comment}{/* USER CODE BEGIN DebugMonitor\_IRQn 0 */}}
+\DoxyCodeLine{00161 }
+\DoxyCodeLine{00162   \textcolor{comment}{/* USER CODE END DebugMonitor\_IRQn 0 */}}
+\DoxyCodeLine{00163   \textcolor{comment}{/* USER CODE BEGIN DebugMonitor\_IRQn 1 */}}
+\DoxyCodeLine{00164 }
+\DoxyCodeLine{00165   \textcolor{comment}{/* USER CODE END DebugMonitor\_IRQn 1 */}}
+\DoxyCodeLine{00166 \}}
+\DoxyCodeLine{00167 }
+\DoxyCodeLine{00171 \textcolor{keywordtype}{void} PendSV\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00172 \{}
+\DoxyCodeLine{00173   \textcolor{comment}{/* USER CODE BEGIN PendSV\_IRQn 0 */}}
+\DoxyCodeLine{00174 }
+\DoxyCodeLine{00175   \textcolor{comment}{/* USER CODE END PendSV\_IRQn 0 */}}
+\DoxyCodeLine{00176   \textcolor{comment}{/* USER CODE BEGIN PendSV\_IRQn 1 */}}
+\DoxyCodeLine{00177 }
+\DoxyCodeLine{00178   \textcolor{comment}{/* USER CODE END PendSV\_IRQn 1 */}}
+\DoxyCodeLine{00179 \}}
+\DoxyCodeLine{00180 }
+\DoxyCodeLine{00184 \textcolor{keywordtype}{void} SysTick\_Handler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00185 \{}
+\DoxyCodeLine{00186   \textcolor{comment}{/* USER CODE BEGIN SysTick\_IRQn 0 */}}
+\DoxyCodeLine{00187 }
+\DoxyCodeLine{00188   \textcolor{comment}{/* USER CODE END SysTick\_IRQn 0 */}}
+\DoxyCodeLine{00189   HAL\_IncTick();}
+\DoxyCodeLine{00190   \textcolor{comment}{/* USER CODE BEGIN SysTick\_IRQn 1 */}}
+\DoxyCodeLine{00191 }
+\DoxyCodeLine{00192   \textcolor{comment}{/* USER CODE END SysTick\_IRQn 1 */}}
+\DoxyCodeLine{00193 \}}
+\DoxyCodeLine{00194 }
+\DoxyCodeLine{00195 \textcolor{comment}{/******************************************************************************/}}
+\DoxyCodeLine{00196 \textcolor{comment}{/* STM32G4xx Peripheral Interrupt Handlers                                    */}}
+\DoxyCodeLine{00197 \textcolor{comment}{/* Add here the Interrupt Handlers for the used peripherals.                  */}}
+\DoxyCodeLine{00198 \textcolor{comment}{/* For the available peripheral interrupt handler names,                      */}}
+\DoxyCodeLine{00199 \textcolor{comment}{/* please refer to the startup file (startup\_stm32g4xx.s).                    */}}
+\DoxyCodeLine{00200 \textcolor{comment}{/******************************************************************************/}}
+\DoxyCodeLine{00201 }
+\DoxyCodeLine{00205 \textcolor{keywordtype}{void} ADC1\_2\_IRQHandler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00206 \{}
+\DoxyCodeLine{00207   \textcolor{comment}{/* USER CODE BEGIN ADC1\_2\_IRQn 0 */}}
+\DoxyCodeLine{00208 }
+\DoxyCodeLine{00209   \textcolor{comment}{/* USER CODE END ADC1\_2\_IRQn 0 */}}
+\DoxyCodeLine{00210   HAL\_ADC\_IRQHandler(\&hadc1);}
+\DoxyCodeLine{00211   \textcolor{comment}{/* USER CODE BEGIN ADC1\_2\_IRQn 1 */}}
+\DoxyCodeLine{00212 }
+\DoxyCodeLine{00213   \textcolor{comment}{/* USER CODE END ADC1\_2\_IRQn 1 */}}
+\DoxyCodeLine{00214 \}}
+\DoxyCodeLine{00215 }
+\DoxyCodeLine{00219 \textcolor{keywordtype}{void} USART2\_IRQHandler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00220 \{}
+\DoxyCodeLine{00221   \textcolor{comment}{/* USER CODE BEGIN USART2\_IRQn 0 */}}
+\DoxyCodeLine{00222 }
+\DoxyCodeLine{00223   \textcolor{comment}{/* USER CODE END USART2\_IRQn 0 */}}
+\DoxyCodeLine{00224   HAL\_UART\_IRQHandler(\&huart2);}
+\DoxyCodeLine{00225   \textcolor{comment}{/* USER CODE BEGIN USART2\_IRQn 1 */}}
+\DoxyCodeLine{00226 }
+\DoxyCodeLine{00227   \textcolor{comment}{/* USER CODE END USART2\_IRQn 1 */}}
+\DoxyCodeLine{00228 \}}
+\DoxyCodeLine{00229 }
+\DoxyCodeLine{00233 \textcolor{keywordtype}{void} EXTI15\_10\_IRQHandler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00234 \{}
+\DoxyCodeLine{00235   \textcolor{comment}{/* USER CODE BEGIN EXTI15\_10\_IRQn 0 */}}
+\DoxyCodeLine{00236 }
+\DoxyCodeLine{00237   \textcolor{comment}{/* USER CODE END EXTI15\_10\_IRQn 0 */}}
+\DoxyCodeLine{00238   HAL\_GPIO\_EXTI\_IRQHandler(BUTTON\_Pin);}
+\DoxyCodeLine{00239   \textcolor{comment}{/* USER CODE BEGIN EXTI15\_10\_IRQn 1 */}}
+\DoxyCodeLine{00240 }
+\DoxyCodeLine{00241   \textcolor{comment}{/* USER CODE END EXTI15\_10\_IRQn 1 */}}
+\DoxyCodeLine{00242 \}}
+\DoxyCodeLine{00243 }
+\DoxyCodeLine{00244 \textcolor{comment}{/* USER CODE BEGIN 1 */}}
+\DoxyCodeLine{00245 }
+\DoxyCodeLine{00246 \textcolor{comment}{/* USER CODE END 1 */}}
+
+\end{DoxyCode}

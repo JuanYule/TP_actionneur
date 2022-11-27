@@ -1,0 +1,136 @@
+\doxysection{DMAEx Private Macros}
+\label{group___d_m_a_ex___private___macros}\index{DMAEx Private Macros@{DMAEx Private Macros}}
+
+
+DMAEx private macros.  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+SIGNAL\+\_\+\+ID}(SIGNAL\+\_\+\+ID)~((SIGNAL\+\_\+\+ID) $<$= \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+LPTIM1\+\_\+\+OUT})
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+REQUEST\+\_\+\+NUMBER}(REQUEST\+\_\+\+NUMBER)~(((REQUEST\+\_\+\+NUMBER) $>$ 0U) \&\& ((REQUEST\+\_\+\+NUMBER) $<$= 32U))
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+POLARITY}(POLARITY)
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+STATE}(SYNC)~(((SYNC) == DISABLE)   $\vert$$\vert$ ((SYNC) == ENABLE))
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+EVENT}(EVENT)
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+SIGNAL\+\_\+\+ID}(SIGNAL\+\_\+\+ID)~((SIGNAL\+\_\+\+ID) $<$= \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+LPTIM1\+\_\+\+OUT})
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+REQUEST\+\_\+\+NUMBER}(REQUEST\+\_\+\+NUMBER)~(((REQUEST\+\_\+\+NUMBER) $>$ 0U) \&\& ((REQUEST\+\_\+\+NUMBER) $<$= 32U))
+\item 
+\#define \textbf{ IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+POLARITY}(POLARITY)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+DMAEx private macros. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___d_m_a_ex___private___macros_ga221ba2c84284ddc0cf883b6ce91a3652}} 
+\index{DMAEx Private Macros@{DMAEx Private Macros}!IS\_DMAMUX\_REQUEST\_GEN\_POLARITY@{IS\_DMAMUX\_REQUEST\_GEN\_POLARITY}}
+\index{IS\_DMAMUX\_REQUEST\_GEN\_POLARITY@{IS\_DMAMUX\_REQUEST\_GEN\_POLARITY}!DMAEx Private Macros@{DMAEx Private Macros}}
+\doxysubsubsection{IS\_DMAMUX\_REQUEST\_GEN\_POLARITY}
+{\footnotesize\ttfamily \#define IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+POLARITY(\begin{DoxyParamCaption}\item[{}]{POLARITY }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                                  (((POLARITY) == HAL\_DMAMUX\_REQ\_GEN\_NO\_EVENT)   || \(\backslash\)}
+\DoxyCodeLine{                                                  ((POLARITY) == HAL\_DMAMUX\_REQ\_GEN\_RISING)  || \(\backslash\)}
+\DoxyCodeLine{                                                  ((POLARITY) == HAL\_DMAMUX\_REQ\_GEN\_FALLING) || \(\backslash\)}
+\DoxyCodeLine{                                                  ((POLARITY) == HAL\_DMAMUX\_REQ\_GEN\_RISING\_FALLING))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 241} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+
+\mbox{\label{group___d_m_a_ex___private___macros_ga2e93828eacf890335947826617002477}} 
+\index{DMAEx Private Macros@{DMAEx Private Macros}!IS\_DMAMUX\_REQUEST\_GEN\_REQUEST\_NUMBER@{IS\_DMAMUX\_REQUEST\_GEN\_REQUEST\_NUMBER}}
+\index{IS\_DMAMUX\_REQUEST\_GEN\_REQUEST\_NUMBER@{IS\_DMAMUX\_REQUEST\_GEN\_REQUEST\_NUMBER}!DMAEx Private Macros@{DMAEx Private Macros}}
+\doxysubsubsection{IS\_DMAMUX\_REQUEST\_GEN\_REQUEST\_NUMBER}
+{\footnotesize\ttfamily \#define IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+REQUEST\+\_\+\+NUMBER(\begin{DoxyParamCaption}\item[{}]{REQUEST\+\_\+\+NUMBER }\end{DoxyParamCaption})~(((REQUEST\+\_\+\+NUMBER) $>$ 0U) \&\& ((REQUEST\+\_\+\+NUMBER) $<$= 32U))}
+
+
+
+Definition at line \textbf{ 239} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+
+\mbox{\label{group___d_m_a_ex___private___macros_ga6e68deba3ecfe83dfe73a42730e56dbd}} 
+\index{DMAEx Private Macros@{DMAEx Private Macros}!IS\_DMAMUX\_REQUEST\_GEN\_SIGNAL\_ID@{IS\_DMAMUX\_REQUEST\_GEN\_SIGNAL\_ID}}
+\index{IS\_DMAMUX\_REQUEST\_GEN\_SIGNAL\_ID@{IS\_DMAMUX\_REQUEST\_GEN\_SIGNAL\_ID}!DMAEx Private Macros@{DMAEx Private Macros}}
+\doxysubsubsection{IS\_DMAMUX\_REQUEST\_GEN\_SIGNAL\_ID}
+{\footnotesize\ttfamily \#define IS\+\_\+\+DMAMUX\+\_\+\+REQUEST\+\_\+\+GEN\+\_\+\+SIGNAL\+\_\+\+ID(\begin{DoxyParamCaption}\item[{}]{SIGNAL\+\_\+\+ID }\end{DoxyParamCaption})~((SIGNAL\+\_\+\+ID) $<$= \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+REQ\+\_\+\+GEN\+\_\+\+LPTIM1\+\_\+\+OUT})}
+
+
+
+Definition at line \textbf{ 237} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+
+\mbox{\label{group___d_m_a_ex___private___macros_ga8f06cc3561c442ce2fdb192a85bc3d99}} 
+\index{DMAEx Private Macros@{DMAEx Private Macros}!IS\_DMAMUX\_SYNC\_EVENT@{IS\_DMAMUX\_SYNC\_EVENT}}
+\index{IS\_DMAMUX\_SYNC\_EVENT@{IS\_DMAMUX\_SYNC\_EVENT}!DMAEx Private Macros@{DMAEx Private Macros}}
+\doxysubsubsection{IS\_DMAMUX\_SYNC\_EVENT}
+{\footnotesize\ttfamily \#define IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+EVENT(\begin{DoxyParamCaption}\item[{}]{EVENT }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                     (((EVENT) == DISABLE)   || \(\backslash\)}
+\DoxyCodeLine{                                     ((EVENT) == ENABLE))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 234} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+
+\mbox{\label{group___d_m_a_ex___private___macros_gaaa05d69b908dd2d78540da6997590012}} 
+\index{DMAEx Private Macros@{DMAEx Private Macros}!IS\_DMAMUX\_SYNC\_POLARITY@{IS\_DMAMUX\_SYNC\_POLARITY}}
+\index{IS\_DMAMUX\_SYNC\_POLARITY@{IS\_DMAMUX\_SYNC\_POLARITY}!DMAEx Private Macros@{DMAEx Private Macros}}
+\doxysubsubsection{IS\_DMAMUX\_SYNC\_POLARITY}
+{\footnotesize\ttfamily \#define IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+POLARITY(\begin{DoxyParamCaption}\item[{}]{POLARITY }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                           (((POLARITY) == HAL\_DMAMUX\_SYNC\_NO\_EVENT)    || \(\backslash\)}
+\DoxyCodeLine{                                           ((POLARITY) == HAL\_DMAMUX\_SYNC\_RISING)   || \(\backslash\)}
+\DoxyCodeLine{                                           ((POLARITY) == HAL\_DMAMUX\_SYNC\_FALLING)  || \(\backslash\)}
+\DoxyCodeLine{                                           ((POLARITY) == HAL\_DMAMUX\_SYNC\_RISING\_FALLING))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 227} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+
+\mbox{\label{group___d_m_a_ex___private___macros_ga558077b36b0a28f13aa6e3901b0bc3b7}} 
+\index{DMAEx Private Macros@{DMAEx Private Macros}!IS\_DMAMUX\_SYNC\_REQUEST\_NUMBER@{IS\_DMAMUX\_SYNC\_REQUEST\_NUMBER}}
+\index{IS\_DMAMUX\_SYNC\_REQUEST\_NUMBER@{IS\_DMAMUX\_SYNC\_REQUEST\_NUMBER}!DMAEx Private Macros@{DMAEx Private Macros}}
+\doxysubsubsection{IS\_DMAMUX\_SYNC\_REQUEST\_NUMBER}
+{\footnotesize\ttfamily \#define IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+REQUEST\+\_\+\+NUMBER(\begin{DoxyParamCaption}\item[{}]{REQUEST\+\_\+\+NUMBER }\end{DoxyParamCaption})~(((REQUEST\+\_\+\+NUMBER) $>$ 0U) \&\& ((REQUEST\+\_\+\+NUMBER) $<$= 32U))}
+
+
+
+Definition at line \textbf{ 225} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+
+\mbox{\label{group___d_m_a_ex___private___macros_gace9e93ce8fbac8137eb4f4043e398471}} 
+\index{DMAEx Private Macros@{DMAEx Private Macros}!IS\_DMAMUX\_SYNC\_SIGNAL\_ID@{IS\_DMAMUX\_SYNC\_SIGNAL\_ID}}
+\index{IS\_DMAMUX\_SYNC\_SIGNAL\_ID@{IS\_DMAMUX\_SYNC\_SIGNAL\_ID}!DMAEx Private Macros@{DMAEx Private Macros}}
+\doxysubsubsection{IS\_DMAMUX\_SYNC\_SIGNAL\_ID}
+{\footnotesize\ttfamily \#define IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+SIGNAL\+\_\+\+ID(\begin{DoxyParamCaption}\item[{}]{SIGNAL\+\_\+\+ID }\end{DoxyParamCaption})~((SIGNAL\+\_\+\+ID) $<$= \textbf{ HAL\+\_\+\+DMAMUX1\+\_\+\+SYNC\+\_\+\+LPTIM1\+\_\+\+OUT})}
+
+
+
+Definition at line \textbf{ 223} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+
+\mbox{\label{group___d_m_a_ex___private___macros_gabef88bd7531f3bc3a9cb807f76b243f0}} 
+\index{DMAEx Private Macros@{DMAEx Private Macros}!IS\_DMAMUX\_SYNC\_STATE@{IS\_DMAMUX\_SYNC\_STATE}}
+\index{IS\_DMAMUX\_SYNC\_STATE@{IS\_DMAMUX\_SYNC\_STATE}!DMAEx Private Macros@{DMAEx Private Macros}}
+\doxysubsubsection{IS\_DMAMUX\_SYNC\_STATE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+DMAMUX\+\_\+\+SYNC\+\_\+\+STATE(\begin{DoxyParamCaption}\item[{}]{SYNC }\end{DoxyParamCaption})~(((SYNC) == DISABLE)   $\vert$$\vert$ ((SYNC) == ENABLE))}
+
+
+
+Definition at line \textbf{ 232} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}.
+

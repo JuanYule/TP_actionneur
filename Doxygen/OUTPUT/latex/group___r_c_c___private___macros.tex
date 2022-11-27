@@ -1,0 +1,398 @@
+\doxysection{RCC\+\_\+\+Private\+\_\+\+Macros}
+\label{group___r_c_c___private___macros}\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+OSCILLATORTYPE}(\+\_\+\+\_\+\+OSCILLATOR\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+HSE}(\+\_\+\+\_\+\+HSE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+LSE}(\+\_\+\+\_\+\+LSE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+HSI}(\+\_\+\+\_\+\+HSI\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+HSI\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+HSI\+\_\+\+OFF}) $\vert$$\vert$ ((\+\_\+\+\_\+\+HSI\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+HSI\+\_\+\+ON}))
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+CALIBRATION\+\_\+\+VALUE}(\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $<$= (\textbf{ RCC\+\_\+\+ICSCR\+\_\+\+HSITRIM} $>$$>$ RCC\+\_\+\+ICSCR\+\_\+\+HSITRIM\+\_\+\+Pos))
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+LSI}(\+\_\+\+\_\+\+LSI\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+LSI\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+LSI\+\_\+\+OFF}) $\vert$$\vert$ ((\+\_\+\+\_\+\+LSI\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+LSI\+\_\+\+ON}))
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+HSI48}(\+\_\+\+\_\+\+HSI48\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+HSI48\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+HSI48\+\_\+\+OFF}) $\vert$$\vert$ ((\+\_\+\+\_\+\+HSI48\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+HSI48\+\_\+\+ON}))
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+PLL}(\+\_\+\+\_\+\+PLL\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+PLLSOURCE}(\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+VALUE}(\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)~((1U $<$= (\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)) \&\& ((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $<$= 16U))
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+PLLN\+\_\+\+VALUE}(\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)~((8U $<$= (\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)) \&\& ((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $<$= 127U))
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+VALUE}(\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $>$= 2U) \&\& ((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $<$= 31U))
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+PLLQ\+\_\+\+VALUE}(\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+PLLR\+\_\+\+VALUE}(\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+CLOCKTYPE}(\+\_\+\+\_\+\+CLK\+\_\+\+\_\+)~((((\+\_\+\+\_\+\+CLK\+\_\+\+\_\+) \& \textbf{ RCC\+\_\+\+CLOCKTYPE\+\_\+\+ALL}) != 0x00\+UL) \&\& (((\+\_\+\+\_\+\+CLK\+\_\+\+\_\+) \& $\sim$\textbf{ RCC\+\_\+\+CLOCKTYPE\+\_\+\+ALL}) == 0x00\+UL))
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+SYSCLKSOURCE}(\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+HCLK}(\+\_\+\+\_\+\+HCLK\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+PCLK}(\+\_\+\+\_\+\+PCLK\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+RTCCLKSOURCE}(\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+MCO}(\+\_\+\+\_\+\+MCOX\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE}(\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+MCODIV}(\+\_\+\+\_\+\+DIV\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+DRIVE}(\+\_\+\+\_\+\+DRIVE\+\_\+\+\_\+)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___r_c_c___private___macros_ga5639cc7f37f0cb7ce1e5d0f3918a48ba}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_CLOCKTYPE@{IS\_RCC\_CLOCKTYPE}}
+\index{IS\_RCC\_CLOCKTYPE@{IS\_RCC\_CLOCKTYPE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_CLOCKTYPE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+CLOCKTYPE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+CLK\+\_\+\+\_\+ }\end{DoxyParamCaption})~((((\+\_\+\+\_\+\+CLK\+\_\+\+\_\+) \& \textbf{ RCC\+\_\+\+CLOCKTYPE\+\_\+\+ALL}) != 0x00\+UL) \&\& (((\+\_\+\+\_\+\+CLK\+\_\+\+\_\+) \& $\sim$\textbf{ RCC\+\_\+\+CLOCKTYPE\+\_\+\+ALL}) == 0x00\+UL))}
+
+
+
+Definition at line \textbf{ 3297} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga0f01b4d9e55bcb7fcbd2c08f6d7bb5b3}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_HCLK@{IS\_RCC\_HCLK}}
+\index{IS\_RCC\_HCLK@{IS\_RCC\_HCLK}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_HCLK}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+HCLK(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+HCLK\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                               (((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV1)   || ((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV2)   || \(\backslash\)}
+\DoxyCodeLine{                               ((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV4)   || ((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV8)   || \(\backslash\)}
+\DoxyCodeLine{                               ((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV16)  || ((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV64)  || \(\backslash\)}
+\DoxyCodeLine{                               ((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV128) || ((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV256) || \(\backslash\)}
+\DoxyCodeLine{                               ((\_\_HCLK\_\_) == RCC\_SYSCLK\_DIV512))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3303} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga3c9bb7f31e4cd8436a41ae33c8908226}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_HSE@{IS\_RCC\_HSE}}
+\index{IS\_RCC\_HSE@{IS\_RCC\_HSE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_HSE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+HSE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+HSE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                              (((\_\_HSE\_\_) == RCC\_HSE\_OFF) || ((\_\_HSE\_\_) == RCC\_HSE\_ON) || \(\backslash\)}
+\DoxyCodeLine{                              ((\_\_HSE\_\_) == RCC\_HSE\_BYPASS))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3264} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga230f351a740560f6b51cdc4b7051606e}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_HSI@{IS\_RCC\_HSI}}
+\index{IS\_RCC\_HSI@{IS\_RCC\_HSI}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_HSI}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+HSI(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+HSI\+\_\+\+\_\+ }\end{DoxyParamCaption})~(((\+\_\+\+\_\+\+HSI\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+HSI\+\_\+\+OFF}) $\vert$$\vert$ ((\+\_\+\+\_\+\+HSI\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+HSI\+\_\+\+ON}))}
+
+
+
+Definition at line \textbf{ 3270} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga341de353db843f9de1ab2ff250ec9d5e}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_HSI48@{IS\_RCC\_HSI48}}
+\index{IS\_RCC\_HSI48@{IS\_RCC\_HSI48}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_HSI48}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+HSI48(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+HSI48\+\_\+\+\_\+ }\end{DoxyParamCaption})~(((\+\_\+\+\_\+\+HSI48\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+HSI48\+\_\+\+OFF}) $\vert$$\vert$ ((\+\_\+\+\_\+\+HSI48\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+HSI48\+\_\+\+ON}))}
+
+
+
+Definition at line \textbf{ 3276} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga1715cf2ee55db0d5b63b242ed63dab5b}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_HSI\_CALIBRATION\_VALUE@{IS\_RCC\_HSI\_CALIBRATION\_VALUE}}
+\index{IS\_RCC\_HSI\_CALIBRATION\_VALUE@{IS\_RCC\_HSI\_CALIBRATION\_VALUE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_HSI\_CALIBRATION\_VALUE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+HSI\+\_\+\+CALIBRATION\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+ }\end{DoxyParamCaption})~((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $<$= (\textbf{ RCC\+\_\+\+ICSCR\+\_\+\+HSITRIM} $>$$>$ RCC\+\_\+\+ICSCR\+\_\+\+HSITRIM\+\_\+\+Pos))}
+
+
+
+Definition at line \textbf{ 3272} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga6c766af016cdc1d63f1ed64c5082737c}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_LSE@{IS\_RCC\_LSE}}
+\index{IS\_RCC\_LSE@{IS\_RCC\_LSE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_LSE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+LSE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+LSE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                              (((\_\_LSE\_\_) == RCC\_LSE\_OFF) || ((\_\_LSE\_\_) == RCC\_LSE\_ON) || \(\backslash\)}
+\DoxyCodeLine{                              ((\_\_LSE\_\_) == RCC\_LSE\_BYPASS))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3267} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_gad52778efb019c0bae5ac6dfb3592c290}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_LSE\_DRIVE@{IS\_RCC\_LSE\_DRIVE}}
+\index{IS\_RCC\_LSE\_DRIVE@{IS\_RCC\_LSE\_DRIVE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_LSE\_DRIVE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+LSE\+\_\+\+DRIVE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+DRIVE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                     (((\_\_DRIVE\_\_) == RCC\_LSEDRIVE\_LOW)        || \(\backslash\)}
+\DoxyCodeLine{                                     ((\_\_DRIVE\_\_) == RCC\_LSEDRIVE\_MEDIUMLOW)  || \(\backslash\)}
+\DoxyCodeLine{                                     ((\_\_DRIVE\_\_) == RCC\_LSEDRIVE\_MEDIUMHIGH) || \(\backslash\)}
+\DoxyCodeLine{                                     ((\_\_DRIVE\_\_) == RCC\_LSEDRIVE\_HIGH))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3334} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga2961f77a4ee7870f36d9f7f6729a0608}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_LSI@{IS\_RCC\_LSI}}
+\index{IS\_RCC\_LSI@{IS\_RCC\_LSI}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_LSI}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+LSI(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+LSI\+\_\+\+\_\+ }\end{DoxyParamCaption})~(((\+\_\+\+\_\+\+LSI\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+LSI\+\_\+\+OFF}) $\vert$$\vert$ ((\+\_\+\+\_\+\+LSI\+\_\+\+\_\+) == \textbf{ RCC\+\_\+\+LSI\+\_\+\+ON}))}
+
+
+
+Definition at line \textbf{ 3274} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga5368a0b11fbade7ce74f2903dd39b46a}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_MCO@{IS\_RCC\_MCO}}
+\index{IS\_RCC\_MCO@{IS\_RCC\_MCO}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_MCO}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+MCO(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+MCOX\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                              (((\_\_MCOX\_\_) == RCC\_MCO\_PA8) || \(\backslash\)}
+\DoxyCodeLine{                              ((\_\_MCOX\_\_) == RCC\_MCO\_PG10))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3318} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga17690472f266a032db5324907a0ddc31}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_MCO1SOURCE@{IS\_RCC\_MCO1SOURCE}}
+\index{IS\_RCC\_MCO1SOURCE@{IS\_RCC\_MCO1SOURCE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_MCO1SOURCE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+MCO1\+SOURCE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                       (((\_\_SOURCE\_\_) == RCC\_MCO1SOURCE\_NOCLOCK) || \(\backslash\)}
+\DoxyCodeLine{                                       ((\_\_SOURCE\_\_) == RCC\_MCO1SOURCE\_SYSCLK) || \(\backslash\)}
+\DoxyCodeLine{                                       ((\_\_SOURCE\_\_) == RCC\_MCO1SOURCE\_HSI) || \(\backslash\)}
+\DoxyCodeLine{                                       ((\_\_SOURCE\_\_) == RCC\_MCO1SOURCE\_HSE) || \(\backslash\)}
+\DoxyCodeLine{                                       ((\_\_SOURCE\_\_) == RCC\_MCO1SOURCE\_PLLCLK) || \(\backslash\)}
+\DoxyCodeLine{                                       ((\_\_SOURCE\_\_) == RCC\_MCO1SOURCE\_LSI) || \(\backslash\)}
+\DoxyCodeLine{                                       ((\_\_SOURCE\_\_) == RCC\_MCO1SOURCE\_LSE) || \(\backslash\)}
+\DoxyCodeLine{                                       ((\_\_SOURCE\_\_) == RCC\_MCO1SOURCE\_HSI48))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3321} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_gab281379d2f6361a20a082259be63af0f}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_MCODIV@{IS\_RCC\_MCODIV}}
+\index{IS\_RCC\_MCODIV@{IS\_RCC\_MCODIV}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_MCODIV}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+MCODIV(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+DIV\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                (((\_\_DIV\_\_) == RCC\_MCODIV\_1) || ((\_\_DIV\_\_) == RCC\_MCODIV\_2) || \(\backslash\)}
+\DoxyCodeLine{                                ((\_\_DIV\_\_) == RCC\_MCODIV\_4) || ((\_\_DIV\_\_) == RCC\_MCODIV\_8) || \(\backslash\)}
+\DoxyCodeLine{                                ((\_\_DIV\_\_) == RCC\_MCODIV\_16))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3330} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga68584e3b585c1c1770d504a030d0dd34}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_OSCILLATORTYPE@{IS\_RCC\_OSCILLATORTYPE}}
+\index{IS\_RCC\_OSCILLATORTYPE@{IS\_RCC\_OSCILLATORTYPE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_OSCILLATORTYPE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+OSCILLATORTYPE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+OSCILLATOR\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                               (((\_\_OSCILLATOR\_\_) == RCC\_OSCILLATORTYPE\_NONE)                               || \(\backslash\)}
+\DoxyCodeLine{                                               (((\_\_OSCILLATOR\_\_) \& RCC\_OSCILLATORTYPE\_HSE)   == RCC\_OSCILLATORTYPE\_HSE)   || \(\backslash\)}
+\DoxyCodeLine{                                               (((\_\_OSCILLATOR\_\_) \& RCC\_OSCILLATORTYPE\_HSI)   == RCC\_OSCILLATORTYPE\_HSI)   || \(\backslash\)}
+\DoxyCodeLine{                                               (((\_\_OSCILLATOR\_\_) \& RCC\_OSCILLATORTYPE\_HSI48) == RCC\_OSCILLATORTYPE\_HSI48) || \(\backslash\)}
+\DoxyCodeLine{                                               (((\_\_OSCILLATOR\_\_) \& RCC\_OSCILLATORTYPE\_LSI)   == RCC\_OSCILLATORTYPE\_LSI)   || \(\backslash\)}
+\DoxyCodeLine{                                               (((\_\_OSCILLATOR\_\_) \& RCC\_OSCILLATORTYPE\_LSE)   == RCC\_OSCILLATORTYPE\_LSE))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3257} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga378b8fcc2e64326f6f98b30cb3fc22d9}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_PCLK@{IS\_RCC\_PCLK}}
+\index{IS\_RCC\_PCLK@{IS\_RCC\_PCLK}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_PCLK}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+PCLK(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+PCLK\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                               (((\_\_PCLK\_\_) == RCC\_HCLK\_DIV1) || ((\_\_PCLK\_\_) == RCC\_HCLK\_DIV2) || \(\backslash\)}
+\DoxyCodeLine{                               ((\_\_PCLK\_\_) == RCC\_HCLK\_DIV4) || ((\_\_PCLK\_\_) == RCC\_HCLK\_DIV8) || \(\backslash\)}
+\DoxyCodeLine{                               ((\_\_PCLK\_\_) == RCC\_HCLK\_DIV16))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3309} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga4e8a1f3a151c3011e915df4da312dd73}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_PLL@{IS\_RCC\_PLL}}
+\index{IS\_RCC\_PLL@{IS\_RCC\_PLL}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_PLL}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+PLL(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+PLL\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                             (((\_\_PLL\_\_) == RCC\_PLL\_NONE) ||((\_\_PLL\_\_) == RCC\_PLL\_OFF) || \(\backslash\)}
+\DoxyCodeLine{                             ((\_\_PLL\_\_) == RCC\_PLL\_ON))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3278} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_gaefa3c5466a7e3c5adb779ce18f788a3c}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_PLLM\_VALUE@{IS\_RCC\_PLLM\_VALUE}}
+\index{IS\_RCC\_PLLM\_VALUE@{IS\_RCC\_PLLM\_VALUE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_PLLM\_VALUE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+PLLM\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+ }\end{DoxyParamCaption})~((1U $<$= (\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)) \&\& ((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $<$= 16U))}
+
+
+
+Definition at line \textbf{ 3285} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga9384dbb3bd0ec1c24093a9ecf075ce8b}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_PLLN\_VALUE@{IS\_RCC\_PLLN\_VALUE}}
+\index{IS\_RCC\_PLLN\_VALUE@{IS\_RCC\_PLLN\_VALUE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_PLLN\_VALUE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+PLLN\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+ }\end{DoxyParamCaption})~((8U $<$= (\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+)) \&\& ((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $<$= 127U))}
+
+
+
+Definition at line \textbf{ 3287} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga0e08547541611b4964de8ac95159365f}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_PLLP\_VALUE@{IS\_RCC\_PLLP\_VALUE}}
+\index{IS\_RCC\_PLLP\_VALUE@{IS\_RCC\_PLLP\_VALUE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_PLLP\_VALUE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+PLLP\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+ }\end{DoxyParamCaption})~(((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $>$= 2U) \&\& ((\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+) $<$= 31U))}
+
+
+
+Definition at line \textbf{ 3289} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga6d4a925c5ed1cd0deec4f390d290477b}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_PLLQ\_VALUE@{IS\_RCC\_PLLQ\_VALUE}}
+\index{IS\_RCC\_PLLQ\_VALUE@{IS\_RCC\_PLLQ\_VALUE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_PLLQ\_VALUE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+PLLQ\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                      (((\_\_VALUE\_\_) == 2U) || ((\_\_VALUE\_\_) == 4U) || \(\backslash\)}
+\DoxyCodeLine{                                      ((\_\_VALUE\_\_) == 6U) || ((\_\_VALUE\_\_) == 8U))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3291} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga276557dff8cad401f08c524ff17c4e12}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_PLLR\_VALUE@{IS\_RCC\_PLLR\_VALUE}}
+\index{IS\_RCC\_PLLR\_VALUE@{IS\_RCC\_PLLR\_VALUE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_PLLR\_VALUE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+PLLR\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+VALUE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                      (((\_\_VALUE\_\_) == 2U) || ((\_\_VALUE\_\_) == 4U) || \(\backslash\)}
+\DoxyCodeLine{                                      ((\_\_VALUE\_\_) == 6U) || ((\_\_VALUE\_\_) == 8U))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3294} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga13202f72c93b28705bd35aab3cbd951f}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_PLLSOURCE@{IS\_RCC\_PLLSOURCE}}
+\index{IS\_RCC\_PLLSOURCE@{IS\_RCC\_PLLSOURCE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_PLLSOURCE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+PLLSOURCE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                      (((\_\_SOURCE\_\_) == RCC\_PLLSOURCE\_NONE) || \(\backslash\)}
+\DoxyCodeLine{                                      ((\_\_SOURCE\_\_) == RCC\_PLLSOURCE\_HSI)  || \(\backslash\)}
+\DoxyCodeLine{                                      ((\_\_SOURCE\_\_) == RCC\_PLLSOURCE\_HSE))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3281} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_gacd1d98013cd9a28e8b1544adf931e7b3}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_RTCCLKSOURCE@{IS\_RCC\_RTCCLKSOURCE}}
+\index{IS\_RCC\_RTCCLKSOURCE@{IS\_RCC\_RTCCLKSOURCE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_RTCCLKSOURCE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+RTCCLKSOURCE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                         (((\_\_SOURCE\_\_) == RCC\_RTCCLKSOURCE\_NONE)   || \(\backslash\)}
+\DoxyCodeLine{                                         ((\_\_SOURCE\_\_) == RCC\_RTCCLKSOURCE\_LSE)    || \(\backslash\)}
+\DoxyCodeLine{                                         ((\_\_SOURCE\_\_) == RCC\_RTCCLKSOURCE\_LSI)    || \(\backslash\)}
+\DoxyCodeLine{                                         ((\_\_SOURCE\_\_) == RCC\_RTCCLKSOURCE\_HSE\_DIV32))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3313} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___private___macros_ga7dc6fce00c2191e691fb2b17dd176d65}} 
+\index{RCC\_Private\_Macros@{RCC\_Private\_Macros}!IS\_RCC\_SYSCLKSOURCE@{IS\_RCC\_SYSCLKSOURCE}}
+\index{IS\_RCC\_SYSCLKSOURCE@{IS\_RCC\_SYSCLKSOURCE}!RCC\_Private\_Macros@{RCC\_Private\_Macros}}
+\doxysubsubsection{IS\_RCC\_SYSCLKSOURCE}
+{\footnotesize\ttfamily \#define IS\+\_\+\+RCC\+\_\+\+SYSCLKSOURCE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                         (((\_\_SOURCE\_\_) == RCC\_SYSCLKSOURCE\_HSI) || \(\backslash\)}
+\DoxyCodeLine{                                         ((\_\_SOURCE\_\_) == RCC\_SYSCLKSOURCE\_HSE) || \(\backslash\)}
+\DoxyCodeLine{                                         ((\_\_SOURCE\_\_) == RCC\_SYSCLKSOURCE\_PLLCLK))}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 3299} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+

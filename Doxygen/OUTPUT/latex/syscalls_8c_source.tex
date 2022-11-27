@@ -1,0 +1,140 @@
+\doxysection{syscalls.\+c}
+\label{syscalls_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/syscalls.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/syscalls.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00023 \textcolor{comment}{/* Includes */}}
+\DoxyCodeLine{00024 \textcolor{preprocessor}{\#include <sys/stat.h>}}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{00026 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{00027 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#include <signal.h>}}
+\DoxyCodeLine{00029 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{00030 \textcolor{preprocessor}{\#include <sys/time.h>}}
+\DoxyCodeLine{00031 \textcolor{preprocessor}{\#include <sys/times.h>}}
+\DoxyCodeLine{00032 }
+\DoxyCodeLine{00033 }
+\DoxyCodeLine{00034 \textcolor{comment}{/* Variables */}}
+\DoxyCodeLine{00035 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \_\_io\_putchar(\textcolor{keywordtype}{int} ch) \_\_attribute\_\_((weak));}
+\DoxyCodeLine{00036 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \_\_io\_getchar(\textcolor{keywordtype}{void}) \_\_attribute\_\_((weak));}
+\DoxyCodeLine{00037 }
+\DoxyCodeLine{00038 }
+\DoxyCodeLine{00039 \textcolor{keywordtype}{char} *\_\_env[1] = \{ 0 \};}
+\DoxyCodeLine{00040 \textcolor{keywordtype}{char} **environ = \_\_env;}
+\DoxyCodeLine{00041 }
+\DoxyCodeLine{00042 }
+\DoxyCodeLine{00043 \textcolor{comment}{/* Functions */}}
+\DoxyCodeLine{00044 \textcolor{keywordtype}{void} initialise\_monitor\_handles()}
+\DoxyCodeLine{00045 \{}
+\DoxyCodeLine{00046 \}}
+\DoxyCodeLine{00047 }
+\DoxyCodeLine{00048 \textcolor{keywordtype}{int} \_getpid(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00049 \{}
+\DoxyCodeLine{00050     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{00051 \}}
+\DoxyCodeLine{00052 }
+\DoxyCodeLine{00053 \textcolor{keywordtype}{int} \_kill(\textcolor{keywordtype}{int} pid, \textcolor{keywordtype}{int} sig)}
+\DoxyCodeLine{00054 \{}
+\DoxyCodeLine{00055     errno = EINVAL;}
+\DoxyCodeLine{00056     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00057 \}}
+\DoxyCodeLine{00058 }
+\DoxyCodeLine{00059 \textcolor{keywordtype}{void} \_exit (\textcolor{keywordtype}{int} status)}
+\DoxyCodeLine{00060 \{}
+\DoxyCodeLine{00061     \_kill(status, -\/1);}
+\DoxyCodeLine{00062     \textcolor{keywordflow}{while} (1) \{\}        \textcolor{comment}{/* Make sure we hang here */}}
+\DoxyCodeLine{00063 \}}
+\DoxyCodeLine{00064 }
+\DoxyCodeLine{00065 \_\_attribute\_\_((weak)) \textcolor{keywordtype}{int} \_read(\textcolor{keywordtype}{int} file, \textcolor{keywordtype}{char} *ptr, \textcolor{keywordtype}{int} len)}
+\DoxyCodeLine{00066 \{}
+\DoxyCodeLine{00067     \textcolor{keywordtype}{int} DataIdx;}
+\DoxyCodeLine{00068 }
+\DoxyCodeLine{00069     \textcolor{keywordflow}{for} (DataIdx = 0; DataIdx < len; DataIdx++)}
+\DoxyCodeLine{00070     \{}
+\DoxyCodeLine{00071         *ptr++ = \_\_io\_getchar();}
+\DoxyCodeLine{00072     \}}
+\DoxyCodeLine{00073 }
+\DoxyCodeLine{00074 \textcolor{keywordflow}{return} len;}
+\DoxyCodeLine{00075 \}}
+\DoxyCodeLine{00076 }
+\DoxyCodeLine{00077 \_\_attribute\_\_((weak)) \textcolor{keywordtype}{int} \_write(\textcolor{keywordtype}{int} file, \textcolor{keywordtype}{char} *ptr, \textcolor{keywordtype}{int} len)}
+\DoxyCodeLine{00078 \{}
+\DoxyCodeLine{00079     \textcolor{keywordtype}{int} DataIdx;}
+\DoxyCodeLine{00080 }
+\DoxyCodeLine{00081     \textcolor{keywordflow}{for} (DataIdx = 0; DataIdx < len; DataIdx++)}
+\DoxyCodeLine{00082     \{}
+\DoxyCodeLine{00083         \_\_io\_putchar(*ptr++);}
+\DoxyCodeLine{00084     \}}
+\DoxyCodeLine{00085     \textcolor{keywordflow}{return} len;}
+\DoxyCodeLine{00086 \}}
+\DoxyCodeLine{00087 }
+\DoxyCodeLine{00088 \textcolor{keywordtype}{int} \_close(\textcolor{keywordtype}{int} file)}
+\DoxyCodeLine{00089 \{}
+\DoxyCodeLine{00090     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00091 \}}
+\DoxyCodeLine{00092 }
+\DoxyCodeLine{00093 }
+\DoxyCodeLine{00094 \textcolor{keywordtype}{int} \_fstat(\textcolor{keywordtype}{int} file, \textcolor{keyword}{struct} stat *st)}
+\DoxyCodeLine{00095 \{}
+\DoxyCodeLine{00096     st-\/>st\_mode = S\_IFCHR;}
+\DoxyCodeLine{00097     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{00098 \}}
+\DoxyCodeLine{00099 }
+\DoxyCodeLine{00100 \textcolor{keywordtype}{int} \_isatty(\textcolor{keywordtype}{int} file)}
+\DoxyCodeLine{00101 \{}
+\DoxyCodeLine{00102     \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{00103 \}}
+\DoxyCodeLine{00104 }
+\DoxyCodeLine{00105 \textcolor{keywordtype}{int} \_lseek(\textcolor{keywordtype}{int} file, \textcolor{keywordtype}{int} ptr, \textcolor{keywordtype}{int} dir)}
+\DoxyCodeLine{00106 \{}
+\DoxyCodeLine{00107     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{00108 \}}
+\DoxyCodeLine{00109 }
+\DoxyCodeLine{00110 \textcolor{keywordtype}{int} \_open(\textcolor{keywordtype}{char} *path, \textcolor{keywordtype}{int} flags, ...)}
+\DoxyCodeLine{00111 \{}
+\DoxyCodeLine{00112     \textcolor{comment}{/* Pretend like we always fail */}}
+\DoxyCodeLine{00113     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00114 \}}
+\DoxyCodeLine{00115 }
+\DoxyCodeLine{00116 \textcolor{keywordtype}{int} \_wait(\textcolor{keywordtype}{int} *status)}
+\DoxyCodeLine{00117 \{}
+\DoxyCodeLine{00118     errno = ECHILD;}
+\DoxyCodeLine{00119     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00120 \}}
+\DoxyCodeLine{00121 }
+\DoxyCodeLine{00122 \textcolor{keywordtype}{int} \_unlink(\textcolor{keywordtype}{char} *name)}
+\DoxyCodeLine{00123 \{}
+\DoxyCodeLine{00124     errno = ENOENT;}
+\DoxyCodeLine{00125     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00126 \}}
+\DoxyCodeLine{00127 }
+\DoxyCodeLine{00128 \textcolor{keywordtype}{int} \_times(\textcolor{keyword}{struct} tms *buf)}
+\DoxyCodeLine{00129 \{}
+\DoxyCodeLine{00130     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00131 \}}
+\DoxyCodeLine{00132 }
+\DoxyCodeLine{00133 \textcolor{keywordtype}{int} \_stat(\textcolor{keywordtype}{char} *file, \textcolor{keyword}{struct} stat *st)}
+\DoxyCodeLine{00134 \{}
+\DoxyCodeLine{00135     st-\/>st\_mode = S\_IFCHR;}
+\DoxyCodeLine{00136     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{00137 \}}
+\DoxyCodeLine{00138 }
+\DoxyCodeLine{00139 \textcolor{keywordtype}{int} \_link(\textcolor{keywordtype}{char} *old, \textcolor{keywordtype}{char} *\textcolor{keyword}{new})}
+\DoxyCodeLine{00140 \{}
+\DoxyCodeLine{00141     errno = EMLINK;}
+\DoxyCodeLine{00142     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00143 \}}
+\DoxyCodeLine{00144 }
+\DoxyCodeLine{00145 \textcolor{keywordtype}{int} \_fork(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00146 \{}
+\DoxyCodeLine{00147     errno = EAGAIN;}
+\DoxyCodeLine{00148     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00149 \}}
+\DoxyCodeLine{00150 }
+\DoxyCodeLine{00151 \textcolor{keywordtype}{int} \_execve(\textcolor{keywordtype}{char} *name, \textcolor{keywordtype}{char} **argv, \textcolor{keywordtype}{char} **env)}
+\DoxyCodeLine{00152 \{}
+\DoxyCodeLine{00153     errno = ENOMEM;}
+\DoxyCodeLine{00154     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{00155 \}}
+
+\end{DoxyCode}

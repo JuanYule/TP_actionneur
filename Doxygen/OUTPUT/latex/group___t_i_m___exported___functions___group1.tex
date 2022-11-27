@@ -1,0 +1,94 @@
+\doxysection{TIM Time Base functions}
+\label{group___t_i_m___exported___functions___group1}\index{TIM Time Base functions@{TIM Time Base functions}}
+
+
+Time Base functions.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{group___t_i_m___exported___functions___group1_ga1b288eb68eb52c97b8d187cdd6e9088f}} 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\mbox{\label{group___t_i_m___exported___functions___group1_gaaf97adbc39e48456a1c83c54895de83b}} 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+De\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void \textbf{ HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Msp\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\begin{DoxyCompactList}\small\item\em TIM\+\_\+\+Base MSP Initialization This function configures the hardware resources used in this example. \end{DoxyCompactList}\item 
+void \textbf{ HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Msp\+De\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\begin{DoxyCompactList}\small\item\em TIM\+\_\+\+Base MSP De-\/\+Initialization This function freeze the hardware resources used in this example. \end{DoxyCompactList}\item 
+\mbox{\label{group___t_i_m___exported___functions___group1_gaf7e5ee80207a338050413e14f7bd24f9}} 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Start} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\mbox{\label{group___t_i_m___exported___functions___group1_ga78697261126cd2facc463b81e8c4b238}} 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Stop} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\mbox{\label{group___t_i_m___exported___functions___group1_gae517d80e2ac713069767df8e8915971e}} 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Start\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\mbox{\label{group___t_i_m___exported___functions___group1_ga19443605c97f15b5ede7d8337534ece4}} 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Stop\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\mbox{\label{group___t_i_m___exported___functions___group1_ga8246aece4afe559642a6da298f7b157a}} 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Start\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t $\ast$p\+Data, uint16\+\_\+t Length)
+\item 
+\mbox{\label{group___t_i_m___exported___functions___group1_ga7673776de6e35f5cbe887e62e13e87b5}} 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Stop\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Time Base functions. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{group___t_i_m___exported___functions___group1_ga13352a6c9cb3225511e5f29dbb894e84}} 
+\index{TIM Time Base functions@{TIM Time Base functions}!HAL\_TIM\_Base\_MspDeInit@{HAL\_TIM\_Base\_MspDeInit}}
+\index{HAL\_TIM\_Base\_MspDeInit@{HAL\_TIM\_Base\_MspDeInit}!TIM Time Base functions@{TIM Time Base functions}}
+\doxysubsubsection{HAL\_TIM\_Base\_MspDeInit()}
+{\footnotesize\ttfamily void HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Msp\+De\+Init (\begin{DoxyParamCaption}\item[{\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$}]{htim\+\_\+base }\end{DoxyParamCaption})}
+
+
+
+TIM\+\_\+\+Base MSP De-\/\+Initialization This function freeze the hardware resources used in this example. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em htim\+\_\+base} & TIM\+\_\+\+Base handle pointer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 250} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+msp.\+c}.
+
+\mbox{\label{group___t_i_m___exported___functions___group1_ga818f4d5d1e2f417438d281b4ac9efb9c}} 
+\index{TIM Time Base functions@{TIM Time Base functions}!HAL\_TIM\_Base\_MspInit@{HAL\_TIM\_Base\_MspInit}}
+\index{HAL\_TIM\_Base\_MspInit@{HAL\_TIM\_Base\_MspInit}!TIM Time Base functions@{TIM Time Base functions}}
+\doxysubsubsection{HAL\_TIM\_Base\_MspInit()}
+{\footnotesize\ttfamily void HAL\+\_\+\+TIM\+\_\+\+Base\+\_\+\+Msp\+Init (\begin{DoxyParamCaption}\item[{\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$}]{htim\+\_\+base }\end{DoxyParamCaption})}
+
+
+
+TIM\+\_\+\+Base MSP Initialization This function configures the hardware resources used in this example. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em htim\+\_\+base} & TIM\+\_\+\+Base handle pointer \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 168} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+msp.\+c}.
+

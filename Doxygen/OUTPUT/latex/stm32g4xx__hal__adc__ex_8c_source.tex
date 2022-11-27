@@ -1,0 +1,1944 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+adc\+\_\+ex.\+c}
+\label{stm32g4xx__hal__adc__ex_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_adc\_ex.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_adc\_ex.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00032 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00033 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00034 }
+\DoxyCodeLine{00044 \textcolor{preprocessor}{\#ifdef HAL\_ADC\_MODULE\_ENABLED}}
+\DoxyCodeLine{00045 }
+\DoxyCodeLine{00046 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00047 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00048 }
+\DoxyCodeLine{00053 \textcolor{preprocessor}{\#define ADC\_JSQR\_FIELDS  ((ADC\_JSQR\_JL | ADC\_JSQR\_JEXTSEL | ADC\_JSQR\_JEXTEN |\(\backslash\)}}
+\DoxyCodeLine{00054 \textcolor{preprocessor}{                           ADC\_JSQR\_JSQ1  | ADC\_JSQR\_JSQ2 |\(\backslash\)}}
+\DoxyCodeLine{00055 \textcolor{preprocessor}{                           ADC\_JSQR\_JSQ3 | ADC\_JSQR\_JSQ4 ))  }}
+\DoxyCodeLine{00057 \textcolor{comment}{/* Fixed timeout value for ADC calibration.                                   */}}
+\DoxyCodeLine{00058 \textcolor{comment}{/* Values defined to be higher than worst cases: low clock frequency,         */}}
+\DoxyCodeLine{00059 \textcolor{comment}{/* maximum prescalers.                                                        */}}
+\DoxyCodeLine{00060 \textcolor{comment}{/* Ex of profile low frequency : f\_ADC at f\_CPU/3968 (minimum value           */}}
+\DoxyCodeLine{00061 \textcolor{comment}{/* considering both possible ADC clocking scheme:                             */}}
+\DoxyCodeLine{00062 \textcolor{comment}{/*        -\/ ADC clock from synchronous clock with AHB prescaler 512,          */}}
+\DoxyCodeLine{00063 \textcolor{comment}{/*          ADC prescaler 4.                                                  */}}
+\DoxyCodeLine{00064 \textcolor{comment}{/*           Ratio max = 512 *4 = 2048                                        */}}
+\DoxyCodeLine{00065 \textcolor{comment}{/*        -\/ ADC clock from asynchronous clock (PLLP) with prescaler 256.      */}}
+\DoxyCodeLine{00066 \textcolor{comment}{/*          Highest CPU clock PLL (PLLR).                                     */}}
+\DoxyCodeLine{00067 \textcolor{comment}{/*           Ratio max = PLLRmax /PPLPmin * 256 = (VCO/2) / (VCO/31) * 256    */}}
+\DoxyCodeLine{00068 \textcolor{comment}{/*                     = 3968 )                                               */}}
+\DoxyCodeLine{00069 \textcolor{comment}{/* Calibration\_time MAX = 81 / f\_ADC                                          */}}
+\DoxyCodeLine{00070 \textcolor{comment}{/*                      = 81 / (f\_CPU/3938) = 318978 CPU cycles               */}}
+\DoxyCodeLine{00071 \textcolor{preprocessor}{\#define ADC\_CALIBRATION\_TIMEOUT         (318978UL)   }}
+\DoxyCodeLine{00077 \textcolor{comment}{/* Private macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00078 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00079 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00080 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00081 }
+\DoxyCodeLine{00125 HAL\_StatusTypeDef HAL\_ADCEx\_Calibration\_Start(ADC\_HandleTypeDef *hadc, uint32\_t SingleDiff)}
+\DoxyCodeLine{00126 \{}
+\DoxyCodeLine{00127   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{00128   \_\_IO uint32\_t wait\_loop\_index = 0UL;}
+\DoxyCodeLine{00129 }
+\DoxyCodeLine{00130   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00131   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00132   assert\_param(IS\_ADC\_SINGLE\_DIFFERENTIAL(SingleDiff));}
+\DoxyCodeLine{00133 }
+\DoxyCodeLine{00134   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00135   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{00136 }
+\DoxyCodeLine{00137   \textcolor{comment}{/* Calibration prerequisite: ADC must be disabled. */}}
+\DoxyCodeLine{00138 }
+\DoxyCodeLine{00139   \textcolor{comment}{/* Disable the ADC (if not already disabled) */}}
+\DoxyCodeLine{00140   tmp\_hal\_status = ADC\_Disable(hadc);}
+\DoxyCodeLine{00141 }
+\DoxyCodeLine{00142   \textcolor{comment}{/* Check if ADC is effectively disabled */}}
+\DoxyCodeLine{00143   \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00144   \{}
+\DoxyCodeLine{00145     \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00146     ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{00147                       HAL\_ADC\_STATE\_REG\_BUSY | HAL\_ADC\_STATE\_INJ\_BUSY,}
+\DoxyCodeLine{00148                       HAL\_ADC\_STATE\_BUSY\_INTERNAL);}
+\DoxyCodeLine{00149 }
+\DoxyCodeLine{00150     \textcolor{comment}{/* Start ADC calibration in mode single-\/ended or differential */}}
+\DoxyCodeLine{00151     LL\_ADC\_StartCalibration(hadc-\/>Instance, SingleDiff);}
+\DoxyCodeLine{00152 }
+\DoxyCodeLine{00153     \textcolor{comment}{/* Wait for calibration completion */}}
+\DoxyCodeLine{00154     \textcolor{keywordflow}{while} (LL\_ADC\_IsCalibrationOnGoing(hadc-\/>Instance) != 0UL)}
+\DoxyCodeLine{00155     \{}
+\DoxyCodeLine{00156       wait\_loop\_index++;}
+\DoxyCodeLine{00157       \textcolor{keywordflow}{if} (wait\_loop\_index >= ADC\_CALIBRATION\_TIMEOUT)}
+\DoxyCodeLine{00158       \{}
+\DoxyCodeLine{00159         \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{00160         ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{00161                           HAL\_ADC\_STATE\_BUSY\_INTERNAL,}
+\DoxyCodeLine{00162                           HAL\_ADC\_STATE\_ERROR\_INTERNAL);}
+\DoxyCodeLine{00163 }
+\DoxyCodeLine{00164         \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00165         \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00166 }
+\DoxyCodeLine{00167         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00168       \}}
+\DoxyCodeLine{00169     \}}
+\DoxyCodeLine{00170 }
+\DoxyCodeLine{00171     \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00172     ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{00173                       HAL\_ADC\_STATE\_BUSY\_INTERNAL,}
+\DoxyCodeLine{00174                       HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{00175   \}}
+\DoxyCodeLine{00176   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00177   \{}
+\DoxyCodeLine{00178     SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_INTERNAL);}
+\DoxyCodeLine{00179 }
+\DoxyCodeLine{00180     \textcolor{comment}{/* Note: No need to update variable "{}tmp\_hal\_status"{} here: already set    */}}
+\DoxyCodeLine{00181     \textcolor{comment}{/*       to state "{}HAL\_ERROR"{} by function disabling the ADC.              */}}
+\DoxyCodeLine{00182   \}}
+\DoxyCodeLine{00183 }
+\DoxyCodeLine{00184   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00185   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00186 }
+\DoxyCodeLine{00187   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00188   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{00189 \}}
+\DoxyCodeLine{00190 }
+\DoxyCodeLine{00199 uint32\_t HAL\_ADCEx\_Calibration\_GetValue(ADC\_HandleTypeDef *hadc, uint32\_t SingleDiff)}
+\DoxyCodeLine{00200 \{}
+\DoxyCodeLine{00201   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00202   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00203   assert\_param(IS\_ADC\_SINGLE\_DIFFERENTIAL(SingleDiff));}
+\DoxyCodeLine{00204 }
+\DoxyCodeLine{00205   \textcolor{comment}{/* Return the selected ADC calibration value */}}
+\DoxyCodeLine{00206   \textcolor{keywordflow}{return} LL\_ADC\_GetCalibrationFactor(hadc-\/>Instance, SingleDiff);}
+\DoxyCodeLine{00207 \}}
+\DoxyCodeLine{00208 }
+\DoxyCodeLine{00219 HAL\_StatusTypeDef HAL\_ADCEx\_Calibration\_SetValue(ADC\_HandleTypeDef *hadc, uint32\_t SingleDiff,}
+\DoxyCodeLine{00220                                                  uint32\_t CalibrationFactor)}
+\DoxyCodeLine{00221 \{}
+\DoxyCodeLine{00222   HAL\_StatusTypeDef tmp\_hal\_status = HAL\_OK;}
+\DoxyCodeLine{00223   uint32\_t tmp\_adc\_is\_conversion\_on\_going\_regular;}
+\DoxyCodeLine{00224   uint32\_t tmp\_adc\_is\_conversion\_on\_going\_injected;}
+\DoxyCodeLine{00225 }
+\DoxyCodeLine{00226   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00227   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00228   assert\_param(IS\_ADC\_SINGLE\_DIFFERENTIAL(SingleDiff));}
+\DoxyCodeLine{00229   assert\_param(IS\_ADC\_CALFACT(CalibrationFactor));}
+\DoxyCodeLine{00230 }
+\DoxyCodeLine{00231   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00232   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{00233 }
+\DoxyCodeLine{00234   \textcolor{comment}{/* Verification of hardware constraints before modifying the calibration    */}}
+\DoxyCodeLine{00235   \textcolor{comment}{/* factors register: ADC must be enabled, no conversion on going.           */}}
+\DoxyCodeLine{00236   tmp\_adc\_is\_conversion\_on\_going\_regular = LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance);}
+\DoxyCodeLine{00237   tmp\_adc\_is\_conversion\_on\_going\_injected = LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance);}
+\DoxyCodeLine{00238 }
+\DoxyCodeLine{00239   \textcolor{keywordflow}{if} ((LL\_ADC\_IsEnabled(hadc-\/>Instance) != 0UL)}
+\DoxyCodeLine{00240       \&\& (tmp\_adc\_is\_conversion\_on\_going\_regular == 0UL)}
+\DoxyCodeLine{00241       \&\& (tmp\_adc\_is\_conversion\_on\_going\_injected == 0UL)}
+\DoxyCodeLine{00242      )}
+\DoxyCodeLine{00243   \{}
+\DoxyCodeLine{00244     \textcolor{comment}{/* Set the selected ADC calibration value */}}
+\DoxyCodeLine{00245     LL\_ADC\_SetCalibrationFactor(hadc-\/>Instance, SingleDiff, CalibrationFactor);}
+\DoxyCodeLine{00246   \}}
+\DoxyCodeLine{00247   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00248   \{}
+\DoxyCodeLine{00249     \textcolor{comment}{/* Update ADC state machine */}}
+\DoxyCodeLine{00250     SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{00251     \textcolor{comment}{/* Update ADC error code */}}
+\DoxyCodeLine{00252     SET\_BIT(hadc-\/>ErrorCode, HAL\_ADC\_ERROR\_INTERNAL);}
+\DoxyCodeLine{00253 }
+\DoxyCodeLine{00254     \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{00255     tmp\_hal\_status = HAL\_ERROR;}
+\DoxyCodeLine{00256   \}}
+\DoxyCodeLine{00257 }
+\DoxyCodeLine{00258   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00259   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00260 }
+\DoxyCodeLine{00261   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00262   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{00263 \}}
+\DoxyCodeLine{00264 }
+\DoxyCodeLine{00276 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedStart(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{00277 \{}
+\DoxyCodeLine{00278   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{00279   uint32\_t tmp\_config\_injected\_queue;}
+\DoxyCodeLine{00280 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00281   uint32\_t tmp\_multimode\_config = LL\_ADC\_GetMultimode(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00282 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00283 }
+\DoxyCodeLine{00284   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00285   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00286 }
+\DoxyCodeLine{00287   \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance) != 0UL)}
+\DoxyCodeLine{00288   \{}
+\DoxyCodeLine{00289     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{00290   \}}
+\DoxyCodeLine{00291   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00292   \{}
+\DoxyCodeLine{00293     \textcolor{comment}{/* In case of software trigger detection enabled, JQDIS must be set}}
+\DoxyCodeLine{00294 \textcolor{comment}{      (which can be done only if ADSTART and JADSTART are both cleared).}}
+\DoxyCodeLine{00295 \textcolor{comment}{       If JQDIS is not set at that point, returns an error}}
+\DoxyCodeLine{00296 \textcolor{comment}{       -\/ since software trigger detection is disabled. User needs to}}
+\DoxyCodeLine{00297 \textcolor{comment}{       resort to HAL\_ADCEx\_DisableInjectedQueue() API to set JQDIS.}}
+\DoxyCodeLine{00298 \textcolor{comment}{       -\/ or (if JQDIS is intentionally reset) since JEXTEN = 0 which means}}
+\DoxyCodeLine{00299 \textcolor{comment}{         the queue is empty */}}
+\DoxyCodeLine{00300     tmp\_config\_injected\_queue = READ\_BIT(hadc-\/>Instance-\/>CFGR, ADC\_CFGR\_JQDIS);}
+\DoxyCodeLine{00301 }
+\DoxyCodeLine{00302     \textcolor{keywordflow}{if} ((READ\_BIT(hadc-\/>Instance-\/>JSQR, ADC\_JSQR\_JEXTEN) == 0UL)}
+\DoxyCodeLine{00303         \&\& (tmp\_config\_injected\_queue == 0UL)}
+\DoxyCodeLine{00304        )}
+\DoxyCodeLine{00305     \{}
+\DoxyCodeLine{00306       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{00307       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00308     \}}
+\DoxyCodeLine{00309 }
+\DoxyCodeLine{00310     \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00311     \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{00312 }
+\DoxyCodeLine{00313     \textcolor{comment}{/* Enable the ADC peripheral */}}
+\DoxyCodeLine{00314     tmp\_hal\_status = ADC\_Enable(hadc);}
+\DoxyCodeLine{00315 }
+\DoxyCodeLine{00316     \textcolor{comment}{/* Start conversion if ADC is effectively enabled */}}
+\DoxyCodeLine{00317     \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00318     \{}
+\DoxyCodeLine{00319       \textcolor{comment}{/* Check if a regular conversion is ongoing */}}
+\DoxyCodeLine{00320       \textcolor{keywordflow}{if} ((hadc-\/>State \& HAL\_ADC\_STATE\_REG\_BUSY) != 0UL)}
+\DoxyCodeLine{00321       \{}
+\DoxyCodeLine{00322         \textcolor{comment}{/* Reset ADC error code field related to injected conversions only */}}
+\DoxyCodeLine{00323         CLEAR\_BIT(hadc-\/>ErrorCode, HAL\_ADC\_ERROR\_JQOVF);}
+\DoxyCodeLine{00324       \}}
+\DoxyCodeLine{00325       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00326       \{}
+\DoxyCodeLine{00327         \textcolor{comment}{/* Set ADC error code to none */}}
+\DoxyCodeLine{00328         ADC\_CLEAR\_ERRORCODE(hadc);}
+\DoxyCodeLine{00329       \}}
+\DoxyCodeLine{00330 }
+\DoxyCodeLine{00331       \textcolor{comment}{/* Set ADC state                                                        */}}
+\DoxyCodeLine{00332       \textcolor{comment}{/* -\/ Clear state bitfield related to injected group conversion results  */}}
+\DoxyCodeLine{00333       \textcolor{comment}{/* -\/ Set state bitfield related to injected operation                   */}}
+\DoxyCodeLine{00334       ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{00335                         HAL\_ADC\_STATE\_READY | HAL\_ADC\_STATE\_INJ\_EOC,}
+\DoxyCodeLine{00336                         HAL\_ADC\_STATE\_INJ\_BUSY);}
+\DoxyCodeLine{00337 }
+\DoxyCodeLine{00338 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00339       \textcolor{comment}{/* Reset HAL\_ADC\_STATE\_MULTIMODE\_SLAVE bit}}
+\DoxyCodeLine{00340 \textcolor{comment}{        -\/ if ADC instance is master or if multimode feature is not available}}
+\DoxyCodeLine{00341 \textcolor{comment}{        -\/ if multimode setting is disabled (ADC instance slave in independent mode) */}}
+\DoxyCodeLine{00342       \textcolor{keywordflow}{if} ((\_\_LL\_ADC\_MULTI\_INSTANCE\_MASTER(hadc-\/>Instance) == hadc-\/>Instance)}
+\DoxyCodeLine{00343           || (tmp\_multimode\_config == LL\_ADC\_MULTI\_INDEPENDENT)}
+\DoxyCodeLine{00344          )}
+\DoxyCodeLine{00345       \{}
+\DoxyCodeLine{00346         CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_MULTIMODE\_SLAVE);}
+\DoxyCodeLine{00347       \}}
+\DoxyCodeLine{00348 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00349 }
+\DoxyCodeLine{00350       \textcolor{comment}{/* Clear ADC group injected group conversion flag */}}
+\DoxyCodeLine{00351       \textcolor{comment}{/* (To ensure of no unknown state from potential previous ADC operations) */}}
+\DoxyCodeLine{00352       \_\_HAL\_ADC\_CLEAR\_FLAG(hadc, (ADC\_FLAG\_JEOC | ADC\_FLAG\_JEOS));}
+\DoxyCodeLine{00353 }
+\DoxyCodeLine{00354       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00355       \textcolor{comment}{/* Unlock before starting ADC conversions: in case of potential         */}}
+\DoxyCodeLine{00356       \textcolor{comment}{/* interruption, to let the process to ADC IRQ Handler.                 */}}
+\DoxyCodeLine{00357       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00358 }
+\DoxyCodeLine{00359       \textcolor{comment}{/* Enable conversion of injected group, if automatic injected conversion  */}}
+\DoxyCodeLine{00360       \textcolor{comment}{/* is disabled.                                                           */}}
+\DoxyCodeLine{00361       \textcolor{comment}{/* If software start has been selected, conversion starts immediately.    */}}
+\DoxyCodeLine{00362       \textcolor{comment}{/* If external trigger has been selected, conversion will start at next   */}}
+\DoxyCodeLine{00363       \textcolor{comment}{/* trigger event.                                                         */}}
+\DoxyCodeLine{00364       \textcolor{comment}{/* Case of multimode enabled (when multimode feature is available):       */}}
+\DoxyCodeLine{00365       \textcolor{comment}{/* if ADC is slave,                                                       */}}
+\DoxyCodeLine{00366       \textcolor{comment}{/*    -\/ ADC is enabled only (conversion is not started),                  */}}
+\DoxyCodeLine{00367       \textcolor{comment}{/*    -\/ if multimode only concerns regular conversion, ADC is enabled     */}}
+\DoxyCodeLine{00368       \textcolor{comment}{/*     and conversion is started.                                         */}}
+\DoxyCodeLine{00369       \textcolor{comment}{/* If ADC is master or independent,                                       */}}
+\DoxyCodeLine{00370       \textcolor{comment}{/*    -\/ ADC is enabled and conversion is started.                         */}}
+\DoxyCodeLine{00371 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00372       \textcolor{keywordflow}{if} ((\_\_LL\_ADC\_MULTI\_INSTANCE\_MASTER(hadc-\/>Instance) == hadc-\/>Instance)}
+\DoxyCodeLine{00373           || (tmp\_multimode\_config == LL\_ADC\_MULTI\_INDEPENDENT)}
+\DoxyCodeLine{00374           || (tmp\_multimode\_config == LL\_ADC\_MULTI\_DUAL\_REG\_SIMULT)}
+\DoxyCodeLine{00375           || (tmp\_multimode\_config == LL\_ADC\_MULTI\_DUAL\_REG\_INTERL)}
+\DoxyCodeLine{00376          )}
+\DoxyCodeLine{00377       \{}
+\DoxyCodeLine{00378         \textcolor{comment}{/* ADC instance is not a multimode slave instance with multimode injected conversions enabled */}}
+\DoxyCodeLine{00379         \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_GetTrigAuto(hadc-\/>Instance) == LL\_ADC\_INJ\_TRIG\_INDEPENDENT)}
+\DoxyCodeLine{00380         \{}
+\DoxyCodeLine{00381           LL\_ADC\_INJ\_StartConversion(hadc-\/>Instance);}
+\DoxyCodeLine{00382         \}}
+\DoxyCodeLine{00383       \}}
+\DoxyCodeLine{00384       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00385       \{}
+\DoxyCodeLine{00386         \textcolor{comment}{/* ADC instance is not a multimode slave instance with multimode injected conversions enabled */}}
+\DoxyCodeLine{00387         SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_MULTIMODE\_SLAVE);}
+\DoxyCodeLine{00388       \}}
+\DoxyCodeLine{00389 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00390       \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_GetTrigAuto(hadc-\/>Instance) == LL\_ADC\_INJ\_TRIG\_INDEPENDENT)}
+\DoxyCodeLine{00391       \{}
+\DoxyCodeLine{00392         \textcolor{comment}{/* Start ADC group injected conversion */}}
+\DoxyCodeLine{00393         LL\_ADC\_INJ\_StartConversion(hadc-\/>Instance);}
+\DoxyCodeLine{00394       \}}
+\DoxyCodeLine{00395 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00396 }
+\DoxyCodeLine{00397     \}}
+\DoxyCodeLine{00398     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00399     \{}
+\DoxyCodeLine{00400       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00401       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00402     \}}
+\DoxyCodeLine{00403 }
+\DoxyCodeLine{00404     \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00405     \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{00406   \}}
+\DoxyCodeLine{00407 \}}
+\DoxyCodeLine{00408 }
+\DoxyCodeLine{00425 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedStop(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{00426 \{}
+\DoxyCodeLine{00427   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{00428 }
+\DoxyCodeLine{00429   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00430   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00431 }
+\DoxyCodeLine{00432   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00433   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{00434 }
+\DoxyCodeLine{00435   \textcolor{comment}{/* 1. Stop potential conversion on going on injected group only. */}}
+\DoxyCodeLine{00436   tmp\_hal\_status = ADC\_ConversionStop(hadc, ADC\_INJECTED\_GROUP);}
+\DoxyCodeLine{00437 }
+\DoxyCodeLine{00438   \textcolor{comment}{/* Disable ADC peripheral if injected conversions are effectively stopped   */}}
+\DoxyCodeLine{00439   \textcolor{comment}{/* and if no conversion on regular group is on-\/going                       */}}
+\DoxyCodeLine{00440   \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00441   \{}
+\DoxyCodeLine{00442     \textcolor{keywordflow}{if} (LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{00443     \{}
+\DoxyCodeLine{00444       \textcolor{comment}{/* 2. Disable the ADC peripheral */}}
+\DoxyCodeLine{00445       tmp\_hal\_status = ADC\_Disable(hadc);}
+\DoxyCodeLine{00446 }
+\DoxyCodeLine{00447       \textcolor{comment}{/* Check if ADC is effectively disabled */}}
+\DoxyCodeLine{00448       \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00449       \{}
+\DoxyCodeLine{00450         \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00451         ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{00452                           HAL\_ADC\_STATE\_REG\_BUSY | HAL\_ADC\_STATE\_INJ\_BUSY,}
+\DoxyCodeLine{00453                           HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{00454       \}}
+\DoxyCodeLine{00455     \}}
+\DoxyCodeLine{00456     \textcolor{comment}{/* Conversion on injected group is stopped, but ADC not disabled since    */}}
+\DoxyCodeLine{00457     \textcolor{comment}{/* conversion on regular group is still running.                          */}}
+\DoxyCodeLine{00458     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00459     \{}
+\DoxyCodeLine{00460       \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00461       CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_BUSY);}
+\DoxyCodeLine{00462     \}}
+\DoxyCodeLine{00463   \}}
+\DoxyCodeLine{00464 }
+\DoxyCodeLine{00465   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00466   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00467 }
+\DoxyCodeLine{00468   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00469   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{00470 \}}
+\DoxyCodeLine{00471 }
+\DoxyCodeLine{00480 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedPollForConversion(ADC\_HandleTypeDef *hadc, uint32\_t Timeout)}
+\DoxyCodeLine{00481 \{}
+\DoxyCodeLine{00482   uint32\_t tickstart;}
+\DoxyCodeLine{00483   uint32\_t tmp\_Flag\_End;}
+\DoxyCodeLine{00484   uint32\_t tmp\_adc\_inj\_is\_trigger\_source\_sw\_start;}
+\DoxyCodeLine{00485   uint32\_t tmp\_adc\_reg\_is\_trigger\_source\_sw\_start;}
+\DoxyCodeLine{00486   uint32\_t tmp\_cfgr;}
+\DoxyCodeLine{00487 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00488   \textcolor{keyword}{const} ADC\_TypeDef *tmpADC\_Master;}
+\DoxyCodeLine{00489   uint32\_t tmp\_multimode\_config = LL\_ADC\_GetMultimode(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00490 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00491 }
+\DoxyCodeLine{00492   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00493   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00494 }
+\DoxyCodeLine{00495   \textcolor{comment}{/* If end of sequence selected */}}
+\DoxyCodeLine{00496   \textcolor{keywordflow}{if} (hadc-\/>Init.EOCSelection == ADC\_EOC\_SEQ\_CONV)}
+\DoxyCodeLine{00497   \{}
+\DoxyCodeLine{00498     tmp\_Flag\_End = ADC\_FLAG\_JEOS;}
+\DoxyCodeLine{00499   \}}
+\DoxyCodeLine{00500   \textcolor{keywordflow}{else} \textcolor{comment}{/* end of conversion selected */}}
+\DoxyCodeLine{00501   \{}
+\DoxyCodeLine{00502     tmp\_Flag\_End = ADC\_FLAG\_JEOC;}
+\DoxyCodeLine{00503   \}}
+\DoxyCodeLine{00504 }
+\DoxyCodeLine{00505   \textcolor{comment}{/* Get timeout */}}
+\DoxyCodeLine{00506   tickstart = HAL\_GetTick();}
+\DoxyCodeLine{00507 }
+\DoxyCodeLine{00508   \textcolor{comment}{/* Wait until End of Conversion or Sequence flag is raised */}}
+\DoxyCodeLine{00509   \textcolor{keywordflow}{while} ((hadc-\/>Instance-\/>ISR \& tmp\_Flag\_End) == 0UL)}
+\DoxyCodeLine{00510   \{}
+\DoxyCodeLine{00511     \textcolor{comment}{/* Check if timeout is disabled (set to infinite wait) */}}
+\DoxyCodeLine{00512     \textcolor{keywordflow}{if} (Timeout != HAL\_MAX\_DELAY)}
+\DoxyCodeLine{00513     \{}
+\DoxyCodeLine{00514       \textcolor{keywordflow}{if} (((HAL\_GetTick() -\/ tickstart) > Timeout) || (Timeout == 0UL))}
+\DoxyCodeLine{00515       \{}
+\DoxyCodeLine{00516         \textcolor{comment}{/* New check to avoid false timeout detection in case of preemption */}}
+\DoxyCodeLine{00517         \textcolor{keywordflow}{if} ((hadc-\/>Instance-\/>ISR \& tmp\_Flag\_End) == 0UL)}
+\DoxyCodeLine{00518         \{}
+\DoxyCodeLine{00519           \textcolor{comment}{/* Update ADC state machine to timeout */}}
+\DoxyCodeLine{00520           SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_TIMEOUT);}
+\DoxyCodeLine{00521 }
+\DoxyCodeLine{00522           \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00523           \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00524 }
+\DoxyCodeLine{00525           \textcolor{keywordflow}{return} HAL\_TIMEOUT;}
+\DoxyCodeLine{00526         \}}
+\DoxyCodeLine{00527       \}}
+\DoxyCodeLine{00528     \}}
+\DoxyCodeLine{00529   \}}
+\DoxyCodeLine{00530 }
+\DoxyCodeLine{00531   \textcolor{comment}{/* Retrieve ADC configuration */}}
+\DoxyCodeLine{00532   tmp\_adc\_inj\_is\_trigger\_source\_sw\_start = LL\_ADC\_INJ\_IsTriggerSourceSWStart(hadc-\/>Instance);}
+\DoxyCodeLine{00533   tmp\_adc\_reg\_is\_trigger\_source\_sw\_start = LL\_ADC\_REG\_IsTriggerSourceSWStart(hadc-\/>Instance);}
+\DoxyCodeLine{00534   \textcolor{comment}{/* Get relevant register CFGR in ADC instance of ADC master or slave  */}}
+\DoxyCodeLine{00535   \textcolor{comment}{/* in function of multimode state (for devices with multimode         */}}
+\DoxyCodeLine{00536   \textcolor{comment}{/* available).                                                        */}}
+\DoxyCodeLine{00537 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00538   \textcolor{keywordflow}{if} ((\_\_LL\_ADC\_MULTI\_INSTANCE\_MASTER(hadc-\/>Instance) == hadc-\/>Instance)}
+\DoxyCodeLine{00539       || (tmp\_multimode\_config == LL\_ADC\_MULTI\_INDEPENDENT)}
+\DoxyCodeLine{00540       || (tmp\_multimode\_config == LL\_ADC\_MULTI\_DUAL\_REG\_SIMULT)}
+\DoxyCodeLine{00541       || (tmp\_multimode\_config == LL\_ADC\_MULTI\_DUAL\_REG\_INTERL)}
+\DoxyCodeLine{00542      )}
+\DoxyCodeLine{00543   \{}
+\DoxyCodeLine{00544     tmp\_cfgr = READ\_REG(hadc-\/>Instance-\/>CFGR);}
+\DoxyCodeLine{00545   \}}
+\DoxyCodeLine{00546   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00547   \{}
+\DoxyCodeLine{00548     tmpADC\_Master = \_\_LL\_ADC\_MULTI\_INSTANCE\_MASTER(hadc-\/>Instance);}
+\DoxyCodeLine{00549     tmp\_cfgr = READ\_REG(tmpADC\_Master-\/>CFGR);}
+\DoxyCodeLine{00550   \}}
+\DoxyCodeLine{00551 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00552   tmp\_cfgr = READ\_REG(hadc-\/>Instance-\/>CFGR);}
+\DoxyCodeLine{00553 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00554 }
+\DoxyCodeLine{00555   \textcolor{comment}{/* Update ADC state machine */}}
+\DoxyCodeLine{00556   SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_EOC);}
+\DoxyCodeLine{00557 }
+\DoxyCodeLine{00558   \textcolor{comment}{/* Determine whether any further conversion upcoming on group injected      */}}
+\DoxyCodeLine{00559   \textcolor{comment}{/* by external trigger or by automatic injected conversion                  */}}
+\DoxyCodeLine{00560   \textcolor{comment}{/* from group regular.                                                      */}}
+\DoxyCodeLine{00561   \textcolor{keywordflow}{if} ((tmp\_adc\_inj\_is\_trigger\_source\_sw\_start != 0UL)            ||}
+\DoxyCodeLine{00562       ((READ\_BIT(tmp\_cfgr, ADC\_CFGR\_JAUTO) == 0UL)      \&\&}
+\DoxyCodeLine{00563        ((tmp\_adc\_reg\_is\_trigger\_source\_sw\_start != 0UL)  \&\&}
+\DoxyCodeLine{00564         (READ\_BIT(tmp\_cfgr, ADC\_CFGR\_CONT) == 0UL))))}
+\DoxyCodeLine{00565   \{}
+\DoxyCodeLine{00566     \textcolor{comment}{/* Check whether end of sequence is reached */}}
+\DoxyCodeLine{00567     \textcolor{keywordflow}{if} (\_\_HAL\_ADC\_GET\_FLAG(hadc, ADC\_FLAG\_JEOS))}
+\DoxyCodeLine{00568     \{}
+\DoxyCodeLine{00569       \textcolor{comment}{/* Particular case if injected contexts queue is enabled:             */}}
+\DoxyCodeLine{00570       \textcolor{comment}{/* when the last context has been fully processed, JSQR is reset      */}}
+\DoxyCodeLine{00571       \textcolor{comment}{/* by the hardware. Even if no injected conversion is planned to come */}}
+\DoxyCodeLine{00572       \textcolor{comment}{/* (queue empty, triggers are ignored), it can start again            */}}
+\DoxyCodeLine{00573       \textcolor{comment}{/* immediately after setting a new context (JADSTART is still set).   */}}
+\DoxyCodeLine{00574       \textcolor{comment}{/* Therefore, state of HAL ADC injected group is kept to busy.        */}}
+\DoxyCodeLine{00575       \textcolor{keywordflow}{if} (READ\_BIT(tmp\_cfgr, ADC\_CFGR\_JQM) == 0UL)}
+\DoxyCodeLine{00576       \{}
+\DoxyCodeLine{00577         \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00578         CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_BUSY);}
+\DoxyCodeLine{00579 }
+\DoxyCodeLine{00580         \textcolor{keywordflow}{if} ((hadc-\/>State \& HAL\_ADC\_STATE\_REG\_BUSY) == 0UL)}
+\DoxyCodeLine{00581         \{}
+\DoxyCodeLine{00582           SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{00583         \}}
+\DoxyCodeLine{00584       \}}
+\DoxyCodeLine{00585     \}}
+\DoxyCodeLine{00586   \}}
+\DoxyCodeLine{00587 }
+\DoxyCodeLine{00588   \textcolor{comment}{/* Clear polled flag */}}
+\DoxyCodeLine{00589   \textcolor{keywordflow}{if} (tmp\_Flag\_End == ADC\_FLAG\_JEOS)}
+\DoxyCodeLine{00590   \{}
+\DoxyCodeLine{00591     \textcolor{comment}{/* Clear end of sequence JEOS flag of injected group if low power feature */}}
+\DoxyCodeLine{00592     \textcolor{comment}{/* "{}LowPowerAutoWait "{} is disabled, to not interfere with this feature.   */}}
+\DoxyCodeLine{00593     \textcolor{comment}{/* For injected groups, no new conversion will start before JEOS is       */}}
+\DoxyCodeLine{00594     \textcolor{comment}{/* cleared.                                                               */}}
+\DoxyCodeLine{00595     \textcolor{keywordflow}{if} (READ\_BIT(tmp\_cfgr, ADC\_CFGR\_AUTDLY) == 0UL)}
+\DoxyCodeLine{00596     \{}
+\DoxyCodeLine{00597       \_\_HAL\_ADC\_CLEAR\_FLAG(hadc, (ADC\_FLAG\_JEOC | ADC\_FLAG\_JEOS));}
+\DoxyCodeLine{00598     \}}
+\DoxyCodeLine{00599   \}}
+\DoxyCodeLine{00600   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00601   \{}
+\DoxyCodeLine{00602     \_\_HAL\_ADC\_CLEAR\_FLAG(hadc, ADC\_FLAG\_JEOC);}
+\DoxyCodeLine{00603   \}}
+\DoxyCodeLine{00604 }
+\DoxyCodeLine{00605   \textcolor{comment}{/* Return API HAL status */}}
+\DoxyCodeLine{00606   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00607 \}}
+\DoxyCodeLine{00608 }
+\DoxyCodeLine{00621 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedStart\_IT(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{00622 \{}
+\DoxyCodeLine{00623   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{00624   uint32\_t tmp\_config\_injected\_queue;}
+\DoxyCodeLine{00625 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00626   uint32\_t tmp\_multimode\_config = LL\_ADC\_GetMultimode(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00627 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00628 }
+\DoxyCodeLine{00629   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00630   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00631 }
+\DoxyCodeLine{00632   \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance) != 0UL)}
+\DoxyCodeLine{00633   \{}
+\DoxyCodeLine{00634     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{00635   \}}
+\DoxyCodeLine{00636   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00637   \{}
+\DoxyCodeLine{00638     \textcolor{comment}{/* In case of software trigger detection enabled, JQDIS must be set}}
+\DoxyCodeLine{00639 \textcolor{comment}{      (which can be done only if ADSTART and JADSTART are both cleared).}}
+\DoxyCodeLine{00640 \textcolor{comment}{       If JQDIS is not set at that point, returns an error}}
+\DoxyCodeLine{00641 \textcolor{comment}{       -\/ since software trigger detection is disabled. User needs to}}
+\DoxyCodeLine{00642 \textcolor{comment}{       resort to HAL\_ADCEx\_DisableInjectedQueue() API to set JQDIS.}}
+\DoxyCodeLine{00643 \textcolor{comment}{       -\/ or (if JQDIS is intentionally reset) since JEXTEN = 0 which means}}
+\DoxyCodeLine{00644 \textcolor{comment}{         the queue is empty */}}
+\DoxyCodeLine{00645     tmp\_config\_injected\_queue = READ\_BIT(hadc-\/>Instance-\/>CFGR, ADC\_CFGR\_JQDIS);}
+\DoxyCodeLine{00646 }
+\DoxyCodeLine{00647     \textcolor{keywordflow}{if} ((READ\_BIT(hadc-\/>Instance-\/>JSQR, ADC\_JSQR\_JEXTEN) == 0UL)}
+\DoxyCodeLine{00648         \&\& (tmp\_config\_injected\_queue == 0UL)}
+\DoxyCodeLine{00649        )}
+\DoxyCodeLine{00650     \{}
+\DoxyCodeLine{00651       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{00652       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00653     \}}
+\DoxyCodeLine{00654 }
+\DoxyCodeLine{00655     \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00656     \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{00657 }
+\DoxyCodeLine{00658     \textcolor{comment}{/* Enable the ADC peripheral */}}
+\DoxyCodeLine{00659     tmp\_hal\_status = ADC\_Enable(hadc);}
+\DoxyCodeLine{00660 }
+\DoxyCodeLine{00661     \textcolor{comment}{/* Start conversion if ADC is effectively enabled */}}
+\DoxyCodeLine{00662     \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00663     \{}
+\DoxyCodeLine{00664       \textcolor{comment}{/* Check if a regular conversion is ongoing */}}
+\DoxyCodeLine{00665       \textcolor{keywordflow}{if} ((hadc-\/>State \& HAL\_ADC\_STATE\_REG\_BUSY) != 0UL)}
+\DoxyCodeLine{00666       \{}
+\DoxyCodeLine{00667         \textcolor{comment}{/* Reset ADC error code field related to injected conversions only */}}
+\DoxyCodeLine{00668         CLEAR\_BIT(hadc-\/>ErrorCode, HAL\_ADC\_ERROR\_JQOVF);}
+\DoxyCodeLine{00669       \}}
+\DoxyCodeLine{00670       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00671       \{}
+\DoxyCodeLine{00672         \textcolor{comment}{/* Set ADC error code to none */}}
+\DoxyCodeLine{00673         ADC\_CLEAR\_ERRORCODE(hadc);}
+\DoxyCodeLine{00674       \}}
+\DoxyCodeLine{00675 }
+\DoxyCodeLine{00676       \textcolor{comment}{/* Set ADC state                                                        */}}
+\DoxyCodeLine{00677       \textcolor{comment}{/* -\/ Clear state bitfield related to injected group conversion results  */}}
+\DoxyCodeLine{00678       \textcolor{comment}{/* -\/ Set state bitfield related to injected operation                   */}}
+\DoxyCodeLine{00679       ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{00680                         HAL\_ADC\_STATE\_READY | HAL\_ADC\_STATE\_INJ\_EOC,}
+\DoxyCodeLine{00681                         HAL\_ADC\_STATE\_INJ\_BUSY);}
+\DoxyCodeLine{00682 }
+\DoxyCodeLine{00683 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00684       \textcolor{comment}{/* Reset HAL\_ADC\_STATE\_MULTIMODE\_SLAVE bit}}
+\DoxyCodeLine{00685 \textcolor{comment}{        -\/ if ADC instance is master or if multimode feature is not available}}
+\DoxyCodeLine{00686 \textcolor{comment}{        -\/ if multimode setting is disabled (ADC instance slave in independent mode) */}}
+\DoxyCodeLine{00687       \textcolor{keywordflow}{if} ((\_\_LL\_ADC\_MULTI\_INSTANCE\_MASTER(hadc-\/>Instance) == hadc-\/>Instance)}
+\DoxyCodeLine{00688           || (tmp\_multimode\_config == LL\_ADC\_MULTI\_INDEPENDENT)}
+\DoxyCodeLine{00689          )}
+\DoxyCodeLine{00690       \{}
+\DoxyCodeLine{00691         CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_MULTIMODE\_SLAVE);}
+\DoxyCodeLine{00692       \}}
+\DoxyCodeLine{00693 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00694 }
+\DoxyCodeLine{00695       \textcolor{comment}{/* Clear ADC group injected group conversion flag */}}
+\DoxyCodeLine{00696       \textcolor{comment}{/* (To ensure of no unknown state from potential previous ADC operations) */}}
+\DoxyCodeLine{00697       \_\_HAL\_ADC\_CLEAR\_FLAG(hadc, (ADC\_FLAG\_JEOC | ADC\_FLAG\_JEOS));}
+\DoxyCodeLine{00698 }
+\DoxyCodeLine{00699       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00700       \textcolor{comment}{/* Unlock before starting ADC conversions: in case of potential         */}}
+\DoxyCodeLine{00701       \textcolor{comment}{/* interruption, to let the process to ADC IRQ Handler.                 */}}
+\DoxyCodeLine{00702       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00703 }
+\DoxyCodeLine{00704       \textcolor{comment}{/* Enable ADC Injected context queue overflow interrupt if this feature   */}}
+\DoxyCodeLine{00705       \textcolor{comment}{/* is enabled.                                                            */}}
+\DoxyCodeLine{00706       \textcolor{keywordflow}{if} ((hadc-\/>Instance-\/>CFGR \& ADC\_CFGR\_JQM) != 0UL)}
+\DoxyCodeLine{00707       \{}
+\DoxyCodeLine{00708         \_\_HAL\_ADC\_ENABLE\_IT(hadc, ADC\_FLAG\_JQOVF);}
+\DoxyCodeLine{00709       \}}
+\DoxyCodeLine{00710 }
+\DoxyCodeLine{00711       \textcolor{comment}{/* Enable ADC end of conversion interrupt */}}
+\DoxyCodeLine{00712       \textcolor{keywordflow}{switch} (hadc-\/>Init.EOCSelection)}
+\DoxyCodeLine{00713       \{}
+\DoxyCodeLine{00714         \textcolor{keywordflow}{case} ADC\_EOC\_SEQ\_CONV:}
+\DoxyCodeLine{00715           \_\_HAL\_ADC\_DISABLE\_IT(hadc, ADC\_IT\_JEOC);}
+\DoxyCodeLine{00716           \_\_HAL\_ADC\_ENABLE\_IT(hadc, ADC\_IT\_JEOS);}
+\DoxyCodeLine{00717           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00718         \textcolor{comment}{/* case ADC\_EOC\_SINGLE\_CONV */}}
+\DoxyCodeLine{00719         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00720           \_\_HAL\_ADC\_DISABLE\_IT(hadc, ADC\_IT\_JEOS);}
+\DoxyCodeLine{00721           \_\_HAL\_ADC\_ENABLE\_IT(hadc, ADC\_IT\_JEOC);}
+\DoxyCodeLine{00722           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00723       \}}
+\DoxyCodeLine{00724 }
+\DoxyCodeLine{00725       \textcolor{comment}{/* Enable conversion of injected group, if automatic injected conversion  */}}
+\DoxyCodeLine{00726       \textcolor{comment}{/* is disabled.                                                           */}}
+\DoxyCodeLine{00727       \textcolor{comment}{/* If software start has been selected, conversion starts immediately.    */}}
+\DoxyCodeLine{00728       \textcolor{comment}{/* If external trigger has been selected, conversion will start at next   */}}
+\DoxyCodeLine{00729       \textcolor{comment}{/* trigger event.                                                         */}}
+\DoxyCodeLine{00730       \textcolor{comment}{/* Case of multimode enabled (when multimode feature is available):       */}}
+\DoxyCodeLine{00731       \textcolor{comment}{/* if ADC is slave,                                                       */}}
+\DoxyCodeLine{00732       \textcolor{comment}{/*    -\/ ADC is enabled only (conversion is not started),                  */}}
+\DoxyCodeLine{00733       \textcolor{comment}{/*    -\/ if multimode only concerns regular conversion, ADC is enabled     */}}
+\DoxyCodeLine{00734       \textcolor{comment}{/*     and conversion is started.                                         */}}
+\DoxyCodeLine{00735       \textcolor{comment}{/* If ADC is master or independent,                                       */}}
+\DoxyCodeLine{00736       \textcolor{comment}{/*    -\/ ADC is enabled and conversion is started.                         */}}
+\DoxyCodeLine{00737 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00738       \textcolor{keywordflow}{if} ((\_\_LL\_ADC\_MULTI\_INSTANCE\_MASTER(hadc-\/>Instance) == hadc-\/>Instance)}
+\DoxyCodeLine{00739           || (tmp\_multimode\_config == LL\_ADC\_MULTI\_INDEPENDENT)}
+\DoxyCodeLine{00740           || (tmp\_multimode\_config == LL\_ADC\_MULTI\_DUAL\_REG\_SIMULT)}
+\DoxyCodeLine{00741           || (tmp\_multimode\_config == LL\_ADC\_MULTI\_DUAL\_REG\_INTERL)}
+\DoxyCodeLine{00742          )}
+\DoxyCodeLine{00743       \{}
+\DoxyCodeLine{00744         \textcolor{comment}{/* ADC instance is not a multimode slave instance with multimode injected conversions enabled */}}
+\DoxyCodeLine{00745         \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_GetTrigAuto(hadc-\/>Instance) == LL\_ADC\_INJ\_TRIG\_INDEPENDENT)}
+\DoxyCodeLine{00746         \{}
+\DoxyCodeLine{00747           LL\_ADC\_INJ\_StartConversion(hadc-\/>Instance);}
+\DoxyCodeLine{00748         \}}
+\DoxyCodeLine{00749       \}}
+\DoxyCodeLine{00750       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00751       \{}
+\DoxyCodeLine{00752         \textcolor{comment}{/* ADC instance is not a multimode slave instance with multimode injected conversions enabled */}}
+\DoxyCodeLine{00753         SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_MULTIMODE\_SLAVE);}
+\DoxyCodeLine{00754       \}}
+\DoxyCodeLine{00755 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00756       \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_GetTrigAuto(hadc-\/>Instance) == LL\_ADC\_INJ\_TRIG\_INDEPENDENT)}
+\DoxyCodeLine{00757       \{}
+\DoxyCodeLine{00758         \textcolor{comment}{/* Start ADC group injected conversion */}}
+\DoxyCodeLine{00759         LL\_ADC\_INJ\_StartConversion(hadc-\/>Instance);}
+\DoxyCodeLine{00760       \}}
+\DoxyCodeLine{00761 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00762 }
+\DoxyCodeLine{00763     \}}
+\DoxyCodeLine{00764     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00765     \{}
+\DoxyCodeLine{00766       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00767       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00768     \}}
+\DoxyCodeLine{00769 }
+\DoxyCodeLine{00770     \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00771     \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{00772   \}}
+\DoxyCodeLine{00773 \}}
+\DoxyCodeLine{00774 }
+\DoxyCodeLine{00794 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedStop\_IT(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{00795 \{}
+\DoxyCodeLine{00796   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{00797 }
+\DoxyCodeLine{00798   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00799   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00800 }
+\DoxyCodeLine{00801   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00802   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{00803 }
+\DoxyCodeLine{00804   \textcolor{comment}{/* 1. Stop potential conversion on going on injected group only. */}}
+\DoxyCodeLine{00805   tmp\_hal\_status = ADC\_ConversionStop(hadc, ADC\_INJECTED\_GROUP);}
+\DoxyCodeLine{00806 }
+\DoxyCodeLine{00807   \textcolor{comment}{/* Disable ADC peripheral if injected conversions are effectively stopped   */}}
+\DoxyCodeLine{00808   \textcolor{comment}{/* and if no conversion on the other group (regular group) is intended to   */}}
+\DoxyCodeLine{00809   \textcolor{comment}{/* continue.                                                                */}}
+\DoxyCodeLine{00810   \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00811   \{}
+\DoxyCodeLine{00812     \textcolor{comment}{/* Disable ADC end of conversion interrupt for injected channels */}}
+\DoxyCodeLine{00813     \_\_HAL\_ADC\_DISABLE\_IT(hadc, (ADC\_IT\_JEOC | ADC\_IT\_JEOS | ADC\_FLAG\_JQOVF));}
+\DoxyCodeLine{00814 }
+\DoxyCodeLine{00815     \textcolor{keywordflow}{if} (LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{00816     \{}
+\DoxyCodeLine{00817       \textcolor{comment}{/* 2. Disable the ADC peripheral */}}
+\DoxyCodeLine{00818       tmp\_hal\_status = ADC\_Disable(hadc);}
+\DoxyCodeLine{00819 }
+\DoxyCodeLine{00820       \textcolor{comment}{/* Check if ADC is effectively disabled */}}
+\DoxyCodeLine{00821       \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00822       \{}
+\DoxyCodeLine{00823         \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00824         ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{00825                           HAL\_ADC\_STATE\_REG\_BUSY | HAL\_ADC\_STATE\_INJ\_BUSY,}
+\DoxyCodeLine{00826                           HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{00827       \}}
+\DoxyCodeLine{00828     \}}
+\DoxyCodeLine{00829     \textcolor{comment}{/* Conversion on injected group is stopped, but ADC not disabled since    */}}
+\DoxyCodeLine{00830     \textcolor{comment}{/* conversion on regular group is still running.                          */}}
+\DoxyCodeLine{00831     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00832     \{}
+\DoxyCodeLine{00833       \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00834       CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_BUSY);}
+\DoxyCodeLine{00835     \}}
+\DoxyCodeLine{00836   \}}
+\DoxyCodeLine{00837 }
+\DoxyCodeLine{00838   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00839   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00840 }
+\DoxyCodeLine{00841   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00842   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{00843 \}}
+\DoxyCodeLine{00844 }
+\DoxyCodeLine{00845 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00861 HAL\_StatusTypeDef HAL\_ADCEx\_MultiModeStart\_DMA(ADC\_HandleTypeDef *hadc, uint32\_t *pData, uint32\_t Length)}
+\DoxyCodeLine{00862 \{}
+\DoxyCodeLine{00863   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{00864   ADC\_HandleTypeDef tmphadcSlave;}
+\DoxyCodeLine{00865   ADC\_Common\_TypeDef *tmpADC\_Common;}
+\DoxyCodeLine{00866 }
+\DoxyCodeLine{00867   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00868   assert\_param(IS\_ADC\_MULTIMODE\_MASTER\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00869   assert\_param(IS\_FUNCTIONAL\_STATE(hadc-\/>Init.ContinuousConvMode));}
+\DoxyCodeLine{00870   assert\_param(IS\_ADC\_EXTTRIG\_EDGE(hadc-\/>Init.ExternalTrigConvEdge));}
+\DoxyCodeLine{00871   assert\_param(IS\_FUNCTIONAL\_STATE(hadc-\/>Init.DMAContinuousRequests));}
+\DoxyCodeLine{00872 }
+\DoxyCodeLine{00873   \textcolor{keywordflow}{if} (LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance) != 0UL)}
+\DoxyCodeLine{00874   \{}
+\DoxyCodeLine{00875     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{00876   \}}
+\DoxyCodeLine{00877   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00878   \{}
+\DoxyCodeLine{00879     \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00880     \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{00881 }
+\DoxyCodeLine{00882     \textcolor{comment}{/* Temporary handle minimum initialization */}}
+\DoxyCodeLine{00883     \_\_HAL\_ADC\_RESET\_HANDLE\_STATE(\&tmphadcSlave);}
+\DoxyCodeLine{00884     ADC\_CLEAR\_ERRORCODE(\&tmphadcSlave);}
+\DoxyCodeLine{00885 }
+\DoxyCodeLine{00886     \textcolor{comment}{/* Set a temporary handle of the ADC slave associated to the ADC master   */}}
+\DoxyCodeLine{00887     ADC\_MULTI\_SLAVE(hadc, \&tmphadcSlave);}
+\DoxyCodeLine{00888 }
+\DoxyCodeLine{00889     \textcolor{keywordflow}{if} (tmphadcSlave.Instance == NULL)}
+\DoxyCodeLine{00890     \{}
+\DoxyCodeLine{00891       \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00892       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{00893 }
+\DoxyCodeLine{00894       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00895       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00896 }
+\DoxyCodeLine{00897       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00898     \}}
+\DoxyCodeLine{00899 }
+\DoxyCodeLine{00900     \textcolor{comment}{/* Enable the ADC peripherals: master and slave (in case if not already   */}}
+\DoxyCodeLine{00901     \textcolor{comment}{/* enabled previously)                                                    */}}
+\DoxyCodeLine{00902     tmp\_hal\_status = ADC\_Enable(hadc);}
+\DoxyCodeLine{00903     \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00904     \{}
+\DoxyCodeLine{00905       tmp\_hal\_status = ADC\_Enable(\&tmphadcSlave);}
+\DoxyCodeLine{00906     \}}
+\DoxyCodeLine{00907 }
+\DoxyCodeLine{00908     \textcolor{comment}{/* Start multimode conversion of ADCs pair */}}
+\DoxyCodeLine{00909     \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{00910     \{}
+\DoxyCodeLine{00911       \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{00912       ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{00913                         (HAL\_ADC\_STATE\_READY | HAL\_ADC\_STATE\_REG\_EOC | HAL\_ADC\_STATE\_REG\_OVR | HAL\_ADC\_STATE\_REG\_EOSMP),}
+\DoxyCodeLine{00914                         HAL\_ADC\_STATE\_REG\_BUSY);}
+\DoxyCodeLine{00915 }
+\DoxyCodeLine{00916       \textcolor{comment}{/* Set ADC error code to none */}}
+\DoxyCodeLine{00917       ADC\_CLEAR\_ERRORCODE(hadc);}
+\DoxyCodeLine{00918 }
+\DoxyCodeLine{00919       \textcolor{comment}{/* Set the DMA transfer complete callback */}}
+\DoxyCodeLine{00920       hadc-\/>DMA\_Handle-\/>XferCpltCallback = ADC\_DMAConvCplt;}
+\DoxyCodeLine{00921 }
+\DoxyCodeLine{00922       \textcolor{comment}{/* Set the DMA half transfer complete callback */}}
+\DoxyCodeLine{00923       hadc-\/>DMA\_Handle-\/>XferHalfCpltCallback = ADC\_DMAHalfConvCplt;}
+\DoxyCodeLine{00924 }
+\DoxyCodeLine{00925       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{00926       hadc-\/>DMA\_Handle-\/>XferErrorCallback = ADC\_DMAError ;}
+\DoxyCodeLine{00927 }
+\DoxyCodeLine{00928       \textcolor{comment}{/* Pointer to the common control register  */}}
+\DoxyCodeLine{00929       tmpADC\_Common = \_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance);}
+\DoxyCodeLine{00930 }
+\DoxyCodeLine{00931       \textcolor{comment}{/* Manage ADC and DMA start: ADC overrun interruption, DMA start, ADC     */}}
+\DoxyCodeLine{00932       \textcolor{comment}{/* start (in case of SW start):                                           */}}
+\DoxyCodeLine{00933 }
+\DoxyCodeLine{00934       \textcolor{comment}{/* Clear regular group conversion flag and overrun flag */}}
+\DoxyCodeLine{00935       \textcolor{comment}{/* (To ensure of no unknown state from potential previous ADC operations) */}}
+\DoxyCodeLine{00936       \_\_HAL\_ADC\_CLEAR\_FLAG(hadc, (ADC\_FLAG\_EOC | ADC\_FLAG\_EOS | ADC\_FLAG\_OVR));}
+\DoxyCodeLine{00937 }
+\DoxyCodeLine{00938       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00939       \textcolor{comment}{/* Unlock before starting ADC conversions: in case of potential         */}}
+\DoxyCodeLine{00940       \textcolor{comment}{/* interruption, to let the process to ADC IRQ Handler.                 */}}
+\DoxyCodeLine{00941       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00942 }
+\DoxyCodeLine{00943       \textcolor{comment}{/* Enable ADC overrun interrupt */}}
+\DoxyCodeLine{00944       \_\_HAL\_ADC\_ENABLE\_IT(hadc, ADC\_IT\_OVR);}
+\DoxyCodeLine{00945 }
+\DoxyCodeLine{00946       \textcolor{comment}{/* Start the DMA channel */}}
+\DoxyCodeLine{00947       tmp\_hal\_status = HAL\_DMA\_Start\_IT(hadc-\/>DMA\_Handle, (uint32\_t)\&tmpADC\_Common-\/>CDR, (uint32\_t)pData, Length);}
+\DoxyCodeLine{00948 }
+\DoxyCodeLine{00949       \textcolor{comment}{/* Enable conversion of regular group.                                    */}}
+\DoxyCodeLine{00950       \textcolor{comment}{/* If software start has been selected, conversion starts immediately.    */}}
+\DoxyCodeLine{00951       \textcolor{comment}{/* If external trigger has been selected, conversion will start at next   */}}
+\DoxyCodeLine{00952       \textcolor{comment}{/* trigger event.                                                         */}}
+\DoxyCodeLine{00953       \textcolor{comment}{/* Start ADC group regular conversion */}}
+\DoxyCodeLine{00954       LL\_ADC\_REG\_StartConversion(hadc-\/>Instance);}
+\DoxyCodeLine{00955     \}}
+\DoxyCodeLine{00956     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00957     \{}
+\DoxyCodeLine{00958       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{00959       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{00960     \}}
+\DoxyCodeLine{00961 }
+\DoxyCodeLine{00962     \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00963     \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{00964   \}}
+\DoxyCodeLine{00965 \}}
+\DoxyCodeLine{00966 }
+\DoxyCodeLine{00980 HAL\_StatusTypeDef HAL\_ADCEx\_MultiModeStop\_DMA(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{00981 \{}
+\DoxyCodeLine{00982   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{00983   uint32\_t tickstart;}
+\DoxyCodeLine{00984   ADC\_HandleTypeDef tmphadcSlave;}
+\DoxyCodeLine{00985   uint32\_t tmphadcSlave\_conversion\_on\_going;}
+\DoxyCodeLine{00986   HAL\_StatusTypeDef tmphadcSlave\_disable\_status;}
+\DoxyCodeLine{00987 }
+\DoxyCodeLine{00988   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00989   assert\_param(IS\_ADC\_MULTIMODE\_MASTER\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{00990 }
+\DoxyCodeLine{00991   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{00992   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{00993 }
+\DoxyCodeLine{00994 }
+\DoxyCodeLine{00995   \textcolor{comment}{/* 1. Stop potential multimode conversion on going, on regular and injected groups */}}
+\DoxyCodeLine{00996   tmp\_hal\_status = ADC\_ConversionStop(hadc, ADC\_REGULAR\_INJECTED\_GROUP);}
+\DoxyCodeLine{00997 }
+\DoxyCodeLine{00998   \textcolor{comment}{/* Disable ADC peripheral if conversions are effectively stopped */}}
+\DoxyCodeLine{00999   \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01000   \{}
+\DoxyCodeLine{01001     \textcolor{comment}{/* Temporary handle minimum initialization */}}
+\DoxyCodeLine{01002     \_\_HAL\_ADC\_RESET\_HANDLE\_STATE(\&tmphadcSlave);}
+\DoxyCodeLine{01003     ADC\_CLEAR\_ERRORCODE(\&tmphadcSlave);}
+\DoxyCodeLine{01004 }
+\DoxyCodeLine{01005     \textcolor{comment}{/* Set a temporary handle of the ADC slave associated to the ADC master   */}}
+\DoxyCodeLine{01006     ADC\_MULTI\_SLAVE(hadc, \&tmphadcSlave);}
+\DoxyCodeLine{01007 }
+\DoxyCodeLine{01008     \textcolor{keywordflow}{if} (tmphadcSlave.Instance == NULL)}
+\DoxyCodeLine{01009     \{}
+\DoxyCodeLine{01010       \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{01011       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{01012 }
+\DoxyCodeLine{01013       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01014       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01015 }
+\DoxyCodeLine{01016       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01017     \}}
+\DoxyCodeLine{01018 }
+\DoxyCodeLine{01019     \textcolor{comment}{/* Procedure to disable the ADC peripheral: wait for conversions          */}}
+\DoxyCodeLine{01020     \textcolor{comment}{/* effectively stopped (ADC master and ADC slave), then disable ADC       */}}
+\DoxyCodeLine{01021 }
+\DoxyCodeLine{01022     \textcolor{comment}{/* 1. Wait for ADC conversion completion for ADC master and ADC slave */}}
+\DoxyCodeLine{01023     tickstart = HAL\_GetTick();}
+\DoxyCodeLine{01024 }
+\DoxyCodeLine{01025     tmphadcSlave\_conversion\_on\_going = LL\_ADC\_REG\_IsConversionOngoing((\&tmphadcSlave)-\/>Instance);}
+\DoxyCodeLine{01026     \textcolor{keywordflow}{while} ((LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance) == 1UL)}
+\DoxyCodeLine{01027            || (tmphadcSlave\_conversion\_on\_going == 1UL)}
+\DoxyCodeLine{01028           )}
+\DoxyCodeLine{01029     \{}
+\DoxyCodeLine{01030       \textcolor{keywordflow}{if} ((HAL\_GetTick() -\/ tickstart) > ADC\_STOP\_CONVERSION\_TIMEOUT)}
+\DoxyCodeLine{01031       \{}
+\DoxyCodeLine{01032         \textcolor{comment}{/* New check to avoid false timeout detection in case of preemption */}}
+\DoxyCodeLine{01033         tmphadcSlave\_conversion\_on\_going = LL\_ADC\_REG\_IsConversionOngoing((\&tmphadcSlave)-\/>Instance);}
+\DoxyCodeLine{01034         \textcolor{keywordflow}{if} ((LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance) == 1UL)}
+\DoxyCodeLine{01035             || (tmphadcSlave\_conversion\_on\_going == 1UL)}
+\DoxyCodeLine{01036            )}
+\DoxyCodeLine{01037         \{}
+\DoxyCodeLine{01038           \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{01039           SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_INTERNAL);}
+\DoxyCodeLine{01040 }
+\DoxyCodeLine{01041           \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01042           \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01043 }
+\DoxyCodeLine{01044           \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01045         \}}
+\DoxyCodeLine{01046       \}}
+\DoxyCodeLine{01047 }
+\DoxyCodeLine{01048       tmphadcSlave\_conversion\_on\_going = LL\_ADC\_REG\_IsConversionOngoing((\&tmphadcSlave)-\/>Instance);}
+\DoxyCodeLine{01049     \}}
+\DoxyCodeLine{01050 }
+\DoxyCodeLine{01051     \textcolor{comment}{/* Disable the DMA channel (in case of DMA in circular mode or stop       */}}
+\DoxyCodeLine{01052     \textcolor{comment}{/* while DMA transfer is on going)                                        */}}
+\DoxyCodeLine{01053     \textcolor{comment}{/* Note: DMA channel of ADC slave should be stopped after this function   */}}
+\DoxyCodeLine{01054     \textcolor{comment}{/*       with HAL\_ADC\_Stop\_DMA() API.                                     */}}
+\DoxyCodeLine{01055     tmp\_hal\_status = HAL\_DMA\_Abort(hadc-\/>DMA\_Handle);}
+\DoxyCodeLine{01056 }
+\DoxyCodeLine{01057     \textcolor{comment}{/* Check if DMA channel effectively disabled */}}
+\DoxyCodeLine{01058     \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_ERROR)}
+\DoxyCodeLine{01059     \{}
+\DoxyCodeLine{01060       \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{01061       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_DMA);}
+\DoxyCodeLine{01062     \}}
+\DoxyCodeLine{01063 }
+\DoxyCodeLine{01064     \textcolor{comment}{/* Disable ADC overrun interrupt */}}
+\DoxyCodeLine{01065     \_\_HAL\_ADC\_DISABLE\_IT(hadc, ADC\_IT\_OVR);}
+\DoxyCodeLine{01066 }
+\DoxyCodeLine{01067     \textcolor{comment}{/* 2. Disable the ADC peripherals: master and slave */}}
+\DoxyCodeLine{01068     \textcolor{comment}{/* Update "{}tmp\_hal\_status"{} only if DMA channel disabling passed, to keep in */}}
+\DoxyCodeLine{01069     \textcolor{comment}{/* memory a potential failing status.                                     */}}
+\DoxyCodeLine{01070     \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01071     \{}
+\DoxyCodeLine{01072       tmphadcSlave\_disable\_status = ADC\_Disable(\&tmphadcSlave);}
+\DoxyCodeLine{01073       \textcolor{keywordflow}{if} ((ADC\_Disable(hadc) == HAL\_OK)           \&\&}
+\DoxyCodeLine{01074           (tmphadcSlave\_disable\_status == HAL\_OK))}
+\DoxyCodeLine{01075       \{}
+\DoxyCodeLine{01076         tmp\_hal\_status = HAL\_OK;}
+\DoxyCodeLine{01077       \}}
+\DoxyCodeLine{01078     \}}
+\DoxyCodeLine{01079     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01080     \{}
+\DoxyCodeLine{01081       \textcolor{comment}{/* In case of error, attempt to disable ADC master and slave without status assert */}}
+\DoxyCodeLine{01082       (void) ADC\_Disable(hadc);}
+\DoxyCodeLine{01083       (void) ADC\_Disable(\&tmphadcSlave);}
+\DoxyCodeLine{01084     \}}
+\DoxyCodeLine{01085 }
+\DoxyCodeLine{01086     \textcolor{comment}{/* Set ADC state (ADC master) */}}
+\DoxyCodeLine{01087     ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{01088                       HAL\_ADC\_STATE\_REG\_BUSY | HAL\_ADC\_STATE\_INJ\_BUSY,}
+\DoxyCodeLine{01089                       HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{01090   \}}
+\DoxyCodeLine{01091 }
+\DoxyCodeLine{01092   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01093   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01094 }
+\DoxyCodeLine{01095   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01096   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{01097 \}}
+\DoxyCodeLine{01098 }
+\DoxyCodeLine{01104 uint32\_t HAL\_ADCEx\_MultiModeGetValue(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01105 \{}
+\DoxyCodeLine{01106   \textcolor{keyword}{const} ADC\_Common\_TypeDef *tmpADC\_Common;}
+\DoxyCodeLine{01107 }
+\DoxyCodeLine{01108   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01109   assert\_param(IS\_ADC\_MULTIMODE\_MASTER\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{01110 }
+\DoxyCodeLine{01111   \textcolor{comment}{/* Prevent unused argument(s) compilation warning if no assert\_param check */}}
+\DoxyCodeLine{01112   \textcolor{comment}{/* and possible no usage in \_\_LL\_ADC\_COMMON\_INSTANCE() below               */}}
+\DoxyCodeLine{01113   UNUSED(hadc);}
+\DoxyCodeLine{01114 }
+\DoxyCodeLine{01115   \textcolor{comment}{/* Pointer to the common control register  */}}
+\DoxyCodeLine{01116   tmpADC\_Common = \_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance);}
+\DoxyCodeLine{01117 }
+\DoxyCodeLine{01118   \textcolor{comment}{/* Return the multi mode conversion value */}}
+\DoxyCodeLine{01119   \textcolor{keywordflow}{return} tmpADC\_Common-\/>CDR;}
+\DoxyCodeLine{01120 \}}
+\DoxyCodeLine{01121 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01122 }
+\DoxyCodeLine{01151 uint32\_t HAL\_ADCEx\_InjectedGetValue(ADC\_HandleTypeDef *hadc, uint32\_t InjectedRank)}
+\DoxyCodeLine{01152 \{}
+\DoxyCodeLine{01153   uint32\_t tmp\_jdr;}
+\DoxyCodeLine{01154 }
+\DoxyCodeLine{01155   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01156   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{01157   assert\_param(IS\_ADC\_INJECTED\_RANK(InjectedRank));}
+\DoxyCodeLine{01158 }
+\DoxyCodeLine{01159   \textcolor{comment}{/* Get ADC converted value */}}
+\DoxyCodeLine{01160   \textcolor{keywordflow}{switch} (InjectedRank)}
+\DoxyCodeLine{01161   \{}
+\DoxyCodeLine{01162     \textcolor{keywordflow}{case} ADC\_INJECTED\_RANK\_4:}
+\DoxyCodeLine{01163       tmp\_jdr = hadc-\/>Instance-\/>JDR4;}
+\DoxyCodeLine{01164       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01165     \textcolor{keywordflow}{case} ADC\_INJECTED\_RANK\_3:}
+\DoxyCodeLine{01166       tmp\_jdr = hadc-\/>Instance-\/>JDR3;}
+\DoxyCodeLine{01167       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01168     \textcolor{keywordflow}{case} ADC\_INJECTED\_RANK\_2:}
+\DoxyCodeLine{01169       tmp\_jdr = hadc-\/>Instance-\/>JDR2;}
+\DoxyCodeLine{01170       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01171     \textcolor{keywordflow}{case} ADC\_INJECTED\_RANK\_1:}
+\DoxyCodeLine{01172     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01173       tmp\_jdr = hadc-\/>Instance-\/>JDR1;}
+\DoxyCodeLine{01174       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01175   \}}
+\DoxyCodeLine{01176 }
+\DoxyCodeLine{01177   \textcolor{comment}{/* Return ADC converted value */}}
+\DoxyCodeLine{01178   \textcolor{keywordflow}{return} tmp\_jdr;}
+\DoxyCodeLine{01179 \}}
+\DoxyCodeLine{01180 }
+\DoxyCodeLine{01186 \_\_weak \textcolor{keywordtype}{void} HAL\_ADCEx\_InjectedConvCpltCallback(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01187 \{}
+\DoxyCodeLine{01188   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{01189   UNUSED(hadc);}
+\DoxyCodeLine{01190 }
+\DoxyCodeLine{01191   \textcolor{comment}{/* NOTE : This function should not be modified. When the callback is needed,}}
+\DoxyCodeLine{01192 \textcolor{comment}{            function HAL\_ADCEx\_InjectedConvCpltCallback must be implemented in the user file.}}
+\DoxyCodeLine{01193 \textcolor{comment}{  */}}
+\DoxyCodeLine{01194 \}}
+\DoxyCodeLine{01195 }
+\DoxyCodeLine{01205 \_\_weak \textcolor{keywordtype}{void} HAL\_ADCEx\_InjectedQueueOverflowCallback(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01206 \{}
+\DoxyCodeLine{01207   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{01208   UNUSED(hadc);}
+\DoxyCodeLine{01209 }
+\DoxyCodeLine{01210   \textcolor{comment}{/* NOTE : This function should not be modified. When the callback is needed,}}
+\DoxyCodeLine{01211 \textcolor{comment}{            function HAL\_ADCEx\_InjectedQueueOverflowCallback must be implemented in the user file.}}
+\DoxyCodeLine{01212 \textcolor{comment}{  */}}
+\DoxyCodeLine{01213 \}}
+\DoxyCodeLine{01214 }
+\DoxyCodeLine{01220 \_\_weak \textcolor{keywordtype}{void} HAL\_ADCEx\_LevelOutOfWindow2Callback(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01221 \{}
+\DoxyCodeLine{01222   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{01223   UNUSED(hadc);}
+\DoxyCodeLine{01224 }
+\DoxyCodeLine{01225   \textcolor{comment}{/* NOTE : This function should not be modified. When the callback is needed,}}
+\DoxyCodeLine{01226 \textcolor{comment}{            function HAL\_ADCEx\_LevelOutOfWindow2Callback must be implemented in the user file.}}
+\DoxyCodeLine{01227 \textcolor{comment}{  */}}
+\DoxyCodeLine{01228 \}}
+\DoxyCodeLine{01229 }
+\DoxyCodeLine{01235 \_\_weak \textcolor{keywordtype}{void} HAL\_ADCEx\_LevelOutOfWindow3Callback(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01236 \{}
+\DoxyCodeLine{01237   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{01238   UNUSED(hadc);}
+\DoxyCodeLine{01239 }
+\DoxyCodeLine{01240   \textcolor{comment}{/* NOTE : This function should not be modified. When the callback is needed,}}
+\DoxyCodeLine{01241 \textcolor{comment}{            function HAL\_ADCEx\_LevelOutOfWindow3Callback must be implemented in the user file.}}
+\DoxyCodeLine{01242 \textcolor{comment}{  */}}
+\DoxyCodeLine{01243 \}}
+\DoxyCodeLine{01244 }
+\DoxyCodeLine{01245 }
+\DoxyCodeLine{01251 \_\_weak \textcolor{keywordtype}{void} HAL\_ADCEx\_EndOfSamplingCallback(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01252 \{}
+\DoxyCodeLine{01253   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{01254   UNUSED(hadc);}
+\DoxyCodeLine{01255 }
+\DoxyCodeLine{01256   \textcolor{comment}{/* NOTE : This function should not be modified. When the callback is needed,}}
+\DoxyCodeLine{01257 \textcolor{comment}{            function HAL\_ADCEx\_EndOfSamplingCallback must be implemented in the user file.}}
+\DoxyCodeLine{01258 \textcolor{comment}{  */}}
+\DoxyCodeLine{01259 \}}
+\DoxyCodeLine{01260 }
+\DoxyCodeLine{01268 HAL\_StatusTypeDef HAL\_ADCEx\_RegularStop(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01269 \{}
+\DoxyCodeLine{01270   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{01271 }
+\DoxyCodeLine{01272   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01273   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{01274 }
+\DoxyCodeLine{01275   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{01276   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{01277 }
+\DoxyCodeLine{01278   \textcolor{comment}{/* 1. Stop potential regular conversion on going */}}
+\DoxyCodeLine{01279   tmp\_hal\_status = ADC\_ConversionStop(hadc, ADC\_REGULAR\_GROUP);}
+\DoxyCodeLine{01280 }
+\DoxyCodeLine{01281   \textcolor{comment}{/* Disable ADC peripheral if regular conversions are effectively stopped}}
+\DoxyCodeLine{01282 \textcolor{comment}{     and if no injected conversions are on-\/going */}}
+\DoxyCodeLine{01283   \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01284   \{}
+\DoxyCodeLine{01285     \textcolor{comment}{/* Clear HAL\_ADC\_STATE\_REG\_BUSY bit */}}
+\DoxyCodeLine{01286     CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_REG\_BUSY);}
+\DoxyCodeLine{01287 }
+\DoxyCodeLine{01288     \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{01289     \{}
+\DoxyCodeLine{01290       \textcolor{comment}{/* 2. Disable the ADC peripheral */}}
+\DoxyCodeLine{01291       tmp\_hal\_status = ADC\_Disable(hadc);}
+\DoxyCodeLine{01292 }
+\DoxyCodeLine{01293       \textcolor{comment}{/* Check if ADC is effectively disabled */}}
+\DoxyCodeLine{01294       \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01295       \{}
+\DoxyCodeLine{01296         \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{01297         ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{01298                           HAL\_ADC\_STATE\_INJ\_BUSY,}
+\DoxyCodeLine{01299                           HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{01300       \}}
+\DoxyCodeLine{01301     \}}
+\DoxyCodeLine{01302     \textcolor{comment}{/* Conversion on injected group is stopped, but ADC not disabled since    */}}
+\DoxyCodeLine{01303     \textcolor{comment}{/* conversion on regular group is still running.                          */}}
+\DoxyCodeLine{01304     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01305     \{}
+\DoxyCodeLine{01306       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_BUSY);}
+\DoxyCodeLine{01307     \}}
+\DoxyCodeLine{01308   \}}
+\DoxyCodeLine{01309 }
+\DoxyCodeLine{01310   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01311   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01312 }
+\DoxyCodeLine{01313   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01314   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{01315 \}}
+\DoxyCodeLine{01316 }
+\DoxyCodeLine{01317 }
+\DoxyCodeLine{01326 HAL\_StatusTypeDef HAL\_ADCEx\_RegularStop\_IT(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01327 \{}
+\DoxyCodeLine{01328   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{01329 }
+\DoxyCodeLine{01330   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01331   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{01332 }
+\DoxyCodeLine{01333   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{01334   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{01335 }
+\DoxyCodeLine{01336   \textcolor{comment}{/* 1. Stop potential regular conversion on going */}}
+\DoxyCodeLine{01337   tmp\_hal\_status = ADC\_ConversionStop(hadc, ADC\_REGULAR\_GROUP);}
+\DoxyCodeLine{01338 }
+\DoxyCodeLine{01339   \textcolor{comment}{/* Disable ADC peripheral if conversions are effectively stopped}}
+\DoxyCodeLine{01340 \textcolor{comment}{    and if no injected conversion is on-\/going */}}
+\DoxyCodeLine{01341   \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01342   \{}
+\DoxyCodeLine{01343     \textcolor{comment}{/* Clear HAL\_ADC\_STATE\_REG\_BUSY bit */}}
+\DoxyCodeLine{01344     CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_REG\_BUSY);}
+\DoxyCodeLine{01345 }
+\DoxyCodeLine{01346     \textcolor{comment}{/* Disable all regular-\/related interrupts */}}
+\DoxyCodeLine{01347     \_\_HAL\_ADC\_DISABLE\_IT(hadc, (ADC\_IT\_EOC | ADC\_IT\_EOS | ADC\_IT\_OVR));}
+\DoxyCodeLine{01348 }
+\DoxyCodeLine{01349     \textcolor{comment}{/* 2. Disable ADC peripheral if no injected conversions are on-\/going */}}
+\DoxyCodeLine{01350     \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{01351     \{}
+\DoxyCodeLine{01352       tmp\_hal\_status = ADC\_Disable(hadc);}
+\DoxyCodeLine{01353       \textcolor{comment}{/* if no issue reported */}}
+\DoxyCodeLine{01354       \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01355       \{}
+\DoxyCodeLine{01356         \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{01357         ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{01358                           HAL\_ADC\_STATE\_INJ\_BUSY,}
+\DoxyCodeLine{01359                           HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{01360       \}}
+\DoxyCodeLine{01361     \}}
+\DoxyCodeLine{01362     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01363     \{}
+\DoxyCodeLine{01364       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_BUSY);}
+\DoxyCodeLine{01365     \}}
+\DoxyCodeLine{01366   \}}
+\DoxyCodeLine{01367 }
+\DoxyCodeLine{01368   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01369   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01370 }
+\DoxyCodeLine{01371   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01372   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{01373 \}}
+\DoxyCodeLine{01374 }
+\DoxyCodeLine{01386 HAL\_StatusTypeDef HAL\_ADCEx\_RegularStop\_DMA(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01387 \{}
+\DoxyCodeLine{01388   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{01389 }
+\DoxyCodeLine{01390   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01391   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{01392 }
+\DoxyCodeLine{01393   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{01394   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{01395 }
+\DoxyCodeLine{01396   \textcolor{comment}{/* 1. Stop potential regular conversion on going */}}
+\DoxyCodeLine{01397   tmp\_hal\_status = ADC\_ConversionStop(hadc, ADC\_REGULAR\_GROUP);}
+\DoxyCodeLine{01398 }
+\DoxyCodeLine{01399   \textcolor{comment}{/* Disable ADC peripheral if conversions are effectively stopped}}
+\DoxyCodeLine{01400 \textcolor{comment}{     and if no injected conversion is on-\/going */}}
+\DoxyCodeLine{01401   \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01402   \{}
+\DoxyCodeLine{01403     \textcolor{comment}{/* Clear HAL\_ADC\_STATE\_REG\_BUSY bit */}}
+\DoxyCodeLine{01404     CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_REG\_BUSY);}
+\DoxyCodeLine{01405 }
+\DoxyCodeLine{01406     \textcolor{comment}{/* Disable ADC DMA (ADC DMA configuration ADC\_CFGR\_DMACFG is kept) */}}
+\DoxyCodeLine{01407     CLEAR\_BIT(hadc-\/>Instance-\/>CFGR, ADC\_CFGR\_DMAEN);}
+\DoxyCodeLine{01408 }
+\DoxyCodeLine{01409     \textcolor{comment}{/* Disable the DMA channel (in case of DMA in circular mode or stop while */}}
+\DoxyCodeLine{01410     \textcolor{comment}{/* while DMA transfer is on going)                                        */}}
+\DoxyCodeLine{01411     tmp\_hal\_status = HAL\_DMA\_Abort(hadc-\/>DMA\_Handle);}
+\DoxyCodeLine{01412 }
+\DoxyCodeLine{01413     \textcolor{comment}{/* Check if DMA channel effectively disabled */}}
+\DoxyCodeLine{01414     \textcolor{keywordflow}{if} (tmp\_hal\_status != HAL\_OK)}
+\DoxyCodeLine{01415     \{}
+\DoxyCodeLine{01416       \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{01417       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_DMA);}
+\DoxyCodeLine{01418     \}}
+\DoxyCodeLine{01419 }
+\DoxyCodeLine{01420     \textcolor{comment}{/* Disable ADC overrun interrupt */}}
+\DoxyCodeLine{01421     \_\_HAL\_ADC\_DISABLE\_IT(hadc, ADC\_IT\_OVR);}
+\DoxyCodeLine{01422 }
+\DoxyCodeLine{01423     \textcolor{comment}{/* 2. Disable the ADC peripheral */}}
+\DoxyCodeLine{01424     \textcolor{comment}{/* Update "{}tmp\_hal\_status"{} only if DMA channel disabling passed,          */}}
+\DoxyCodeLine{01425     \textcolor{comment}{/* to keep in memory a potential failing status.                          */}}
+\DoxyCodeLine{01426     \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{01427     \{}
+\DoxyCodeLine{01428       \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01429       \{}
+\DoxyCodeLine{01430         tmp\_hal\_status = ADC\_Disable(hadc);}
+\DoxyCodeLine{01431       \}}
+\DoxyCodeLine{01432       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01433       \{}
+\DoxyCodeLine{01434         (void)ADC\_Disable(hadc);}
+\DoxyCodeLine{01435       \}}
+\DoxyCodeLine{01436 }
+\DoxyCodeLine{01437       \textcolor{comment}{/* Check if ADC is effectively disabled */}}
+\DoxyCodeLine{01438       \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01439       \{}
+\DoxyCodeLine{01440         \textcolor{comment}{/* Set ADC state */}}
+\DoxyCodeLine{01441         ADC\_STATE\_CLR\_SET(hadc-\/>State,}
+\DoxyCodeLine{01442                           HAL\_ADC\_STATE\_INJ\_BUSY,}
+\DoxyCodeLine{01443                           HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{01444       \}}
+\DoxyCodeLine{01445     \}}
+\DoxyCodeLine{01446     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01447     \{}
+\DoxyCodeLine{01448       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_BUSY);}
+\DoxyCodeLine{01449     \}}
+\DoxyCodeLine{01450   \}}
+\DoxyCodeLine{01451 }
+\DoxyCodeLine{01452   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01453   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01454 }
+\DoxyCodeLine{01455   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01456   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{01457 \}}
+\DoxyCodeLine{01458 }
+\DoxyCodeLine{01459 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{01473 HAL\_StatusTypeDef HAL\_ADCEx\_RegularMultiModeStop\_DMA(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{01474 \{}
+\DoxyCodeLine{01475   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{01476   uint32\_t tickstart;}
+\DoxyCodeLine{01477   ADC\_HandleTypeDef tmphadcSlave;}
+\DoxyCodeLine{01478   uint32\_t tmphadcSlave\_conversion\_on\_going;}
+\DoxyCodeLine{01479 }
+\DoxyCodeLine{01480   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01481   assert\_param(IS\_ADC\_MULTIMODE\_MASTER\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{01482 }
+\DoxyCodeLine{01483   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{01484   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{01485 }
+\DoxyCodeLine{01486 }
+\DoxyCodeLine{01487   \textcolor{comment}{/* 1. Stop potential multimode conversion on going, on regular groups */}}
+\DoxyCodeLine{01488   tmp\_hal\_status = ADC\_ConversionStop(hadc, ADC\_REGULAR\_GROUP);}
+\DoxyCodeLine{01489 }
+\DoxyCodeLine{01490   \textcolor{comment}{/* Disable ADC peripheral if conversions are effectively stopped */}}
+\DoxyCodeLine{01491   \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01492   \{}
+\DoxyCodeLine{01493     \textcolor{comment}{/* Clear HAL\_ADC\_STATE\_REG\_BUSY bit */}}
+\DoxyCodeLine{01494     CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_REG\_BUSY);}
+\DoxyCodeLine{01495 }
+\DoxyCodeLine{01496     \textcolor{comment}{/* Temporary handle minimum initialization */}}
+\DoxyCodeLine{01497     \_\_HAL\_ADC\_RESET\_HANDLE\_STATE(\&tmphadcSlave);}
+\DoxyCodeLine{01498     ADC\_CLEAR\_ERRORCODE(\&tmphadcSlave);}
+\DoxyCodeLine{01499 }
+\DoxyCodeLine{01500     \textcolor{comment}{/* Set a temporary handle of the ADC slave associated to the ADC master   */}}
+\DoxyCodeLine{01501     ADC\_MULTI\_SLAVE(hadc, \&tmphadcSlave);}
+\DoxyCodeLine{01502 }
+\DoxyCodeLine{01503     \textcolor{keywordflow}{if} (tmphadcSlave.Instance == NULL)}
+\DoxyCodeLine{01504     \{}
+\DoxyCodeLine{01505       \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{01506       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{01507 }
+\DoxyCodeLine{01508       \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01509       \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01510 }
+\DoxyCodeLine{01511       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01512     \}}
+\DoxyCodeLine{01513 }
+\DoxyCodeLine{01514     \textcolor{comment}{/* Procedure to disable the ADC peripheral: wait for conversions          */}}
+\DoxyCodeLine{01515     \textcolor{comment}{/* effectively stopped (ADC master and ADC slave), then disable ADC       */}}
+\DoxyCodeLine{01516 }
+\DoxyCodeLine{01517     \textcolor{comment}{/* 1. Wait for ADC conversion completion for ADC master and ADC slave */}}
+\DoxyCodeLine{01518     tickstart = HAL\_GetTick();}
+\DoxyCodeLine{01519 }
+\DoxyCodeLine{01520     tmphadcSlave\_conversion\_on\_going = LL\_ADC\_REG\_IsConversionOngoing((\&tmphadcSlave)-\/>Instance);}
+\DoxyCodeLine{01521     \textcolor{keywordflow}{while} ((LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance) == 1UL)}
+\DoxyCodeLine{01522            || (tmphadcSlave\_conversion\_on\_going == 1UL)}
+\DoxyCodeLine{01523           )}
+\DoxyCodeLine{01524     \{}
+\DoxyCodeLine{01525       \textcolor{keywordflow}{if} ((HAL\_GetTick() -\/ tickstart) > ADC\_STOP\_CONVERSION\_TIMEOUT)}
+\DoxyCodeLine{01526       \{}
+\DoxyCodeLine{01527         \textcolor{comment}{/* New check to avoid false timeout detection in case of preemption */}}
+\DoxyCodeLine{01528         tmphadcSlave\_conversion\_on\_going = LL\_ADC\_REG\_IsConversionOngoing((\&tmphadcSlave)-\/>Instance);}
+\DoxyCodeLine{01529         \textcolor{keywordflow}{if} ((LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance) == 1UL)}
+\DoxyCodeLine{01530             || (tmphadcSlave\_conversion\_on\_going == 1UL)}
+\DoxyCodeLine{01531            )}
+\DoxyCodeLine{01532         \{}
+\DoxyCodeLine{01533           \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{01534           SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_INTERNAL);}
+\DoxyCodeLine{01535 }
+\DoxyCodeLine{01536           \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01537           \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01538 }
+\DoxyCodeLine{01539           \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01540         \}}
+\DoxyCodeLine{01541       \}}
+\DoxyCodeLine{01542 }
+\DoxyCodeLine{01543       tmphadcSlave\_conversion\_on\_going = LL\_ADC\_REG\_IsConversionOngoing((\&tmphadcSlave)-\/>Instance);}
+\DoxyCodeLine{01544     \}}
+\DoxyCodeLine{01545 }
+\DoxyCodeLine{01546     \textcolor{comment}{/* Disable the DMA channel (in case of DMA in circular mode or stop       */}}
+\DoxyCodeLine{01547     \textcolor{comment}{/* while DMA transfer is on going)                                        */}}
+\DoxyCodeLine{01548     \textcolor{comment}{/* Note: DMA channel of ADC slave should be stopped after this function   */}}
+\DoxyCodeLine{01549     \textcolor{comment}{/* with HAL\_ADCEx\_RegularStop\_DMA() API.                                  */}}
+\DoxyCodeLine{01550     tmp\_hal\_status = HAL\_DMA\_Abort(hadc-\/>DMA\_Handle);}
+\DoxyCodeLine{01551 }
+\DoxyCodeLine{01552     \textcolor{comment}{/* Check if DMA channel effectively disabled */}}
+\DoxyCodeLine{01553     \textcolor{keywordflow}{if} (tmp\_hal\_status != HAL\_OK)}
+\DoxyCodeLine{01554     \{}
+\DoxyCodeLine{01555       \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{01556       SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_DMA);}
+\DoxyCodeLine{01557     \}}
+\DoxyCodeLine{01558 }
+\DoxyCodeLine{01559     \textcolor{comment}{/* Disable ADC overrun interrupt */}}
+\DoxyCodeLine{01560     \_\_HAL\_ADC\_DISABLE\_IT(hadc, ADC\_IT\_OVR);}
+\DoxyCodeLine{01561 }
+\DoxyCodeLine{01562     \textcolor{comment}{/* 2. Disable the ADC peripherals: master and slave if no injected        */}}
+\DoxyCodeLine{01563     \textcolor{comment}{/*   conversion is on-\/going.                                              */}}
+\DoxyCodeLine{01564     \textcolor{comment}{/* Update "{}tmp\_hal\_status"{} only if DMA channel disabling passed, to keep in */}}
+\DoxyCodeLine{01565     \textcolor{comment}{/* memory a potential failing status.                                     */}}
+\DoxyCodeLine{01566     \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01567     \{}
+\DoxyCodeLine{01568       \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{01569       \{}
+\DoxyCodeLine{01570         tmp\_hal\_status =  ADC\_Disable(hadc);}
+\DoxyCodeLine{01571         \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01572         \{}
+\DoxyCodeLine{01573           \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing((\&tmphadcSlave)-\/>Instance) == 0UL)}
+\DoxyCodeLine{01574           \{}
+\DoxyCodeLine{01575             tmp\_hal\_status =  ADC\_Disable(\&tmphadcSlave);}
+\DoxyCodeLine{01576           \}}
+\DoxyCodeLine{01577         \}}
+\DoxyCodeLine{01578       \}}
+\DoxyCodeLine{01579 }
+\DoxyCodeLine{01580       \textcolor{keywordflow}{if} (tmp\_hal\_status == HAL\_OK)}
+\DoxyCodeLine{01581       \{}
+\DoxyCodeLine{01582         \textcolor{comment}{/* Both Master and Slave ADC's could be disabled. Update Master State */}}
+\DoxyCodeLine{01583         \textcolor{comment}{/* Clear HAL\_ADC\_STATE\_INJ\_BUSY bit, set HAL\_ADC\_STATE\_READY bit */}}
+\DoxyCodeLine{01584         ADC\_STATE\_CLR\_SET(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_BUSY, HAL\_ADC\_STATE\_READY);}
+\DoxyCodeLine{01585       \}}
+\DoxyCodeLine{01586       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01587       \{}
+\DoxyCodeLine{01588         \textcolor{comment}{/* injected (Master or Slave) conversions are still on-\/going,}}
+\DoxyCodeLine{01589 \textcolor{comment}{           no Master State change */}}
+\DoxyCodeLine{01590       \}}
+\DoxyCodeLine{01591     \}}
+\DoxyCodeLine{01592   \}}
+\DoxyCodeLine{01593 }
+\DoxyCodeLine{01594   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{01595   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{01596 }
+\DoxyCodeLine{01597   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01598   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{01599 \}}
+\DoxyCodeLine{01600 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01601 }
+\DoxyCodeLine{01658 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedConfigChannel(ADC\_HandleTypeDef *hadc, ADC\_InjectionConfTypeDef *sConfigInjected)}
+\DoxyCodeLine{01659 \{}
+\DoxyCodeLine{01660   HAL\_StatusTypeDef tmp\_hal\_status = HAL\_OK;}
+\DoxyCodeLine{01661   uint32\_t tmpOffsetShifted;}
+\DoxyCodeLine{01662   uint32\_t tmp\_config\_internal\_channel;}
+\DoxyCodeLine{01663   uint32\_t tmp\_adc\_is\_conversion\_on\_going\_regular;}
+\DoxyCodeLine{01664   uint32\_t tmp\_adc\_is\_conversion\_on\_going\_injected;}
+\DoxyCodeLine{01665   \_\_IO uint32\_t wait\_loop\_index = 0;}
+\DoxyCodeLine{01666 }
+\DoxyCodeLine{01667   uint32\_t tmp\_JSQR\_ContextQueueBeingBuilt = 0U;}
+\DoxyCodeLine{01668 }
+\DoxyCodeLine{01669   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01670   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{01671   assert\_param(IS\_ADC\_SAMPLE\_TIME(sConfigInjected-\/>InjectedSamplingTime));}
+\DoxyCodeLine{01672   assert\_param(IS\_ADC\_SINGLE\_DIFFERENTIAL(sConfigInjected-\/>InjectedSingleDiff));}
+\DoxyCodeLine{01673   assert\_param(IS\_FUNCTIONAL\_STATE(sConfigInjected-\/>AutoInjectedConv));}
+\DoxyCodeLine{01674   assert\_param(IS\_FUNCTIONAL\_STATE(sConfigInjected-\/>QueueInjectedContext));}
+\DoxyCodeLine{01675   assert\_param(IS\_ADC\_EXTTRIGINJEC\_EDGE(sConfigInjected-\/>ExternalTrigInjecConvEdge));}
+\DoxyCodeLine{01676   assert\_param(IS\_ADC\_EXTTRIGINJEC(hadc, sConfigInjected-\/>ExternalTrigInjecConv));}
+\DoxyCodeLine{01677   assert\_param(IS\_ADC\_OFFSET\_NUMBER(sConfigInjected-\/>InjectedOffsetNumber));}
+\DoxyCodeLine{01678   assert\_param(IS\_ADC\_RANGE(ADC\_GET\_RESOLUTION(hadc), sConfigInjected-\/>InjectedOffset));}
+\DoxyCodeLine{01679   assert\_param(IS\_ADC\_OFFSET\_SIGN(sConfigInjected-\/>InjectedOffsetSign));}
+\DoxyCodeLine{01680   assert\_param(IS\_FUNCTIONAL\_STATE(sConfigInjected-\/>InjectedOffsetSaturation));}
+\DoxyCodeLine{01681   assert\_param(IS\_FUNCTIONAL\_STATE(sConfigInjected-\/>InjecOversamplingMode));}
+\DoxyCodeLine{01682 }
+\DoxyCodeLine{01683   \textcolor{keywordflow}{if} (hadc-\/>Init.ScanConvMode != ADC\_SCAN\_DISABLE)}
+\DoxyCodeLine{01684   \{}
+\DoxyCodeLine{01685     assert\_param(IS\_ADC\_INJECTED\_RANK(sConfigInjected-\/>InjectedRank));}
+\DoxyCodeLine{01686     assert\_param(IS\_ADC\_INJECTED\_NB\_CONV(sConfigInjected-\/>InjectedNbrOfConversion));}
+\DoxyCodeLine{01687     assert\_param(IS\_FUNCTIONAL\_STATE(sConfigInjected-\/>InjectedDiscontinuousConvMode));}
+\DoxyCodeLine{01688   \}}
+\DoxyCodeLine{01689 }
+\DoxyCodeLine{01690 }
+\DoxyCodeLine{01691   \textcolor{comment}{/* if JOVSE is set, the value of the OFFSETy\_EN bit in ADCx\_OFRy register is}}
+\DoxyCodeLine{01692 \textcolor{comment}{     ignored (considered as reset) */}}
+\DoxyCodeLine{01693   assert\_param(!((sConfigInjected-\/>InjectedOffsetNumber != ADC\_OFFSET\_NONE) \&\& (sConfigInjected-\/>InjecOversamplingMode == ENABLE)));}
+\DoxyCodeLine{01694 }
+\DoxyCodeLine{01695   \textcolor{comment}{/* JDISCEN and JAUTO bits can't be set at the same time  */}}
+\DoxyCodeLine{01696   assert\_param(!((sConfigInjected-\/>InjectedDiscontinuousConvMode == ENABLE) \&\& (sConfigInjected-\/>AutoInjectedConv == ENABLE)));}
+\DoxyCodeLine{01697 }
+\DoxyCodeLine{01698   \textcolor{comment}{/*  DISCEN and JAUTO bits can't be set at the same time */}}
+\DoxyCodeLine{01699   assert\_param(!((hadc-\/>Init.DiscontinuousConvMode == ENABLE) \&\& (sConfigInjected-\/>AutoInjectedConv == ENABLE)));}
+\DoxyCodeLine{01700 }
+\DoxyCodeLine{01701   \textcolor{comment}{/* Verification of channel number */}}
+\DoxyCodeLine{01702   \textcolor{keywordflow}{if} (sConfigInjected-\/>InjectedSingleDiff != ADC\_DIFFERENTIAL\_ENDED)}
+\DoxyCodeLine{01703   \{}
+\DoxyCodeLine{01704     assert\_param(IS\_ADC\_CHANNEL(hadc, sConfigInjected-\/>InjectedChannel));}
+\DoxyCodeLine{01705   \}}
+\DoxyCodeLine{01706   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01707   \{}
+\DoxyCodeLine{01708     assert\_param(IS\_ADC\_DIFF\_CHANNEL(hadc, sConfigInjected-\/>InjectedChannel));}
+\DoxyCodeLine{01709   \}}
+\DoxyCodeLine{01710 }
+\DoxyCodeLine{01711   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{01712   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{01713 }
+\DoxyCodeLine{01714   \textcolor{comment}{/* Configuration of injected group sequencer:                               */}}
+\DoxyCodeLine{01715   \textcolor{comment}{/* Hardware constraint: Must fully define injected context register JSQR    */}}
+\DoxyCodeLine{01716   \textcolor{comment}{/* before make it entering into injected sequencer queue.                   */}}
+\DoxyCodeLine{01717   \textcolor{comment}{/*                                                                          */}}
+\DoxyCodeLine{01718   \textcolor{comment}{/* -\/ if scan mode is disabled:                                              */}}
+\DoxyCodeLine{01719   \textcolor{comment}{/*    * Injected channels sequence length is set to 0x00: 1 channel         */}}
+\DoxyCodeLine{01720   \textcolor{comment}{/*      converted (channel on injected rank 1)                              */}}
+\DoxyCodeLine{01721   \textcolor{comment}{/*      Parameter "{}InjectedNbrOfConversion"{} is discarded.                   */}}
+\DoxyCodeLine{01722   \textcolor{comment}{/*    * Injected context register JSQR setting is simple: register is fully */}}
+\DoxyCodeLine{01723   \textcolor{comment}{/*      defined on one call of this function (for injected rank 1) and can  */}}
+\DoxyCodeLine{01724   \textcolor{comment}{/*      be entered into queue directly.                                     */}}
+\DoxyCodeLine{01725   \textcolor{comment}{/* -\/ if scan mode is enabled:                                               */}}
+\DoxyCodeLine{01726   \textcolor{comment}{/*    * Injected channels sequence length is set to parameter               */}}
+\DoxyCodeLine{01727   \textcolor{comment}{/*      "{}InjectedNbrOfConversion"{}.                                          */}}
+\DoxyCodeLine{01728   \textcolor{comment}{/*    * Injected context register JSQR setting more complex: register is    */}}
+\DoxyCodeLine{01729   \textcolor{comment}{/*      fully defined over successive calls of this function, for each      */}}
+\DoxyCodeLine{01730   \textcolor{comment}{/*      injected channel rank. It is entered into queue only when all       */}}
+\DoxyCodeLine{01731   \textcolor{comment}{/*      injected ranks have been set.                                       */}}
+\DoxyCodeLine{01732   \textcolor{comment}{/*   Note: Scan mode is not present by hardware on this device, but used    */}}
+\DoxyCodeLine{01733   \textcolor{comment}{/*   by software for alignment over all STM32 devices.                      */}}
+\DoxyCodeLine{01734 }
+\DoxyCodeLine{01735   \textcolor{keywordflow}{if} ((hadc-\/>Init.ScanConvMode == ADC\_SCAN\_DISABLE)  ||}
+\DoxyCodeLine{01736       (sConfigInjected-\/>InjectedNbrOfConversion == 1U))}
+\DoxyCodeLine{01737   \{}
+\DoxyCodeLine{01738     \textcolor{comment}{/* Configuration of context register JSQR:                                */}}
+\DoxyCodeLine{01739     \textcolor{comment}{/*  -\/ number of ranks in injected group sequencer: fixed to 1st rank      */}}
+\DoxyCodeLine{01740     \textcolor{comment}{/*    (scan mode disabled, only rank 1 used)                              */}}
+\DoxyCodeLine{01741     \textcolor{comment}{/*  -\/ external trigger to start conversion                                */}}
+\DoxyCodeLine{01742     \textcolor{comment}{/*  -\/ external trigger polarity                                           */}}
+\DoxyCodeLine{01743     \textcolor{comment}{/*  -\/ channel set to rank 1 (scan mode disabled, only rank 1 can be used) */}}
+\DoxyCodeLine{01744 }
+\DoxyCodeLine{01745     \textcolor{keywordflow}{if} (sConfigInjected-\/>InjectedRank == ADC\_INJECTED\_RANK\_1)}
+\DoxyCodeLine{01746     \{}
+\DoxyCodeLine{01747       \textcolor{comment}{/* Enable external trigger if trigger selection is different of         */}}
+\DoxyCodeLine{01748       \textcolor{comment}{/* software start.                                                      */}}
+\DoxyCodeLine{01749       \textcolor{comment}{/* Note: This configuration keeps the hardware feature of parameter     */}}
+\DoxyCodeLine{01750       \textcolor{comment}{/*       ExternalTrigInjecConvEdge "{}trigger edge none"{} equivalent to    */}}
+\DoxyCodeLine{01751       \textcolor{comment}{/*       software start.                                                */}}
+\DoxyCodeLine{01752       \textcolor{keywordflow}{if} (sConfigInjected-\/>ExternalTrigInjecConv != ADC\_INJECTED\_SOFTWARE\_START)}
+\DoxyCodeLine{01753       \{}
+\DoxyCodeLine{01754         tmp\_JSQR\_ContextQueueBeingBuilt = (ADC\_JSQR\_RK(sConfigInjected-\/>InjectedChannel, ADC\_INJECTED\_RANK\_1)}
+\DoxyCodeLine{01755                                            | (sConfigInjected-\/>ExternalTrigInjecConv \& ADC\_JSQR\_JEXTSEL)}
+\DoxyCodeLine{01756                                            | sConfigInjected-\/>ExternalTrigInjecConvEdge}
+\DoxyCodeLine{01757                                           );}
+\DoxyCodeLine{01758       \}}
+\DoxyCodeLine{01759       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01760       \{}
+\DoxyCodeLine{01761         tmp\_JSQR\_ContextQueueBeingBuilt = (ADC\_JSQR\_RK(sConfigInjected-\/>InjectedChannel, ADC\_INJECTED\_RANK\_1));}
+\DoxyCodeLine{01762       \}}
+\DoxyCodeLine{01763 }
+\DoxyCodeLine{01764       MODIFY\_REG(hadc-\/>Instance-\/>JSQR, ADC\_JSQR\_FIELDS, tmp\_JSQR\_ContextQueueBeingBuilt);}
+\DoxyCodeLine{01765       \textcolor{comment}{/* For debug and informative reasons, hadc handle saves JSQR setting */}}
+\DoxyCodeLine{01766       hadc-\/>InjectionConfig.ContextQueue = tmp\_JSQR\_ContextQueueBeingBuilt;}
+\DoxyCodeLine{01767 }
+\DoxyCodeLine{01768     \}}
+\DoxyCodeLine{01769   \}}
+\DoxyCodeLine{01770   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01771   \{}
+\DoxyCodeLine{01772     \textcolor{comment}{/* Case of scan mode enabled, several channels to set into injected group */}}
+\DoxyCodeLine{01773     \textcolor{comment}{/* sequencer.                                                             */}}
+\DoxyCodeLine{01774     \textcolor{comment}{/*                                                                        */}}
+\DoxyCodeLine{01775     \textcolor{comment}{/* Procedure to define injected context register JSQR over successive     */}}
+\DoxyCodeLine{01776     \textcolor{comment}{/* calls of this function, for each injected channel rank:                */}}
+\DoxyCodeLine{01777     \textcolor{comment}{/* 1. Start new context and set parameters related to all injected        */}}
+\DoxyCodeLine{01778     \textcolor{comment}{/*    channels: injected sequence length and trigger.                     */}}
+\DoxyCodeLine{01779 }
+\DoxyCodeLine{01780     \textcolor{comment}{/* if hadc-\/>InjectionConfig.ChannelCount is equal to 0, this is the first */}}
+\DoxyCodeLine{01781     \textcolor{comment}{/*   call of the context under setting                                    */}}
+\DoxyCodeLine{01782     \textcolor{keywordflow}{if} (hadc-\/>InjectionConfig.ChannelCount == 0U)}
+\DoxyCodeLine{01783     \{}
+\DoxyCodeLine{01784       \textcolor{comment}{/* Initialize number of channels that will be configured on the context */}}
+\DoxyCodeLine{01785       \textcolor{comment}{/*  being built                                                         */}}
+\DoxyCodeLine{01786       hadc-\/>InjectionConfig.ChannelCount = sConfigInjected-\/>InjectedNbrOfConversion;}
+\DoxyCodeLine{01787       \textcolor{comment}{/* Handle hadc saves the context under build up over each HAL\_ADCEx\_InjectedConfigChannel()}}
+\DoxyCodeLine{01788 \textcolor{comment}{         call, this context will be written in JSQR register at the last call.}}
+\DoxyCodeLine{01789 \textcolor{comment}{         At this point, the context is merely reset  */}}
+\DoxyCodeLine{01790       hadc-\/>InjectionConfig.ContextQueue = 0x00000000U;}
+\DoxyCodeLine{01791 }
+\DoxyCodeLine{01792       \textcolor{comment}{/* Configuration of context register JSQR:                              */}}
+\DoxyCodeLine{01793       \textcolor{comment}{/*  -\/ number of ranks in injected group sequencer                       */}}
+\DoxyCodeLine{01794       \textcolor{comment}{/*  -\/ external trigger to start conversion                              */}}
+\DoxyCodeLine{01795       \textcolor{comment}{/*  -\/ external trigger polarity                                         */}}
+\DoxyCodeLine{01796 }
+\DoxyCodeLine{01797       \textcolor{comment}{/* Enable external trigger if trigger selection is different of         */}}
+\DoxyCodeLine{01798       \textcolor{comment}{/* software start.                                                      */}}
+\DoxyCodeLine{01799       \textcolor{comment}{/* Note: This configuration keeps the hardware feature of parameter     */}}
+\DoxyCodeLine{01800       \textcolor{comment}{/*       ExternalTrigInjecConvEdge "{}trigger edge none"{} equivalent to    */}}
+\DoxyCodeLine{01801       \textcolor{comment}{/*       software start.                                                */}}
+\DoxyCodeLine{01802       \textcolor{keywordflow}{if} (sConfigInjected-\/>ExternalTrigInjecConv != ADC\_INJECTED\_SOFTWARE\_START)}
+\DoxyCodeLine{01803       \{}
+\DoxyCodeLine{01804         tmp\_JSQR\_ContextQueueBeingBuilt = ((sConfigInjected-\/>InjectedNbrOfConversion -\/ 1U)}
+\DoxyCodeLine{01805                                            | (sConfigInjected-\/>ExternalTrigInjecConv \& ADC\_JSQR\_JEXTSEL)}
+\DoxyCodeLine{01806                                            | sConfigInjected-\/>ExternalTrigInjecConvEdge}
+\DoxyCodeLine{01807                                           );}
+\DoxyCodeLine{01808       \}}
+\DoxyCodeLine{01809       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01810       \{}
+\DoxyCodeLine{01811         tmp\_JSQR\_ContextQueueBeingBuilt = ((sConfigInjected-\/>InjectedNbrOfConversion -\/ 1U));}
+\DoxyCodeLine{01812       \}}
+\DoxyCodeLine{01813 }
+\DoxyCodeLine{01814     \}}
+\DoxyCodeLine{01815 }
+\DoxyCodeLine{01816     \textcolor{comment}{/* 2. Continue setting of context under definition with parameter       */}}
+\DoxyCodeLine{01817     \textcolor{comment}{/*    related to each channel: channel rank sequence                    */}}
+\DoxyCodeLine{01818     \textcolor{comment}{/* Clear the old JSQx bits for the selected rank */}}
+\DoxyCodeLine{01819     tmp\_JSQR\_ContextQueueBeingBuilt \&= \string~ADC\_JSQR\_RK(ADC\_SQR3\_SQ10, sConfigInjected-\/>InjectedRank);}
+\DoxyCodeLine{01820 }
+\DoxyCodeLine{01821     \textcolor{comment}{/* Set the JSQx bits for the selected rank */}}
+\DoxyCodeLine{01822     tmp\_JSQR\_ContextQueueBeingBuilt |= ADC\_JSQR\_RK(sConfigInjected-\/>InjectedChannel, sConfigInjected-\/>InjectedRank);}
+\DoxyCodeLine{01823 }
+\DoxyCodeLine{01824     \textcolor{comment}{/* Decrease channel count  */}}
+\DoxyCodeLine{01825     hadc-\/>InjectionConfig.ChannelCount-\/-\/;}
+\DoxyCodeLine{01826 }
+\DoxyCodeLine{01827     \textcolor{comment}{/* 3. tmp\_JSQR\_ContextQueueBeingBuilt is fully built for this HAL\_ADCEx\_InjectedConfigChannel()}}
+\DoxyCodeLine{01828 \textcolor{comment}{          call, aggregate the setting to those already built during the previous}}
+\DoxyCodeLine{01829 \textcolor{comment}{          HAL\_ADCEx\_InjectedConfigChannel() calls (for the same context of course)  */}}
+\DoxyCodeLine{01830     hadc-\/>InjectionConfig.ContextQueue |= tmp\_JSQR\_ContextQueueBeingBuilt;}
+\DoxyCodeLine{01831 }
+\DoxyCodeLine{01832     \textcolor{comment}{/* 4. End of context setting: if this is the last channel set, then write context}}
+\DoxyCodeLine{01833 \textcolor{comment}{        into register JSQR and make it enter into queue                   */}}
+\DoxyCodeLine{01834     \textcolor{keywordflow}{if} (hadc-\/>InjectionConfig.ChannelCount == 0U)}
+\DoxyCodeLine{01835     \{}
+\DoxyCodeLine{01836       MODIFY\_REG(hadc-\/>Instance-\/>JSQR, ADC\_JSQR\_FIELDS, hadc-\/>InjectionConfig.ContextQueue);}
+\DoxyCodeLine{01837     \}}
+\DoxyCodeLine{01838   \}}
+\DoxyCodeLine{01839 }
+\DoxyCodeLine{01840   \textcolor{comment}{/* Parameters update conditioned to ADC state:                              */}}
+\DoxyCodeLine{01841   \textcolor{comment}{/* Parameters that can be updated when ADC is disabled or enabled without   */}}
+\DoxyCodeLine{01842   \textcolor{comment}{/* conversion on going on injected group:                                   */}}
+\DoxyCodeLine{01843   \textcolor{comment}{/*  -\/ Injected context queue: Queue disable (active context is kept) or     */}}
+\DoxyCodeLine{01844   \textcolor{comment}{/*    enable (context decremented, up to 2 contexts queued)                 */}}
+\DoxyCodeLine{01845   \textcolor{comment}{/*  -\/ Injected discontinuous mode: can be enabled only if auto-\/injected     */}}
+\DoxyCodeLine{01846   \textcolor{comment}{/*    mode is disabled.                                                     */}}
+\DoxyCodeLine{01847   \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{01848   \{}
+\DoxyCodeLine{01849     \textcolor{comment}{/* If auto-\/injected mode is disabled: no constraint                       */}}
+\DoxyCodeLine{01850     \textcolor{keywordflow}{if} (sConfigInjected-\/>AutoInjectedConv == DISABLE)}
+\DoxyCodeLine{01851     \{}
+\DoxyCodeLine{01852       MODIFY\_REG(hadc-\/>Instance-\/>CFGR,}
+\DoxyCodeLine{01853                  ADC\_CFGR\_JQM | ADC\_CFGR\_JDISCEN,}
+\DoxyCodeLine{01854                  ADC\_CFGR\_INJECT\_CONTEXT\_QUEUE((uint32\_t)sConfigInjected-\/>QueueInjectedContext)           |}
+\DoxyCodeLine{01855                  ADC\_CFGR\_INJECT\_DISCCONTINUOUS((uint32\_t)sConfigInjected-\/>InjectedDiscontinuousConvMode));}
+\DoxyCodeLine{01856     \}}
+\DoxyCodeLine{01857     \textcolor{comment}{/* If auto-\/injected mode is enabled: Injected discontinuous setting is    */}}
+\DoxyCodeLine{01858     \textcolor{comment}{/* discarded.                                                             */}}
+\DoxyCodeLine{01859     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01860     \{}
+\DoxyCodeLine{01861       MODIFY\_REG(hadc-\/>Instance-\/>CFGR,}
+\DoxyCodeLine{01862                  ADC\_CFGR\_JQM | ADC\_CFGR\_JDISCEN,}
+\DoxyCodeLine{01863                  ADC\_CFGR\_INJECT\_CONTEXT\_QUEUE((uint32\_t)sConfigInjected-\/>QueueInjectedContext));}
+\DoxyCodeLine{01864     \}}
+\DoxyCodeLine{01865 }
+\DoxyCodeLine{01866   \}}
+\DoxyCodeLine{01867 }
+\DoxyCodeLine{01868   \textcolor{comment}{/* Parameters update conditioned to ADC state:                              */}}
+\DoxyCodeLine{01869   \textcolor{comment}{/* Parameters that can be updated when ADC is disabled or enabled without   */}}
+\DoxyCodeLine{01870   \textcolor{comment}{/* conversion on going on regular and injected groups:                      */}}
+\DoxyCodeLine{01871   \textcolor{comment}{/*  -\/ Automatic injected conversion: can be enabled if injected group       */}}
+\DoxyCodeLine{01872   \textcolor{comment}{/*    external triggers are disabled.                                       */}}
+\DoxyCodeLine{01873   \textcolor{comment}{/*  -\/ Channel sampling time                                                 */}}
+\DoxyCodeLine{01874   \textcolor{comment}{/*  -\/ Channel offset                                                        */}}
+\DoxyCodeLine{01875   tmp\_adc\_is\_conversion\_on\_going\_regular = LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance);}
+\DoxyCodeLine{01876   tmp\_adc\_is\_conversion\_on\_going\_injected = LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance);}
+\DoxyCodeLine{01877 }
+\DoxyCodeLine{01878   \textcolor{keywordflow}{if} ((tmp\_adc\_is\_conversion\_on\_going\_regular == 0UL)}
+\DoxyCodeLine{01879       \&\& (tmp\_adc\_is\_conversion\_on\_going\_injected == 0UL)}
+\DoxyCodeLine{01880      )}
+\DoxyCodeLine{01881   \{}
+\DoxyCodeLine{01882     \textcolor{comment}{/* If injected group external triggers are disabled (set to injected      */}}
+\DoxyCodeLine{01883     \textcolor{comment}{/* software start): no constraint                                         */}}
+\DoxyCodeLine{01884     \textcolor{keywordflow}{if} ((sConfigInjected-\/>ExternalTrigInjecConv == ADC\_INJECTED\_SOFTWARE\_START)}
+\DoxyCodeLine{01885         || (sConfigInjected-\/>ExternalTrigInjecConvEdge == ADC\_EXTERNALTRIGINJECCONV\_EDGE\_NONE))}
+\DoxyCodeLine{01886     \{}
+\DoxyCodeLine{01887       \textcolor{keywordflow}{if} (sConfigInjected-\/>AutoInjectedConv == ENABLE)}
+\DoxyCodeLine{01888       \{}
+\DoxyCodeLine{01889         SET\_BIT(hadc-\/>Instance-\/>CFGR, ADC\_CFGR\_JAUTO);}
+\DoxyCodeLine{01890       \}}
+\DoxyCodeLine{01891       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01892       \{}
+\DoxyCodeLine{01893         CLEAR\_BIT(hadc-\/>Instance-\/>CFGR, ADC\_CFGR\_JAUTO);}
+\DoxyCodeLine{01894       \}}
+\DoxyCodeLine{01895     \}}
+\DoxyCodeLine{01896     \textcolor{comment}{/* If Automatic injected conversion was intended to be set and could not  */}}
+\DoxyCodeLine{01897     \textcolor{comment}{/* due to injected group external triggers enabled, error is reported.    */}}
+\DoxyCodeLine{01898     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01899     \{}
+\DoxyCodeLine{01900       \textcolor{keywordflow}{if} (sConfigInjected-\/>AutoInjectedConv == ENABLE)}
+\DoxyCodeLine{01901       \{}
+\DoxyCodeLine{01902         \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{01903         SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{01904 }
+\DoxyCodeLine{01905         tmp\_hal\_status = HAL\_ERROR;}
+\DoxyCodeLine{01906       \}}
+\DoxyCodeLine{01907       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01908       \{}
+\DoxyCodeLine{01909         CLEAR\_BIT(hadc-\/>Instance-\/>CFGR, ADC\_CFGR\_JAUTO);}
+\DoxyCodeLine{01910       \}}
+\DoxyCodeLine{01911     \}}
+\DoxyCodeLine{01912 }
+\DoxyCodeLine{01913     \textcolor{keywordflow}{if} (sConfigInjected-\/>InjecOversamplingMode == ENABLE)}
+\DoxyCodeLine{01914     \{}
+\DoxyCodeLine{01915       assert\_param(IS\_ADC\_OVERSAMPLING\_RATIO(sConfigInjected-\/>InjecOversampling.Ratio));}
+\DoxyCodeLine{01916       assert\_param(IS\_ADC\_RIGHT\_BIT\_SHIFT(sConfigInjected-\/>InjecOversampling.RightBitShift));}
+\DoxyCodeLine{01917 }
+\DoxyCodeLine{01918       \textcolor{comment}{/*  JOVSE must be reset in case of triggered regular mode  */}}
+\DoxyCodeLine{01919       assert\_param(!(READ\_BIT(hadc-\/>Instance-\/>CFGR2, ADC\_CFGR2\_ROVSE | ADC\_CFGR2\_TROVS) == (ADC\_CFGR2\_ROVSE | ADC\_CFGR2\_TROVS)));}
+\DoxyCodeLine{01920 }
+\DoxyCodeLine{01921       \textcolor{comment}{/* Configuration of Injected Oversampler:                                 */}}
+\DoxyCodeLine{01922       \textcolor{comment}{/*  -\/ Oversampling Ratio                                                  */}}
+\DoxyCodeLine{01923       \textcolor{comment}{/*  -\/ Right bit shift                                                     */}}
+\DoxyCodeLine{01924 }
+\DoxyCodeLine{01925       \textcolor{comment}{/* Enable OverSampling mode */}}
+\DoxyCodeLine{01926       MODIFY\_REG(hadc-\/>Instance-\/>CFGR2,}
+\DoxyCodeLine{01927                  ADC\_CFGR2\_JOVSE |}
+\DoxyCodeLine{01928                  ADC\_CFGR2\_OVSR  |}
+\DoxyCodeLine{01929                  ADC\_CFGR2\_OVSS,}
+\DoxyCodeLine{01930                  ADC\_CFGR2\_JOVSE                                  |}
+\DoxyCodeLine{01931                  sConfigInjected-\/>InjecOversampling.Ratio         |}
+\DoxyCodeLine{01932                  sConfigInjected-\/>InjecOversampling.RightBitShift}
+\DoxyCodeLine{01933                 );}
+\DoxyCodeLine{01934     \}}
+\DoxyCodeLine{01935     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01936     \{}
+\DoxyCodeLine{01937       \textcolor{comment}{/* Disable Regular OverSampling */}}
+\DoxyCodeLine{01938       CLEAR\_BIT(hadc-\/>Instance-\/>CFGR2, ADC\_CFGR2\_JOVSE);}
+\DoxyCodeLine{01939     \}}
+\DoxyCodeLine{01940 }
+\DoxyCodeLine{01941     \textcolor{comment}{/* Manage specific case of sampling time 3.5 cycles replacing 2.5 cyles */}}
+\DoxyCodeLine{01942     \textcolor{keywordflow}{if} (sConfigInjected-\/>InjectedSamplingTime == ADC\_SAMPLETIME\_3CYCLES\_5)}
+\DoxyCodeLine{01943     \{}
+\DoxyCodeLine{01944       \textcolor{comment}{/* Set sampling time of the selected ADC channel */}}
+\DoxyCodeLine{01945       LL\_ADC\_SetChannelSamplingTime(hadc-\/>Instance, sConfigInjected-\/>InjectedChannel, LL\_ADC\_SAMPLINGTIME\_2CYCLES\_5);}
+\DoxyCodeLine{01946 }
+\DoxyCodeLine{01947       \textcolor{comment}{/* Set ADC sampling time common configuration */}}
+\DoxyCodeLine{01948       LL\_ADC\_SetSamplingTimeCommonConfig(hadc-\/>Instance, LL\_ADC\_SAMPLINGTIME\_COMMON\_3C5\_REPL\_2C5);}
+\DoxyCodeLine{01949     \}}
+\DoxyCodeLine{01950     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01951     \{}
+\DoxyCodeLine{01952       \textcolor{comment}{/* Set sampling time of the selected ADC channel */}}
+\DoxyCodeLine{01953       LL\_ADC\_SetChannelSamplingTime(hadc-\/>Instance, sConfigInjected-\/>InjectedChannel, sConfigInjected-\/>InjectedSamplingTime);}
+\DoxyCodeLine{01954 }
+\DoxyCodeLine{01955       \textcolor{comment}{/* Set ADC sampling time common configuration */}}
+\DoxyCodeLine{01956       LL\_ADC\_SetSamplingTimeCommonConfig(hadc-\/>Instance, LL\_ADC\_SAMPLINGTIME\_COMMON\_DEFAULT);}
+\DoxyCodeLine{01957     \}}
+\DoxyCodeLine{01958 }
+\DoxyCodeLine{01959     \textcolor{comment}{/* Configure the offset: offset enable/disable, channel, offset value */}}
+\DoxyCodeLine{01960 }
+\DoxyCodeLine{01961     \textcolor{comment}{/* Shift the offset with respect to the selected ADC resolution. */}}
+\DoxyCodeLine{01962     \textcolor{comment}{/* Offset has to be left-\/aligned on bit 11, the LSB (right bits) are set to 0 */}}
+\DoxyCodeLine{01963     tmpOffsetShifted = ADC\_OFFSET\_SHIFT\_RESOLUTION(hadc, sConfigInjected-\/>InjectedOffset);}
+\DoxyCodeLine{01964 }
+\DoxyCodeLine{01965     \textcolor{keywordflow}{if} (sConfigInjected-\/>InjectedOffsetNumber != ADC\_OFFSET\_NONE)}
+\DoxyCodeLine{01966     \{}
+\DoxyCodeLine{01967       \textcolor{comment}{/* Set ADC selected offset number */}}
+\DoxyCodeLine{01968       LL\_ADC\_SetOffset(hadc-\/>Instance, sConfigInjected-\/>InjectedOffsetNumber, sConfigInjected-\/>InjectedChannel,}
+\DoxyCodeLine{01969                        tmpOffsetShifted);}
+\DoxyCodeLine{01970 }
+\DoxyCodeLine{01971       \textcolor{comment}{/* Set ADC selected offset sign \& saturation */}}
+\DoxyCodeLine{01972       LL\_ADC\_SetOffsetSign(hadc-\/>Instance, sConfigInjected-\/>InjectedOffsetNumber, sConfigInjected-\/>InjectedOffsetSign);}
+\DoxyCodeLine{01973       LL\_ADC\_SetOffsetSaturation(hadc-\/>Instance, sConfigInjected-\/>InjectedOffsetNumber,}
+\DoxyCodeLine{01974                                  (sConfigInjected-\/>InjectedOffsetSaturation == ENABLE) ? LL\_ADC\_OFFSET\_SATURATION\_ENABLE : LL\_ADC\_OFFSET\_SATURATION\_DISABLE);}
+\DoxyCodeLine{01975     \}}
+\DoxyCodeLine{01976     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01977     \{}
+\DoxyCodeLine{01978       \textcolor{comment}{/* Scan each offset register to check if the selected channel is targeted. */}}
+\DoxyCodeLine{01979       \textcolor{comment}{/* If this is the case, the corresponding offset number is disabled.       */}}
+\DoxyCodeLine{01980       \textcolor{keywordflow}{if} (\_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(LL\_ADC\_GetOffsetChannel(hadc-\/>Instance, LL\_ADC\_OFFSET\_1))}
+\DoxyCodeLine{01981           == \_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(sConfigInjected-\/>InjectedChannel))}
+\DoxyCodeLine{01982       \{}
+\DoxyCodeLine{01983         LL\_ADC\_SetOffsetState(hadc-\/>Instance, LL\_ADC\_OFFSET\_1, LL\_ADC\_OFFSET\_DISABLE);}
+\DoxyCodeLine{01984       \}}
+\DoxyCodeLine{01985       \textcolor{keywordflow}{if} (\_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(LL\_ADC\_GetOffsetChannel(hadc-\/>Instance, LL\_ADC\_OFFSET\_2))}
+\DoxyCodeLine{01986           == \_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(sConfigInjected-\/>InjectedChannel))}
+\DoxyCodeLine{01987       \{}
+\DoxyCodeLine{01988         LL\_ADC\_SetOffsetState(hadc-\/>Instance, LL\_ADC\_OFFSET\_2, LL\_ADC\_OFFSET\_DISABLE);}
+\DoxyCodeLine{01989       \}}
+\DoxyCodeLine{01990       \textcolor{keywordflow}{if} (\_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(LL\_ADC\_GetOffsetChannel(hadc-\/>Instance, LL\_ADC\_OFFSET\_3))}
+\DoxyCodeLine{01991           == \_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(sConfigInjected-\/>InjectedChannel))}
+\DoxyCodeLine{01992       \{}
+\DoxyCodeLine{01993         LL\_ADC\_SetOffsetState(hadc-\/>Instance, LL\_ADC\_OFFSET\_3, LL\_ADC\_OFFSET\_DISABLE);}
+\DoxyCodeLine{01994       \}}
+\DoxyCodeLine{01995       \textcolor{keywordflow}{if} (\_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(LL\_ADC\_GetOffsetChannel(hadc-\/>Instance, LL\_ADC\_OFFSET\_4))}
+\DoxyCodeLine{01996           == \_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(sConfigInjected-\/>InjectedChannel))}
+\DoxyCodeLine{01997       \{}
+\DoxyCodeLine{01998         LL\_ADC\_SetOffsetState(hadc-\/>Instance, LL\_ADC\_OFFSET\_4, LL\_ADC\_OFFSET\_DISABLE);}
+\DoxyCodeLine{01999       \}}
+\DoxyCodeLine{02000     \}}
+\DoxyCodeLine{02001 }
+\DoxyCodeLine{02002   \}}
+\DoxyCodeLine{02003 }
+\DoxyCodeLine{02004   \textcolor{comment}{/* Parameters update conditioned to ADC state:                              */}}
+\DoxyCodeLine{02005   \textcolor{comment}{/* Parameters that can be updated only when ADC is disabled:                */}}
+\DoxyCodeLine{02006   \textcolor{comment}{/*  -\/ Single or differential mode                                           */}}
+\DoxyCodeLine{02007   \textcolor{keywordflow}{if} (LL\_ADC\_IsEnabled(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{02008   \{}
+\DoxyCodeLine{02009     \textcolor{comment}{/* Set mode single-\/ended or differential input of the selected ADC channel */}}
+\DoxyCodeLine{02010     LL\_ADC\_SetChannelSingleDiff(hadc-\/>Instance, sConfigInjected-\/>InjectedChannel, sConfigInjected-\/>InjectedSingleDiff);}
+\DoxyCodeLine{02011 }
+\DoxyCodeLine{02012     \textcolor{comment}{/* Configuration of differential mode */}}
+\DoxyCodeLine{02013     \textcolor{comment}{/* Note: ADC channel number masked with value "{}0x1F"{} to ensure shift value within 32 bits range */}}
+\DoxyCodeLine{02014     \textcolor{keywordflow}{if} (sConfigInjected-\/>InjectedSingleDiff == ADC\_DIFFERENTIAL\_ENDED)}
+\DoxyCodeLine{02015     \{}
+\DoxyCodeLine{02016       \textcolor{comment}{/* Set sampling time of the selected ADC channel */}}
+\DoxyCodeLine{02017       LL\_ADC\_SetChannelSamplingTime(hadc-\/>Instance,}
+\DoxyCodeLine{02018                                     (uint32\_t)(\_\_LL\_ADC\_DECIMAL\_NB\_TO\_CHANNEL((\_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB((uint32\_t)sConfigInjected-\/>InjectedChannel)}
+\DoxyCodeLine{02019                                                                                + 1UL) \& 0x1FUL)), sConfigInjected-\/>InjectedSamplingTime);}
+\DoxyCodeLine{02020     \}}
+\DoxyCodeLine{02021 }
+\DoxyCodeLine{02022   \}}
+\DoxyCodeLine{02023 }
+\DoxyCodeLine{02024   \textcolor{comment}{/* Management of internal measurement channels: Vbat/VrefInt/TempSensor   */}}
+\DoxyCodeLine{02025   \textcolor{comment}{/* internal measurement paths enable: If internal channel selected,       */}}
+\DoxyCodeLine{02026   \textcolor{comment}{/* enable dedicated internal buffers and path.                            */}}
+\DoxyCodeLine{02027   \textcolor{comment}{/* Note: these internal measurement paths can be disabled using           */}}
+\DoxyCodeLine{02028   \textcolor{comment}{/* HAL\_ADC\_DeInit().                                                      */}}
+\DoxyCodeLine{02029 }
+\DoxyCodeLine{02030   \textcolor{keywordflow}{if} (\_\_LL\_ADC\_IS\_CHANNEL\_INTERNAL(sConfigInjected-\/>InjectedChannel))}
+\DoxyCodeLine{02031   \{}
+\DoxyCodeLine{02032     tmp\_config\_internal\_channel = LL\_ADC\_GetCommonPathInternalCh(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{02033 }
+\DoxyCodeLine{02034     \textcolor{comment}{/* If the requested internal measurement path has already been enabled,   */}}
+\DoxyCodeLine{02035     \textcolor{comment}{/* bypass the configuration processing.                                   */}}
+\DoxyCodeLine{02036     \textcolor{keywordflow}{if} (((sConfigInjected-\/>InjectedChannel == ADC\_CHANNEL\_TEMPSENSOR\_ADC1)}
+\DoxyCodeLine{02037          || (sConfigInjected-\/>InjectedChannel == ADC\_CHANNEL\_TEMPSENSOR\_ADC5))}
+\DoxyCodeLine{02038         \&\& ((tmp\_config\_internal\_channel \& LL\_ADC\_PATH\_INTERNAL\_TEMPSENSOR) == 0UL))}
+\DoxyCodeLine{02039     \{}
+\DoxyCodeLine{02040       \textcolor{keywordflow}{if} (ADC\_TEMPERATURE\_SENSOR\_INSTANCE(hadc))}
+\DoxyCodeLine{02041       \{}
+\DoxyCodeLine{02042         LL\_ADC\_SetCommonPathInternalCh(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance),}
+\DoxyCodeLine{02043                                        LL\_ADC\_PATH\_INTERNAL\_TEMPSENSOR | tmp\_config\_internal\_channel);}
+\DoxyCodeLine{02044 }
+\DoxyCodeLine{02045         \textcolor{comment}{/* Delay for temperature sensor stabilization time */}}
+\DoxyCodeLine{02046         \textcolor{comment}{/* Wait loop initialization and execution */}}
+\DoxyCodeLine{02047         \textcolor{comment}{/* Note: Variable divided by 2 to compensate partially              */}}
+\DoxyCodeLine{02048         \textcolor{comment}{/*       CPU processing cycles, scaling in us split to not          */}}
+\DoxyCodeLine{02049         \textcolor{comment}{/*       exceed 32 bits register capacity and handle low frequency. */}}
+\DoxyCodeLine{02050         wait\_loop\_index = ((LL\_ADC\_DELAY\_TEMPSENSOR\_STAB\_US / 10UL) * (((SystemCoreClock / (100000UL * 2UL)) + 1UL) + 1UL));}
+\DoxyCodeLine{02051         \textcolor{keywordflow}{while} (wait\_loop\_index != 0UL)}
+\DoxyCodeLine{02052         \{}
+\DoxyCodeLine{02053           wait\_loop\_index-\/-\/;}
+\DoxyCodeLine{02054         \}}
+\DoxyCodeLine{02055       \}}
+\DoxyCodeLine{02056     \}}
+\DoxyCodeLine{02057     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((sConfigInjected-\/>InjectedChannel == ADC\_CHANNEL\_VBAT)}
+\DoxyCodeLine{02058              \&\& ((tmp\_config\_internal\_channel \& LL\_ADC\_PATH\_INTERNAL\_VBAT) == 0UL))}
+\DoxyCodeLine{02059     \{}
+\DoxyCodeLine{02060       \textcolor{keywordflow}{if} (ADC\_BATTERY\_VOLTAGE\_INSTANCE(hadc))}
+\DoxyCodeLine{02061       \{}
+\DoxyCodeLine{02062         LL\_ADC\_SetCommonPathInternalCh(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance),}
+\DoxyCodeLine{02063                                        LL\_ADC\_PATH\_INTERNAL\_VBAT | tmp\_config\_internal\_channel);}
+\DoxyCodeLine{02064       \}}
+\DoxyCodeLine{02065     \}}
+\DoxyCodeLine{02066     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((sConfigInjected-\/>InjectedChannel == ADC\_CHANNEL\_VREFINT)}
+\DoxyCodeLine{02067              \&\& ((tmp\_config\_internal\_channel \& LL\_ADC\_PATH\_INTERNAL\_VREFINT) == 0UL))}
+\DoxyCodeLine{02068     \{}
+\DoxyCodeLine{02069       \textcolor{keywordflow}{if} (ADC\_VREFINT\_INSTANCE(hadc))}
+\DoxyCodeLine{02070       \{}
+\DoxyCodeLine{02071         LL\_ADC\_SetCommonPathInternalCh(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance),}
+\DoxyCodeLine{02072                                        LL\_ADC\_PATH\_INTERNAL\_VREFINT | tmp\_config\_internal\_channel);}
+\DoxyCodeLine{02073       \}}
+\DoxyCodeLine{02074     \}}
+\DoxyCodeLine{02075     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{02076     \{}
+\DoxyCodeLine{02077       \textcolor{comment}{/* nothing to do */}}
+\DoxyCodeLine{02078     \}}
+\DoxyCodeLine{02079   \}}
+\DoxyCodeLine{02080 }
+\DoxyCodeLine{02081   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{02082   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{02083 }
+\DoxyCodeLine{02084   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{02085   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{02086 \}}
+\DoxyCodeLine{02087 }
+\DoxyCodeLine{02088 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{02105 HAL\_StatusTypeDef HAL\_ADCEx\_MultiModeConfigChannel(ADC\_HandleTypeDef *hadc, ADC\_MultiModeTypeDef *multimode)}
+\DoxyCodeLine{02106 \{}
+\DoxyCodeLine{02107   HAL\_StatusTypeDef tmp\_hal\_status = HAL\_OK;}
+\DoxyCodeLine{02108   ADC\_Common\_TypeDef *tmpADC\_Common;}
+\DoxyCodeLine{02109   ADC\_HandleTypeDef tmphadcSlave;}
+\DoxyCodeLine{02110   uint32\_t tmphadcSlave\_conversion\_on\_going;}
+\DoxyCodeLine{02111 }
+\DoxyCodeLine{02112   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02113   assert\_param(IS\_ADC\_MULTIMODE\_MASTER\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{02114   assert\_param(IS\_ADC\_MULTIMODE(multimode-\/>Mode));}
+\DoxyCodeLine{02115   \textcolor{keywordflow}{if} (multimode-\/>Mode != ADC\_MODE\_INDEPENDENT)}
+\DoxyCodeLine{02116   \{}
+\DoxyCodeLine{02117     assert\_param(IS\_ADC\_DMA\_ACCESS\_MULTIMODE(multimode-\/>DMAAccessMode));}
+\DoxyCodeLine{02118     assert\_param(IS\_ADC\_SAMPLING\_DELAY(multimode-\/>TwoSamplingDelay));}
+\DoxyCodeLine{02119   \}}
+\DoxyCodeLine{02120 }
+\DoxyCodeLine{02121   \textcolor{comment}{/* Process locked */}}
+\DoxyCodeLine{02122   \_\_HAL\_LOCK(hadc);}
+\DoxyCodeLine{02123 }
+\DoxyCodeLine{02124   \textcolor{comment}{/* Temporary handle minimum initialization */}}
+\DoxyCodeLine{02125   \_\_HAL\_ADC\_RESET\_HANDLE\_STATE(\&tmphadcSlave);}
+\DoxyCodeLine{02126   ADC\_CLEAR\_ERRORCODE(\&tmphadcSlave);}
+\DoxyCodeLine{02127 }
+\DoxyCodeLine{02128   ADC\_MULTI\_SLAVE(hadc, \&tmphadcSlave);}
+\DoxyCodeLine{02129 }
+\DoxyCodeLine{02130   \textcolor{keywordflow}{if} (tmphadcSlave.Instance == NULL)}
+\DoxyCodeLine{02131   \{}
+\DoxyCodeLine{02132     \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{02133     SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{02134 }
+\DoxyCodeLine{02135     \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{02136     \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{02137 }
+\DoxyCodeLine{02138     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{02139   \}}
+\DoxyCodeLine{02140 }
+\DoxyCodeLine{02141   \textcolor{comment}{/* Parameters update conditioned to ADC state:                              */}}
+\DoxyCodeLine{02142   \textcolor{comment}{/* Parameters that can be updated when ADC is disabled or enabled without   */}}
+\DoxyCodeLine{02143   \textcolor{comment}{/* conversion on going on regular group:                                    */}}
+\DoxyCodeLine{02144   \textcolor{comment}{/*  -\/ Multimode DMA configuration                                           */}}
+\DoxyCodeLine{02145   \textcolor{comment}{/*  -\/ Multimode DMA mode                                                    */}}
+\DoxyCodeLine{02146   tmphadcSlave\_conversion\_on\_going = LL\_ADC\_REG\_IsConversionOngoing((\&tmphadcSlave)-\/>Instance);}
+\DoxyCodeLine{02147   \textcolor{keywordflow}{if} ((LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{02148       \&\& (tmphadcSlave\_conversion\_on\_going == 0UL))}
+\DoxyCodeLine{02149   \{}
+\DoxyCodeLine{02150     \textcolor{comment}{/* Pointer to the common control register */}}
+\DoxyCodeLine{02151     tmpADC\_Common = \_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance);}
+\DoxyCodeLine{02152 }
+\DoxyCodeLine{02153     \textcolor{comment}{/* If multimode is selected, configure all multimode parameters.          */}}
+\DoxyCodeLine{02154     \textcolor{comment}{/* Otherwise, reset multimode parameters (can be used in case of          */}}
+\DoxyCodeLine{02155     \textcolor{comment}{/* transition from multimode to independent mode).                        */}}
+\DoxyCodeLine{02156     \textcolor{keywordflow}{if} (multimode-\/>Mode != ADC\_MODE\_INDEPENDENT)}
+\DoxyCodeLine{02157     \{}
+\DoxyCodeLine{02158       MODIFY\_REG(tmpADC\_Common-\/>CCR, ADC\_CCR\_MDMA | ADC\_CCR\_DMACFG,}
+\DoxyCodeLine{02159                  multimode-\/>DMAAccessMode |}
+\DoxyCodeLine{02160                  ADC\_CCR\_MULTI\_DMACONTREQ((uint32\_t)hadc-\/>Init.DMAContinuousRequests));}
+\DoxyCodeLine{02161 }
+\DoxyCodeLine{02162       \textcolor{comment}{/* Parameters that can be updated only when ADC is disabled:                */}}
+\DoxyCodeLine{02163       \textcolor{comment}{/*  -\/ Multimode mode selection                                              */}}
+\DoxyCodeLine{02164       \textcolor{comment}{/*  -\/ Multimode delay                                                       */}}
+\DoxyCodeLine{02165       \textcolor{comment}{/*    Note: Delay range depends on selected resolution:                     */}}
+\DoxyCodeLine{02166       \textcolor{comment}{/*      from 1 to 12 clock cycles for 12 bits                               */}}
+\DoxyCodeLine{02167       \textcolor{comment}{/*      from 1 to 10 clock cycles for 10 bits,                              */}}
+\DoxyCodeLine{02168       \textcolor{comment}{/*      from 1 to 8 clock cycles for 8 bits                                 */}}
+\DoxyCodeLine{02169       \textcolor{comment}{/*      from 1 to 6 clock cycles for 6 bits                                 */}}
+\DoxyCodeLine{02170       \textcolor{comment}{/*    If a higher delay is selected, it will be clipped to maximum delay    */}}
+\DoxyCodeLine{02171       \textcolor{comment}{/*    range                                                                 */}}
+\DoxyCodeLine{02172       \textcolor{keywordflow}{if} (\_\_LL\_ADC\_IS\_ENABLED\_ALL\_COMMON\_INSTANCE(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance)) == 0UL)}
+\DoxyCodeLine{02173       \{}
+\DoxyCodeLine{02174         MODIFY\_REG(tmpADC\_Common-\/>CCR,}
+\DoxyCodeLine{02175                    ADC\_CCR\_DUAL |}
+\DoxyCodeLine{02176                    ADC\_CCR\_DELAY,}
+\DoxyCodeLine{02177                    multimode-\/>Mode |}
+\DoxyCodeLine{02178                    multimode-\/>TwoSamplingDelay}
+\DoxyCodeLine{02179                   );}
+\DoxyCodeLine{02180       \}}
+\DoxyCodeLine{02181     \}}
+\DoxyCodeLine{02182     \textcolor{keywordflow}{else} \textcolor{comment}{/* ADC\_MODE\_INDEPENDENT */}}
+\DoxyCodeLine{02183     \{}
+\DoxyCodeLine{02184       CLEAR\_BIT(tmpADC\_Common-\/>CCR, ADC\_CCR\_MDMA | ADC\_CCR\_DMACFG);}
+\DoxyCodeLine{02185 }
+\DoxyCodeLine{02186       \textcolor{comment}{/* Parameters that can be updated only when ADC is disabled:                */}}
+\DoxyCodeLine{02187       \textcolor{comment}{/*  -\/ Multimode mode selection                                              */}}
+\DoxyCodeLine{02188       \textcolor{comment}{/*  -\/ Multimode delay                                                       */}}
+\DoxyCodeLine{02189       \textcolor{keywordflow}{if} (\_\_LL\_ADC\_IS\_ENABLED\_ALL\_COMMON\_INSTANCE(\_\_LL\_ADC\_COMMON\_INSTANCE(hadc-\/>Instance)) == 0UL)}
+\DoxyCodeLine{02190       \{}
+\DoxyCodeLine{02191         CLEAR\_BIT(tmpADC\_Common-\/>CCR, ADC\_CCR\_DUAL | ADC\_CCR\_DELAY);}
+\DoxyCodeLine{02192       \}}
+\DoxyCodeLine{02193     \}}
+\DoxyCodeLine{02194   \}}
+\DoxyCodeLine{02195   \textcolor{comment}{/* If one of the ADC sharing the same common group is enabled, no update    */}}
+\DoxyCodeLine{02196   \textcolor{comment}{/* could be done on neither of the multimode structure parameters.          */}}
+\DoxyCodeLine{02197   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{02198   \{}
+\DoxyCodeLine{02199     \textcolor{comment}{/* Update ADC state machine to error */}}
+\DoxyCodeLine{02200     SET\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_ERROR\_CONFIG);}
+\DoxyCodeLine{02201 }
+\DoxyCodeLine{02202     tmp\_hal\_status = HAL\_ERROR;}
+\DoxyCodeLine{02203   \}}
+\DoxyCodeLine{02204 }
+\DoxyCodeLine{02205   \textcolor{comment}{/* Process unlocked */}}
+\DoxyCodeLine{02206   \_\_HAL\_UNLOCK(hadc);}
+\DoxyCodeLine{02207 }
+\DoxyCodeLine{02208   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{02209   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{02210 \}}
+\DoxyCodeLine{02211 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02212 }
+\DoxyCodeLine{02222 HAL\_StatusTypeDef HAL\_ADCEx\_EnableInjectedQueue(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{02223 \{}
+\DoxyCodeLine{02224   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{02225   uint32\_t tmp\_adc\_is\_conversion\_on\_going\_regular;}
+\DoxyCodeLine{02226   uint32\_t tmp\_adc\_is\_conversion\_on\_going\_injected;}
+\DoxyCodeLine{02227 }
+\DoxyCodeLine{02228   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02229   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{02230 }
+\DoxyCodeLine{02231   tmp\_adc\_is\_conversion\_on\_going\_regular = LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance);}
+\DoxyCodeLine{02232   tmp\_adc\_is\_conversion\_on\_going\_injected = LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance);}
+\DoxyCodeLine{02233 }
+\DoxyCodeLine{02234   \textcolor{comment}{/* Parameter can be set only if no conversion is on-\/going */}}
+\DoxyCodeLine{02235   \textcolor{keywordflow}{if} ((tmp\_adc\_is\_conversion\_on\_going\_regular == 0UL)}
+\DoxyCodeLine{02236       \&\& (tmp\_adc\_is\_conversion\_on\_going\_injected == 0UL)}
+\DoxyCodeLine{02237      )}
+\DoxyCodeLine{02238   \{}
+\DoxyCodeLine{02239     CLEAR\_BIT(hadc-\/>Instance-\/>CFGR, ADC\_CFGR\_JQDIS);}
+\DoxyCodeLine{02240 }
+\DoxyCodeLine{02241     \textcolor{comment}{/* Update state, clear previous result related to injected queue overflow */}}
+\DoxyCodeLine{02242     CLEAR\_BIT(hadc-\/>State, HAL\_ADC\_STATE\_INJ\_JQOVF);}
+\DoxyCodeLine{02243 }
+\DoxyCodeLine{02244     tmp\_hal\_status = HAL\_OK;}
+\DoxyCodeLine{02245   \}}
+\DoxyCodeLine{02246   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{02247   \{}
+\DoxyCodeLine{02248     tmp\_hal\_status = HAL\_ERROR;}
+\DoxyCodeLine{02249   \}}
+\DoxyCodeLine{02250 }
+\DoxyCodeLine{02251   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{02252 \}}
+\DoxyCodeLine{02253 }
+\DoxyCodeLine{02263 HAL\_StatusTypeDef HAL\_ADCEx\_DisableInjectedQueue(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{02264 \{}
+\DoxyCodeLine{02265   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{02266   uint32\_t tmp\_adc\_is\_conversion\_on\_going\_regular;}
+\DoxyCodeLine{02267   uint32\_t tmp\_adc\_is\_conversion\_on\_going\_injected;}
+\DoxyCodeLine{02268 }
+\DoxyCodeLine{02269   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02270   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{02271 }
+\DoxyCodeLine{02272   tmp\_adc\_is\_conversion\_on\_going\_regular = LL\_ADC\_REG\_IsConversionOngoing(hadc-\/>Instance);}
+\DoxyCodeLine{02273   tmp\_adc\_is\_conversion\_on\_going\_injected = LL\_ADC\_INJ\_IsConversionOngoing(hadc-\/>Instance);}
+\DoxyCodeLine{02274 }
+\DoxyCodeLine{02275   \textcolor{comment}{/* Parameter can be set only if no conversion is on-\/going */}}
+\DoxyCodeLine{02276   \textcolor{keywordflow}{if} ((tmp\_adc\_is\_conversion\_on\_going\_regular == 0UL)}
+\DoxyCodeLine{02277       \&\& (tmp\_adc\_is\_conversion\_on\_going\_injected == 0UL)}
+\DoxyCodeLine{02278      )}
+\DoxyCodeLine{02279   \{}
+\DoxyCodeLine{02280     LL\_ADC\_INJ\_SetQueueMode(hadc-\/>Instance, LL\_ADC\_INJ\_QUEUE\_DISABLE);}
+\DoxyCodeLine{02281     tmp\_hal\_status = HAL\_OK;}
+\DoxyCodeLine{02282   \}}
+\DoxyCodeLine{02283   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{02284   \{}
+\DoxyCodeLine{02285     tmp\_hal\_status = HAL\_ERROR;}
+\DoxyCodeLine{02286   \}}
+\DoxyCodeLine{02287 }
+\DoxyCodeLine{02288   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{02289 \}}
+\DoxyCodeLine{02290 }
+\DoxyCodeLine{02300 HAL\_StatusTypeDef HAL\_ADCEx\_DisableVoltageRegulator(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{02301 \{}
+\DoxyCodeLine{02302   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{02303 }
+\DoxyCodeLine{02304   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02305   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{02306 }
+\DoxyCodeLine{02307   \textcolor{comment}{/* Setting of this feature is conditioned to ADC state: ADC must be ADC disabled */}}
+\DoxyCodeLine{02308   \textcolor{keywordflow}{if} (LL\_ADC\_IsEnabled(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{02309   \{}
+\DoxyCodeLine{02310     LL\_ADC\_DisableInternalRegulator(hadc-\/>Instance);}
+\DoxyCodeLine{02311     tmp\_hal\_status = HAL\_OK;}
+\DoxyCodeLine{02312   \}}
+\DoxyCodeLine{02313   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{02314   \{}
+\DoxyCodeLine{02315     tmp\_hal\_status = HAL\_ERROR;}
+\DoxyCodeLine{02316   \}}
+\DoxyCodeLine{02317 }
+\DoxyCodeLine{02318   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{02319 \}}
+\DoxyCodeLine{02320 }
+\DoxyCodeLine{02337 HAL\_StatusTypeDef HAL\_ADCEx\_EnterADCDeepPowerDownMode(ADC\_HandleTypeDef *hadc)}
+\DoxyCodeLine{02338 \{}
+\DoxyCodeLine{02339   HAL\_StatusTypeDef tmp\_hal\_status;}
+\DoxyCodeLine{02340 }
+\DoxyCodeLine{02341   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02342   assert\_param(IS\_ADC\_ALL\_INSTANCE(hadc-\/>Instance));}
+\DoxyCodeLine{02343 }
+\DoxyCodeLine{02344   \textcolor{comment}{/* Setting of this feature is conditioned to ADC state: ADC must be ADC disabled */}}
+\DoxyCodeLine{02345   \textcolor{keywordflow}{if} (LL\_ADC\_IsEnabled(hadc-\/>Instance) == 0UL)}
+\DoxyCodeLine{02346   \{}
+\DoxyCodeLine{02347     LL\_ADC\_EnableDeepPowerDown(hadc-\/>Instance);}
+\DoxyCodeLine{02348     tmp\_hal\_status = HAL\_OK;}
+\DoxyCodeLine{02349   \}}
+\DoxyCodeLine{02350   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{02351   \{}
+\DoxyCodeLine{02352     tmp\_hal\_status = HAL\_ERROR;}
+\DoxyCodeLine{02353   \}}
+\DoxyCodeLine{02354 }
+\DoxyCodeLine{02355   \textcolor{keywordflow}{return} tmp\_hal\_status;}
+\DoxyCodeLine{02356 \}}
+\DoxyCodeLine{02357 }
+\DoxyCodeLine{02366 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_ADC\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

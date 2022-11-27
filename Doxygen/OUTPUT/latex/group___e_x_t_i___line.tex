@@ -1,0 +1,539 @@
+\doxysection{EXTI Line}
+\label{group___e_x_t_i___line}\index{EXTI Line@{EXTI Line}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+0}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x00u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+1}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x01u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+2}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x02u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+3}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x03u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+4}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x04u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+5}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x05u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+6}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x06u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+7}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x07u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+8}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x08u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+9}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x09u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+10}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Au)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+11}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Bu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+12}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Cu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+13}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Du)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+14}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Eu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+15}~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Fu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+16}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x10u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+17}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x11u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+18}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x12u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+19}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x13u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+20}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x14u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+21}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x15u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+22}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x16u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+23}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x17u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+24}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x18u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+25}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x19u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+26}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Au)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+27}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Bu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+28}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Cu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+29}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Du)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+30}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Eu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+31}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Fu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+32}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x00u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+33}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x01u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+34}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x02u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+35}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x03u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+36}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x04u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+37}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x05u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+38}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x06u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+39}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x07u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+40}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x08u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+41}~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x09u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+42}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x0\+Au)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+43}~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x0\+Bu)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___e_x_t_i___line_gac1a9cd58d76e9f497abecc832e3294c8}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_0@{EXTI\_LINE\_0}}
+\index{EXTI\_LINE\_0@{EXTI\_LINE\_0}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_0}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+0~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x00u)}
+
+
+
+Definition at line \textbf{ 87} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gaf64b8deca0cf44b4c58d2b4d0fcd2177}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_1@{EXTI\_LINE\_1}}
+\index{EXTI\_LINE\_1@{EXTI\_LINE\_1}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_1}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+1~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x01u)}
+
+
+
+Definition at line \textbf{ 88} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gac94dbc4ff94b573f4dd796d60dcd250c}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_10@{EXTI\_LINE\_10}}
+\index{EXTI\_LINE\_10@{EXTI\_LINE\_10}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_10}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+10~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Au)}
+
+
+
+Definition at line \textbf{ 97} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga301648b2965852f535209429f71e251b}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_11@{EXTI\_LINE\_11}}
+\index{EXTI\_LINE\_11@{EXTI\_LINE\_11}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_11}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+11~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Bu)}
+
+
+
+Definition at line \textbf{ 98} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga4ff15c98aec7cd3fd0f0c5bd5cfaa501}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_12@{EXTI\_LINE\_12}}
+\index{EXTI\_LINE\_12@{EXTI\_LINE\_12}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_12}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+12~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Cu)}
+
+
+
+Definition at line \textbf{ 99} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga8e144f1beae1e5d259f5d4aed6a3efe0}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_13@{EXTI\_LINE\_13}}
+\index{EXTI\_LINE\_13@{EXTI\_LINE\_13}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_13}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+13~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Du)}
+
+
+
+Definition at line \textbf{ 100} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga60b812a0a6fe00af8db8763b8202a463}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_14@{EXTI\_LINE\_14}}
+\index{EXTI\_LINE\_14@{EXTI\_LINE\_14}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_14}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+14~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Eu)}
+
+
+
+Definition at line \textbf{ 101} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga9e711303de4e32d120d2551dc5c64dd7}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_15@{EXTI\_LINE\_15}}
+\index{EXTI\_LINE\_15@{EXTI\_LINE\_15}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_15}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+15~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x0\+Fu)}
+
+
+
+Definition at line \textbf{ 102} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga92cf76ca2f7a5638944ccd94e842ebb1}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_16@{EXTI\_LINE\_16}}
+\index{EXTI\_LINE\_16@{EXTI\_LINE\_16}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_16}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+16~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x10u)}
+
+
+
+Definition at line \textbf{ 103} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga9d09e51fda52def20bd23a0c42da3014}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_17@{EXTI\_LINE\_17}}
+\index{EXTI\_LINE\_17@{EXTI\_LINE\_17}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_17}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+17~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x11u)}
+
+
+
+Definition at line \textbf{ 104} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga8f420801658edbe81973c670ed97913e}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_18@{EXTI\_LINE\_18}}
+\index{EXTI\_LINE\_18@{EXTI\_LINE\_18}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_18}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+18~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x12u)}
+
+
+
+Definition at line \textbf{ 105} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gaa69d86266839e0980ad222192760c760}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_19@{EXTI\_LINE\_19}}
+\index{EXTI\_LINE\_19@{EXTI\_LINE\_19}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_19}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+19~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x13u)}
+
+
+
+Definition at line \textbf{ 106} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gaec48b88f5279b95962682300c0650840}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_2@{EXTI\_LINE\_2}}
+\index{EXTI\_LINE\_2@{EXTI\_LINE\_2}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_2}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+2~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x02u)}
+
+
+
+Definition at line \textbf{ 89} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga1d35577fb74cdbf58431570bd763f615}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_20@{EXTI\_LINE\_20}}
+\index{EXTI\_LINE\_20@{EXTI\_LINE\_20}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_20}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+20~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x14u)}
+
+
+
+Definition at line \textbf{ 107} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gaae9d458581e656ab574d6d56b9844587}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_21@{EXTI\_LINE\_21}}
+\index{EXTI\_LINE\_21@{EXTI\_LINE\_21}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_21}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+21~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x15u)}
+
+
+
+Definition at line \textbf{ 108} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gacf5c5aed8ca5e9a3a3128d314cbe1f7f}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_22@{EXTI\_LINE\_22}}
+\index{EXTI\_LINE\_22@{EXTI\_LINE\_22}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_22}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+22~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x16u)}
+
+
+
+Definition at line \textbf{ 109} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga7795a473c5c93e2eb5c1bcfc0b48deef}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_23@{EXTI\_LINE\_23}}
+\index{EXTI\_LINE\_23@{EXTI\_LINE\_23}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_23}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+23~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x17u)}
+
+
+
+Definition at line \textbf{ 110} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga5944e77813fffbcc70a6425af917ea8d}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_24@{EXTI\_LINE\_24}}
+\index{EXTI\_LINE\_24@{EXTI\_LINE\_24}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_24}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+24~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x18u)}
+
+
+
+Definition at line \textbf{ 111} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gaf97766a975b78a6111ca49c7021bc9d9}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_25@{EXTI\_LINE\_25}}
+\index{EXTI\_LINE\_25@{EXTI\_LINE\_25}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_25}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+25~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x19u)}
+
+
+
+Definition at line \textbf{ 112} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga3b3766b3e71dee91dc3e2738c5780ed8}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_26@{EXTI\_LINE\_26}}
+\index{EXTI\_LINE\_26@{EXTI\_LINE\_26}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_26}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+26~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Au)}
+
+
+
+Definition at line \textbf{ 113} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga46161d35da1ef91f13519e2baacc9942}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_27@{EXTI\_LINE\_27}}
+\index{EXTI\_LINE\_27@{EXTI\_LINE\_27}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_27}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+27~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Bu)}
+
+
+
+Definition at line \textbf{ 114} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga2acfe92f9aa20f2f79e82d61b7d78fbe}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_28@{EXTI\_LINE\_28}}
+\index{EXTI\_LINE\_28@{EXTI\_LINE\_28}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_28}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+28~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Cu)}
+
+
+
+Definition at line \textbf{ 115} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga162f320011d63c463bfe9cdb0885e08c}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_29@{EXTI\_LINE\_29}}
+\index{EXTI\_LINE\_29@{EXTI\_LINE\_29}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_29}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+29~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Du)}
+
+
+
+Definition at line \textbf{ 116} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga7e223d61dcb2b538040824c0b491d68c}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_3@{EXTI\_LINE\_3}}
+\index{EXTI\_LINE\_3@{EXTI\_LINE\_3}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_3}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+3~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x03u)}
+
+
+
+Definition at line \textbf{ 90} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga639f644e7061c0d27b2fc41dfc9060af}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_30@{EXTI\_LINE\_30}}
+\index{EXTI\_LINE\_30@{EXTI\_LINE\_30}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_30}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+30~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Eu)}
+
+
+
+Definition at line \textbf{ 117} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gab91907c719ed07ca44ba5c79ebbf51b8}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_31@{EXTI\_LINE\_31}}
+\index{EXTI\_LINE\_31@{EXTI\_LINE\_31}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_31}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+31~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x1\+Fu)}
+
+
+
+Definition at line \textbf{ 118} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga230e3b56ac5691f79bcfb8f5ff1dfa6f}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_32@{EXTI\_LINE\_32}}
+\index{EXTI\_LINE\_32@{EXTI\_LINE\_32}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_32}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+32~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x00u)}
+
+
+
+Definition at line \textbf{ 119} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga85099acd51591dfc5e57f348e857caa1}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_33@{EXTI\_LINE\_33}}
+\index{EXTI\_LINE\_33@{EXTI\_LINE\_33}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_33}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+33~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x01u)}
+
+
+
+Definition at line \textbf{ 120} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga1e1304f9c5c227be7505df945390f061}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_34@{EXTI\_LINE\_34}}
+\index{EXTI\_LINE\_34@{EXTI\_LINE\_34}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_34}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+34~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x02u)}
+
+
+
+Definition at line \textbf{ 121} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gae56b98ffe7015346acc105cd530e0a7d}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_35@{EXTI\_LINE\_35}}
+\index{EXTI\_LINE\_35@{EXTI\_LINE\_35}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_35}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+35~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x03u)}
+
+
+
+Definition at line \textbf{ 122} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga7dc69afe18e27884b8d25fc6378b9bc5}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_36@{EXTI\_LINE\_36}}
+\index{EXTI\_LINE\_36@{EXTI\_LINE\_36}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_36}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+36~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x04u)}
+
+
+
+Definition at line \textbf{ 123} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gad6570cf0e3f03def23e5a44c0ae7875c}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_37@{EXTI\_LINE\_37}}
+\index{EXTI\_LINE\_37@{EXTI\_LINE\_37}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_37}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+37~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x05u)}
+
+
+
+Definition at line \textbf{ 124} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga89ba8391c935c577401c2e2a24c03d20}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_38@{EXTI\_LINE\_38}}
+\index{EXTI\_LINE\_38@{EXTI\_LINE\_38}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_38}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+38~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x06u)}
+
+
+
+Definition at line \textbf{ 125} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga0e2b90a3e6058c92d4c4df1cbd256029}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_39@{EXTI\_LINE\_39}}
+\index{EXTI\_LINE\_39@{EXTI\_LINE\_39}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_39}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+39~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x07u)}
+
+
+
+Definition at line \textbf{ 126} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gaf8e1e94adf29806583e68170c1dad7dd}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_4@{EXTI\_LINE\_4}}
+\index{EXTI\_LINE\_4@{EXTI\_LINE\_4}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_4}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+4~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x04u)}
+
+
+
+Definition at line \textbf{ 91} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga9d56769c1c9e077ac5ae70253c42ed65}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_40@{EXTI\_LINE\_40}}
+\index{EXTI\_LINE\_40@{EXTI\_LINE\_40}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_40}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+40~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x08u)}
+
+
+
+Definition at line \textbf{ 127} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga2da2722a13fbde7f842fd21e506dee2a}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_41@{EXTI\_LINE\_41}}
+\index{EXTI\_LINE\_41@{EXTI\_LINE\_41}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_41}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+41~(EXTI\+\_\+\+CONFIG   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x09u)}
+
+
+
+Definition at line \textbf{ 128} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga335e3b46e25d77b242dff4f2d1c60749}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_42@{EXTI\_LINE\_42}}
+\index{EXTI\_LINE\_42@{EXTI\_LINE\_42}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_42}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+42~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x0\+Au)}
+
+
+
+Definition at line \textbf{ 129} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga595f3ac317142b9286b517860979590b}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_43@{EXTI\_LINE\_43}}
+\index{EXTI\_LINE\_43@{EXTI\_LINE\_43}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_43}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+43~(EXTI\+\_\+\+DIRECT   $\vert$ EXTI\+\_\+\+REG2 $\vert$ 0x0\+Bu)}
+
+
+
+Definition at line \textbf{ 130} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gab7859f0b07e671f71be61d7d301eb909}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_5@{EXTI\_LINE\_5}}
+\index{EXTI\_LINE\_5@{EXTI\_LINE\_5}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_5}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+5~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x05u)}
+
+
+
+Definition at line \textbf{ 92} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_gaebcb8302f9aae1d54c7aada7ade230c0}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_6@{EXTI\_LINE\_6}}
+\index{EXTI\_LINE\_6@{EXTI\_LINE\_6}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_6}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+6~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x06u)}
+
+
+
+Definition at line \textbf{ 93} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga32a33e800bf0f754d0337ab30abde810}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_7@{EXTI\_LINE\_7}}
+\index{EXTI\_LINE\_7@{EXTI\_LINE\_7}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_7}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+7~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x07u)}
+
+
+
+Definition at line \textbf{ 94} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga0bb9322e3cfbe3a256f9e479ba3e5664}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_8@{EXTI\_LINE\_8}}
+\index{EXTI\_LINE\_8@{EXTI\_LINE\_8}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_8}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+8~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x08u)}
+
+
+
+Definition at line \textbf{ 95} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+
+\mbox{\label{group___e_x_t_i___line_ga714a1411d5dc8bcf6b6efe69396fbccf}} 
+\index{EXTI Line@{EXTI Line}!EXTI\_LINE\_9@{EXTI\_LINE\_9}}
+\index{EXTI\_LINE\_9@{EXTI\_LINE\_9}!EXTI Line@{EXTI Line}}
+\doxysubsubsection{EXTI\_LINE\_9}
+{\footnotesize\ttfamily \#define EXTI\+\_\+\+LINE\+\_\+9~(EXTI\+\_\+\+GPIO     $\vert$ EXTI\+\_\+\+REG1 $\vert$ 0x09u)}
+
+
+
+Definition at line \textbf{ 96} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+exti.\+h}.
+

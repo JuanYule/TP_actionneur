@@ -1,0 +1,93 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+ll\+\_\+cortex.h File Reference}
+\label{stm32g4xx__ll__cortex_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_cortex.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_ll\_cortex.h}}
+
+
+Header file of CORTEX LL module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ LL\+\_\+\+SYSTICK\+\_\+\+CLKSOURCE\+\_\+\+HCLK\+\_\+\+DIV8}~0x00000000U
+\item 
+\#define \textbf{ LL\+\_\+\+SYSTICK\+\_\+\+CLKSOURCE\+\_\+\+HCLK}~\textbf{ Sys\+Tick\+\_\+\+CTRL\+\_\+\+CLKSOURCE\+\_\+\+Msk}
+\item 
+\#define \textbf{ LL\+\_\+\+HANDLER\+\_\+\+FAULT\+\_\+\+USG}~\textbf{ SCB\+\_\+\+SHCSR\+\_\+\+USGFAULTENA\+\_\+\+Msk}
+\item 
+\#define \textbf{ LL\+\_\+\+HANDLER\+\_\+\+FAULT\+\_\+\+BUS}~\textbf{ SCB\+\_\+\+SHCSR\+\_\+\+BUSFAULTENA\+\_\+\+Msk}
+\item 
+\#define \textbf{ LL\+\_\+\+HANDLER\+\_\+\+FAULT\+\_\+\+MEM}~\textbf{ SCB\+\_\+\+SHCSR\+\_\+\+MEMFAULTENA\+\_\+\+Msk}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+SYSTICK\+\_\+\+Is\+Active\+Counter\+Flag} (void)
+\begin{DoxyCompactList}\small\item\em This function checks if the Systick counter flag is active or not. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+SYSTICK\+\_\+\+Set\+Clk\+Source} (uint32\+\_\+t Source)
+\begin{DoxyCompactList}\small\item\em Configures the Sys\+Tick clock source @rmtoll STK\+\_\+\+CTRL CLKSOURCE LL\+\_\+\+SYSTICK\+\_\+\+Set\+Clk\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+SYSTICK\+\_\+\+Get\+Clk\+Source} (void)
+\begin{DoxyCompactList}\small\item\em Get the Sys\+Tick clock source @rmtoll STK\+\_\+\+CTRL CLKSOURCE LL\+\_\+\+SYSTICK\+\_\+\+Get\+Clk\+Source. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+SYSTICK\+\_\+\+Enable\+IT} (void)
+\begin{DoxyCompactList}\small\item\em Enable Sys\+Tick exception request @rmtoll STK\+\_\+\+CTRL TICKINT LL\+\_\+\+SYSTICK\+\_\+\+Enable\+IT. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+SYSTICK\+\_\+\+Disable\+IT} (void)
+\begin{DoxyCompactList}\small\item\em Disable Sys\+Tick exception request @rmtoll STK\+\_\+\+CTRL TICKINT LL\+\_\+\+SYSTICK\+\_\+\+Disable\+IT. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+SYSTICK\+\_\+\+Is\+Enabled\+IT} (void)
+\begin{DoxyCompactList}\small\item\em Checks if the SYSTICK interrupt is enabled or disabled. @rmtoll STK\+\_\+\+CTRL TICKINT LL\+\_\+\+SYSTICK\+\_\+\+Is\+Enabled\+IT. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+LPM\+\_\+\+Enable\+Sleep} (void)
+\begin{DoxyCompactList}\small\item\em Processor uses sleep as its low power mode @rmtoll SCB\+\_\+\+SCR SLEEPDEEP LL\+\_\+\+LPM\+\_\+\+Enable\+Sleep. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+LPM\+\_\+\+Enable\+Deep\+Sleep} (void)
+\begin{DoxyCompactList}\small\item\em Processor uses deep sleep as its low power mode @rmtoll SCB\+\_\+\+SCR SLEEPDEEP LL\+\_\+\+LPM\+\_\+\+Enable\+Deep\+Sleep. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+LPM\+\_\+\+Enable\+Sleep\+On\+Exit} (void)
+\begin{DoxyCompactList}\small\item\em Configures sleep-\/on-\/exit when returning from Handler mode to Thread mode. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+LPM\+\_\+\+Disable\+Sleep\+On\+Exit} (void)
+\begin{DoxyCompactList}\small\item\em Do not sleep when returning to Thread mode. @rmtoll SCB\+\_\+\+SCR SLEEPONEXIT LL\+\_\+\+LPM\+\_\+\+Disable\+Sleep\+On\+Exit. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+LPM\+\_\+\+Enable\+Event\+On\+Pend} (void)
+\begin{DoxyCompactList}\small\item\em Enabled events and all interrupts, including disabled interrupts, can wakeup the processor. @rmtoll SCB\+\_\+\+SCR SEVEONPEND LL\+\_\+\+LPM\+\_\+\+Enable\+Event\+On\+Pend. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+LPM\+\_\+\+Disable\+Event\+On\+Pend} (void)
+\begin{DoxyCompactList}\small\item\em Only enabled interrupts or events can wakeup the processor, disabled interrupts are excluded @rmtoll SCB\+\_\+\+SCR SEVEONPEND LL\+\_\+\+LPM\+\_\+\+Disable\+Event\+On\+Pend. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+HANDLER\+\_\+\+Enable\+Fault} (uint32\+\_\+t Fault)
+\begin{DoxyCompactList}\small\item\em Enable a fault in System handler control register (SHCSR) @rmtoll SCB\+\_\+\+SHCSR MEMFAULTENA LL\+\_\+\+HANDLER\+\_\+\+Enable\+Fault. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE void \textbf{ LL\+\_\+\+HANDLER\+\_\+\+Disable\+Fault} (uint32\+\_\+t Fault)
+\begin{DoxyCompactList}\small\item\em Disable a fault in System handler control register (SHCSR) @rmtoll SCB\+\_\+\+SHCSR MEMFAULTENA LL\+\_\+\+HANDLER\+\_\+\+Disable\+Fault. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+CPUID\+\_\+\+Get\+Implementer} (void)
+\begin{DoxyCompactList}\small\item\em Get Implementer code @rmtoll SCB\+\_\+\+CPUID IMPLEMENTER LL\+\_\+\+CPUID\+\_\+\+Get\+Implementer. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+CPUID\+\_\+\+Get\+Variant} (void)
+\begin{DoxyCompactList}\small\item\em Get Variant number (The r value in the rnpn product revision identifier) @rmtoll SCB\+\_\+\+CPUID VARIANT LL\+\_\+\+CPUID\+\_\+\+Get\+Variant. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+CPUID\+\_\+\+Get\+Architecture} (void)
+\begin{DoxyCompactList}\small\item\em Get Architecture number @rmtoll SCB\+\_\+\+CPUID ARCHITECTURE LL\+\_\+\+CPUID\+\_\+\+Get\+Architecture. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+CPUID\+\_\+\+Get\+Par\+No} (void)
+\begin{DoxyCompactList}\small\item\em Get Part number @rmtoll SCB\+\_\+\+CPUID PARTNO LL\+\_\+\+CPUID\+\_\+\+Get\+Par\+No. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+INLINE uint32\+\_\+t \textbf{ LL\+\_\+\+CPUID\+\_\+\+Get\+Revision} (void)
+\begin{DoxyCompactList}\small\item\em Get Revision number (The p value in the rnpn product revision identifier, indicates patch release) @rmtoll SCB\+\_\+\+CPUID REVISION LL\+\_\+\+CPUID\+\_\+\+Get\+Revision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of CORTEX LL module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS.
+
+\begin{DoxyVerb}==============================================================================
+                   ##### How to use this driver #####
+==============================================================================
+  [..]
+  The LL CORTEX driver contains a set of generic APIs that can be
+  used by user:
+    (+) SYSTICK configuration used by LL_mDelay and LL_Init1msTick
+        functions
+    (+) Low power mode configuration (SCB register of Cortex-MCU)
+    (+) MPU API to configure and enable regions
+    (+) API to access to MCU info (CPUID register)
+    (+) API to enable fault handler (SHCSR accesses)\end{DoxyVerb}
+ 
+
+Definition in file \textbf{ stm32g4xx\+\_\+ll\+\_\+cortex.\+h}.
+

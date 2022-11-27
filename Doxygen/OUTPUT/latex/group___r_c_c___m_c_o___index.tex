@@ -1,0 +1,143 @@
+\doxysection{MCO Index}
+\label{group___r_c_c___m_c_o___index}\index{MCO Index@{MCO Index}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+POS}~16U
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+MASK}~(0x\+FUL $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+POS)
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+POS}~20U
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+MASK}~(0x\+FFUL $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+POS)
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO\+\_\+\+INDEX\+\_\+\+POS}~28U
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO\+\_\+\+INDEX\+\_\+\+MASK}~(0x1\+UL $<$$<$ RCC\+\_\+\+MCO\+\_\+\+INDEX\+\_\+\+POS)
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO1\+\_\+\+INDEX}~(0x0\+UL $<$$<$ RCC\+\_\+\+MCO\+\_\+\+INDEX\+\_\+\+POS)
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO\+\_\+\+PA8}~(\textbf{ RCC\+\_\+\+MCO1\+\_\+\+INDEX} $\vert$ (GPIO\+\_\+\+AF0\+\_\+\+MCO $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+POS) $\vert$ (GPIO\+\_\+\+GET\+\_\+\+INDEX(GPIOA) $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+POS) $\vert$ GPIO\+\_\+\+PIN\+\_\+8)
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO\+\_\+\+PG10}~(\textbf{ RCC\+\_\+\+MCO1\+\_\+\+INDEX} $\vert$ (GPIO\+\_\+\+AF0\+\_\+\+MCO $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+POS) $\vert$ (GPIO\+\_\+\+GET\+\_\+\+INDEX(GPIOG) $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+POS) $\vert$ GPIO\+\_\+\+PIN\+\_\+10)
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO1}~RCC\+\_\+\+MCO\+\_\+\+PA8
+\item 
+\#define \textbf{ RCC\+\_\+\+MCO}~RCC\+\_\+\+MCO1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___r_c_c___m_c_o___index_gad9bc2abe13f0d3e62a5f9aa381927eb3}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO@{RCC\_MCO}}
+\index{RCC\_MCO@{RCC\_MCO}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO~RCC\+\_\+\+MCO1}
+
+MCO1 to be compliant with other families with 2 MCOs 
+
+Definition at line \textbf{ 405} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_ga152dd1ae9455e528526c4e23a817937b}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO1@{RCC\_MCO1}}
+\index{RCC\_MCO1@{RCC\_MCO1}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO1}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO1~RCC\+\_\+\+MCO\+\_\+\+PA8}
+
+
+
+Definition at line \textbf{ 404} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_gaaec8f6464e8040f7677624ccbfd89ac1}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO1\_INDEX@{RCC\_MCO1\_INDEX}}
+\index{RCC\_MCO1\_INDEX@{RCC\_MCO1\_INDEX}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO1\_INDEX}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO1\+\_\+\+INDEX~(0x0\+UL $<$$<$ RCC\+\_\+\+MCO\+\_\+\+INDEX\+\_\+\+POS)}
+
+MCO1 index 
+
+Definition at line \textbf{ 399} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_gae2f481df71bb5625fd7a518e15b63526}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO\_GPIOAF\_MASK@{RCC\_MCO\_GPIOAF\_MASK}}
+\index{RCC\_MCO\_GPIOAF\_MASK@{RCC\_MCO\_GPIOAF\_MASK}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO\_GPIOAF\_MASK}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+MASK~(0x\+FFUL $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+POS)}
+
+
+
+Definition at line \textbf{ 396} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_ga23b58916a302e33a03218b3a91f5b5ff}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO\_GPIOAF\_POS@{RCC\_MCO\_GPIOAF\_POS}}
+\index{RCC\_MCO\_GPIOAF\_POS@{RCC\_MCO\_GPIOAF\_POS}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO\_GPIOAF\_POS}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+POS~20U}
+
+
+
+Definition at line \textbf{ 395} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_ga9eaf3a8d355d13bf5f1d344bece1a581}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO\_GPIOPORT\_MASK@{RCC\_MCO\_GPIOPORT\_MASK}}
+\index{RCC\_MCO\_GPIOPORT\_MASK@{RCC\_MCO\_GPIOPORT\_MASK}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO\_GPIOPORT\_MASK}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+MASK~(0x\+FUL $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+POS)}
+
+
+
+Definition at line \textbf{ 394} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_ga04b59ed63786d018dc48eae6f2e4401a}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO\_GPIOPORT\_POS@{RCC\_MCO\_GPIOPORT\_POS}}
+\index{RCC\_MCO\_GPIOPORT\_POS@{RCC\_MCO\_GPIOPORT\_POS}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO\_GPIOPORT\_POS}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+POS~16U}
+
+
+
+Definition at line \textbf{ 393} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_ga1fddf05a13b2e72268209d7a35a6f8f8}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO\_INDEX\_MASK@{RCC\_MCO\_INDEX\_MASK}}
+\index{RCC\_MCO\_INDEX\_MASK@{RCC\_MCO\_INDEX\_MASK}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO\_INDEX\_MASK}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO\+\_\+\+INDEX\+\_\+\+MASK~(0x1\+UL $<$$<$ RCC\+\_\+\+MCO\+\_\+\+INDEX\+\_\+\+POS)}
+
+
+
+Definition at line \textbf{ 398} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_ga7029c2b2a3b1ee452d25cd605231088d}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO\_INDEX\_POS@{RCC\_MCO\_INDEX\_POS}}
+\index{RCC\_MCO\_INDEX\_POS@{RCC\_MCO\_INDEX\_POS}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO\_INDEX\_POS}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO\+\_\+\+INDEX\+\_\+\+POS~28U}
+
+
+
+Definition at line \textbf{ 397} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_gac5864ba42617cd6c1e3b45b732d97ca5}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO\_PA8@{RCC\_MCO\_PA8}}
+\index{RCC\_MCO\_PA8@{RCC\_MCO\_PA8}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO\_PA8}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO\+\_\+\+PA8~(\textbf{ RCC\+\_\+\+MCO1\+\_\+\+INDEX} $\vert$ (GPIO\+\_\+\+AF0\+\_\+\+MCO $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+POS) $\vert$ (GPIO\+\_\+\+GET\+\_\+\+INDEX(GPIOA) $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+POS) $\vert$ GPIO\+\_\+\+PIN\+\_\+8)}
+
+
+
+Definition at line \textbf{ 400} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___m_c_o___index_ga6c1ab4526501054341703ae32f9b3d06}} 
+\index{MCO Index@{MCO Index}!RCC\_MCO\_PG10@{RCC\_MCO\_PG10}}
+\index{RCC\_MCO\_PG10@{RCC\_MCO\_PG10}!MCO Index@{MCO Index}}
+\doxysubsubsection{RCC\_MCO\_PG10}
+{\footnotesize\ttfamily \#define RCC\+\_\+\+MCO\+\_\+\+PG10~(\textbf{ RCC\+\_\+\+MCO1\+\_\+\+INDEX} $\vert$ (GPIO\+\_\+\+AF0\+\_\+\+MCO $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOAF\+\_\+\+POS) $\vert$ (GPIO\+\_\+\+GET\+\_\+\+INDEX(GPIOG) $<$$<$ RCC\+\_\+\+MCO\+\_\+\+GPIOPORT\+\_\+\+POS) $\vert$ GPIO\+\_\+\+PIN\+\_\+10)}
+
+
+
+Definition at line \textbf{ 401} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+

@@ -1,0 +1,205 @@
+\doxysection{UARTEx Private Macros}
+\label{group___u_a_r_t_ex___private___macros}\index{UARTEx Private Macros@{UARTEx Private Macros}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ UART\+\_\+\+GETCLOCKSOURCE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+CLOCKSOURCE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Report the UART clock source. \end{DoxyCompactList}\item 
+\#define \textbf{ UART\+\_\+\+MASK\+\_\+\+COMPUTATION}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Report the UART mask to apply to retrieve the received data according to the word length and to the parity bits activation. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+WORD\+\_\+\+LENGTH}(\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame length is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADDRESSLENGTH\+\_\+\+DETECT}(\+\_\+\+\_\+\+ADDRESS\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART wake-\/up address length is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD}(\+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART TXFIFO threshold level is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD}(\+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART RXFIFO threshold level is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___u_a_r_t_ex___private___macros_gaa4cf2a15ad7ae46e2905debeef35a908}} 
+\index{UARTEx Private Macros@{UARTEx Private Macros}!IS\_UART\_ADDRESSLENGTH\_DETECT@{IS\_UART\_ADDRESSLENGTH\_DETECT}}
+\index{IS\_UART\_ADDRESSLENGTH\_DETECT@{IS\_UART\_ADDRESSLENGTH\_DETECT}!UARTEx Private Macros@{UARTEx Private Macros}}
+\doxysubsubsection{IS\_UART\_ADDRESSLENGTH\_DETECT}
+{\footnotesize\ttfamily \#define IS\+\_\+\+UART\+\_\+\+ADDRESSLENGTH\+\_\+\+DETECT(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+ADDRESS\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                                   (((\_\_ADDRESS\_\_) == UART\_ADDRESS\_DETECT\_4B) || \(\backslash\)}
+\DoxyCodeLine{                                                   ((\_\_ADDRESS\_\_) == UART\_ADDRESS\_DETECT\_7B))}
+
+\end{DoxyCode}
+
+
+Ensure that UART wake-\/up address length is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+\+\_\+\+ADDRESS\+\_\+\+\_\+} & UART wake-\/up address length. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em SET} & ({\bfseries{ADDRESS}} is valid) or RESET ({\bfseries{ADDRESS}} is invalid) \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 605} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+h}.
+
+\mbox{\label{group___u_a_r_t_ex___private___macros_gac6cc8376326d3982bda0685dbaaff687}} 
+\index{UARTEx Private Macros@{UARTEx Private Macros}!IS\_UART\_RXFIFO\_THRESHOLD@{IS\_UART\_RXFIFO\_THRESHOLD}}
+\index{IS\_UART\_RXFIFO\_THRESHOLD@{IS\_UART\_RXFIFO\_THRESHOLD}!UARTEx Private Macros@{UARTEx Private Macros}}
+\doxysubsubsection{IS\_UART\_RXFIFO\_THRESHOLD}
+{\footnotesize\ttfamily \#define IS\+\_\+\+UART\+\_\+\+RXFIFO\+\_\+\+THRESHOLD(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                                 (((\_\_THRESHOLD\_\_) == UART\_RXFIFO\_THRESHOLD\_1\_8) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_RXFIFO\_THRESHOLD\_1\_4) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_RXFIFO\_THRESHOLD\_1\_2) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_RXFIFO\_THRESHOLD\_3\_4) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_RXFIFO\_THRESHOLD\_7\_8) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_RXFIFO\_THRESHOLD\_8\_8))}
+
+\end{DoxyCode}
+
+
+Ensure that UART RXFIFO threshold level is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+} & UART RXFIFO threshold level. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em SET} & ({\bfseries{THRESHOLD}} is valid) or RESET ({\bfseries{THRESHOLD}} is invalid) \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 625} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+h}.
+
+\mbox{\label{group___u_a_r_t_ex___private___macros_ga59f192f936bea1dac321a552ab3e662d}} 
+\index{UARTEx Private Macros@{UARTEx Private Macros}!IS\_UART\_TXFIFO\_THRESHOLD@{IS\_UART\_TXFIFO\_THRESHOLD}}
+\index{IS\_UART\_TXFIFO\_THRESHOLD@{IS\_UART\_TXFIFO\_THRESHOLD}!UARTEx Private Macros@{UARTEx Private Macros}}
+\doxysubsubsection{IS\_UART\_TXFIFO\_THRESHOLD}
+{\footnotesize\ttfamily \#define IS\+\_\+\+UART\+\_\+\+TXFIFO\+\_\+\+THRESHOLD(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                                 (((\_\_THRESHOLD\_\_) == UART\_TXFIFO\_THRESHOLD\_1\_8) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_TXFIFO\_THRESHOLD\_1\_4) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_TXFIFO\_THRESHOLD\_1\_2) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_TXFIFO\_THRESHOLD\_3\_4) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_TXFIFO\_THRESHOLD\_7\_8) || \(\backslash\)}
+\DoxyCodeLine{                                                 ((\_\_THRESHOLD\_\_) == UART\_TXFIFO\_THRESHOLD\_8\_8))}
+
+\end{DoxyCode}
+
+
+Ensure that UART TXFIFO threshold level is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+\+\_\+\+THRESHOLD\+\_\+\+\_\+} & UART TXFIFO threshold level. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em SET} & ({\bfseries{THRESHOLD}} is valid) or RESET ({\bfseries{THRESHOLD}} is invalid) \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 613} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+h}.
+
+\mbox{\label{group___u_a_r_t_ex___private___macros_gaf856254e5a61d2ee81086918bffabde5}} 
+\index{UARTEx Private Macros@{UARTEx Private Macros}!IS\_UART\_WORD\_LENGTH@{IS\_UART\_WORD\_LENGTH}}
+\index{IS\_UART\_WORD\_LENGTH@{IS\_UART\_WORD\_LENGTH}!UARTEx Private Macros@{UARTEx Private Macros}}
+\doxysubsubsection{IS\_UART\_WORD\_LENGTH}
+{\footnotesize\ttfamily \#define IS\+\_\+\+UART\+\_\+\+WORD\+\_\+\+LENGTH(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                         (((\_\_LENGTH\_\_) == UART\_WORDLENGTH\_7B) || \(\backslash\)}
+\DoxyCodeLine{                                         ((\_\_LENGTH\_\_) == UART\_WORDLENGTH\_8B) || \(\backslash\)}
+\DoxyCodeLine{                                         ((\_\_LENGTH\_\_) == UART\_WORDLENGTH\_9B))}
+
+\end{DoxyCode}
+
+
+Ensure that UART frame length is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+} & UART frame length. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em SET} & ({\bfseries{LENGTH}} is valid) or RESET ({\bfseries{LENGTH}} is invalid) \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 596} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+h}.
+
+\mbox{\label{group___u_a_r_t_ex___private___macros_ga2d8ffd4cb12754846ace609dff92e8df}} 
+\index{UARTEx Private Macros@{UARTEx Private Macros}!UART\_GETCLOCKSOURCE@{UART\_GETCLOCKSOURCE}}
+\index{UART\_GETCLOCKSOURCE@{UART\_GETCLOCKSOURCE}!UARTEx Private Macros@{UARTEx Private Macros}}
+\doxysubsubsection{UART\_GETCLOCKSOURCE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+GETCLOCKSOURCE(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  }\item[{}]{\+\_\+\+\_\+\+CLOCKSOURCE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Report the UART clock source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+} & specifies the UART Handle. \\
+\hline
+{\em \+\_\+\+\_\+\+CLOCKSOURCE\+\_\+\+\_\+} & output variable. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em UART} & clocking source, written in {\bfseries{CLOCKSOURCE}}. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 448} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+h}.
+
+\mbox{\label{group___u_a_r_t_ex___private___macros_gad9330184a8bd9399a36bcc93215a50d1}} 
+\index{UARTEx Private Macros@{UARTEx Private Macros}!UART\_MASK\_COMPUTATION@{UART\_MASK\_COMPUTATION}}
+\index{UART\_MASK\_COMPUTATION@{UART\_MASK\_COMPUTATION}!UARTEx Private Macros@{UARTEx Private Macros}}
+\doxysubsubsection{UART\_MASK\_COMPUTATION}
+{\footnotesize\ttfamily \#define UART\+\_\+\+MASK\+\_\+\+COMPUTATION(\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Report the UART mask to apply to retrieve the received data according to the word length and to the parity bits activation. 
+
+\begin{DoxyNote}{Note}
+If PCE = 1, the parity bit is not included in the data extracted by the reception API(). This masking operation is not carried out in the case of DMA transfers. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+} & specifies the UART Handle. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None,the} & mask to apply to UART RDR register is stored in ({\bfseries{HANDLE}})-\/$>$Mask field. \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 550} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+h}.
+

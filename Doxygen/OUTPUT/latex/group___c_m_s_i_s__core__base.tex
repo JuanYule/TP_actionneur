@@ -1,0 +1,2402 @@
+\doxysection{Core Definitions}
+\label{group___c_m_s_i_s__core__base}\index{Core Definitions@{Core Definitions}}
+
+
+Definitions for base addresses, unions, and structures.  
+
+
+\doxysubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Functions and Instructions Reference}
+\item 
+\textbf{ NVIC Functions}
+\begin{DoxyCompactList}\small\item\em Functions that manage interrupts and exceptions via the NVIC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ ITM\+\_\+\+BASE}~(0x\+E0000000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )
+\item 
+\#define \textbf{ ITM}~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )
+\item 
+\#define \textbf{ FPU\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)
+\item 
+\#define \textbf{ FPU}~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}         )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ ITM\+\_\+\+BASE}~(0x\+E0000000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )
+\item 
+\#define \textbf{ ITM}~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )
+\item 
+\#define \textbf{ FPU\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)
+\item 
+\#define \textbf{ FPU}~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}         )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ ITM\+\_\+\+BASE}~(0x\+E0000000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ ITM}~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE})
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ ITM\+\_\+\+BASE}~(0x\+E0000000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )
+\item 
+\#define \textbf{ ITM}~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )
+\item 
+\#define \textbf{ FPU\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)
+\item 
+\#define \textbf{ FPU}~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}         )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ ITM\+\_\+\+BASE}~(0x\+E0000000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )
+\item 
+\#define \textbf{ ITM}~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )
+\item 
+\#define \textbf{ FPU\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)
+\item 
+\#define \textbf{ FPU}~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}         )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ ITM\+\_\+\+BASE}~(0x\+E0000000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ ITM}~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE})
+\item 
+\#define \textbf{ FPU\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)
+\item 
+\#define \textbf{ FPU}~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}      )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ ITM\+\_\+\+BASE}~(0x\+E0000000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ ITM}~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE})
+\item 
+\#define \textbf{ FPU\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)
+\item 
+\#define \textbf{ FPU}~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}      )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ SCS\+\_\+\+BASE}~(0x\+E000\+E000\+UL)
+\item 
+\#define \textbf{ ITM\+\_\+\+BASE}~(0x\+E0000000\+UL)
+\item 
+\#define \textbf{ DWT\+\_\+\+BASE}~(0x\+E0001000\+UL)
+\item 
+\#define \textbf{ TPI\+\_\+\+BASE}~(0x\+E0040000\+UL)
+\item 
+\#define \textbf{ Core\+Debug\+\_\+\+BASE}~(0x\+E000\+EDF0\+UL)
+\item 
+\#define \textbf{ Sys\+Tick\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)
+\item 
+\#define \textbf{ NVIC\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)
+\item 
+\#define \textbf{ SCB\+\_\+\+BASE}~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)
+\item 
+\#define \textbf{ SCn\+SCB}~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ SCB}~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Sys\+Tick}~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )
+\item 
+\#define \textbf{ NVIC}~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )
+\item 
+\#define \textbf{ ITM}~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ DWT}~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ TPI}~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}      )
+\item 
+\#define \textbf{ Core\+Debug}~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Definitions for base addresses, unions, and structures. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 2050} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1127} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1894} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1202} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE})}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1391} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1969} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE}   )}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1969} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE})}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1561} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE})}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1784} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gab6e30a2b802d9021619dbb0be7f5d63d}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug@{CoreDebug}}
+\index{CoreDebug@{CoreDebug}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug~((\textbf{ Core\+Debug\+\_\+\+Type} $\ast$)     \textbf{ Core\+Debug\+\_\+\+BASE})}
+
+Core Debug configuration struct 
+
+Definition at line \textbf{ 1374} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 2038} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1116} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1882} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1191} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1379} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1957} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1957} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1549} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1772} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga680604dbcda9e9b31a1639fcffe5230b}} 
+\index{Core Definitions@{Core Definitions}!CoreDebug\_BASE@{CoreDebug\_BASE}}
+\index{CoreDebug\_BASE@{CoreDebug\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{CoreDebug\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily \#define Core\+Debug\+\_\+\+BASE~(0x\+E000\+EDF0\+UL)}
+
+Core Debug Base Address 
+
+Definition at line \textbf{ 1362} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 2048} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1125} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1892} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1200} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}      )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1389} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1967} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}         )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1967} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}      )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1559} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}      )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1782} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabbe5a060185e1d5afa3f85b14e10a6ce}} 
+\index{Core Definitions@{Core Definitions}!DWT@{DWT}}
+\index{DWT@{DWT}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily \#define DWT~((\textbf{ DWT\+\_\+\+Type}       $\ast$)     \textbf{ DWT\+\_\+\+BASE}      )}
+
+DWT configuration struct 
+
+Definition at line \textbf{ 1372} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 2036} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1114} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1880} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1189} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1377} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1955} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1955} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1547} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1770} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gafdab534f961bf8935eb456cb7700dcd2}} 
+\index{Core Definitions@{Core Definitions}!DWT\_BASE@{DWT\_BASE}}
+\index{DWT\_BASE@{DWT\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{DWT\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily \#define DWT\+\_\+\+BASE~(0x\+E0001000\+UL)}
+
+DWT Base Address 
+
+Definition at line \textbf{ 1360} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabc7c93f2594e85ece1e1a24f10591428}} 
+\index{Core Definitions@{Core Definitions}!FPU@{FPU}}
+\index{FPU@{FPU}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily \#define FPU~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}         )}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 2063} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabc7c93f2594e85ece1e1a24f10591428}} 
+\index{Core Definitions@{Core Definitions}!FPU@{FPU}}
+\index{FPU@{FPU}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily \#define FPU~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}         )}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1907} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabc7c93f2594e85ece1e1a24f10591428}} 
+\index{Core Definitions@{Core Definitions}!FPU@{FPU}}
+\index{FPU@{FPU}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily \#define FPU~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}         )}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1982} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabc7c93f2594e85ece1e1a24f10591428}} 
+\index{Core Definitions@{Core Definitions}!FPU@{FPU}}
+\index{FPU@{FPU}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily \#define FPU~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}         )}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1982} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabc7c93f2594e85ece1e1a24f10591428}} 
+\index{Core Definitions@{Core Definitions}!FPU@{FPU}}
+\index{FPU@{FPU}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily \#define FPU~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}      )}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1569} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabc7c93f2594e85ece1e1a24f10591428}} 
+\index{Core Definitions@{Core Definitions}!FPU@{FPU}}
+\index{FPU@{FPU}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily \#define FPU~((\textbf{ FPU\+\_\+\+Type}       $\ast$)     \textbf{ FPU\+\_\+\+BASE}      )}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1792} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga4dcad4027118c098c07bcd575f1fbb28}} 
+\index{Core Definitions@{Core Definitions}!FPU\_BASE@{FPU\_BASE}}
+\index{FPU\_BASE@{FPU\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily \#define FPU\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 2062} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga4dcad4027118c098c07bcd575f1fbb28}} 
+\index{Core Definitions@{Core Definitions}!FPU\_BASE@{FPU\_BASE}}
+\index{FPU\_BASE@{FPU\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily \#define FPU\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1906} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga4dcad4027118c098c07bcd575f1fbb28}} 
+\index{Core Definitions@{Core Definitions}!FPU\_BASE@{FPU\_BASE}}
+\index{FPU\_BASE@{FPU\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily \#define FPU\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1981} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga4dcad4027118c098c07bcd575f1fbb28}} 
+\index{Core Definitions@{Core Definitions}!FPU\_BASE@{FPU\_BASE}}
+\index{FPU\_BASE@{FPU\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily \#define FPU\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1981} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga4dcad4027118c098c07bcd575f1fbb28}} 
+\index{Core Definitions@{Core Definitions}!FPU\_BASE@{FPU\_BASE}}
+\index{FPU\_BASE@{FPU\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily \#define FPU\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1568} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga4dcad4027118c098c07bcd575f1fbb28}} 
+\index{Core Definitions@{Core Definitions}!FPU\_BASE@{FPU\_BASE}}
+\index{FPU\_BASE@{FPU\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{FPU\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily \#define FPU\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+F30\+UL)}
+
+Floating Point Unit 
+
+Definition at line \textbf{ 1791} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabae7cdf882def602cb787bb039ff6a43}} 
+\index{Core Definitions@{Core Definitions}!ITM@{ITM}}
+\index{ITM@{ITM}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily \#define ITM~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}         )}
+
+ITM configuration struct 
+
+Definition at line \textbf{ 2047} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabae7cdf882def602cb787bb039ff6a43}} 
+\index{Core Definitions@{Core Definitions}!ITM@{ITM}}
+\index{ITM@{ITM}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily \#define ITM~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}         )}
+
+ITM configuration struct 
+
+Definition at line \textbf{ 1891} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabae7cdf882def602cb787bb039ff6a43}} 
+\index{Core Definitions@{Core Definitions}!ITM@{ITM}}
+\index{ITM@{ITM}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily \#define ITM~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}      )}
+
+ITM configuration struct 
+
+Definition at line \textbf{ 1388} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabae7cdf882def602cb787bb039ff6a43}} 
+\index{Core Definitions@{Core Definitions}!ITM@{ITM}}
+\index{ITM@{ITM}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily \#define ITM~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}         )}
+
+ITM configuration struct 
+
+Definition at line \textbf{ 1966} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabae7cdf882def602cb787bb039ff6a43}} 
+\index{Core Definitions@{Core Definitions}!ITM@{ITM}}
+\index{ITM@{ITM}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily \#define ITM~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}         )}
+
+ITM configuration struct 
+
+Definition at line \textbf{ 1966} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabae7cdf882def602cb787bb039ff6a43}} 
+\index{Core Definitions@{Core Definitions}!ITM@{ITM}}
+\index{ITM@{ITM}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily \#define ITM~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}      )}
+
+ITM configuration struct 
+
+Definition at line \textbf{ 1558} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabae7cdf882def602cb787bb039ff6a43}} 
+\index{Core Definitions@{Core Definitions}!ITM@{ITM}}
+\index{ITM@{ITM}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily \#define ITM~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}      )}
+
+ITM configuration struct 
+
+Definition at line \textbf{ 1781} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gabae7cdf882def602cb787bb039ff6a43}} 
+\index{Core Definitions@{Core Definitions}!ITM@{ITM}}
+\index{ITM@{ITM}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily \#define ITM~((\textbf{ ITM\+\_\+\+Type}       $\ast$)     \textbf{ ITM\+\_\+\+BASE}      )}
+
+ITM configuration struct 
+
+Definition at line \textbf{ 1371} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gadd76251e412a195ec0a8f47227a8359e}} 
+\index{Core Definitions@{Core Definitions}!ITM\_BASE@{ITM\_BASE}}
+\index{ITM\_BASE@{ITM\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily \#define ITM\+\_\+\+BASE~(0x\+E0000000\+UL)}
+
+ITM Base Address 
+
+Definition at line \textbf{ 2035} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gadd76251e412a195ec0a8f47227a8359e}} 
+\index{Core Definitions@{Core Definitions}!ITM\_BASE@{ITM\_BASE}}
+\index{ITM\_BASE@{ITM\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily \#define ITM\+\_\+\+BASE~(0x\+E0000000\+UL)}
+
+ITM Base Address 
+
+Definition at line \textbf{ 1879} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gadd76251e412a195ec0a8f47227a8359e}} 
+\index{Core Definitions@{Core Definitions}!ITM\_BASE@{ITM\_BASE}}
+\index{ITM\_BASE@{ITM\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily \#define ITM\+\_\+\+BASE~(0x\+E0000000\+UL)}
+
+ITM Base Address 
+
+Definition at line \textbf{ 1376} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gadd76251e412a195ec0a8f47227a8359e}} 
+\index{Core Definitions@{Core Definitions}!ITM\_BASE@{ITM\_BASE}}
+\index{ITM\_BASE@{ITM\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily \#define ITM\+\_\+\+BASE~(0x\+E0000000\+UL)}
+
+ITM Base Address 
+
+Definition at line \textbf{ 1954} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gadd76251e412a195ec0a8f47227a8359e}} 
+\index{Core Definitions@{Core Definitions}!ITM\_BASE@{ITM\_BASE}}
+\index{ITM\_BASE@{ITM\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily \#define ITM\+\_\+\+BASE~(0x\+E0000000\+UL)}
+
+ITM Base Address 
+
+Definition at line \textbf{ 1954} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gadd76251e412a195ec0a8f47227a8359e}} 
+\index{Core Definitions@{Core Definitions}!ITM\_BASE@{ITM\_BASE}}
+\index{ITM\_BASE@{ITM\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily \#define ITM\+\_\+\+BASE~(0x\+E0000000\+UL)}
+
+ITM Base Address 
+
+Definition at line \textbf{ 1546} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gadd76251e412a195ec0a8f47227a8359e}} 
+\index{Core Definitions@{Core Definitions}!ITM\_BASE@{ITM\_BASE}}
+\index{ITM\_BASE@{ITM\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily \#define ITM\+\_\+\+BASE~(0x\+E0000000\+UL)}
+
+ITM Base Address 
+
+Definition at line \textbf{ 1769} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gadd76251e412a195ec0a8f47227a8359e}} 
+\index{Core Definitions@{Core Definitions}!ITM\_BASE@{ITM\_BASE}}
+\index{ITM\_BASE@{ITM\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{ITM\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily \#define ITM\+\_\+\+BASE~(0x\+E0000000\+UL)}
+
+ITM Base Address 
+
+Definition at line \textbf{ 1359} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 2046} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1124} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1890} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 541} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 655} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 568} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1199} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1387} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1965} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}        )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1965} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1557} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1780} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 665} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gac8e97e8ce56ae9f57da1363a937f8a17}} 
+\index{Core Definitions@{Core Definitions}!NVIC@{NVIC}}
+\index{NVIC@{NVIC}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily \#define NVIC~((\textbf{ NVIC\+\_\+\+Type}      $\ast$)     \textbf{ NVIC\+\_\+\+BASE}     )}
+
+NVIC configuration struct 
+
+Definition at line \textbf{ 1370} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 2040} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1118} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1884} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 536} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 650} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 562} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1193} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1381} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1959} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1959} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1551} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1774} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 659} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaa0288691785a5f868238e0468b39523d}} 
+\index{Core Definitions@{Core Definitions}!NVIC\_BASE@{NVIC\_BASE}}
+\index{NVIC\_BASE@{NVIC\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{NVIC\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily \#define NVIC\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0100\+UL)}
+
+NVIC Base Address 
+
+Definition at line \textbf{ 1364} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 2044} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1122} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1888} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 539} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 653} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 566} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1197} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1385} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1963} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}         )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1963} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1555} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1778} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 663} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gaaaf6477c2bde2f00f99e3c2fd1060b01}} 
+\index{Core Definitions@{Core Definitions}!SCB@{SCB}}
+\index{SCB@{SCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily \#define SCB~((\textbf{ SCB\+\_\+\+Type}       $\ast$)     \textbf{ SCB\+\_\+\+BASE}      )}
+
+SCB configuration struct 
+
+Definition at line \textbf{ 1368} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 2041} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1119} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1885} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 537} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 651} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 563} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1194} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1382} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1960} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1960} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1552} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1775} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 660} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gad55a7ddb8d4b2398b0c1cfec76c0d9fd}} 
+\index{Core Definitions@{Core Definitions}!SCB\_BASE@{SCB\_BASE}}
+\index{SCB\_BASE@{SCB\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCB\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily \#define SCB\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0\+D00\+UL)}
+
+System Control Block Base Address 
+
+Definition at line \textbf{ 1365} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}         )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 2043} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}         )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 1887} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 565} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 1384} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}         )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 1962} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}         )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 1962} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 1554} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 1777} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 662} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga9fe0cd2eef83a8adad94490d9ecca63f}} 
+\index{Core Definitions@{Core Definitions}!SCnSCB@{SCnSCB}}
+\index{SCnSCB@{SCnSCB}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCnSCB\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily \#define SCn\+SCB~((\textbf{ SCn\+SCB\+\_\+\+Type}    $\ast$)     \textbf{ SCS\+\_\+\+BASE}      )}
+
+System control Register not in SCB 
+
+Definition at line \textbf{ 1367} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 2034} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1113} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1878} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 534} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 648} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 560} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1188} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1375} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1953} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1953} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1545} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1768} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 657} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga3c14ed93192c8d9143322bbf77ebf770}} 
+\index{Core Definitions@{Core Definitions}!SCS\_BASE@{SCS\_BASE}}
+\index{SCS\_BASE@{SCS\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SCS\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily \#define SCS\+\_\+\+BASE~(0x\+E000\+E000\+UL)}
+
+System Control Space Base Address 
+
+Definition at line \textbf{ 1358} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 2045} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1123} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1889} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 540} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 654} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 567} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1198} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1386} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1964} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}     )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1964} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1556} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1779} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 664} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_gacd96c53beeaff8f603fcda425eb295de}} 
+\index{Core Definitions@{Core Definitions}!SysTick@{SysTick}}
+\index{SysTick@{SysTick}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick~((\textbf{ Sys\+Tick\+\_\+\+Type}   $\ast$)     \textbf{ Sys\+Tick\+\_\+\+BASE}  )}
+
+Sys\+Tick configuration struct 
+
+Definition at line \textbf{ 1369} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 2039} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1117} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1883} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 535} of file \textbf{ core\+\_\+cm0.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 649} of file \textbf{ core\+\_\+cm0plus.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 561} of file \textbf{ core\+\_\+cm1.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1192} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1380} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1958} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1958} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1550} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1773} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 658} of file \textbf{ core\+\_\+sc000.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga58effaac0b93006b756d33209e814646}} 
+\index{Core Definitions@{Core Definitions}!SysTick\_BASE@{SysTick\_BASE}}
+\index{SysTick\_BASE@{SysTick\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{SysTick\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily \#define Sys\+Tick\+\_\+\+BASE~(\textbf{ SCS\+\_\+\+BASE} +  0x0010\+UL)}
+
+Sys\+Tick Base Address 
+
+Definition at line \textbf{ 1363} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 2049} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1126} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1893} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1201} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}      )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1390} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1968} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}         )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1968} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}      )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1560} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}      )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1783} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga8b4dd00016aed25a0ea54e9a9acd1239}} 
+\index{Core Definitions@{Core Definitions}!TPI@{TPI}}
+\index{TPI@{TPI}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily \#define TPI~((\textbf{ TPI\+\_\+\+Type}       $\ast$)     \textbf{ TPI\+\_\+\+BASE}      )}
+
+TPI configuration struct 
+
+Definition at line \textbf{ 1373} of file \textbf{ core\+\_\+sc300.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 2037} of file \textbf{ core\+\_\+armv81mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1115} of file \textbf{ core\+\_\+armv8mbl.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1881} of file \textbf{ core\+\_\+armv8mml.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1190} of file \textbf{ core\+\_\+cm23.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1378} of file \textbf{ core\+\_\+cm3.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1956} of file \textbf{ core\+\_\+cm33.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1956} of file \textbf{ core\+\_\+cm35p.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1548} of file \textbf{ core\+\_\+cm4.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1771} of file \textbf{ core\+\_\+cm7.\+h}.
+
+\mbox{\label{group___c_m_s_i_s__core__base_ga2b1eeff850a7e418844ca847145a1a68}} 
+\index{Core Definitions@{Core Definitions}!TPI\_BASE@{TPI\_BASE}}
+\index{TPI\_BASE@{TPI\_BASE}!Core Definitions@{Core Definitions}}
+\doxysubsubsection{TPI\_BASE\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily \#define TPI\+\_\+\+BASE~(0x\+E0040000\+UL)}
+
+TPI Base Address 
+
+Definition at line \textbf{ 1361} of file \textbf{ core\+\_\+sc300.\+h}.
+

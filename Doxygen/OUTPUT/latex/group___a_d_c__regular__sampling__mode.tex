@@ -1,0 +1,47 @@
+\doxysection{ADC group regular sampling mode}
+\label{group___a_d_c__regular__sampling__mode}\index{ADC group regular sampling mode@{ADC group regular sampling mode}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+NORMAL}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+BULB}~(\textbf{ ADC\+\_\+\+CFGR2\+\_\+\+BULB})
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+TRIGGER\+\_\+\+CONTROLED}~(\textbf{ ADC\+\_\+\+CFGR2\+\_\+\+SMPTRIG})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___a_d_c__regular__sampling__mode_ga0c65ed363b5488d372f51a76ec3d321b}} 
+\index{ADC group regular sampling mode@{ADC group regular sampling mode}!ADC\_SAMPLING\_MODE\_BULB@{ADC\_SAMPLING\_MODE\_BULB}}
+\index{ADC\_SAMPLING\_MODE\_BULB@{ADC\_SAMPLING\_MODE\_BULB}!ADC group regular sampling mode@{ADC group regular sampling mode}}
+\doxysubsubsection{ADC\_SAMPLING\_MODE\_BULB}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+BULB~(\textbf{ ADC\+\_\+\+CFGR2\+\_\+\+BULB})}
+
+ADC conversions sampling phase starts immediately after end of conversion, and stops upon trigger event. Note\+: First conversion is using minimal sampling time (see \doxyref{Channel -\/ Sampling time}{p.}{group___a_d_c___h_a_l___e_c___c_h_a_n_n_e_l___s_a_m_p_l_i_n_g_t_i_m_e}) 
+
+Definition at line \textbf{ 579} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
+\mbox{\label{group___a_d_c__regular__sampling__mode_ga80d6e02e0529ad60ae612ac13875f328}} 
+\index{ADC group regular sampling mode@{ADC group regular sampling mode}!ADC\_SAMPLING\_MODE\_NORMAL@{ADC\_SAMPLING\_MODE\_NORMAL}}
+\index{ADC\_SAMPLING\_MODE\_NORMAL@{ADC\_SAMPLING\_MODE\_NORMAL}!ADC group regular sampling mode@{ADC group regular sampling mode}}
+\doxysubsubsection{ADC\_SAMPLING\_MODE\_NORMAL}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+NORMAL~(0x00000000\+UL)}
+
+ADC conversions sampling phase duration is defined using \doxyref{Channel -\/ Sampling time}{p.}{group___a_d_c___h_a_l___e_c___c_h_a_n_n_e_l___s_a_m_p_l_i_n_g_t_i_m_e} 
+
+Definition at line \textbf{ 577} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
+\mbox{\label{group___a_d_c__regular__sampling__mode_gaea8643626ce3c10cc586db10b7744869}} 
+\index{ADC group regular sampling mode@{ADC group regular sampling mode}!ADC\_SAMPLING\_MODE\_TRIGGER\_CONTROLED@{ADC\_SAMPLING\_MODE\_TRIGGER\_CONTROLED}}
+\index{ADC\_SAMPLING\_MODE\_TRIGGER\_CONTROLED@{ADC\_SAMPLING\_MODE\_TRIGGER\_CONTROLED}!ADC group regular sampling mode@{ADC group regular sampling mode}}
+\doxysubsubsection{ADC\_SAMPLING\_MODE\_TRIGGER\_CONTROLED}
+{\footnotesize\ttfamily \#define ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+TRIGGER\+\_\+\+CONTROLED~(\textbf{ ADC\+\_\+\+CFGR2\+\_\+\+SMPTRIG})}
+
+ADC conversions sampling phase is controlled by trigger events\+: Trigger rising edge = start sampling Trigger falling edge = stop sampling and start conversion 
+
+Definition at line \textbf{ 582} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+

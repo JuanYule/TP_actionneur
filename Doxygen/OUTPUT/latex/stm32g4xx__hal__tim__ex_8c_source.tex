@@ -1,0 +1,2514 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+tim\+\_\+ex.\+c}
+\label{stm32g4xx__hal__tim__ex_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_tim\_ex.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_tim\_ex.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00088 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00089 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00090 }
+\DoxyCodeLine{00100 \textcolor{preprocessor}{\#ifdef HAL\_TIM\_MODULE\_ENABLED}}
+\DoxyCodeLine{00101 }
+\DoxyCodeLine{00102 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00103 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00104 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00108 \textcolor{comment}{/* Timeout for break input rearm */}}
+\DoxyCodeLine{00109 \textcolor{preprocessor}{\#define TIM\_BREAKINPUT\_REARM\_TIMEOUT    5UL }\textcolor{comment}{/* 5 milliseconds */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00113 \textcolor{comment}{/* End of private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00114 }
+\DoxyCodeLine{00115 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00116 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00117 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00118 \textcolor{keyword}{static} \textcolor{keywordtype}{void} TIM\_DMADelayPulseNCplt(DMA\_HandleTypeDef *hdma);}
+\DoxyCodeLine{00119 \textcolor{keyword}{static} \textcolor{keywordtype}{void} TIM\_DMAErrorCCxN(DMA\_HandleTypeDef *hdma);}
+\DoxyCodeLine{00120 \textcolor{keyword}{static} \textcolor{keywordtype}{void} TIM\_CCxNChannelCmd(TIM\_TypeDef *TIMx, uint32\_t Channel, uint32\_t ChannelNState);}
+\DoxyCodeLine{00121 }
+\DoxyCodeLine{00122 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00157 HAL\_StatusTypeDef HAL\_TIMEx\_HallSensor\_Init(TIM\_HandleTypeDef *htim, TIM\_HallSensor\_InitTypeDef *sConfig)}
+\DoxyCodeLine{00158 \{}
+\DoxyCodeLine{00159   TIM\_OC\_InitTypeDef OC\_Config;}
+\DoxyCodeLine{00160 }
+\DoxyCodeLine{00161   \textcolor{comment}{/* Check the TIM handle allocation */}}
+\DoxyCodeLine{00162   \textcolor{keywordflow}{if} (htim == NULL)}
+\DoxyCodeLine{00163   \{}
+\DoxyCodeLine{00164     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00165   \}}
+\DoxyCodeLine{00166 }
+\DoxyCodeLine{00167   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00168   assert\_param(IS\_TIM\_HALL\_SENSOR\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{00169   assert\_param(IS\_TIM\_COUNTER\_MODE(htim-\/>Init.CounterMode));}
+\DoxyCodeLine{00170   assert\_param(IS\_TIM\_CLOCKDIVISION\_DIV(htim-\/>Init.ClockDivision));}
+\DoxyCodeLine{00171   assert\_param(IS\_TIM\_AUTORELOAD\_PRELOAD(htim-\/>Init.AutoReloadPreload));}
+\DoxyCodeLine{00172   assert\_param(IS\_TIM\_IC\_POLARITY(sConfig-\/>IC1Polarity));}
+\DoxyCodeLine{00173   assert\_param(IS\_TIM\_IC\_PRESCALER(sConfig-\/>IC1Prescaler));}
+\DoxyCodeLine{00174   assert\_param(IS\_TIM\_IC\_FILTER(sConfig-\/>IC1Filter));}
+\DoxyCodeLine{00175 }
+\DoxyCodeLine{00176   \textcolor{keywordflow}{if} (htim-\/>State == HAL\_TIM\_STATE\_RESET)}
+\DoxyCodeLine{00177   \{}
+\DoxyCodeLine{00178     \textcolor{comment}{/* Allocate lock resource and initialize it */}}
+\DoxyCodeLine{00179     htim-\/>Lock = HAL\_UNLOCKED;}
+\DoxyCodeLine{00180 }
+\DoxyCodeLine{00181 \textcolor{preprocessor}{\#if (USE\_HAL\_TIM\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{00182     \textcolor{comment}{/* Reset interrupt callbacks to legacy week callbacks */}}
+\DoxyCodeLine{00183     TIM\_ResetCallback(htim);}
+\DoxyCodeLine{00184 }
+\DoxyCodeLine{00185     \textcolor{keywordflow}{if} (htim-\/>HallSensor\_MspInitCallback == NULL)}
+\DoxyCodeLine{00186     \{}
+\DoxyCodeLine{00187       htim-\/>HallSensor\_MspInitCallback = HAL\_TIMEx\_HallSensor\_MspInit;}
+\DoxyCodeLine{00188     \}}
+\DoxyCodeLine{00189     \textcolor{comment}{/* Init the low level hardware : GPIO, CLOCK, NVIC */}}
+\DoxyCodeLine{00190     htim-\/>HallSensor\_MspInitCallback(htim);}
+\DoxyCodeLine{00191 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00192     \textcolor{comment}{/* Init the low level hardware : GPIO, CLOCK, NVIC and DMA */}}
+\DoxyCodeLine{00193     HAL\_TIMEx\_HallSensor\_MspInit(htim);}
+\DoxyCodeLine{00194 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_TIM\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00195   \}}
+\DoxyCodeLine{00196 }
+\DoxyCodeLine{00197   \textcolor{comment}{/* Set the TIM state */}}
+\DoxyCodeLine{00198   htim-\/>State = HAL\_TIM\_STATE\_BUSY;}
+\DoxyCodeLine{00199 }
+\DoxyCodeLine{00200   \textcolor{comment}{/* Configure the Time base in the Encoder Mode */}}
+\DoxyCodeLine{00201   TIM\_Base\_SetConfig(htim-\/>Instance, \&htim-\/>Init);}
+\DoxyCodeLine{00202 }
+\DoxyCodeLine{00203   \textcolor{comment}{/* Configure the Channel 1 as Input Channel to interface with the three Outputs of the  Hall sensor */}}
+\DoxyCodeLine{00204   TIM\_TI1\_SetConfig(htim-\/>Instance, sConfig-\/>IC1Polarity, TIM\_ICSELECTION\_TRC, sConfig-\/>IC1Filter);}
+\DoxyCodeLine{00205 }
+\DoxyCodeLine{00206   \textcolor{comment}{/* Reset the IC1PSC Bits */}}
+\DoxyCodeLine{00207   htim-\/>Instance-\/>CCMR1 \&= \string~TIM\_CCMR1\_IC1PSC;}
+\DoxyCodeLine{00208   \textcolor{comment}{/* Set the IC1PSC value */}}
+\DoxyCodeLine{00209   htim-\/>Instance-\/>CCMR1 |= sConfig-\/>IC1Prescaler;}
+\DoxyCodeLine{00210 }
+\DoxyCodeLine{00211   \textcolor{comment}{/* Enable the Hall sensor interface (XOR function of the three inputs) */}}
+\DoxyCodeLine{00212   htim-\/>Instance-\/>CR2 |= TIM\_CR2\_TI1S;}
+\DoxyCodeLine{00213 }
+\DoxyCodeLine{00214   \textcolor{comment}{/* Select the TIM\_TS\_TI1F\_ED signal as Input trigger for the TIM */}}
+\DoxyCodeLine{00215   htim-\/>Instance-\/>SMCR \&= \string~TIM\_SMCR\_TS;}
+\DoxyCodeLine{00216   htim-\/>Instance-\/>SMCR |= TIM\_TS\_TI1F\_ED;}
+\DoxyCodeLine{00217 }
+\DoxyCodeLine{00218   \textcolor{comment}{/* Use the TIM\_TS\_TI1F\_ED signal to reset the TIM counter each edge detection */}}
+\DoxyCodeLine{00219   htim-\/>Instance-\/>SMCR \&= \string~TIM\_SMCR\_SMS;}
+\DoxyCodeLine{00220   htim-\/>Instance-\/>SMCR |= TIM\_SLAVEMODE\_RESET;}
+\DoxyCodeLine{00221 }
+\DoxyCodeLine{00222   \textcolor{comment}{/* Program channel 2 in PWM 2 mode with the desired Commutation\_Delay*/}}
+\DoxyCodeLine{00223   OC\_Config.OCFastMode = TIM\_OCFAST\_DISABLE;}
+\DoxyCodeLine{00224   OC\_Config.OCIdleState = TIM\_OCIDLESTATE\_RESET;}
+\DoxyCodeLine{00225   OC\_Config.OCMode = TIM\_OCMODE\_PWM2;}
+\DoxyCodeLine{00226   OC\_Config.OCNIdleState = TIM\_OCNIDLESTATE\_RESET;}
+\DoxyCodeLine{00227   OC\_Config.OCNPolarity = TIM\_OCNPOLARITY\_HIGH;}
+\DoxyCodeLine{00228   OC\_Config.OCPolarity = TIM\_OCPOLARITY\_HIGH;}
+\DoxyCodeLine{00229   OC\_Config.Pulse = sConfig-\/>Commutation\_Delay;}
+\DoxyCodeLine{00230 }
+\DoxyCodeLine{00231   TIM\_OC2\_SetConfig(htim-\/>Instance, \&OC\_Config);}
+\DoxyCodeLine{00232 }
+\DoxyCodeLine{00233   \textcolor{comment}{/* Select OC2REF as trigger output on TRGO: write the MMS bits in the TIMx\_CR2}}
+\DoxyCodeLine{00234 \textcolor{comment}{    register to 101 */}}
+\DoxyCodeLine{00235   htim-\/>Instance-\/>CR2 \&= \string~TIM\_CR2\_MMS;}
+\DoxyCodeLine{00236   htim-\/>Instance-\/>CR2 |= TIM\_TRGO\_OC2REF;}
+\DoxyCodeLine{00237 }
+\DoxyCodeLine{00238   \textcolor{comment}{/* Initialize the DMA burst operation state */}}
+\DoxyCodeLine{00239   htim-\/>DMABurstState = HAL\_DMA\_BURST\_STATE\_READY;}
+\DoxyCodeLine{00240 }
+\DoxyCodeLine{00241   \textcolor{comment}{/* Initialize the TIM channels state */}}
+\DoxyCodeLine{00242   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00243   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00244   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00245   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00246 }
+\DoxyCodeLine{00247   \textcolor{comment}{/* Initialize the TIM state*/}}
+\DoxyCodeLine{00248   htim-\/>State = HAL\_TIM\_STATE\_READY;}
+\DoxyCodeLine{00249 }
+\DoxyCodeLine{00250   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00251 \}}
+\DoxyCodeLine{00252 }
+\DoxyCodeLine{00258 HAL\_StatusTypeDef HAL\_TIMEx\_HallSensor\_DeInit(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{00259 \{}
+\DoxyCodeLine{00260   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00261   assert\_param(IS\_TIM\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{00262 }
+\DoxyCodeLine{00263   htim-\/>State = HAL\_TIM\_STATE\_BUSY;}
+\DoxyCodeLine{00264 }
+\DoxyCodeLine{00265   \textcolor{comment}{/* Disable the TIM Peripheral Clock */}}
+\DoxyCodeLine{00266   \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{00267 }
+\DoxyCodeLine{00268 \textcolor{preprocessor}{\#if (USE\_HAL\_TIM\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{00269   \textcolor{keywordflow}{if} (htim-\/>HallSensor\_MspDeInitCallback == NULL)}
+\DoxyCodeLine{00270   \{}
+\DoxyCodeLine{00271     htim-\/>HallSensor\_MspDeInitCallback = HAL\_TIMEx\_HallSensor\_MspDeInit;}
+\DoxyCodeLine{00272   \}}
+\DoxyCodeLine{00273   \textcolor{comment}{/* DeInit the low level hardware */}}
+\DoxyCodeLine{00274   htim-\/>HallSensor\_MspDeInitCallback(htim);}
+\DoxyCodeLine{00275 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00276   \textcolor{comment}{/* DeInit the low level hardware: GPIO, CLOCK, NVIC */}}
+\DoxyCodeLine{00277   HAL\_TIMEx\_HallSensor\_MspDeInit(htim);}
+\DoxyCodeLine{00278 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_TIM\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00279 }
+\DoxyCodeLine{00280   \textcolor{comment}{/* Change the DMA burst operation state */}}
+\DoxyCodeLine{00281   htim-\/>DMABurstState = HAL\_DMA\_BURST\_STATE\_RESET;}
+\DoxyCodeLine{00282 }
+\DoxyCodeLine{00283   \textcolor{comment}{/* Change the TIM channels state */}}
+\DoxyCodeLine{00284   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_RESET);}
+\DoxyCodeLine{00285   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_RESET);}
+\DoxyCodeLine{00286   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_RESET);}
+\DoxyCodeLine{00287   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_RESET);}
+\DoxyCodeLine{00288 }
+\DoxyCodeLine{00289   \textcolor{comment}{/* Change TIM state */}}
+\DoxyCodeLine{00290   htim-\/>State = HAL\_TIM\_STATE\_RESET;}
+\DoxyCodeLine{00291 }
+\DoxyCodeLine{00292   \textcolor{comment}{/* Release Lock */}}
+\DoxyCodeLine{00293   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{00294 }
+\DoxyCodeLine{00295   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00296 \}}
+\DoxyCodeLine{00297 }
+\DoxyCodeLine{00303 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_HallSensor\_MspInit(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{00304 \{}
+\DoxyCodeLine{00305   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{00306   UNUSED(htim);}
+\DoxyCodeLine{00307 }
+\DoxyCodeLine{00308   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00309 \textcolor{comment}{            the HAL\_TIMEx\_HallSensor\_MspInit could be implemented in the user file}}
+\DoxyCodeLine{00310 \textcolor{comment}{   */}}
+\DoxyCodeLine{00311 \}}
+\DoxyCodeLine{00312 }
+\DoxyCodeLine{00318 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_HallSensor\_MspDeInit(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{00319 \{}
+\DoxyCodeLine{00320   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{00321   UNUSED(htim);}
+\DoxyCodeLine{00322 }
+\DoxyCodeLine{00323   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00324 \textcolor{comment}{            the HAL\_TIMEx\_HallSensor\_MspDeInit could be implemented in the user file}}
+\DoxyCodeLine{00325 \textcolor{comment}{   */}}
+\DoxyCodeLine{00326 \}}
+\DoxyCodeLine{00327 }
+\DoxyCodeLine{00333 HAL\_StatusTypeDef HAL\_TIMEx\_HallSensor\_Start(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{00334 \{}
+\DoxyCodeLine{00335   uint32\_t tmpsmcr;}
+\DoxyCodeLine{00336   HAL\_TIM\_ChannelStateTypeDef channel\_1\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{00337   HAL\_TIM\_ChannelStateTypeDef channel\_2\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{00338   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_1\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{00339   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_2\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{00340 }
+\DoxyCodeLine{00341   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00342   assert\_param(IS\_TIM\_HALL\_SENSOR\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{00343 }
+\DoxyCodeLine{00344   \textcolor{comment}{/* Check the TIM channels state */}}
+\DoxyCodeLine{00345   \textcolor{keywordflow}{if} ((channel\_1\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00346       || (channel\_2\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00347       || (complementary\_channel\_1\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00348       || (complementary\_channel\_2\_state != HAL\_TIM\_CHANNEL\_STATE\_READY))}
+\DoxyCodeLine{00349   \{}
+\DoxyCodeLine{00350     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00351   \}}
+\DoxyCodeLine{00352 }
+\DoxyCodeLine{00353   \textcolor{comment}{/* Set the TIM channels state */}}
+\DoxyCodeLine{00354   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00355   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00356   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00357   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00358 }
+\DoxyCodeLine{00359   \textcolor{comment}{/* Enable the Input Capture channel 1}}
+\DoxyCodeLine{00360 \textcolor{comment}{  (in the Hall Sensor Interface the three possible channels that can be used are TIM\_CHANNEL\_1,}}
+\DoxyCodeLine{00361 \textcolor{comment}{  TIM\_CHANNEL\_2 and TIM\_CHANNEL\_3) */}}
+\DoxyCodeLine{00362   TIM\_CCxChannelCmd(htim-\/>Instance, TIM\_CHANNEL\_1, TIM\_CCx\_ENABLE);}
+\DoxyCodeLine{00363 }
+\DoxyCodeLine{00364   \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{00365   \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{00366   \{}
+\DoxyCodeLine{00367     tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{00368     \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{00369     \{}
+\DoxyCodeLine{00370       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00371     \}}
+\DoxyCodeLine{00372   \}}
+\DoxyCodeLine{00373   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00374   \{}
+\DoxyCodeLine{00375     \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00376   \}}
+\DoxyCodeLine{00377 }
+\DoxyCodeLine{00378   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00379   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00380 \}}
+\DoxyCodeLine{00381 }
+\DoxyCodeLine{00387 HAL\_StatusTypeDef HAL\_TIMEx\_HallSensor\_Stop(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{00388 \{}
+\DoxyCodeLine{00389   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00390   assert\_param(IS\_TIM\_HALL\_SENSOR\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{00391 }
+\DoxyCodeLine{00392   \textcolor{comment}{/* Disable the Input Capture channels 1, 2 and 3}}
+\DoxyCodeLine{00393 \textcolor{comment}{  (in the Hall Sensor Interface the three possible channels that can be used are TIM\_CHANNEL\_1,}}
+\DoxyCodeLine{00394 \textcolor{comment}{  TIM\_CHANNEL\_2 and TIM\_CHANNEL\_3) */}}
+\DoxyCodeLine{00395   TIM\_CCxChannelCmd(htim-\/>Instance, TIM\_CHANNEL\_1, TIM\_CCx\_DISABLE);}
+\DoxyCodeLine{00396 }
+\DoxyCodeLine{00397   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{00398   \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{00399 }
+\DoxyCodeLine{00400   \textcolor{comment}{/* Set the TIM channels state */}}
+\DoxyCodeLine{00401   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00402   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00403   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00404   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00405 }
+\DoxyCodeLine{00406   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00407   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00408 \}}
+\DoxyCodeLine{00409 }
+\DoxyCodeLine{00415 HAL\_StatusTypeDef HAL\_TIMEx\_HallSensor\_Start\_IT(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{00416 \{}
+\DoxyCodeLine{00417   uint32\_t tmpsmcr;}
+\DoxyCodeLine{00418   HAL\_TIM\_ChannelStateTypeDef channel\_1\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{00419   HAL\_TIM\_ChannelStateTypeDef channel\_2\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{00420   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_1\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{00421   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_2\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{00422 }
+\DoxyCodeLine{00423   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00424   assert\_param(IS\_TIM\_HALL\_SENSOR\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{00425 }
+\DoxyCodeLine{00426   \textcolor{comment}{/* Check the TIM channels state */}}
+\DoxyCodeLine{00427   \textcolor{keywordflow}{if} ((channel\_1\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00428       || (channel\_2\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00429       || (complementary\_channel\_1\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00430       || (complementary\_channel\_2\_state != HAL\_TIM\_CHANNEL\_STATE\_READY))}
+\DoxyCodeLine{00431   \{}
+\DoxyCodeLine{00432     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00433   \}}
+\DoxyCodeLine{00434 }
+\DoxyCodeLine{00435   \textcolor{comment}{/* Set the TIM channels state */}}
+\DoxyCodeLine{00436   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00437   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00438   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00439   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00440 }
+\DoxyCodeLine{00441   \textcolor{comment}{/* Enable the capture compare Interrupts 1 event */}}
+\DoxyCodeLine{00442   \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC1);}
+\DoxyCodeLine{00443 }
+\DoxyCodeLine{00444   \textcolor{comment}{/* Enable the Input Capture channel 1}}
+\DoxyCodeLine{00445 \textcolor{comment}{  (in the Hall Sensor Interface the three possible channels that can be used are TIM\_CHANNEL\_1,}}
+\DoxyCodeLine{00446 \textcolor{comment}{  TIM\_CHANNEL\_2 and TIM\_CHANNEL\_3) */}}
+\DoxyCodeLine{00447   TIM\_CCxChannelCmd(htim-\/>Instance, TIM\_CHANNEL\_1, TIM\_CCx\_ENABLE);}
+\DoxyCodeLine{00448 }
+\DoxyCodeLine{00449   \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{00450   \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{00451   \{}
+\DoxyCodeLine{00452     tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{00453     \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{00454     \{}
+\DoxyCodeLine{00455       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00456     \}}
+\DoxyCodeLine{00457   \}}
+\DoxyCodeLine{00458   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00459   \{}
+\DoxyCodeLine{00460     \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00461   \}}
+\DoxyCodeLine{00462 }
+\DoxyCodeLine{00463   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00464   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00465 \}}
+\DoxyCodeLine{00466 }
+\DoxyCodeLine{00472 HAL\_StatusTypeDef HAL\_TIMEx\_HallSensor\_Stop\_IT(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{00473 \{}
+\DoxyCodeLine{00474   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00475   assert\_param(IS\_TIM\_HALL\_SENSOR\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{00476 }
+\DoxyCodeLine{00477   \textcolor{comment}{/* Disable the Input Capture channel 1}}
+\DoxyCodeLine{00478 \textcolor{comment}{  (in the Hall Sensor Interface the three possible channels that can be used are TIM\_CHANNEL\_1,}}
+\DoxyCodeLine{00479 \textcolor{comment}{  TIM\_CHANNEL\_2 and TIM\_CHANNEL\_3) */}}
+\DoxyCodeLine{00480   TIM\_CCxChannelCmd(htim-\/>Instance, TIM\_CHANNEL\_1, TIM\_CCx\_DISABLE);}
+\DoxyCodeLine{00481 }
+\DoxyCodeLine{00482   \textcolor{comment}{/* Disable the capture compare Interrupts event */}}
+\DoxyCodeLine{00483   \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC1);}
+\DoxyCodeLine{00484 }
+\DoxyCodeLine{00485   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{00486   \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{00487 }
+\DoxyCodeLine{00488   \textcolor{comment}{/* Set the TIM channels state */}}
+\DoxyCodeLine{00489   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00490   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00491   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00492   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00493 }
+\DoxyCodeLine{00494   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00495   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00496 \}}
+\DoxyCodeLine{00497 }
+\DoxyCodeLine{00505 HAL\_StatusTypeDef HAL\_TIMEx\_HallSensor\_Start\_DMA(TIM\_HandleTypeDef *htim, uint32\_t *pData, uint16\_t Length)}
+\DoxyCodeLine{00506 \{}
+\DoxyCodeLine{00507   uint32\_t tmpsmcr;}
+\DoxyCodeLine{00508   HAL\_TIM\_ChannelStateTypeDef channel\_1\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{00509   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_1\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{00510 }
+\DoxyCodeLine{00511   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00512   assert\_param(IS\_TIM\_HALL\_SENSOR\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{00513 }
+\DoxyCodeLine{00514   \textcolor{comment}{/* Set the TIM channel state */}}
+\DoxyCodeLine{00515   \textcolor{keywordflow}{if} ((channel\_1\_state == HAL\_TIM\_CHANNEL\_STATE\_BUSY)}
+\DoxyCodeLine{00516       || (complementary\_channel\_1\_state == HAL\_TIM\_CHANNEL\_STATE\_BUSY))}
+\DoxyCodeLine{00517   \{}
+\DoxyCodeLine{00518     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{00519   \}}
+\DoxyCodeLine{00520   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((channel\_1\_state == HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00521            \&\& (complementary\_channel\_1\_state == HAL\_TIM\_CHANNEL\_STATE\_READY))}
+\DoxyCodeLine{00522   \{}
+\DoxyCodeLine{00523     \textcolor{keywordflow}{if} ((pData == NULL) \&\& (Length > 0U))}
+\DoxyCodeLine{00524     \{}
+\DoxyCodeLine{00525       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00526     \}}
+\DoxyCodeLine{00527     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00528     \{}
+\DoxyCodeLine{00529       TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00530       TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00531     \}}
+\DoxyCodeLine{00532   \}}
+\DoxyCodeLine{00533   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00534   \{}
+\DoxyCodeLine{00535     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00536   \}}
+\DoxyCodeLine{00537 }
+\DoxyCodeLine{00538   \textcolor{comment}{/* Enable the Input Capture channel 1}}
+\DoxyCodeLine{00539 \textcolor{comment}{  (in the Hall Sensor Interface the three possible channels that can be used are TIM\_CHANNEL\_1,}}
+\DoxyCodeLine{00540 \textcolor{comment}{  TIM\_CHANNEL\_2 and TIM\_CHANNEL\_3) */}}
+\DoxyCodeLine{00541   TIM\_CCxChannelCmd(htim-\/>Instance, TIM\_CHANNEL\_1, TIM\_CCx\_ENABLE);}
+\DoxyCodeLine{00542 }
+\DoxyCodeLine{00543   \textcolor{comment}{/* Set the DMA Input Capture 1 Callbacks */}}
+\DoxyCodeLine{00544   htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferCpltCallback = TIM\_DMACaptureCplt;}
+\DoxyCodeLine{00545   htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferHalfCpltCallback = TIM\_DMACaptureHalfCplt;}
+\DoxyCodeLine{00546   \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{00547   htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferErrorCallback = TIM\_DMAError ;}
+\DoxyCodeLine{00548 }
+\DoxyCodeLine{00549   \textcolor{comment}{/* Enable the DMA channel for Capture 1*/}}
+\DoxyCodeLine{00550   \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC1], (uint32\_t)\&htim-\/>Instance-\/>CCR1, (uint32\_t)pData, Length) != HAL\_OK)}
+\DoxyCodeLine{00551   \{}
+\DoxyCodeLine{00552     \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{00553     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00554   \}}
+\DoxyCodeLine{00555   \textcolor{comment}{/* Enable the capture compare 1 Interrupt */}}
+\DoxyCodeLine{00556   \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC1);}
+\DoxyCodeLine{00557 }
+\DoxyCodeLine{00558   \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{00559   \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{00560   \{}
+\DoxyCodeLine{00561     tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{00562     \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{00563     \{}
+\DoxyCodeLine{00564       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00565     \}}
+\DoxyCodeLine{00566   \}}
+\DoxyCodeLine{00567   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00568   \{}
+\DoxyCodeLine{00569     \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00570   \}}
+\DoxyCodeLine{00571 }
+\DoxyCodeLine{00572   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00573   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00574 \}}
+\DoxyCodeLine{00575 }
+\DoxyCodeLine{00581 HAL\_StatusTypeDef HAL\_TIMEx\_HallSensor\_Stop\_DMA(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{00582 \{}
+\DoxyCodeLine{00583   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00584   assert\_param(IS\_TIM\_HALL\_SENSOR\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{00585 }
+\DoxyCodeLine{00586   \textcolor{comment}{/* Disable the Input Capture channel 1}}
+\DoxyCodeLine{00587 \textcolor{comment}{  (in the Hall Sensor Interface the three possible channels that can be used are TIM\_CHANNEL\_1,}}
+\DoxyCodeLine{00588 \textcolor{comment}{  TIM\_CHANNEL\_2 and TIM\_CHANNEL\_3) */}}
+\DoxyCodeLine{00589   TIM\_CCxChannelCmd(htim-\/>Instance, TIM\_CHANNEL\_1, TIM\_CCx\_DISABLE);}
+\DoxyCodeLine{00590 }
+\DoxyCodeLine{00591 }
+\DoxyCodeLine{00592   \textcolor{comment}{/* Disable the capture compare Interrupts 1 event */}}
+\DoxyCodeLine{00593   \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC1);}
+\DoxyCodeLine{00594 }
+\DoxyCodeLine{00595   (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC1]);}
+\DoxyCodeLine{00596 }
+\DoxyCodeLine{00597   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{00598   \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{00599 }
+\DoxyCodeLine{00600   \textcolor{comment}{/* Set the TIM channel state */}}
+\DoxyCodeLine{00601   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00602   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00603 }
+\DoxyCodeLine{00604   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00605   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00606 \}}
+\DoxyCodeLine{00607 }
+\DoxyCodeLine{00644 HAL\_StatusTypeDef HAL\_TIMEx\_OCN\_Start(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{00645 \{}
+\DoxyCodeLine{00646   uint32\_t tmpsmcr;}
+\DoxyCodeLine{00647 }
+\DoxyCodeLine{00648   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00649   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{00650 }
+\DoxyCodeLine{00651   \textcolor{comment}{/* Check the TIM complementary channel state */}}
+\DoxyCodeLine{00652   \textcolor{keywordflow}{if} (TIM\_CHANNEL\_N\_STATE\_GET(htim, Channel) != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00653   \{}
+\DoxyCodeLine{00654     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00655   \}}
+\DoxyCodeLine{00656 }
+\DoxyCodeLine{00657   \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{00658   TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00659 }
+\DoxyCodeLine{00660   \textcolor{comment}{/* Enable the Capture compare channel N */}}
+\DoxyCodeLine{00661   TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_ENABLE);}
+\DoxyCodeLine{00662 }
+\DoxyCodeLine{00663   \textcolor{comment}{/* Enable the Main Output */}}
+\DoxyCodeLine{00664   \_\_HAL\_TIM\_MOE\_ENABLE(htim);}
+\DoxyCodeLine{00665 }
+\DoxyCodeLine{00666   \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{00667   \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{00668   \{}
+\DoxyCodeLine{00669     tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{00670     \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{00671     \{}
+\DoxyCodeLine{00672       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00673     \}}
+\DoxyCodeLine{00674   \}}
+\DoxyCodeLine{00675   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00676   \{}
+\DoxyCodeLine{00677     \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00678   \}}
+\DoxyCodeLine{00679 }
+\DoxyCodeLine{00680   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00681   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00682 \}}
+\DoxyCodeLine{00683 }
+\DoxyCodeLine{00696 HAL\_StatusTypeDef HAL\_TIMEx\_OCN\_Stop(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{00697 \{}
+\DoxyCodeLine{00698   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00699   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{00700 }
+\DoxyCodeLine{00701   \textcolor{comment}{/* Disable the Capture compare channel N */}}
+\DoxyCodeLine{00702   TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_DISABLE);}
+\DoxyCodeLine{00703 }
+\DoxyCodeLine{00704   \textcolor{comment}{/* Disable the Main Output */}}
+\DoxyCodeLine{00705   \_\_HAL\_TIM\_MOE\_DISABLE(htim);}
+\DoxyCodeLine{00706 }
+\DoxyCodeLine{00707   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{00708   \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{00709 }
+\DoxyCodeLine{00710   \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{00711   TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00712 }
+\DoxyCodeLine{00713   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00714   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00715 \}}
+\DoxyCodeLine{00716 }
+\DoxyCodeLine{00729 HAL\_StatusTypeDef HAL\_TIMEx\_OCN\_Start\_IT(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{00730 \{}
+\DoxyCodeLine{00731   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00732   uint32\_t tmpsmcr;}
+\DoxyCodeLine{00733 }
+\DoxyCodeLine{00734   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00735   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{00736 }
+\DoxyCodeLine{00737   \textcolor{comment}{/* Check the TIM complementary channel state */}}
+\DoxyCodeLine{00738   \textcolor{keywordflow}{if} (TIM\_CHANNEL\_N\_STATE\_GET(htim, Channel) != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00739   \{}
+\DoxyCodeLine{00740     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00741   \}}
+\DoxyCodeLine{00742 }
+\DoxyCodeLine{00743   \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{00744   TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00745 }
+\DoxyCodeLine{00746   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{00747   \{}
+\DoxyCodeLine{00748     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{00749     \{}
+\DoxyCodeLine{00750       \textcolor{comment}{/* Enable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{00751       \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC1);}
+\DoxyCodeLine{00752       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00753     \}}
+\DoxyCodeLine{00754 }
+\DoxyCodeLine{00755     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{00756     \{}
+\DoxyCodeLine{00757       \textcolor{comment}{/* Enable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{00758       \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC2);}
+\DoxyCodeLine{00759       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00760     \}}
+\DoxyCodeLine{00761 }
+\DoxyCodeLine{00762     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{00763     \{}
+\DoxyCodeLine{00764       \textcolor{comment}{/* Enable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{00765       \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC3);}
+\DoxyCodeLine{00766       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00767     \}}
+\DoxyCodeLine{00768 }
+\DoxyCodeLine{00769 }
+\DoxyCodeLine{00770     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{00771     \{}
+\DoxyCodeLine{00772       \textcolor{comment}{/* Enable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{00773       \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC4);}
+\DoxyCodeLine{00774       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00775     \}}
+\DoxyCodeLine{00776 }
+\DoxyCodeLine{00777     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00778       status = HAL\_ERROR;}
+\DoxyCodeLine{00779       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00780   \}}
+\DoxyCodeLine{00781 }
+\DoxyCodeLine{00782   \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{00783   \{}
+\DoxyCodeLine{00784     \textcolor{comment}{/* Enable the TIM Break interrupt */}}
+\DoxyCodeLine{00785     \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_BREAK);}
+\DoxyCodeLine{00786 }
+\DoxyCodeLine{00787     \textcolor{comment}{/* Enable the Capture compare channel N */}}
+\DoxyCodeLine{00788     TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_ENABLE);}
+\DoxyCodeLine{00789 }
+\DoxyCodeLine{00790     \textcolor{comment}{/* Enable the Main Output */}}
+\DoxyCodeLine{00791     \_\_HAL\_TIM\_MOE\_ENABLE(htim);}
+\DoxyCodeLine{00792 }
+\DoxyCodeLine{00793     \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{00794     \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{00795     \{}
+\DoxyCodeLine{00796       tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{00797       \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{00798       \{}
+\DoxyCodeLine{00799         \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00800       \}}
+\DoxyCodeLine{00801     \}}
+\DoxyCodeLine{00802     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00803     \{}
+\DoxyCodeLine{00804       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{00805     \}}
+\DoxyCodeLine{00806   \}}
+\DoxyCodeLine{00807 }
+\DoxyCodeLine{00808   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00809   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00810 \}}
+\DoxyCodeLine{00811 }
+\DoxyCodeLine{00824 HAL\_StatusTypeDef HAL\_TIMEx\_OCN\_Stop\_IT(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{00825 \{}
+\DoxyCodeLine{00826   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00827   uint32\_t tmpccer;}
+\DoxyCodeLine{00828 }
+\DoxyCodeLine{00829   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00830   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{00831 }
+\DoxyCodeLine{00832   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{00833   \{}
+\DoxyCodeLine{00834     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{00835     \{}
+\DoxyCodeLine{00836       \textcolor{comment}{/* Disable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{00837       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC1);}
+\DoxyCodeLine{00838       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00839     \}}
+\DoxyCodeLine{00840 }
+\DoxyCodeLine{00841     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{00842     \{}
+\DoxyCodeLine{00843       \textcolor{comment}{/* Disable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{00844       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC2);}
+\DoxyCodeLine{00845       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00846     \}}
+\DoxyCodeLine{00847 }
+\DoxyCodeLine{00848     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{00849     \{}
+\DoxyCodeLine{00850       \textcolor{comment}{/* Disable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{00851       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC3);}
+\DoxyCodeLine{00852       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00853     \}}
+\DoxyCodeLine{00854 }
+\DoxyCodeLine{00855     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{00856     \{}
+\DoxyCodeLine{00857       \textcolor{comment}{/* Disable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{00858       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC4);}
+\DoxyCodeLine{00859       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00860     \}}
+\DoxyCodeLine{00861 }
+\DoxyCodeLine{00862     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00863       status = HAL\_ERROR;}
+\DoxyCodeLine{00864       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00865   \}}
+\DoxyCodeLine{00866 }
+\DoxyCodeLine{00867   \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{00868   \{}
+\DoxyCodeLine{00869     \textcolor{comment}{/* Disable the Capture compare channel N */}}
+\DoxyCodeLine{00870     TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_DISABLE);}
+\DoxyCodeLine{00871 }
+\DoxyCodeLine{00872     \textcolor{comment}{/* Disable the TIM Break interrupt (only if no more channel is active) */}}
+\DoxyCodeLine{00873     tmpccer = htim-\/>Instance-\/>CCER;}
+\DoxyCodeLine{00874     \textcolor{keywordflow}{if} ((tmpccer \& (TIM\_CCER\_CC1NE | TIM\_CCER\_CC2NE | TIM\_CCER\_CC3NE  | TIM\_CCER\_CC4NE)) == (uint32\_t)RESET)}
+\DoxyCodeLine{00875     \{}
+\DoxyCodeLine{00876       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_BREAK);}
+\DoxyCodeLine{00877     \}}
+\DoxyCodeLine{00878 }
+\DoxyCodeLine{00879     \textcolor{comment}{/* Disable the Main Output */}}
+\DoxyCodeLine{00880     \_\_HAL\_TIM\_MOE\_DISABLE(htim);}
+\DoxyCodeLine{00881 }
+\DoxyCodeLine{00882     \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{00883     \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{00884 }
+\DoxyCodeLine{00885     \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{00886     TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{00887   \}}
+\DoxyCodeLine{00888 }
+\DoxyCodeLine{00889   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{00890   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00891 \}}
+\DoxyCodeLine{00892 }
+\DoxyCodeLine{00907 HAL\_StatusTypeDef HAL\_TIMEx\_OCN\_Start\_DMA(TIM\_HandleTypeDef *htim, uint32\_t Channel, uint32\_t *pData, uint16\_t Length)}
+\DoxyCodeLine{00908 \{}
+\DoxyCodeLine{00909   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{00910   uint32\_t tmpsmcr;}
+\DoxyCodeLine{00911 }
+\DoxyCodeLine{00912   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00913   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{00914 }
+\DoxyCodeLine{00915   \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{00916   \textcolor{keywordflow}{if} (TIM\_CHANNEL\_N\_STATE\_GET(htim, Channel) == HAL\_TIM\_CHANNEL\_STATE\_BUSY)}
+\DoxyCodeLine{00917   \{}
+\DoxyCodeLine{00918     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{00919   \}}
+\DoxyCodeLine{00920   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (TIM\_CHANNEL\_N\_STATE\_GET(htim, Channel) == HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{00921   \{}
+\DoxyCodeLine{00922     \textcolor{keywordflow}{if} ((pData == NULL) \&\& (Length > 0U))}
+\DoxyCodeLine{00923     \{}
+\DoxyCodeLine{00924       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00925     \}}
+\DoxyCodeLine{00926     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00927     \{}
+\DoxyCodeLine{00928       TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{00929     \}}
+\DoxyCodeLine{00930   \}}
+\DoxyCodeLine{00931   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00932   \{}
+\DoxyCodeLine{00933     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00934   \}}
+\DoxyCodeLine{00935 }
+\DoxyCodeLine{00936   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{00937   \{}
+\DoxyCodeLine{00938     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{00939     \{}
+\DoxyCodeLine{00940       \textcolor{comment}{/* Set the DMA compare callbacks */}}
+\DoxyCodeLine{00941       htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferCpltCallback = TIM\_DMADelayPulseNCplt;}
+\DoxyCodeLine{00942       htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferHalfCpltCallback = TIM\_DMADelayPulseHalfCplt;}
+\DoxyCodeLine{00943 }
+\DoxyCodeLine{00944       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{00945       htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferErrorCallback = TIM\_DMAErrorCCxN ;}
+\DoxyCodeLine{00946 }
+\DoxyCodeLine{00947       \textcolor{comment}{/* Enable the DMA channel */}}
+\DoxyCodeLine{00948       \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC1], (uint32\_t)pData, (uint32\_t)\&htim-\/>Instance-\/>CCR1,}
+\DoxyCodeLine{00949                            Length) != HAL\_OK)}
+\DoxyCodeLine{00950       \{}
+\DoxyCodeLine{00951         \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{00952         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00953       \}}
+\DoxyCodeLine{00954       \textcolor{comment}{/* Enable the TIM Output Compare DMA request */}}
+\DoxyCodeLine{00955       \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC1);}
+\DoxyCodeLine{00956       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00957     \}}
+\DoxyCodeLine{00958 }
+\DoxyCodeLine{00959     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{00960     \{}
+\DoxyCodeLine{00961       \textcolor{comment}{/* Set the DMA compare callbacks */}}
+\DoxyCodeLine{00962       htim-\/>hdma[TIM\_DMA\_ID\_CC2]-\/>XferCpltCallback = TIM\_DMADelayPulseNCplt;}
+\DoxyCodeLine{00963       htim-\/>hdma[TIM\_DMA\_ID\_CC2]-\/>XferHalfCpltCallback = TIM\_DMADelayPulseHalfCplt;}
+\DoxyCodeLine{00964 }
+\DoxyCodeLine{00965       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{00966       htim-\/>hdma[TIM\_DMA\_ID\_CC2]-\/>XferErrorCallback = TIM\_DMAErrorCCxN ;}
+\DoxyCodeLine{00967 }
+\DoxyCodeLine{00968       \textcolor{comment}{/* Enable the DMA channel */}}
+\DoxyCodeLine{00969       \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC2], (uint32\_t)pData, (uint32\_t)\&htim-\/>Instance-\/>CCR2,}
+\DoxyCodeLine{00970                            Length) != HAL\_OK)}
+\DoxyCodeLine{00971       \{}
+\DoxyCodeLine{00972         \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{00973         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00974       \}}
+\DoxyCodeLine{00975       \textcolor{comment}{/* Enable the TIM Output Compare DMA request */}}
+\DoxyCodeLine{00976       \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC2);}
+\DoxyCodeLine{00977       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00978     \}}
+\DoxyCodeLine{00979 }
+\DoxyCodeLine{00980     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{00981     \{}
+\DoxyCodeLine{00982       \textcolor{comment}{/* Set the DMA compare callbacks */}}
+\DoxyCodeLine{00983       htim-\/>hdma[TIM\_DMA\_ID\_CC3]-\/>XferCpltCallback = TIM\_DMADelayPulseNCplt;}
+\DoxyCodeLine{00984       htim-\/>hdma[TIM\_DMA\_ID\_CC3]-\/>XferHalfCpltCallback = TIM\_DMADelayPulseHalfCplt;}
+\DoxyCodeLine{00985 }
+\DoxyCodeLine{00986       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{00987       htim-\/>hdma[TIM\_DMA\_ID\_CC3]-\/>XferErrorCallback = TIM\_DMAErrorCCxN ;}
+\DoxyCodeLine{00988 }
+\DoxyCodeLine{00989       \textcolor{comment}{/* Enable the DMA channel */}}
+\DoxyCodeLine{00990       \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC3], (uint32\_t)pData, (uint32\_t)\&htim-\/>Instance-\/>CCR3,}
+\DoxyCodeLine{00991                            Length) != HAL\_OK)}
+\DoxyCodeLine{00992       \{}
+\DoxyCodeLine{00993         \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{00994         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00995       \}}
+\DoxyCodeLine{00996       \textcolor{comment}{/* Enable the TIM Output Compare DMA request */}}
+\DoxyCodeLine{00997       \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC3);}
+\DoxyCodeLine{00998       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00999     \}}
+\DoxyCodeLine{01000 }
+\DoxyCodeLine{01001     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{01002     \{}
+\DoxyCodeLine{01003       \textcolor{comment}{/* Set the DMA compare callbacks */}}
+\DoxyCodeLine{01004       htim-\/>hdma[TIM\_DMA\_ID\_CC4]-\/>XferCpltCallback = TIM\_DMADelayPulseNCplt;}
+\DoxyCodeLine{01005       htim-\/>hdma[TIM\_DMA\_ID\_CC4]-\/>XferHalfCpltCallback = TIM\_DMADelayPulseHalfCplt;}
+\DoxyCodeLine{01006 }
+\DoxyCodeLine{01007       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{01008       htim-\/>hdma[TIM\_DMA\_ID\_CC4]-\/>XferErrorCallback = TIM\_DMAErrorCCxN ;}
+\DoxyCodeLine{01009 }
+\DoxyCodeLine{01010       \textcolor{comment}{/* Enable the DMA channel */}}
+\DoxyCodeLine{01011       \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC4], (uint32\_t)pData, (uint32\_t)\&htim-\/>Instance-\/>CCR4,}
+\DoxyCodeLine{01012                            Length) != HAL\_OK)}
+\DoxyCodeLine{01013       \{}
+\DoxyCodeLine{01014         \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{01015         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01016       \}}
+\DoxyCodeLine{01017       \textcolor{comment}{/* Enable the TIM Output Compare DMA request */}}
+\DoxyCodeLine{01018       \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC4);}
+\DoxyCodeLine{01019       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01020     \}}
+\DoxyCodeLine{01021 }
+\DoxyCodeLine{01022     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01023       status = HAL\_ERROR;}
+\DoxyCodeLine{01024       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01025   \}}
+\DoxyCodeLine{01026 }
+\DoxyCodeLine{01027   \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{01028   \{}
+\DoxyCodeLine{01029     \textcolor{comment}{/* Enable the Capture compare channel N */}}
+\DoxyCodeLine{01030     TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_ENABLE);}
+\DoxyCodeLine{01031 }
+\DoxyCodeLine{01032     \textcolor{comment}{/* Enable the Main Output */}}
+\DoxyCodeLine{01033     \_\_HAL\_TIM\_MOE\_ENABLE(htim);}
+\DoxyCodeLine{01034 }
+\DoxyCodeLine{01035     \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{01036     \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{01037     \{}
+\DoxyCodeLine{01038       tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{01039       \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{01040       \{}
+\DoxyCodeLine{01041         \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{01042       \}}
+\DoxyCodeLine{01043     \}}
+\DoxyCodeLine{01044     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01045     \{}
+\DoxyCodeLine{01046       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{01047     \}}
+\DoxyCodeLine{01048   \}}
+\DoxyCodeLine{01049 }
+\DoxyCodeLine{01050   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01051   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01052 \}}
+\DoxyCodeLine{01053 }
+\DoxyCodeLine{01066 HAL\_StatusTypeDef HAL\_TIMEx\_OCN\_Stop\_DMA(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{01067 \{}
+\DoxyCodeLine{01068   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{01069 }
+\DoxyCodeLine{01070   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01071   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{01072 }
+\DoxyCodeLine{01073   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{01074   \{}
+\DoxyCodeLine{01075     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{01076     \{}
+\DoxyCodeLine{01077       \textcolor{comment}{/* Disable the TIM Output Compare DMA request */}}
+\DoxyCodeLine{01078       \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC1);}
+\DoxyCodeLine{01079       (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC1]);}
+\DoxyCodeLine{01080       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01081     \}}
+\DoxyCodeLine{01082 }
+\DoxyCodeLine{01083     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{01084     \{}
+\DoxyCodeLine{01085       \textcolor{comment}{/* Disable the TIM Output Compare DMA request */}}
+\DoxyCodeLine{01086       \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC2);}
+\DoxyCodeLine{01087       (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC2]);}
+\DoxyCodeLine{01088       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01089     \}}
+\DoxyCodeLine{01090 }
+\DoxyCodeLine{01091     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{01092     \{}
+\DoxyCodeLine{01093       \textcolor{comment}{/* Disable the TIM Output Compare DMA request */}}
+\DoxyCodeLine{01094       \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC3);}
+\DoxyCodeLine{01095       (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC3]);}
+\DoxyCodeLine{01096       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01097     \}}
+\DoxyCodeLine{01098 }
+\DoxyCodeLine{01099     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{01100     \{}
+\DoxyCodeLine{01101       \textcolor{comment}{/* Disable the TIM Output Compare interrupt */}}
+\DoxyCodeLine{01102       \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC4);}
+\DoxyCodeLine{01103       (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC4]);}
+\DoxyCodeLine{01104       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01105     \}}
+\DoxyCodeLine{01106 }
+\DoxyCodeLine{01107     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01108       status = HAL\_ERROR;}
+\DoxyCodeLine{01109       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01110   \}}
+\DoxyCodeLine{01111 }
+\DoxyCodeLine{01112   \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{01113   \{}
+\DoxyCodeLine{01114     \textcolor{comment}{/* Disable the Capture compare channel N */}}
+\DoxyCodeLine{01115     TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_DISABLE);}
+\DoxyCodeLine{01116 }
+\DoxyCodeLine{01117     \textcolor{comment}{/* Disable the Main Output */}}
+\DoxyCodeLine{01118     \_\_HAL\_TIM\_MOE\_DISABLE(htim);}
+\DoxyCodeLine{01119 }
+\DoxyCodeLine{01120     \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{01121     \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{01122 }
+\DoxyCodeLine{01123     \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{01124     TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01125   \}}
+\DoxyCodeLine{01126 }
+\DoxyCodeLine{01127   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01128   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01129 \}}
+\DoxyCodeLine{01130 }
+\DoxyCodeLine{01176 HAL\_StatusTypeDef HAL\_TIMEx\_PWMN\_Start(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{01177 \{}
+\DoxyCodeLine{01178   uint32\_t tmpsmcr;}
+\DoxyCodeLine{01179 }
+\DoxyCodeLine{01180   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01181   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{01182 }
+\DoxyCodeLine{01183   \textcolor{comment}{/* Check the TIM complementary channel state */}}
+\DoxyCodeLine{01184   \textcolor{keywordflow}{if} (TIM\_CHANNEL\_N\_STATE\_GET(htim, Channel) != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01185   \{}
+\DoxyCodeLine{01186     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01187   \}}
+\DoxyCodeLine{01188 }
+\DoxyCodeLine{01189   \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{01190   TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01191 }
+\DoxyCodeLine{01192   \textcolor{comment}{/* Enable the complementary PWM output  */}}
+\DoxyCodeLine{01193   TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_ENABLE);}
+\DoxyCodeLine{01194 }
+\DoxyCodeLine{01195   \textcolor{comment}{/* Enable the Main Output */}}
+\DoxyCodeLine{01196   \_\_HAL\_TIM\_MOE\_ENABLE(htim);}
+\DoxyCodeLine{01197 }
+\DoxyCodeLine{01198   \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{01199   \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{01200   \{}
+\DoxyCodeLine{01201     tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{01202     \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{01203     \{}
+\DoxyCodeLine{01204       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{01205     \}}
+\DoxyCodeLine{01206   \}}
+\DoxyCodeLine{01207   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01208   \{}
+\DoxyCodeLine{01209     \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{01210   \}}
+\DoxyCodeLine{01211 }
+\DoxyCodeLine{01212   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01213   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{01214 \}}
+\DoxyCodeLine{01215 }
+\DoxyCodeLine{01227 HAL\_StatusTypeDef HAL\_TIMEx\_PWMN\_Stop(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{01228 \{}
+\DoxyCodeLine{01229   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01230   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{01231 }
+\DoxyCodeLine{01232   \textcolor{comment}{/* Disable the complementary PWM output  */}}
+\DoxyCodeLine{01233   TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_DISABLE);}
+\DoxyCodeLine{01234 }
+\DoxyCodeLine{01235   \textcolor{comment}{/* Disable the Main Output */}}
+\DoxyCodeLine{01236   \_\_HAL\_TIM\_MOE\_DISABLE(htim);}
+\DoxyCodeLine{01237 }
+\DoxyCodeLine{01238   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{01239   \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{01240 }
+\DoxyCodeLine{01241   \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{01242   TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01243 }
+\DoxyCodeLine{01244   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01245   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{01246 \}}
+\DoxyCodeLine{01247 }
+\DoxyCodeLine{01260 HAL\_StatusTypeDef HAL\_TIMEx\_PWMN\_Start\_IT(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{01261 \{}
+\DoxyCodeLine{01262   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{01263   uint32\_t tmpsmcr;}
+\DoxyCodeLine{01264 }
+\DoxyCodeLine{01265   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01266   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{01267 }
+\DoxyCodeLine{01268   \textcolor{comment}{/* Check the TIM complementary channel state */}}
+\DoxyCodeLine{01269   \textcolor{keywordflow}{if} (TIM\_CHANNEL\_N\_STATE\_GET(htim, Channel) != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01270   \{}
+\DoxyCodeLine{01271     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01272   \}}
+\DoxyCodeLine{01273 }
+\DoxyCodeLine{01274   \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{01275   TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01276 }
+\DoxyCodeLine{01277   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{01278   \{}
+\DoxyCodeLine{01279     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{01280     \{}
+\DoxyCodeLine{01281       \textcolor{comment}{/* Enable the TIM Capture/Compare 1 interrupt */}}
+\DoxyCodeLine{01282       \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC1);}
+\DoxyCodeLine{01283       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01284     \}}
+\DoxyCodeLine{01285 }
+\DoxyCodeLine{01286     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{01287     \{}
+\DoxyCodeLine{01288       \textcolor{comment}{/* Enable the TIM Capture/Compare 2 interrupt */}}
+\DoxyCodeLine{01289       \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC2);}
+\DoxyCodeLine{01290       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01291     \}}
+\DoxyCodeLine{01292 }
+\DoxyCodeLine{01293     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{01294     \{}
+\DoxyCodeLine{01295       \textcolor{comment}{/* Enable the TIM Capture/Compare 3 interrupt */}}
+\DoxyCodeLine{01296       \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC3);}
+\DoxyCodeLine{01297       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01298     \}}
+\DoxyCodeLine{01299 }
+\DoxyCodeLine{01300     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{01301     \{}
+\DoxyCodeLine{01302       \textcolor{comment}{/* Enable the TIM Capture/Compare 4 interrupt */}}
+\DoxyCodeLine{01303       \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC4);}
+\DoxyCodeLine{01304       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01305     \}}
+\DoxyCodeLine{01306 }
+\DoxyCodeLine{01307     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01308       status = HAL\_ERROR;}
+\DoxyCodeLine{01309       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01310   \}}
+\DoxyCodeLine{01311 }
+\DoxyCodeLine{01312   \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{01313   \{}
+\DoxyCodeLine{01314     \textcolor{comment}{/* Enable the TIM Break interrupt */}}
+\DoxyCodeLine{01315     \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_BREAK);}
+\DoxyCodeLine{01316 }
+\DoxyCodeLine{01317     \textcolor{comment}{/* Enable the complementary PWM output  */}}
+\DoxyCodeLine{01318     TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_ENABLE);}
+\DoxyCodeLine{01319 }
+\DoxyCodeLine{01320     \textcolor{comment}{/* Enable the Main Output */}}
+\DoxyCodeLine{01321     \_\_HAL\_TIM\_MOE\_ENABLE(htim);}
+\DoxyCodeLine{01322 }
+\DoxyCodeLine{01323     \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{01324     \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{01325     \{}
+\DoxyCodeLine{01326       tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{01327       \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{01328       \{}
+\DoxyCodeLine{01329         \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{01330       \}}
+\DoxyCodeLine{01331     \}}
+\DoxyCodeLine{01332     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01333     \{}
+\DoxyCodeLine{01334       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{01335     \}}
+\DoxyCodeLine{01336   \}}
+\DoxyCodeLine{01337 }
+\DoxyCodeLine{01338   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01339   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01340 \}}
+\DoxyCodeLine{01341 }
+\DoxyCodeLine{01354 HAL\_StatusTypeDef HAL\_TIMEx\_PWMN\_Stop\_IT(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{01355 \{}
+\DoxyCodeLine{01356   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{01357   uint32\_t tmpccer;}
+\DoxyCodeLine{01358 }
+\DoxyCodeLine{01359   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01360   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{01361 }
+\DoxyCodeLine{01362   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{01363   \{}
+\DoxyCodeLine{01364     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{01365     \{}
+\DoxyCodeLine{01366       \textcolor{comment}{/* Disable the TIM Capture/Compare 1 interrupt */}}
+\DoxyCodeLine{01367       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC1);}
+\DoxyCodeLine{01368       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01369     \}}
+\DoxyCodeLine{01370 }
+\DoxyCodeLine{01371     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{01372     \{}
+\DoxyCodeLine{01373       \textcolor{comment}{/* Disable the TIM Capture/Compare 2 interrupt */}}
+\DoxyCodeLine{01374       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC2);}
+\DoxyCodeLine{01375       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01376     \}}
+\DoxyCodeLine{01377 }
+\DoxyCodeLine{01378     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{01379     \{}
+\DoxyCodeLine{01380       \textcolor{comment}{/* Disable the TIM Capture/Compare 3 interrupt */}}
+\DoxyCodeLine{01381       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC3);}
+\DoxyCodeLine{01382       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01383     \}}
+\DoxyCodeLine{01384 }
+\DoxyCodeLine{01385     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{01386     \{}
+\DoxyCodeLine{01387       \textcolor{comment}{/* Disable the TIM Capture/Compare 4 interrupt */}}
+\DoxyCodeLine{01388       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC4);}
+\DoxyCodeLine{01389       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01390     \}}
+\DoxyCodeLine{01391 }
+\DoxyCodeLine{01392     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01393       status = HAL\_ERROR;}
+\DoxyCodeLine{01394       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01395   \}}
+\DoxyCodeLine{01396 }
+\DoxyCodeLine{01397   \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{01398   \{}
+\DoxyCodeLine{01399     \textcolor{comment}{/* Disable the complementary PWM output  */}}
+\DoxyCodeLine{01400     TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_DISABLE);}
+\DoxyCodeLine{01401 }
+\DoxyCodeLine{01402     \textcolor{comment}{/* Disable the TIM Break interrupt (only if no more channel is active) */}}
+\DoxyCodeLine{01403     tmpccer = htim-\/>Instance-\/>CCER;}
+\DoxyCodeLine{01404     \textcolor{keywordflow}{if} ((tmpccer \& (TIM\_CCER\_CC1NE | TIM\_CCER\_CC2NE | TIM\_CCER\_CC3NE  | TIM\_CCER\_CC4NE)) == (uint32\_t)RESET)}
+\DoxyCodeLine{01405     \{}
+\DoxyCodeLine{01406       \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_BREAK);}
+\DoxyCodeLine{01407     \}}
+\DoxyCodeLine{01408 }
+\DoxyCodeLine{01409     \textcolor{comment}{/* Disable the Main Output */}}
+\DoxyCodeLine{01410     \_\_HAL\_TIM\_MOE\_DISABLE(htim);}
+\DoxyCodeLine{01411 }
+\DoxyCodeLine{01412     \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{01413     \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{01414 }
+\DoxyCodeLine{01415     \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{01416     TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01417   \}}
+\DoxyCodeLine{01418 }
+\DoxyCodeLine{01419   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01420   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01421 \}}
+\DoxyCodeLine{01422 }
+\DoxyCodeLine{01437 HAL\_StatusTypeDef HAL\_TIMEx\_PWMN\_Start\_DMA(TIM\_HandleTypeDef *htim, uint32\_t Channel, uint32\_t *pData, uint16\_t Length)}
+\DoxyCodeLine{01438 \{}
+\DoxyCodeLine{01439   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{01440   uint32\_t tmpsmcr;}
+\DoxyCodeLine{01441 }
+\DoxyCodeLine{01442   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01443   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{01444 }
+\DoxyCodeLine{01445   \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{01446   \textcolor{keywordflow}{if} (TIM\_CHANNEL\_N\_STATE\_GET(htim, Channel) == HAL\_TIM\_CHANNEL\_STATE\_BUSY)}
+\DoxyCodeLine{01447   \{}
+\DoxyCodeLine{01448     \textcolor{keywordflow}{return} HAL\_BUSY;}
+\DoxyCodeLine{01449   \}}
+\DoxyCodeLine{01450   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (TIM\_CHANNEL\_N\_STATE\_GET(htim, Channel) == HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01451   \{}
+\DoxyCodeLine{01452     \textcolor{keywordflow}{if} ((pData == NULL) \&\& (Length > 0U))}
+\DoxyCodeLine{01453     \{}
+\DoxyCodeLine{01454       \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01455     \}}
+\DoxyCodeLine{01456     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01457     \{}
+\DoxyCodeLine{01458       TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01459     \}}
+\DoxyCodeLine{01460   \}}
+\DoxyCodeLine{01461   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01462   \{}
+\DoxyCodeLine{01463     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01464   \}}
+\DoxyCodeLine{01465 }
+\DoxyCodeLine{01466   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{01467   \{}
+\DoxyCodeLine{01468     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{01469     \{}
+\DoxyCodeLine{01470       \textcolor{comment}{/* Set the DMA compare callbacks */}}
+\DoxyCodeLine{01471       htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferCpltCallback = TIM\_DMADelayPulseNCplt;}
+\DoxyCodeLine{01472       htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferHalfCpltCallback = TIM\_DMADelayPulseHalfCplt;}
+\DoxyCodeLine{01473 }
+\DoxyCodeLine{01474       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{01475       htim-\/>hdma[TIM\_DMA\_ID\_CC1]-\/>XferErrorCallback = TIM\_DMAErrorCCxN ;}
+\DoxyCodeLine{01476 }
+\DoxyCodeLine{01477       \textcolor{comment}{/* Enable the DMA channel */}}
+\DoxyCodeLine{01478       \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC1], (uint32\_t)pData, (uint32\_t)\&htim-\/>Instance-\/>CCR1,}
+\DoxyCodeLine{01479                            Length) != HAL\_OK)}
+\DoxyCodeLine{01480       \{}
+\DoxyCodeLine{01481         \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{01482         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01483       \}}
+\DoxyCodeLine{01484       \textcolor{comment}{/* Enable the TIM Capture/Compare 1 DMA request */}}
+\DoxyCodeLine{01485       \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC1);}
+\DoxyCodeLine{01486       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01487     \}}
+\DoxyCodeLine{01488 }
+\DoxyCodeLine{01489     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{01490     \{}
+\DoxyCodeLine{01491       \textcolor{comment}{/* Set the DMA compare callbacks */}}
+\DoxyCodeLine{01492       htim-\/>hdma[TIM\_DMA\_ID\_CC2]-\/>XferCpltCallback = TIM\_DMADelayPulseNCplt;}
+\DoxyCodeLine{01493       htim-\/>hdma[TIM\_DMA\_ID\_CC2]-\/>XferHalfCpltCallback = TIM\_DMADelayPulseHalfCplt;}
+\DoxyCodeLine{01494 }
+\DoxyCodeLine{01495       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{01496       htim-\/>hdma[TIM\_DMA\_ID\_CC2]-\/>XferErrorCallback = TIM\_DMAErrorCCxN ;}
+\DoxyCodeLine{01497 }
+\DoxyCodeLine{01498       \textcolor{comment}{/* Enable the DMA channel */}}
+\DoxyCodeLine{01499       \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC2], (uint32\_t)pData, (uint32\_t)\&htim-\/>Instance-\/>CCR2,}
+\DoxyCodeLine{01500                            Length) != HAL\_OK)}
+\DoxyCodeLine{01501       \{}
+\DoxyCodeLine{01502         \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{01503         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01504       \}}
+\DoxyCodeLine{01505       \textcolor{comment}{/* Enable the TIM Capture/Compare 2 DMA request */}}
+\DoxyCodeLine{01506       \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC2);}
+\DoxyCodeLine{01507       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01508     \}}
+\DoxyCodeLine{01509 }
+\DoxyCodeLine{01510     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{01511     \{}
+\DoxyCodeLine{01512       \textcolor{comment}{/* Set the DMA compare callbacks */}}
+\DoxyCodeLine{01513       htim-\/>hdma[TIM\_DMA\_ID\_CC3]-\/>XferCpltCallback = TIM\_DMADelayPulseNCplt;}
+\DoxyCodeLine{01514       htim-\/>hdma[TIM\_DMA\_ID\_CC3]-\/>XferHalfCpltCallback = TIM\_DMADelayPulseHalfCplt;}
+\DoxyCodeLine{01515 }
+\DoxyCodeLine{01516       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{01517       htim-\/>hdma[TIM\_DMA\_ID\_CC3]-\/>XferErrorCallback = TIM\_DMAErrorCCxN ;}
+\DoxyCodeLine{01518 }
+\DoxyCodeLine{01519       \textcolor{comment}{/* Enable the DMA channel */}}
+\DoxyCodeLine{01520       \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC3], (uint32\_t)pData, (uint32\_t)\&htim-\/>Instance-\/>CCR3,}
+\DoxyCodeLine{01521                            Length) != HAL\_OK)}
+\DoxyCodeLine{01522       \{}
+\DoxyCodeLine{01523         \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{01524         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01525       \}}
+\DoxyCodeLine{01526       \textcolor{comment}{/* Enable the TIM Capture/Compare 3 DMA request */}}
+\DoxyCodeLine{01527       \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC3);}
+\DoxyCodeLine{01528       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01529     \}}
+\DoxyCodeLine{01530 }
+\DoxyCodeLine{01531     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{01532     \{}
+\DoxyCodeLine{01533       \textcolor{comment}{/* Set the DMA compare callbacks */}}
+\DoxyCodeLine{01534       htim-\/>hdma[TIM\_DMA\_ID\_CC4]-\/>XferCpltCallback = TIM\_DMADelayPulseNCplt;}
+\DoxyCodeLine{01535       htim-\/>hdma[TIM\_DMA\_ID\_CC4]-\/>XferHalfCpltCallback = TIM\_DMADelayPulseHalfCplt;}
+\DoxyCodeLine{01536 }
+\DoxyCodeLine{01537       \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{01538       htim-\/>hdma[TIM\_DMA\_ID\_CC4]-\/>XferErrorCallback = TIM\_DMAErrorCCxN ;}
+\DoxyCodeLine{01539 }
+\DoxyCodeLine{01540       \textcolor{comment}{/* Enable the DMA channel */}}
+\DoxyCodeLine{01541       \textcolor{keywordflow}{if} (HAL\_DMA\_Start\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC4], (uint32\_t)pData, (uint32\_t)\&htim-\/>Instance-\/>CCR4,}
+\DoxyCodeLine{01542                            Length) != HAL\_OK)}
+\DoxyCodeLine{01543       \{}
+\DoxyCodeLine{01544         \textcolor{comment}{/* Return error status */}}
+\DoxyCodeLine{01545         \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01546       \}}
+\DoxyCodeLine{01547       \textcolor{comment}{/* Enable the TIM Capture/Compare 4 DMA request */}}
+\DoxyCodeLine{01548       \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_CC4);}
+\DoxyCodeLine{01549       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01550     \}}
+\DoxyCodeLine{01551 }
+\DoxyCodeLine{01552     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01553       status = HAL\_ERROR;}
+\DoxyCodeLine{01554       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01555   \}}
+\DoxyCodeLine{01556 }
+\DoxyCodeLine{01557   \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{01558   \{}
+\DoxyCodeLine{01559     \textcolor{comment}{/* Enable the complementary PWM output  */}}
+\DoxyCodeLine{01560     TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_ENABLE);}
+\DoxyCodeLine{01561 }
+\DoxyCodeLine{01562     \textcolor{comment}{/* Enable the Main Output */}}
+\DoxyCodeLine{01563     \_\_HAL\_TIM\_MOE\_ENABLE(htim);}
+\DoxyCodeLine{01564 }
+\DoxyCodeLine{01565     \textcolor{comment}{/* Enable the Peripheral, except in trigger mode where enable is automatically done with trigger */}}
+\DoxyCodeLine{01566     \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{01567     \{}
+\DoxyCodeLine{01568       tmpsmcr = htim-\/>Instance-\/>SMCR \& TIM\_SMCR\_SMS;}
+\DoxyCodeLine{01569       \textcolor{keywordflow}{if} (!IS\_TIM\_SLAVEMODE\_TRIGGER\_ENABLED(tmpsmcr))}
+\DoxyCodeLine{01570       \{}
+\DoxyCodeLine{01571         \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{01572       \}}
+\DoxyCodeLine{01573     \}}
+\DoxyCodeLine{01574     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01575     \{}
+\DoxyCodeLine{01576       \_\_HAL\_TIM\_ENABLE(htim);}
+\DoxyCodeLine{01577     \}}
+\DoxyCodeLine{01578   \}}
+\DoxyCodeLine{01579 }
+\DoxyCodeLine{01580   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01581   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01582 \}}
+\DoxyCodeLine{01583 }
+\DoxyCodeLine{01596 HAL\_StatusTypeDef HAL\_TIMEx\_PWMN\_Stop\_DMA(TIM\_HandleTypeDef *htim, uint32\_t Channel)}
+\DoxyCodeLine{01597 \{}
+\DoxyCodeLine{01598   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{01599 }
+\DoxyCodeLine{01600   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01601   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{01602 }
+\DoxyCodeLine{01603   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{01604   \{}
+\DoxyCodeLine{01605     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{01606     \{}
+\DoxyCodeLine{01607       \textcolor{comment}{/* Disable the TIM Capture/Compare 1 DMA request */}}
+\DoxyCodeLine{01608       \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC1);}
+\DoxyCodeLine{01609       (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC1]);}
+\DoxyCodeLine{01610       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01611     \}}
+\DoxyCodeLine{01612 }
+\DoxyCodeLine{01613     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{01614     \{}
+\DoxyCodeLine{01615       \textcolor{comment}{/* Disable the TIM Capture/Compare 2 DMA request */}}
+\DoxyCodeLine{01616       \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC2);}
+\DoxyCodeLine{01617       (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC2]);}
+\DoxyCodeLine{01618       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01619     \}}
+\DoxyCodeLine{01620 }
+\DoxyCodeLine{01621     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{01622     \{}
+\DoxyCodeLine{01623       \textcolor{comment}{/* Disable the TIM Capture/Compare 3 DMA request */}}
+\DoxyCodeLine{01624       \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC3);}
+\DoxyCodeLine{01625       (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC3]);}
+\DoxyCodeLine{01626       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01627     \}}
+\DoxyCodeLine{01628 }
+\DoxyCodeLine{01629     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{01630     \{}
+\DoxyCodeLine{01631       \textcolor{comment}{/* Disable the TIM Capture/Compare 4 DMA request */}}
+\DoxyCodeLine{01632       \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_CC4);}
+\DoxyCodeLine{01633       (void)HAL\_DMA\_Abort\_IT(htim-\/>hdma[TIM\_DMA\_ID\_CC4]);}
+\DoxyCodeLine{01634       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01635     \}}
+\DoxyCodeLine{01636 }
+\DoxyCodeLine{01637     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01638       status = HAL\_ERROR;}
+\DoxyCodeLine{01639       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01640   \}}
+\DoxyCodeLine{01641 }
+\DoxyCodeLine{01642   \textcolor{keywordflow}{if} (status == HAL\_OK)}
+\DoxyCodeLine{01643   \{}
+\DoxyCodeLine{01644     \textcolor{comment}{/* Disable the complementary PWM output */}}
+\DoxyCodeLine{01645     TIM\_CCxNChannelCmd(htim-\/>Instance, Channel, TIM\_CCxN\_DISABLE);}
+\DoxyCodeLine{01646 }
+\DoxyCodeLine{01647     \textcolor{comment}{/* Disable the Main Output */}}
+\DoxyCodeLine{01648     \_\_HAL\_TIM\_MOE\_DISABLE(htim);}
+\DoxyCodeLine{01649 }
+\DoxyCodeLine{01650     \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{01651     \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{01652 }
+\DoxyCodeLine{01653     \textcolor{comment}{/* Set the TIM complementary channel state */}}
+\DoxyCodeLine{01654     TIM\_CHANNEL\_N\_STATE\_SET(htim, Channel, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01655   \}}
+\DoxyCodeLine{01656 }
+\DoxyCodeLine{01657   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01658   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01659 \}}
+\DoxyCodeLine{01660 }
+\DoxyCodeLine{01695 HAL\_StatusTypeDef HAL\_TIMEx\_OnePulseN\_Start(TIM\_HandleTypeDef *htim, uint32\_t OutputChannel)}
+\DoxyCodeLine{01696 \{}
+\DoxyCodeLine{01697   uint32\_t input\_channel = (OutputChannel == TIM\_CHANNEL\_1) ? TIM\_CHANNEL\_2 : TIM\_CHANNEL\_1;}
+\DoxyCodeLine{01698   HAL\_TIM\_ChannelStateTypeDef channel\_1\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{01699   HAL\_TIM\_ChannelStateTypeDef channel\_2\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{01700   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_1\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{01701   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_2\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{01702 }
+\DoxyCodeLine{01703   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01704   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, OutputChannel));}
+\DoxyCodeLine{01705 }
+\DoxyCodeLine{01706   \textcolor{comment}{/* Check the TIM channels state */}}
+\DoxyCodeLine{01707   \textcolor{keywordflow}{if} ((channel\_1\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01708       || (channel\_2\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01709       || (complementary\_channel\_1\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01710       || (complementary\_channel\_2\_state != HAL\_TIM\_CHANNEL\_STATE\_READY))}
+\DoxyCodeLine{01711   \{}
+\DoxyCodeLine{01712     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01713   \}}
+\DoxyCodeLine{01714 }
+\DoxyCodeLine{01715   \textcolor{comment}{/* Set the TIM channels state */}}
+\DoxyCodeLine{01716   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01717   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01718   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01719   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01720 }
+\DoxyCodeLine{01721   \textcolor{comment}{/* Enable the complementary One Pulse output channel and the Input Capture channel */}}
+\DoxyCodeLine{01722   TIM\_CCxNChannelCmd(htim-\/>Instance, OutputChannel, TIM\_CCxN\_ENABLE);}
+\DoxyCodeLine{01723   TIM\_CCxChannelCmd(htim-\/>Instance, input\_channel, TIM\_CCx\_ENABLE);}
+\DoxyCodeLine{01724 }
+\DoxyCodeLine{01725   \textcolor{comment}{/* Enable the Main Output */}}
+\DoxyCodeLine{01726   \_\_HAL\_TIM\_MOE\_ENABLE(htim);}
+\DoxyCodeLine{01727 }
+\DoxyCodeLine{01728   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01729   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{01730 \}}
+\DoxyCodeLine{01731 }
+\DoxyCodeLine{01744 HAL\_StatusTypeDef HAL\_TIMEx\_OnePulseN\_Stop(TIM\_HandleTypeDef *htim, uint32\_t OutputChannel)}
+\DoxyCodeLine{01745 \{}
+\DoxyCodeLine{01746   uint32\_t input\_channel = (OutputChannel == TIM\_CHANNEL\_1) ? TIM\_CHANNEL\_2 : TIM\_CHANNEL\_1;}
+\DoxyCodeLine{01747 }
+\DoxyCodeLine{01748   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01749   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, OutputChannel));}
+\DoxyCodeLine{01750 }
+\DoxyCodeLine{01751   \textcolor{comment}{/* Disable the complementary One Pulse output channel and the Input Capture channel */}}
+\DoxyCodeLine{01752   TIM\_CCxNChannelCmd(htim-\/>Instance, OutputChannel, TIM\_CCxN\_DISABLE);}
+\DoxyCodeLine{01753   TIM\_CCxChannelCmd(htim-\/>Instance, input\_channel, TIM\_CCx\_DISABLE);}
+\DoxyCodeLine{01754 }
+\DoxyCodeLine{01755   \textcolor{comment}{/* Disable the Main Output */}}
+\DoxyCodeLine{01756   \_\_HAL\_TIM\_MOE\_DISABLE(htim);}
+\DoxyCodeLine{01757 }
+\DoxyCodeLine{01758   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{01759   \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{01760 }
+\DoxyCodeLine{01761   \textcolor{comment}{/* Set the TIM  channels state */}}
+\DoxyCodeLine{01762   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01763   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01764   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01765   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01766 }
+\DoxyCodeLine{01767   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01768   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{01769 \}}
+\DoxyCodeLine{01770 }
+\DoxyCodeLine{01783 HAL\_StatusTypeDef HAL\_TIMEx\_OnePulseN\_Start\_IT(TIM\_HandleTypeDef *htim, uint32\_t OutputChannel)}
+\DoxyCodeLine{01784 \{}
+\DoxyCodeLine{01785   uint32\_t input\_channel = (OutputChannel == TIM\_CHANNEL\_1) ? TIM\_CHANNEL\_2 : TIM\_CHANNEL\_1;}
+\DoxyCodeLine{01786   HAL\_TIM\_ChannelStateTypeDef channel\_1\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{01787   HAL\_TIM\_ChannelStateTypeDef channel\_2\_state = TIM\_CHANNEL\_STATE\_GET(htim, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{01788   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_1\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_1);}
+\DoxyCodeLine{01789   HAL\_TIM\_ChannelStateTypeDef complementary\_channel\_2\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, TIM\_CHANNEL\_2);}
+\DoxyCodeLine{01790 }
+\DoxyCodeLine{01791   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01792   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, OutputChannel));}
+\DoxyCodeLine{01793 }
+\DoxyCodeLine{01794   \textcolor{comment}{/* Check the TIM channels state */}}
+\DoxyCodeLine{01795   \textcolor{keywordflow}{if} ((channel\_1\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01796       || (channel\_2\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01797       || (complementary\_channel\_1\_state != HAL\_TIM\_CHANNEL\_STATE\_READY)}
+\DoxyCodeLine{01798       || (complementary\_channel\_2\_state != HAL\_TIM\_CHANNEL\_STATE\_READY))}
+\DoxyCodeLine{01799   \{}
+\DoxyCodeLine{01800     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{01801   \}}
+\DoxyCodeLine{01802 }
+\DoxyCodeLine{01803   \textcolor{comment}{/* Set the TIM channels state */}}
+\DoxyCodeLine{01804   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01805   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01806   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01807   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_BUSY);}
+\DoxyCodeLine{01808 }
+\DoxyCodeLine{01809   \textcolor{comment}{/* Enable the TIM Capture/Compare 1 interrupt */}}
+\DoxyCodeLine{01810   \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC1);}
+\DoxyCodeLine{01811 }
+\DoxyCodeLine{01812   \textcolor{comment}{/* Enable the TIM Capture/Compare 2 interrupt */}}
+\DoxyCodeLine{01813   \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_CC2);}
+\DoxyCodeLine{01814 }
+\DoxyCodeLine{01815   \textcolor{comment}{/* Enable the complementary One Pulse output channel and the Input Capture channel */}}
+\DoxyCodeLine{01816   TIM\_CCxNChannelCmd(htim-\/>Instance, OutputChannel, TIM\_CCxN\_ENABLE);}
+\DoxyCodeLine{01817   TIM\_CCxChannelCmd(htim-\/>Instance, input\_channel, TIM\_CCx\_ENABLE);}
+\DoxyCodeLine{01818 }
+\DoxyCodeLine{01819   \textcolor{comment}{/* Enable the Main Output */}}
+\DoxyCodeLine{01820   \_\_HAL\_TIM\_MOE\_ENABLE(htim);}
+\DoxyCodeLine{01821 }
+\DoxyCodeLine{01822   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01823   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{01824 \}}
+\DoxyCodeLine{01825 }
+\DoxyCodeLine{01838 HAL\_StatusTypeDef HAL\_TIMEx\_OnePulseN\_Stop\_IT(TIM\_HandleTypeDef *htim, uint32\_t OutputChannel)}
+\DoxyCodeLine{01839 \{}
+\DoxyCodeLine{01840   uint32\_t input\_channel = (OutputChannel == TIM\_CHANNEL\_1) ? TIM\_CHANNEL\_2 : TIM\_CHANNEL\_1;}
+\DoxyCodeLine{01841 }
+\DoxyCodeLine{01842   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01843   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, OutputChannel));}
+\DoxyCodeLine{01844 }
+\DoxyCodeLine{01845   \textcolor{comment}{/* Disable the TIM Capture/Compare 1 interrupt */}}
+\DoxyCodeLine{01846   \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC1);}
+\DoxyCodeLine{01847 }
+\DoxyCodeLine{01848   \textcolor{comment}{/* Disable the TIM Capture/Compare 2 interrupt */}}
+\DoxyCodeLine{01849   \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_CC2);}
+\DoxyCodeLine{01850 }
+\DoxyCodeLine{01851   \textcolor{comment}{/* Disable the complementary One Pulse output channel and the Input Capture channel */}}
+\DoxyCodeLine{01852   TIM\_CCxNChannelCmd(htim-\/>Instance, OutputChannel, TIM\_CCxN\_DISABLE);}
+\DoxyCodeLine{01853   TIM\_CCxChannelCmd(htim-\/>Instance, input\_channel, TIM\_CCx\_DISABLE);}
+\DoxyCodeLine{01854 }
+\DoxyCodeLine{01855   \textcolor{comment}{/* Disable the Main Output */}}
+\DoxyCodeLine{01856   \_\_HAL\_TIM\_MOE\_DISABLE(htim);}
+\DoxyCodeLine{01857 }
+\DoxyCodeLine{01858   \textcolor{comment}{/* Disable the Peripheral */}}
+\DoxyCodeLine{01859   \_\_HAL\_TIM\_DISABLE(htim);}
+\DoxyCodeLine{01860 }
+\DoxyCodeLine{01861   \textcolor{comment}{/* Set the TIM  channels state */}}
+\DoxyCodeLine{01862   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01863   TIM\_CHANNEL\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01864   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01865   TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{01866 }
+\DoxyCodeLine{01867   \textcolor{comment}{/* Return function status */}}
+\DoxyCodeLine{01868   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{01869 \}}
+\DoxyCodeLine{01870 }
+\DoxyCodeLine{01932 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigCommutEvent(TIM\_HandleTypeDef *htim, uint32\_t  InputTrigger,}
+\DoxyCodeLine{01933                                               uint32\_t  CommutationSource)}
+\DoxyCodeLine{01934 \{}
+\DoxyCodeLine{01935   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01936   assert\_param(IS\_TIM\_COMMUTATION\_EVENT\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{01937   assert\_param(IS\_TIM\_INTERNAL\_TRIGGEREVENT\_INSTANCE(htim-\/>Instance, InputTrigger));}
+\DoxyCodeLine{01938 }
+\DoxyCodeLine{01939   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{01940 }
+\DoxyCodeLine{01941 \textcolor{preprocessor}{\#if defined(TIM5) \&\& defined(TIM20)}}
+\DoxyCodeLine{01942   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{01943       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{01944       (InputTrigger == TIM\_TS\_ITR4)  || (InputTrigger == TIM\_TS\_ITR5) ||}
+\DoxyCodeLine{01945       (InputTrigger == TIM\_TS\_ITR6)  || (InputTrigger == TIM\_TS\_ITR7) ||}
+\DoxyCodeLine{01946       (InputTrigger == TIM\_TS\_ITR8)  || (InputTrigger == TIM\_TS\_ITR9) ||}
+\DoxyCodeLine{01947       (InputTrigger == TIM\_TS\_ITR10) || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{01948 \textcolor{preprocessor}{\#elif defined(TIM5)}}
+\DoxyCodeLine{01949   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{01950       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{01951       (InputTrigger == TIM\_TS\_ITR4)  || (InputTrigger == TIM\_TS\_ITR5) ||}
+\DoxyCodeLine{01952       (InputTrigger == TIM\_TS\_ITR6)  || (InputTrigger == TIM\_TS\_ITR7) ||}
+\DoxyCodeLine{01953       (InputTrigger == TIM\_TS\_ITR8)  || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{01954 \textcolor{preprocessor}{\#elif defined(TIM20)}}
+\DoxyCodeLine{01955   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{01956       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{01957       (InputTrigger == TIM\_TS\_ITR5)  || (InputTrigger == TIM\_TS\_ITR6) ||}
+\DoxyCodeLine{01958       (InputTrigger == TIM\_TS\_ITR7)  || (InputTrigger == TIM\_TS\_ITR8) ||}
+\DoxyCodeLine{01959       (InputTrigger == TIM\_TS\_ITR9)  || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{01960 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01961   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{01962       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{01963       (InputTrigger == TIM\_TS\_ITR5)  || (InputTrigger == TIM\_TS\_ITR6) ||}
+\DoxyCodeLine{01964       (InputTrigger == TIM\_TS\_ITR7)  || (InputTrigger == TIM\_TS\_ITR8) ||}
+\DoxyCodeLine{01965       (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{01966 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* TIM5 \&\& TIM20 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01967   \{}
+\DoxyCodeLine{01968     \textcolor{comment}{/* Select the Input trigger */}}
+\DoxyCodeLine{01969     htim-\/>Instance-\/>SMCR \&= \string~TIM\_SMCR\_TS;}
+\DoxyCodeLine{01970     htim-\/>Instance-\/>SMCR |= InputTrigger;}
+\DoxyCodeLine{01971   \}}
+\DoxyCodeLine{01972 }
+\DoxyCodeLine{01973   \textcolor{comment}{/* Select the Capture Compare preload feature */}}
+\DoxyCodeLine{01974   htim-\/>Instance-\/>CR2 |= TIM\_CR2\_CCPC;}
+\DoxyCodeLine{01975   \textcolor{comment}{/* Select the Commutation event source */}}
+\DoxyCodeLine{01976   htim-\/>Instance-\/>CR2 \&= \string~TIM\_CR2\_CCUS;}
+\DoxyCodeLine{01977   htim-\/>Instance-\/>CR2 |= CommutationSource;}
+\DoxyCodeLine{01978 }
+\DoxyCodeLine{01979   \textcolor{comment}{/* Disable Commutation Interrupt */}}
+\DoxyCodeLine{01980   \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_COM);}
+\DoxyCodeLine{01981 }
+\DoxyCodeLine{01982   \textcolor{comment}{/* Disable Commutation DMA request */}}
+\DoxyCodeLine{01983   \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_COM);}
+\DoxyCodeLine{01984 }
+\DoxyCodeLine{01985   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{01986 }
+\DoxyCodeLine{01987   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{01988 \}}
+\DoxyCodeLine{01989 }
+\DoxyCodeLine{02023 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigCommutEvent\_IT(TIM\_HandleTypeDef *htim, uint32\_t  InputTrigger,}
+\DoxyCodeLine{02024                                                  uint32\_t  CommutationSource)}
+\DoxyCodeLine{02025 \{}
+\DoxyCodeLine{02026   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02027   assert\_param(IS\_TIM\_COMMUTATION\_EVENT\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02028   assert\_param(IS\_TIM\_INTERNAL\_TRIGGEREVENT\_INSTANCE(htim-\/>Instance, InputTrigger));}
+\DoxyCodeLine{02029 }
+\DoxyCodeLine{02030   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{02031 }
+\DoxyCodeLine{02032 \textcolor{preprocessor}{\#if defined(TIM5) \&\& defined(TIM20)}}
+\DoxyCodeLine{02033   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{02034       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{02035       (InputTrigger == TIM\_TS\_ITR4)  || (InputTrigger == TIM\_TS\_ITR5) ||}
+\DoxyCodeLine{02036       (InputTrigger == TIM\_TS\_ITR6)  || (InputTrigger == TIM\_TS\_ITR7) ||}
+\DoxyCodeLine{02037       (InputTrigger == TIM\_TS\_ITR8)  || (InputTrigger == TIM\_TS\_ITR9) ||}
+\DoxyCodeLine{02038       (InputTrigger == TIM\_TS\_ITR10) || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{02039 \textcolor{preprocessor}{\#elif defined(TIM5)}}
+\DoxyCodeLine{02040   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{02041       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{02042       (InputTrigger == TIM\_TS\_ITR4)  || (InputTrigger == TIM\_TS\_ITR5) ||}
+\DoxyCodeLine{02043       (InputTrigger == TIM\_TS\_ITR6)  || (InputTrigger == TIM\_TS\_ITR7) ||}
+\DoxyCodeLine{02044       (InputTrigger == TIM\_TS\_ITR8)  || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{02045 \textcolor{preprocessor}{\#elif defined(TIM20)}}
+\DoxyCodeLine{02046   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{02047       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{02048       (InputTrigger == TIM\_TS\_ITR5)  || (InputTrigger == TIM\_TS\_ITR6) ||}
+\DoxyCodeLine{02049       (InputTrigger == TIM\_TS\_ITR7)  || (InputTrigger == TIM\_TS\_ITR8) ||}
+\DoxyCodeLine{02050       (InputTrigger == TIM\_TS\_ITR9)  || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{02051 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{02052   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{02053       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{02054       (InputTrigger == TIM\_TS\_ITR5)  || (InputTrigger == TIM\_TS\_ITR6) ||}
+\DoxyCodeLine{02055       (InputTrigger == TIM\_TS\_ITR7)  || (InputTrigger == TIM\_TS\_ITR8) ||}
+\DoxyCodeLine{02056       (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{02057 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* TIM5 \&\& TIM20 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02058   \{}
+\DoxyCodeLine{02059     \textcolor{comment}{/* Select the Input trigger */}}
+\DoxyCodeLine{02060     htim-\/>Instance-\/>SMCR \&= \string~TIM\_SMCR\_TS;}
+\DoxyCodeLine{02061     htim-\/>Instance-\/>SMCR |= InputTrigger;}
+\DoxyCodeLine{02062   \}}
+\DoxyCodeLine{02063 }
+\DoxyCodeLine{02064   \textcolor{comment}{/* Select the Capture Compare preload feature */}}
+\DoxyCodeLine{02065   htim-\/>Instance-\/>CR2 |= TIM\_CR2\_CCPC;}
+\DoxyCodeLine{02066   \textcolor{comment}{/* Select the Commutation event source */}}
+\DoxyCodeLine{02067   htim-\/>Instance-\/>CR2 \&= \string~TIM\_CR2\_CCUS;}
+\DoxyCodeLine{02068   htim-\/>Instance-\/>CR2 |= CommutationSource;}
+\DoxyCodeLine{02069 }
+\DoxyCodeLine{02070   \textcolor{comment}{/* Disable Commutation DMA request */}}
+\DoxyCodeLine{02071   \_\_HAL\_TIM\_DISABLE\_DMA(htim, TIM\_DMA\_COM);}
+\DoxyCodeLine{02072 }
+\DoxyCodeLine{02073   \textcolor{comment}{/* Enable the Commutation Interrupt */}}
+\DoxyCodeLine{02074   \_\_HAL\_TIM\_ENABLE\_IT(htim, TIM\_IT\_COM);}
+\DoxyCodeLine{02075 }
+\DoxyCodeLine{02076   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{02077 }
+\DoxyCodeLine{02078   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{02079 \}}
+\DoxyCodeLine{02080 }
+\DoxyCodeLine{02115 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigCommutEvent\_DMA(TIM\_HandleTypeDef *htim, uint32\_t  InputTrigger,}
+\DoxyCodeLine{02116                                                   uint32\_t  CommutationSource)}
+\DoxyCodeLine{02117 \{}
+\DoxyCodeLine{02118   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02119   assert\_param(IS\_TIM\_COMMUTATION\_EVENT\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02120   assert\_param(IS\_TIM\_INTERNAL\_TRIGGEREVENT\_INSTANCE(htim-\/>Instance, InputTrigger));}
+\DoxyCodeLine{02121 }
+\DoxyCodeLine{02122   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{02123 }
+\DoxyCodeLine{02124 \textcolor{preprocessor}{\#if defined(TIM5) \&\& defined(TIM20)}}
+\DoxyCodeLine{02125   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{02126       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{02127       (InputTrigger == TIM\_TS\_ITR4)  || (InputTrigger == TIM\_TS\_ITR5) ||}
+\DoxyCodeLine{02128       (InputTrigger == TIM\_TS\_ITR6)  || (InputTrigger == TIM\_TS\_ITR7) ||}
+\DoxyCodeLine{02129       (InputTrigger == TIM\_TS\_ITR8)  || (InputTrigger == TIM\_TS\_ITR9) ||}
+\DoxyCodeLine{02130       (InputTrigger == TIM\_TS\_ITR10) || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{02131 \textcolor{preprocessor}{\#elif defined(TIM5)}}
+\DoxyCodeLine{02132   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{02133       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{02134       (InputTrigger == TIM\_TS\_ITR4)  || (InputTrigger == TIM\_TS\_ITR5) ||}
+\DoxyCodeLine{02135       (InputTrigger == TIM\_TS\_ITR6)  || (InputTrigger == TIM\_TS\_ITR7) ||}
+\DoxyCodeLine{02136       (InputTrigger == TIM\_TS\_ITR8)  || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{02137 \textcolor{preprocessor}{\#elif defined(TIM20)}}
+\DoxyCodeLine{02138   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{02139       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{02140       (InputTrigger == TIM\_TS\_ITR5)  || (InputTrigger == TIM\_TS\_ITR6) ||}
+\DoxyCodeLine{02141       (InputTrigger == TIM\_TS\_ITR7)  || (InputTrigger == TIM\_TS\_ITR8) ||}
+\DoxyCodeLine{02142       (InputTrigger == TIM\_TS\_ITR9)  || (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{02143 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{02144   \textcolor{keywordflow}{if} ((InputTrigger == TIM\_TS\_ITR0)  || (InputTrigger == TIM\_TS\_ITR1) ||}
+\DoxyCodeLine{02145       (InputTrigger == TIM\_TS\_ITR2)  || (InputTrigger == TIM\_TS\_ITR3) ||}
+\DoxyCodeLine{02146       (InputTrigger == TIM\_TS\_ITR5)  || (InputTrigger == TIM\_TS\_ITR6) ||}
+\DoxyCodeLine{02147       (InputTrigger == TIM\_TS\_ITR7)  || (InputTrigger == TIM\_TS\_ITR8) ||}
+\DoxyCodeLine{02148       (InputTrigger == TIM\_TS\_ITR11))}
+\DoxyCodeLine{02149 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* TIM5 \&\& TIM20 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02150   \{}
+\DoxyCodeLine{02151     \textcolor{comment}{/* Select the Input trigger */}}
+\DoxyCodeLine{02152     htim-\/>Instance-\/>SMCR \&= \string~TIM\_SMCR\_TS;}
+\DoxyCodeLine{02153     htim-\/>Instance-\/>SMCR |= InputTrigger;}
+\DoxyCodeLine{02154   \}}
+\DoxyCodeLine{02155 }
+\DoxyCodeLine{02156   \textcolor{comment}{/* Select the Capture Compare preload feature */}}
+\DoxyCodeLine{02157   htim-\/>Instance-\/>CR2 |= TIM\_CR2\_CCPC;}
+\DoxyCodeLine{02158   \textcolor{comment}{/* Select the Commutation event source */}}
+\DoxyCodeLine{02159   htim-\/>Instance-\/>CR2 \&= \string~TIM\_CR2\_CCUS;}
+\DoxyCodeLine{02160   htim-\/>Instance-\/>CR2 |= CommutationSource;}
+\DoxyCodeLine{02161 }
+\DoxyCodeLine{02162   \textcolor{comment}{/* Enable the Commutation DMA Request */}}
+\DoxyCodeLine{02163   \textcolor{comment}{/* Set the DMA Commutation Callback */}}
+\DoxyCodeLine{02164   htim-\/>hdma[TIM\_DMA\_ID\_COMMUTATION]-\/>XferCpltCallback = TIMEx\_DMACommutationCplt;}
+\DoxyCodeLine{02165   htim-\/>hdma[TIM\_DMA\_ID\_COMMUTATION]-\/>XferHalfCpltCallback = TIMEx\_DMACommutationHalfCplt;}
+\DoxyCodeLine{02166   \textcolor{comment}{/* Set the DMA error callback */}}
+\DoxyCodeLine{02167   htim-\/>hdma[TIM\_DMA\_ID\_COMMUTATION]-\/>XferErrorCallback = TIM\_DMAError;}
+\DoxyCodeLine{02168 }
+\DoxyCodeLine{02169   \textcolor{comment}{/* Disable Commutation Interrupt */}}
+\DoxyCodeLine{02170   \_\_HAL\_TIM\_DISABLE\_IT(htim, TIM\_IT\_COM);}
+\DoxyCodeLine{02171 }
+\DoxyCodeLine{02172   \textcolor{comment}{/* Enable the Commutation DMA Request */}}
+\DoxyCodeLine{02173   \_\_HAL\_TIM\_ENABLE\_DMA(htim, TIM\_DMA\_COM);}
+\DoxyCodeLine{02174 }
+\DoxyCodeLine{02175   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{02176 }
+\DoxyCodeLine{02177   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{02178 \}}
+\DoxyCodeLine{02179 }
+\DoxyCodeLine{02188 HAL\_StatusTypeDef HAL\_TIMEx\_MasterConfigSynchronization(TIM\_HandleTypeDef *htim,}
+\DoxyCodeLine{02189                                                         TIM\_MasterConfigTypeDef *sMasterConfig)}
+\DoxyCodeLine{02190 \{}
+\DoxyCodeLine{02191   uint32\_t tmpcr2;}
+\DoxyCodeLine{02192   uint32\_t tmpsmcr;}
+\DoxyCodeLine{02193 }
+\DoxyCodeLine{02194   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02195   assert\_param(IS\_TIM\_MASTER\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02196   assert\_param(IS\_TIM\_TRGO\_SOURCE(sMasterConfig-\/>MasterOutputTrigger));}
+\DoxyCodeLine{02197   assert\_param(IS\_TIM\_MSM\_STATE(sMasterConfig-\/>MasterSlaveMode));}
+\DoxyCodeLine{02198 }
+\DoxyCodeLine{02199   \textcolor{comment}{/* Check input state */}}
+\DoxyCodeLine{02200   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{02201 }
+\DoxyCodeLine{02202   \textcolor{comment}{/* Change the handler state */}}
+\DoxyCodeLine{02203   htim-\/>State = HAL\_TIM\_STATE\_BUSY;}
+\DoxyCodeLine{02204 }
+\DoxyCodeLine{02205   \textcolor{comment}{/* Get the TIMx CR2 register value */}}
+\DoxyCodeLine{02206   tmpcr2 = htim-\/>Instance-\/>CR2;}
+\DoxyCodeLine{02207 }
+\DoxyCodeLine{02208   \textcolor{comment}{/* Get the TIMx SMCR register value */}}
+\DoxyCodeLine{02209   tmpsmcr = htim-\/>Instance-\/>SMCR;}
+\DoxyCodeLine{02210 }
+\DoxyCodeLine{02211   \textcolor{comment}{/* If the timer supports ADC synchronization through TRGO2, set the master mode selection 2 */}}
+\DoxyCodeLine{02212   \textcolor{keywordflow}{if} (IS\_TIM\_TRGO2\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{02213   \{}
+\DoxyCodeLine{02214     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02215     assert\_param(IS\_TIM\_TRGO2\_SOURCE(sMasterConfig-\/>MasterOutputTrigger2));}
+\DoxyCodeLine{02216 }
+\DoxyCodeLine{02217     \textcolor{comment}{/* Clear the MMS2 bits */}}
+\DoxyCodeLine{02218     tmpcr2 \&= \string~TIM\_CR2\_MMS2;}
+\DoxyCodeLine{02219     \textcolor{comment}{/* Select the TRGO2 source*/}}
+\DoxyCodeLine{02220     tmpcr2 |= sMasterConfig-\/>MasterOutputTrigger2;}
+\DoxyCodeLine{02221   \}}
+\DoxyCodeLine{02222 }
+\DoxyCodeLine{02223   \textcolor{comment}{/* Reset the MMS Bits */}}
+\DoxyCodeLine{02224   tmpcr2 \&= \string~TIM\_CR2\_MMS;}
+\DoxyCodeLine{02225   \textcolor{comment}{/* Select the TRGO source */}}
+\DoxyCodeLine{02226   tmpcr2 |=  sMasterConfig-\/>MasterOutputTrigger;}
+\DoxyCodeLine{02227 }
+\DoxyCodeLine{02228   \textcolor{comment}{/* Update TIMx CR2 */}}
+\DoxyCodeLine{02229   htim-\/>Instance-\/>CR2 = tmpcr2;}
+\DoxyCodeLine{02230 }
+\DoxyCodeLine{02231   \textcolor{keywordflow}{if} (IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{02232   \{}
+\DoxyCodeLine{02233     \textcolor{comment}{/* Reset the MSM Bit */}}
+\DoxyCodeLine{02234     tmpsmcr \&= \string~TIM\_SMCR\_MSM;}
+\DoxyCodeLine{02235     \textcolor{comment}{/* Set master mode */}}
+\DoxyCodeLine{02236     tmpsmcr |= sMasterConfig-\/>MasterSlaveMode;}
+\DoxyCodeLine{02237 }
+\DoxyCodeLine{02238     \textcolor{comment}{/* Update TIMx SMCR */}}
+\DoxyCodeLine{02239     htim-\/>Instance-\/>SMCR = tmpsmcr;}
+\DoxyCodeLine{02240   \}}
+\DoxyCodeLine{02241 }
+\DoxyCodeLine{02242   \textcolor{comment}{/* Change the htim state */}}
+\DoxyCodeLine{02243   htim-\/>State = HAL\_TIM\_STATE\_READY;}
+\DoxyCodeLine{02244 }
+\DoxyCodeLine{02245   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{02246 }
+\DoxyCodeLine{02247   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{02248 \}}
+\DoxyCodeLine{02249 }
+\DoxyCodeLine{02261 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigBreakDeadTime(TIM\_HandleTypeDef *htim,}
+\DoxyCodeLine{02262                                                 TIM\_BreakDeadTimeConfigTypeDef *sBreakDeadTimeConfig)}
+\DoxyCodeLine{02263 \{}
+\DoxyCodeLine{02264   \textcolor{comment}{/* Keep this variable initialized to 0 as it is used to configure BDTR register */}}
+\DoxyCodeLine{02265   uint32\_t tmpbdtr = 0U;}
+\DoxyCodeLine{02266 }
+\DoxyCodeLine{02267   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02268   assert\_param(IS\_TIM\_BREAK\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02269   assert\_param(IS\_TIM\_OSSR\_STATE(sBreakDeadTimeConfig-\/>OffStateRunMode));}
+\DoxyCodeLine{02270   assert\_param(IS\_TIM\_OSSI\_STATE(sBreakDeadTimeConfig-\/>OffStateIDLEMode));}
+\DoxyCodeLine{02271   assert\_param(IS\_TIM\_LOCK\_LEVEL(sBreakDeadTimeConfig-\/>LockLevel));}
+\DoxyCodeLine{02272   assert\_param(IS\_TIM\_DEADTIME(sBreakDeadTimeConfig-\/>DeadTime));}
+\DoxyCodeLine{02273   assert\_param(IS\_TIM\_BREAK\_STATE(sBreakDeadTimeConfig-\/>BreakState));}
+\DoxyCodeLine{02274   assert\_param(IS\_TIM\_BREAK\_POLARITY(sBreakDeadTimeConfig-\/>BreakPolarity));}
+\DoxyCodeLine{02275   assert\_param(IS\_TIM\_BREAK\_FILTER(sBreakDeadTimeConfig-\/>BreakFilter));}
+\DoxyCodeLine{02276   assert\_param(IS\_TIM\_AUTOMATIC\_OUTPUT\_STATE(sBreakDeadTimeConfig-\/>AutomaticOutput));}
+\DoxyCodeLine{02277 }
+\DoxyCodeLine{02278   \textcolor{comment}{/* Check input state */}}
+\DoxyCodeLine{02279   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{02280 }
+\DoxyCodeLine{02281   \textcolor{comment}{/* Set the Lock level, the Break enable Bit and the Polarity, the OSSR State,}}
+\DoxyCodeLine{02282 \textcolor{comment}{     the OSSI State, the dead time value and the Automatic Output Enable Bit */}}
+\DoxyCodeLine{02283 }
+\DoxyCodeLine{02284   \textcolor{comment}{/* Set the BDTR bits */}}
+\DoxyCodeLine{02285   MODIFY\_REG(tmpbdtr, TIM\_BDTR\_DTG, sBreakDeadTimeConfig-\/>DeadTime);}
+\DoxyCodeLine{02286   MODIFY\_REG(tmpbdtr, TIM\_BDTR\_LOCK, sBreakDeadTimeConfig-\/>LockLevel);}
+\DoxyCodeLine{02287   MODIFY\_REG(tmpbdtr, TIM\_BDTR\_OSSI, sBreakDeadTimeConfig-\/>OffStateIDLEMode);}
+\DoxyCodeLine{02288   MODIFY\_REG(tmpbdtr, TIM\_BDTR\_OSSR, sBreakDeadTimeConfig-\/>OffStateRunMode);}
+\DoxyCodeLine{02289   MODIFY\_REG(tmpbdtr, TIM\_BDTR\_BKE, sBreakDeadTimeConfig-\/>BreakState);}
+\DoxyCodeLine{02290   MODIFY\_REG(tmpbdtr, TIM\_BDTR\_BKP, sBreakDeadTimeConfig-\/>BreakPolarity);}
+\DoxyCodeLine{02291   MODIFY\_REG(tmpbdtr, TIM\_BDTR\_AOE, sBreakDeadTimeConfig-\/>AutomaticOutput);}
+\DoxyCodeLine{02292   MODIFY\_REG(tmpbdtr, TIM\_BDTR\_BKF, (sBreakDeadTimeConfig-\/>BreakFilter << TIM\_BDTR\_BKF\_Pos));}
+\DoxyCodeLine{02293 }
+\DoxyCodeLine{02294   \textcolor{keywordflow}{if} (IS\_TIM\_ADVANCED\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{02295   \{}
+\DoxyCodeLine{02296     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02297     assert\_param(IS\_TIM\_BREAK\_AFMODE(sBreakDeadTimeConfig-\/>BreakAFMode));}
+\DoxyCodeLine{02298 }
+\DoxyCodeLine{02299     \textcolor{comment}{/* Set BREAK AF mode */}}
+\DoxyCodeLine{02300     MODIFY\_REG(tmpbdtr, TIM\_BDTR\_BKBID, sBreakDeadTimeConfig-\/>BreakAFMode);}
+\DoxyCodeLine{02301   \}}
+\DoxyCodeLine{02302 }
+\DoxyCodeLine{02303   \textcolor{keywordflow}{if} (IS\_TIM\_BKIN2\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{02304   \{}
+\DoxyCodeLine{02305     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02306     assert\_param(IS\_TIM\_BREAK2\_STATE(sBreakDeadTimeConfig-\/>Break2State));}
+\DoxyCodeLine{02307     assert\_param(IS\_TIM\_BREAK2\_POLARITY(sBreakDeadTimeConfig-\/>Break2Polarity));}
+\DoxyCodeLine{02308     assert\_param(IS\_TIM\_BREAK\_FILTER(sBreakDeadTimeConfig-\/>Break2Filter));}
+\DoxyCodeLine{02309 }
+\DoxyCodeLine{02310     \textcolor{comment}{/* Set the BREAK2 input related BDTR bits */}}
+\DoxyCodeLine{02311     MODIFY\_REG(tmpbdtr, TIM\_BDTR\_BK2F, (sBreakDeadTimeConfig-\/>Break2Filter << TIM\_BDTR\_BK2F\_Pos));}
+\DoxyCodeLine{02312     MODIFY\_REG(tmpbdtr, TIM\_BDTR\_BK2E, sBreakDeadTimeConfig-\/>Break2State);}
+\DoxyCodeLine{02313     MODIFY\_REG(tmpbdtr, TIM\_BDTR\_BK2P, sBreakDeadTimeConfig-\/>Break2Polarity);}
+\DoxyCodeLine{02314 }
+\DoxyCodeLine{02315     \textcolor{keywordflow}{if} (IS\_TIM\_ADVANCED\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{02316     \{}
+\DoxyCodeLine{02317       \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02318       assert\_param(IS\_TIM\_BREAK2\_AFMODE(sBreakDeadTimeConfig-\/>Break2AFMode));}
+\DoxyCodeLine{02319 }
+\DoxyCodeLine{02320       \textcolor{comment}{/* Set BREAK2 AF mode */}}
+\DoxyCodeLine{02321       MODIFY\_REG(tmpbdtr, TIM\_BDTR\_BK2BID, sBreakDeadTimeConfig-\/>Break2AFMode);}
+\DoxyCodeLine{02322     \}}
+\DoxyCodeLine{02323   \}}
+\DoxyCodeLine{02324 }
+\DoxyCodeLine{02325   \textcolor{comment}{/* Set TIMx\_BDTR */}}
+\DoxyCodeLine{02326   htim-\/>Instance-\/>BDTR = tmpbdtr;}
+\DoxyCodeLine{02327 }
+\DoxyCodeLine{02328   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{02329 }
+\DoxyCodeLine{02330   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{02331 \}}
+\DoxyCodeLine{02332 }
+\DoxyCodeLine{02343 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigBreakInput(TIM\_HandleTypeDef *htim,}
+\DoxyCodeLine{02344                                              uint32\_t BreakInput,}
+\DoxyCodeLine{02345                                              TIMEx\_BreakInputConfigTypeDef *sBreakInputConfig)}
+\DoxyCodeLine{02346 }
+\DoxyCodeLine{02347 \{}
+\DoxyCodeLine{02348   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{02349   uint32\_t tmporx;}
+\DoxyCodeLine{02350   uint32\_t bkin\_enable\_mask;}
+\DoxyCodeLine{02351   uint32\_t bkin\_polarity\_mask;}
+\DoxyCodeLine{02352   uint32\_t bkin\_enable\_bitpos;}
+\DoxyCodeLine{02353   uint32\_t bkin\_polarity\_bitpos;}
+\DoxyCodeLine{02354 }
+\DoxyCodeLine{02355   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02356   assert\_param(IS\_TIM\_BREAK\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02357   assert\_param(IS\_TIM\_BREAKINPUT(BreakInput));}
+\DoxyCodeLine{02358   assert\_param(IS\_TIM\_BREAKINPUTSOURCE(sBreakInputConfig-\/>Source));}
+\DoxyCodeLine{02359   assert\_param(IS\_TIM\_BREAKINPUTSOURCE\_STATE(sBreakInputConfig-\/>Enable));}
+\DoxyCodeLine{02360   assert\_param(IS\_TIM\_BREAKINPUTSOURCE\_POLARITY(sBreakInputConfig-\/>Polarity));}
+\DoxyCodeLine{02361 }
+\DoxyCodeLine{02362   \textcolor{comment}{/* Check input state */}}
+\DoxyCodeLine{02363   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{02364 }
+\DoxyCodeLine{02365   \textcolor{keywordflow}{switch} (sBreakInputConfig-\/>Source)}
+\DoxyCodeLine{02366   \{}
+\DoxyCodeLine{02367     \textcolor{keywordflow}{case} TIM\_BREAKINPUTSOURCE\_BKIN:}
+\DoxyCodeLine{02368     \{}
+\DoxyCodeLine{02369       bkin\_enable\_mask = TIM1\_AF1\_BKINE;}
+\DoxyCodeLine{02370       bkin\_enable\_bitpos = TIM1\_AF1\_BKINE\_Pos;}
+\DoxyCodeLine{02371       bkin\_polarity\_mask = TIM1\_AF1\_BKINP;}
+\DoxyCodeLine{02372       bkin\_polarity\_bitpos = TIM1\_AF1\_BKINP\_Pos;}
+\DoxyCodeLine{02373       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02374     \}}
+\DoxyCodeLine{02375     \textcolor{keywordflow}{case} TIM\_BREAKINPUTSOURCE\_COMP1:}
+\DoxyCodeLine{02376     \{}
+\DoxyCodeLine{02377       bkin\_enable\_mask = TIM1\_AF1\_BKCMP1E;}
+\DoxyCodeLine{02378       bkin\_enable\_bitpos = TIM1\_AF1\_BKCMP1E\_Pos;}
+\DoxyCodeLine{02379       bkin\_polarity\_mask = TIM1\_AF1\_BKCMP1P;}
+\DoxyCodeLine{02380       bkin\_polarity\_bitpos = TIM1\_AF1\_BKCMP1P\_Pos;}
+\DoxyCodeLine{02381       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02382     \}}
+\DoxyCodeLine{02383     \textcolor{keywordflow}{case} TIM\_BREAKINPUTSOURCE\_COMP2:}
+\DoxyCodeLine{02384     \{}
+\DoxyCodeLine{02385       bkin\_enable\_mask = TIM1\_AF1\_BKCMP2E;}
+\DoxyCodeLine{02386       bkin\_enable\_bitpos = TIM1\_AF1\_BKCMP2E\_Pos;}
+\DoxyCodeLine{02387       bkin\_polarity\_mask = TIM1\_AF1\_BKCMP2P;}
+\DoxyCodeLine{02388       bkin\_polarity\_bitpos = TIM1\_AF1\_BKCMP2P\_Pos;}
+\DoxyCodeLine{02389       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02390     \}}
+\DoxyCodeLine{02391     \textcolor{keywordflow}{case} TIM\_BREAKINPUTSOURCE\_COMP3:}
+\DoxyCodeLine{02392     \{}
+\DoxyCodeLine{02393       bkin\_enable\_mask = TIM1\_AF1\_BKCMP3E;}
+\DoxyCodeLine{02394       bkin\_enable\_bitpos = TIM1\_AF1\_BKCMP3E\_Pos;}
+\DoxyCodeLine{02395       bkin\_polarity\_mask = TIM1\_AF1\_BKCMP3P;}
+\DoxyCodeLine{02396       bkin\_polarity\_bitpos = TIM1\_AF1\_BKCMP3P\_Pos;}
+\DoxyCodeLine{02397       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02398     \}}
+\DoxyCodeLine{02399     \textcolor{keywordflow}{case} TIM\_BREAKINPUTSOURCE\_COMP4:}
+\DoxyCodeLine{02400     \{}
+\DoxyCodeLine{02401       bkin\_enable\_mask = TIM1\_AF1\_BKCMP4E;}
+\DoxyCodeLine{02402       bkin\_enable\_bitpos = TIM1\_AF1\_BKCMP4E\_Pos;}
+\DoxyCodeLine{02403       bkin\_polarity\_mask = TIM1\_AF1\_BKCMP4P;}
+\DoxyCodeLine{02404       bkin\_polarity\_bitpos = TIM1\_AF1\_BKCMP4P\_Pos;}
+\DoxyCodeLine{02405       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02406     \}}
+\DoxyCodeLine{02407 \textcolor{preprocessor}{\#if defined (COMP5)}}
+\DoxyCodeLine{02408     \textcolor{keywordflow}{case} TIM\_BREAKINPUTSOURCE\_COMP5:}
+\DoxyCodeLine{02409     \{}
+\DoxyCodeLine{02410       bkin\_enable\_mask = TIM1\_AF1\_BKCMP5E;}
+\DoxyCodeLine{02411       bkin\_enable\_bitpos = TIM1\_AF1\_BKCMP5E\_Pos;}
+\DoxyCodeLine{02412       \textcolor{comment}{/* No palarity bit for this COMP. Variable bkin\_polarity\_mask keeps its default value 0 */}}
+\DoxyCodeLine{02413       bkin\_polarity\_mask = 0U;}
+\DoxyCodeLine{02414       bkin\_polarity\_bitpos = 0U;}
+\DoxyCodeLine{02415       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02416     \}}
+\DoxyCodeLine{02417 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* COMP5 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02418 \textcolor{preprocessor}{\#if defined (COMP6)}}
+\DoxyCodeLine{02419     \textcolor{keywordflow}{case} TIM\_BREAKINPUTSOURCE\_COMP6:}
+\DoxyCodeLine{02420     \{}
+\DoxyCodeLine{02421       bkin\_enable\_mask = TIM1\_AF1\_BKCMP6E;}
+\DoxyCodeLine{02422       bkin\_enable\_bitpos = TIM1\_AF1\_BKCMP6E\_Pos;}
+\DoxyCodeLine{02423       \textcolor{comment}{/* No palarity bit for this COMP. Variable bkin\_polarity\_mask keeps its default value 0 */}}
+\DoxyCodeLine{02424       bkin\_polarity\_mask = 0U;}
+\DoxyCodeLine{02425       bkin\_polarity\_bitpos = 0U;}
+\DoxyCodeLine{02426       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02427     \}}
+\DoxyCodeLine{02428 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* COMP7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02429 \textcolor{preprocessor}{\#if defined (COMP7)}}
+\DoxyCodeLine{02430     \textcolor{keywordflow}{case} TIM\_BREAKINPUTSOURCE\_COMP7:}
+\DoxyCodeLine{02431     \{}
+\DoxyCodeLine{02432       bkin\_enable\_mask = TIM1\_AF1\_BKCMP7E;}
+\DoxyCodeLine{02433       bkin\_enable\_bitpos = TIM1\_AF1\_BKCMP7E\_Pos;}
+\DoxyCodeLine{02434       \textcolor{comment}{/* No palarity bit for this COMP. Variable bkin\_polarity\_mask keeps its default value 0 */}}
+\DoxyCodeLine{02435       bkin\_polarity\_mask = 0U;}
+\DoxyCodeLine{02436       bkin\_polarity\_bitpos = 0U;}
+\DoxyCodeLine{02437       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02438     \}}
+\DoxyCodeLine{02439 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* COMP7 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{02440 }
+\DoxyCodeLine{02441     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{02442     \{}
+\DoxyCodeLine{02443       bkin\_enable\_mask = 0U;}
+\DoxyCodeLine{02444       bkin\_polarity\_mask = 0U;}
+\DoxyCodeLine{02445       bkin\_enable\_bitpos = 0U;}
+\DoxyCodeLine{02446       bkin\_polarity\_bitpos = 0U;}
+\DoxyCodeLine{02447       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02448     \}}
+\DoxyCodeLine{02449   \}}
+\DoxyCodeLine{02450 }
+\DoxyCodeLine{02451   \textcolor{keywordflow}{switch} (BreakInput)}
+\DoxyCodeLine{02452   \{}
+\DoxyCodeLine{02453     \textcolor{keywordflow}{case} TIM\_BREAKINPUT\_BRK:}
+\DoxyCodeLine{02454     \{}
+\DoxyCodeLine{02455       \textcolor{comment}{/* Get the TIMx\_AF1 register value */}}
+\DoxyCodeLine{02456       tmporx = htim-\/>Instance-\/>AF1;}
+\DoxyCodeLine{02457 }
+\DoxyCodeLine{02458       \textcolor{comment}{/* Enable the break input */}}
+\DoxyCodeLine{02459       tmporx \&= \string~bkin\_enable\_mask;}
+\DoxyCodeLine{02460       tmporx |= (sBreakInputConfig-\/>Enable << bkin\_enable\_bitpos) \& bkin\_enable\_mask;}
+\DoxyCodeLine{02461 }
+\DoxyCodeLine{02462       \textcolor{comment}{/* Set the break input polarity */}}
+\DoxyCodeLine{02463       tmporx \&= \string~bkin\_polarity\_mask;}
+\DoxyCodeLine{02464       tmporx |= (sBreakInputConfig-\/>Polarity << bkin\_polarity\_bitpos) \& bkin\_polarity\_mask;}
+\DoxyCodeLine{02465 }
+\DoxyCodeLine{02466       \textcolor{comment}{/* Set TIMx\_AF1 */}}
+\DoxyCodeLine{02467       htim-\/>Instance-\/>AF1 = tmporx;}
+\DoxyCodeLine{02468       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02469     \}}
+\DoxyCodeLine{02470     \textcolor{keywordflow}{case} TIM\_BREAKINPUT\_BRK2:}
+\DoxyCodeLine{02471     \{}
+\DoxyCodeLine{02472       \textcolor{comment}{/* Get the TIMx\_AF2 register value */}}
+\DoxyCodeLine{02473       tmporx = htim-\/>Instance-\/>AF2;}
+\DoxyCodeLine{02474 }
+\DoxyCodeLine{02475       \textcolor{comment}{/* Enable the break input */}}
+\DoxyCodeLine{02476       tmporx \&= \string~bkin\_enable\_mask;}
+\DoxyCodeLine{02477       tmporx |= (sBreakInputConfig-\/>Enable << bkin\_enable\_bitpos) \& bkin\_enable\_mask;}
+\DoxyCodeLine{02478 }
+\DoxyCodeLine{02479       \textcolor{comment}{/* Set the break input polarity */}}
+\DoxyCodeLine{02480       tmporx \&= \string~bkin\_polarity\_mask;}
+\DoxyCodeLine{02481       tmporx |= (sBreakInputConfig-\/>Polarity << bkin\_polarity\_bitpos) \& bkin\_polarity\_mask;}
+\DoxyCodeLine{02482 }
+\DoxyCodeLine{02483       \textcolor{comment}{/* Set TIMx\_AF2 */}}
+\DoxyCodeLine{02484       htim-\/>Instance-\/>AF2 = tmporx;}
+\DoxyCodeLine{02485       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02486     \}}
+\DoxyCodeLine{02487     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{02488       status = HAL\_ERROR;}
+\DoxyCodeLine{02489       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02490   \}}
+\DoxyCodeLine{02491 }
+\DoxyCodeLine{02492   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{02493 }
+\DoxyCodeLine{02494   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{02495 \}}
+\DoxyCodeLine{02496 }
+\DoxyCodeLine{02607 HAL\_StatusTypeDef HAL\_TIMEx\_RemapConfig(TIM\_HandleTypeDef *htim, uint32\_t Remap)}
+\DoxyCodeLine{02608 \{}
+\DoxyCodeLine{02609   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{02610   assert\_param(IS\_TIM\_REMAP\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02611   assert\_param(IS\_TIM\_REMAP(Remap));}
+\DoxyCodeLine{02612 }
+\DoxyCodeLine{02613   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{02614 }
+\DoxyCodeLine{02615   MODIFY\_REG(htim-\/>Instance-\/>AF1, TIM1\_AF1\_ETRSEL\_Msk, Remap);}
+\DoxyCodeLine{02616 }
+\DoxyCodeLine{02617   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{02618 }
+\DoxyCodeLine{02619   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{02620 \}}
+\DoxyCodeLine{02621 }
+\DoxyCodeLine{02781 HAL\_StatusTypeDef  HAL\_TIMEx\_TISelection(TIM\_HandleTypeDef *htim, uint32\_t TISelection, uint32\_t Channel)}
+\DoxyCodeLine{02782 \{}
+\DoxyCodeLine{02783   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{02784 }
+\DoxyCodeLine{02785   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{02786   assert\_param(IS\_TIM\_TISEL\_TIX\_INSTANCE(htim-\/>Instance, Channel));}
+\DoxyCodeLine{02787   assert\_param(IS\_TIM\_TISEL(TISelection));}
+\DoxyCodeLine{02788 }
+\DoxyCodeLine{02789   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{02790 }
+\DoxyCodeLine{02791   \textcolor{keywordflow}{switch} (Channel)}
+\DoxyCodeLine{02792   \{}
+\DoxyCodeLine{02793     \textcolor{keywordflow}{case} TIM\_CHANNEL\_1:}
+\DoxyCodeLine{02794       MODIFY\_REG(htim-\/>Instance-\/>TISEL, TIM\_TISEL\_TI1SEL, TISelection);}
+\DoxyCodeLine{02795 }
+\DoxyCodeLine{02796       \textcolor{comment}{/* If required, set OR bit to request HSE/32 clock */}}
+\DoxyCodeLine{02797       \textcolor{keywordflow}{if} (IS\_TIM\_HSE32\_INSTANCE(htim-\/>Instance))}
+\DoxyCodeLine{02798       \{}
+\DoxyCodeLine{02799         SET\_BIT(htim-\/>Instance-\/>OR, TIM\_OR\_HSE32EN);}
+\DoxyCodeLine{02800       \}}
+\DoxyCodeLine{02801       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{02802       \{}
+\DoxyCodeLine{02803         CLEAR\_BIT(htim-\/>Instance-\/>OR, TIM\_OR\_HSE32EN);}
+\DoxyCodeLine{02804       \}}
+\DoxyCodeLine{02805       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02806     \textcolor{keywordflow}{case} TIM\_CHANNEL\_2:}
+\DoxyCodeLine{02807       MODIFY\_REG(htim-\/>Instance-\/>TISEL, TIM\_TISEL\_TI2SEL, TISelection);}
+\DoxyCodeLine{02808       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02809     \textcolor{keywordflow}{case} TIM\_CHANNEL\_3:}
+\DoxyCodeLine{02810       MODIFY\_REG(htim-\/>Instance-\/>TISEL, TIM\_TISEL\_TI3SEL, TISelection);}
+\DoxyCodeLine{02811       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02812     \textcolor{keywordflow}{case} TIM\_CHANNEL\_4:}
+\DoxyCodeLine{02813       MODIFY\_REG(htim-\/>Instance-\/>TISEL, TIM\_TISEL\_TI4SEL, TISelection);}
+\DoxyCodeLine{02814       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02815     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{02816       status = HAL\_ERROR;}
+\DoxyCodeLine{02817       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02818   \}}
+\DoxyCodeLine{02819 }
+\DoxyCodeLine{02820   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{02821 }
+\DoxyCodeLine{02822   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{02823 \}}
+\DoxyCodeLine{02824 }
+\DoxyCodeLine{02836 HAL\_StatusTypeDef HAL\_TIMEx\_GroupChannel5(TIM\_HandleTypeDef *htim, uint32\_t Channels)}
+\DoxyCodeLine{02837 \{}
+\DoxyCodeLine{02838   \textcolor{comment}{/* Check parameters */}}
+\DoxyCodeLine{02839   assert\_param(IS\_TIM\_COMBINED3PHASEPWM\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02840   assert\_param(IS\_TIM\_GROUPCH5(Channels));}
+\DoxyCodeLine{02841 }
+\DoxyCodeLine{02842   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{02843   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{02844 }
+\DoxyCodeLine{02845   htim-\/>State = HAL\_TIM\_STATE\_BUSY;}
+\DoxyCodeLine{02846 }
+\DoxyCodeLine{02847   \textcolor{comment}{/* Clear GC5Cx bit fields */}}
+\DoxyCodeLine{02848   htim-\/>Instance-\/>CCR5 \&= \string~(TIM\_CCR5\_GC5C3 | TIM\_CCR5\_GC5C2 | TIM\_CCR5\_GC5C1);}
+\DoxyCodeLine{02849 }
+\DoxyCodeLine{02850   \textcolor{comment}{/* Set GC5Cx bit fields */}}
+\DoxyCodeLine{02851   htim-\/>Instance-\/>CCR5 |= Channels;}
+\DoxyCodeLine{02852 }
+\DoxyCodeLine{02853   \textcolor{comment}{/* Change the htim state */}}
+\DoxyCodeLine{02854   htim-\/>State = HAL\_TIM\_STATE\_READY;}
+\DoxyCodeLine{02855 }
+\DoxyCodeLine{02856   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{02857 }
+\DoxyCodeLine{02858   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{02859 \}}
+\DoxyCodeLine{02860 }
+\DoxyCodeLine{02874 HAL\_StatusTypeDef HAL\_TIMEx\_DisarmBreakInput(TIM\_HandleTypeDef *htim, uint32\_t BreakInput)}
+\DoxyCodeLine{02875 \{}
+\DoxyCodeLine{02876   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{02877   uint32\_t tmpbdtr;}
+\DoxyCodeLine{02878 }
+\DoxyCodeLine{02879   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02880   assert\_param(IS\_TIM\_ADVANCED\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02881   assert\_param(IS\_TIM\_BREAKINPUT(BreakInput));}
+\DoxyCodeLine{02882 }
+\DoxyCodeLine{02883   \textcolor{keywordflow}{switch} (BreakInput)}
+\DoxyCodeLine{02884   \{}
+\DoxyCodeLine{02885     \textcolor{keywordflow}{case} TIM\_BREAKINPUT\_BRK:}
+\DoxyCodeLine{02886     \{}
+\DoxyCodeLine{02887       \textcolor{comment}{/* Check initial conditions */}}
+\DoxyCodeLine{02888       tmpbdtr = READ\_REG(htim-\/>Instance-\/>BDTR);}
+\DoxyCodeLine{02889       \textcolor{keywordflow}{if} ((READ\_BIT(tmpbdtr, TIM\_BDTR\_BKBID) == TIM\_BDTR\_BKBID) \&\&}
+\DoxyCodeLine{02890           (READ\_BIT(tmpbdtr, TIM\_BDTR\_MOE) == 0U))}
+\DoxyCodeLine{02891       \{}
+\DoxyCodeLine{02892         \textcolor{comment}{/* Break input BRK is disarmed */}}
+\DoxyCodeLine{02893         SET\_BIT(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_BKDSRM);}
+\DoxyCodeLine{02894       \}}
+\DoxyCodeLine{02895       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02896     \}}
+\DoxyCodeLine{02897 }
+\DoxyCodeLine{02898     \textcolor{keywordflow}{case} TIM\_BREAKINPUT\_BRK2:}
+\DoxyCodeLine{02899     \{}
+\DoxyCodeLine{02900       \textcolor{comment}{/* Check initial conditions */}}
+\DoxyCodeLine{02901       tmpbdtr = READ\_REG(htim-\/>Instance-\/>BDTR);}
+\DoxyCodeLine{02902       \textcolor{keywordflow}{if} ((READ\_BIT(tmpbdtr, TIM\_BDTR\_BK2BID) == TIM\_BDTR\_BK2BID) \&\&}
+\DoxyCodeLine{02903           (READ\_BIT(tmpbdtr, TIM\_BDTR\_MOE) == 0U))}
+\DoxyCodeLine{02904       \{}
+\DoxyCodeLine{02905         \textcolor{comment}{/* Break input BRK is disarmed */}}
+\DoxyCodeLine{02906         SET\_BIT(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_BK2DSRM);}
+\DoxyCodeLine{02907       \}}
+\DoxyCodeLine{02908       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02909     \}}
+\DoxyCodeLine{02910     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{02911       status = HAL\_ERROR;}
+\DoxyCodeLine{02912       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02913   \}}
+\DoxyCodeLine{02914 }
+\DoxyCodeLine{02915   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{02916 \}}
+\DoxyCodeLine{02917 }
+\DoxyCodeLine{02929 HAL\_StatusTypeDef HAL\_TIMEx\_ReArmBreakInput(TIM\_HandleTypeDef *htim, uint32\_t BreakInput)}
+\DoxyCodeLine{02930 \{}
+\DoxyCodeLine{02931   HAL\_StatusTypeDef status = HAL\_OK;}
+\DoxyCodeLine{02932   uint32\_t tickstart;}
+\DoxyCodeLine{02933 }
+\DoxyCodeLine{02934   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{02935   assert\_param(IS\_TIM\_ADVANCED\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{02936   assert\_param(IS\_TIM\_BREAKINPUT(BreakInput));}
+\DoxyCodeLine{02937 }
+\DoxyCodeLine{02938   \textcolor{keywordflow}{switch} (BreakInput)}
+\DoxyCodeLine{02939   \{}
+\DoxyCodeLine{02940     \textcolor{keywordflow}{case} TIM\_BREAKINPUT\_BRK:}
+\DoxyCodeLine{02941     \{}
+\DoxyCodeLine{02942       \textcolor{comment}{/* Check initial conditions */}}
+\DoxyCodeLine{02943       \textcolor{keywordflow}{if} (READ\_BIT(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_BKBID) == TIM\_BDTR\_BKBID)}
+\DoxyCodeLine{02944       \{}
+\DoxyCodeLine{02945         \textcolor{comment}{/* Break input BRK is re-\/armed automatically by hardware. Poll to check whether fault condition disappeared */}}
+\DoxyCodeLine{02946         \textcolor{comment}{/* Init tickstart for timeout management */}}
+\DoxyCodeLine{02947         tickstart = HAL\_GetTick();}
+\DoxyCodeLine{02948         \textcolor{keywordflow}{while} (READ\_BIT(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_BKDSRM) != 0UL)}
+\DoxyCodeLine{02949         \{}
+\DoxyCodeLine{02950           \textcolor{keywordflow}{if} ((HAL\_GetTick() -\/ tickstart) > TIM\_BREAKINPUT\_REARM\_TIMEOUT)}
+\DoxyCodeLine{02951           \{}
+\DoxyCodeLine{02952             \textcolor{comment}{/* New check to avoid false timeout detection in case of preemption */}}
+\DoxyCodeLine{02953             \textcolor{keywordflow}{if} (READ\_BIT(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_BKDSRM) != 0UL)}
+\DoxyCodeLine{02954             \{}
+\DoxyCodeLine{02955               \textcolor{keywordflow}{return} HAL\_TIMEOUT;}
+\DoxyCodeLine{02956             \}}
+\DoxyCodeLine{02957           \}}
+\DoxyCodeLine{02958         \}}
+\DoxyCodeLine{02959       \}}
+\DoxyCodeLine{02960       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02961     \}}
+\DoxyCodeLine{02962 }
+\DoxyCodeLine{02963     \textcolor{keywordflow}{case} TIM\_BREAKINPUT\_BRK2:}
+\DoxyCodeLine{02964     \{}
+\DoxyCodeLine{02965       \textcolor{comment}{/* Check initial conditions */}}
+\DoxyCodeLine{02966       \textcolor{keywordflow}{if} (READ\_BIT(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_BK2BID) == TIM\_BDTR\_BK2BID)}
+\DoxyCodeLine{02967       \{}
+\DoxyCodeLine{02968         \textcolor{comment}{/* Break input BRK2 is re-\/armed automatically by hardware. Poll to check whether fault condition disappeared */}}
+\DoxyCodeLine{02969         \textcolor{comment}{/* Init tickstart for timeout management */}}
+\DoxyCodeLine{02970         tickstart = HAL\_GetTick();}
+\DoxyCodeLine{02971         \textcolor{keywordflow}{while} (READ\_BIT(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_BK2DSRM) != 0UL)}
+\DoxyCodeLine{02972         \{}
+\DoxyCodeLine{02973           \textcolor{keywordflow}{if} ((HAL\_GetTick() -\/ tickstart) > TIM\_BREAKINPUT\_REARM\_TIMEOUT)}
+\DoxyCodeLine{02974           \{}
+\DoxyCodeLine{02975             \textcolor{comment}{/* New check to avoid false timeout detection in case of preemption */}}
+\DoxyCodeLine{02976             \textcolor{keywordflow}{if} (READ\_BIT(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_BK2DSRM) != 0UL)}
+\DoxyCodeLine{02977             \{}
+\DoxyCodeLine{02978               \textcolor{keywordflow}{return} HAL\_TIMEOUT;}
+\DoxyCodeLine{02979             \}}
+\DoxyCodeLine{02980           \}}
+\DoxyCodeLine{02981         \}}
+\DoxyCodeLine{02982       \}}
+\DoxyCodeLine{02983       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02984     \}}
+\DoxyCodeLine{02985     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{02986       status = HAL\_ERROR;}
+\DoxyCodeLine{02987       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{02988   \}}
+\DoxyCodeLine{02989 }
+\DoxyCodeLine{02990   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{02991 \}}
+\DoxyCodeLine{02992 }
+\DoxyCodeLine{03012 HAL\_StatusTypeDef HAL\_TIMEx\_DitheringEnable(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03013 \{}
+\DoxyCodeLine{03014   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03015   assert\_param(IS\_TIM\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03016 }
+\DoxyCodeLine{03017   SET\_BIT(htim-\/>Instance-\/>CR1, TIM\_CR1\_DITHEN);}
+\DoxyCodeLine{03018   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03019 \}}
+\DoxyCodeLine{03020 }
+\DoxyCodeLine{03036 HAL\_StatusTypeDef HAL\_TIMEx\_DitheringDisable(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03037 \{}
+\DoxyCodeLine{03038   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03039   assert\_param(IS\_TIM\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03040 }
+\DoxyCodeLine{03041   CLEAR\_BIT(htim-\/>Instance-\/>CR1, TIM\_CR1\_DITHEN);}
+\DoxyCodeLine{03042   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03043 \}}
+\DoxyCodeLine{03044 }
+\DoxyCodeLine{03054 HAL\_StatusTypeDef HAL\_TIMEx\_OC\_ConfigPulseOnCompare(TIM\_HandleTypeDef *htim,}
+\DoxyCodeLine{03055                                                     uint32\_t PulseWidthPrescaler,}
+\DoxyCodeLine{03056                                                     uint32\_t PulseWidth)}
+\DoxyCodeLine{03057 \{}
+\DoxyCodeLine{03058   uint32\_t tmpecr;}
+\DoxyCodeLine{03059 }
+\DoxyCodeLine{03060   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03061   assert\_param(IS\_TIM\_PULSEONCOMPARE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03062   assert\_param(IS\_TIM\_PULSEONCOMPARE\_WIDTH(PulseWidth));}
+\DoxyCodeLine{03063   assert\_param(IS\_TIM\_PULSEONCOMPARE\_WIDTHPRESCALER(PulseWidthPrescaler));}
+\DoxyCodeLine{03064 }
+\DoxyCodeLine{03065   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{03066   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{03067 }
+\DoxyCodeLine{03068   \textcolor{comment}{/* Set the TIM state */}}
+\DoxyCodeLine{03069   htim-\/>State = HAL\_TIM\_STATE\_BUSY;}
+\DoxyCodeLine{03070 }
+\DoxyCodeLine{03071   \textcolor{comment}{/* Get the TIMx ECR register value */}}
+\DoxyCodeLine{03072   tmpecr = htim-\/>Instance-\/>ECR;}
+\DoxyCodeLine{03073   \textcolor{comment}{/* Reset the Pulse width prescaler and the Pulse width */}}
+\DoxyCodeLine{03074   tmpecr \&= \string~(TIM\_ECR\_PWPRSC | TIM\_ECR\_PW);}
+\DoxyCodeLine{03075   \textcolor{comment}{/* Set the Pulse width prescaler and Pulse width*/}}
+\DoxyCodeLine{03076   tmpecr |= PulseWidthPrescaler << TIM\_ECR\_PWPRSC\_Pos;}
+\DoxyCodeLine{03077   tmpecr |= PulseWidth << TIM\_ECR\_PW\_Pos;}
+\DoxyCodeLine{03078   \textcolor{comment}{/* Write to TIMx ECR */}}
+\DoxyCodeLine{03079   htim-\/>Instance-\/>ECR = tmpecr;}
+\DoxyCodeLine{03080 }
+\DoxyCodeLine{03081   \textcolor{comment}{/* Change the TIM state */}}
+\DoxyCodeLine{03082   htim-\/>State = HAL\_TIM\_STATE\_READY;}
+\DoxyCodeLine{03083 }
+\DoxyCodeLine{03084   \textcolor{comment}{/* Release Lock */}}
+\DoxyCodeLine{03085   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{03086 }
+\DoxyCodeLine{03087   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03088 \}}
+\DoxyCodeLine{03089 }
+\DoxyCodeLine{03099 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigSlaveModePreload(TIM\_HandleTypeDef *htim, uint32\_t Source)}
+\DoxyCodeLine{03100 \{}
+\DoxyCodeLine{03101   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03102   assert\_param(IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03103   assert\_param(IS\_TIM\_SLAVE\_PRELOAD\_SOURCE(Source));}
+\DoxyCodeLine{03104 }
+\DoxyCodeLine{03105   MODIFY\_REG(htim-\/>Instance-\/>SMCR, TIM\_SMCR\_SMSPS, Source);}
+\DoxyCodeLine{03106   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03107 \}}
+\DoxyCodeLine{03108 }
+\DoxyCodeLine{03114 HAL\_StatusTypeDef HAL\_TIMEx\_EnableSlaveModePreload(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03115 \{}
+\DoxyCodeLine{03116   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03117   assert\_param(IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03118 }
+\DoxyCodeLine{03119   SET\_BIT(htim-\/>Instance-\/>SMCR, TIM\_SMCR\_SMSPE);}
+\DoxyCodeLine{03120   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03121 \}}
+\DoxyCodeLine{03122 }
+\DoxyCodeLine{03128 HAL\_StatusTypeDef HAL\_TIMEx\_DisableSlaveModePreload(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03129 \{}
+\DoxyCodeLine{03130   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03131   assert\_param(IS\_TIM\_SLAVE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03132 }
+\DoxyCodeLine{03133   CLEAR\_BIT(htim-\/>Instance-\/>SMCR, TIM\_SMCR\_SMSPE);}
+\DoxyCodeLine{03134   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03135 \}}
+\DoxyCodeLine{03136 }
+\DoxyCodeLine{03142 HAL\_StatusTypeDef HAL\_TIMEx\_EnableDeadTimePreload(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03143 \{}
+\DoxyCodeLine{03144   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03145   assert\_param(IS\_TIM\_BREAK\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03146 }
+\DoxyCodeLine{03147   SET\_BIT(htim-\/>Instance-\/>DTR2, TIM\_DTR2\_DTPE);}
+\DoxyCodeLine{03148   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03149 \}}
+\DoxyCodeLine{03150 }
+\DoxyCodeLine{03156 HAL\_StatusTypeDef HAL\_TIMEx\_DisableDeadTimePreload(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03157 \{}
+\DoxyCodeLine{03158   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03159   assert\_param(IS\_TIM\_BREAK\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03160 }
+\DoxyCodeLine{03161   CLEAR\_BIT(htim-\/>Instance-\/>DTR2, TIM\_DTR2\_DTPE);}
+\DoxyCodeLine{03162   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03163 \}}
+\DoxyCodeLine{03164 }
+\DoxyCodeLine{03172 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigDeadTime(TIM\_HandleTypeDef *htim, uint32\_t Deadtime)}
+\DoxyCodeLine{03173 \{}
+\DoxyCodeLine{03174   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03175   assert\_param(IS\_TIM\_BREAK\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03176   assert\_param(IS\_TIM\_DEADTIME(Deadtime));}
+\DoxyCodeLine{03177 }
+\DoxyCodeLine{03178   MODIFY\_REG(htim-\/>Instance-\/>BDTR, TIM\_BDTR\_DTG, Deadtime);}
+\DoxyCodeLine{03179   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03180 \}}
+\DoxyCodeLine{03181 }
+\DoxyCodeLine{03189 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigAsymmetricalDeadTime(TIM\_HandleTypeDef *htim, uint32\_t FallingDeadtime)}
+\DoxyCodeLine{03190 \{}
+\DoxyCodeLine{03191   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03192   assert\_param(IS\_TIM\_BREAK\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03193   assert\_param(IS\_TIM\_DEADTIME(FallingDeadtime));}
+\DoxyCodeLine{03194 }
+\DoxyCodeLine{03195   MODIFY\_REG(htim-\/>Instance-\/>DTR2, TIM\_DTR2\_DTGF, FallingDeadtime);}
+\DoxyCodeLine{03196   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03197 \}}
+\DoxyCodeLine{03198 }
+\DoxyCodeLine{03204 HAL\_StatusTypeDef HAL\_TIMEx\_EnableAsymmetricalDeadTime(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03205 \{}
+\DoxyCodeLine{03206   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03207   assert\_param(IS\_TIM\_BREAK\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03208 }
+\DoxyCodeLine{03209   SET\_BIT(htim-\/>Instance-\/>DTR2, TIM\_DTR2\_DTAE);}
+\DoxyCodeLine{03210   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03211 \}}
+\DoxyCodeLine{03212 }
+\DoxyCodeLine{03218 HAL\_StatusTypeDef HAL\_TIMEx\_DisableAsymmetricalDeadTime(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03219 \{}
+\DoxyCodeLine{03220   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03221   assert\_param(IS\_TIM\_BREAK\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03222 }
+\DoxyCodeLine{03223   CLEAR\_BIT(htim-\/>Instance-\/>DTR2, TIM\_DTR2\_DTAE);}
+\DoxyCodeLine{03224   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03225 \}}
+\DoxyCodeLine{03226 }
+\DoxyCodeLine{03236 HAL\_StatusTypeDef HAL\_TIMEx\_ConfigEncoderIndex(TIM\_HandleTypeDef *htim,}
+\DoxyCodeLine{03237                                                TIMEx\_EncoderIndexConfigTypeDef *sEncoderIndexConfig)}
+\DoxyCodeLine{03238 \{}
+\DoxyCodeLine{03239   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03240   assert\_param(IS\_TIM\_ENCODER\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03241   assert\_param(IS\_TIM\_ENCODERINDEX\_POLARITY(sEncoderIndexConfig-\/>Polarity));}
+\DoxyCodeLine{03242   assert\_param(IS\_TIM\_ENCODERINDEX\_PRESCALER(sEncoderIndexConfig-\/>Prescaler));}
+\DoxyCodeLine{03243   assert\_param(IS\_TIM\_ENCODERINDEX\_FILTER(sEncoderIndexConfig-\/>Filter));}
+\DoxyCodeLine{03244   assert\_param(IS\_FUNCTIONAL\_STATE(sEncoderIndexConfig-\/>FirstIndexEnable));}
+\DoxyCodeLine{03245   assert\_param(IS\_TIM\_ENCODERINDEX\_POSITION(sEncoderIndexConfig-\/>Position));}
+\DoxyCodeLine{03246   assert\_param(IS\_TIM\_ENCODERINDEX\_DIRECTION(sEncoderIndexConfig-\/>Direction));}
+\DoxyCodeLine{03247 }
+\DoxyCodeLine{03248   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{03249   \_\_HAL\_LOCK(htim);}
+\DoxyCodeLine{03250 }
+\DoxyCodeLine{03251   \textcolor{comment}{/* Configures the TIMx External Trigger (ETR) which is used as Index input */}}
+\DoxyCodeLine{03252   TIM\_ETR\_SetConfig(htim-\/>Instance,}
+\DoxyCodeLine{03253                     sEncoderIndexConfig-\/>Prescaler,}
+\DoxyCodeLine{03254                     sEncoderIndexConfig-\/>Polarity,}
+\DoxyCodeLine{03255                     sEncoderIndexConfig-\/>Filter);}
+\DoxyCodeLine{03256 }
+\DoxyCodeLine{03257   \textcolor{comment}{/* Configures the encoder index */}}
+\DoxyCodeLine{03258   MODIFY\_REG(htim-\/>Instance-\/>ECR,}
+\DoxyCodeLine{03259              TIM\_ECR\_IDIR\_Msk | TIM\_ECR\_FIDX\_Msk | TIM\_ECR\_IPOS\_Msk,}
+\DoxyCodeLine{03260              (sEncoderIndexConfig-\/>Direction |}
+\DoxyCodeLine{03261               ((sEncoderIndexConfig-\/>FirstIndexEnable == ENABLE) ? (0x1U << TIM\_ECR\_FIDX\_Pos) : 0U) |}
+\DoxyCodeLine{03262               sEncoderIndexConfig-\/>Position |}
+\DoxyCodeLine{03263               TIM\_ECR\_IE));}
+\DoxyCodeLine{03264 }
+\DoxyCodeLine{03265   \_\_HAL\_UNLOCK(htim);}
+\DoxyCodeLine{03266 }
+\DoxyCodeLine{03267   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03268 \}}
+\DoxyCodeLine{03269 }
+\DoxyCodeLine{03275 HAL\_StatusTypeDef HAL\_TIMEx\_EnableEncoderIndex(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03276 \{}
+\DoxyCodeLine{03277   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03278   assert\_param(IS\_TIM\_ENCODER\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03279 }
+\DoxyCodeLine{03280   SET\_BIT(htim-\/>Instance-\/>ECR, TIM\_ECR\_IE);}
+\DoxyCodeLine{03281   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03282 \}}
+\DoxyCodeLine{03283 }
+\DoxyCodeLine{03289 HAL\_StatusTypeDef HAL\_TIMEx\_DisableEncoderIndex(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03290 \{}
+\DoxyCodeLine{03291   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03292   assert\_param(IS\_TIM\_ENCODER\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03293 }
+\DoxyCodeLine{03294   CLEAR\_BIT(htim-\/>Instance-\/>ECR, TIM\_ECR\_IE);}
+\DoxyCodeLine{03295   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03296 \}}
+\DoxyCodeLine{03297 }
+\DoxyCodeLine{03303 HAL\_StatusTypeDef HAL\_TIMEx\_EnableEncoderFirstIndex(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03304 \{}
+\DoxyCodeLine{03305   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03306   assert\_param(IS\_TIM\_ENCODER\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03307 }
+\DoxyCodeLine{03308   SET\_BIT(htim-\/>Instance-\/>ECR, TIM\_ECR\_FIDX);}
+\DoxyCodeLine{03309   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03310 \}}
+\DoxyCodeLine{03311 }
+\DoxyCodeLine{03317 HAL\_StatusTypeDef HAL\_TIMEx\_DisableEncoderFirstIndex(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03318 \{}
+\DoxyCodeLine{03319   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03320   assert\_param(IS\_TIM\_ENCODER\_INTERFACE\_INSTANCE(htim-\/>Instance));}
+\DoxyCodeLine{03321 }
+\DoxyCodeLine{03322   CLEAR\_BIT(htim-\/>Instance-\/>ECR, TIM\_ECR\_FIDX);}
+\DoxyCodeLine{03323   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{03324 \}}
+\DoxyCodeLine{03325 }
+\DoxyCodeLine{03351 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_CommutCallback(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03352 \{}
+\DoxyCodeLine{03353   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{03354   UNUSED(htim);}
+\DoxyCodeLine{03355 }
+\DoxyCodeLine{03356   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{03357 \textcolor{comment}{            the HAL\_TIMEx\_CommutCallback could be implemented in the user file}}
+\DoxyCodeLine{03358 \textcolor{comment}{   */}}
+\DoxyCodeLine{03359 \}}
+\DoxyCodeLine{03365 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_CommutHalfCpltCallback(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03366 \{}
+\DoxyCodeLine{03367   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{03368   UNUSED(htim);}
+\DoxyCodeLine{03369 }
+\DoxyCodeLine{03370   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{03371 \textcolor{comment}{            the HAL\_TIMEx\_CommutHalfCpltCallback could be implemented in the user file}}
+\DoxyCodeLine{03372 \textcolor{comment}{   */}}
+\DoxyCodeLine{03373 \}}
+\DoxyCodeLine{03374 }
+\DoxyCodeLine{03380 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_BreakCallback(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03381 \{}
+\DoxyCodeLine{03382   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{03383   UNUSED(htim);}
+\DoxyCodeLine{03384 }
+\DoxyCodeLine{03385   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{03386 \textcolor{comment}{            the HAL\_TIMEx\_BreakCallback could be implemented in the user file}}
+\DoxyCodeLine{03387 \textcolor{comment}{   */}}
+\DoxyCodeLine{03388 \}}
+\DoxyCodeLine{03389 }
+\DoxyCodeLine{03395 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_Break2Callback(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03396 \{}
+\DoxyCodeLine{03397   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{03398   UNUSED(htim);}
+\DoxyCodeLine{03399 }
+\DoxyCodeLine{03400   \textcolor{comment}{/* NOTE : This function Should not be modified, when the callback is needed,}}
+\DoxyCodeLine{03401 \textcolor{comment}{            the HAL\_TIMEx\_Break2Callback could be implemented in the user file}}
+\DoxyCodeLine{03402 \textcolor{comment}{   */}}
+\DoxyCodeLine{03403 \}}
+\DoxyCodeLine{03404 }
+\DoxyCodeLine{03410 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_EncoderIndexCallback(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03411 \{}
+\DoxyCodeLine{03412   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{03413   UNUSED(htim);}
+\DoxyCodeLine{03414 }
+\DoxyCodeLine{03415   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{03416 \textcolor{comment}{            the HAL\_TIMEx\_EncoderIndexCallback could be implemented in the user file}}
+\DoxyCodeLine{03417 \textcolor{comment}{   */}}
+\DoxyCodeLine{03418 \}}
+\DoxyCodeLine{03419 }
+\DoxyCodeLine{03425 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_DirectionChangeCallback(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03426 \{}
+\DoxyCodeLine{03427   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{03428   UNUSED(htim);}
+\DoxyCodeLine{03429 }
+\DoxyCodeLine{03430   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{03431 \textcolor{comment}{            the HAL\_TIMEx\_DirectionChangeCallback could be implemented in the user file}}
+\DoxyCodeLine{03432 \textcolor{comment}{   */}}
+\DoxyCodeLine{03433 \}}
+\DoxyCodeLine{03434 }
+\DoxyCodeLine{03440 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_IndexErrorCallback(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03441 \{}
+\DoxyCodeLine{03442   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{03443   UNUSED(htim);}
+\DoxyCodeLine{03444 }
+\DoxyCodeLine{03445   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{03446 \textcolor{comment}{            the HAL\_TIMEx\_IndexErrorCallback could be implemented in the user file}}
+\DoxyCodeLine{03447 \textcolor{comment}{   */}}
+\DoxyCodeLine{03448 \}}
+\DoxyCodeLine{03449 }
+\DoxyCodeLine{03455 \_\_weak \textcolor{keywordtype}{void} HAL\_TIMEx\_TransitionErrorCallback(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03456 \{}
+\DoxyCodeLine{03457   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{03458   UNUSED(htim);}
+\DoxyCodeLine{03459 }
+\DoxyCodeLine{03460   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{03461 \textcolor{comment}{            the HAL\_TIMEx\_TransitionErrorCallback could be implemented in the user file}}
+\DoxyCodeLine{03462 \textcolor{comment}{   */}}
+\DoxyCodeLine{03463 \}}
+\DoxyCodeLine{03464 }
+\DoxyCodeLine{03489 HAL\_TIM\_StateTypeDef HAL\_TIMEx\_HallSensor\_GetState(TIM\_HandleTypeDef *htim)}
+\DoxyCodeLine{03490 \{}
+\DoxyCodeLine{03491   \textcolor{keywordflow}{return} htim-\/>State;}
+\DoxyCodeLine{03492 \}}
+\DoxyCodeLine{03493 }
+\DoxyCodeLine{03505 HAL\_TIM\_ChannelStateTypeDef HAL\_TIMEx\_GetChannelNState(TIM\_HandleTypeDef *htim,  uint32\_t ChannelN)}
+\DoxyCodeLine{03506 \{}
+\DoxyCodeLine{03507   HAL\_TIM\_ChannelStateTypeDef channel\_state;}
+\DoxyCodeLine{03508 }
+\DoxyCodeLine{03509   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{03510   assert\_param(IS\_TIM\_CCXN\_INSTANCE(htim-\/>Instance, ChannelN));}
+\DoxyCodeLine{03511 }
+\DoxyCodeLine{03512   channel\_state = TIM\_CHANNEL\_N\_STATE\_GET(htim, ChannelN);}
+\DoxyCodeLine{03513 }
+\DoxyCodeLine{03514   \textcolor{keywordflow}{return} channel\_state;}
+\DoxyCodeLine{03515 \}}
+\DoxyCodeLine{03524 \textcolor{comment}{/* Private functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{03534 \textcolor{keywordtype}{void} TIMEx\_DMACommutationCplt(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{03535 \{}
+\DoxyCodeLine{03536   TIM\_HandleTypeDef *htim = (TIM\_HandleTypeDef *)((DMA\_HandleTypeDef *)hdma)-\/>Parent;}
+\DoxyCodeLine{03537 }
+\DoxyCodeLine{03538   \textcolor{comment}{/* Change the htim state */}}
+\DoxyCodeLine{03539   htim-\/>State = HAL\_TIM\_STATE\_READY;}
+\DoxyCodeLine{03540 }
+\DoxyCodeLine{03541 \textcolor{preprocessor}{\#if (USE\_HAL\_TIM\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{03542   htim-\/>CommutationCallback(htim);}
+\DoxyCodeLine{03543 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{03544   HAL\_TIMEx\_CommutCallback(htim);}
+\DoxyCodeLine{03545 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_TIM\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{03546 \}}
+\DoxyCodeLine{03547 }
+\DoxyCodeLine{03553 \textcolor{keywordtype}{void} TIMEx\_DMACommutationHalfCplt(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{03554 \{}
+\DoxyCodeLine{03555   TIM\_HandleTypeDef *htim = (TIM\_HandleTypeDef *)((DMA\_HandleTypeDef *)hdma)-\/>Parent;}
+\DoxyCodeLine{03556 }
+\DoxyCodeLine{03557   \textcolor{comment}{/* Change the htim state */}}
+\DoxyCodeLine{03558   htim-\/>State = HAL\_TIM\_STATE\_READY;}
+\DoxyCodeLine{03559 }
+\DoxyCodeLine{03560 \textcolor{preprocessor}{\#if (USE\_HAL\_TIM\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{03561   htim-\/>CommutationHalfCpltCallback(htim);}
+\DoxyCodeLine{03562 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{03563   HAL\_TIMEx\_CommutHalfCpltCallback(htim);}
+\DoxyCodeLine{03564 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_TIM\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{03565 \}}
+\DoxyCodeLine{03566 }
+\DoxyCodeLine{03567 }
+\DoxyCodeLine{03573 \textcolor{keyword}{static} \textcolor{keywordtype}{void} TIM\_DMADelayPulseNCplt(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{03574 \{}
+\DoxyCodeLine{03575   TIM\_HandleTypeDef *htim = (TIM\_HandleTypeDef *)((DMA\_HandleTypeDef *)hdma)-\/>Parent;}
+\DoxyCodeLine{03576 }
+\DoxyCodeLine{03577   \textcolor{keywordflow}{if} (hdma == htim-\/>hdma[TIM\_DMA\_ID\_CC1])}
+\DoxyCodeLine{03578   \{}
+\DoxyCodeLine{03579     htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_1;}
+\DoxyCodeLine{03580 }
+\DoxyCodeLine{03581     \textcolor{keywordflow}{if} (hdma-\/>Init.Mode == DMA\_NORMAL)}
+\DoxyCodeLine{03582     \{}
+\DoxyCodeLine{03583       TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{03584     \}}
+\DoxyCodeLine{03585   \}}
+\DoxyCodeLine{03586   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hdma == htim-\/>hdma[TIM\_DMA\_ID\_CC2])}
+\DoxyCodeLine{03587   \{}
+\DoxyCodeLine{03588     htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_2;}
+\DoxyCodeLine{03589 }
+\DoxyCodeLine{03590     \textcolor{keywordflow}{if} (hdma-\/>Init.Mode == DMA\_NORMAL)}
+\DoxyCodeLine{03591     \{}
+\DoxyCodeLine{03592       TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{03593     \}}
+\DoxyCodeLine{03594   \}}
+\DoxyCodeLine{03595   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hdma == htim-\/>hdma[TIM\_DMA\_ID\_CC3])}
+\DoxyCodeLine{03596   \{}
+\DoxyCodeLine{03597     htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_3;}
+\DoxyCodeLine{03598 }
+\DoxyCodeLine{03599     \textcolor{keywordflow}{if} (hdma-\/>Init.Mode == DMA\_NORMAL)}
+\DoxyCodeLine{03600     \{}
+\DoxyCodeLine{03601       TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_3, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{03602     \}}
+\DoxyCodeLine{03603   \}}
+\DoxyCodeLine{03604   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hdma == htim-\/>hdma[TIM\_DMA\_ID\_CC4])}
+\DoxyCodeLine{03605   \{}
+\DoxyCodeLine{03606     htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_4;}
+\DoxyCodeLine{03607 }
+\DoxyCodeLine{03608     \textcolor{keywordflow}{if} (hdma-\/>Init.Mode == DMA\_NORMAL)}
+\DoxyCodeLine{03609     \{}
+\DoxyCodeLine{03610       TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_4, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{03611     \}}
+\DoxyCodeLine{03612   \}}
+\DoxyCodeLine{03613   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{03614   \{}
+\DoxyCodeLine{03615     \textcolor{comment}{/* nothing to do */}}
+\DoxyCodeLine{03616   \}}
+\DoxyCodeLine{03617 }
+\DoxyCodeLine{03618 \textcolor{preprocessor}{\#if (USE\_HAL\_TIM\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{03619   htim-\/>PWM\_PulseFinishedCallback(htim);}
+\DoxyCodeLine{03620 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{03621   HAL\_TIM\_PWM\_PulseFinishedCallback(htim);}
+\DoxyCodeLine{03622 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_TIM\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{03623 }
+\DoxyCodeLine{03624   htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_CLEARED;}
+\DoxyCodeLine{03625 \}}
+\DoxyCodeLine{03626 }
+\DoxyCodeLine{03632 \textcolor{keyword}{static} \textcolor{keywordtype}{void} TIM\_DMAErrorCCxN(DMA\_HandleTypeDef *hdma)}
+\DoxyCodeLine{03633 \{}
+\DoxyCodeLine{03634   TIM\_HandleTypeDef *htim = (TIM\_HandleTypeDef *)((DMA\_HandleTypeDef *)hdma)-\/>Parent;}
+\DoxyCodeLine{03635 }
+\DoxyCodeLine{03636   \textcolor{keywordflow}{if} (hdma == htim-\/>hdma[TIM\_DMA\_ID\_CC1])}
+\DoxyCodeLine{03637   \{}
+\DoxyCodeLine{03638     htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_1;}
+\DoxyCodeLine{03639     TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_1, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{03640   \}}
+\DoxyCodeLine{03641   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hdma == htim-\/>hdma[TIM\_DMA\_ID\_CC2])}
+\DoxyCodeLine{03642   \{}
+\DoxyCodeLine{03643     htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_2;}
+\DoxyCodeLine{03644     TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_2, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{03645   \}}
+\DoxyCodeLine{03646   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hdma == htim-\/>hdma[TIM\_DMA\_ID\_CC3])}
+\DoxyCodeLine{03647   \{}
+\DoxyCodeLine{03648     htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_3;}
+\DoxyCodeLine{03649     TIM\_CHANNEL\_N\_STATE\_SET(htim, TIM\_CHANNEL\_3, HAL\_TIM\_CHANNEL\_STATE\_READY);}
+\DoxyCodeLine{03650   \}}
+\DoxyCodeLine{03651   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{03652   \{}
+\DoxyCodeLine{03653     \textcolor{comment}{/* nothing to do */}}
+\DoxyCodeLine{03654   \}}
+\DoxyCodeLine{03655 }
+\DoxyCodeLine{03656 \textcolor{preprocessor}{\#if (USE\_HAL\_TIM\_REGISTER\_CALLBACKS == 1)}}
+\DoxyCodeLine{03657   htim-\/>ErrorCallback(htim);}
+\DoxyCodeLine{03658 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{03659   HAL\_TIM\_ErrorCallback(htim);}
+\DoxyCodeLine{03660 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_HAL\_TIM\_REGISTER\_CALLBACKS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{03661 }
+\DoxyCodeLine{03662   htim-\/>Channel = HAL\_TIM\_ACTIVE\_CHANNEL\_CLEARED;}
+\DoxyCodeLine{03663 \}}
+\DoxyCodeLine{03664 }
+\DoxyCodeLine{03678 \textcolor{keyword}{static} \textcolor{keywordtype}{void} TIM\_CCxNChannelCmd(TIM\_TypeDef *TIMx, uint32\_t Channel, uint32\_t ChannelNState)}
+\DoxyCodeLine{03679 \{}
+\DoxyCodeLine{03680   uint32\_t tmp;}
+\DoxyCodeLine{03681 }
+\DoxyCodeLine{03682   tmp = TIM\_CCER\_CC1NE << (Channel \& 0x1FU); \textcolor{comment}{/* 0x1FU = 31 bits max shift */}}
+\DoxyCodeLine{03683 }
+\DoxyCodeLine{03684   \textcolor{comment}{/* Reset the CCxNE Bit */}}
+\DoxyCodeLine{03685   TIMx-\/>CCER \&=  \string~tmp;}
+\DoxyCodeLine{03686 }
+\DoxyCodeLine{03687   \textcolor{comment}{/* Set or reset the CCxNE Bit */}}
+\DoxyCodeLine{03688   TIMx-\/>CCER |= (uint32\_t)(ChannelNState << (Channel \& 0x1FU)); \textcolor{comment}{/* 0x1FU = 31 bits max shift */}}
+\DoxyCodeLine{03689 \}}
+\DoxyCodeLine{03694 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_TIM\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

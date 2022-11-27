@@ -1,0 +1,1190 @@
+\doxysection{stm32g4xx\+\_\+ll\+\_\+adc.\+c}
+\label{stm32g4xx__ll__adc_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_ll\_adc.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_ll\_adc.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00018 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{00019 }
+\DoxyCodeLine{00020 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#include "{}stm32g4xx\_ll\_adc.h"{}}}
+\DoxyCodeLine{00022 \textcolor{preprocessor}{\#include "{}stm32g4xx\_ll\_bus.h"{}}}
+\DoxyCodeLine{00023 }
+\DoxyCodeLine{00024 \textcolor{preprocessor}{\#ifdef  USE\_FULL\_ASSERT}}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#include "{}stm32\_assert.h"{}}}
+\DoxyCodeLine{00026 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00027 \textcolor{preprocessor}{\#define assert\_param(expr) ((void)0U)}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00034 \textcolor{preprocessor}{\#if defined (ADC1) || defined (ADC2) || defined (ADC3) || defined (ADC4) || defined (ADC5)}}
+\DoxyCodeLine{00035 }
+\DoxyCodeLine{00040 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00041 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00042 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00047 \textcolor{comment}{/* Definitions of ADC hardware constraints delays */}}
+\DoxyCodeLine{00048 \textcolor{comment}{/* Note: Only ADC peripheral HW delays are defined in ADC LL driver driver,   */}}
+\DoxyCodeLine{00049 \textcolor{comment}{/*       not timeout values:                                                  */}}
+\DoxyCodeLine{00050 \textcolor{comment}{/*       Timeout values for ADC operations are dependent to device clock      */}}
+\DoxyCodeLine{00051 \textcolor{comment}{/*       configuration (system clock versus ADC clock),                       */}}
+\DoxyCodeLine{00052 \textcolor{comment}{/*       and therefore must be defined in user application.                   */}}
+\DoxyCodeLine{00053 \textcolor{comment}{/*       Refer to @ref ADC\_LL\_EC\_HW\_DELAYS for description of ADC timeout     */}}
+\DoxyCodeLine{00054 \textcolor{comment}{/*       values definition.                                                   */}}
+\DoxyCodeLine{00055 \textcolor{comment}{/* Note: ADC timeout values are defined here in CPU cycles to be independent  */}}
+\DoxyCodeLine{00056 \textcolor{comment}{/*       of device clock setting.                                             */}}
+\DoxyCodeLine{00057 \textcolor{comment}{/*       In user application, ADC timeout values should be defined with       */}}
+\DoxyCodeLine{00058 \textcolor{comment}{/*       temporal values, in function of device clock settings.               */}}
+\DoxyCodeLine{00059 \textcolor{comment}{/*       Highest ratio CPU clock frequency vs ADC clock frequency:            */}}
+\DoxyCodeLine{00060 \textcolor{comment}{/*        -\/ ADC clock from synchronous clock with AHB prescaler 512,          */}}
+\DoxyCodeLine{00061 \textcolor{comment}{/*          ADC prescaler 4.                                                  */}}
+\DoxyCodeLine{00062 \textcolor{comment}{/*           Ratio max = 512 *4 = 2048                                        */}}
+\DoxyCodeLine{00063 \textcolor{comment}{/*        -\/ ADC clock from asynchronous clock (PLLP) with prescaler 256.      */}}
+\DoxyCodeLine{00064 \textcolor{comment}{/*          Highest CPU clock PLL (PLLR).                                     */}}
+\DoxyCodeLine{00065 \textcolor{comment}{/*           Ratio max = PLLRmax /PPLPmin * 256 = (VCO/2) / (VCO/31) * 256    */}}
+\DoxyCodeLine{00066 \textcolor{comment}{/*                     = 3968                                                 */}}
+\DoxyCodeLine{00067 \textcolor{comment}{/* Unit: CPU cycles.                                                          */}}
+\DoxyCodeLine{00068 \textcolor{preprocessor}{\#define ADC\_CLOCK\_RATIO\_VS\_CPU\_HIGHEST          (3968UL)}}
+\DoxyCodeLine{00069 \textcolor{preprocessor}{\#define ADC\_TIMEOUT\_DISABLE\_CPU\_CYCLES          (ADC\_CLOCK\_RATIO\_VS\_CPU\_HIGHEST * 1UL)}}
+\DoxyCodeLine{00070 \textcolor{preprocessor}{\#define ADC\_TIMEOUT\_STOP\_CONVERSION\_CPU\_CYCLES  (ADC\_CLOCK\_RATIO\_VS\_CPU\_HIGHEST * 1UL)}}
+\DoxyCodeLine{00071 }
+\DoxyCodeLine{00076 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00077 }
+\DoxyCodeLine{00082 \textcolor{comment}{/* Check of parameters for configuration of ADC hierarchical scope:           */}}
+\DoxyCodeLine{00083 \textcolor{comment}{/* common to several ADC instances.                                           */}}
+\DoxyCodeLine{00084 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_COMMON\_CLOCK(\_\_CLOCK\_\_)                                      \(\backslash\)}}
+\DoxyCodeLine{00085 \textcolor{preprocessor}{  (((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_SYNC\_PCLK\_DIV1)                                \(\backslash\)}}
+\DoxyCodeLine{00086 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_SYNC\_PCLK\_DIV2)                             \(\backslash\)}}
+\DoxyCodeLine{00087 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_SYNC\_PCLK\_DIV4)                             \(\backslash\)}}
+\DoxyCodeLine{00088 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV1)                                 \(\backslash\)}}
+\DoxyCodeLine{00089 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV2)                                 \(\backslash\)}}
+\DoxyCodeLine{00090 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV4)                                 \(\backslash\)}}
+\DoxyCodeLine{00091 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV6)                                 \(\backslash\)}}
+\DoxyCodeLine{00092 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV8)                                 \(\backslash\)}}
+\DoxyCodeLine{00093 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV10)                                \(\backslash\)}}
+\DoxyCodeLine{00094 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV12)                                \(\backslash\)}}
+\DoxyCodeLine{00095 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV16)                                \(\backslash\)}}
+\DoxyCodeLine{00096 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV32)                                \(\backslash\)}}
+\DoxyCodeLine{00097 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV64)                                \(\backslash\)}}
+\DoxyCodeLine{00098 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV128)                               \(\backslash\)}}
+\DoxyCodeLine{00099 \textcolor{preprocessor}{   || ((\_\_CLOCK\_\_) == LL\_ADC\_CLOCK\_ASYNC\_DIV256)                               \(\backslash\)}}
+\DoxyCodeLine{00100 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00101 }
+\DoxyCodeLine{00102 \textcolor{comment}{/* Check of parameters for configuration of ADC hierarchical scope:           */}}
+\DoxyCodeLine{00103 \textcolor{comment}{/* ADC instance.                                                              */}}
+\DoxyCodeLine{00104 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_RESOLUTION(\_\_RESOLUTION\_\_)                                   \(\backslash\)}}
+\DoxyCodeLine{00105 \textcolor{preprocessor}{  (((\_\_RESOLUTION\_\_) == LL\_ADC\_RESOLUTION\_12B)                                 \(\backslash\)}}
+\DoxyCodeLine{00106 \textcolor{preprocessor}{   || ((\_\_RESOLUTION\_\_) == LL\_ADC\_RESOLUTION\_10B)                              \(\backslash\)}}
+\DoxyCodeLine{00107 \textcolor{preprocessor}{   || ((\_\_RESOLUTION\_\_) == LL\_ADC\_RESOLUTION\_8B)                               \(\backslash\)}}
+\DoxyCodeLine{00108 \textcolor{preprocessor}{   || ((\_\_RESOLUTION\_\_) == LL\_ADC\_RESOLUTION\_6B)                               \(\backslash\)}}
+\DoxyCodeLine{00109 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00110 }
+\DoxyCodeLine{00111 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_DATA\_ALIGN(\_\_DATA\_ALIGN\_\_)                                   \(\backslash\)}}
+\DoxyCodeLine{00112 \textcolor{preprocessor}{  (((\_\_DATA\_ALIGN\_\_) == LL\_ADC\_DATA\_ALIGN\_RIGHT)                               \(\backslash\)}}
+\DoxyCodeLine{00113 \textcolor{preprocessor}{   || ((\_\_DATA\_ALIGN\_\_) == LL\_ADC\_DATA\_ALIGN\_LEFT)                             \(\backslash\)}}
+\DoxyCodeLine{00114 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00115 }
+\DoxyCodeLine{00116 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_LOW\_POWER(\_\_LOW\_POWER\_\_)                                     \(\backslash\)}}
+\DoxyCodeLine{00117 \textcolor{preprocessor}{  (((\_\_LOW\_POWER\_\_) == LL\_ADC\_LP\_MODE\_NONE)                                    \(\backslash\)}}
+\DoxyCodeLine{00118 \textcolor{preprocessor}{   || ((\_\_LOW\_POWER\_\_) == LL\_ADC\_LP\_AUTOWAIT)                                  \(\backslash\)}}
+\DoxyCodeLine{00119 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00120 }
+\DoxyCodeLine{00121 \textcolor{comment}{/* Check of parameters for configuration of ADC hierarchical scope:           */}}
+\DoxyCodeLine{00122 \textcolor{comment}{/* ADC group regular                                                          */}}
+\DoxyCodeLine{00123 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx)}}
+\DoxyCodeLine{00124 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_REG\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00125 \textcolor{preprocessor}{  (((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00126 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00127 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00128 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH3)                  \(\backslash\)}}
+\DoxyCodeLine{00129 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00130 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00131 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00132 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00133 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00134 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00135 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00136 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00137 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00138 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_TRGO2)               \(\backslash\)}}
+\DoxyCodeLine{00139 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH1)                 \(\backslash\)}}
+\DoxyCodeLine{00140 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG1)                \(\backslash\)}}
+\DoxyCodeLine{00141 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG3)                \(\backslash\)}}
+\DoxyCodeLine{00142 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG5)                \(\backslash\)}}
+\DoxyCodeLine{00143 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG6)                \(\backslash\)}}
+\DoxyCodeLine{00144 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG7)                \(\backslash\)}}
+\DoxyCodeLine{00145 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG8)                \(\backslash\)}}
+\DoxyCodeLine{00146 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG9)                \(\backslash\)}}
+\DoxyCodeLine{00147 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG10)               \(\backslash\)}}
+\DoxyCodeLine{00148 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00149 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC1) || ((\_\_ADC\_INSTANCE\_\_) == ADC2))          \(\backslash\)}}
+\DoxyCodeLine{00150 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00151 \textcolor{preprocessor}{            ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00152 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00153 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00154 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00155 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00156 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH2)           \(\backslash\)}}
+\DoxyCodeLine{00157 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH3)           \(\backslash\)}}
+\DoxyCodeLine{00158 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE11)         \(\backslash\)}}
+\DoxyCodeLine{00159 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00160 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00161 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC3) || ((\_\_ADC\_INSTANCE\_\_) == ADC4) || ((\_\_ADC\_INSTANCE\_\_) == ADC5)) \(\backslash\)}}
+\DoxyCodeLine{00162 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00163 \textcolor{preprocessor}{            ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00164 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00165 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00166 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00167 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00168 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE2)          \(\backslash\)}}
+\DoxyCodeLine{00169 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG2)          \(\backslash\)}}
+\DoxyCodeLine{00170 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_HRTIM\_TRG4)          \(\backslash\)}}
+\DoxyCodeLine{00171 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00172 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00173 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00174 \textcolor{preprocessor}{\#elif defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00175 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_REG\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00176 \textcolor{preprocessor}{  (((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00177 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00178 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00179 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH3)                  \(\backslash\)}}
+\DoxyCodeLine{00180 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00181 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH2)                  \(\backslash\)}}
+\DoxyCodeLine{00182 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00183 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00184 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00185 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00186 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00187 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00188 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00189 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00190 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_TRGO2)               \(\backslash\)}}
+\DoxyCodeLine{00191 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH1)                 \(\backslash\)}}
+\DoxyCodeLine{00192 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00193 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC1) || ((\_\_ADC\_INSTANCE\_\_) == ADC2))          \(\backslash\)}}
+\DoxyCodeLine{00194 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00195 \textcolor{preprocessor}{            ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00196 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00197 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00198 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00199 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00200 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH2)           \(\backslash\)}}
+\DoxyCodeLine{00201 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH3)           \(\backslash\)}}
+\DoxyCodeLine{00202 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE11)         \(\backslash\)}}
+\DoxyCodeLine{00203 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00204 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00205 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC3) || ((\_\_ADC\_INSTANCE\_\_) == ADC4) || ((\_\_ADC\_INSTANCE\_\_) == ADC5)) \(\backslash\)}}
+\DoxyCodeLine{00206 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00207 \textcolor{preprocessor}{            ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00208 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00209 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00210 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00211 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00212 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE2)          \(\backslash\)}}
+\DoxyCodeLine{00213 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00214 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00215 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00216 \textcolor{preprocessor}{\#elif defined(STM32G471xx)}}
+\DoxyCodeLine{00217 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_REG\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00218 \textcolor{preprocessor}{  (((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00219 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00220 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00221 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH3)                  \(\backslash\)}}
+\DoxyCodeLine{00222 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00223 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH2)                  \(\backslash\)}}
+\DoxyCodeLine{00224 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00225 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00226 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00227 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00228 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00229 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00230 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00231 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00232 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC1) || ((\_\_ADC\_INSTANCE\_\_) == ADC2))          \(\backslash\)}}
+\DoxyCodeLine{00233 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00234 \textcolor{preprocessor}{            ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00235 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00236 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00237 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00238 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00239 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE11)         \(\backslash\)}}
+\DoxyCodeLine{00240 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00241 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00242 \textcolor{preprocessor}{   || (((\_\_ADC\_INSTANCE\_\_) == ADC3) \(\backslash\)}}
+\DoxyCodeLine{00243 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00244 \textcolor{preprocessor}{            ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00245 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00246 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00247 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00248 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00249 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE2)          \(\backslash\)}}
+\DoxyCodeLine{00250 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00251 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00252 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00253 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)}}
+\DoxyCodeLine{00254 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_REG\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00255 \textcolor{preprocessor}{  (((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00256 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00257 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00258 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH1)                  \(\backslash\)}}
+\DoxyCodeLine{00259 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH2)                  \(\backslash\)}}
+\DoxyCodeLine{00260 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH3)                  \(\backslash\)}}
+\DoxyCodeLine{00261 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00262 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH2)                  \(\backslash\)}}
+\DoxyCodeLine{00263 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00264 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00265 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00266 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00267 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00268 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00269 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00270 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00271 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00272 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00273 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE11)               \(\backslash\)}}
+\DoxyCodeLine{00274 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00275 \textcolor{preprocessor}{\#elif defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00276 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_REG\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00277 \textcolor{preprocessor}{  (((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00278 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00279 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00280 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH3)                  \(\backslash\)}}
+\DoxyCodeLine{00281 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00282 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00283 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00284 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00285 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00286 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00287 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00288 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00289 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00290 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_TRGO2)               \(\backslash\)}}
+\DoxyCodeLine{00291 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH1)                 \(\backslash\)}}
+\DoxyCodeLine{00292 \textcolor{preprocessor}{   || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00293 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC1) || ((\_\_ADC\_INSTANCE\_\_) == ADC2))          \(\backslash\)}}
+\DoxyCodeLine{00294 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00295 \textcolor{preprocessor}{            ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00296 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00297 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00298 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00299 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00300 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH2)           \(\backslash\)}}
+\DoxyCodeLine{00301 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM20\_CH3)           \(\backslash\)}}
+\DoxyCodeLine{00302 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE11)         \(\backslash\)}}
+\DoxyCodeLine{00303 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00304 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00305 \textcolor{preprocessor}{   || (((\_\_ADC\_INSTANCE\_\_) == ADC3)                                            \(\backslash\)}}
+\DoxyCodeLine{00306 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00307 \textcolor{preprocessor}{            ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00308 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00309 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00310 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00311 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00312 \textcolor{preprocessor}{         || ((\_\_REG\_TRIG\_SOURCE\_\_) == LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE2)          \(\backslash\)}}
+\DoxyCodeLine{00313 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00314 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00315 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00316 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00317 }
+\DoxyCodeLine{00318 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_CONTINUOUS\_MODE(\_\_REG\_CONTINUOUS\_MODE\_\_)                 \(\backslash\)}}
+\DoxyCodeLine{00319 \textcolor{preprocessor}{  (((\_\_REG\_CONTINUOUS\_MODE\_\_) == LL\_ADC\_REG\_CONV\_SINGLE)                       \(\backslash\)}}
+\DoxyCodeLine{00320 \textcolor{preprocessor}{   || ((\_\_REG\_CONTINUOUS\_MODE\_\_) == LL\_ADC\_REG\_CONV\_CONTINUOUS)                \(\backslash\)}}
+\DoxyCodeLine{00321 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00322 }
+\DoxyCodeLine{00323 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_DMA\_TRANSFER(\_\_REG\_DMA\_TRANSFER\_\_)                       \(\backslash\)}}
+\DoxyCodeLine{00324 \textcolor{preprocessor}{  (((\_\_REG\_DMA\_TRANSFER\_\_) == LL\_ADC\_REG\_DMA\_TRANSFER\_NONE)                    \(\backslash\)}}
+\DoxyCodeLine{00325 \textcolor{preprocessor}{   || ((\_\_REG\_DMA\_TRANSFER\_\_) == LL\_ADC\_REG\_DMA\_TRANSFER\_LIMITED)              \(\backslash\)}}
+\DoxyCodeLine{00326 \textcolor{preprocessor}{   || ((\_\_REG\_DMA\_TRANSFER\_\_) == LL\_ADC\_REG\_DMA\_TRANSFER\_UNLIMITED)            \(\backslash\)}}
+\DoxyCodeLine{00327 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00328 }
+\DoxyCodeLine{00329 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_OVR\_DATA\_BEHAVIOR(\_\_REG\_OVR\_DATA\_BEHAVIOR\_\_)             \(\backslash\)}}
+\DoxyCodeLine{00330 \textcolor{preprocessor}{  (((\_\_REG\_OVR\_DATA\_BEHAVIOR\_\_) == LL\_ADC\_REG\_OVR\_DATA\_PRESERVED)              \(\backslash\)}}
+\DoxyCodeLine{00331 \textcolor{preprocessor}{   || ((\_\_REG\_OVR\_DATA\_BEHAVIOR\_\_) == LL\_ADC\_REG\_OVR\_DATA\_OVERWRITTEN)         \(\backslash\)}}
+\DoxyCodeLine{00332 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00333 }
+\DoxyCodeLine{00334 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_SEQ\_SCAN\_LENGTH(\_\_REG\_SEQ\_SCAN\_LENGTH\_\_)                 \(\backslash\)}}
+\DoxyCodeLine{00335 \textcolor{preprocessor}{  (((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_DISABLE)                  \(\backslash\)}}
+\DoxyCodeLine{00336 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_2RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00337 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_3RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00338 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_4RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00339 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_5RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00340 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_6RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00341 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_7RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00342 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_8RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00343 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_9RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00344 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_10RANKS)        \(\backslash\)}}
+\DoxyCodeLine{00345 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_11RANKS)        \(\backslash\)}}
+\DoxyCodeLine{00346 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_12RANKS)        \(\backslash\)}}
+\DoxyCodeLine{00347 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_13RANKS)        \(\backslash\)}}
+\DoxyCodeLine{00348 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_14RANKS)        \(\backslash\)}}
+\DoxyCodeLine{00349 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_15RANKS)        \(\backslash\)}}
+\DoxyCodeLine{00350 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_16RANKS)        \(\backslash\)}}
+\DoxyCodeLine{00351 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00352 }
+\DoxyCodeLine{00353 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_REG\_SEQ\_SCAN\_DISCONT\_MODE(\_\_REG\_SEQ\_DISCONT\_MODE\_\_)          \(\backslash\)}}
+\DoxyCodeLine{00354 \textcolor{preprocessor}{  (((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_DISABLE)              \(\backslash\)}}
+\DoxyCodeLine{00355 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_1RANK)             \(\backslash\)}}
+\DoxyCodeLine{00356 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_2RANKS)            \(\backslash\)}}
+\DoxyCodeLine{00357 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_3RANKS)            \(\backslash\)}}
+\DoxyCodeLine{00358 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_4RANKS)            \(\backslash\)}}
+\DoxyCodeLine{00359 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_5RANKS)            \(\backslash\)}}
+\DoxyCodeLine{00360 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_6RANKS)            \(\backslash\)}}
+\DoxyCodeLine{00361 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_7RANKS)            \(\backslash\)}}
+\DoxyCodeLine{00362 \textcolor{preprocessor}{   || ((\_\_REG\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_REG\_SEQ\_DISCONT\_8RANKS)            \(\backslash\)}}
+\DoxyCodeLine{00363 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00364 }
+\DoxyCodeLine{00365 \textcolor{comment}{/* Check of parameters for configuration of ADC hierarchical scope:           */}}
+\DoxyCodeLine{00366 \textcolor{comment}{/* ADC group injected                                                         */}}
+\DoxyCodeLine{00367 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx)}}
+\DoxyCodeLine{00368 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_INJ\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00369 \textcolor{preprocessor}{  (((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00370 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00371 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00372 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00373 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00374 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00375 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00376 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00377 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00378 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00379 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00380 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00381 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00382 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00383 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_TRGO2)               \(\backslash\)}}
+\DoxyCodeLine{00384 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG2)                \(\backslash\)}}
+\DoxyCodeLine{00385 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG4)                \(\backslash\)}}
+\DoxyCodeLine{00386 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG5)                \(\backslash\)}}
+\DoxyCodeLine{00387 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG6)                \(\backslash\)}}
+\DoxyCodeLine{00388 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG7)                \(\backslash\)}}
+\DoxyCodeLine{00389 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG8)                \(\backslash\)}}
+\DoxyCodeLine{00390 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG9)                \(\backslash\)}}
+\DoxyCodeLine{00391 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG10)               \(\backslash\)}}
+\DoxyCodeLine{00392 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00393 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC1) || ((\_\_ADC\_INSTANCE\_\_) == ADC2))          \(\backslash\)}}
+\DoxyCodeLine{00394 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00395 \textcolor{preprocessor}{            ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00396 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00397 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00398 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00399 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM16\_CH1)           \(\backslash\)}}
+\DoxyCodeLine{00400 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_CH4)           \(\backslash\)}}
+\DoxyCodeLine{00401 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE15)         \(\backslash\)}}
+\DoxyCodeLine{00402 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00403 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00404 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC3) || ((\_\_ADC\_INSTANCE\_\_) == ADC4) || ((\_\_ADC\_INSTANCE\_\_) == ADC5)) \(\backslash\)}}
+\DoxyCodeLine{00405 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00406 \textcolor{preprocessor}{            ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00407 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00408 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00409 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00410 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_CH2)           \(\backslash\)}}
+\DoxyCodeLine{00411 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG1)          \(\backslash\)}}
+\DoxyCodeLine{00412 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_HRTIM\_TRG3)          \(\backslash\)}}
+\DoxyCodeLine{00413 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE3)          \(\backslash\)}}
+\DoxyCodeLine{00414 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00415 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00416 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00417 \textcolor{preprocessor}{\#elif defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00418 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_INJ\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00419 \textcolor{preprocessor}{  (((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00420 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00421 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00422 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00423 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00424 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00425 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00426 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00427 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00428 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00429 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00430 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00431 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00432 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00433 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_TRGO2)               \(\backslash\)}}
+\DoxyCodeLine{00434 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00435 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC1) || ((\_\_ADC\_INSTANCE\_\_) == ADC2))          \(\backslash\)}}
+\DoxyCodeLine{00436 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00437 \textcolor{preprocessor}{            ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00438 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00439 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00440 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00441 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM16\_CH1)           \(\backslash\)}}
+\DoxyCodeLine{00442 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_CH4)           \(\backslash\)}}
+\DoxyCodeLine{00443 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE15)         \(\backslash\)}}
+\DoxyCodeLine{00444 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00445 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00446 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC3) || ((\_\_ADC\_INSTANCE\_\_) == ADC4) || ((\_\_ADC\_INSTANCE\_\_) == ADC5)) \(\backslash\)}}
+\DoxyCodeLine{00447 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00448 \textcolor{preprocessor}{            ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00449 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00450 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00451 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00452 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_CH2)           \(\backslash\)}}
+\DoxyCodeLine{00453 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE3)          \(\backslash\)}}
+\DoxyCodeLine{00454 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00455 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00456 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00457 \textcolor{preprocessor}{\#elif defined(STM32G471xx)}}
+\DoxyCodeLine{00458 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_INJ\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00459 \textcolor{preprocessor}{  (((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00460 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00461 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00462 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00463 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00464 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00465 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00466 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00467 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00468 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00469 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00470 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00471 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00472 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00473 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC1) || ((\_\_ADC\_INSTANCE\_\_) == ADC2))          \(\backslash\)}}
+\DoxyCodeLine{00474 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00475 \textcolor{preprocessor}{            ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00476 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00477 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00478 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00479 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM16\_CH1)           \(\backslash\)}}
+\DoxyCodeLine{00480 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE15)         \(\backslash\)}}
+\DoxyCodeLine{00481 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00482 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00483 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC3)) \(\backslash\)}}
+\DoxyCodeLine{00484 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00485 \textcolor{preprocessor}{            ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00486 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00487 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00488 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00489 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE3)          \(\backslash\)}}
+\DoxyCodeLine{00490 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00491 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00492 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00493 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)}}
+\DoxyCodeLine{00494 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_INJ\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00495 \textcolor{preprocessor}{  (((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00496 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00497 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00498 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00499 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00500 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_CH1)                  \(\backslash\)}}
+\DoxyCodeLine{00501 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00502 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH1)                  \(\backslash\)}}
+\DoxyCodeLine{00503 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH3)                  \(\backslash\)}}
+\DoxyCodeLine{00504 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00505 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00506 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00507 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00508 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00509 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00510 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00511 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00512 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM16\_CH1)                 \(\backslash\)}}
+\DoxyCodeLine{00513 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00514 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE15)               \(\backslash\)}}
+\DoxyCodeLine{00515 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00516 \textcolor{preprocessor}{\#elif defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00517 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_TRIG\_SOURCE(\_\_ADC\_INSTANCE\_\_, \_\_INJ\_TRIG\_SOURCE\_\_)       \(\backslash\)}}
+\DoxyCodeLine{00518 \textcolor{preprocessor}{  (((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_SOFTWARE)                         \(\backslash\)}}
+\DoxyCodeLine{00519 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00520 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00521 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00522 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00523 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00524 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00525 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM6\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00526 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM7\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00527 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO)                 \(\backslash\)}}
+\DoxyCodeLine{00528 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_TRGO2)                \(\backslash\)}}
+\DoxyCodeLine{00529 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH4)                  \(\backslash\)}}
+\DoxyCodeLine{00530 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM15\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00531 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_TRGO)                \(\backslash\)}}
+\DoxyCodeLine{00532 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_TRGO2)               \(\backslash\)}}
+\DoxyCodeLine{00533 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_LPTIM\_OUT)                 \(\backslash\)}}
+\DoxyCodeLine{00534 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC1) || ((\_\_ADC\_INSTANCE\_\_) == ADC2))          \(\backslash\)}}
+\DoxyCodeLine{00535 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00536 \textcolor{preprocessor}{            ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00537 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH1)            \(\backslash\)}}
+\DoxyCodeLine{00538 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00539 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00540 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM16\_CH1)           \(\backslash\)}}
+\DoxyCodeLine{00541 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_CH4)           \(\backslash\)}}
+\DoxyCodeLine{00542 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE15)         \(\backslash\)}}
+\DoxyCodeLine{00543 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00544 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00545 \textcolor{preprocessor}{   || ((((\_\_ADC\_INSTANCE\_\_) == ADC3))                                          \(\backslash\)}}
+\DoxyCodeLine{00546 \textcolor{preprocessor}{       \&\& (                                                                    \(\backslash\)}}
+\DoxyCodeLine{00547 \textcolor{preprocessor}{            ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00548 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH3)            \(\backslash\)}}
+\DoxyCodeLine{00549 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH4)            \(\backslash\)}}
+\DoxyCodeLine{00550 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH2)            \(\backslash\)}}
+\DoxyCodeLine{00551 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_TIM20\_CH2)           \(\backslash\)}}
+\DoxyCodeLine{00552 \textcolor{preprocessor}{         || ((\_\_INJ\_TRIG\_SOURCE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE3)          \(\backslash\)}}
+\DoxyCodeLine{00553 \textcolor{preprocessor}{          )                                                                    \(\backslash\)}}
+\DoxyCodeLine{00554 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{00555 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00556 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00557 }
+\DoxyCodeLine{00558 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_TRIG\_EXT\_EDGE(\_\_INJ\_TRIG\_EXT\_EDGE\_\_)                     \(\backslash\)}}
+\DoxyCodeLine{00559 \textcolor{preprocessor}{  (((\_\_INJ\_TRIG\_EXT\_EDGE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_RISING)                     \(\backslash\)}}
+\DoxyCodeLine{00560 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_EXT\_EDGE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_FALLING)                 \(\backslash\)}}
+\DoxyCodeLine{00561 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_EXT\_EDGE\_\_) == LL\_ADC\_INJ\_TRIG\_EXT\_RISINGFALLING)           \(\backslash\)}}
+\DoxyCodeLine{00562 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00563 }
+\DoxyCodeLine{00564 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_TRIG\_AUTO(\_\_INJ\_TRIG\_AUTO\_\_)                             \(\backslash\)}}
+\DoxyCodeLine{00565 \textcolor{preprocessor}{  (((\_\_INJ\_TRIG\_AUTO\_\_) == LL\_ADC\_INJ\_TRIG\_INDEPENDENT)                        \(\backslash\)}}
+\DoxyCodeLine{00566 \textcolor{preprocessor}{   || ((\_\_INJ\_TRIG\_AUTO\_\_) == LL\_ADC\_INJ\_TRIG\_FROM\_GRP\_REGULAR)                \(\backslash\)}}
+\DoxyCodeLine{00567 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00568 }
+\DoxyCodeLine{00569 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_SEQ\_SCAN\_LENGTH(\_\_INJ\_SEQ\_SCAN\_LENGTH\_\_)                 \(\backslash\)}}
+\DoxyCodeLine{00570 \textcolor{preprocessor}{  (((\_\_INJ\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_INJ\_SEQ\_SCAN\_DISABLE)                  \(\backslash\)}}
+\DoxyCodeLine{00571 \textcolor{preprocessor}{   || ((\_\_INJ\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_INJ\_SEQ\_SCAN\_ENABLE\_2RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00572 \textcolor{preprocessor}{   || ((\_\_INJ\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_INJ\_SEQ\_SCAN\_ENABLE\_3RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00573 \textcolor{preprocessor}{   || ((\_\_INJ\_SEQ\_SCAN\_LENGTH\_\_) == LL\_ADC\_INJ\_SEQ\_SCAN\_ENABLE\_4RANKS)         \(\backslash\)}}
+\DoxyCodeLine{00574 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00575 }
+\DoxyCodeLine{00576 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_INJ\_SEQ\_SCAN\_DISCONT\_MODE(\_\_INJ\_SEQ\_DISCONT\_MODE\_\_)          \(\backslash\)}}
+\DoxyCodeLine{00577 \textcolor{preprocessor}{  (((\_\_INJ\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_INJ\_SEQ\_DISCONT\_DISABLE)              \(\backslash\)}}
+\DoxyCodeLine{00578 \textcolor{preprocessor}{   || ((\_\_INJ\_SEQ\_DISCONT\_MODE\_\_) == LL\_ADC\_INJ\_SEQ\_DISCONT\_1RANK)             \(\backslash\)}}
+\DoxyCodeLine{00579 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00580 }
+\DoxyCodeLine{00581 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00582 \textcolor{comment}{/* Check of parameters for configuration of ADC hierarchical scope:           */}}
+\DoxyCodeLine{00583 \textcolor{comment}{/* multimode.                                                                 */}}
+\DoxyCodeLine{00584 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_MULTI\_MODE(\_\_MULTI\_MODE\_\_)                                   \(\backslash\)}}
+\DoxyCodeLine{00585 \textcolor{preprocessor}{  (((\_\_MULTI\_MODE\_\_) == LL\_ADC\_MULTI\_INDEPENDENT)                              \(\backslash\)}}
+\DoxyCodeLine{00586 \textcolor{preprocessor}{   || ((\_\_MULTI\_MODE\_\_) == LL\_ADC\_MULTI\_DUAL\_REG\_SIMULT)                       \(\backslash\)}}
+\DoxyCodeLine{00587 \textcolor{preprocessor}{   || ((\_\_MULTI\_MODE\_\_) == LL\_ADC\_MULTI\_DUAL\_REG\_INTERL)                       \(\backslash\)}}
+\DoxyCodeLine{00588 \textcolor{preprocessor}{   || ((\_\_MULTI\_MODE\_\_) == LL\_ADC\_MULTI\_DUAL\_INJ\_SIMULT)                       \(\backslash\)}}
+\DoxyCodeLine{00589 \textcolor{preprocessor}{   || ((\_\_MULTI\_MODE\_\_) == LL\_ADC\_MULTI\_DUAL\_INJ\_ALTERN)                       \(\backslash\)}}
+\DoxyCodeLine{00590 \textcolor{preprocessor}{   || ((\_\_MULTI\_MODE\_\_) == LL\_ADC\_MULTI\_DUAL\_REG\_SIM\_INJ\_SIM)                  \(\backslash\)}}
+\DoxyCodeLine{00591 \textcolor{preprocessor}{   || ((\_\_MULTI\_MODE\_\_) == LL\_ADC\_MULTI\_DUAL\_REG\_SIM\_INJ\_ALT)                  \(\backslash\)}}
+\DoxyCodeLine{00592 \textcolor{preprocessor}{   || ((\_\_MULTI\_MODE\_\_) == LL\_ADC\_MULTI\_DUAL\_REG\_INT\_INJ\_SIM)                  \(\backslash\)}}
+\DoxyCodeLine{00593 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00594 }
+\DoxyCodeLine{00595 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_MULTI\_DMA\_TRANSFER(\_\_MULTI\_DMA\_TRANSFER\_\_)                   \(\backslash\)}}
+\DoxyCodeLine{00596 \textcolor{preprocessor}{  (((\_\_MULTI\_DMA\_TRANSFER\_\_) == LL\_ADC\_MULTI\_REG\_DMA\_EACH\_ADC)                 \(\backslash\)}}
+\DoxyCodeLine{00597 \textcolor{preprocessor}{   || ((\_\_MULTI\_DMA\_TRANSFER\_\_) == LL\_ADC\_MULTI\_REG\_DMA\_LIMIT\_RES12\_10B)       \(\backslash\)}}
+\DoxyCodeLine{00598 \textcolor{preprocessor}{   || ((\_\_MULTI\_DMA\_TRANSFER\_\_) == LL\_ADC\_MULTI\_REG\_DMA\_LIMIT\_RES8\_6B)         \(\backslash\)}}
+\DoxyCodeLine{00599 \textcolor{preprocessor}{   || ((\_\_MULTI\_DMA\_TRANSFER\_\_) == LL\_ADC\_MULTI\_REG\_DMA\_UNLMT\_RES12\_10B)       \(\backslash\)}}
+\DoxyCodeLine{00600 \textcolor{preprocessor}{   || ((\_\_MULTI\_DMA\_TRANSFER\_\_) == LL\_ADC\_MULTI\_REG\_DMA\_UNLMT\_RES8\_6B)         \(\backslash\)}}
+\DoxyCodeLine{00601 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00602 }
+\DoxyCodeLine{00603 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_MULTI\_TWOSMP\_DELAY(\_\_MULTI\_TWOSMP\_DELAY\_\_)                   \(\backslash\)}}
+\DoxyCodeLine{00604 \textcolor{preprocessor}{  (((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_1CYCLE)              \(\backslash\)}}
+\DoxyCodeLine{00605 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_2CYCLES)          \(\backslash\)}}
+\DoxyCodeLine{00606 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_3CYCLES)          \(\backslash\)}}
+\DoxyCodeLine{00607 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_4CYCLES)          \(\backslash\)}}
+\DoxyCodeLine{00608 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_5CYCLES)          \(\backslash\)}}
+\DoxyCodeLine{00609 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_6CYCLES)          \(\backslash\)}}
+\DoxyCodeLine{00610 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_7CYCLES)          \(\backslash\)}}
+\DoxyCodeLine{00611 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_8CYCLES)          \(\backslash\)}}
+\DoxyCodeLine{00612 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_9CYCLES)          \(\backslash\)}}
+\DoxyCodeLine{00613 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_10CYCLES)         \(\backslash\)}}
+\DoxyCodeLine{00614 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_11CYCLES)         \(\backslash\)}}
+\DoxyCodeLine{00615 \textcolor{preprocessor}{   || ((\_\_MULTI\_TWOSMP\_DELAY\_\_) == LL\_ADC\_MULTI\_TWOSMP\_DELAY\_12CYCLES)         \(\backslash\)}}
+\DoxyCodeLine{00616 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00617 }
+\DoxyCodeLine{00618 \textcolor{preprocessor}{\#define IS\_LL\_ADC\_MULTI\_MASTER\_SLAVE(\_\_MULTI\_MASTER\_SLAVE\_\_)                   \(\backslash\)}}
+\DoxyCodeLine{00619 \textcolor{preprocessor}{  (((\_\_MULTI\_MASTER\_SLAVE\_\_) == LL\_ADC\_MULTI\_MASTER)                           \(\backslash\)}}
+\DoxyCodeLine{00620 \textcolor{preprocessor}{   || ((\_\_MULTI\_MASTER\_SLAVE\_\_) == LL\_ADC\_MULTI\_SLAVE)                         \(\backslash\)}}
+\DoxyCodeLine{00621 \textcolor{preprocessor}{   || ((\_\_MULTI\_MASTER\_SLAVE\_\_) == LL\_ADC\_MULTI\_MASTER\_SLAVE)                  \(\backslash\)}}
+\DoxyCodeLine{00622 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{00623 }
+\DoxyCodeLine{00624 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00630 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00631 }
+\DoxyCodeLine{00632 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00657 ErrorStatus LL\_ADC\_CommonDeInit(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{00658 \{}
+\DoxyCodeLine{00659   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00660   assert\_param(IS\_ADC\_COMMON\_INSTANCE(ADCxy\_COMMON));}
+\DoxyCodeLine{00661 }
+\DoxyCodeLine{00662   \textcolor{keywordflow}{if} (ADCxy\_COMMON == ADC12\_COMMON)}
+\DoxyCodeLine{00663   \{}
+\DoxyCodeLine{00664     \textcolor{comment}{/* Force reset of ADC clock (core clock) */}}
+\DoxyCodeLine{00665     LL\_AHB2\_GRP1\_ForceReset(LL\_AHB2\_GRP1\_PERIPH\_ADC12);}
+\DoxyCodeLine{00666 }
+\DoxyCodeLine{00667     \textcolor{comment}{/* Release reset of ADC clock (core clock) */}}
+\DoxyCodeLine{00668     LL\_AHB2\_GRP1\_ReleaseReset(LL\_AHB2\_GRP1\_PERIPH\_ADC12);}
+\DoxyCodeLine{00669   \}}
+\DoxyCodeLine{00670 \textcolor{preprocessor}{\#if defined(ADC345\_COMMON)}}
+\DoxyCodeLine{00671   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00672   \{}
+\DoxyCodeLine{00673     \textcolor{comment}{/* Force reset of ADC clock (core clock) */}}
+\DoxyCodeLine{00674     LL\_AHB2\_GRP1\_ForceReset(LL\_AHB2\_GRP1\_PERIPH\_ADC345);}
+\DoxyCodeLine{00675 }
+\DoxyCodeLine{00676     \textcolor{comment}{/* Release reset of ADC clock (core clock) */}}
+\DoxyCodeLine{00677     LL\_AHB2\_GRP1\_ReleaseReset(LL\_AHB2\_GRP1\_PERIPH\_ADC345);}
+\DoxyCodeLine{00678   \}}
+\DoxyCodeLine{00679 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00680 }
+\DoxyCodeLine{00681   \textcolor{keywordflow}{return} SUCCESS;}
+\DoxyCodeLine{00682 \}}
+\DoxyCodeLine{00683 }
+\DoxyCodeLine{00699 ErrorStatus LL\_ADC\_CommonInit(ADC\_Common\_TypeDef *ADCxy\_COMMON, LL\_ADC\_CommonInitTypeDef *ADC\_CommonInitStruct)}
+\DoxyCodeLine{00700 \{}
+\DoxyCodeLine{00701   ErrorStatus status = SUCCESS;}
+\DoxyCodeLine{00702 }
+\DoxyCodeLine{00703   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00704   assert\_param(IS\_ADC\_COMMON\_INSTANCE(ADCxy\_COMMON));}
+\DoxyCodeLine{00705   assert\_param(IS\_LL\_ADC\_COMMON\_CLOCK(ADC\_CommonInitStruct-\/>CommonClock));}
+\DoxyCodeLine{00706 }
+\DoxyCodeLine{00707 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00708   assert\_param(IS\_LL\_ADC\_MULTI\_MODE(ADC\_CommonInitStruct-\/>Multimode));}
+\DoxyCodeLine{00709   \textcolor{keywordflow}{if} (ADC\_CommonInitStruct-\/>Multimode != LL\_ADC\_MULTI\_INDEPENDENT)}
+\DoxyCodeLine{00710   \{}
+\DoxyCodeLine{00711     assert\_param(IS\_LL\_ADC\_MULTI\_DMA\_TRANSFER(ADC\_CommonInitStruct-\/>MultiDMATransfer));}
+\DoxyCodeLine{00712     assert\_param(IS\_LL\_ADC\_MULTI\_TWOSMP\_DELAY(ADC\_CommonInitStruct-\/>MultiTwoSamplingDelay));}
+\DoxyCodeLine{00713   \}}
+\DoxyCodeLine{00714 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00715 }
+\DoxyCodeLine{00716   \textcolor{comment}{/* Note: Hardware constraint (refer to description of functions             */}}
+\DoxyCodeLine{00717   \textcolor{comment}{/*       "{}LL\_ADC\_SetCommonXXX()"{} and "{}LL\_ADC\_SetMultiXXX()"{}):               */}}
+\DoxyCodeLine{00718   \textcolor{comment}{/*       On this STM32 series, setting of these features is conditioned to  */}}
+\DoxyCodeLine{00719   \textcolor{comment}{/*       ADC state:                                                         */}}
+\DoxyCodeLine{00720   \textcolor{comment}{/*       All ADC instances of the ADC common group must be disabled.        */}}
+\DoxyCodeLine{00721   \textcolor{keywordflow}{if} (\_\_LL\_ADC\_IS\_ENABLED\_ALL\_COMMON\_INSTANCE(ADCxy\_COMMON) == 0UL)}
+\DoxyCodeLine{00722   \{}
+\DoxyCodeLine{00723     \textcolor{comment}{/* Configuration of ADC hierarchical scope:                               */}}
+\DoxyCodeLine{00724     \textcolor{comment}{/*  -\/ common to several ADC                                               */}}
+\DoxyCodeLine{00725     \textcolor{comment}{/*    (all ADC instances belonging to the same ADC common instance)       */}}
+\DoxyCodeLine{00726     \textcolor{comment}{/*    -\/ Set ADC clock (conversion clock)                                  */}}
+\DoxyCodeLine{00727     \textcolor{comment}{/*  -\/ multimode (if several ADC instances available on the                */}}
+\DoxyCodeLine{00728     \textcolor{comment}{/*    selected device)                                                    */}}
+\DoxyCodeLine{00729     \textcolor{comment}{/*    -\/ Set ADC multimode configuration                                   */}}
+\DoxyCodeLine{00730     \textcolor{comment}{/*    -\/ Set ADC multimode DMA transfer                                    */}}
+\DoxyCodeLine{00731     \textcolor{comment}{/*    -\/ Set ADC multimode: delay between 2 sampling phases                */}}
+\DoxyCodeLine{00732 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00733     \textcolor{keywordflow}{if} (ADC\_CommonInitStruct-\/>Multimode != LL\_ADC\_MULTI\_INDEPENDENT)}
+\DoxyCodeLine{00734     \{}
+\DoxyCodeLine{00735       MODIFY\_REG(ADCxy\_COMMON-\/>CCR,}
+\DoxyCodeLine{00736                  ADC\_CCR\_CKMODE}
+\DoxyCodeLine{00737                  | ADC\_CCR\_PRESC}
+\DoxyCodeLine{00738                  | ADC\_CCR\_DUAL}
+\DoxyCodeLine{00739                  | ADC\_CCR\_MDMA}
+\DoxyCodeLine{00740                  | ADC\_CCR\_DELAY}
+\DoxyCodeLine{00741                  ,}
+\DoxyCodeLine{00742                  ADC\_CommonInitStruct-\/>CommonClock}
+\DoxyCodeLine{00743                  | ADC\_CommonInitStruct-\/>Multimode}
+\DoxyCodeLine{00744                  | ADC\_CommonInitStruct-\/>MultiDMATransfer}
+\DoxyCodeLine{00745                  | ADC\_CommonInitStruct-\/>MultiTwoSamplingDelay}
+\DoxyCodeLine{00746                 );}
+\DoxyCodeLine{00747     \}}
+\DoxyCodeLine{00748     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00749     \{}
+\DoxyCodeLine{00750       MODIFY\_REG(ADCxy\_COMMON-\/>CCR,}
+\DoxyCodeLine{00751                  ADC\_CCR\_CKMODE}
+\DoxyCodeLine{00752                  | ADC\_CCR\_PRESC}
+\DoxyCodeLine{00753                  | ADC\_CCR\_DUAL}
+\DoxyCodeLine{00754                  | ADC\_CCR\_MDMA}
+\DoxyCodeLine{00755                  | ADC\_CCR\_DELAY}
+\DoxyCodeLine{00756                  ,}
+\DoxyCodeLine{00757                  ADC\_CommonInitStruct-\/>CommonClock}
+\DoxyCodeLine{00758                  | LL\_ADC\_MULTI\_INDEPENDENT}
+\DoxyCodeLine{00759                 );}
+\DoxyCodeLine{00760     \}}
+\DoxyCodeLine{00761 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00762     LL\_ADC\_SetCommonClock(ADCxy\_COMMON, ADC\_CommonInitStruct-\/>CommonClock);}
+\DoxyCodeLine{00763 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00764   \}}
+\DoxyCodeLine{00765   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00766   \{}
+\DoxyCodeLine{00767     \textcolor{comment}{/* Initialization error: One or several ADC instances belonging to        */}}
+\DoxyCodeLine{00768     \textcolor{comment}{/* the same ADC common instance are not disabled.                         */}}
+\DoxyCodeLine{00769     status = ERROR;}
+\DoxyCodeLine{00770   \}}
+\DoxyCodeLine{00771 }
+\DoxyCodeLine{00772   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00773 \}}
+\DoxyCodeLine{00774 }
+\DoxyCodeLine{00781 \textcolor{keywordtype}{void} LL\_ADC\_CommonStructInit(LL\_ADC\_CommonInitTypeDef *ADC\_CommonInitStruct)}
+\DoxyCodeLine{00782 \{}
+\DoxyCodeLine{00783   \textcolor{comment}{/* Set ADC\_CommonInitStruct fields to default values */}}
+\DoxyCodeLine{00784   \textcolor{comment}{/* Set fields of ADC common */}}
+\DoxyCodeLine{00785   \textcolor{comment}{/* (all ADC instances belonging to the same ADC common instance) */}}
+\DoxyCodeLine{00786   ADC\_CommonInitStruct-\/>CommonClock = LL\_ADC\_CLOCK\_SYNC\_PCLK\_DIV2;}
+\DoxyCodeLine{00787 }
+\DoxyCodeLine{00788 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{00789   \textcolor{comment}{/* Set fields of ADC multimode */}}
+\DoxyCodeLine{00790   ADC\_CommonInitStruct-\/>Multimode             = LL\_ADC\_MULTI\_INDEPENDENT;}
+\DoxyCodeLine{00791   ADC\_CommonInitStruct-\/>MultiDMATransfer      = LL\_ADC\_MULTI\_REG\_DMA\_EACH\_ADC;}
+\DoxyCodeLine{00792   ADC\_CommonInitStruct-\/>MultiTwoSamplingDelay = LL\_ADC\_MULTI\_TWOSMP\_DELAY\_1CYCLE;}
+\DoxyCodeLine{00793 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00794 \}}
+\DoxyCodeLine{00795 }
+\DoxyCodeLine{00814 ErrorStatus LL\_ADC\_DeInit(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{00815 \{}
+\DoxyCodeLine{00816   ErrorStatus status = SUCCESS;}
+\DoxyCodeLine{00817 }
+\DoxyCodeLine{00818   \_\_IO uint32\_t timeout\_cpu\_cycles = 0UL;}
+\DoxyCodeLine{00819 }
+\DoxyCodeLine{00820   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00821   assert\_param(IS\_ADC\_ALL\_INSTANCE(ADCx));}
+\DoxyCodeLine{00822 }
+\DoxyCodeLine{00823   \textcolor{comment}{/* Disable ADC instance if not already disabled.                            */}}
+\DoxyCodeLine{00824   \textcolor{keywordflow}{if} (LL\_ADC\_IsEnabled(ADCx) == 1UL)}
+\DoxyCodeLine{00825   \{}
+\DoxyCodeLine{00826     \textcolor{comment}{/* Set ADC group regular trigger source to SW start to ensure to not      */}}
+\DoxyCodeLine{00827     \textcolor{comment}{/* have an external trigger event occurring during the conversion stop    */}}
+\DoxyCodeLine{00828     \textcolor{comment}{/* ADC disable process.                                                   */}}
+\DoxyCodeLine{00829     LL\_ADC\_REG\_SetTriggerSource(ADCx, LL\_ADC\_REG\_TRIG\_SOFTWARE);}
+\DoxyCodeLine{00830 }
+\DoxyCodeLine{00831     \textcolor{comment}{/* Stop potential ADC conversion on going on ADC group regular.           */}}
+\DoxyCodeLine{00832     \textcolor{keywordflow}{if} (LL\_ADC\_REG\_IsConversionOngoing(ADCx) != 0UL)}
+\DoxyCodeLine{00833     \{}
+\DoxyCodeLine{00834       \textcolor{keywordflow}{if} (LL\_ADC\_REG\_IsStopConversionOngoing(ADCx) == 0UL)}
+\DoxyCodeLine{00835       \{}
+\DoxyCodeLine{00836         LL\_ADC\_REG\_StopConversion(ADCx);}
+\DoxyCodeLine{00837       \}}
+\DoxyCodeLine{00838     \}}
+\DoxyCodeLine{00839 }
+\DoxyCodeLine{00840     \textcolor{comment}{/* Set ADC group injected trigger source to SW start to ensure to not     */}}
+\DoxyCodeLine{00841     \textcolor{comment}{/* have an external trigger event occurring during the conversion stop    */}}
+\DoxyCodeLine{00842     \textcolor{comment}{/* ADC disable process.                                                   */}}
+\DoxyCodeLine{00843     LL\_ADC\_INJ\_SetTriggerSource(ADCx, LL\_ADC\_INJ\_TRIG\_SOFTWARE);}
+\DoxyCodeLine{00844 }
+\DoxyCodeLine{00845     \textcolor{comment}{/* Stop potential ADC conversion on going on ADC group injected.          */}}
+\DoxyCodeLine{00846     \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsConversionOngoing(ADCx) != 0UL)}
+\DoxyCodeLine{00847     \{}
+\DoxyCodeLine{00848       \textcolor{keywordflow}{if} (LL\_ADC\_INJ\_IsStopConversionOngoing(ADCx) == 0UL)}
+\DoxyCodeLine{00849       \{}
+\DoxyCodeLine{00850         LL\_ADC\_INJ\_StopConversion(ADCx);}
+\DoxyCodeLine{00851       \}}
+\DoxyCodeLine{00852     \}}
+\DoxyCodeLine{00853 }
+\DoxyCodeLine{00854     \textcolor{comment}{/* Wait for ADC conversions are effectively stopped                       */}}
+\DoxyCodeLine{00855     timeout\_cpu\_cycles = ADC\_TIMEOUT\_STOP\_CONVERSION\_CPU\_CYCLES;}
+\DoxyCodeLine{00856     \textcolor{keywordflow}{while} ((LL\_ADC\_REG\_IsStopConversionOngoing(ADCx)}
+\DoxyCodeLine{00857             | LL\_ADC\_INJ\_IsStopConversionOngoing(ADCx)) == 1UL)}
+\DoxyCodeLine{00858     \{}
+\DoxyCodeLine{00859       timeout\_cpu\_cycles-\/-\/;}
+\DoxyCodeLine{00860       \textcolor{keywordflow}{if} (timeout\_cpu\_cycles == 0UL)}
+\DoxyCodeLine{00861       \{}
+\DoxyCodeLine{00862         \textcolor{comment}{/* Time-\/out error */}}
+\DoxyCodeLine{00863         status = ERROR;}
+\DoxyCodeLine{00864         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00865       \}}
+\DoxyCodeLine{00866     \}}
+\DoxyCodeLine{00867 }
+\DoxyCodeLine{00868     \textcolor{comment}{/* Flush group injected contexts queue (register JSQR):                   */}}
+\DoxyCodeLine{00869     \textcolor{comment}{/* Note: Bit JQM must be set to empty the contexts queue (otherwise       */}}
+\DoxyCodeLine{00870     \textcolor{comment}{/*       contexts queue is maintained with the last active context).      */}}
+\DoxyCodeLine{00871     LL\_ADC\_INJ\_SetQueueMode(ADCx, LL\_ADC\_INJ\_QUEUE\_2CONTEXTS\_END\_EMPTY);}
+\DoxyCodeLine{00872 }
+\DoxyCodeLine{00873     \textcolor{comment}{/* Disable the ADC instance */}}
+\DoxyCodeLine{00874     LL\_ADC\_Disable(ADCx);}
+\DoxyCodeLine{00875 }
+\DoxyCodeLine{00876     \textcolor{comment}{/* Wait for ADC instance is effectively disabled */}}
+\DoxyCodeLine{00877     timeout\_cpu\_cycles = ADC\_TIMEOUT\_DISABLE\_CPU\_CYCLES;}
+\DoxyCodeLine{00878     \textcolor{keywordflow}{while} (LL\_ADC\_IsDisableOngoing(ADCx) == 1UL)}
+\DoxyCodeLine{00879     \{}
+\DoxyCodeLine{00880       timeout\_cpu\_cycles-\/-\/;}
+\DoxyCodeLine{00881       \textcolor{keywordflow}{if} (timeout\_cpu\_cycles == 0UL)}
+\DoxyCodeLine{00882       \{}
+\DoxyCodeLine{00883         \textcolor{comment}{/* Time-\/out error */}}
+\DoxyCodeLine{00884         status = ERROR;}
+\DoxyCodeLine{00885         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00886       \}}
+\DoxyCodeLine{00887     \}}
+\DoxyCodeLine{00888   \}}
+\DoxyCodeLine{00889 }
+\DoxyCodeLine{00890   \textcolor{comment}{/* Check whether ADC state is compliant with expected state */}}
+\DoxyCodeLine{00891   \textcolor{keywordflow}{if} (READ\_BIT(ADCx-\/>CR,}
+\DoxyCodeLine{00892                (ADC\_CR\_JADSTP | ADC\_CR\_ADSTP | ADC\_CR\_JADSTART | ADC\_CR\_ADSTART}
+\DoxyCodeLine{00893                 | ADC\_CR\_ADDIS | ADC\_CR\_ADEN)}
+\DoxyCodeLine{00894               )}
+\DoxyCodeLine{00895       == 0UL)}
+\DoxyCodeLine{00896   \{}
+\DoxyCodeLine{00897     \textcolor{comment}{/* ========== Reset ADC registers ========== */}}
+\DoxyCodeLine{00898     \textcolor{comment}{/* Reset register IER */}}
+\DoxyCodeLine{00899     CLEAR\_BIT(ADCx-\/>IER,}
+\DoxyCodeLine{00900               (LL\_ADC\_IT\_ADRDY}
+\DoxyCodeLine{00901                | LL\_ADC\_IT\_EOC}
+\DoxyCodeLine{00902                | LL\_ADC\_IT\_EOS}
+\DoxyCodeLine{00903                | LL\_ADC\_IT\_OVR}
+\DoxyCodeLine{00904                | LL\_ADC\_IT\_EOSMP}
+\DoxyCodeLine{00905                | LL\_ADC\_IT\_JEOC}
+\DoxyCodeLine{00906                | LL\_ADC\_IT\_JEOS}
+\DoxyCodeLine{00907                | LL\_ADC\_IT\_JQOVF}
+\DoxyCodeLine{00908                | LL\_ADC\_IT\_AWD1}
+\DoxyCodeLine{00909                | LL\_ADC\_IT\_AWD2}
+\DoxyCodeLine{00910                | LL\_ADC\_IT\_AWD3}
+\DoxyCodeLine{00911               )}
+\DoxyCodeLine{00912              );}
+\DoxyCodeLine{00913 }
+\DoxyCodeLine{00914     \textcolor{comment}{/* Reset register ISR */}}
+\DoxyCodeLine{00915     SET\_BIT(ADCx-\/>ISR,}
+\DoxyCodeLine{00916             (LL\_ADC\_FLAG\_ADRDY}
+\DoxyCodeLine{00917              | LL\_ADC\_FLAG\_EOC}
+\DoxyCodeLine{00918              | LL\_ADC\_FLAG\_EOS}
+\DoxyCodeLine{00919              | LL\_ADC\_FLAG\_OVR}
+\DoxyCodeLine{00920              | LL\_ADC\_FLAG\_EOSMP}
+\DoxyCodeLine{00921              | LL\_ADC\_FLAG\_JEOC}
+\DoxyCodeLine{00922              | LL\_ADC\_FLAG\_JEOS}
+\DoxyCodeLine{00923              | LL\_ADC\_FLAG\_JQOVF}
+\DoxyCodeLine{00924              | LL\_ADC\_FLAG\_AWD1}
+\DoxyCodeLine{00925              | LL\_ADC\_FLAG\_AWD2}
+\DoxyCodeLine{00926              | LL\_ADC\_FLAG\_AWD3}
+\DoxyCodeLine{00927             )}
+\DoxyCodeLine{00928            );}
+\DoxyCodeLine{00929 }
+\DoxyCodeLine{00930     \textcolor{comment}{/* Reset register CR */}}
+\DoxyCodeLine{00931     \textcolor{comment}{/*  -\/ Bits ADC\_CR\_JADSTP, ADC\_CR\_ADSTP, ADC\_CR\_JADSTART, ADC\_CR\_ADSTART,  */}}
+\DoxyCodeLine{00932     \textcolor{comment}{/*    ADC\_CR\_ADCAL, ADC\_CR\_ADDIS, ADC\_CR\_ADEN are in                      */}}
+\DoxyCodeLine{00933     \textcolor{comment}{/*    access mode "{}read-\/set"{}: no direct reset applicable.                 */}}
+\DoxyCodeLine{00934     \textcolor{comment}{/*  -\/ Reset Calibration mode to default setting (single ended).           */}}
+\DoxyCodeLine{00935     \textcolor{comment}{/*  -\/ Disable ADC internal voltage regulator.                             */}}
+\DoxyCodeLine{00936     \textcolor{comment}{/*  -\/ Enable ADC deep power down.                                         */}}
+\DoxyCodeLine{00937     \textcolor{comment}{/*    Note: ADC internal voltage regulator disable and ADC deep power     */}}
+\DoxyCodeLine{00938     \textcolor{comment}{/*          down enable are conditioned to ADC state disabled:            */}}
+\DoxyCodeLine{00939     \textcolor{comment}{/*          already done above.                                           */}}
+\DoxyCodeLine{00940     CLEAR\_BIT(ADCx-\/>CR, ADC\_CR\_ADVREGEN | ADC\_CR\_ADCALDIF);}
+\DoxyCodeLine{00941     SET\_BIT(ADCx-\/>CR, ADC\_CR\_DEEPPWD);}
+\DoxyCodeLine{00942 }
+\DoxyCodeLine{00943     \textcolor{comment}{/* Reset register CFGR */}}
+\DoxyCodeLine{00944     MODIFY\_REG(ADCx-\/>CFGR,}
+\DoxyCodeLine{00945                (ADC\_CFGR\_AWD1CH  | ADC\_CFGR\_JAUTO   | ADC\_CFGR\_JAWD1EN}
+\DoxyCodeLine{00946                 | ADC\_CFGR\_AWD1EN  | ADC\_CFGR\_AWD1SGL | ADC\_CFGR\_JQM}
+\DoxyCodeLine{00947                 | ADC\_CFGR\_JDISCEN | ADC\_CFGR\_DISCNUM | ADC\_CFGR\_DISCEN}
+\DoxyCodeLine{00948                 | ADC\_CFGR\_AUTDLY  | ADC\_CFGR\_CONT    | ADC\_CFGR\_OVRMOD}
+\DoxyCodeLine{00949                 | ADC\_CFGR\_EXTEN   | ADC\_CFGR\_EXTSEL  | ADC\_CFGR\_ALIGN}
+\DoxyCodeLine{00950                 | ADC\_CFGR\_RES     | ADC\_CFGR\_DMACFG  | ADC\_CFGR\_DMAEN),}
+\DoxyCodeLine{00951                ADC\_CFGR\_JQDIS}
+\DoxyCodeLine{00952               );}
+\DoxyCodeLine{00953 }
+\DoxyCodeLine{00954     \textcolor{comment}{/* Reset register CFGR2 */}}
+\DoxyCodeLine{00955     CLEAR\_BIT(ADCx-\/>CFGR2,}
+\DoxyCodeLine{00956               (ADC\_CFGR2\_ROVSM  | ADC\_CFGR2\_TROVS | ADC\_CFGR2\_OVSS}
+\DoxyCodeLine{00957                | ADC\_CFGR2\_SWTRIG | ADC\_CFGR2\_BULB | ADC\_CFGR2\_SMPTRIG}
+\DoxyCodeLine{00958                | ADC\_CFGR2\_GCOMP}
+\DoxyCodeLine{00959                | ADC\_CFGR2\_OVSR   | ADC\_CFGR2\_JOVSE | ADC\_CFGR2\_ROVSE)}
+\DoxyCodeLine{00960              );}
+\DoxyCodeLine{00961 }
+\DoxyCodeLine{00962     \textcolor{comment}{/* Reset register SMPR1 */}}
+\DoxyCodeLine{00963     CLEAR\_BIT(ADCx-\/>SMPR1,}
+\DoxyCodeLine{00964               (ADC\_SMPR1\_SMP9 | ADC\_SMPR1\_SMP8 | ADC\_SMPR1\_SMP7}
+\DoxyCodeLine{00965                | ADC\_SMPR1\_SMP6 | ADC\_SMPR1\_SMP5 | ADC\_SMPR1\_SMP4}
+\DoxyCodeLine{00966                | ADC\_SMPR1\_SMP3 | ADC\_SMPR1\_SMP2 | ADC\_SMPR1\_SMP1)}
+\DoxyCodeLine{00967              );}
+\DoxyCodeLine{00968 }
+\DoxyCodeLine{00969     \textcolor{comment}{/* Reset register SMPR2 */}}
+\DoxyCodeLine{00970     CLEAR\_BIT(ADCx-\/>SMPR2,}
+\DoxyCodeLine{00971               (ADC\_SMPR2\_SMP18 | ADC\_SMPR2\_SMP17 | ADC\_SMPR2\_SMP16}
+\DoxyCodeLine{00972                | ADC\_SMPR2\_SMP15 | ADC\_SMPR2\_SMP14 | ADC\_SMPR2\_SMP13}
+\DoxyCodeLine{00973                | ADC\_SMPR2\_SMP12 | ADC\_SMPR2\_SMP11 | ADC\_SMPR2\_SMP10)}
+\DoxyCodeLine{00974              );}
+\DoxyCodeLine{00975 }
+\DoxyCodeLine{00976     \textcolor{comment}{/* Reset register TR1 */}}
+\DoxyCodeLine{00977     MODIFY\_REG(ADCx-\/>TR1, ADC\_TR1\_AWDFILT | ADC\_TR1\_HT1 | ADC\_TR1\_LT1, ADC\_TR1\_HT1);}
+\DoxyCodeLine{00978 }
+\DoxyCodeLine{00979     \textcolor{comment}{/* Reset register TR2 */}}
+\DoxyCodeLine{00980     MODIFY\_REG(ADCx-\/>TR2, ADC\_TR2\_HT2 | ADC\_TR2\_LT2, ADC\_TR2\_HT2);}
+\DoxyCodeLine{00981 }
+\DoxyCodeLine{00982     \textcolor{comment}{/* Reset register TR3 */}}
+\DoxyCodeLine{00983     MODIFY\_REG(ADCx-\/>TR3, ADC\_TR3\_HT3 | ADC\_TR3\_LT3, ADC\_TR3\_HT3);}
+\DoxyCodeLine{00984 }
+\DoxyCodeLine{00985     \textcolor{comment}{/* Reset register SQR1 */}}
+\DoxyCodeLine{00986     CLEAR\_BIT(ADCx-\/>SQR1,}
+\DoxyCodeLine{00987               (ADC\_SQR1\_SQ4 | ADC\_SQR1\_SQ3 | ADC\_SQR1\_SQ2}
+\DoxyCodeLine{00988                | ADC\_SQR1\_SQ1 | ADC\_SQR1\_L)}
+\DoxyCodeLine{00989              );}
+\DoxyCodeLine{00990 }
+\DoxyCodeLine{00991     \textcolor{comment}{/* Reset register SQR2 */}}
+\DoxyCodeLine{00992     CLEAR\_BIT(ADCx-\/>SQR2,}
+\DoxyCodeLine{00993               (ADC\_SQR2\_SQ9 | ADC\_SQR2\_SQ8 | ADC\_SQR2\_SQ7}
+\DoxyCodeLine{00994                | ADC\_SQR2\_SQ6 | ADC\_SQR2\_SQ5)}
+\DoxyCodeLine{00995              );}
+\DoxyCodeLine{00996 }
+\DoxyCodeLine{00997     \textcolor{comment}{/* Reset register SQR3 */}}
+\DoxyCodeLine{00998     CLEAR\_BIT(ADCx-\/>SQR3,}
+\DoxyCodeLine{00999               (ADC\_SQR3\_SQ14 | ADC\_SQR3\_SQ13 | ADC\_SQR3\_SQ12}
+\DoxyCodeLine{01000                | ADC\_SQR3\_SQ11 | ADC\_SQR3\_SQ10)}
+\DoxyCodeLine{01001              );}
+\DoxyCodeLine{01002 }
+\DoxyCodeLine{01003     \textcolor{comment}{/* Reset register SQR4 */}}
+\DoxyCodeLine{01004     CLEAR\_BIT(ADCx-\/>SQR4, ADC\_SQR4\_SQ16 | ADC\_SQR4\_SQ15);}
+\DoxyCodeLine{01005 }
+\DoxyCodeLine{01006     \textcolor{comment}{/* Reset register JSQR */}}
+\DoxyCodeLine{01007     CLEAR\_BIT(ADCx-\/>JSQR,}
+\DoxyCodeLine{01008               (ADC\_JSQR\_JL}
+\DoxyCodeLine{01009                | ADC\_JSQR\_JEXTSEL | ADC\_JSQR\_JEXTEN}
+\DoxyCodeLine{01010                | ADC\_JSQR\_JSQ4    | ADC\_JSQR\_JSQ3}
+\DoxyCodeLine{01011                | ADC\_JSQR\_JSQ2    | ADC\_JSQR\_JSQ1)}
+\DoxyCodeLine{01012              );}
+\DoxyCodeLine{01013 }
+\DoxyCodeLine{01014     \textcolor{comment}{/* Reset register DR */}}
+\DoxyCodeLine{01015     \textcolor{comment}{/* Note: bits in access mode read only, no direct reset applicable */}}
+\DoxyCodeLine{01016 }
+\DoxyCodeLine{01017     \textcolor{comment}{/* Reset register OFR1 */}}
+\DoxyCodeLine{01018     CLEAR\_BIT(ADCx-\/>OFR1, ADC\_OFR1\_OFFSET1\_EN | ADC\_OFR1\_OFFSET1\_CH | ADC\_OFR1\_OFFSET1 | ADC\_OFR1\_SATEN | ADC\_OFR1\_OFFSETPOS);}
+\DoxyCodeLine{01019     \textcolor{comment}{/* Reset register OFR2 */}}
+\DoxyCodeLine{01020     CLEAR\_BIT(ADCx-\/>OFR2, ADC\_OFR2\_OFFSET2\_EN | ADC\_OFR2\_OFFSET2\_CH | ADC\_OFR2\_OFFSET2 | ADC\_OFR2\_SATEN | ADC\_OFR2\_OFFSETPOS);}
+\DoxyCodeLine{01021     \textcolor{comment}{/* Reset register OFR3 */}}
+\DoxyCodeLine{01022     CLEAR\_BIT(ADCx-\/>OFR3, ADC\_OFR3\_OFFSET3\_EN | ADC\_OFR3\_OFFSET3\_CH | ADC\_OFR3\_OFFSET3 | ADC\_OFR3\_SATEN | ADC\_OFR3\_OFFSETPOS);}
+\DoxyCodeLine{01023     \textcolor{comment}{/* Reset register OFR4 */}}
+\DoxyCodeLine{01024     CLEAR\_BIT(ADCx-\/>OFR4, ADC\_OFR4\_OFFSET4\_EN | ADC\_OFR4\_OFFSET4\_CH | ADC\_OFR4\_OFFSET4 | ADC\_OFR4\_SATEN | ADC\_OFR4\_OFFSETPOS);}
+\DoxyCodeLine{01025 }
+\DoxyCodeLine{01026     \textcolor{comment}{/* Reset registers JDR1, JDR2, JDR3, JDR4 */}}
+\DoxyCodeLine{01027     \textcolor{comment}{/* Note: bits in access mode read only, no direct reset applicable */}}
+\DoxyCodeLine{01028 }
+\DoxyCodeLine{01029     \textcolor{comment}{/* Reset register AWD2CR */}}
+\DoxyCodeLine{01030     CLEAR\_BIT(ADCx-\/>AWD2CR, ADC\_AWD2CR\_AWD2CH);}
+\DoxyCodeLine{01031 }
+\DoxyCodeLine{01032     \textcolor{comment}{/* Reset register AWD3CR */}}
+\DoxyCodeLine{01033     CLEAR\_BIT(ADCx-\/>AWD3CR, ADC\_AWD3CR\_AWD3CH);}
+\DoxyCodeLine{01034 }
+\DoxyCodeLine{01035     \textcolor{comment}{/* Reset register DIFSEL */}}
+\DoxyCodeLine{01036     CLEAR\_BIT(ADCx-\/>DIFSEL, ADC\_DIFSEL\_DIFSEL);}
+\DoxyCodeLine{01037 }
+\DoxyCodeLine{01038     \textcolor{comment}{/* Reset register CALFACT */}}
+\DoxyCodeLine{01039     CLEAR\_BIT(ADCx-\/>CALFACT, ADC\_CALFACT\_CALFACT\_D | ADC\_CALFACT\_CALFACT\_S);}
+\DoxyCodeLine{01040 }
+\DoxyCodeLine{01041     \textcolor{comment}{/* Reset register GCOMP */}}
+\DoxyCodeLine{01042     CLEAR\_BIT(ADCx-\/>GCOMP, ADC\_GCOMP\_GCOMPCOEFF);}
+\DoxyCodeLine{01043   \}}
+\DoxyCodeLine{01044   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01045   \{}
+\DoxyCodeLine{01046     \textcolor{comment}{/* ADC instance is in an unknown state */}}
+\DoxyCodeLine{01047     \textcolor{comment}{/* Need to performing a hard reset of ADC instance, using high level      */}}
+\DoxyCodeLine{01048     \textcolor{comment}{/* clock source RCC ADC reset.                                            */}}
+\DoxyCodeLine{01049     \textcolor{comment}{/* Caution: On this STM32 series, if several ADC instances are available  */}}
+\DoxyCodeLine{01050     \textcolor{comment}{/*          on the selected device, RCC ADC reset will reset              */}}
+\DoxyCodeLine{01051     \textcolor{comment}{/*          all ADC instances belonging to the common ADC instance.       */}}
+\DoxyCodeLine{01052     \textcolor{comment}{/* Caution: On this STM32 series, if several ADC instances are available  */}}
+\DoxyCodeLine{01053     \textcolor{comment}{/*          on the selected device, RCC ADC reset will reset              */}}
+\DoxyCodeLine{01054     \textcolor{comment}{/*          all ADC instances belonging to the common ADC instance.       */}}
+\DoxyCodeLine{01055     status = ERROR;}
+\DoxyCodeLine{01056   \}}
+\DoxyCodeLine{01057 }
+\DoxyCodeLine{01058   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01059 \}}
+\DoxyCodeLine{01060 }
+\DoxyCodeLine{01094 ErrorStatus LL\_ADC\_Init(ADC\_TypeDef *ADCx, LL\_ADC\_InitTypeDef *ADC\_InitStruct)}
+\DoxyCodeLine{01095 \{}
+\DoxyCodeLine{01096   ErrorStatus status = SUCCESS;}
+\DoxyCodeLine{01097 }
+\DoxyCodeLine{01098   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01099   assert\_param(IS\_ADC\_ALL\_INSTANCE(ADCx));}
+\DoxyCodeLine{01100 }
+\DoxyCodeLine{01101   assert\_param(IS\_LL\_ADC\_RESOLUTION(ADC\_InitStruct-\/>Resolution));}
+\DoxyCodeLine{01102   assert\_param(IS\_LL\_ADC\_DATA\_ALIGN(ADC\_InitStruct-\/>DataAlignment));}
+\DoxyCodeLine{01103   assert\_param(IS\_LL\_ADC\_LOW\_POWER(ADC\_InitStruct-\/>LowPowerMode));}
+\DoxyCodeLine{01104 }
+\DoxyCodeLine{01105   \textcolor{comment}{/* Note: Hardware constraint (refer to description of this function):       */}}
+\DoxyCodeLine{01106   \textcolor{comment}{/*       ADC instance must be disabled.                                     */}}
+\DoxyCodeLine{01107   \textcolor{keywordflow}{if} (LL\_ADC\_IsEnabled(ADCx) == 0UL)}
+\DoxyCodeLine{01108   \{}
+\DoxyCodeLine{01109     \textcolor{comment}{/* Configuration of ADC hierarchical scope:                               */}}
+\DoxyCodeLine{01110     \textcolor{comment}{/*  -\/ ADC instance                                                        */}}
+\DoxyCodeLine{01111     \textcolor{comment}{/*    -\/ Set ADC data resolution                                           */}}
+\DoxyCodeLine{01112     \textcolor{comment}{/*    -\/ Set ADC conversion data alignment                                 */}}
+\DoxyCodeLine{01113     \textcolor{comment}{/*    -\/ Set ADC low power mode                                            */}}
+\DoxyCodeLine{01114     MODIFY\_REG(ADCx-\/>CFGR,}
+\DoxyCodeLine{01115                ADC\_CFGR\_RES}
+\DoxyCodeLine{01116                | ADC\_CFGR\_ALIGN}
+\DoxyCodeLine{01117                | ADC\_CFGR\_AUTDLY}
+\DoxyCodeLine{01118                ,}
+\DoxyCodeLine{01119                ADC\_InitStruct-\/>Resolution}
+\DoxyCodeLine{01120                | ADC\_InitStruct-\/>DataAlignment}
+\DoxyCodeLine{01121                | ADC\_InitStruct-\/>LowPowerMode}
+\DoxyCodeLine{01122               );}
+\DoxyCodeLine{01123 }
+\DoxyCodeLine{01124   \}}
+\DoxyCodeLine{01125   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01126   \{}
+\DoxyCodeLine{01127     \textcolor{comment}{/* Initialization error: ADC instance is not disabled. */}}
+\DoxyCodeLine{01128     status = ERROR;}
+\DoxyCodeLine{01129   \}}
+\DoxyCodeLine{01130 }
+\DoxyCodeLine{01131   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01132 \}}
+\DoxyCodeLine{01133 }
+\DoxyCodeLine{01140 \textcolor{keywordtype}{void} LL\_ADC\_StructInit(LL\_ADC\_InitTypeDef *ADC\_InitStruct)}
+\DoxyCodeLine{01141 \{}
+\DoxyCodeLine{01142   \textcolor{comment}{/* Set ADC\_InitStruct fields to default values */}}
+\DoxyCodeLine{01143   \textcolor{comment}{/* Set fields of ADC instance */}}
+\DoxyCodeLine{01144   ADC\_InitStruct-\/>Resolution    = LL\_ADC\_RESOLUTION\_12B;}
+\DoxyCodeLine{01145   ADC\_InitStruct-\/>DataAlignment = LL\_ADC\_DATA\_ALIGN\_RIGHT;}
+\DoxyCodeLine{01146   ADC\_InitStruct-\/>LowPowerMode  = LL\_ADC\_LP\_MODE\_NONE;}
+\DoxyCodeLine{01147 }
+\DoxyCodeLine{01148 \}}
+\DoxyCodeLine{01149 }
+\DoxyCodeLine{01182 ErrorStatus LL\_ADC\_REG\_Init(ADC\_TypeDef *ADCx, LL\_ADC\_REG\_InitTypeDef *ADC\_REG\_InitStruct)}
+\DoxyCodeLine{01183 \{}
+\DoxyCodeLine{01184   ErrorStatus status = SUCCESS;}
+\DoxyCodeLine{01185 }
+\DoxyCodeLine{01186   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01187   assert\_param(IS\_ADC\_ALL\_INSTANCE(ADCx));}
+\DoxyCodeLine{01188   assert\_param(IS\_LL\_ADC\_REG\_TRIG\_SOURCE(ADCx, ADC\_REG\_InitStruct-\/>TriggerSource));}
+\DoxyCodeLine{01189   assert\_param(IS\_LL\_ADC\_REG\_SEQ\_SCAN\_LENGTH(ADC\_REG\_InitStruct-\/>SequencerLength));}
+\DoxyCodeLine{01190   \textcolor{keywordflow}{if} (ADC\_REG\_InitStruct-\/>SequencerLength != LL\_ADC\_REG\_SEQ\_SCAN\_DISABLE)}
+\DoxyCodeLine{01191   \{}
+\DoxyCodeLine{01192     assert\_param(IS\_LL\_ADC\_REG\_SEQ\_SCAN\_DISCONT\_MODE(ADC\_REG\_InitStruct-\/>SequencerDiscont));}
+\DoxyCodeLine{01193 }
+\DoxyCodeLine{01194     \textcolor{comment}{/* ADC group regular continuous mode and discontinuous mode                 */}}
+\DoxyCodeLine{01195     \textcolor{comment}{/* can not be enabled simultenaeously                                       */}}
+\DoxyCodeLine{01196     assert\_param((ADC\_REG\_InitStruct-\/>ContinuousMode == LL\_ADC\_REG\_CONV\_SINGLE)}
+\DoxyCodeLine{01197                  || (ADC\_REG\_InitStruct-\/>SequencerDiscont == LL\_ADC\_REG\_SEQ\_DISCONT\_DISABLE));}
+\DoxyCodeLine{01198   \}}
+\DoxyCodeLine{01199   assert\_param(IS\_LL\_ADC\_REG\_CONTINUOUS\_MODE(ADC\_REG\_InitStruct-\/>ContinuousMode));}
+\DoxyCodeLine{01200   assert\_param(IS\_LL\_ADC\_REG\_DMA\_TRANSFER(ADC\_REG\_InitStruct-\/>DMATransfer));}
+\DoxyCodeLine{01201   assert\_param(IS\_LL\_ADC\_REG\_OVR\_DATA\_BEHAVIOR(ADC\_REG\_InitStruct-\/>Overrun));}
+\DoxyCodeLine{01202 }
+\DoxyCodeLine{01203   \textcolor{comment}{/* Note: Hardware constraint (refer to description of this function):       */}}
+\DoxyCodeLine{01204   \textcolor{comment}{/*       ADC instance must be disabled.                                     */}}
+\DoxyCodeLine{01205   \textcolor{keywordflow}{if} (LL\_ADC\_IsEnabled(ADCx) == 0UL)}
+\DoxyCodeLine{01206   \{}
+\DoxyCodeLine{01207     \textcolor{comment}{/* Configuration of ADC hierarchical scope:                               */}}
+\DoxyCodeLine{01208     \textcolor{comment}{/*  -\/ ADC group regular                                                   */}}
+\DoxyCodeLine{01209     \textcolor{comment}{/*    -\/ Set ADC group regular trigger source                              */}}
+\DoxyCodeLine{01210     \textcolor{comment}{/*    -\/ Set ADC group regular sequencer length                            */}}
+\DoxyCodeLine{01211     \textcolor{comment}{/*    -\/ Set ADC group regular sequencer discontinuous mode                */}}
+\DoxyCodeLine{01212     \textcolor{comment}{/*    -\/ Set ADC group regular continuous mode                             */}}
+\DoxyCodeLine{01213     \textcolor{comment}{/*    -\/ Set ADC group regular conversion data transfer: no transfer or    */}}
+\DoxyCodeLine{01214     \textcolor{comment}{/*      transfer by DMA, and DMA requests mode                            */}}
+\DoxyCodeLine{01215     \textcolor{comment}{/*    -\/ Set ADC group regular overrun behavior                            */}}
+\DoxyCodeLine{01216     \textcolor{comment}{/* Note: On this STM32 series, ADC trigger edge is set to value 0x0 by    */}}
+\DoxyCodeLine{01217     \textcolor{comment}{/*       setting of trigger source to SW start.                           */}}
+\DoxyCodeLine{01218     \textcolor{keywordflow}{if} (ADC\_REG\_InitStruct-\/>SequencerLength != LL\_ADC\_REG\_SEQ\_SCAN\_DISABLE)}
+\DoxyCodeLine{01219     \{}
+\DoxyCodeLine{01220       MODIFY\_REG(ADCx-\/>CFGR,}
+\DoxyCodeLine{01221                  ADC\_CFGR\_EXTSEL}
+\DoxyCodeLine{01222                  | ADC\_CFGR\_EXTEN}
+\DoxyCodeLine{01223                  | ADC\_CFGR\_DISCEN}
+\DoxyCodeLine{01224                  | ADC\_CFGR\_DISCNUM}
+\DoxyCodeLine{01225                  | ADC\_CFGR\_CONT}
+\DoxyCodeLine{01226                  | ADC\_CFGR\_DMAEN}
+\DoxyCodeLine{01227                  | ADC\_CFGR\_DMACFG}
+\DoxyCodeLine{01228                  | ADC\_CFGR\_OVRMOD}
+\DoxyCodeLine{01229                  ,}
+\DoxyCodeLine{01230                  ADC\_REG\_InitStruct-\/>TriggerSource}
+\DoxyCodeLine{01231                  | ADC\_REG\_InitStruct-\/>SequencerDiscont}
+\DoxyCodeLine{01232                  | ADC\_REG\_InitStruct-\/>ContinuousMode}
+\DoxyCodeLine{01233                  | ADC\_REG\_InitStruct-\/>DMATransfer}
+\DoxyCodeLine{01234                  | ADC\_REG\_InitStruct-\/>Overrun}
+\DoxyCodeLine{01235                 );}
+\DoxyCodeLine{01236     \}}
+\DoxyCodeLine{01237     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01238     \{}
+\DoxyCodeLine{01239       MODIFY\_REG(ADCx-\/>CFGR,}
+\DoxyCodeLine{01240                  ADC\_CFGR\_EXTSEL}
+\DoxyCodeLine{01241                  | ADC\_CFGR\_EXTEN}
+\DoxyCodeLine{01242                  | ADC\_CFGR\_DISCEN}
+\DoxyCodeLine{01243                  | ADC\_CFGR\_DISCNUM}
+\DoxyCodeLine{01244                  | ADC\_CFGR\_CONT}
+\DoxyCodeLine{01245                  | ADC\_CFGR\_DMAEN}
+\DoxyCodeLine{01246                  | ADC\_CFGR\_DMACFG}
+\DoxyCodeLine{01247                  | ADC\_CFGR\_OVRMOD}
+\DoxyCodeLine{01248                  ,}
+\DoxyCodeLine{01249                  ADC\_REG\_InitStruct-\/>TriggerSource}
+\DoxyCodeLine{01250                  | LL\_ADC\_REG\_SEQ\_DISCONT\_DISABLE}
+\DoxyCodeLine{01251                  | ADC\_REG\_InitStruct-\/>ContinuousMode}
+\DoxyCodeLine{01252                  | ADC\_REG\_InitStruct-\/>DMATransfer}
+\DoxyCodeLine{01253                  | ADC\_REG\_InitStruct-\/>Overrun}
+\DoxyCodeLine{01254                 );}
+\DoxyCodeLine{01255     \}}
+\DoxyCodeLine{01256 }
+\DoxyCodeLine{01257     \textcolor{comment}{/* Set ADC group regular sequencer length and scan direction */}}
+\DoxyCodeLine{01258     LL\_ADC\_REG\_SetSequencerLength(ADCx, ADC\_REG\_InitStruct-\/>SequencerLength);}
+\DoxyCodeLine{01259   \}}
+\DoxyCodeLine{01260   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01261   \{}
+\DoxyCodeLine{01262     \textcolor{comment}{/* Initialization error: ADC instance is not disabled. */}}
+\DoxyCodeLine{01263     status = ERROR;}
+\DoxyCodeLine{01264   \}}
+\DoxyCodeLine{01265   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01266 \}}
+\DoxyCodeLine{01267 }
+\DoxyCodeLine{01274 \textcolor{keywordtype}{void} LL\_ADC\_REG\_StructInit(LL\_ADC\_REG\_InitTypeDef *ADC\_REG\_InitStruct)}
+\DoxyCodeLine{01275 \{}
+\DoxyCodeLine{01276   \textcolor{comment}{/* Set ADC\_REG\_InitStruct fields to default values */}}
+\DoxyCodeLine{01277   \textcolor{comment}{/* Set fields of ADC group regular */}}
+\DoxyCodeLine{01278   \textcolor{comment}{/* Note: On this STM32 series, ADC trigger edge is set to value 0x0 by      */}}
+\DoxyCodeLine{01279   \textcolor{comment}{/*       setting of trigger source to SW start.                             */}}
+\DoxyCodeLine{01280   ADC\_REG\_InitStruct-\/>TriggerSource    = LL\_ADC\_REG\_TRIG\_SOFTWARE;}
+\DoxyCodeLine{01281   ADC\_REG\_InitStruct-\/>SequencerLength  = LL\_ADC\_REG\_SEQ\_SCAN\_DISABLE;}
+\DoxyCodeLine{01282   ADC\_REG\_InitStruct-\/>SequencerDiscont = LL\_ADC\_REG\_SEQ\_DISCONT\_DISABLE;}
+\DoxyCodeLine{01283   ADC\_REG\_InitStruct-\/>ContinuousMode   = LL\_ADC\_REG\_CONV\_SINGLE;}
+\DoxyCodeLine{01284   ADC\_REG\_InitStruct-\/>DMATransfer      = LL\_ADC\_REG\_DMA\_TRANSFER\_NONE;}
+\DoxyCodeLine{01285   ADC\_REG\_InitStruct-\/>Overrun          = LL\_ADC\_REG\_OVR\_DATA\_OVERWRITTEN;}
+\DoxyCodeLine{01286 \}}
+\DoxyCodeLine{01287 }
+\DoxyCodeLine{01326 ErrorStatus LL\_ADC\_INJ\_Init(ADC\_TypeDef *ADCx, LL\_ADC\_INJ\_InitTypeDef *ADC\_INJ\_InitStruct)}
+\DoxyCodeLine{01327 \{}
+\DoxyCodeLine{01328   ErrorStatus status = SUCCESS;}
+\DoxyCodeLine{01329 }
+\DoxyCodeLine{01330   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01331   assert\_param(IS\_ADC\_ALL\_INSTANCE(ADCx));}
+\DoxyCodeLine{01332   assert\_param(IS\_LL\_ADC\_INJ\_TRIG\_SOURCE(ADCx, ADC\_INJ\_InitStruct-\/>TriggerSource));}
+\DoxyCodeLine{01333   assert\_param(IS\_LL\_ADC\_INJ\_SEQ\_SCAN\_LENGTH(ADC\_INJ\_InitStruct-\/>SequencerLength));}
+\DoxyCodeLine{01334   \textcolor{keywordflow}{if} (ADC\_INJ\_InitStruct-\/>SequencerLength != LL\_ADC\_INJ\_SEQ\_SCAN\_DISABLE)}
+\DoxyCodeLine{01335   \{}
+\DoxyCodeLine{01336     assert\_param(IS\_LL\_ADC\_INJ\_SEQ\_SCAN\_DISCONT\_MODE(ADC\_INJ\_InitStruct-\/>SequencerDiscont));}
+\DoxyCodeLine{01337   \}}
+\DoxyCodeLine{01338   assert\_param(IS\_LL\_ADC\_INJ\_TRIG\_AUTO(ADC\_INJ\_InitStruct-\/>TrigAuto));}
+\DoxyCodeLine{01339 }
+\DoxyCodeLine{01340   \textcolor{comment}{/* Note: Hardware constraint (refer to description of this function):       */}}
+\DoxyCodeLine{01341   \textcolor{comment}{/*       ADC instance must be disabled.                                     */}}
+\DoxyCodeLine{01342   \textcolor{keywordflow}{if} (LL\_ADC\_IsEnabled(ADCx) == 0UL)}
+\DoxyCodeLine{01343   \{}
+\DoxyCodeLine{01344     \textcolor{comment}{/* Configuration of ADC hierarchical scope:                               */}}
+\DoxyCodeLine{01345     \textcolor{comment}{/*  -\/ ADC group injected                                                  */}}
+\DoxyCodeLine{01346     \textcolor{comment}{/*    -\/ Set ADC group injected trigger source                             */}}
+\DoxyCodeLine{01347     \textcolor{comment}{/*    -\/ Set ADC group injected sequencer length                           */}}
+\DoxyCodeLine{01348     \textcolor{comment}{/*    -\/ Set ADC group injected sequencer discontinuous mode               */}}
+\DoxyCodeLine{01349     \textcolor{comment}{/*    -\/ Set ADC group injected conversion trigger: independent or         */}}
+\DoxyCodeLine{01350     \textcolor{comment}{/*      from ADC group regular                                            */}}
+\DoxyCodeLine{01351     \textcolor{comment}{/* Note: On this STM32 series, ADC trigger edge is set to value 0x0 by    */}}
+\DoxyCodeLine{01352     \textcolor{comment}{/*       setting of trigger source to SW start.                           */}}
+\DoxyCodeLine{01353     \textcolor{keywordflow}{if} (ADC\_INJ\_InitStruct-\/>SequencerLength != LL\_ADC\_REG\_SEQ\_SCAN\_DISABLE)}
+\DoxyCodeLine{01354     \{}
+\DoxyCodeLine{01355       MODIFY\_REG(ADCx-\/>CFGR,}
+\DoxyCodeLine{01356                  ADC\_CFGR\_JDISCEN}
+\DoxyCodeLine{01357                  | ADC\_CFGR\_JAUTO}
+\DoxyCodeLine{01358                  ,}
+\DoxyCodeLine{01359                  ADC\_INJ\_InitStruct-\/>SequencerDiscont}
+\DoxyCodeLine{01360                  | ADC\_INJ\_InitStruct-\/>TrigAuto}
+\DoxyCodeLine{01361                 );}
+\DoxyCodeLine{01362     \}}
+\DoxyCodeLine{01363     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01364     \{}
+\DoxyCodeLine{01365       MODIFY\_REG(ADCx-\/>CFGR,}
+\DoxyCodeLine{01366                  ADC\_CFGR\_JDISCEN}
+\DoxyCodeLine{01367                  | ADC\_CFGR\_JAUTO}
+\DoxyCodeLine{01368                  ,}
+\DoxyCodeLine{01369                  LL\_ADC\_REG\_SEQ\_DISCONT\_DISABLE}
+\DoxyCodeLine{01370                  | ADC\_INJ\_InitStruct-\/>TrigAuto}
+\DoxyCodeLine{01371                 );}
+\DoxyCodeLine{01372     \}}
+\DoxyCodeLine{01373 }
+\DoxyCodeLine{01374     MODIFY\_REG(ADCx-\/>JSQR,}
+\DoxyCodeLine{01375                ADC\_JSQR\_JEXTSEL}
+\DoxyCodeLine{01376                | ADC\_JSQR\_JEXTEN}
+\DoxyCodeLine{01377                | ADC\_JSQR\_JL}
+\DoxyCodeLine{01378                ,}
+\DoxyCodeLine{01379                ADC\_INJ\_InitStruct-\/>TriggerSource}
+\DoxyCodeLine{01380                | ADC\_INJ\_InitStruct-\/>SequencerLength}
+\DoxyCodeLine{01381               );}
+\DoxyCodeLine{01382   \}}
+\DoxyCodeLine{01383   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01384   \{}
+\DoxyCodeLine{01385     \textcolor{comment}{/* Initialization error: ADC instance is not disabled. */}}
+\DoxyCodeLine{01386     status = ERROR;}
+\DoxyCodeLine{01387   \}}
+\DoxyCodeLine{01388   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{01389 \}}
+\DoxyCodeLine{01390 }
+\DoxyCodeLine{01397 \textcolor{keywordtype}{void} LL\_ADC\_INJ\_StructInit(LL\_ADC\_INJ\_InitTypeDef *ADC\_INJ\_InitStruct)}
+\DoxyCodeLine{01398 \{}
+\DoxyCodeLine{01399   \textcolor{comment}{/* Set ADC\_INJ\_InitStruct fields to default values */}}
+\DoxyCodeLine{01400   \textcolor{comment}{/* Set fields of ADC group injected */}}
+\DoxyCodeLine{01401   ADC\_INJ\_InitStruct-\/>TriggerSource    = LL\_ADC\_INJ\_TRIG\_SOFTWARE;}
+\DoxyCodeLine{01402   ADC\_INJ\_InitStruct-\/>SequencerLength  = LL\_ADC\_INJ\_SEQ\_SCAN\_DISABLE;}
+\DoxyCodeLine{01403   ADC\_INJ\_InitStruct-\/>SequencerDiscont = LL\_ADC\_INJ\_SEQ\_DISCONT\_DISABLE;}
+\DoxyCodeLine{01404   ADC\_INJ\_InitStruct-\/>TrigAuto         = LL\_ADC\_INJ\_TRIG\_INDEPENDENT;}
+\DoxyCodeLine{01405 \}}
+\DoxyCodeLine{01406 }
+\DoxyCodeLine{01419 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC1 || ADC2 || ADC3 || ADC4 || ADC5 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01420 }
+\DoxyCodeLine{01425 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_FULL\_LL\_DRIVER */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

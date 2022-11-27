@@ -1,0 +1,300 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+gpio.\+c}
+\label{stm32g4xx__hal__gpio_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_gpio.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_gpio.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00105 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00106 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00107 }
+\DoxyCodeLine{00122 \textcolor{preprocessor}{\#ifdef HAL\_GPIO\_MODULE\_ENABLED}}
+\DoxyCodeLine{00123 }
+\DoxyCodeLine{00124 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00125 \textcolor{comment}{/* Private defines -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00129 \textcolor{preprocessor}{\#define GPIO\_NUMBER           (16U)}}
+\DoxyCodeLine{00134 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00135 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00136 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00137 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00138 }
+\DoxyCodeLine{00162 \textcolor{keywordtype}{void} HAL\_GPIO\_Init(GPIO\_TypeDef  *GPIOx, GPIO\_InitTypeDef *GPIO\_Init)}
+\DoxyCodeLine{00163 \{}
+\DoxyCodeLine{00164   uint32\_t position = 0x00U;}
+\DoxyCodeLine{00165   uint32\_t iocurrent;}
+\DoxyCodeLine{00166   uint32\_t temp;}
+\DoxyCodeLine{00167 }
+\DoxyCodeLine{00168   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00169   assert\_param(IS\_GPIO\_ALL\_INSTANCE(GPIOx));}
+\DoxyCodeLine{00170   assert\_param(IS\_GPIO\_PIN(GPIO\_Init-\/>Pin));}
+\DoxyCodeLine{00171   assert\_param(IS\_GPIO\_MODE(GPIO\_Init-\/>Mode));}
+\DoxyCodeLine{00172 }
+\DoxyCodeLine{00173   \textcolor{comment}{/* Configure the port pins */}}
+\DoxyCodeLine{00174   \textcolor{keywordflow}{while} (((GPIO\_Init-\/>Pin) >> position) != 0U)}
+\DoxyCodeLine{00175   \{}
+\DoxyCodeLine{00176     \textcolor{comment}{/* Get current io position */}}
+\DoxyCodeLine{00177     iocurrent = (GPIO\_Init-\/>Pin) \& (1UL << position);}
+\DoxyCodeLine{00178 }
+\DoxyCodeLine{00179     \textcolor{keywordflow}{if} (iocurrent != 0x00u)}
+\DoxyCodeLine{00180     \{}
+\DoxyCodeLine{00181       \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ GPIO Mode Configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00182       \textcolor{comment}{/* In case of Output or Alternate function mode selection */}}
+\DoxyCodeLine{00183       \textcolor{keywordflow}{if}(((GPIO\_Init-\/>Mode \& GPIO\_MODE) == MODE\_OUTPUT) ||}
+\DoxyCodeLine{00184          ((GPIO\_Init-\/>Mode \& GPIO\_MODE) == MODE\_AF))}
+\DoxyCodeLine{00185       \{}
+\DoxyCodeLine{00186         \textcolor{comment}{/* Check the Speed parameter */}}
+\DoxyCodeLine{00187         assert\_param(IS\_GPIO\_SPEED(GPIO\_Init-\/>Speed));}
+\DoxyCodeLine{00188         \textcolor{comment}{/* Configure the IO Speed */}}
+\DoxyCodeLine{00189         temp = GPIOx-\/>OSPEEDR;}
+\DoxyCodeLine{00190         temp \&= \string~(GPIO\_OSPEEDR\_OSPEED0 << (position * 2U));}
+\DoxyCodeLine{00191         temp |= (GPIO\_Init-\/>Speed << (position * 2U));}
+\DoxyCodeLine{00192         GPIOx-\/>OSPEEDR = temp;}
+\DoxyCodeLine{00193 }
+\DoxyCodeLine{00194         \textcolor{comment}{/* Configure the IO Output Type */}}
+\DoxyCodeLine{00195         temp = GPIOx-\/>OTYPER;}
+\DoxyCodeLine{00196         temp \&= \string~(GPIO\_OTYPER\_OT0 << position) ;}
+\DoxyCodeLine{00197         temp |= (((GPIO\_Init-\/>Mode \& OUTPUT\_TYPE) >> OUTPUT\_TYPE\_Pos) << position);}
+\DoxyCodeLine{00198         GPIOx-\/>OTYPER = temp;}
+\DoxyCodeLine{00199       \}}
+\DoxyCodeLine{00200 }
+\DoxyCodeLine{00201       \textcolor{keywordflow}{if} ((GPIO\_Init-\/>Mode \& GPIO\_MODE) != MODE\_ANALOG)}
+\DoxyCodeLine{00202       \{}
+\DoxyCodeLine{00203         \textcolor{comment}{/* Check the Pull parameter */}}
+\DoxyCodeLine{00204         assert\_param(IS\_GPIO\_PULL(GPIO\_Init-\/>Pull));}
+\DoxyCodeLine{00205 }
+\DoxyCodeLine{00206         \textcolor{comment}{/* Activate the Pull-\/up or Pull down resistor for the current IO */}}
+\DoxyCodeLine{00207         temp = GPIOx-\/>PUPDR;}
+\DoxyCodeLine{00208         temp \&= \string~(GPIO\_PUPDR\_PUPD0 << (position * 2U));}
+\DoxyCodeLine{00209         temp |= ((GPIO\_Init-\/>Pull) << (position * 2U));}
+\DoxyCodeLine{00210         GPIOx-\/>PUPDR = temp;}
+\DoxyCodeLine{00211       \}}
+\DoxyCodeLine{00212 }
+\DoxyCodeLine{00213       \textcolor{comment}{/* In case of Alternate function mode selection */}}
+\DoxyCodeLine{00214       \textcolor{keywordflow}{if} ((GPIO\_Init-\/>Mode \& GPIO\_MODE) == MODE\_AF)}
+\DoxyCodeLine{00215       \{}
+\DoxyCodeLine{00216         \textcolor{comment}{/* Check the Alternate function parameters */}}
+\DoxyCodeLine{00217         assert\_param(IS\_GPIO\_AF\_INSTANCE(GPIOx));}
+\DoxyCodeLine{00218         assert\_param(IS\_GPIO\_AF(GPIO\_Init-\/>Alternate));}
+\DoxyCodeLine{00219 }
+\DoxyCodeLine{00220         \textcolor{comment}{/* Configure Alternate function mapped with the current IO */}}
+\DoxyCodeLine{00221         temp = GPIOx-\/>AFR[position >> 3U];}
+\DoxyCodeLine{00222         temp \&= \string~(0xFU << ((position \& 0x07U) * 4U));}
+\DoxyCodeLine{00223         temp |= ((GPIO\_Init-\/>Alternate) << ((position \& 0x07U) * 4U));}
+\DoxyCodeLine{00224         GPIOx-\/>AFR[position >> 3U] = temp;}
+\DoxyCodeLine{00225       \}}
+\DoxyCodeLine{00226 }
+\DoxyCodeLine{00227       \textcolor{comment}{/* Configure IO Direction mode (Input, Output, Alternate or Analog) */}}
+\DoxyCodeLine{00228       temp = GPIOx-\/>MODER;}
+\DoxyCodeLine{00229       temp \&= \string~(GPIO\_MODER\_MODE0 << (position * 2U));}
+\DoxyCodeLine{00230       temp |= ((GPIO\_Init-\/>Mode \& GPIO\_MODE) << (position * 2U));}
+\DoxyCodeLine{00231       GPIOx-\/>MODER = temp;}
+\DoxyCodeLine{00232 }
+\DoxyCodeLine{00233       \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ EXTI Mode Configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00234       \textcolor{comment}{/* Configure the External Interrupt or event for the current IO */}}
+\DoxyCodeLine{00235       \textcolor{keywordflow}{if} ((GPIO\_Init-\/>Mode \& EXTI\_MODE) != 0x00u)}
+\DoxyCodeLine{00236       \{}
+\DoxyCodeLine{00237         \textcolor{comment}{/* Enable SYSCFG Clock */}}
+\DoxyCodeLine{00238         \_\_HAL\_RCC\_SYSCFG\_CLK\_ENABLE();}
+\DoxyCodeLine{00239 }
+\DoxyCodeLine{00240         temp = SYSCFG-\/>EXTICR[position >> 2U];}
+\DoxyCodeLine{00241         temp \&= \string~(0x0FUL << (4U * (position \& 0x03U)));}
+\DoxyCodeLine{00242         temp |= (GPIO\_GET\_INDEX(GPIOx) << (4U * (position \& 0x03U)));}
+\DoxyCodeLine{00243         SYSCFG-\/>EXTICR[position >> 2U] = temp;}
+\DoxyCodeLine{00244 }
+\DoxyCodeLine{00245         \textcolor{comment}{/* Clear Rising Falling edge configuration */}}
+\DoxyCodeLine{00246         temp = EXTI-\/>RTSR1;}
+\DoxyCodeLine{00247         temp \&= \string~(iocurrent);}
+\DoxyCodeLine{00248         \textcolor{keywordflow}{if} ((GPIO\_Init-\/>Mode \& TRIGGER\_RISING) != 0x00U)}
+\DoxyCodeLine{00249         \{}
+\DoxyCodeLine{00250           temp |= iocurrent;}
+\DoxyCodeLine{00251         \}}
+\DoxyCodeLine{00252         EXTI-\/>RTSR1 = temp;}
+\DoxyCodeLine{00253 }
+\DoxyCodeLine{00254         temp = EXTI-\/>FTSR1;}
+\DoxyCodeLine{00255         temp \&= \string~(iocurrent);}
+\DoxyCodeLine{00256         \textcolor{keywordflow}{if} ((GPIO\_Init-\/>Mode \& TRIGGER\_FALLING) != 0x00U)}
+\DoxyCodeLine{00257         \{}
+\DoxyCodeLine{00258           temp |= iocurrent;}
+\DoxyCodeLine{00259         \}}
+\DoxyCodeLine{00260         EXTI-\/>FTSR1 = temp;}
+\DoxyCodeLine{00261 }
+\DoxyCodeLine{00262         temp = EXTI-\/>EMR1;}
+\DoxyCodeLine{00263         temp \&= \string~(iocurrent);}
+\DoxyCodeLine{00264         \textcolor{keywordflow}{if} ((GPIO\_Init-\/>Mode \& EXTI\_EVT) != 0x00U)}
+\DoxyCodeLine{00265         \{}
+\DoxyCodeLine{00266           temp |= iocurrent;}
+\DoxyCodeLine{00267         \}}
+\DoxyCodeLine{00268         EXTI-\/>EMR1 = temp;}
+\DoxyCodeLine{00269 }
+\DoxyCodeLine{00270         \textcolor{comment}{/* Clear EXTI line configuration */}}
+\DoxyCodeLine{00271         temp = EXTI-\/>IMR1;}
+\DoxyCodeLine{00272         temp \&= \string~(iocurrent);}
+\DoxyCodeLine{00273         \textcolor{keywordflow}{if} ((GPIO\_Init-\/>Mode \& EXTI\_IT) != 0x00U)}
+\DoxyCodeLine{00274         \{}
+\DoxyCodeLine{00275           temp |= iocurrent;}
+\DoxyCodeLine{00276         \}}
+\DoxyCodeLine{00277         EXTI-\/>IMR1 = temp;}
+\DoxyCodeLine{00278       \}}
+\DoxyCodeLine{00279     \}}
+\DoxyCodeLine{00280 }
+\DoxyCodeLine{00281     position++;}
+\DoxyCodeLine{00282   \}}
+\DoxyCodeLine{00283 \}}
+\DoxyCodeLine{00284 }
+\DoxyCodeLine{00292 \textcolor{keywordtype}{void} HAL\_GPIO\_DeInit(GPIO\_TypeDef  *GPIOx, uint32\_t GPIO\_Pin)}
+\DoxyCodeLine{00293 \{}
+\DoxyCodeLine{00294   uint32\_t position = 0x00U;}
+\DoxyCodeLine{00295   uint32\_t iocurrent;}
+\DoxyCodeLine{00296   uint32\_t tmp;}
+\DoxyCodeLine{00297 }
+\DoxyCodeLine{00298   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00299   assert\_param(IS\_GPIO\_ALL\_INSTANCE(GPIOx));}
+\DoxyCodeLine{00300   assert\_param(IS\_GPIO\_PIN(GPIO\_Pin));}
+\DoxyCodeLine{00301 }
+\DoxyCodeLine{00302   \textcolor{comment}{/* Configure the port pins */}}
+\DoxyCodeLine{00303   \textcolor{keywordflow}{while} ((GPIO\_Pin >> position) != 0U)}
+\DoxyCodeLine{00304   \{}
+\DoxyCodeLine{00305     \textcolor{comment}{/* Get current io position */}}
+\DoxyCodeLine{00306     iocurrent = (GPIO\_Pin) \& (1UL << position);}
+\DoxyCodeLine{00307 }
+\DoxyCodeLine{00308     \textcolor{keywordflow}{if} (iocurrent != 0x00u)}
+\DoxyCodeLine{00309     \{}
+\DoxyCodeLine{00310       \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ EXTI Mode Configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00311       \textcolor{comment}{/* Clear the External Interrupt or Event for the current IO */}}
+\DoxyCodeLine{00312 }
+\DoxyCodeLine{00313       tmp = SYSCFG-\/>EXTICR[position >> 2U];}
+\DoxyCodeLine{00314       tmp \&= (0x0FUL << (4U * (position \& 0x03U)));}
+\DoxyCodeLine{00315       \textcolor{keywordflow}{if} (tmp == (GPIO\_GET\_INDEX(GPIOx) << (4U * (position \& 0x03U))))}
+\DoxyCodeLine{00316       \{}
+\DoxyCodeLine{00317         \textcolor{comment}{/* Clear EXTI line configuration */}}
+\DoxyCodeLine{00318         EXTI-\/>IMR1 \&= \string~(iocurrent);}
+\DoxyCodeLine{00319         EXTI-\/>EMR1 \&= \string~(iocurrent);}
+\DoxyCodeLine{00320 }
+\DoxyCodeLine{00321         \textcolor{comment}{/* Clear Rising Falling edge configuration */}}
+\DoxyCodeLine{00322         EXTI-\/>FTSR1 \&= \string~(iocurrent);}
+\DoxyCodeLine{00323         EXTI-\/>RTSR1 \&= \string~(iocurrent);}
+\DoxyCodeLine{00324 }
+\DoxyCodeLine{00325         tmp = 0x0FUL << (4U * (position \& 0x03U));}
+\DoxyCodeLine{00326         SYSCFG-\/>EXTICR[position >> 2U] \&= \string~tmp;}
+\DoxyCodeLine{00327       \}}
+\DoxyCodeLine{00328 }
+\DoxyCodeLine{00329       \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ GPIO Mode Configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00330       \textcolor{comment}{/* Configure IO in Analog Mode */}}
+\DoxyCodeLine{00331       GPIOx-\/>MODER |= (GPIO\_MODER\_MODE0 << (position * 2u));}
+\DoxyCodeLine{00332 }
+\DoxyCodeLine{00333       \textcolor{comment}{/* Configure the default Alternate Function in current IO */}}
+\DoxyCodeLine{00334       GPIOx-\/>AFR[position >> 3u] \&= \string~(0xFu << ((position \& 0x07u) * 4u));}
+\DoxyCodeLine{00335 }
+\DoxyCodeLine{00336       \textcolor{comment}{/* Deactivate the Pull-\/up and Pull-\/down resistor for the current IO */}}
+\DoxyCodeLine{00337       GPIOx-\/>PUPDR \&= \string~(GPIO\_PUPDR\_PUPD0 << (position * 2u));}
+\DoxyCodeLine{00338 }
+\DoxyCodeLine{00339       \textcolor{comment}{/* Configure the default value IO Output Type */}}
+\DoxyCodeLine{00340       GPIOx-\/>OTYPER  \&= \string~(GPIO\_OTYPER\_OT0 << position);}
+\DoxyCodeLine{00341 }
+\DoxyCodeLine{00342       \textcolor{comment}{/* Configure the default value for IO Speed */}}
+\DoxyCodeLine{00343       GPIOx-\/>OSPEEDR \&= \string~(GPIO\_OSPEEDR\_OSPEED0 << (position * 2u));}
+\DoxyCodeLine{00344     \}}
+\DoxyCodeLine{00345 }
+\DoxyCodeLine{00346     position++;}
+\DoxyCodeLine{00347   \}}
+\DoxyCodeLine{00348 \}}
+\DoxyCodeLine{00349 }
+\DoxyCodeLine{00373 GPIO\_PinState HAL\_GPIO\_ReadPin(GPIO\_TypeDef *GPIOx, uint16\_t GPIO\_Pin)}
+\DoxyCodeLine{00374 \{}
+\DoxyCodeLine{00375   GPIO\_PinState bitstatus;}
+\DoxyCodeLine{00376 }
+\DoxyCodeLine{00377   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00378   assert\_param(IS\_GPIO\_PIN(GPIO\_Pin));}
+\DoxyCodeLine{00379 }
+\DoxyCodeLine{00380   \textcolor{keywordflow}{if} ((GPIOx-\/>IDR \& GPIO\_Pin) != 0x00U)}
+\DoxyCodeLine{00381   \{}
+\DoxyCodeLine{00382     bitstatus = GPIO\_PIN\_SET;}
+\DoxyCodeLine{00383   \}}
+\DoxyCodeLine{00384   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00385   \{}
+\DoxyCodeLine{00386     bitstatus = GPIO\_PIN\_RESET;}
+\DoxyCodeLine{00387   \}}
+\DoxyCodeLine{00388   \textcolor{keywordflow}{return} bitstatus;}
+\DoxyCodeLine{00389 \}}
+\DoxyCodeLine{00390 }
+\DoxyCodeLine{00407 \textcolor{keywordtype}{void} HAL\_GPIO\_WritePin(GPIO\_TypeDef *GPIOx, uint16\_t GPIO\_Pin, GPIO\_PinState PinState)}
+\DoxyCodeLine{00408 \{}
+\DoxyCodeLine{00409   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00410   assert\_param(IS\_GPIO\_PIN(GPIO\_Pin));}
+\DoxyCodeLine{00411   assert\_param(IS\_GPIO\_PIN\_ACTION(PinState));}
+\DoxyCodeLine{00412 }
+\DoxyCodeLine{00413   \textcolor{keywordflow}{if} (PinState != GPIO\_PIN\_RESET)}
+\DoxyCodeLine{00414   \{}
+\DoxyCodeLine{00415     GPIOx-\/>BSRR = (uint32\_t)GPIO\_Pin;}
+\DoxyCodeLine{00416   \}}
+\DoxyCodeLine{00417   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00418   \{}
+\DoxyCodeLine{00419     GPIOx-\/>BRR = (uint32\_t)GPIO\_Pin;}
+\DoxyCodeLine{00420   \}}
+\DoxyCodeLine{00421 \}}
+\DoxyCodeLine{00422 }
+\DoxyCodeLine{00430 \textcolor{keywordtype}{void} HAL\_GPIO\_TogglePin(GPIO\_TypeDef *GPIOx, uint16\_t GPIO\_Pin)}
+\DoxyCodeLine{00431 \{}
+\DoxyCodeLine{00432   uint32\_t odr;}
+\DoxyCodeLine{00433 }
+\DoxyCodeLine{00434   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00435   assert\_param(IS\_GPIO\_PIN(GPIO\_Pin));}
+\DoxyCodeLine{00436 }
+\DoxyCodeLine{00437   \textcolor{comment}{/* get current Output Data Register value */}}
+\DoxyCodeLine{00438   odr = GPIOx-\/>ODR;}
+\DoxyCodeLine{00439 }
+\DoxyCodeLine{00440   \textcolor{comment}{/* Set selected pins that were at low level, and reset ones that were high */}}
+\DoxyCodeLine{00441   GPIOx-\/>BSRR = ((odr \& GPIO\_Pin) << GPIO\_NUMBER) | (\string~odr \& GPIO\_Pin);}
+\DoxyCodeLine{00442 \}}
+\DoxyCodeLine{00443 }
+\DoxyCodeLine{00455 HAL\_StatusTypeDef HAL\_GPIO\_LockPin(GPIO\_TypeDef *GPIOx, uint16\_t GPIO\_Pin)}
+\DoxyCodeLine{00456 \{}
+\DoxyCodeLine{00457   \_\_IO uint32\_t tmp = GPIO\_LCKR\_LCKK;}
+\DoxyCodeLine{00458 }
+\DoxyCodeLine{00459   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00460   assert\_param(IS\_GPIO\_LOCK\_INSTANCE(GPIOx));}
+\DoxyCodeLine{00461   assert\_param(IS\_GPIO\_PIN(GPIO\_Pin));}
+\DoxyCodeLine{00462 }
+\DoxyCodeLine{00463   \textcolor{comment}{/* Apply lock key write sequence */}}
+\DoxyCodeLine{00464   tmp |= GPIO\_Pin;}
+\DoxyCodeLine{00465   \textcolor{comment}{/* Set LCKx bit(s): LCKK='1' + LCK[15-\/0] */}}
+\DoxyCodeLine{00466   GPIOx-\/>LCKR = tmp;}
+\DoxyCodeLine{00467   \textcolor{comment}{/* Reset LCKx bit(s): LCKK='0' + LCK[15-\/0] */}}
+\DoxyCodeLine{00468   GPIOx-\/>LCKR = GPIO\_Pin;}
+\DoxyCodeLine{00469   \textcolor{comment}{/* Set LCKx bit(s): LCKK='1' + LCK[15-\/0] */}}
+\DoxyCodeLine{00470   GPIOx-\/>LCKR = tmp;}
+\DoxyCodeLine{00471   \textcolor{comment}{/* Read LCKK register. This read is mandatory to complete key lock sequence */}}
+\DoxyCodeLine{00472   tmp = GPIOx-\/>LCKR;}
+\DoxyCodeLine{00473 }
+\DoxyCodeLine{00474   \textcolor{comment}{/* read again in order to confirm lock is active */}}
+\DoxyCodeLine{00475   \textcolor{keywordflow}{if} ((GPIOx-\/>LCKR \& GPIO\_LCKR\_LCKK) != 0x00u)}
+\DoxyCodeLine{00476   \{}
+\DoxyCodeLine{00477     \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00478   \}}
+\DoxyCodeLine{00479   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00480   \{}
+\DoxyCodeLine{00481     \textcolor{keywordflow}{return} HAL\_ERROR;}
+\DoxyCodeLine{00482   \}}
+\DoxyCodeLine{00483 \}}
+\DoxyCodeLine{00484 }
+\DoxyCodeLine{00490 \textcolor{keywordtype}{void} HAL\_GPIO\_EXTI\_IRQHandler(uint16\_t GPIO\_Pin)}
+\DoxyCodeLine{00491 \{}
+\DoxyCodeLine{00492   \textcolor{comment}{/* EXTI line interrupt detected */}}
+\DoxyCodeLine{00493   \textcolor{keywordflow}{if} (\_\_HAL\_GPIO\_EXTI\_GET\_IT(GPIO\_Pin) != 0x00u)}
+\DoxyCodeLine{00494   \{}
+\DoxyCodeLine{00495     \_\_HAL\_GPIO\_EXTI\_CLEAR\_IT(GPIO\_Pin);}
+\DoxyCodeLine{00496     HAL\_GPIO\_EXTI\_Callback(GPIO\_Pin);}
+\DoxyCodeLine{00497   \}}
+\DoxyCodeLine{00498 \}}
+\DoxyCodeLine{00499 }
+\DoxyCodeLine{00505 \_\_weak \textcolor{keywordtype}{void} HAL\_GPIO\_EXTI\_Callback(uint16\_t GPIO\_Pin)}
+\DoxyCodeLine{00506 \{}
+\DoxyCodeLine{00507   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{00508   UNUSED(GPIO\_Pin);}
+\DoxyCodeLine{00509 }
+\DoxyCodeLine{00510   \textcolor{comment}{/* NOTE: This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{00511 \textcolor{comment}{           the HAL\_GPIO\_EXTI\_Callback could be implemented in the user file}}
+\DoxyCodeLine{00512 \textcolor{comment}{   */}}
+\DoxyCodeLine{00513 \}}
+\DoxyCodeLine{00514 }
+\DoxyCodeLine{00524 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_GPIO\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,500 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+hal\+\_\+tim\+\_\+ex.h File Reference}
+\label{stm32g4xx__hal__tim__ex_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_tim\_ex.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_tim\_ex.h}}
+
+
+Header file of TIM HAL Extended module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ TIM\+\_\+\+Hall\+Sensor\+\_\+\+Init\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em TIM Hall sensor Configuration Structure definition. \end{DoxyCompactList}\item 
+struct \textbf{ TIMEx\+\_\+\+Break\+Input\+Config\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em TIM Break/\+Break2 input configuration. \end{DoxyCompactList}\item 
+struct \textbf{ TIMEx\+\_\+\+Encoder\+Index\+Config\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em TIM Encoder index configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+ETR\+\_\+\+GPIO}~0x00000000U                                                 /$\ast$ !$<$ ETR input is connected to GPIO $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+ETR\+\_\+\+COMP1}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0}                                           /$\ast$ !$<$ ETR input is connected to COMP1\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+ETR\+\_\+\+COMP2}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1}                                           /$\ast$ !$<$ ETR input is connected to COMP2\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+ETR\+\_\+\+COMP3}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                     /$\ast$ !$<$ ETR input is connected to COMP3\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+ETR\+\_\+\+COMP4}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+2}                                           /$\ast$ !$<$ ETR input is connected to COMP4\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+ETR\+\_\+\+ADC1\+\_\+\+AWD1}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3}                                           /$\ast$ !$<$ ADC1 analog watchdog 1 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+ETR\+\_\+\+ADC1\+\_\+\+AWD2}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                     /$\ast$ !$<$ ADC1 analog watchdog 2 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+ETR\+\_\+\+ADC1\+\_\+\+AWD3}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1})                     /$\ast$ !$<$ ADC1 analog watchdog 3 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+ETR\+\_\+\+GPIO}~0x00000000U                                                /$\ast$ !$<$ ETR input is connected to GPIO $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+ETR\+\_\+\+COMP1}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0}                                          /$\ast$ !$<$ ETR input is connected to COMP1\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+ETR\+\_\+\+COMP2}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1}                                          /$\ast$ !$<$ ETR input is connected to COMP2\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+ETR\+\_\+\+COMP3}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                    /$\ast$ !$<$ ETR input is connected to COMP3\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+ETR\+\_\+\+COMP4}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+2}                                          /$\ast$ !$<$ ETR input is connected to COMP4\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+ETR\+\_\+\+TIM3\+\_\+\+ETR}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3}                                          /$\ast$ !$<$ ETR input is connected to TIM3 ETR $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+ETR\+\_\+\+TIM4\+\_\+\+ETR}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                    /$\ast$ !$<$ ETR input is connected to TIM4 ETR $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+ETR\+\_\+\+LSE}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0}) /$\ast$ !$<$ ETR input is connected to LSE $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+GPIO}~0x00000000U                                                 /$\ast$ !$<$ ETR input is connected to GPIO $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+COMP1}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0}                                           /$\ast$ !$<$ ETR input is connected to COMP1\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+COMP2}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1}                                           /$\ast$ !$<$ ETR input is connected to COMP2\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+COMP3}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                     /$\ast$ !$<$ ETR input is connected to COMP3\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+COMP4}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+2}                                           /$\ast$ !$<$ ETR input is connected to COMP4\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+TIM2\+\_\+\+ETR}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3}                                           /$\ast$ !$<$ ETR input is connected to TIM2 ETR $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+TIM4\+\_\+\+ETR}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                     /$\ast$ !$<$ ETR input is connected to TIM4 ETR $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+ADC2\+\_\+\+AWD1}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0}) /$\ast$ !$<$ ADC2 analog watchdog 1 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+ADC2\+\_\+\+AWD2}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+2})                     /$\ast$ !$<$ ADC2 analog watchdog 2 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+ETR\+\_\+\+ADC2\+\_\+\+AWD3}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+2} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0}) /$\ast$ !$<$ ADC2 analog watchdog 3 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+ETR\+\_\+\+GPIO}~0x00000000U                                                 /$\ast$ !$<$ ETR input is connected to GPIO $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+ETR\+\_\+\+COMP1}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0}                                           /$\ast$ !$<$ ETR input is connected to COMP1\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+ETR\+\_\+\+COMP2}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1}                                           /$\ast$ !$<$ ETR input is connected to COMP2\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+ETR\+\_\+\+COMP3}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                     /$\ast$ !$<$ ETR input is connected to COMP3\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+ETR\+\_\+\+COMP4}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+2}                                           /$\ast$ !$<$ ETR input is connected to COMP4\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+ETR\+\_\+\+TIM3\+\_\+\+ETR}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3}                                           /$\ast$ !$<$ ETR input is connected to TIM3 ETR $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+ETR\+\_\+\+GPIO}~0x00000000U                                                  /$\ast$ !$<$ ETR input is connected to GPIO $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+ETR\+\_\+\+COMP1}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0}                                            /$\ast$ !$<$ ETR input is connected to COMP1\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+ETR\+\_\+\+COMP2}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1}                                            /$\ast$ !$<$ ETR input is connected to COMP2\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+ETR\+\_\+\+COMP3}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                      /$\ast$ !$<$ ETR input is connected to COMP3\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+ETR\+\_\+\+COMP4}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+2}                                            /$\ast$ !$<$ ETR input is connected to COMP4\+\_\+\+OUT $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+ETR\+\_\+\+ADC2\+\_\+\+AWD1}~\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3}                                            /$\ast$ !$<$ ADC2 analog watchdog 1 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+ETR\+\_\+\+ADC2\+\_\+\+AWD2}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+0})                      /$\ast$ !$<$ ADC2 analog watchdog 2 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+ETR\+\_\+\+ADC2\+\_\+\+AWD3}~(\textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+3} $\vert$ \textbf{ TIM1\+\_\+\+AF1\+\_\+\+ETRSEL\+\_\+1})                      /$\ast$ !$<$ ADC2 analog watchdog 3 $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUT\+\_\+\+BRK}~0x00000001U
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUT\+\_\+\+BRK2}~0x00000002U
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+BKIN}~0x00000001U                               /$\ast$ !$<$ An external source (GPIO) is connected to the BKIN pin  $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+COMP1}~0x00000002U                               /$\ast$ !$<$ The COMP1 output is connected to the break input $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+COMP2}~0x00000004U                               /$\ast$ !$<$ The COMP2 output is connected to the break input $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+COMP3}~0x00000008U                               /$\ast$ !$<$ The COMP3 output is connected to the break input $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+COMP4}~0x00000010U                               /$\ast$ !$<$ The COMP4 output is connected to the break input $\ast$/
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+ENABLE}~0x00000001U
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+POLARITY\+\_\+\+LOW}~0x00000001U
+\item 
+\#define \textbf{ TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+POLARITY\+\_\+\+HIGH}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+TI1\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+TI1\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+TI1\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+TI1\+\_\+\+COMP3}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM1\+\_\+\+TI1\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI1\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI1\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI1\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI1\+\_\+\+COMP3}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI1\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI2\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI2\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI2\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI2\+\_\+\+COMP3}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI2\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI3\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI3\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI3\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI4\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI4\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI4\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM2\+\_\+\+TI4\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI4\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI1\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI1\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI1\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI1\+\_\+\+COMP3}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI1\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI2\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI2\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI2\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI2\+\_\+\+COMP3}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI2\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI3\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM3\+\_\+\+TI3\+\_\+\+COMP3}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI3\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI1\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI1\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI1\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI1\+\_\+\+COMP3}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI1\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI2\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI2\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI2\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI2\+\_\+\+COMP3}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI2\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI3\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM4\+\_\+\+TI4\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+TI1\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+TI1\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+TI1\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+TI1\+\_\+\+COMP3}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM8\+\_\+\+TI1\+\_\+\+COMP4}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM15\+\_\+\+TI1\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM15\+\_\+\+TI1\+\_\+\+LSE}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM15\+\_\+\+TI1\+\_\+\+COMP1}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM15\+\_\+\+TI1\+\_\+\+COMP2}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM15\+\_\+\+TI2\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM15\+\_\+\+TI2\+\_\+\+COMP2}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM15\+\_\+\+TI2\+\_\+\+COMP3}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI2\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM16\+\_\+\+TI1\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM16\+\_\+\+TI1\+\_\+\+MCO}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM16\+\_\+\+TI1\+\_\+\+HSE\+\_\+32}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM16\+\_\+\+TI1\+\_\+\+RTC\+\_\+\+WK}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM16\+\_\+\+TI1\+\_\+\+LSE}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM16\+\_\+\+TI1\+\_\+\+LSI}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM17\+\_\+\+TI1\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM17\+\_\+\+TI1\+\_\+\+MCO}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM17\+\_\+\+TI1\+\_\+\+HSE\+\_\+32}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM17\+\_\+\+TI1\+\_\+\+RTC\+\_\+\+WK}~\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM17\+\_\+\+TI1\+\_\+\+LSE}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM17\+\_\+\+TI1\+\_\+\+LSI}~(\textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+2} $\vert$ \textbf{ TIM\+\_\+\+TISEL\+\_\+\+TI1\+SEL\+\_\+1})
+\item 
+\#define \textbf{ TIM\+\_\+\+SMS\+\_\+\+PRELOAD\+\_\+\+SOURCE\+\_\+\+UPDATE}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+SMS\+\_\+\+PRELOAD\+\_\+\+SOURCE\+\_\+\+INDEX}~\textbf{ TIM\+\_\+\+SMCR\+\_\+\+SMSPS}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+POSITION\+\_\+00}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+POSITION\+\_\+01}~\textbf{ TIM\+\_\+\+ECR\+\_\+\+IPOS\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+POSITION\+\_\+10}~\textbf{ TIM\+\_\+\+ECR\+\_\+\+IPOS\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+POSITION\+\_\+11}~(\textbf{ TIM\+\_\+\+ECR\+\_\+\+IPOS\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+ECR\+\_\+\+IPOS\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+POSITION\+\_\+0}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+POSITION\+\_\+1}~\textbf{ TIM\+\_\+\+ECR\+\_\+\+IPOS\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+DIRECTION\+\_\+\+UP\+\_\+\+DOWN}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+DIRECTION\+\_\+\+UP}~\textbf{ TIM\+\_\+\+ECR\+\_\+\+IDIR\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+DIRECTION\+\_\+\+DOWN}~\textbf{ TIM\+\_\+\+ECR\+\_\+\+IDIR\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+POLARITY\+\_\+\+INVERTED}~\textbf{ TIM\+\_\+\+ETRPOLARITY\+\_\+\+INVERTED}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+POLARITY\+\_\+\+NONINVERTED}~\textbf{ TIM\+\_\+\+ETRPOLARITY\+\_\+\+NONINVERTED}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+PRESCALER\+\_\+\+DIV1}~\textbf{ TIM\+\_\+\+ETRPRESCALER\+\_\+\+DIV1}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+PRESCALER\+\_\+\+DIV2}~\textbf{ TIM\+\_\+\+ETRPRESCALER\+\_\+\+DIV2}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+PRESCALER\+\_\+\+DIV4}~\textbf{ TIM\+\_\+\+ETRPRESCALER\+\_\+\+DIV4}
+\item 
+\#define \textbf{ TIM\+\_\+\+ENCODERINDEX\+\_\+\+PRESCALER\+\_\+\+DIV8}~\textbf{ TIM\+\_\+\+ETRPRESCALER\+\_\+\+DIV8}
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+CALC\+\_\+\+PSC}(\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+CNTCLK\+\_\+\+\_\+)~  ((\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+) $>$= (\+\_\+\+\_\+\+CNTCLK\+\_\+\+\_\+)) ? (uint32\+\_\+t)((\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+)/(\+\_\+\+\_\+\+CNTCLK\+\_\+\+\_\+) -\/ 1U) \+: 0U
+\begin{DoxyCompactList}\small\item\em HELPER macro calculating the prescaler value to achieve the required counter clock frequency. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+CALC\+\_\+\+PERIOD}(\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+PSC\+\_\+\+\_\+,  \+\_\+\+\_\+\+FREQ\+\_\+\+\_\+)~  (((\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+)/((\+\_\+\+\_\+\+PSC\+\_\+\+\_\+) + 1U)) $>$= (\+\_\+\+\_\+\+FREQ\+\_\+\+\_\+)) ? ((\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+)/((\+\_\+\+\_\+\+FREQ\+\_\+\+\_\+) $\ast$ ((\+\_\+\+\_\+\+PSC\+\_\+\+\_\+) + 1U)) -\/ 1U) \+: 0U
+\begin{DoxyCompactList}\small\item\em HELPER macro calculating the auto-\/reload value to achieve the required output signal frequency. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+CALC\+\_\+\+PERIOD\+\_\+\+DITHER}(\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+PSC\+\_\+\+\_\+,  \+\_\+\+\_\+\+FREQ\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em HELPER macro calculating the auto-\/reload value, with dithering feature enabled, to achieve the required output signal frequency. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+CALC\+\_\+\+PULSE}(\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+PSC\+\_\+\+\_\+,  \+\_\+\+\_\+\+DELAY\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em HELPER macro calculating the compare value required to achieve the required timer output compare active/inactive delay. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+CALC\+\_\+\+PULSE\+\_\+\+DITHER}(\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+PSC\+\_\+\+\_\+,  \+\_\+\+\_\+\+DELAY\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em HELPER macro calculating the compare value, with dithering feature enabled, to achieve the required timer output compare active/inactive delay. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+CALC\+\_\+\+PERIOD\+\_\+\+BY\+\_\+\+DELAY}(\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+PSC\+\_\+\+\_\+,  \+\_\+\+\_\+\+DELAY\+\_\+\+\_\+,  \+\_\+\+\_\+\+PULSE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em HELPER macro calculating the auto-\/reload value to achieve the required pulse duration (when the timer operates in one pulse mode). \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+TIM\+\_\+\+CALC\+\_\+\+PERIOD\+\_\+\+DITHER\+\_\+\+BY\+\_\+\+DELAY}(\+\_\+\+\_\+\+TIMCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+PSC\+\_\+\+\_\+,  \+\_\+\+\_\+\+DELAY\+\_\+\+\_\+,  \+\_\+\+\_\+\+PULSE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em HELPER macro calculating the auto-\/reload value, with dithering feature enabled, to achieve the required pulse duration (when the timer operates in one pulse mode). \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+REMAP}(\+\_\+\+\_\+\+REMAP\+\_\+\+\_\+)~((((\+\_\+\+\_\+\+REMAP\+\_\+\+\_\+) \& 0x\+FFFC3\+FFFU) == 0x00000000U))
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+BREAKINPUT}(\+\_\+\+\_\+\+BREAKINPUT\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+BREAKINPUTSOURCE}(\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+STATE}(\+\_\+\+\_\+\+STATE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+BREAKINPUTSOURCE\+\_\+\+POLARITY}(\+\_\+\+\_\+\+POLARITY\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+TISEL}(\+\_\+\+\_\+\+TISEL\+\_\+\+\_\+)~((((\+\_\+\+\_\+\+TISEL\+\_\+\+\_\+) \& 0x\+F0\+F0\+F0\+F0U) == 0x00000000U))
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+TISEL\+\_\+\+TIX\+\_\+\+INSTANCE}(INSTANCE,  CHANNEL)~  (IS\+\_\+\+TIM\+\_\+\+CCX\+\_\+\+INSTANCE(INSTANCE, CHANNEL) \&\& ((CHANNEL) $<$ \textbf{ TIM\+\_\+\+CHANNEL\+\_\+5}))
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+CLOCKSOURCE\+\_\+\+INSTANCE}(INSTANCE,  \+\_\+\+\_\+\+CLOCK\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+TRIGGER\+\_\+\+INSTANCE}(INSTANCE,  \+\_\+\+\_\+\+SELECTION\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+INTERNAL\+\_\+\+TRIGGEREVENT\+\_\+\+INSTANCE}(INSTANCE,  \+\_\+\+\_\+\+SELECTION\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+OC\+\_\+\+CHANNEL\+\_\+\+MODE}(\+\_\+\+\_\+\+MODE\+\_\+\+\_\+,  \+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+PULSEONCOMPARE\+\_\+\+CHANNEL}(\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+PULSEONCOMPARE\+\_\+\+INSTANCE}(INSTANCE)~IS\+\_\+\+TIM\+\_\+\+CC3\+\_\+\+INSTANCE(INSTANCE)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+PULSEONCOMPARE\+\_\+\+WIDTH}(\+\_\+\+\_\+\+WIDTH\+\_\+\+\_\+)~((\+\_\+\+\_\+\+WIDTH\+\_\+\+\_\+) $<$= 0x\+FFU)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+PULSEONCOMPARE\+\_\+\+WIDTHPRESCALER}(\+\_\+\+\_\+\+PRESCALER\+\_\+\+\_\+)~((\+\_\+\+\_\+\+PRESCALER\+\_\+\+\_\+) $<$= 0x7U)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+SLAVE\+\_\+\+PRELOAD\+\_\+\+SOURCE}(\+\_\+\+\_\+\+SOURCE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+ENCODERINDEX\+\_\+\+POLARITY}(\+\_\+\+\_\+\+POLARITY\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+ENCODERINDEX\+\_\+\+PRESCALER}(\+\_\+\+\_\+\+PRESCALER\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+ENCODERINDEX\+\_\+\+FILTER}(\+\_\+\+\_\+\+FILTER\+\_\+\+\_\+)~((\+\_\+\+\_\+\+FILTER\+\_\+\+\_\+) $<$= 0x\+FUL)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+ENCODERINDEX\+\_\+\+POSITION}(\+\_\+\+\_\+\+POSITION\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+ENCODERINDEX\+\_\+\+DIRECTION}(\+\_\+\+\_\+\+DIRECTION\+\_\+\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, \textbf{ TIM\+\_\+\+Hall\+Sensor\+\_\+\+Init\+Type\+Def} $\ast$s\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+De\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Msp\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Msp\+De\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Start} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Stop} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Start\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Stop\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Start\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t $\ast$p\+Data, uint16\+\_\+t Length)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Stop\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+OCN\+\_\+\+Start} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+OCN\+\_\+\+Stop} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+OCN\+\_\+\+Start\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+OCN\+\_\+\+Stop\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+OCN\+\_\+\+Start\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel, uint32\+\_\+t $\ast$p\+Data, uint16\+\_\+t Length)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+OCN\+\_\+\+Stop\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+PWMN\+\_\+\+Start} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+PWMN\+\_\+\+Stop} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+PWMN\+\_\+\+Start\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+PWMN\+\_\+\+Stop\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+PWMN\+\_\+\+Start\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel, uint32\+\_\+t $\ast$p\+Data, uint16\+\_\+t Length)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+PWMN\+\_\+\+Stop\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+One\+Pulse\+N\+\_\+\+Start} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Output\+Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+One\+Pulse\+N\+\_\+\+Stop} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Output\+Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+One\+Pulse\+N\+\_\+\+Start\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Output\+Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+One\+Pulse\+N\+\_\+\+Stop\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Output\+Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Commut\+Event} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Input\+Trigger, uint32\+\_\+t Commutation\+Source)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Commut\+Event\+\_\+\+IT} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Input\+Trigger, uint32\+\_\+t Commutation\+Source)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Commut\+Event\+\_\+\+DMA} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Input\+Trigger, uint32\+\_\+t Commutation\+Source)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Master\+Config\+Synchronization} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, \textbf{ TIM\+\_\+\+Master\+Config\+Type\+Def} $\ast$s\+Master\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Break\+Dead\+Time} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, \textbf{ TIM\+\_\+\+Break\+Dead\+Time\+Config\+Type\+Def} $\ast$s\+Break\+Dead\+Time\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Break\+Input} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Break\+Input, \textbf{ TIMEx\+\_\+\+Break\+Input\+Config\+Type\+Def} $\ast$s\+Break\+Input\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Group\+Channel5} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Channels)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Remap\+Config} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Remap)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+TISelection} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t TISelection, uint32\+\_\+t Channel)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Disarm\+Break\+Input} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Break\+Input)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Re\+Arm\+Break\+Input} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Break\+Input)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Dithering\+Enable} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Dithering\+Disable} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+OC\+\_\+\+Config\+Pulse\+On\+Compare} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Pulse\+Width\+Prescaler, uint32\+\_\+t Pulse\+Width)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Slave\+Mode\+Preload} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Source)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Enable\+Slave\+Mode\+Preload} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Disable\+Slave\+Mode\+Preload} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Enable\+Dead\+Time\+Preload} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Disable\+Dead\+Time\+Preload} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Dead\+Time} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Deadtime)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Asymmetrical\+Dead\+Time} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t Falling\+Deadtime)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Enable\+Asymmetrical\+Dead\+Time} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Disable\+Asymmetrical\+Dead\+Time} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Config\+Encoder\+Index} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, \textbf{ TIMEx\+\_\+\+Encoder\+Index\+Config\+Type\+Def} $\ast$s\+Encoder\+Index\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Enable\+Encoder\+Index} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Disable\+Encoder\+Index} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Enable\+Encoder\+First\+Index} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Disable\+Encoder\+First\+Index} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Commut\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Commut\+Half\+Cplt\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Break\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Break2\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Encoder\+Index\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Direction\+Change\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Index\+Error\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Transition\+Error\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+TIM\+\_\+\+State\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Hall\+Sensor\+\_\+\+Get\+State} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+\textbf{ HAL\+\_\+\+TIM\+\_\+\+Channel\+State\+Type\+Def} {\bfseries HAL\+\_\+\+TIMEx\+\_\+\+Get\+Channel\+NState} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim, uint32\+\_\+t ChannelN)
+\item 
+void {\bfseries TIMEx\+\_\+\+DMACommutation\+Cplt} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+void {\bfseries TIMEx\+\_\+\+DMACommutation\+Half\+Cplt} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of TIM HAL Extended module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+hal\+\_\+tim\+\_\+ex.\+h}.
+

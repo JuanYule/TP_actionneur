@@ -1,0 +1,143 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+flash\+\_\+ramfunc.\+c}
+\label{stm32g4xx__hal__flash__ramfunc_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_flash\_ramfunc.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_flash\_ramfunc.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00048 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00049 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00050 }
+\DoxyCodeLine{00060 \textcolor{preprocessor}{\#ifdef HAL\_FLASH\_MODULE\_ENABLED}}
+\DoxyCodeLine{00061 }
+\DoxyCodeLine{00062 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00063 \textcolor{comment}{/* Private define -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00064 \textcolor{comment}{/* Private macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00065 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00066 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00067 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00068 }
+\DoxyCodeLine{00092 \_\_RAM\_FUNC HAL\_StatusTypeDef HAL\_FLASHEx\_EnableRunPowerDown(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00093 \{}
+\DoxyCodeLine{00094   \textcolor{comment}{/* Enable the Power Down in Run mode*/}}
+\DoxyCodeLine{00095   \_\_HAL\_FLASH\_POWER\_DOWN\_ENABLE();}
+\DoxyCodeLine{00096 }
+\DoxyCodeLine{00097   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00098 }
+\DoxyCodeLine{00099 \}}
+\DoxyCodeLine{00100 }
+\DoxyCodeLine{00106 \_\_RAM\_FUNC HAL\_StatusTypeDef HAL\_FLASHEx\_DisableRunPowerDown(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{00107 \{}
+\DoxyCodeLine{00108   \textcolor{comment}{/* Disable the Power Down in Run mode*/}}
+\DoxyCodeLine{00109   \_\_HAL\_FLASH\_POWER\_DOWN\_DISABLE();}
+\DoxyCodeLine{00110 }
+\DoxyCodeLine{00111   \textcolor{keywordflow}{return} HAL\_OK;}
+\DoxyCodeLine{00112 \}}
+\DoxyCodeLine{00113 }
+\DoxyCodeLine{00114 \textcolor{preprocessor}{\#if defined (FLASH\_OPTR\_DBANK)}}
+\DoxyCodeLine{00130 \_\_RAM\_FUNC HAL\_StatusTypeDef HAL\_FLASHEx\_OB\_DBankConfig(uint32\_t DBankConfig)}
+\DoxyCodeLine{00131 \{}
+\DoxyCodeLine{00132   uint32\_t count, reg;}
+\DoxyCodeLine{00133   HAL\_StatusTypeDef status = HAL\_ERROR;}
+\DoxyCodeLine{00134 }
+\DoxyCodeLine{00135   \textcolor{comment}{/* Process Locked */}}
+\DoxyCodeLine{00136   \_\_HAL\_LOCK(\&pFlash);}
+\DoxyCodeLine{00137 }
+\DoxyCodeLine{00138   \textcolor{comment}{/* Check if the PCROP is disabled */}}
+\DoxyCodeLine{00139   reg = FLASH-\/>PCROP1SR;}
+\DoxyCodeLine{00140   \textcolor{keywordflow}{if} (reg > FLASH-\/>PCROP1ER)}
+\DoxyCodeLine{00141   \{}
+\DoxyCodeLine{00142     reg = FLASH-\/>PCROP2SR;}
+\DoxyCodeLine{00143     \textcolor{keywordflow}{if} (reg > FLASH-\/>PCROP2ER)}
+\DoxyCodeLine{00144     \{}
+\DoxyCodeLine{00145       \textcolor{comment}{/* Disable Flash prefetch */}}
+\DoxyCodeLine{00146       \_\_HAL\_FLASH\_PREFETCH\_BUFFER\_DISABLE();}
+\DoxyCodeLine{00147 }
+\DoxyCodeLine{00148       \textcolor{keywordflow}{if} (READ\_BIT(FLASH-\/>ACR, FLASH\_ACR\_ICEN) != 0U)}
+\DoxyCodeLine{00149       \{}
+\DoxyCodeLine{00150         \textcolor{comment}{/* Disable Flash instruction cache */}}
+\DoxyCodeLine{00151         \_\_HAL\_FLASH\_INSTRUCTION\_CACHE\_DISABLE();}
+\DoxyCodeLine{00152 }
+\DoxyCodeLine{00153         \textcolor{comment}{/* Flush Flash instruction cache */}}
+\DoxyCodeLine{00154         \_\_HAL\_FLASH\_INSTRUCTION\_CACHE\_RESET();}
+\DoxyCodeLine{00155       \}}
+\DoxyCodeLine{00156 }
+\DoxyCodeLine{00157       \textcolor{keywordflow}{if} (READ\_BIT(FLASH-\/>ACR, FLASH\_ACR\_DCEN) != 0U)}
+\DoxyCodeLine{00158       \{}
+\DoxyCodeLine{00159         \textcolor{comment}{/* Disable Flash data cache */}}
+\DoxyCodeLine{00160         \_\_HAL\_FLASH\_DATA\_CACHE\_DISABLE();}
+\DoxyCodeLine{00161 }
+\DoxyCodeLine{00162         \textcolor{comment}{/* Flush Flash data cache */}}
+\DoxyCodeLine{00163         \_\_HAL\_FLASH\_DATA\_CACHE\_RESET();}
+\DoxyCodeLine{00164       \}}
+\DoxyCodeLine{00165 }
+\DoxyCodeLine{00166       \textcolor{comment}{/* Disable WRP zone A of 1st bank if needed */}}
+\DoxyCodeLine{00167       reg = FLASH-\/>WRP1AR;}
+\DoxyCodeLine{00168       \textcolor{keywordflow}{if} (((reg \& FLASH\_WRP1AR\_WRP1A\_STRT) >> FLASH\_WRP1AR\_WRP1A\_STRT\_Pos) <=}
+\DoxyCodeLine{00169           ((reg \& FLASH\_WRP1AR\_WRP1A\_END) >> FLASH\_WRP1AR\_WRP1A\_END\_Pos))}
+\DoxyCodeLine{00170       \{}
+\DoxyCodeLine{00171         MODIFY\_REG(FLASH-\/>WRP1AR, (FLASH\_WRP1AR\_WRP1A\_STRT | FLASH\_WRP1AR\_WRP1A\_END), FLASH\_WRP1AR\_WRP1A\_STRT);}
+\DoxyCodeLine{00172       \}}
+\DoxyCodeLine{00173 }
+\DoxyCodeLine{00174       \textcolor{comment}{/* Disable WRP zone B of 1st bank if needed */}}
+\DoxyCodeLine{00175       reg = FLASH-\/>WRP1BR;}
+\DoxyCodeLine{00176       \textcolor{keywordflow}{if} (((reg \& FLASH\_WRP1BR\_WRP1B\_STRT) >> FLASH\_WRP1BR\_WRP1B\_STRT\_Pos) <=}
+\DoxyCodeLine{00177           ((reg \& FLASH\_WRP1BR\_WRP1B\_END) >> FLASH\_WRP1BR\_WRP1B\_END\_Pos))}
+\DoxyCodeLine{00178       \{}
+\DoxyCodeLine{00179         MODIFY\_REG(FLASH-\/>WRP1BR, (FLASH\_WRP1BR\_WRP1B\_STRT | FLASH\_WRP1BR\_WRP1B\_END), FLASH\_WRP1BR\_WRP1B\_STRT);}
+\DoxyCodeLine{00180       \}}
+\DoxyCodeLine{00181 }
+\DoxyCodeLine{00182       \textcolor{comment}{/* Disable WRP zone A of 2nd bank if needed */}}
+\DoxyCodeLine{00183       reg = FLASH-\/>WRP2AR;}
+\DoxyCodeLine{00184       \textcolor{keywordflow}{if} (((reg \& FLASH\_WRP2AR\_WRP2A\_STRT) >> FLASH\_WRP2AR\_WRP2A\_STRT\_Pos) <=}
+\DoxyCodeLine{00185           ((reg \& FLASH\_WRP2AR\_WRP2A\_END) >> FLASH\_WRP2AR\_WRP2A\_END\_Pos))}
+\DoxyCodeLine{00186       \{}
+\DoxyCodeLine{00187         MODIFY\_REG(FLASH-\/>WRP2AR, (FLASH\_WRP2AR\_WRP2A\_STRT | FLASH\_WRP2AR\_WRP2A\_END), FLASH\_WRP2AR\_WRP2A\_STRT);}
+\DoxyCodeLine{00188       \}}
+\DoxyCodeLine{00189 }
+\DoxyCodeLine{00190       \textcolor{comment}{/* Disable WRP zone B of 2nd bank if needed */}}
+\DoxyCodeLine{00191       reg = FLASH-\/>WRP2BR;}
+\DoxyCodeLine{00192       \textcolor{keywordflow}{if} (((reg \& FLASH\_WRP2BR\_WRP2B\_STRT) >> FLASH\_WRP2BR\_WRP2B\_STRT\_Pos) <=}
+\DoxyCodeLine{00193           ((reg \& FLASH\_WRP2BR\_WRP2B\_END) >> FLASH\_WRP2BR\_WRP2B\_END\_Pos))}
+\DoxyCodeLine{00194       \{}
+\DoxyCodeLine{00195         MODIFY\_REG(FLASH-\/>WRP2BR, (FLASH\_WRP2BR\_WRP2B\_STRT | FLASH\_WRP2BR\_WRP2B\_END), FLASH\_WRP2BR\_WRP2B\_STRT);}
+\DoxyCodeLine{00196       \}}
+\DoxyCodeLine{00197 }
+\DoxyCodeLine{00198       \textcolor{comment}{/* Modify the DBANK user option byte */}}
+\DoxyCodeLine{00199       MODIFY\_REG(FLASH-\/>OPTR, FLASH\_OPTR\_DBANK, DBankConfig);}
+\DoxyCodeLine{00200 }
+\DoxyCodeLine{00201       \textcolor{comment}{/* Set OPTSTRT Bit */}}
+\DoxyCodeLine{00202       SET\_BIT(FLASH-\/>CR, FLASH\_CR\_OPTSTRT);}
+\DoxyCodeLine{00203 }
+\DoxyCodeLine{00204       \textcolor{comment}{/* Wait for last operation to be completed */}}
+\DoxyCodeLine{00205       \textcolor{comment}{/* 8 is the number of required instruction cycles for the below loop statement (timeout expressed in ms) */}}
+\DoxyCodeLine{00206       count = FLASH\_TIMEOUT\_VALUE * (SystemCoreClock / 8U / 1000U);}
+\DoxyCodeLine{00207       \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00208       \{}
+\DoxyCodeLine{00209         \textcolor{keywordflow}{if} (count == 0U)}
+\DoxyCodeLine{00210         \{}
+\DoxyCodeLine{00211           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00212         \}}
+\DoxyCodeLine{00213         count-\/-\/;}
+\DoxyCodeLine{00214       \}}
+\DoxyCodeLine{00215       \textcolor{keywordflow}{while} (\_\_HAL\_FLASH\_GET\_FLAG(FLASH\_FLAG\_BSY) != RESET);}
+\DoxyCodeLine{00216 }
+\DoxyCodeLine{00217       \textcolor{comment}{/* If the option byte program operation is completed, disable the OPTSTRT Bit */}}
+\DoxyCodeLine{00218       CLEAR\_BIT(FLASH-\/>CR, FLASH\_CR\_OPTSTRT);}
+\DoxyCodeLine{00219 }
+\DoxyCodeLine{00220       \textcolor{comment}{/* Set the bit to force the option byte reloading */}}
+\DoxyCodeLine{00221       SET\_BIT(FLASH-\/>CR, FLASH\_CR\_OBL\_LAUNCH);}
+\DoxyCodeLine{00222     \}}
+\DoxyCodeLine{00223   \}}
+\DoxyCodeLine{00224 }
+\DoxyCodeLine{00225   \textcolor{comment}{/* Process Unlocked */}}
+\DoxyCodeLine{00226   \_\_HAL\_UNLOCK(\&pFlash);}
+\DoxyCodeLine{00227 }
+\DoxyCodeLine{00228   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00229 \}}
+\DoxyCodeLine{00230 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00231 }
+\DoxyCodeLine{00239 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_FLASH\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00240 }
+\DoxyCodeLine{00241 }
+\DoxyCodeLine{00242 }
+
+\end{DoxyCode}

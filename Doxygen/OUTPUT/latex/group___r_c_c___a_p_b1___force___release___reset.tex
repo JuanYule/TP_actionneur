@@ -1,0 +1,474 @@
+\doxysection{APB1 Peripheral Force Release Reset}
+\label{group___r_c_c___a_p_b1___force___release___reset}\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+
+
+Force or release APB1 peripheral reset.  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+FORCE\+\_\+\+RESET}()~WRITE\+\_\+\+REG(RCC-\/$>$APB1\+RSTR1, 0x\+FFFFFFFFU)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM2\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM2\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM3\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM3\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM4\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM4\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM6\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM6\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM7\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM7\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+CRS\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+CRSRST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SPI2\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+SPI2\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SPI3\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+SPI3\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USART2\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USART3\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C1\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C1\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C2\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C2\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USB\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USBRST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+PWR\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+PWRRST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C3\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C3\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+LPTIM1\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR2, RCC\+\_\+\+APB1\+RSTR2\+\_\+\+LPUART1\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+UCPD1\+\_\+\+FORCE\+\_\+\+RESET}()~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR2, RCC\+\_\+\+APB1\+RSTR2\+\_\+\+UCPD1\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+RELEASE\+\_\+\+RESET}()~WRITE\+\_\+\+REG(RCC-\/$>$APB1\+RSTR1, 0x00000000U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM2\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM2\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM3\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM3\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM4\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM4\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM6\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM6\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM7\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM7\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+CRS\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+CRSRST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SPI2\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+SPI2\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SPI3\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+SPI3\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USART2\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USART3\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C1\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C1\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C2\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C2\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USB\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USBRST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+PWR\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+PWRRST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C3\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C3\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+LPTIM1\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR2, RCC\+\_\+\+APB1\+RSTR2\+\_\+\+LPUART1\+RST)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+UCPD1\+\_\+\+RELEASE\+\_\+\+RESET}()~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR2, RCC\+\_\+\+APB1\+RSTR2\+\_\+\+UCPD1\+RST)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Force or release APB1 peripheral reset. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga6f6e7048eca1abd1be132027f5b79465}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_APB1\_FORCE\_RESET@{\_\_HAL\_RCC\_APB1\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_APB1\_FORCE\_RESET@{\_\_HAL\_RCC\_APB1\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_APB1\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~WRITE\+\_\+\+REG(RCC-\/$>$APB1\+RSTR1, 0x\+FFFFFFFFU)}
+
+
+
+Definition at line \textbf{ 1761} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga9d0742ab271ace3dbe1a4e83de3d017b}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_APB1\_RELEASE\_RESET@{\_\_HAL\_RCC\_APB1\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_APB1\_RELEASE\_RESET@{\_\_HAL\_RCC\_APB1\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_APB1\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+APB1\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~WRITE\+\_\+\+REG(RCC-\/$>$APB1\+RSTR1, 0x00000000U)}
+
+
+
+Definition at line \textbf{ 1819} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga03a62cae9d5aa34f2809ec31fd0c6e36}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_CRS\_FORCE\_RESET@{\_\_HAL\_RCC\_CRS\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_CRS\_FORCE\_RESET@{\_\_HAL\_RCC\_CRS\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_CRS\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+CRS\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+CRSRST)}
+
+
+
+Definition at line \textbf{ 1777} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga17634ef4587b3247b81e73af7e0b32be}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_CRS\_RELEASE\_RESET@{\_\_HAL\_RCC\_CRS\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_CRS\_RELEASE\_RESET@{\_\_HAL\_RCC\_CRS\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_CRS\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+CRS\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+CRSRST)}
+
+
+
+Definition at line \textbf{ 1835} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga551c171f88af86ca985db634ac9e3275}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_I2C1\_FORCE\_RESET@{\_\_HAL\_RCC\_I2C1\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_I2C1\_FORCE\_RESET@{\_\_HAL\_RCC\_I2C1\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_I2C1\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C1\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C1\+RST)}
+
+
+
+Definition at line \textbf{ 1795} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga87cc8c2107c1d0820cc1f7e2aeb1aeb9}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_I2C1\_RELEASE\_RESET@{\_\_HAL\_RCC\_I2C1\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_I2C1\_RELEASE\_RESET@{\_\_HAL\_RCC\_I2C1\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_I2C1\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C1\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C1\+RST)}
+
+
+
+Definition at line \textbf{ 1853} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gaed404dfdc9bc032cf718b7ed17f664f0}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_I2C2\_FORCE\_RESET@{\_\_HAL\_RCC\_I2C2\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_I2C2\_FORCE\_RESET@{\_\_HAL\_RCC\_I2C2\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_I2C2\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C2\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C2\+RST)}
+
+
+
+Definition at line \textbf{ 1797} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga2fa8cc909b285813af86c253ec110356}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_I2C2\_RELEASE\_RESET@{\_\_HAL\_RCC\_I2C2\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_I2C2\_RELEASE\_RESET@{\_\_HAL\_RCC\_I2C2\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_I2C2\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C2\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C2\+RST)}
+
+
+
+Definition at line \textbf{ 1855} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gaf0d824c0c76161daaefa6fd7ba2c0302}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_I2C3\_FORCE\_RESET@{\_\_HAL\_RCC\_I2C3\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_I2C3\_FORCE\_RESET@{\_\_HAL\_RCC\_I2C3\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_I2C3\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C3\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C3\+RST)}
+
+
+
+Definition at line \textbf{ 1807} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga383f01978613c3b08659efab5153b4b9}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_I2C3\_RELEASE\_RESET@{\_\_HAL\_RCC\_I2C3\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_I2C3\_RELEASE\_RESET@{\_\_HAL\_RCC\_I2C3\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_I2C3\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+I2\+C3\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+I2\+C3\+RST)}
+
+
+
+Definition at line \textbf{ 1865} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga76cc40a6695938f9b0fb602a68a4ac31}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_LPTIM1\_FORCE\_RESET@{\_\_HAL\_RCC\_LPTIM1\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_LPTIM1\_FORCE\_RESET@{\_\_HAL\_RCC\_LPTIM1\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_LPTIM1\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+LPTIM1\+RST)}
+
+
+
+Definition at line \textbf{ 1809} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga70b1086ae23902e74a5a2a596a848430}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_LPTIM1\_RELEASE\_RESET@{\_\_HAL\_RCC\_LPTIM1\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_LPTIM1\_RELEASE\_RESET@{\_\_HAL\_RCC\_LPTIM1\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_LPTIM1\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+LPTIM1\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+LPTIM1\+RST)}
+
+
+
+Definition at line \textbf{ 1867} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gae490f9c0107ca58b2881ee5237653076}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_LPUART1\_FORCE\_RESET@{\_\_HAL\_RCC\_LPUART1\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_LPUART1\_FORCE\_RESET@{\_\_HAL\_RCC\_LPUART1\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_LPUART1\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR2, RCC\+\_\+\+APB1\+RSTR2\+\_\+\+LPUART1\+RST)}
+
+
+
+Definition at line \textbf{ 1811} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga2353b603aec972b0bc0afa52ce78ad42}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_LPUART1\_RELEASE\_RESET@{\_\_HAL\_RCC\_LPUART1\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_LPUART1\_RELEASE\_RESET@{\_\_HAL\_RCC\_LPUART1\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_LPUART1\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+LPUART1\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR2, RCC\+\_\+\+APB1\+RSTR2\+\_\+\+LPUART1\+RST)}
+
+
+
+Definition at line \textbf{ 1869} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gaf454341fae45fdfacfea2f45c07ce3e0}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_PWR\_FORCE\_RESET@{\_\_HAL\_RCC\_PWR\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_PWR\_FORCE\_RESET@{\_\_HAL\_RCC\_PWR\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_PWR\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+PWR\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+PWRRST)}
+
+
+
+Definition at line \textbf{ 1805} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gaaa5a340d38d50e508243f48bbb47dd32}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_PWR\_RELEASE\_RESET@{\_\_HAL\_RCC\_PWR\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_PWR\_RELEASE\_RESET@{\_\_HAL\_RCC\_PWR\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_PWR\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+PWR\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+PWRRST)}
+
+
+
+Definition at line \textbf{ 1863} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga869e4f5c1132e3dfce084099cf454c51}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_SPI2\_FORCE\_RESET@{\_\_HAL\_RCC\_SPI2\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_SPI2\_FORCE\_RESET@{\_\_HAL\_RCC\_SPI2\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_SPI2\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SPI2\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+SPI2\+RST)}
+
+
+
+Definition at line \textbf{ 1779} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gacb910fd0c3c5a27d020ef3df20fce4c7}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_SPI2\_RELEASE\_RESET@{\_\_HAL\_RCC\_SPI2\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_SPI2\_RELEASE\_RESET@{\_\_HAL\_RCC\_SPI2\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_SPI2\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SPI2\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+SPI2\+RST)}
+
+
+
+Definition at line \textbf{ 1837} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gafb0c679992eba330a2d47ac722a5c143}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_SPI3\_FORCE\_RESET@{\_\_HAL\_RCC\_SPI3\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_SPI3\_FORCE\_RESET@{\_\_HAL\_RCC\_SPI3\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_SPI3\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SPI3\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+SPI3\+RST)}
+
+
+
+Definition at line \textbf{ 1781} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga1fb7a5367cfed25545058af0eb4f55f1}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_SPI3\_RELEASE\_RESET@{\_\_HAL\_RCC\_SPI3\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_SPI3\_RELEASE\_RESET@{\_\_HAL\_RCC\_SPI3\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_SPI3\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+SPI3\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+SPI3\+RST)}
+
+
+
+Definition at line \textbf{ 1839} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga1010b7c4a9122449860babb341f01d7b}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM2\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM2\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM2\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM2\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM2\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM2\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM2\+RST)}
+
+
+
+Definition at line \textbf{ 1763} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga4b1b3b45c95788edb29ccd2bf6994826}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM2\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM2\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM2\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM2\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM2\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM2\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM2\+RST)}
+
+
+
+Definition at line \textbf{ 1821} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga80ff127f3c25bde58ee5c1f224e2dca4}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM3\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM3\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM3\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM3\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM3\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM3\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM3\+RST)}
+
+
+
+Definition at line \textbf{ 1765} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga27cf9c39217fff6ae9bce2285d9aff8c}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM3\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM3\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM3\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM3\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM3\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM3\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM3\+RST)}
+
+
+
+Definition at line \textbf{ 1823} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga16ff4de009e6cf02e8bfff068866837a}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM4\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM4\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM4\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM4\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM4\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM4\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM4\+RST)}
+
+
+
+Definition at line \textbf{ 1767} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gaab43d37f4682740d15c4b1fadb908d51}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM4\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM4\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM4\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM4\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM4\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM4\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM4\+RST)}
+
+
+
+Definition at line \textbf{ 1825} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga3446c3ea4d5e101b591fcb0222d0fb10}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM6\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM6\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM6\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM6\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM6\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM6\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM6\+RST)}
+
+
+
+Definition at line \textbf{ 1773} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga7eba1763b83169bc7cec3e10bfbccf20}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM6\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM6\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM6\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM6\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM6\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM6\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM6\+RST)}
+
+
+
+Definition at line \textbf{ 1831} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga350e60b0e21e094ff1624e1da9855e65}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM7\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM7\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM7\_FORCE\_RESET@{\_\_HAL\_RCC\_TIM7\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM7\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM7\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM7\+RST)}
+
+
+
+Definition at line \textbf{ 1775} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga4451d9cbc82223d913fae1f6b8187996}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_TIM7\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM7\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_TIM7\_RELEASE\_RESET@{\_\_HAL\_RCC\_TIM7\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_TIM7\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+TIM7\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+TIM7\+RST)}
+
+
+
+Definition at line \textbf{ 1833} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gaf0847a60efced59010268512af923d83}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_UCPD1\_FORCE\_RESET@{\_\_HAL\_RCC\_UCPD1\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_UCPD1\_FORCE\_RESET@{\_\_HAL\_RCC\_UCPD1\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_UCPD1\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+UCPD1\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR2, RCC\+\_\+\+APB1\+RSTR2\+\_\+\+UCPD1\+RST)}
+
+
+
+Definition at line \textbf{ 1817} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gac2b6c716e6f84ef518285d803cf65aaf}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_UCPD1\_RELEASE\_RESET@{\_\_HAL\_RCC\_UCPD1\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_UCPD1\_RELEASE\_RESET@{\_\_HAL\_RCC\_UCPD1\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_UCPD1\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+UCPD1\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR2, RCC\+\_\+\+APB1\+RSTR2\+\_\+\+UCPD1\+RST)}
+
+
+
+Definition at line \textbf{ 1875} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_gab4de80173ffa0e599baab0e76d562cc3}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_USART2\_FORCE\_RESET@{\_\_HAL\_RCC\_USART2\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_USART2\_FORCE\_RESET@{\_\_HAL\_RCC\_USART2\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_USART2\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USART2\+RST)}
+
+
+
+Definition at line \textbf{ 1783} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga8baebf28a2739de5f3c5ef72519b9499}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_USART2\_RELEASE\_RESET@{\_\_HAL\_RCC\_USART2\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_USART2\_RELEASE\_RESET@{\_\_HAL\_RCC\_USART2\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_USART2\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USART2\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USART2\+RST)}
+
+
+
+Definition at line \textbf{ 1841} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga8902e16d49b4335d213b6a115c19127b}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_USART3\_FORCE\_RESET@{\_\_HAL\_RCC\_USART3\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_USART3\_FORCE\_RESET@{\_\_HAL\_RCC\_USART3\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_USART3\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USART3\+RST)}
+
+
+
+Definition at line \textbf{ 1785} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga25b71d0f7fb3b9455fb360fcb780c492}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_USART3\_RELEASE\_RESET@{\_\_HAL\_RCC\_USART3\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_USART3\_RELEASE\_RESET@{\_\_HAL\_RCC\_USART3\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_USART3\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USART3\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USART3\+RST)}
+
+
+
+Definition at line \textbf{ 1843} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga3d05fde29c4ac7d73fea2b1a107b28bc}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_USB\_FORCE\_RESET@{\_\_HAL\_RCC\_USB\_FORCE\_RESET}}
+\index{\_\_HAL\_RCC\_USB\_FORCE\_RESET@{\_\_HAL\_RCC\_USB\_FORCE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_USB\_FORCE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USB\+\_\+\+FORCE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~SET\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USBRST)}
+
+
+
+Definition at line \textbf{ 1799} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+
+\mbox{\label{group___r_c_c___a_p_b1___force___release___reset_ga8cdd5ad1a3d93937c9e9917e7d40f003}} 
+\index{APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}!\_\_HAL\_RCC\_USB\_RELEASE\_RESET@{\_\_HAL\_RCC\_USB\_RELEASE\_RESET}}
+\index{\_\_HAL\_RCC\_USB\_RELEASE\_RESET@{\_\_HAL\_RCC\_USB\_RELEASE\_RESET}!APB1 Peripheral Force Release Reset@{APB1 Peripheral Force Release Reset}}
+\doxysubsubsection{\_\_HAL\_RCC\_USB\_RELEASE\_RESET}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+HAL\+\_\+\+RCC\+\_\+\+USB\+\_\+\+RELEASE\+\_\+\+RESET(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~CLEAR\+\_\+\+BIT(RCC-\/$>$APB1\+RSTR1, RCC\+\_\+\+APB1\+RSTR1\+\_\+\+USBRST)}
+
+
+
+Definition at line \textbf{ 1857} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc.\+h}.
+

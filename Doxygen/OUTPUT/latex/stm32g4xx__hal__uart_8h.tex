@@ -1,0 +1,638 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+hal\+\_\+uart.h File Reference}
+\label{stm32g4xx__hal__uart_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_uart.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_uart.h}}
+
+
+Header file of UART HAL module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+uart\+\_\+ex.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ UART\+\_\+\+Init\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em UART Init Structure definition. \end{DoxyCompactList}\item 
+struct \textbf{ UART\+\_\+\+Adv\+Feature\+Init\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em UART Advanced Features initialization structure definition. \end{DoxyCompactList}\item 
+struct \textbf{ \+\_\+\+\_\+\+UART\+\_\+\+Handle\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em UART handle Structure definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+STATE\+\_\+\+RESET}~0x00000000U
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+STATE\+\_\+\+READY}~0x00000020U
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+STATE\+\_\+\+BUSY}~0x00000024U
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+STATE\+\_\+\+BUSY\+\_\+\+TX}~0x00000021U
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+STATE\+\_\+\+BUSY\+\_\+\+RX}~0x00000022U
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+STATE\+\_\+\+BUSY\+\_\+\+TX\+\_\+\+RX}~0x00000023U
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+STATE\+\_\+\+TIMEOUT}~0x000000\+A0U
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+STATE\+\_\+\+ERROR}~0x000000\+E0U
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+ERROR\+\_\+\+NONE}~(0x00000000U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+ERROR\+\_\+\+PE}~(0x00000001U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+ERROR\+\_\+\+NE}~(0x00000002U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+ERROR\+\_\+\+FE}~(0x00000004U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+ERROR\+\_\+\+ORE}~(0x00000008U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+ERROR\+\_\+\+DMA}~(0x00000010U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+ERROR\+\_\+\+RTO}~(0x00000020U)
+\item 
+\#define \textbf{ UART\+\_\+\+STOPBITS\+\_\+0\+\_\+5}~\textbf{ USART\+\_\+\+CR2\+\_\+\+STOP\+\_\+0}
+\item 
+\#define \textbf{ UART\+\_\+\+STOPBITS\+\_\+1}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+STOPBITS\+\_\+1\+\_\+5}~(\textbf{ USART\+\_\+\+CR2\+\_\+\+STOP\+\_\+0} $\vert$ \textbf{ USART\+\_\+\+CR2\+\_\+\+STOP\+\_\+1})
+\item 
+\#define \textbf{ UART\+\_\+\+STOPBITS\+\_\+2}~\textbf{ USART\+\_\+\+CR2\+\_\+\+STOP\+\_\+1}
+\item 
+\#define \textbf{ UART\+\_\+\+PARITY\+\_\+\+NONE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+PARITY\+\_\+\+EVEN}~\textbf{ USART\+\_\+\+CR1\+\_\+\+PCE}
+\item 
+\#define \textbf{ UART\+\_\+\+PARITY\+\_\+\+ODD}~(\textbf{ USART\+\_\+\+CR1\+\_\+\+PCE} $\vert$ \textbf{ USART\+\_\+\+CR1\+\_\+\+PS})
+\item 
+\#define \textbf{ UART\+\_\+\+HWCONTROL\+\_\+\+NONE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+HWCONTROL\+\_\+\+RTS}~\textbf{ USART\+\_\+\+CR3\+\_\+\+RTSE}
+\item 
+\#define \textbf{ UART\+\_\+\+HWCONTROL\+\_\+\+CTS}~\textbf{ USART\+\_\+\+CR3\+\_\+\+CTSE}
+\item 
+\#define \textbf{ UART\+\_\+\+HWCONTROL\+\_\+\+RTS\+\_\+\+CTS}~(\textbf{ USART\+\_\+\+CR3\+\_\+\+RTSE} $\vert$ \textbf{ USART\+\_\+\+CR3\+\_\+\+CTSE})
+\item 
+\#define \textbf{ UART\+\_\+\+MODE\+\_\+\+RX}~\textbf{ USART\+\_\+\+CR1\+\_\+\+RE}
+\item 
+\#define \textbf{ UART\+\_\+\+MODE\+\_\+\+TX}~\textbf{ USART\+\_\+\+CR1\+\_\+\+TE}
+\item 
+\#define \textbf{ UART\+\_\+\+MODE\+\_\+\+TX\+\_\+\+RX}~(\textbf{ USART\+\_\+\+CR1\+\_\+\+TE} $\vert$\textbf{ USART\+\_\+\+CR1\+\_\+\+RE})
+\item 
+\#define \textbf{ UART\+\_\+\+STATE\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+STATE\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR1\+\_\+\+UE}
+\item 
+\#define \textbf{ UART\+\_\+\+OVERSAMPLING\+\_\+16}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+OVERSAMPLING\+\_\+8}~\textbf{ USART\+\_\+\+CR1\+\_\+\+OVER8}
+\item 
+\#define \textbf{ UART\+\_\+\+ONE\+\_\+\+BIT\+\_\+\+SAMPLE\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ONE\+\_\+\+BIT\+\_\+\+SAMPLE\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR3\+\_\+\+ONEBIT}
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV1}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV2}~0x00000001U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV4}~0x00000002U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV6}~0x00000003U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV8}~0x00000004U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV10}~0x00000005U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV12}~0x00000006U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV16}~0x00000007U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV32}~0x00000008U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV64}~0x00000009U
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV128}~0x0000000\+AU
+\item 
+\#define \textbf{ UART\+\_\+\+PRESCALER\+\_\+\+DIV256}~0x0000000\+BU
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATE\+\_\+\+ONSTARTBIT}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATE\+\_\+\+ONFALLINGEDGE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+ABRMODE\+\_\+0}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATE\+\_\+\+ON0\+X7\+FFRAME}~\textbf{ USART\+\_\+\+CR2\+\_\+\+ABRMODE\+\_\+1}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATE\+\_\+\+ON0\+X55\+FRAME}~\textbf{ USART\+\_\+\+CR2\+\_\+\+ABRMODE}
+\item 
+\#define \textbf{ UART\+\_\+\+RECEIVER\+\_\+\+TIMEOUT\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+RECEIVER\+\_\+\+TIMEOUT\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+RTOEN}
+\item 
+\#define \textbf{ UART\+\_\+\+LIN\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+LIN\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+LINEN}
+\item 
+\#define \textbf{ UART\+\_\+\+LINBREAKDETECTLENGTH\+\_\+10B}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+LINBREAKDETECTLENGTH\+\_\+11B}~\textbf{ USART\+\_\+\+CR2\+\_\+\+LBDL}
+\item 
+\#define \textbf{ UART\+\_\+\+DMA\+\_\+\+TX\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+DMA\+\_\+\+TX\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR3\+\_\+\+DMAT}
+\item 
+\#define \textbf{ UART\+\_\+\+DMA\+\_\+\+RX\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+DMA\+\_\+\+RX\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR3\+\_\+\+DMAR}
+\item 
+\#define \textbf{ UART\+\_\+\+HALF\+\_\+\+DUPLEX\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+HALF\+\_\+\+DUPLEX\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR3\+\_\+\+HDSEL}
+\item 
+\#define \textbf{ UART\+\_\+\+WAKEUPMETHOD\+\_\+\+IDLELINE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+WAKEUPMETHOD\+\_\+\+ADDRESSMARK}~\textbf{ USART\+\_\+\+CR1\+\_\+\+WAKE}
+\item 
+\#define \textbf{ UART\+\_\+\+AUTOBAUD\+\_\+\+REQUEST}~\textbf{ USART\+\_\+\+RQR\+\_\+\+ABRRQ}
+\item 
+\#define \textbf{ UART\+\_\+\+SENDBREAK\+\_\+\+REQUEST}~\textbf{ USART\+\_\+\+RQR\+\_\+\+SBKRQ}
+\item 
+\#define \textbf{ UART\+\_\+\+MUTE\+\_\+\+MODE\+\_\+\+REQUEST}~\textbf{ USART\+\_\+\+RQR\+\_\+\+MMRQ}
+\item 
+\#define \textbf{ UART\+\_\+\+RXDATA\+\_\+\+FLUSH\+\_\+\+REQUEST}~\textbf{ USART\+\_\+\+RQR\+\_\+\+RXFRQ}
+\item 
+\#define \textbf{ UART\+\_\+\+TXDATA\+\_\+\+FLUSH\+\_\+\+REQUEST}~\textbf{ USART\+\_\+\+RQR\+\_\+\+TXFRQ}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+NO\+\_\+\+INIT}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+TXINVERT\+\_\+\+INIT}~0x00000001U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+RXINVERT\+\_\+\+INIT}~0x00000002U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+DATAINVERT\+\_\+\+INIT}~0x00000004U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+SWAP\+\_\+\+INIT}~0x00000008U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+RXOVERRUNDISABLE\+\_\+\+INIT}~0x00000010U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+DMADISABLEONERROR\+\_\+\+INIT}~0x00000020U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATE\+\_\+\+INIT}~0x00000040U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+MSBFIRST\+\_\+\+INIT}~0x00000080U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+TXINV\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+TXINV\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+TXINV}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+RXINV\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+RXINV\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+RXINV}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+DATAINV\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+DATAINV\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+DATAINV}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+SWAP\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+SWAP\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+SWAP}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+OVERRUN\+\_\+\+ENABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+OVERRUN\+\_\+\+DISABLE}~\textbf{ USART\+\_\+\+CR3\+\_\+\+OVRDIS}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATE\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATE\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+ABREN}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+DMA\+\_\+\+ENABLEONRXERROR}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+DMA\+\_\+\+DISABLEONRXERROR}~\textbf{ USART\+\_\+\+CR3\+\_\+\+DDRE}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+MSBFIRST\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+MSBFIRST\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR2\+\_\+\+MSBFIRST}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+STOPMODE\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+STOPMODE\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR1\+\_\+\+UESM}
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+MUTEMODE\+\_\+\+DISABLE}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+ADVFEATURE\+\_\+\+MUTEMODE\+\_\+\+ENABLE}~\textbf{ USART\+\_\+\+CR1\+\_\+\+MME}
+\item 
+\#define \textbf{ UART\+\_\+\+CR2\+\_\+\+ADDRESS\+\_\+\+LSB\+\_\+\+POS}~24U
+\item 
+\#define \textbf{ UART\+\_\+\+WAKEUP\+\_\+\+ON\+\_\+\+ADDRESS}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+WAKEUP\+\_\+\+ON\+\_\+\+STARTBIT}~\textbf{ USART\+\_\+\+CR3\+\_\+\+WUS\+\_\+1}
+\item 
+\#define \textbf{ UART\+\_\+\+WAKEUP\+\_\+\+ON\+\_\+\+READDATA\+\_\+\+NONEMPTY}~\textbf{ USART\+\_\+\+CR3\+\_\+\+WUS}
+\item 
+\#define \textbf{ UART\+\_\+\+DE\+\_\+\+POLARITY\+\_\+\+HIGH}~0x00000000U
+\item 
+\#define \textbf{ UART\+\_\+\+DE\+\_\+\+POLARITY\+\_\+\+LOW}~\textbf{ USART\+\_\+\+CR3\+\_\+\+DEP}
+\item 
+\#define \textbf{ UART\+\_\+\+CR1\+\_\+\+DEAT\+\_\+\+ADDRESS\+\_\+\+LSB\+\_\+\+POS}~21U
+\item 
+\#define \textbf{ UART\+\_\+\+CR1\+\_\+\+DEDT\+\_\+\+ADDRESS\+\_\+\+LSB\+\_\+\+POS}~16U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+MASK}~0x001\+FU
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+TIMEOUT\+\_\+\+VALUE}~0x1\+FFFFFFU
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TXFT}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXFT}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RXFT}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXFT}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RXFF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXFF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TXFE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXFE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+REACK}~\textbf{ USART\+\_\+\+ISR\+\_\+\+REACK}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TEACK}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TEACK}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+WUF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+WUF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RWU}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RWU}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+SBKF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+SBKF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+CMF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+CMF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+BUSY}~\textbf{ USART\+\_\+\+ISR\+\_\+\+BUSY}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+ABRF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+ABRF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+ABRE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+ABRE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RTOF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RTOF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+CTS}~\textbf{ USART\+\_\+\+ISR\+\_\+\+CTS}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+CTSIF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+CTSIF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+LBDF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+LBDF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TXE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXE\+\_\+\+TXFNF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TXFNF}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TXE\+\_\+\+TXFNF}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+TC}~\textbf{ USART\+\_\+\+ISR\+\_\+\+TC}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RXNE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXNE\+\_\+\+RXFNE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+RXFNE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+RXNE\+\_\+\+RXFNE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+IDLE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+IDLE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+ORE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+ORE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+NE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+NE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+FE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+FE}
+\item 
+\#define \textbf{ UART\+\_\+\+FLAG\+\_\+\+PE}~\textbf{ USART\+\_\+\+ISR\+\_\+\+PE}
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+PE}~0x0028U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+TXE}~0x0727U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+TXFNF}~0x0727U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+TC}~0x0626U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+RXNE}~0x0525U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+RXFNE}~0x0525U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+IDLE}~0x0424U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+LBD}~0x0846U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+CTS}~0x096\+AU
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+CM}~0x112\+EU
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+WUF}~0x1476U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+RXFF}~0x183\+FU
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+TXFE}~0x173\+EU
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+RXFT}~0x1\+A7\+CU
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+TXFT}~0x1\+B77U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+RTO}~0x0\+B3\+AU
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+ERR}~0x0060U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+ORE}~0x0300U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+NE}~0x0200U
+\item 
+\#define \textbf{ UART\+\_\+\+IT\+\_\+\+FE}~0x0100U
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+PEF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+PECF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+FEF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+FECF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+NEF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+NECF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+OREF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+ORECF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+IDLEF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+IDLECF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+TXFECF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+TXFECF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+TCF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+TCCF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+LBDF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+LBDCF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+CTSF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+CTSCF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+CMF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+CMCF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+WUF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+WUCF}
+\item 
+\#define \textbf{ UART\+\_\+\+CLEAR\+\_\+\+RTOF}~\textbf{ USART\+\_\+\+ICR\+\_\+\+RTOCF}
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+RECEPTION\+\_\+\+STANDARD}~(0x00000000U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+RECEPTION\+\_\+\+TOIDLE}~(0x00000001U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+RECEPTION\+\_\+\+TORTO}~(0x00000002U)
+\item 
+\#define \textbf{ HAL\+\_\+\+UART\+\_\+\+RECEPTION\+\_\+\+TOCHARMATCH}~(0x00000003U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+RESET\+\_\+\+HANDLE\+\_\+\+STATE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Reset UART handle states. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+FLUSH\+\_\+\+DRREGISTER}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Flush the UART Data registers. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+FLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+FLAG\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$ICR = (\+\_\+\+\_\+\+FLAG\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Clear the specified UART pending flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+PEFLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~\textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+FLAG}((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+), \textbf{ UART\+\_\+\+CLEAR\+\_\+\+PEF})
+\begin{DoxyCompactList}\small\item\em Clear the UART PE pending flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+FEFLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~\textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+FLAG}((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+), \textbf{ UART\+\_\+\+CLEAR\+\_\+\+FEF})
+\begin{DoxyCompactList}\small\item\em Clear the UART FE pending flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+NEFLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~\textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+FLAG}((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+), \textbf{ UART\+\_\+\+CLEAR\+\_\+\+NEF})
+\begin{DoxyCompactList}\small\item\em Clear the UART NE pending flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+OREFLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~\textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+FLAG}((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+), \textbf{ UART\+\_\+\+CLEAR\+\_\+\+OREF})
+\begin{DoxyCompactList}\small\item\em Clear the UART ORE pending flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+IDLEFLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~\textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+FLAG}((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+), \textbf{ UART\+\_\+\+CLEAR\+\_\+\+IDLEF})
+\begin{DoxyCompactList}\small\item\em Clear the UART IDLE pending flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+TXFECF}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~\textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+FLAG}((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+), \textbf{ UART\+\_\+\+CLEAR\+\_\+\+TXFECF})
+\begin{DoxyCompactList}\small\item\em Clear the UART TX FIFO empty clear flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+GET\+\_\+\+FLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+FLAG\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$ISR \& (\+\_\+\+\_\+\+FLAG\+\_\+\+\_\+)) == (\+\_\+\+\_\+\+FLAG\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Check whether the specified UART flag is set or not. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+ENABLE\+\_\+\+IT}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Enable the specified UART interrupt. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+DISABLE\+\_\+\+IT}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Disable the specified UART interrupt. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+GET\+\_\+\+IT}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Check whether the specified UART interrupt has occurred or not. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+GET\+\_\+\+IT\+\_\+\+SOURCE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Check whether the specified UART interrupt source is enabled or not. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+CLEAR\+\_\+\+IT}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+IT\+\_\+\+CLEAR\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$ICR = (uint32\+\_\+t)(\+\_\+\+\_\+\+IT\+\_\+\+CLEAR\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Clear the specified UART ISR flag, in setting the proper ICR register flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+SEND\+\_\+\+REQ}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+REQ\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$RQR $\vert$= (uint16\+\_\+t)(\+\_\+\+\_\+\+REQ\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Set a specific UART request flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+ONE\+\_\+\+BIT\+\_\+\+SAMPLE\+\_\+\+ENABLE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$CR3$\vert$= \textbf{ USART\+\_\+\+CR3\+\_\+\+ONEBIT})
+\begin{DoxyCompactList}\small\item\em Enable the UART one bit sample method. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+ONE\+\_\+\+BIT\+\_\+\+SAMPLE\+\_\+\+DISABLE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$CR3 \&= $\sim$\textbf{ USART\+\_\+\+CR3\+\_\+\+ONEBIT})
+\begin{DoxyCompactList}\small\item\em Disable the UART one bit sample method. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+ENABLE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$CR1 $\vert$= \textbf{ USART\+\_\+\+CR1\+\_\+\+UE})
+\begin{DoxyCompactList}\small\item\em Enable UART. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+DISABLE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$CR1 \&= $\sim$\textbf{ USART\+\_\+\+CR1\+\_\+\+UE})
+\begin{DoxyCompactList}\small\item\em Disable UART. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+HWCONTROL\+\_\+\+CTS\+\_\+\+ENABLE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Enable CTS flow control. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+HWCONTROL\+\_\+\+CTS\+\_\+\+DISABLE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Disable CTS flow control. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+HWCONTROL\+\_\+\+RTS\+\_\+\+ENABLE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Enable RTS flow control. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+UART\+\_\+\+HWCONTROL\+\_\+\+RTS\+\_\+\+DISABLE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Disable RTS flow control. \end{DoxyCompactList}\item 
+\#define \textbf{ UART\+\_\+\+GET\+\_\+\+DIV\+\_\+\+FACTOR}(\+\_\+\+\_\+\+CLOCKPRESCALER\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Get UART clok division factor from clock prescaler value. \end{DoxyCompactList}\item 
+\#define \textbf{ UART\+\_\+\+DIV\+\_\+\+LPUART}(\+\_\+\+\_\+\+PCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+BAUD\+\_\+\+\_\+,  \+\_\+\+\_\+\+CLOCKPRESCALER\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em BRR division operation to set BRR register with LPUART. \end{DoxyCompactList}\item 
+\#define \textbf{ UART\+\_\+\+DIV\+\_\+\+SAMPLING8}(\+\_\+\+\_\+\+PCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+BAUD\+\_\+\+\_\+,  \+\_\+\+\_\+\+CLOCKPRESCALER\+\_\+\+\_\+)~  (((((\+\_\+\+\_\+\+PCLK\+\_\+\+\_\+)/UARTPresc\+Table[(\+\_\+\+\_\+\+CLOCKPRESCALER\+\_\+\+\_\+)])$\ast$2U) + ((\+\_\+\+\_\+\+BAUD\+\_\+\+\_\+)/2U)) / (\+\_\+\+\_\+\+BAUD\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em BRR division operation to set BRR register in 8-\/bit oversampling mode. \end{DoxyCompactList}\item 
+\#define \textbf{ UART\+\_\+\+DIV\+\_\+\+SAMPLING16}(\+\_\+\+\_\+\+PCLK\+\_\+\+\_\+,  \+\_\+\+\_\+\+BAUD\+\_\+\+\_\+,  \+\_\+\+\_\+\+CLOCKPRESCALER\+\_\+\+\_\+)~  ((((\+\_\+\+\_\+\+PCLK\+\_\+\+\_\+)/UARTPresc\+Table[(\+\_\+\+\_\+\+CLOCKPRESCALER\+\_\+\+\_\+)]) + ((\+\_\+\+\_\+\+BAUD\+\_\+\+\_\+)/2U)) / (\+\_\+\+\_\+\+BAUD\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em BRR division operation to set BRR register in 16-\/bit oversampling mode. \end{DoxyCompactList}\item 
+\#define \textbf{ UART\+\_\+\+INSTANCE\+\_\+\+LOWPOWER}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~(IS\+\_\+\+LPUART\+\_\+\+INSTANCE((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance))
+\begin{DoxyCompactList}\small\item\em Check whether or not UART instance is Low Power UART. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+BAUDRATE}(\+\_\+\+\_\+\+BAUDRATE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+BAUDRATE\+\_\+\+\_\+) $<$ 18750001U)
+\begin{DoxyCompactList}\small\item\em Check UART Baud rate. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ASSERTIONTIME}(\+\_\+\+\_\+\+TIME\+\_\+\+\_\+)~((\+\_\+\+\_\+\+TIME\+\_\+\+\_\+) $<$= 0x1\+FU)
+\begin{DoxyCompactList}\small\item\em Check UART assertion time. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+DEASSERTIONTIME}(\+\_\+\+\_\+\+TIME\+\_\+\+\_\+)~((\+\_\+\+\_\+\+TIME\+\_\+\+\_\+) $<$= 0x1\+FU)
+\begin{DoxyCompactList}\small\item\em Check UART deassertion time. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+STOPBITS}(\+\_\+\+\_\+\+STOPBITS\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame number of stop bits is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+LPUART\+\_\+\+STOPBITS}(\+\_\+\+\_\+\+STOPBITS\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that LPUART frame number of stop bits is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+PARITY}(\+\_\+\+\_\+\+PARITY\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame parity is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+HARDWARE\+\_\+\+FLOW\+\_\+\+CONTROL}(\+\_\+\+\_\+\+CONTROL\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART hardware flow control is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+MODE}(\+\_\+\+\_\+\+MODE\+\_\+\+\_\+)~((((\+\_\+\+\_\+\+MODE\+\_\+\+\_\+) \& ($\sim$((uint32\+\_\+t)(\textbf{ UART\+\_\+\+MODE\+\_\+\+TX\+\_\+\+RX})))) == 0x00U) \&\& ((\+\_\+\+\_\+\+MODE\+\_\+\+\_\+) != 0x00U))
+\begin{DoxyCompactList}\small\item\em Ensure that UART communication mode is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+STATE}(\+\_\+\+\_\+\+STATE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART state is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+OVERSAMPLING}(\+\_\+\+\_\+\+SAMPLING\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART oversampling is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ONE\+\_\+\+BIT\+\_\+\+SAMPLE}(\+\_\+\+\_\+\+ONEBIT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame sampling is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATEMODE}(\+\_\+\+\_\+\+MODE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART auto Baud rate detection mode is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+RECEIVER\+\_\+\+TIMEOUT}(\+\_\+\+\_\+\+TIMEOUT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART receiver timeout setting is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+RECEIVER\+\_\+\+TIMEOUT\+\_\+\+VALUE}(\+\_\+\+\_\+\+TIMEOUTVALUE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+TIMEOUTVALUE\+\_\+\+\_\+) $<$= 0x\+FFFFFFU)
+\begin{DoxyCompactList}\small\item\em Check the receiver timeout value. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+LIN}(\+\_\+\+\_\+\+LIN\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART LIN state is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+LIN\+\_\+\+BREAK\+\_\+\+DETECT\+\_\+\+LENGTH}(\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART LIN break detection length is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+DMA\+\_\+\+TX}(\+\_\+\+\_\+\+DMATX\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART DMA TX state is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+DMA\+\_\+\+RX}(\+\_\+\+\_\+\+DMARX\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART DMA RX state is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+HALF\+\_\+\+DUPLEX}(\+\_\+\+\_\+\+HDSEL\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART half-\/duplex state is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+WAKEUPMETHOD}(\+\_\+\+\_\+\+WAKEUP\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART wake-\/up method is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+REQUEST\+\_\+\+PARAMETER}(\+\_\+\+\_\+\+PARAM\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART request parameter is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+INIT}(\+\_\+\+\_\+\+INIT\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART advanced features initialization is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+TXINV}(\+\_\+\+\_\+\+TXINV\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame TX inversion setting is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+RXINV}(\+\_\+\+\_\+\+RXINV\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame RX inversion setting is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+DATAINV}(\+\_\+\+\_\+\+DATAINV\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame data inversion setting is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+SWAP}(\+\_\+\+\_\+\+SWAP\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame RX/\+TX pins swap setting is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+OVERRUN}(\+\_\+\+\_\+\+OVERRUN\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame overrun setting is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+AUTOBAUDRATE}(\+\_\+\+\_\+\+AUTOBAUDRATE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART auto Baud rate state is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+DMAONRXERROR}(\+\_\+\+\_\+\+DMA\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART DMA enabling or disabling on error setting is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+MSBFIRST}(\+\_\+\+\_\+\+MSBFIRST\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART frame MSB first setting is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+ADVFEATURE\+\_\+\+STOPMODE}(\+\_\+\+\_\+\+STOPMODE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART stop mode state is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+MUTE\+\_\+\+MODE}(\+\_\+\+\_\+\+MUTE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART mute mode state is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+WAKEUP\+\_\+\+SELECTION}(\+\_\+\+\_\+\+WAKE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART wake-\/up selection is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+DE\+\_\+\+POLARITY}(\+\_\+\+\_\+\+POLARITY\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART driver enable polarity is valid. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+UART\+\_\+\+PRESCALER}(\+\_\+\+\_\+\+CLOCKPRESCALER\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Ensure that UART Prescaler is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint32\+\_\+t \textbf{ HAL\+\_\+\+UART\+\_\+\+State\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em HAL UART State definition. \end{DoxyCompactList}\item 
+typedef uint32\+\_\+t \textbf{ HAL\+\_\+\+UART\+\_\+\+Rx\+Type\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em HAL UART Reception type definition. \end{DoxyCompactList}\item 
+typedef struct \textbf{ \+\_\+\+\_\+\+UART\+\_\+\+Handle\+Type\+Def} {\bfseries UART\+\_\+\+Handle\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em UART handle Structure definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ UART\+\_\+\+Clock\+Source\+Type\+Def} \{ \newline
+\textbf{ UART\+\_\+\+CLOCKSOURCE\+\_\+\+PCLK1} = 0x00U
+, \textbf{ UART\+\_\+\+CLOCKSOURCE\+\_\+\+PCLK2} = 0x01U
+, \textbf{ UART\+\_\+\+CLOCKSOURCE\+\_\+\+HSI} = 0x02U
+, \textbf{ UART\+\_\+\+CLOCKSOURCE\+\_\+\+SYSCLK} = 0x04U
+, \newline
+\textbf{ UART\+\_\+\+CLOCKSOURCE\+\_\+\+LSE} = 0x08U
+, \textbf{ UART\+\_\+\+CLOCKSOURCE\+\_\+\+UNDEFINED} = 0x10U
+ \}
+\begin{DoxyCompactList}\small\item\em UART clock sources definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Init} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Half\+Duplex\+\_\+\+Init} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+LIN\+\_\+\+Init} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint32\+\_\+t Break\+Detect\+Length)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Multi\+Processor\+\_\+\+Init} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t Address, uint32\+\_\+t Wake\+Up\+Method)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+De\+Init} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void \textbf{ HAL\+\_\+\+UART\+\_\+\+Msp\+Init} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\begin{DoxyCompactList}\small\item\em UART MSP Initialization This function configures the hardware resources used in this example. \end{DoxyCompactList}\item 
+void \textbf{ HAL\+\_\+\+UART\+\_\+\+Msp\+De\+Init} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\begin{DoxyCompactList}\small\item\em UART MSP De-\/\+Initialization This function freeze the hardware resources used in this example. \end{DoxyCompactList}\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Transmit} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, const uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size, uint32\+\_\+t Timeout)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Receive} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size, uint32\+\_\+t Timeout)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Transmit\+\_\+\+IT} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, const uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Receive\+\_\+\+IT} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Transmit\+\_\+\+DMA} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, const uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Receive\+\_\+\+DMA} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+DMAPause} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+DMAResume} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+DMAStop} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort\+Transmit} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort\+Receive} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort\+\_\+\+IT} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort\+Transmit\+\_\+\+IT} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort\+Receive\+\_\+\+IT} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+IRQHandler} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+Tx\+Half\+Cplt\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+Tx\+Cplt\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+Rx\+Half\+Cplt\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void \textbf{ HAL\+\_\+\+UART\+\_\+\+Rx\+Cplt\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+Error\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort\+Cplt\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort\+Transmit\+Cplt\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+Abort\+Receive\+Cplt\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+UARTEx\+\_\+\+Rx\+Event\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint16\+\_\+t Size)
+\item 
+void {\bfseries HAL\+\_\+\+UART\+\_\+\+Receiver\+Timeout\+\_\+\+Config} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint32\+\_\+t Timeout\+Value)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Enable\+Receiver\+Timeout} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Disable\+Receiver\+Timeout} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+LIN\+\_\+\+Send\+Break} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Multi\+Processor\+\_\+\+Enable\+Mute\+Mode} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Multi\+Processor\+\_\+\+Disable\+Mute\+Mode} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void {\bfseries HAL\+\_\+\+Multi\+Processor\+\_\+\+Enter\+Mute\+Mode} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Half\+Duplex\+\_\+\+Enable\+Transmitter} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+Half\+Duplex\+\_\+\+Enable\+Receiver} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+UART\+\_\+\+State\+Type\+Def} {\bfseries HAL\+\_\+\+UART\+\_\+\+Get\+State} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+UART\+\_\+\+Get\+Error} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries UART\+\_\+\+Set\+Config} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries UART\+\_\+\+Check\+Idle\+State} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries UART\+\_\+\+Wait\+On\+Flag\+Until\+Timeout} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint32\+\_\+t Flag, Flag\+Status Status, uint32\+\_\+t Tickstart, uint32\+\_\+t Timeout)
+\item 
+void {\bfseries UART\+\_\+\+Adv\+Feature\+Config} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries UART\+\_\+\+Start\+\_\+\+Receive\+\_\+\+IT} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries UART\+\_\+\+Start\+\_\+\+Receive\+\_\+\+DMA} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart, uint8\+\_\+t $\ast$p\+Data, uint16\+\_\+t Size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint16\+\_\+t {\bfseries UARTPresc\+Table} [12]
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of UART HAL module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+hal\+\_\+uart.\+h}.
+

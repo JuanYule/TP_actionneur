@@ -1,0 +1,77 @@
+\doxysection{RCC\+\_\+\+CRSSynchro\+Info\+Type\+Def Struct Reference}
+\label{struct_r_c_c___c_r_s_synchro_info_type_def}\index{RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}}
+
+
+RCC\+\_\+\+CRS Synchronization structure definition.  
+
+
+
+
+{\ttfamily \#include $<$stm32g4xx\+\_\+hal\+\_\+rcc\+\_\+ex.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \textbf{ Reload\+Value}
+\item 
+uint32\+\_\+t \textbf{ HSI48\+Calibration\+Value}
+\item 
+uint32\+\_\+t \textbf{ Freq\+Error\+Capture}
+\item 
+uint32\+\_\+t \textbf{ Freq\+Error\+Direction}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+RCC\+\_\+\+CRS Synchronization structure definition. 
+
+Definition at line \textbf{ 157} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc\+\_\+ex.\+h}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\label{struct_r_c_c___c_r_s_synchro_info_type_def_a4daae605939159f7f1dd079c6cfe59a8}} 
+\index{RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}!FreqErrorCapture@{FreqErrorCapture}}
+\index{FreqErrorCapture@{FreqErrorCapture}!RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}}
+\doxysubsubsection{FreqErrorCapture}
+{\footnotesize\ttfamily uint32\+\_\+t Freq\+Error\+Capture}
+
+Specifies the value loaded in the .FECAP, the frequency error counter value latched in the time of the last SYNC event. This parameter must be a number between 0 and 0x\+FFFF 
+
+Definition at line \textbf{ 165} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc\+\_\+ex.\+h}.
+
+\mbox{\label{struct_r_c_c___c_r_s_synchro_info_type_def_a25a4c347bbdb1f1c8f6d977fc83a0817}} 
+\index{RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}!FreqErrorDirection@{FreqErrorDirection}}
+\index{FreqErrorDirection@{FreqErrorDirection}!RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}}
+\doxysubsubsection{FreqErrorDirection}
+{\footnotesize\ttfamily uint32\+\_\+t Freq\+Error\+Direction}
+
+Specifies the value loaded in the .FEDIR, the counting direction of the frequency error counter latched in the time of the last SYNC event. It shows whether the actual frequency is below or above the target. This parameter must be a value of \doxyref{RCCEx CRS Freq\+Error\+Direction}{p.}{group___r_c_c_ex___c_r_s___freq_error_direction} 
+
+Definition at line \textbf{ 169} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc\+\_\+ex.\+h}.
+
+\mbox{\label{struct_r_c_c___c_r_s_synchro_info_type_def_a33d4291a43bf4a02c59e67c23d090c32}} 
+\index{RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}!HSI48CalibrationValue@{HSI48CalibrationValue}}
+\index{HSI48CalibrationValue@{HSI48CalibrationValue}!RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}}
+\doxysubsubsection{HSI48CalibrationValue}
+{\footnotesize\ttfamily uint32\+\_\+t HSI48\+Calibration\+Value}
+
+Specifies value loaded in HSI48 oscillator smooth trimming. This parameter must be a number between 0 and 0x7F 
+
+Definition at line \textbf{ 162} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc\+\_\+ex.\+h}.
+
+\mbox{\label{struct_r_c_c___c_r_s_synchro_info_type_def_a670045cfad50e7e4b3a31c0119d6e4fd}} 
+\index{RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}!ReloadValue@{ReloadValue}}
+\index{ReloadValue@{ReloadValue}!RCC\_CRSSynchroInfoTypeDef@{RCC\_CRSSynchroInfoTypeDef}}
+\doxysubsubsection{ReloadValue}
+{\footnotesize\ttfamily uint32\+\_\+t Reload\+Value}
+
+Specifies the value loaded in the Counter reload value. This parameter must be a number between 0 and 0x\+FFFF 
+
+Definition at line \textbf{ 159} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+rcc\+\_\+ex.\+h}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/\textbf{ stm32g4xx\+\_\+hal\+\_\+rcc\+\_\+ex.\+h}\end{DoxyCompactItemize}

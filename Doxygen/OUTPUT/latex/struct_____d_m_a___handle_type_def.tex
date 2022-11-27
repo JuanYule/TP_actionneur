@@ -1,0 +1,261 @@
+\doxysection{\+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def Struct Reference}
+\label{struct_____d_m_a___handle_type_def}\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+
+
+DMA handle Structure definition.  
+
+
+
+
+{\ttfamily \#include $<$stm32g4xx\+\_\+hal\+\_\+dma.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ DMA\+\_\+\+Channel\+\_\+\+Type\+Def} $\ast$ \textbf{ Instance}
+\item 
+\textbf{ DMA\+\_\+\+Init\+Type\+Def} \textbf{ Init}
+\item 
+\textbf{ HAL\+\_\+\+Lock\+Type\+Def} \textbf{ Lock}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} \textbf{ HAL\+\_\+\+DMA\+\_\+\+State\+Type\+Def} \textbf{ State}
+\item 
+void $\ast$ \textbf{ Parent}
+\item 
+void($\ast$ \textbf{ Xfer\+Cplt\+Callback} )(struct \textbf{ \+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+void($\ast$ \textbf{ Xfer\+Half\+Cplt\+Callback} )(struct \textbf{ \+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+void($\ast$ \textbf{ Xfer\+Error\+Callback} )(struct \textbf{ \+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+void($\ast$ \textbf{ Xfer\+Abort\+Callback} )(struct \textbf{ \+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ Error\+Code}
+\item 
+\textbf{ DMA\+\_\+\+Type\+Def} $\ast$ \textbf{ Dma\+Base\+Address}
+\item 
+uint32\+\_\+t \textbf{ Channel\+Index}
+\item 
+\textbf{ DMAMUX\+\_\+\+Channel\+\_\+\+Type\+Def} $\ast$ \textbf{ DMAmux\+Channel}
+\item 
+\textbf{ DMAMUX\+\_\+\+Channel\+Status\+\_\+\+Type\+Def} $\ast$ \textbf{ DMAmux\+Channel\+Status}
+\item 
+uint32\+\_\+t \textbf{ DMAmux\+Channel\+Status\+Mask}
+\item 
+\textbf{ DMAMUX\+\_\+\+Request\+Gen\+\_\+\+Type\+Def} $\ast$ \textbf{ DMAmux\+Request\+Gen}
+\item 
+\textbf{ DMAMUX\+\_\+\+Request\+Gen\+Status\+\_\+\+Type\+Def} $\ast$ \textbf{ DMAmux\+Request\+Gen\+Status}
+\item 
+uint32\+\_\+t \textbf{ DMAmux\+Request\+Gen\+Status\+Mask}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+DMA handle Structure definition. 
+
+Definition at line \textbf{ 113} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\label{struct_____d_m_a___handle_type_def_ae2d85e64eb57a8bccd3f70e74db09c31}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!ChannelIndex@{ChannelIndex}}
+\index{ChannelIndex@{ChannelIndex}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{ChannelIndex}
+{\footnotesize\ttfamily uint32\+\_\+t Channel\+Index}
+
+DMA Channel Index ~\newline
+ 
+
+Definition at line \textbf{ 137} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_adaadecc05539a447843606e1e511d992}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!DmaBaseAddress@{DmaBaseAddress}}
+\index{DmaBaseAddress@{DmaBaseAddress}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{DmaBaseAddress}
+{\footnotesize\ttfamily \textbf{ DMA\+\_\+\+Type\+Def}$\ast$ Dma\+Base\+Address}
+
+DMA Channel Base Address ~\newline
+ 
+
+Definition at line \textbf{ 135} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a63aa7a453f14433a93bfc300db7e8eeb}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!DMAmuxChannel@{DMAmuxChannel}}
+\index{DMAmuxChannel@{DMAmuxChannel}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{DMAmuxChannel}
+{\footnotesize\ttfamily \textbf{ DMAMUX\+\_\+\+Channel\+\_\+\+Type\+Def}$\ast$ DMAmux\+Channel}
+
+Register base address ~\newline
+ 
+
+Definition at line \textbf{ 139} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a382fc8a5a3c3eb587b7c75ece3448c93}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!DMAmuxChannelStatus@{DMAmuxChannelStatus}}
+\index{DMAmuxChannelStatus@{DMAmuxChannelStatus}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{DMAmuxChannelStatus}
+{\footnotesize\ttfamily \textbf{ DMAMUX\+\_\+\+Channel\+Status\+\_\+\+Type\+Def}$\ast$ DMAmux\+Channel\+Status}
+
+DMAMUX Channels Status Base Address ~\newline
+ 
+
+Definition at line \textbf{ 141} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_aa96798fa1c9d4cb63d4f80835de42984}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!DMAmuxChannelStatusMask@{DMAmuxChannelStatusMask}}
+\index{DMAmuxChannelStatusMask@{DMAmuxChannelStatusMask}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{DMAmuxChannelStatusMask}
+{\footnotesize\ttfamily uint32\+\_\+t DMAmux\+Channel\+Status\+Mask}
+
+DMAMUX Channel Status Mask ~\newline
+ 
+
+Definition at line \textbf{ 143} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a7a9b5a2cdc6c1f7adbba53d8e4d86b83}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!DMAmuxRequestGen@{DMAmuxRequestGen}}
+\index{DMAmuxRequestGen@{DMAmuxRequestGen}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{DMAmuxRequestGen}
+{\footnotesize\ttfamily \textbf{ DMAMUX\+\_\+\+Request\+Gen\+\_\+\+Type\+Def}$\ast$ DMAmux\+Request\+Gen}
+
+DMAMUX request generator Base Address 
+
+Definition at line \textbf{ 145} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_ad3f4a59882ebacecb280c8569c9e9010}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!DMAmuxRequestGenStatus@{DMAmuxRequestGenStatus}}
+\index{DMAmuxRequestGenStatus@{DMAmuxRequestGenStatus}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{DMAmuxRequestGenStatus}
+{\footnotesize\ttfamily \textbf{ DMAMUX\+\_\+\+Request\+Gen\+Status\+\_\+\+Type\+Def}$\ast$ DMAmux\+Request\+Gen\+Status}
+
+DMAMUX request generator Address ~\newline
+ 
+
+Definition at line \textbf{ 147} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a38f76cde279730ad689ac03a85fffc02}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!DMAmuxRequestGenStatusMask@{DMAmuxRequestGenStatusMask}}
+\index{DMAmuxRequestGenStatusMask@{DMAmuxRequestGenStatusMask}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{DMAmuxRequestGenStatusMask}
+{\footnotesize\ttfamily uint32\+\_\+t DMAmux\+Request\+Gen\+Status\+Mask}
+
+DMAMUX request generator Status mask 
+
+Definition at line \textbf{ 149} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a123c5063e6a3b1901b2fbe5f88c53a7e}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!ErrorCode@{ErrorCode}}
+\index{ErrorCode@{ErrorCode}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{ErrorCode}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t Error\+Code}
+
+DMA Error code ~\newline
+ 
+
+Definition at line \textbf{ 133} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a4352c7144ad5e1e4ab54a87d3be6eb62}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!Init@{Init}}
+\index{Init@{Init}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{Init}
+{\footnotesize\ttfamily \textbf{ DMA\+\_\+\+Init\+Type\+Def} Init}
+
+DMA communication parameters ~\newline
+ 
+
+Definition at line \textbf{ 117} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_adc5940b5bbf1fc712118cd40ff3ea69b}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!Instance@{Instance}}
+\index{Instance@{Instance}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{Instance}
+{\footnotesize\ttfamily \textbf{ DMA\+\_\+\+Channel\+\_\+\+Type\+Def}$\ast$ Instance}
+
+Register base address ~\newline
+ 
+
+Definition at line \textbf{ 115} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_ad4cf225029dbefe8d3fe660c33b8bb6b}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!Lock@{Lock}}
+\index{Lock@{Lock}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{Lock}
+{\footnotesize\ttfamily \textbf{ HAL\+\_\+\+Lock\+Type\+Def} Lock}
+
+DMA locking object ~\newline
+ 
+
+Definition at line \textbf{ 119} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a6ee5f2130887847bbc051932ea43b73d}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!Parent@{Parent}}
+\index{Parent@{Parent}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{Parent}
+{\footnotesize\ttfamily void$\ast$ Parent}
+
+Parent object state ~\newline
+ 
+
+Definition at line \textbf{ 123} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a2263083d2bfa96222f3d7b8339c6faf8}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!State@{State}}
+\index{State@{State}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{State}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} \textbf{ HAL\+\_\+\+DMA\+\_\+\+State\+Type\+Def} State}
+
+DMA transfer state ~\newline
+ 
+
+Definition at line \textbf{ 121} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a6253dc8680e566bbc244228374dd647d}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!XferAbortCallback@{XferAbortCallback}}
+\index{XferAbortCallback@{XferAbortCallback}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{XferAbortCallback}
+{\footnotesize\ttfamily void($\ast$ Xfer\+Abort\+Callback) (struct \textbf{ \+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)}
+
+DMA transfer abort callback ~\newline
+ 
+
+Definition at line \textbf{ 131} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a3d7716d1d7a5717f09525efd19334864}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!XferCpltCallback@{XferCpltCallback}}
+\index{XferCpltCallback@{XferCpltCallback}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{XferCpltCallback}
+{\footnotesize\ttfamily void($\ast$ Xfer\+Cplt\+Callback) (struct \textbf{ \+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)}
+
+DMA transfer complete callback ~\newline
+ 
+
+Definition at line \textbf{ 125} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_a695c6fe664a7baf827e461652ebdb9e0}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!XferErrorCallback@{XferErrorCallback}}
+\index{XferErrorCallback@{XferErrorCallback}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{XferErrorCallback}
+{\footnotesize\ttfamily void($\ast$ Xfer\+Error\+Callback) (struct \textbf{ \+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)}
+
+DMA transfer error callback ~\newline
+ 
+
+Definition at line \textbf{ 129} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+\mbox{\label{struct_____d_m_a___handle_type_def_aea6af14bab20d3f9a82f08df1abea01a}} 
+\index{\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}!XferHalfCpltCallback@{XferHalfCpltCallback}}
+\index{XferHalfCpltCallback@{XferHalfCpltCallback}!\_\_DMA\_HandleTypeDef@{\_\_DMA\_HandleTypeDef}}
+\doxysubsubsection{XferHalfCpltCallback}
+{\footnotesize\ttfamily void($\ast$ Xfer\+Half\+Cplt\+Callback) (struct \textbf{ \+\_\+\+\_\+\+DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)}
+
+DMA Half transfer complete callback ~\newline
+ 
+
+Definition at line \textbf{ 127} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/\textbf{ stm32g4xx\+\_\+hal\+\_\+dma.\+h}\end{DoxyCompactItemize}

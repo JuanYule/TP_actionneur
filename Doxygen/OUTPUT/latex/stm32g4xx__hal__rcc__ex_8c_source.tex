@@ -1,0 +1,1489 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+rcc\+\_\+ex.\+c}
+\label{stm32g4xx__hal__rcc__ex_8c_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_rcc\_ex.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Src/stm32g4xx\_hal\_rcc\_ex.c}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00024 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal.h"{}}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00036 \textcolor{preprocessor}{\#ifdef HAL\_RCC\_MODULE\_ENABLED}}
+\DoxyCodeLine{00037 }
+\DoxyCodeLine{00038 \textcolor{comment}{/* Private typedef -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00039 \textcolor{comment}{/* Private defines -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00043 \textcolor{preprocessor}{\#define PLL\_TIMEOUT\_VALUE        2U                }\textcolor{comment}{/* 2 ms (minimum Tick + 1) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00044 }
+\DoxyCodeLine{00045 \textcolor{preprocessor}{\#define DIVIDER\_P\_UPDATE          0U}}
+\DoxyCodeLine{00046 \textcolor{preprocessor}{\#define DIVIDER\_Q\_UPDATE          1U}}
+\DoxyCodeLine{00047 \textcolor{preprocessor}{\#define DIVIDER\_R\_UPDATE          2U}}
+\DoxyCodeLine{00048 }
+\DoxyCodeLine{00049 \textcolor{preprocessor}{\#define \_\_LSCO\_CLK\_ENABLE()       \_\_HAL\_RCC\_GPIOA\_CLK\_ENABLE()}}
+\DoxyCodeLine{00050 \textcolor{preprocessor}{\#define LSCO\_GPIO\_PORT            GPIOA}}
+\DoxyCodeLine{00051 \textcolor{preprocessor}{\#define LSCO\_PIN                  GPIO\_PIN\_2}}
+\DoxyCodeLine{00056 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00057 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00058 \textcolor{comment}{/* Private function prototypes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00067 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00068 }
+\DoxyCodeLine{00123 HAL\_StatusTypeDef HAL\_RCCEx\_PeriphCLKConfig(RCC\_PeriphCLKInitTypeDef  *PeriphClkInit)}
+\DoxyCodeLine{00124 \{}
+\DoxyCodeLine{00125   uint32\_t tmpregister;}
+\DoxyCodeLine{00126   uint32\_t tickstart;}
+\DoxyCodeLine{00127   HAL\_StatusTypeDef ret = HAL\_OK;      \textcolor{comment}{/* Intermediate status */}}
+\DoxyCodeLine{00128   HAL\_StatusTypeDef status = HAL\_OK;   \textcolor{comment}{/* Final status */}}
+\DoxyCodeLine{00129 }
+\DoxyCodeLine{00130   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00131   assert\_param(IS\_RCC\_PERIPHCLOCK(PeriphClkInit-\/>PeriphClockSelection));}
+\DoxyCodeLine{00132 }
+\DoxyCodeLine{00133   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ RTC clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00134   \textcolor{keywordflow}{if}((PeriphClkInit-\/>PeriphClockSelection \& RCC\_PERIPHCLK\_RTC) == RCC\_PERIPHCLK\_RTC)}
+\DoxyCodeLine{00135   \{}
+\DoxyCodeLine{00136     FlagStatus       pwrclkchanged = RESET;}
+\DoxyCodeLine{00137     }
+\DoxyCodeLine{00138     \textcolor{comment}{/* Check for RTC Parameters used to output RTCCLK */}}
+\DoxyCodeLine{00139     assert\_param(IS\_RCC\_RTCCLKSOURCE(PeriphClkInit-\/>RTCClockSelection));}
+\DoxyCodeLine{00140 }
+\DoxyCodeLine{00141     \textcolor{comment}{/* Enable Power Clock */}}
+\DoxyCodeLine{00142     \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_PWR\_IS\_CLK\_DISABLED())}
+\DoxyCodeLine{00143     \{}
+\DoxyCodeLine{00144       \_\_HAL\_RCC\_PWR\_CLK\_ENABLE();}
+\DoxyCodeLine{00145       pwrclkchanged = SET;}
+\DoxyCodeLine{00146     \}}
+\DoxyCodeLine{00147       }
+\DoxyCodeLine{00148     \textcolor{comment}{/* Enable write access to Backup domain */}}
+\DoxyCodeLine{00149     SET\_BIT(PWR-\/>CR1, PWR\_CR1\_DBP);}
+\DoxyCodeLine{00150 }
+\DoxyCodeLine{00151     \textcolor{comment}{/* Wait for Backup domain Write protection disable */}}
+\DoxyCodeLine{00152     tickstart = HAL\_GetTick();}
+\DoxyCodeLine{00153 }
+\DoxyCodeLine{00154     \textcolor{keywordflow}{while}((PWR-\/>CR1 \& PWR\_CR1\_DBP) == 0U)}
+\DoxyCodeLine{00155     \{}
+\DoxyCodeLine{00156       \textcolor{keywordflow}{if}((HAL\_GetTick() -\/ tickstart) > RCC\_DBP\_TIMEOUT\_VALUE)}
+\DoxyCodeLine{00157       \{}
+\DoxyCodeLine{00158         ret = HAL\_TIMEOUT;}
+\DoxyCodeLine{00159         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00160       \}}
+\DoxyCodeLine{00161     \}}
+\DoxyCodeLine{00162 }
+\DoxyCodeLine{00163     \textcolor{keywordflow}{if}(ret == HAL\_OK)}
+\DoxyCodeLine{00164     \{ }
+\DoxyCodeLine{00165       \textcolor{comment}{/* Reset the Backup domain only if the RTC Clock source selection is modified from default */}}
+\DoxyCodeLine{00166       tmpregister = READ\_BIT(RCC-\/>BDCR, RCC\_BDCR\_RTCSEL);}
+\DoxyCodeLine{00167       }
+\DoxyCodeLine{00168       \textcolor{keywordflow}{if}((tmpregister != RCC\_RTCCLKSOURCE\_NONE) \&\& (tmpregister != PeriphClkInit-\/>RTCClockSelection))}
+\DoxyCodeLine{00169       \{}
+\DoxyCodeLine{00170         \textcolor{comment}{/* Store the content of BDCR register before the reset of Backup Domain */}}
+\DoxyCodeLine{00171         tmpregister = READ\_BIT(RCC-\/>BDCR, \string~(RCC\_BDCR\_RTCSEL));}
+\DoxyCodeLine{00172         \textcolor{comment}{/* RTC Clock selection can be changed only if the Backup Domain is reset */}}
+\DoxyCodeLine{00173         \_\_HAL\_RCC\_BACKUPRESET\_FORCE();}
+\DoxyCodeLine{00174         \_\_HAL\_RCC\_BACKUPRESET\_RELEASE();}
+\DoxyCodeLine{00175         \textcolor{comment}{/* Restore the Content of BDCR register */}}
+\DoxyCodeLine{00176         RCC-\/>BDCR = tmpregister;}
+\DoxyCodeLine{00177       \}}
+\DoxyCodeLine{00178 }
+\DoxyCodeLine{00179       \textcolor{comment}{/* Wait for LSE reactivation if LSE was enable prior to Backup Domain reset */}}
+\DoxyCodeLine{00180       \textcolor{keywordflow}{if} (HAL\_IS\_BIT\_SET(tmpregister, RCC\_BDCR\_LSEON))}
+\DoxyCodeLine{00181       \{}
+\DoxyCodeLine{00182         \textcolor{comment}{/* Get Start Tick*/}}
+\DoxyCodeLine{00183         tickstart = HAL\_GetTick();}
+\DoxyCodeLine{00184 }
+\DoxyCodeLine{00185         \textcolor{comment}{/* Wait till LSE is ready */}}
+\DoxyCodeLine{00186         \textcolor{keywordflow}{while}(READ\_BIT(RCC-\/>BDCR, RCC\_BDCR\_LSERDY) == 0U)}
+\DoxyCodeLine{00187         \{}
+\DoxyCodeLine{00188           \textcolor{keywordflow}{if}((HAL\_GetTick() -\/ tickstart) > RCC\_LSE\_TIMEOUT\_VALUE)}
+\DoxyCodeLine{00189           \{}
+\DoxyCodeLine{00190             ret = HAL\_TIMEOUT;}
+\DoxyCodeLine{00191             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00192           \}}
+\DoxyCodeLine{00193         \}}
+\DoxyCodeLine{00194       \}}
+\DoxyCodeLine{00195       }
+\DoxyCodeLine{00196       \textcolor{keywordflow}{if}(ret == HAL\_OK)}
+\DoxyCodeLine{00197       \{}
+\DoxyCodeLine{00198         \textcolor{comment}{/* Apply new RTC clock source selection */}}
+\DoxyCodeLine{00199         \_\_HAL\_RCC\_RTC\_CONFIG(PeriphClkInit-\/>RTCClockSelection);}
+\DoxyCodeLine{00200       \}}
+\DoxyCodeLine{00201       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00202       \{}
+\DoxyCodeLine{00203         \textcolor{comment}{/* set overall return value */}}
+\DoxyCodeLine{00204         status = ret;}
+\DoxyCodeLine{00205       \}}
+\DoxyCodeLine{00206     \}}
+\DoxyCodeLine{00207     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00208     \{}
+\DoxyCodeLine{00209       \textcolor{comment}{/* set overall return value */}}
+\DoxyCodeLine{00210       status = ret;}
+\DoxyCodeLine{00211     \}}
+\DoxyCodeLine{00212 }
+\DoxyCodeLine{00213     \textcolor{comment}{/* Restore clock configuration if changed */}}
+\DoxyCodeLine{00214     \textcolor{keywordflow}{if}(pwrclkchanged == SET)}
+\DoxyCodeLine{00215     \{}
+\DoxyCodeLine{00216       \_\_HAL\_RCC\_PWR\_CLK\_DISABLE();}
+\DoxyCodeLine{00217     \}}
+\DoxyCodeLine{00218   \}}
+\DoxyCodeLine{00219 }
+\DoxyCodeLine{00220   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ USART1 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00221   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_USART1) == RCC\_PERIPHCLK\_USART1)}
+\DoxyCodeLine{00222   \{}
+\DoxyCodeLine{00223     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00224     assert\_param(IS\_RCC\_USART1CLKSOURCE(PeriphClkInit-\/>Usart1ClockSelection));}
+\DoxyCodeLine{00225 }
+\DoxyCodeLine{00226     \textcolor{comment}{/* Configure the USART1 clock source */}}
+\DoxyCodeLine{00227     \_\_HAL\_RCC\_USART1\_CONFIG(PeriphClkInit-\/>Usart1ClockSelection);}
+\DoxyCodeLine{00228   \}}
+\DoxyCodeLine{00229 }
+\DoxyCodeLine{00230   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ USART2 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00231   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_USART2) == RCC\_PERIPHCLK\_USART2)}
+\DoxyCodeLine{00232   \{}
+\DoxyCodeLine{00233     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00234     assert\_param(IS\_RCC\_USART2CLKSOURCE(PeriphClkInit-\/>Usart2ClockSelection));}
+\DoxyCodeLine{00235 }
+\DoxyCodeLine{00236     \textcolor{comment}{/* Configure the USART2 clock source */}}
+\DoxyCodeLine{00237     \_\_HAL\_RCC\_USART2\_CONFIG(PeriphClkInit-\/>Usart2ClockSelection);}
+\DoxyCodeLine{00238   \}}
+\DoxyCodeLine{00239 }
+\DoxyCodeLine{00240   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ USART3 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00241   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_USART3) == RCC\_PERIPHCLK\_USART3)}
+\DoxyCodeLine{00242   \{}
+\DoxyCodeLine{00243     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00244     assert\_param(IS\_RCC\_USART3CLKSOURCE(PeriphClkInit-\/>Usart3ClockSelection));}
+\DoxyCodeLine{00245 }
+\DoxyCodeLine{00246     \textcolor{comment}{/* Configure the USART3 clock source */}}
+\DoxyCodeLine{00247     \_\_HAL\_RCC\_USART3\_CONFIG(PeriphClkInit-\/>Usart3ClockSelection);}
+\DoxyCodeLine{00248   \}}
+\DoxyCodeLine{00249 }
+\DoxyCodeLine{00250 \textcolor{preprocessor}{\#if defined(UART4)}}
+\DoxyCodeLine{00251   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ UART4 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00252   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_UART4) == RCC\_PERIPHCLK\_UART4)}
+\DoxyCodeLine{00253   \{}
+\DoxyCodeLine{00254     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00255     assert\_param(IS\_RCC\_UART4CLKSOURCE(PeriphClkInit-\/>Uart4ClockSelection));}
+\DoxyCodeLine{00256 }
+\DoxyCodeLine{00257     \textcolor{comment}{/* Configure the UART4 clock source */}}
+\DoxyCodeLine{00258     \_\_HAL\_RCC\_UART4\_CONFIG(PeriphClkInit-\/>Uart4ClockSelection);}
+\DoxyCodeLine{00259   \}}
+\DoxyCodeLine{00260 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* UART4 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00261 }
+\DoxyCodeLine{00262 \textcolor{preprocessor}{\#if defined(UART5)}}
+\DoxyCodeLine{00263 }
+\DoxyCodeLine{00264   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ UART5 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00265   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_UART5) == RCC\_PERIPHCLK\_UART5)}
+\DoxyCodeLine{00266   \{}
+\DoxyCodeLine{00267     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00268     assert\_param(IS\_RCC\_UART5CLKSOURCE(PeriphClkInit-\/>Uart5ClockSelection));}
+\DoxyCodeLine{00269 }
+\DoxyCodeLine{00270     \textcolor{comment}{/* Configure the UART5 clock source */}}
+\DoxyCodeLine{00271     \_\_HAL\_RCC\_UART5\_CONFIG(PeriphClkInit-\/>Uart5ClockSelection);}
+\DoxyCodeLine{00272   \}}
+\DoxyCodeLine{00273 }
+\DoxyCodeLine{00274 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* UART5 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00275 }
+\DoxyCodeLine{00276   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ LPUART1 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00277   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_LPUART1) == RCC\_PERIPHCLK\_LPUART1)}
+\DoxyCodeLine{00278   \{}
+\DoxyCodeLine{00279     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00280     assert\_param(IS\_RCC\_LPUART1CLKSOURCE(PeriphClkInit-\/>Lpuart1ClockSelection));}
+\DoxyCodeLine{00281 }
+\DoxyCodeLine{00282     \textcolor{comment}{/* Configure the LPUAR1 clock source */}}
+\DoxyCodeLine{00283     \_\_HAL\_RCC\_LPUART1\_CONFIG(PeriphClkInit-\/>Lpuart1ClockSelection);}
+\DoxyCodeLine{00284   \}}
+\DoxyCodeLine{00285 }
+\DoxyCodeLine{00286   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ I2C1 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00287   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_I2C1) == RCC\_PERIPHCLK\_I2C1)}
+\DoxyCodeLine{00288   \{}
+\DoxyCodeLine{00289     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00290     assert\_param(IS\_RCC\_I2C1CLKSOURCE(PeriphClkInit-\/>I2c1ClockSelection));}
+\DoxyCodeLine{00291 }
+\DoxyCodeLine{00292     \textcolor{comment}{/* Configure the I2C1 clock source */}}
+\DoxyCodeLine{00293     \_\_HAL\_RCC\_I2C1\_CONFIG(PeriphClkInit-\/>I2c1ClockSelection);}
+\DoxyCodeLine{00294   \}}
+\DoxyCodeLine{00295 }
+\DoxyCodeLine{00296   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ I2C2 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00297   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_I2C2) == RCC\_PERIPHCLK\_I2C2)}
+\DoxyCodeLine{00298   \{}
+\DoxyCodeLine{00299     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00300     assert\_param(IS\_RCC\_I2C2CLKSOURCE(PeriphClkInit-\/>I2c2ClockSelection));}
+\DoxyCodeLine{00301 }
+\DoxyCodeLine{00302     \textcolor{comment}{/* Configure the I2C2 clock source */}}
+\DoxyCodeLine{00303     \_\_HAL\_RCC\_I2C2\_CONFIG(PeriphClkInit-\/>I2c2ClockSelection);}
+\DoxyCodeLine{00304   \}}
+\DoxyCodeLine{00305 }
+\DoxyCodeLine{00306   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ I2C3 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00307   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_I2C3) == RCC\_PERIPHCLK\_I2C3)}
+\DoxyCodeLine{00308   \{}
+\DoxyCodeLine{00309     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00310     assert\_param(IS\_RCC\_I2C3CLKSOURCE(PeriphClkInit-\/>I2c3ClockSelection));}
+\DoxyCodeLine{00311 }
+\DoxyCodeLine{00312     \textcolor{comment}{/* Configure the I2C3 clock source */}}
+\DoxyCodeLine{00313     \_\_HAL\_RCC\_I2C3\_CONFIG(PeriphClkInit-\/>I2c3ClockSelection);}
+\DoxyCodeLine{00314   \}}
+\DoxyCodeLine{00315 }
+\DoxyCodeLine{00316 \textcolor{preprocessor}{\#if defined(I2C4)  }}
+\DoxyCodeLine{00317 }
+\DoxyCodeLine{00318   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ I2C4 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00319   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_I2C4) == RCC\_PERIPHCLK\_I2C4)}
+\DoxyCodeLine{00320   \{}
+\DoxyCodeLine{00321     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00322     assert\_param(IS\_RCC\_I2C4CLKSOURCE(PeriphClkInit-\/>I2c4ClockSelection));}
+\DoxyCodeLine{00323 }
+\DoxyCodeLine{00324     \textcolor{comment}{/* Configure the I2C4 clock source */}}
+\DoxyCodeLine{00325     \_\_HAL\_RCC\_I2C4\_CONFIG(PeriphClkInit-\/>I2c4ClockSelection);}
+\DoxyCodeLine{00326   \}}
+\DoxyCodeLine{00327 }
+\DoxyCodeLine{00328 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* I2C4 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00329 }
+\DoxyCodeLine{00330   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ LPTIM1 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00331   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_LPTIM1) == RCC\_PERIPHCLK\_LPTIM1)}
+\DoxyCodeLine{00332   \{}
+\DoxyCodeLine{00333     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00334     assert\_param(IS\_RCC\_LPTIM1CLKSOURCE(PeriphClkInit-\/>Lptim1ClockSelection));}
+\DoxyCodeLine{00335 }
+\DoxyCodeLine{00336     \textcolor{comment}{/* Configure the LPTIM1 clock source */}}
+\DoxyCodeLine{00337     \_\_HAL\_RCC\_LPTIM1\_CONFIG(PeriphClkInit-\/>Lptim1ClockSelection);}
+\DoxyCodeLine{00338   \}}
+\DoxyCodeLine{00339 }
+\DoxyCodeLine{00340   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ SAI1 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00341   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_SAI1) == RCC\_PERIPHCLK\_SAI1)}
+\DoxyCodeLine{00342   \{}
+\DoxyCodeLine{00343     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00344     assert\_param(IS\_RCC\_SAI1CLKSOURCE(PeriphClkInit-\/>Sai1ClockSelection));}
+\DoxyCodeLine{00345 }
+\DoxyCodeLine{00346     \textcolor{comment}{/* Configure the SAI1 interface clock source */}}
+\DoxyCodeLine{00347     \_\_HAL\_RCC\_SAI1\_CONFIG(PeriphClkInit-\/>Sai1ClockSelection);}
+\DoxyCodeLine{00348     }
+\DoxyCodeLine{00349     \textcolor{keywordflow}{if}(PeriphClkInit-\/>Sai1ClockSelection == RCC\_SAI1CLKSOURCE\_PLL)}
+\DoxyCodeLine{00350     \{}
+\DoxyCodeLine{00351       \textcolor{comment}{/* Enable PLL48M1CLK output */}}
+\DoxyCodeLine{00352       \_\_HAL\_RCC\_PLLCLKOUT\_ENABLE(RCC\_PLL\_48M1CLK);}
+\DoxyCodeLine{00353     \}}
+\DoxyCodeLine{00354   \}}
+\DoxyCodeLine{00355 }
+\DoxyCodeLine{00356   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ I2S clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00357   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_I2S) == RCC\_PERIPHCLK\_I2S)}
+\DoxyCodeLine{00358   \{}
+\DoxyCodeLine{00359     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00360     assert\_param(IS\_RCC\_I2SCLKSOURCE(PeriphClkInit-\/>I2sClockSelection));}
+\DoxyCodeLine{00361 }
+\DoxyCodeLine{00362     \textcolor{comment}{/* Configure the I2S interface clock source */}}
+\DoxyCodeLine{00363     \_\_HAL\_RCC\_I2S\_CONFIG(PeriphClkInit-\/>I2sClockSelection);}
+\DoxyCodeLine{00364     }
+\DoxyCodeLine{00365     \textcolor{keywordflow}{if}(PeriphClkInit-\/>I2sClockSelection == RCC\_I2SCLKSOURCE\_PLL)}
+\DoxyCodeLine{00366     \{}
+\DoxyCodeLine{00367       \textcolor{comment}{/* Enable PLL48M1CLK output */}}
+\DoxyCodeLine{00368       \_\_HAL\_RCC\_PLLCLKOUT\_ENABLE(RCC\_PLL\_48M1CLK);}
+\DoxyCodeLine{00369     \}}
+\DoxyCodeLine{00370   \}}
+\DoxyCodeLine{00371 }
+\DoxyCodeLine{00372 \textcolor{preprocessor}{\#if defined(FDCAN1)}}
+\DoxyCodeLine{00373   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ FDCAN clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00374   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_FDCAN) == RCC\_PERIPHCLK\_FDCAN)}
+\DoxyCodeLine{00375   \{}
+\DoxyCodeLine{00376     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00377     assert\_param(IS\_RCC\_FDCANCLKSOURCE(PeriphClkInit-\/>FdcanClockSelection));}
+\DoxyCodeLine{00378 }
+\DoxyCodeLine{00379     \textcolor{comment}{/* Configure the FDCAN interface clock source */}}
+\DoxyCodeLine{00380     \_\_HAL\_RCC\_FDCAN\_CONFIG(PeriphClkInit-\/>FdcanClockSelection);}
+\DoxyCodeLine{00381     }
+\DoxyCodeLine{00382     \textcolor{keywordflow}{if}(PeriphClkInit-\/>FdcanClockSelection == RCC\_FDCANCLKSOURCE\_PLL)}
+\DoxyCodeLine{00383     \{}
+\DoxyCodeLine{00384       \textcolor{comment}{/* Enable PLL48M1CLK output */}}
+\DoxyCodeLine{00385       \_\_HAL\_RCC\_PLLCLKOUT\_ENABLE(RCC\_PLL\_48M1CLK);}
+\DoxyCodeLine{00386     \}}
+\DoxyCodeLine{00387   \}}
+\DoxyCodeLine{00388 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* FDCAN1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00389 }
+\DoxyCodeLine{00390 \textcolor{preprocessor}{\#if defined(USB)}}
+\DoxyCodeLine{00391 }
+\DoxyCodeLine{00392   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ USB clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00393   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_USB) == (RCC\_PERIPHCLK\_USB))}
+\DoxyCodeLine{00394   \{}
+\DoxyCodeLine{00395     assert\_param(IS\_RCC\_USBCLKSOURCE(PeriphClkInit-\/>UsbClockSelection));}
+\DoxyCodeLine{00396     \_\_HAL\_RCC\_USB\_CONFIG(PeriphClkInit-\/>UsbClockSelection);}
+\DoxyCodeLine{00397 }
+\DoxyCodeLine{00398     \textcolor{keywordflow}{if}(PeriphClkInit-\/>UsbClockSelection == RCC\_USBCLKSOURCE\_PLL)}
+\DoxyCodeLine{00399     \{}
+\DoxyCodeLine{00400       \textcolor{comment}{/* Enable PLL48M1CLK output */}}
+\DoxyCodeLine{00401       \_\_HAL\_RCC\_PLLCLKOUT\_ENABLE(RCC\_PLL\_48M1CLK);}
+\DoxyCodeLine{00402     \}}
+\DoxyCodeLine{00403   \}}
+\DoxyCodeLine{00404 }
+\DoxyCodeLine{00405 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USB */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00406 }
+\DoxyCodeLine{00407   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ RNG clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00408   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_RNG) == (RCC\_PERIPHCLK\_RNG))}
+\DoxyCodeLine{00409   \{}
+\DoxyCodeLine{00410     assert\_param(IS\_RCC\_RNGCLKSOURCE(PeriphClkInit-\/>RngClockSelection));}
+\DoxyCodeLine{00411     \_\_HAL\_RCC\_RNG\_CONFIG(PeriphClkInit-\/>RngClockSelection);}
+\DoxyCodeLine{00412 }
+\DoxyCodeLine{00413     \textcolor{keywordflow}{if}(PeriphClkInit-\/>RngClockSelection == RCC\_RNGCLKSOURCE\_PLL)}
+\DoxyCodeLine{00414     \{}
+\DoxyCodeLine{00415       \textcolor{comment}{/* Enable PLL48M1CLK output */}}
+\DoxyCodeLine{00416       \_\_HAL\_RCC\_PLLCLKOUT\_ENABLE(RCC\_PLL\_48M1CLK);}
+\DoxyCodeLine{00417     \}}
+\DoxyCodeLine{00418   \}}
+\DoxyCodeLine{00419 }
+\DoxyCodeLine{00420   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ ADC12 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00421   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_ADC12) == RCC\_PERIPHCLK\_ADC12)}
+\DoxyCodeLine{00422   \{}
+\DoxyCodeLine{00423     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00424     assert\_param(IS\_RCC\_ADC12CLKSOURCE(PeriphClkInit-\/>Adc12ClockSelection));}
+\DoxyCodeLine{00425 }
+\DoxyCodeLine{00426     \textcolor{comment}{/* Configure the ADC12 interface clock source */}}
+\DoxyCodeLine{00427     \_\_HAL\_RCC\_ADC12\_CONFIG(PeriphClkInit-\/>Adc12ClockSelection);}
+\DoxyCodeLine{00428     }
+\DoxyCodeLine{00429     \textcolor{keywordflow}{if}(PeriphClkInit-\/>Adc12ClockSelection == RCC\_ADC12CLKSOURCE\_PLL)}
+\DoxyCodeLine{00430     \{}
+\DoxyCodeLine{00431       \textcolor{comment}{/* Enable PLLADCCLK output */}}
+\DoxyCodeLine{00432       \_\_HAL\_RCC\_PLLCLKOUT\_ENABLE(RCC\_PLL\_ADCCLK);}
+\DoxyCodeLine{00433     \}}
+\DoxyCodeLine{00434   \}}
+\DoxyCodeLine{00435   }
+\DoxyCodeLine{00436 \textcolor{preprocessor}{\#if defined(ADC345\_COMMON)}}
+\DoxyCodeLine{00437   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ ADC345 clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00438   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_ADC345) == RCC\_PERIPHCLK\_ADC345)}
+\DoxyCodeLine{00439   \{}
+\DoxyCodeLine{00440     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00441     assert\_param(IS\_RCC\_ADC345CLKSOURCE(PeriphClkInit-\/>Adc345ClockSelection));}
+\DoxyCodeLine{00442 }
+\DoxyCodeLine{00443     \textcolor{comment}{/* Configure the ADC345 interface clock source */}}
+\DoxyCodeLine{00444     \_\_HAL\_RCC\_ADC345\_CONFIG(PeriphClkInit-\/>Adc345ClockSelection);}
+\DoxyCodeLine{00445     }
+\DoxyCodeLine{00446     \textcolor{keywordflow}{if}(PeriphClkInit-\/>Adc345ClockSelection == RCC\_ADC345CLKSOURCE\_PLL)}
+\DoxyCodeLine{00447     \{}
+\DoxyCodeLine{00448       \textcolor{comment}{/* Enable PLLADCCLK output */}}
+\DoxyCodeLine{00449       \_\_HAL\_RCC\_PLLCLKOUT\_ENABLE(RCC\_PLL\_ADCCLK);}
+\DoxyCodeLine{00450     \}}
+\DoxyCodeLine{00451   \}}
+\DoxyCodeLine{00452 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC345\_COMMON */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00453 }
+\DoxyCodeLine{00454 \textcolor{preprocessor}{\#if defined(QUADSPI)}}
+\DoxyCodeLine{00455 }
+\DoxyCodeLine{00456   \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ QuadSPIx clock source configuration -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00457   \textcolor{keywordflow}{if}(((PeriphClkInit-\/>PeriphClockSelection) \& RCC\_PERIPHCLK\_QSPI) == RCC\_PERIPHCLK\_QSPI)}
+\DoxyCodeLine{00458   \{}
+\DoxyCodeLine{00459     \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00460     assert\_param(IS\_RCC\_QSPICLKSOURCE(PeriphClkInit-\/>QspiClockSelection));}
+\DoxyCodeLine{00461 }
+\DoxyCodeLine{00462     \textcolor{comment}{/* Configure the QuadSPI clock source */}}
+\DoxyCodeLine{00463     \_\_HAL\_RCC\_QSPI\_CONFIG(PeriphClkInit-\/>QspiClockSelection);}
+\DoxyCodeLine{00464 }
+\DoxyCodeLine{00465     \textcolor{keywordflow}{if}(PeriphClkInit-\/>QspiClockSelection == RCC\_QSPICLKSOURCE\_PLL)}
+\DoxyCodeLine{00466     \{}
+\DoxyCodeLine{00467       \textcolor{comment}{/* Enable PLL48M1CLK output */}}
+\DoxyCodeLine{00468       \_\_HAL\_RCC\_PLLCLKOUT\_ENABLE(RCC\_PLL\_48M1CLK);}
+\DoxyCodeLine{00469     \}}
+\DoxyCodeLine{00470   \}}
+\DoxyCodeLine{00471 }
+\DoxyCodeLine{00472 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* QUADSPI */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00473 }
+\DoxyCodeLine{00474   \textcolor{keywordflow}{return} status;}
+\DoxyCodeLine{00475 \}}
+\DoxyCodeLine{00476 }
+\DoxyCodeLine{00485 \textcolor{keywordtype}{void} HAL\_RCCEx\_GetPeriphCLKConfig(RCC\_PeriphCLKInitTypeDef  *PeriphClkInit)}
+\DoxyCodeLine{00486 \{}
+\DoxyCodeLine{00487   \textcolor{comment}{/* Set all possible values for the extended clock type parameter-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00488 }
+\DoxyCodeLine{00489 \textcolor{preprocessor}{\#if defined(STM32G474xx) || defined(STM32G484xx)}}
+\DoxyCodeLine{00490 }
+\DoxyCodeLine{00491   PeriphClkInit-\/>PeriphClockSelection = RCC\_PERIPHCLK\_USART1  | RCC\_PERIPHCLK\_USART2 | RCC\_PERIPHCLK\_USART3 | RCC\_PERIPHCLK\_UART4  | \(\backslash\)}
+\DoxyCodeLine{00492                                         RCC\_PERIPHCLK\_UART5   | \(\backslash\)}
+\DoxyCodeLine{00493                                         RCC\_PERIPHCLK\_LPUART1 | RCC\_PERIPHCLK\_I2C1   | RCC\_PERIPHCLK\_I2C2   | RCC\_PERIPHCLK\_I2C3   | \(\backslash\)}
+\DoxyCodeLine{00494                                         RCC\_PERIPHCLK\_I2C4    | \(\backslash\)}
+\DoxyCodeLine{00495                                         RCC\_PERIPHCLK\_LPTIM1  | RCC\_PERIPHCLK\_SAI1   | RCC\_PERIPHCLK\_I2S    | RCC\_PERIPHCLK\_FDCAN  | \(\backslash\)}
+\DoxyCodeLine{00496                                         RCC\_PERIPHCLK\_RNG     | RCC\_PERIPHCLK\_USB    | RCC\_PERIPHCLK\_ADC12  | RCC\_PERIPHCLK\_ADC345 | \(\backslash\)}
+\DoxyCodeLine{00497                                         RCC\_PERIPHCLK\_QSPI    | \(\backslash\)}
+\DoxyCodeLine{00498                                         RCC\_PERIPHCLK\_RTC;}
+\DoxyCodeLine{00499 \textcolor{preprocessor}{\#elif defined(STM32G491xx) || defined(STM32G4A1xx)}}
+\DoxyCodeLine{00500 }
+\DoxyCodeLine{00501   PeriphClkInit-\/>PeriphClockSelection = RCC\_PERIPHCLK\_USART1  | RCC\_PERIPHCLK\_USART2 | RCC\_PERIPHCLK\_USART3 | RCC\_PERIPHCLK\_UART4  | \(\backslash\)}
+\DoxyCodeLine{00502                                         RCC\_PERIPHCLK\_UART5   | \(\backslash\)}
+\DoxyCodeLine{00503                                         RCC\_PERIPHCLK\_LPUART1 | RCC\_PERIPHCLK\_I2C1   | RCC\_PERIPHCLK\_I2C2   | RCC\_PERIPHCLK\_I2C3   | \(\backslash\)}
+\DoxyCodeLine{00504                                         RCC\_PERIPHCLK\_LPTIM1  | RCC\_PERIPHCLK\_SAI1   | RCC\_PERIPHCLK\_I2S    | RCC\_PERIPHCLK\_FDCAN  | \(\backslash\)}
+\DoxyCodeLine{00505                                         RCC\_PERIPHCLK\_RNG     | RCC\_PERIPHCLK\_USB    | RCC\_PERIPHCLK\_ADC12  | RCC\_PERIPHCLK\_ADC345 | \(\backslash\)}
+\DoxyCodeLine{00506                                         RCC\_PERIPHCLK\_QSPI    | \(\backslash\)}
+\DoxyCodeLine{00507                                         RCC\_PERIPHCLK\_RTC;}
+\DoxyCodeLine{00508 }
+\DoxyCodeLine{00509 \textcolor{preprocessor}{\#elif defined(STM32G473xx) || defined(STM32G483xx)}}
+\DoxyCodeLine{00510 }
+\DoxyCodeLine{00511   PeriphClkInit-\/>PeriphClockSelection = RCC\_PERIPHCLK\_USART1  | RCC\_PERIPHCLK\_USART2 | RCC\_PERIPHCLK\_USART3 | RCC\_PERIPHCLK\_UART4  | \(\backslash\)}
+\DoxyCodeLine{00512                                         RCC\_PERIPHCLK\_UART5   | \(\backslash\)}
+\DoxyCodeLine{00513                                         RCC\_PERIPHCLK\_LPUART1 | RCC\_PERIPHCLK\_I2C1   | RCC\_PERIPHCLK\_I2C2   | RCC\_PERIPHCLK\_I2C3   | \(\backslash\)}
+\DoxyCodeLine{00514                                         RCC\_PERIPHCLK\_I2C4    | \(\backslash\)}
+\DoxyCodeLine{00515                                         RCC\_PERIPHCLK\_LPTIM1  | RCC\_PERIPHCLK\_SAI1   | RCC\_PERIPHCLK\_I2S    | \(\backslash\)}
+\DoxyCodeLine{00516                                         RCC\_PERIPHCLK\_RNG     | RCC\_PERIPHCLK\_USB    | RCC\_PERIPHCLK\_ADC12  | RCC\_PERIPHCLK\_ADC345 | \(\backslash\)}
+\DoxyCodeLine{00517                                         RCC\_PERIPHCLK\_QSPI    | \(\backslash\)}
+\DoxyCodeLine{00518                                         RCC\_PERIPHCLK\_RTC;}
+\DoxyCodeLine{00519 }
+\DoxyCodeLine{00520 \textcolor{preprocessor}{\#elif defined(STM32G471xx)}}
+\DoxyCodeLine{00521 }
+\DoxyCodeLine{00522   PeriphClkInit-\/>PeriphClockSelection = RCC\_PERIPHCLK\_USART1  | RCC\_PERIPHCLK\_USART2 | RCC\_PERIPHCLK\_USART3 | RCC\_PERIPHCLK\_UART4  | \(\backslash\)}
+\DoxyCodeLine{00523                                         RCC\_PERIPHCLK\_UART5   | \(\backslash\)}
+\DoxyCodeLine{00524                                         RCC\_PERIPHCLK\_LPUART1 | RCC\_PERIPHCLK\_I2C1   | RCC\_PERIPHCLK\_I2C2   | RCC\_PERIPHCLK\_I2C3   | \(\backslash\)}
+\DoxyCodeLine{00525                                         RCC\_PERIPHCLK\_I2C4    | \(\backslash\)}
+\DoxyCodeLine{00526                                         RCC\_PERIPHCLK\_LPTIM1  | RCC\_PERIPHCLK\_SAI1   | RCC\_PERIPHCLK\_I2S    | \(\backslash\)}
+\DoxyCodeLine{00527                                         RCC\_PERIPHCLK\_RNG     | RCC\_PERIPHCLK\_USB    | RCC\_PERIPHCLK\_ADC12  | \(\backslash\)}
+\DoxyCodeLine{00528                                         RCC\_PERIPHCLK\_RTC;}
+\DoxyCodeLine{00529 \textcolor{preprocessor}{\#elif defined(STM32G431xx) || defined(STM32G441xx)}}
+\DoxyCodeLine{00530 }
+\DoxyCodeLine{00531   PeriphClkInit-\/>PeriphClockSelection = RCC\_PERIPHCLK\_USART1  | RCC\_PERIPHCLK\_USART2 | RCC\_PERIPHCLK\_USART3 | RCC\_PERIPHCLK\_UART4  | \(\backslash\)}
+\DoxyCodeLine{00532                                         RCC\_PERIPHCLK\_LPUART1 | RCC\_PERIPHCLK\_I2C1   | RCC\_PERIPHCLK\_I2C2   | RCC\_PERIPHCLK\_I2C3   | \(\backslash\)}
+\DoxyCodeLine{00533                                         RCC\_PERIPHCLK\_LPTIM1  | RCC\_PERIPHCLK\_SAI1   | RCC\_PERIPHCLK\_I2S    | RCC\_PERIPHCLK\_FDCAN    | \(\backslash\)}
+\DoxyCodeLine{00534                                         RCC\_PERIPHCLK\_RNG     | RCC\_PERIPHCLK\_USB    | RCC\_PERIPHCLK\_ADC12  | \(\backslash\)}
+\DoxyCodeLine{00535                                         RCC\_PERIPHCLK\_RTC;}
+\DoxyCodeLine{00536 \textcolor{preprocessor}{\#elif defined(STM32GBK1CB)}}
+\DoxyCodeLine{00537 }
+\DoxyCodeLine{00538   PeriphClkInit-\/>PeriphClockSelection = RCC\_PERIPHCLK\_USART1  | RCC\_PERIPHCLK\_USART2 | RCC\_PERIPHCLK\_USART3 | \(\backslash\)}
+\DoxyCodeLine{00539                                         RCC\_PERIPHCLK\_LPUART1 | RCC\_PERIPHCLK\_I2C1   | RCC\_PERIPHCLK\_I2C2   | RCC\_PERIPHCLK\_I2C3   | \(\backslash\)}
+\DoxyCodeLine{00540                                         RCC\_PERIPHCLK\_LPTIM1  | RCC\_PERIPHCLK\_SAI1   | RCC\_PERIPHCLK\_I2S    | RCC\_PERIPHCLK\_FDCAN    | \(\backslash\)}
+\DoxyCodeLine{00541                                         RCC\_PERIPHCLK\_RNG     | RCC\_PERIPHCLK\_USB    | RCC\_PERIPHCLK\_ADC12  | \(\backslash\)}
+\DoxyCodeLine{00542                                         RCC\_PERIPHCLK\_RTC;}
+\DoxyCodeLine{00543 }
+\DoxyCodeLine{00544 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32G431xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00545 }
+\DoxyCodeLine{00546 }
+\DoxyCodeLine{00547   \textcolor{comment}{/* Get the USART1 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00548   PeriphClkInit-\/>Usart1ClockSelection  = \_\_HAL\_RCC\_GET\_USART1\_SOURCE();}
+\DoxyCodeLine{00549   \textcolor{comment}{/* Get the USART2 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00550   PeriphClkInit-\/>Usart2ClockSelection  = \_\_HAL\_RCC\_GET\_USART2\_SOURCE();}
+\DoxyCodeLine{00551   \textcolor{comment}{/* Get the USART3 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00552   PeriphClkInit-\/>Usart3ClockSelection  = \_\_HAL\_RCC\_GET\_USART3\_SOURCE();}
+\DoxyCodeLine{00553 }
+\DoxyCodeLine{00554 \textcolor{preprocessor}{\#if defined(UART4)}}
+\DoxyCodeLine{00555   \textcolor{comment}{/* Get the UART4 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00556   PeriphClkInit-\/>Uart4ClockSelection   = \_\_HAL\_RCC\_GET\_UART4\_SOURCE();}
+\DoxyCodeLine{00557 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* UART4 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00558 }
+\DoxyCodeLine{00559 \textcolor{preprocessor}{\#if defined(UART5)}}
+\DoxyCodeLine{00560   \textcolor{comment}{/* Get the UART5 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00561   PeriphClkInit-\/>Uart5ClockSelection   = \_\_HAL\_RCC\_GET\_UART5\_SOURCE();}
+\DoxyCodeLine{00562 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* UART5 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00563   }
+\DoxyCodeLine{00564   \textcolor{comment}{/* Get the LPUART1 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00565   PeriphClkInit-\/>Lpuart1ClockSelection = \_\_HAL\_RCC\_GET\_LPUART1\_SOURCE();}
+\DoxyCodeLine{00566 }
+\DoxyCodeLine{00567   \textcolor{comment}{/* Get the I2C1 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00568   PeriphClkInit-\/>I2c1ClockSelection    = \_\_HAL\_RCC\_GET\_I2C1\_SOURCE();}
+\DoxyCodeLine{00569 }
+\DoxyCodeLine{00570   \textcolor{comment}{/* Get the I2C2 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00571   PeriphClkInit-\/>I2c2ClockSelection    = \_\_HAL\_RCC\_GET\_I2C2\_SOURCE();}
+\DoxyCodeLine{00572 }
+\DoxyCodeLine{00573   \textcolor{comment}{/* Get the I2C3 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00574   PeriphClkInit-\/>I2c3ClockSelection    = \_\_HAL\_RCC\_GET\_I2C3\_SOURCE();}
+\DoxyCodeLine{00575 }
+\DoxyCodeLine{00576 \textcolor{preprocessor}{\#if defined(I2C4)}}
+\DoxyCodeLine{00577   \textcolor{comment}{/* Get the I2C4 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00578   PeriphClkInit-\/>I2c4ClockSelection    = \_\_HAL\_RCC\_GET\_I2C4\_SOURCE();}
+\DoxyCodeLine{00579 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* I2C4 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00580 }
+\DoxyCodeLine{00581   \textcolor{comment}{/* Get the LPTIM1 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00582   PeriphClkInit-\/>Lptim1ClockSelection  = \_\_HAL\_RCC\_GET\_LPTIM1\_SOURCE();}
+\DoxyCodeLine{00583 }
+\DoxyCodeLine{00584   \textcolor{comment}{/* Get the SAI1 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00585   PeriphClkInit-\/>Sai1ClockSelection    = \_\_HAL\_RCC\_GET\_SAI1\_SOURCE();}
+\DoxyCodeLine{00586 }
+\DoxyCodeLine{00587   \textcolor{comment}{/* Get the I2S clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00588   PeriphClkInit-\/>I2sClockSelection    = \_\_HAL\_RCC\_GET\_I2S\_SOURCE();}
+\DoxyCodeLine{00589 }
+\DoxyCodeLine{00590 \textcolor{preprocessor}{\#if defined(FDCAN1)}}
+\DoxyCodeLine{00591   \textcolor{comment}{/* Get the FDCAN clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00592   PeriphClkInit-\/>FdcanClockSelection    = \_\_HAL\_RCC\_GET\_FDCAN\_SOURCE();}
+\DoxyCodeLine{00593 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* FDCAN1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00594 }
+\DoxyCodeLine{00595 \textcolor{preprocessor}{\#if defined(USB)}}
+\DoxyCodeLine{00596   \textcolor{comment}{/* Get the USB clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00597   PeriphClkInit-\/>UsbClockSelection   = \_\_HAL\_RCC\_GET\_USB\_SOURCE();}
+\DoxyCodeLine{00598 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USB */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00599 }
+\DoxyCodeLine{00600   \textcolor{comment}{/* Get the RNG clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00601   PeriphClkInit-\/>RngClockSelection   = \_\_HAL\_RCC\_GET\_RNG\_SOURCE();}
+\DoxyCodeLine{00602 }
+\DoxyCodeLine{00603   \textcolor{comment}{/* Get the ADC12 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00604   PeriphClkInit-\/>Adc12ClockSelection     = \_\_HAL\_RCC\_GET\_ADC12\_SOURCE();}
+\DoxyCodeLine{00605 }
+\DoxyCodeLine{00606 \textcolor{preprocessor}{\#if defined(ADC345\_COMMON)}}
+\DoxyCodeLine{00607   \textcolor{comment}{/* Get the ADC345 clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00608   PeriphClkInit-\/>Adc345ClockSelection     = \_\_HAL\_RCC\_GET\_ADC345\_SOURCE();}
+\DoxyCodeLine{00609 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC345\_COMMON */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00610 }
+\DoxyCodeLine{00611 \textcolor{preprocessor}{\#if defined(QUADSPI)}}
+\DoxyCodeLine{00612   \textcolor{comment}{/* Get the QuadSPIclock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00613   PeriphClkInit-\/>QspiClockSelection = \_\_HAL\_RCC\_GET\_QSPI\_SOURCE();}
+\DoxyCodeLine{00614 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* QUADSPI */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00615 }
+\DoxyCodeLine{00616   \textcolor{comment}{/* Get the RTC clock source -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00617   PeriphClkInit-\/>RTCClockSelection     = \_\_HAL\_RCC\_GET\_RTC\_SOURCE();}
+\DoxyCodeLine{00618 }
+\DoxyCodeLine{00619 \}}
+\DoxyCodeLine{00620 }
+\DoxyCodeLine{00648 uint32\_t HAL\_RCCEx\_GetPeriphCLKFreq(uint32\_t PeriphClk)}
+\DoxyCodeLine{00649 \{}
+\DoxyCodeLine{00650   uint32\_t frequency = 0U;}
+\DoxyCodeLine{00651   uint32\_t srcclk;}
+\DoxyCodeLine{00652   uint32\_t pllvco, plln, pllp;}
+\DoxyCodeLine{00653 }
+\DoxyCodeLine{00654   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{00655   assert\_param(IS\_RCC\_PERIPHCLOCK(PeriphClk));}
+\DoxyCodeLine{00656 }
+\DoxyCodeLine{00657   \textcolor{keywordflow}{if}(PeriphClk == RCC\_PERIPHCLK\_RTC)}
+\DoxyCodeLine{00658   \{}
+\DoxyCodeLine{00659     \textcolor{comment}{/* Get the current RTC source */}}
+\DoxyCodeLine{00660     srcclk = \_\_HAL\_RCC\_GET\_RTC\_SOURCE();}
+\DoxyCodeLine{00661 }
+\DoxyCodeLine{00662     \textcolor{comment}{/* Check if LSE is ready and if RTC clock selection is LSE */}}
+\DoxyCodeLine{00663     \textcolor{keywordflow}{if} ((HAL\_IS\_BIT\_SET(RCC-\/>BDCR, RCC\_BDCR\_LSERDY)) \&\& (srcclk == RCC\_RTCCLKSOURCE\_LSE))}
+\DoxyCodeLine{00664     \{}
+\DoxyCodeLine{00665       frequency = LSE\_VALUE;}
+\DoxyCodeLine{00666     \}}
+\DoxyCodeLine{00667     \textcolor{comment}{/* Check if LSI is ready and if RTC clock selection is LSI */}}
+\DoxyCodeLine{00668     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((HAL\_IS\_BIT\_SET(RCC-\/>CSR, RCC\_CSR\_LSIRDY)) \&\& (srcclk == RCC\_RTCCLKSOURCE\_LSI))}
+\DoxyCodeLine{00669     \{}
+\DoxyCodeLine{00670       frequency = LSI\_VALUE;}
+\DoxyCodeLine{00671     \}}
+\DoxyCodeLine{00672     \textcolor{comment}{/* Check if HSE is ready  and if RTC clock selection is HSI\_DIV32*/}}
+\DoxyCodeLine{00673     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSERDY)) \&\& (srcclk == RCC\_RTCCLKSOURCE\_HSE\_DIV32))}
+\DoxyCodeLine{00674     \{}
+\DoxyCodeLine{00675       frequency = HSE\_VALUE / 32U;}
+\DoxyCodeLine{00676     \}}
+\DoxyCodeLine{00677     \textcolor{comment}{/* Clock not enabled for RTC*/}}
+\DoxyCodeLine{00678     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00679     \{}
+\DoxyCodeLine{00680       \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00681     \}}
+\DoxyCodeLine{00682   \}}
+\DoxyCodeLine{00683   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00684   \{}
+\DoxyCodeLine{00685     \textcolor{comment}{/* Other external peripheral clock source than RTC */}}
+\DoxyCodeLine{00686 }
+\DoxyCodeLine{00687     \textcolor{comment}{/* Compute PLL clock input */}}
+\DoxyCodeLine{00688     \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_GET\_PLL\_OSCSOURCE() == RCC\_PLLSOURCE\_HSI)   \textcolor{comment}{/* HSI ? */}}
+\DoxyCodeLine{00689     \{}
+\DoxyCodeLine{00690       \textcolor{keywordflow}{if}(HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY))}
+\DoxyCodeLine{00691       \{}
+\DoxyCodeLine{00692         pllvco = HSI\_VALUE;}
+\DoxyCodeLine{00693       \}}
+\DoxyCodeLine{00694       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00695       \{}
+\DoxyCodeLine{00696         pllvco = 0U;}
+\DoxyCodeLine{00697       \}}
+\DoxyCodeLine{00698     \}}
+\DoxyCodeLine{00699     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_GET\_PLL\_OSCSOURCE() == RCC\_PLLSOURCE\_HSE)   \textcolor{comment}{/* HSE ? */}}
+\DoxyCodeLine{00700     \{}
+\DoxyCodeLine{00701       \textcolor{keywordflow}{if}(HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSERDY))}
+\DoxyCodeLine{00702       \{}
+\DoxyCodeLine{00703         pllvco = HSE\_VALUE;}
+\DoxyCodeLine{00704       \}}
+\DoxyCodeLine{00705       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00706       \{}
+\DoxyCodeLine{00707         pllvco = 0U;}
+\DoxyCodeLine{00708       \}}
+\DoxyCodeLine{00709     \}}
+\DoxyCodeLine{00710     \textcolor{keywordflow}{else} \textcolor{comment}{/* No source */}}
+\DoxyCodeLine{00711     \{}
+\DoxyCodeLine{00712       pllvco = 0U;}
+\DoxyCodeLine{00713     \}}
+\DoxyCodeLine{00714 }
+\DoxyCodeLine{00715     \textcolor{comment}{/* f(PLL Source) / PLLM */}}
+\DoxyCodeLine{00716     pllvco = (pllvco / ((READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLM) >> RCC\_PLLCFGR\_PLLM\_Pos) + 1U));}
+\DoxyCodeLine{00717 }
+\DoxyCodeLine{00718     \textcolor{keywordflow}{switch}(PeriphClk)}
+\DoxyCodeLine{00719     \{}
+\DoxyCodeLine{00720 }
+\DoxyCodeLine{00721     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_USART1:}
+\DoxyCodeLine{00722       \textcolor{comment}{/* Get the current USART1 source */}}
+\DoxyCodeLine{00723       srcclk = \_\_HAL\_RCC\_GET\_USART1\_SOURCE();}
+\DoxyCodeLine{00724 }
+\DoxyCodeLine{00725       \textcolor{keywordflow}{if}(srcclk == RCC\_USART1CLKSOURCE\_PCLK2)}
+\DoxyCodeLine{00726       \{}
+\DoxyCodeLine{00727         frequency = HAL\_RCC\_GetPCLK2Freq();}
+\DoxyCodeLine{00728       \}}
+\DoxyCodeLine{00729       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_USART1CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00730       \{}
+\DoxyCodeLine{00731         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00732       \}}
+\DoxyCodeLine{00733       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_USART1CLKSOURCE\_HSI) )}
+\DoxyCodeLine{00734       \{}
+\DoxyCodeLine{00735         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00736       \}}
+\DoxyCodeLine{00737       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>BDCR, RCC\_BDCR\_LSERDY)) \&\& (srcclk == RCC\_USART1CLKSOURCE\_LSE))}
+\DoxyCodeLine{00738       \{}
+\DoxyCodeLine{00739         frequency = LSE\_VALUE;}
+\DoxyCodeLine{00740       \}}
+\DoxyCodeLine{00741       \textcolor{comment}{/* Clock not enabled for USART1 */}}
+\DoxyCodeLine{00742       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00743       \{}
+\DoxyCodeLine{00744         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00745       \}}
+\DoxyCodeLine{00746       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00747 }
+\DoxyCodeLine{00748     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_USART2:}
+\DoxyCodeLine{00749       \textcolor{comment}{/* Get the current USART2 source */}}
+\DoxyCodeLine{00750       srcclk = \_\_HAL\_RCC\_GET\_USART2\_SOURCE();}
+\DoxyCodeLine{00751 }
+\DoxyCodeLine{00752       \textcolor{keywordflow}{if}(srcclk == RCC\_USART2CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00753       \{}
+\DoxyCodeLine{00754         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00755       \}}
+\DoxyCodeLine{00756       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_USART2CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00757       \{}
+\DoxyCodeLine{00758         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00759       \}}
+\DoxyCodeLine{00760       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_USART2CLKSOURCE\_HSI))}
+\DoxyCodeLine{00761       \{}
+\DoxyCodeLine{00762         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00763       \}}
+\DoxyCodeLine{00764       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>BDCR, RCC\_BDCR\_LSERDY))  \&\& (srcclk == RCC\_USART2CLKSOURCE\_LSE))}
+\DoxyCodeLine{00765       \{}
+\DoxyCodeLine{00766         frequency = LSE\_VALUE;}
+\DoxyCodeLine{00767       \}}
+\DoxyCodeLine{00768       \textcolor{comment}{/* Clock not enabled for USART2 */}}
+\DoxyCodeLine{00769       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00770       \{}
+\DoxyCodeLine{00771         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00772       \}}
+\DoxyCodeLine{00773       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00774 }
+\DoxyCodeLine{00775     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_USART3:}
+\DoxyCodeLine{00776       \textcolor{comment}{/* Get the current USART3 source */}}
+\DoxyCodeLine{00777       srcclk = \_\_HAL\_RCC\_GET\_USART3\_SOURCE();}
+\DoxyCodeLine{00778 }
+\DoxyCodeLine{00779       \textcolor{keywordflow}{if}(srcclk == RCC\_USART3CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00780       \{}
+\DoxyCodeLine{00781         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00782       \}}
+\DoxyCodeLine{00783       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_USART3CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00784       \{}
+\DoxyCodeLine{00785         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00786       \}}
+\DoxyCodeLine{00787       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_USART3CLKSOURCE\_HSI))}
+\DoxyCodeLine{00788       \{}
+\DoxyCodeLine{00789         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00790       \}}
+\DoxyCodeLine{00791       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>BDCR, RCC\_BDCR\_LSERDY)) \&\& (srcclk == RCC\_USART3CLKSOURCE\_LSE))}
+\DoxyCodeLine{00792       \{}
+\DoxyCodeLine{00793         frequency = LSE\_VALUE;}
+\DoxyCodeLine{00794       \}}
+\DoxyCodeLine{00795       \textcolor{comment}{/* Clock not enabled for USART3 */}}
+\DoxyCodeLine{00796       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00797       \{}
+\DoxyCodeLine{00798         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00799       \}}
+\DoxyCodeLine{00800       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00801 }
+\DoxyCodeLine{00802 \textcolor{preprocessor}{\#if defined(UART4)}}
+\DoxyCodeLine{00803     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_UART4:}
+\DoxyCodeLine{00804       \textcolor{comment}{/* Get the current UART4 source */}}
+\DoxyCodeLine{00805       srcclk = \_\_HAL\_RCC\_GET\_UART4\_SOURCE();}
+\DoxyCodeLine{00806 }
+\DoxyCodeLine{00807       \textcolor{keywordflow}{if}(srcclk == RCC\_UART4CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00808       \{}
+\DoxyCodeLine{00809         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00810       \}}
+\DoxyCodeLine{00811       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_UART4CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00812       \{}
+\DoxyCodeLine{00813         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00814       \}}
+\DoxyCodeLine{00815       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_UART4CLKSOURCE\_HSI))}
+\DoxyCodeLine{00816       \{}
+\DoxyCodeLine{00817         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00818       \}}
+\DoxyCodeLine{00819       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>BDCR, RCC\_BDCR\_LSERDY)) \&\& (srcclk == RCC\_UART4CLKSOURCE\_LSE))}
+\DoxyCodeLine{00820       \{}
+\DoxyCodeLine{00821         frequency = LSE\_VALUE;}
+\DoxyCodeLine{00822       \}}
+\DoxyCodeLine{00823       \textcolor{comment}{/* Clock not enabled for UART4 */}}
+\DoxyCodeLine{00824       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00825       \{}
+\DoxyCodeLine{00826         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00827       \}}
+\DoxyCodeLine{00828       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00829 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* UART4 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00830 }
+\DoxyCodeLine{00831 \textcolor{preprocessor}{\#if defined(UART5)}}
+\DoxyCodeLine{00832     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_UART5:}
+\DoxyCodeLine{00833       \textcolor{comment}{/* Get the current UART5 source */}}
+\DoxyCodeLine{00834       srcclk = \_\_HAL\_RCC\_GET\_UART5\_SOURCE();}
+\DoxyCodeLine{00835 }
+\DoxyCodeLine{00836       \textcolor{keywordflow}{if}(srcclk == RCC\_UART5CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00837       \{}
+\DoxyCodeLine{00838         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00839       \}}
+\DoxyCodeLine{00840       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_UART5CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00841       \{}
+\DoxyCodeLine{00842         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00843       \}}
+\DoxyCodeLine{00844       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_UART5CLKSOURCE\_HSI))}
+\DoxyCodeLine{00845       \{}
+\DoxyCodeLine{00846         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00847       \}}
+\DoxyCodeLine{00848       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>BDCR, RCC\_BDCR\_LSERDY)) \&\& (srcclk == RCC\_UART5CLKSOURCE\_LSE))}
+\DoxyCodeLine{00849       \{}
+\DoxyCodeLine{00850         frequency = LSE\_VALUE;}
+\DoxyCodeLine{00851       \}}
+\DoxyCodeLine{00852       \textcolor{comment}{/* Clock not enabled for UART5 */}}
+\DoxyCodeLine{00853       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00854       \{}
+\DoxyCodeLine{00855         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00856       \}}
+\DoxyCodeLine{00857       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00858 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* UART5 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00859 }
+\DoxyCodeLine{00860     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_LPUART1:}
+\DoxyCodeLine{00861       \textcolor{comment}{/* Get the current LPUART1 source */}}
+\DoxyCodeLine{00862       srcclk = \_\_HAL\_RCC\_GET\_LPUART1\_SOURCE();}
+\DoxyCodeLine{00863 }
+\DoxyCodeLine{00864       \textcolor{keywordflow}{if}(srcclk == RCC\_LPUART1CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00865       \{}
+\DoxyCodeLine{00866         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00867       \}}
+\DoxyCodeLine{00868       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_LPUART1CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00869       \{}
+\DoxyCodeLine{00870         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00871       \}}
+\DoxyCodeLine{00872       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_LPUART1CLKSOURCE\_HSI))}
+\DoxyCodeLine{00873       \{}
+\DoxyCodeLine{00874         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00875       \}}
+\DoxyCodeLine{00876       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>BDCR, RCC\_BDCR\_LSERDY)) \&\& (srcclk == RCC\_LPUART1CLKSOURCE\_LSE))}
+\DoxyCodeLine{00877       \{}
+\DoxyCodeLine{00878         frequency = LSE\_VALUE;}
+\DoxyCodeLine{00879       \}}
+\DoxyCodeLine{00880       \textcolor{comment}{/* Clock not enabled for LPUART1 */}}
+\DoxyCodeLine{00881       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00882       \{}
+\DoxyCodeLine{00883         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00884       \}}
+\DoxyCodeLine{00885       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00886 }
+\DoxyCodeLine{00887     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_I2C1:}
+\DoxyCodeLine{00888       \textcolor{comment}{/* Get the current I2C1 source */}}
+\DoxyCodeLine{00889       srcclk = \_\_HAL\_RCC\_GET\_I2C1\_SOURCE();}
+\DoxyCodeLine{00890 }
+\DoxyCodeLine{00891       \textcolor{keywordflow}{if}(srcclk == RCC\_I2C1CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00892       \{}
+\DoxyCodeLine{00893         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00894       \}}
+\DoxyCodeLine{00895       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_I2C1CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00896       \{}
+\DoxyCodeLine{00897         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00898       \}}
+\DoxyCodeLine{00899       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_I2C1CLKSOURCE\_HSI))}
+\DoxyCodeLine{00900       \{}
+\DoxyCodeLine{00901         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00902       \}}
+\DoxyCodeLine{00903       \textcolor{comment}{/* Clock not enabled for I2C1 */}}
+\DoxyCodeLine{00904       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00905       \{}
+\DoxyCodeLine{00906         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00907       \}}
+\DoxyCodeLine{00908       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00909 }
+\DoxyCodeLine{00910     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_I2C2:}
+\DoxyCodeLine{00911       \textcolor{comment}{/* Get the current I2C2 source */}}
+\DoxyCodeLine{00912       srcclk = \_\_HAL\_RCC\_GET\_I2C2\_SOURCE();}
+\DoxyCodeLine{00913 }
+\DoxyCodeLine{00914       \textcolor{keywordflow}{if}(srcclk == RCC\_I2C2CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00915       \{}
+\DoxyCodeLine{00916         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00917       \}}
+\DoxyCodeLine{00918       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_I2C2CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00919       \{}
+\DoxyCodeLine{00920         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00921       \}}
+\DoxyCodeLine{00922       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_I2C2CLKSOURCE\_HSI))}
+\DoxyCodeLine{00923       \{}
+\DoxyCodeLine{00924         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00925       \}}
+\DoxyCodeLine{00926       \textcolor{comment}{/* Clock not enabled for I2C2 */}}
+\DoxyCodeLine{00927       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00928       \{}
+\DoxyCodeLine{00929         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00930       \}}
+\DoxyCodeLine{00931       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00932 }
+\DoxyCodeLine{00933     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_I2C3:}
+\DoxyCodeLine{00934       \textcolor{comment}{/* Get the current I2C3 source */}}
+\DoxyCodeLine{00935       srcclk = \_\_HAL\_RCC\_GET\_I2C3\_SOURCE();}
+\DoxyCodeLine{00936 }
+\DoxyCodeLine{00937       \textcolor{keywordflow}{if}(srcclk == RCC\_I2C3CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00938       \{}
+\DoxyCodeLine{00939         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00940       \}}
+\DoxyCodeLine{00941       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_I2C3CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00942       \{}
+\DoxyCodeLine{00943         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00944       \}}
+\DoxyCodeLine{00945       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_I2C3CLKSOURCE\_HSI))}
+\DoxyCodeLine{00946       \{}
+\DoxyCodeLine{00947         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00948       \}}
+\DoxyCodeLine{00949       \textcolor{comment}{/* Clock not enabled for I2C3 */}}
+\DoxyCodeLine{00950       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00951       \{}
+\DoxyCodeLine{00952         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00953       \}}
+\DoxyCodeLine{00954       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00955 }
+\DoxyCodeLine{00956 \textcolor{preprocessor}{\#if defined(I2C4)}}
+\DoxyCodeLine{00957 }
+\DoxyCodeLine{00958     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_I2C4:}
+\DoxyCodeLine{00959       \textcolor{comment}{/* Get the current I2C4 source */}}
+\DoxyCodeLine{00960       srcclk = \_\_HAL\_RCC\_GET\_I2C4\_SOURCE();}
+\DoxyCodeLine{00961 }
+\DoxyCodeLine{00962       \textcolor{keywordflow}{if}(srcclk == RCC\_I2C4CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00963       \{}
+\DoxyCodeLine{00964         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00965       \}}
+\DoxyCodeLine{00966       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_I2C4CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{00967       \{}
+\DoxyCodeLine{00968         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{00969       \}}
+\DoxyCodeLine{00970       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_I2C4CLKSOURCE\_HSI))}
+\DoxyCodeLine{00971       \{}
+\DoxyCodeLine{00972         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00973       \}}
+\DoxyCodeLine{00974       \textcolor{comment}{/* Clock not enabled for I2C4 */}}
+\DoxyCodeLine{00975       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00976       \{}
+\DoxyCodeLine{00977         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{00978       \}}
+\DoxyCodeLine{00979       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00980 }
+\DoxyCodeLine{00981 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* I2C4 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00982 }
+\DoxyCodeLine{00983     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_LPTIM1:}
+\DoxyCodeLine{00984       \textcolor{comment}{/* Get the current LPTIM1 source */}}
+\DoxyCodeLine{00985       srcclk = \_\_HAL\_RCC\_GET\_LPTIM1\_SOURCE();}
+\DoxyCodeLine{00986 }
+\DoxyCodeLine{00987       \textcolor{keywordflow}{if}(srcclk == RCC\_LPTIM1CLKSOURCE\_PCLK1)}
+\DoxyCodeLine{00988       \{}
+\DoxyCodeLine{00989         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{00990       \}}
+\DoxyCodeLine{00991       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CSR, RCC\_CSR\_LSIRDY)) \&\& (srcclk == RCC\_LPTIM1CLKSOURCE\_LSI))}
+\DoxyCodeLine{00992       \{}
+\DoxyCodeLine{00993         frequency = LSI\_VALUE;}
+\DoxyCodeLine{00994       \}}
+\DoxyCodeLine{00995       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_LPTIM1CLKSOURCE\_HSI))}
+\DoxyCodeLine{00996       \{}
+\DoxyCodeLine{00997         frequency = HSI\_VALUE;}
+\DoxyCodeLine{00998       \}}
+\DoxyCodeLine{00999       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((HAL\_IS\_BIT\_SET(RCC-\/>BDCR, RCC\_BDCR\_LSERDY)) \&\& (srcclk == RCC\_LPTIM1CLKSOURCE\_LSE))}
+\DoxyCodeLine{01000       \{}
+\DoxyCodeLine{01001         frequency = LSE\_VALUE;}
+\DoxyCodeLine{01002       \}}
+\DoxyCodeLine{01003       \textcolor{comment}{/* Clock not enabled for LPTIM1 */}}
+\DoxyCodeLine{01004       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01005       \{}
+\DoxyCodeLine{01006         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01007       \}}
+\DoxyCodeLine{01008       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01009 }
+\DoxyCodeLine{01010     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_SAI1:}
+\DoxyCodeLine{01011       \textcolor{comment}{/* Get the current SAI1 source */}}
+\DoxyCodeLine{01012       srcclk = \_\_HAL\_RCC\_GET\_SAI1\_SOURCE();}
+\DoxyCodeLine{01013 }
+\DoxyCodeLine{01014       \textcolor{keywordflow}{if}(srcclk == RCC\_SAI1CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{01015       \{}
+\DoxyCodeLine{01016         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{01017       \}}
+\DoxyCodeLine{01018       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_SAI1CLKSOURCE\_PLL)}
+\DoxyCodeLine{01019       \{}
+\DoxyCodeLine{01020         \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_GET\_PLLCLKOUT\_CONFIG(RCC\_PLL\_48M1CLK) != 0U)}
+\DoxyCodeLine{01021         \{}
+\DoxyCodeLine{01022           \textcolor{comment}{/* f(PLLQ) = f(VCO input) * PLLN / PLLQ */}}
+\DoxyCodeLine{01023           plln = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLN) >> RCC\_PLLCFGR\_PLLN\_Pos;}
+\DoxyCodeLine{01024           frequency = (pllvco * plln) / (((READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLQ) >> RCC\_PLLCFGR\_PLLQ\_Pos) + 1U) << 1U);}
+\DoxyCodeLine{01025         \}}
+\DoxyCodeLine{01026       \}}
+\DoxyCodeLine{01027       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_SAI1CLKSOURCE\_EXT)}
+\DoxyCodeLine{01028       \{}
+\DoxyCodeLine{01029         \textcolor{comment}{/* External clock used.*/}}
+\DoxyCodeLine{01030         frequency = EXTERNAL\_CLOCK\_VALUE;}
+\DoxyCodeLine{01031       \}}
+\DoxyCodeLine{01032       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_SAI1CLKSOURCE\_HSI))}
+\DoxyCodeLine{01033       \{}
+\DoxyCodeLine{01034         frequency = HSI\_VALUE;}
+\DoxyCodeLine{01035       \}}
+\DoxyCodeLine{01036       \textcolor{comment}{/* Clock not enabled for SAI1 */}}
+\DoxyCodeLine{01037       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01038       \{}
+\DoxyCodeLine{01039         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01040       \}}
+\DoxyCodeLine{01041       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01042 }
+\DoxyCodeLine{01043     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_I2S:}
+\DoxyCodeLine{01044       \textcolor{comment}{/* Get the current I2Sx source */}}
+\DoxyCodeLine{01045       srcclk = \_\_HAL\_RCC\_GET\_I2S\_SOURCE();}
+\DoxyCodeLine{01046 }
+\DoxyCodeLine{01047       \textcolor{keywordflow}{if}(srcclk == RCC\_I2SCLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{01048       \{}
+\DoxyCodeLine{01049         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{01050       \}}
+\DoxyCodeLine{01051       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_I2SCLKSOURCE\_PLL)}
+\DoxyCodeLine{01052       \{}
+\DoxyCodeLine{01053         \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_GET\_PLLCLKOUT\_CONFIG(RCC\_PLL\_48M1CLK) != 0U)}
+\DoxyCodeLine{01054         \{}
+\DoxyCodeLine{01055           \textcolor{comment}{/* f(PLLQ) = f(VCO input) * PLLN / PLLQ */}}
+\DoxyCodeLine{01056           plln = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLN) >> RCC\_PLLCFGR\_PLLN\_Pos;}
+\DoxyCodeLine{01057           frequency = (pllvco * plln) / (((READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLQ) >> RCC\_PLLCFGR\_PLLQ\_Pos) + 1U) << 1U);}
+\DoxyCodeLine{01058         \}}
+\DoxyCodeLine{01059       \}}
+\DoxyCodeLine{01060       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_I2SCLKSOURCE\_EXT)}
+\DoxyCodeLine{01061       \{}
+\DoxyCodeLine{01062         \textcolor{comment}{/* External clock used.*/}}
+\DoxyCodeLine{01063         frequency = EXTERNAL\_CLOCK\_VALUE;}
+\DoxyCodeLine{01064       \}      }
+\DoxyCodeLine{01065       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CR, RCC\_CR\_HSIRDY)) \&\& (srcclk == RCC\_I2SCLKSOURCE\_HSI))}
+\DoxyCodeLine{01066       \{}
+\DoxyCodeLine{01067         frequency = HSI\_VALUE;}
+\DoxyCodeLine{01068       \}}
+\DoxyCodeLine{01069       \textcolor{comment}{/* Clock not enabled for I2S */}}
+\DoxyCodeLine{01070       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01071       \{}
+\DoxyCodeLine{01072         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01073       \}}
+\DoxyCodeLine{01074       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01075 }
+\DoxyCodeLine{01076 \textcolor{preprocessor}{\#if defined(FDCAN1)}}
+\DoxyCodeLine{01077     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_FDCAN:}
+\DoxyCodeLine{01078       \textcolor{comment}{/* Get the current FDCANx source */}}
+\DoxyCodeLine{01079       srcclk = \_\_HAL\_RCC\_GET\_FDCAN\_SOURCE();}
+\DoxyCodeLine{01080 }
+\DoxyCodeLine{01081       \textcolor{keywordflow}{if}(srcclk == RCC\_FDCANCLKSOURCE\_PCLK1)}
+\DoxyCodeLine{01082       \{}
+\DoxyCodeLine{01083         frequency = HAL\_RCC\_GetPCLK1Freq();}
+\DoxyCodeLine{01084       \}}
+\DoxyCodeLine{01085       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_FDCANCLKSOURCE\_HSE)}
+\DoxyCodeLine{01086       \{}
+\DoxyCodeLine{01087         frequency = HSE\_VALUE;}
+\DoxyCodeLine{01088       \}}
+\DoxyCodeLine{01089       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_FDCANCLKSOURCE\_PLL)}
+\DoxyCodeLine{01090       \{}
+\DoxyCodeLine{01091         \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_GET\_PLLCLKOUT\_CONFIG(RCC\_PLL\_48M1CLK) != 0U)}
+\DoxyCodeLine{01092         \{}
+\DoxyCodeLine{01093           \textcolor{comment}{/* f(PLLQ) = f(VCO input) * PLLN / PLLQ */}}
+\DoxyCodeLine{01094           plln = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLN) >> RCC\_PLLCFGR\_PLLN\_Pos;}
+\DoxyCodeLine{01095           frequency = (pllvco * plln) / (((READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLQ) >> RCC\_PLLCFGR\_PLLQ\_Pos) + 1U) << 1U);}
+\DoxyCodeLine{01096         \}}
+\DoxyCodeLine{01097       \}}
+\DoxyCodeLine{01098       \textcolor{comment}{/* Clock not enabled for FDCAN */}}
+\DoxyCodeLine{01099       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01100       \{}
+\DoxyCodeLine{01101         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01102       \}}
+\DoxyCodeLine{01103       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01104 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* FDCAN1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01105     }
+\DoxyCodeLine{01106 \textcolor{preprocessor}{\#if defined(USB)}}
+\DoxyCodeLine{01107     }
+\DoxyCodeLine{01108     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_USB:}
+\DoxyCodeLine{01109       \textcolor{comment}{/* Get the current USB source */}}
+\DoxyCodeLine{01110       srcclk = \_\_HAL\_RCC\_GET\_USB\_SOURCE();}
+\DoxyCodeLine{01111       }
+\DoxyCodeLine{01112       \textcolor{keywordflow}{if}(srcclk == RCC\_USBCLKSOURCE\_PLL)  \textcolor{comment}{/* PLL ? */}}
+\DoxyCodeLine{01113       \{}
+\DoxyCodeLine{01114         \textcolor{comment}{/* f(PLLQ) = f(VCO input) * PLLN / PLLQ */}}
+\DoxyCodeLine{01115         plln = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLN) >> RCC\_PLLCFGR\_PLLN\_Pos;}
+\DoxyCodeLine{01116         frequency = (pllvco * plln) / (((READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLQ) >> RCC\_PLLCFGR\_PLLQ\_Pos) + 1U) << 1U);}
+\DoxyCodeLine{01117       \}}
+\DoxyCodeLine{01118       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((HAL\_IS\_BIT\_SET(RCC-\/>CRRCR, RCC\_CRRCR\_HSI48RDY)) \&\& (srcclk == RCC\_USBCLKSOURCE\_HSI48)) \textcolor{comment}{/* HSI48 ? */}}
+\DoxyCodeLine{01119       \{}
+\DoxyCodeLine{01120         frequency = HSI48\_VALUE;}
+\DoxyCodeLine{01121       \}}
+\DoxyCodeLine{01122       \textcolor{keywordflow}{else} \textcolor{comment}{/* No clock source */}}
+\DoxyCodeLine{01123       \{}
+\DoxyCodeLine{01124         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01125       \}}
+\DoxyCodeLine{01126       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01127       }
+\DoxyCodeLine{01128 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USB */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01129 }
+\DoxyCodeLine{01130     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_RNG:}
+\DoxyCodeLine{01131       \textcolor{comment}{/* Get the current RNG source */}}
+\DoxyCodeLine{01132       srcclk = \_\_HAL\_RCC\_GET\_RNG\_SOURCE();}
+\DoxyCodeLine{01133 }
+\DoxyCodeLine{01134       \textcolor{keywordflow}{if}(srcclk == RCC\_RNGCLKSOURCE\_PLL)  \textcolor{comment}{/* PLL ? */}}
+\DoxyCodeLine{01135       \{}
+\DoxyCodeLine{01136         \textcolor{comment}{/* f(PLLQ) = f(VCO input) * PLLN / PLLQ */}}
+\DoxyCodeLine{01137         plln = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLN) >> RCC\_PLLCFGR\_PLLN\_Pos;}
+\DoxyCodeLine{01138         frequency = (pllvco * plln) / (((READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLQ) >> RCC\_PLLCFGR\_PLLQ\_Pos) + 1U) << 1U);}
+\DoxyCodeLine{01139       \}}
+\DoxyCodeLine{01140       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( (HAL\_IS\_BIT\_SET(RCC-\/>CRRCR, RCC\_CRRCR\_HSI48RDY)) \&\& (srcclk == RCC\_RNGCLKSOURCE\_HSI48)) \textcolor{comment}{/* HSI48 ? */}}
+\DoxyCodeLine{01141       \{}
+\DoxyCodeLine{01142         frequency = HSI48\_VALUE;}
+\DoxyCodeLine{01143       \}}
+\DoxyCodeLine{01144       \textcolor{keywordflow}{else} \textcolor{comment}{/* No clock source */}}
+\DoxyCodeLine{01145       \{}
+\DoxyCodeLine{01146         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01147       \}}
+\DoxyCodeLine{01148       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01149 }
+\DoxyCodeLine{01150     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_ADC12:}
+\DoxyCodeLine{01151       \textcolor{comment}{/* Get the current ADC12 source */}}
+\DoxyCodeLine{01152       srcclk = \_\_HAL\_RCC\_GET\_ADC12\_SOURCE();}
+\DoxyCodeLine{01153       }
+\DoxyCodeLine{01154       \textcolor{keywordflow}{if}(srcclk == RCC\_ADC12CLKSOURCE\_PLL)}
+\DoxyCodeLine{01155       \{}
+\DoxyCodeLine{01156         \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_GET\_PLLCLKOUT\_CONFIG(RCC\_PLL\_ADCCLK) != 0U)}
+\DoxyCodeLine{01157         \{}
+\DoxyCodeLine{01158           \textcolor{comment}{/* f(PLLP) = f(VCO input) * PLLN / PLLP */}}
+\DoxyCodeLine{01159           plln = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLN) >> RCC\_PLLCFGR\_PLLN\_Pos;}
+\DoxyCodeLine{01160           pllp = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLPDIV) >> RCC\_PLLCFGR\_PLLPDIV\_Pos;}
+\DoxyCodeLine{01161           \textcolor{keywordflow}{if}(pllp == 0U)}
+\DoxyCodeLine{01162           \{}
+\DoxyCodeLine{01163             \textcolor{keywordflow}{if}(READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLP) != 0U)}
+\DoxyCodeLine{01164             \{}
+\DoxyCodeLine{01165               pllp = 17U;}
+\DoxyCodeLine{01166             \}}
+\DoxyCodeLine{01167             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01168             \{}
+\DoxyCodeLine{01169               pllp = 7U;}
+\DoxyCodeLine{01170             \}}
+\DoxyCodeLine{01171           \}}
+\DoxyCodeLine{01172           frequency = (pllvco * plln) / pllp;}
+\DoxyCodeLine{01173         \}}
+\DoxyCodeLine{01174       \}}
+\DoxyCodeLine{01175       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_ADC12CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{01176       \{}
+\DoxyCodeLine{01177         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{01178       \}}
+\DoxyCodeLine{01179       \textcolor{comment}{/* Clock not enabled for ADC12 */}}
+\DoxyCodeLine{01180       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01181       \{}
+\DoxyCodeLine{01182         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01183       \}}
+\DoxyCodeLine{01184       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01185 }
+\DoxyCodeLine{01186 \textcolor{preprocessor}{\#if defined(ADC345\_COMMON)}}
+\DoxyCodeLine{01187     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_ADC345:}
+\DoxyCodeLine{01188       \textcolor{comment}{/* Get the current ADC345 source */}}
+\DoxyCodeLine{01189       srcclk = \_\_HAL\_RCC\_GET\_ADC345\_SOURCE();}
+\DoxyCodeLine{01190       }
+\DoxyCodeLine{01191       \textcolor{keywordflow}{if}(srcclk == RCC\_ADC345CLKSOURCE\_PLL)}
+\DoxyCodeLine{01192       \{}
+\DoxyCodeLine{01193         \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_GET\_PLLCLKOUT\_CONFIG(RCC\_PLL\_ADCCLK) != 0U)}
+\DoxyCodeLine{01194         \{}
+\DoxyCodeLine{01195           \textcolor{comment}{/* f(PLLP) = f(VCO input) * PLLN / PLLP */}}
+\DoxyCodeLine{01196           plln = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLN) >> RCC\_PLLCFGR\_PLLN\_Pos;}
+\DoxyCodeLine{01197           pllp = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLPDIV) >> RCC\_PLLCFGR\_PLLPDIV\_Pos;}
+\DoxyCodeLine{01198           \textcolor{keywordflow}{if}(pllp == 0U)}
+\DoxyCodeLine{01199           \{}
+\DoxyCodeLine{01200             \textcolor{keywordflow}{if}(READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLP) != 0U)}
+\DoxyCodeLine{01201             \{}
+\DoxyCodeLine{01202               pllp = 17U;}
+\DoxyCodeLine{01203             \}}
+\DoxyCodeLine{01204             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01205             \{}
+\DoxyCodeLine{01206               pllp = 7U;}
+\DoxyCodeLine{01207             \}}
+\DoxyCodeLine{01208           \}}
+\DoxyCodeLine{01209           frequency = (pllvco * plln) / pllp;}
+\DoxyCodeLine{01210         \}}
+\DoxyCodeLine{01211       \}}
+\DoxyCodeLine{01212       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_ADC345CLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{01213       \{}
+\DoxyCodeLine{01214         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{01215       \}}
+\DoxyCodeLine{01216       \textcolor{comment}{/* Clock not enabled for ADC345 */}}
+\DoxyCodeLine{01217       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01218       \{}
+\DoxyCodeLine{01219         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01220       \}}
+\DoxyCodeLine{01221       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01222 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC345\_COMMON */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01223 }
+\DoxyCodeLine{01224 \textcolor{preprocessor}{\#if defined(QUADSPI)}}
+\DoxyCodeLine{01225 }
+\DoxyCodeLine{01226     \textcolor{keywordflow}{case} RCC\_PERIPHCLK\_QSPI:}
+\DoxyCodeLine{01227       \textcolor{comment}{/* Get the current QSPI source */}}
+\DoxyCodeLine{01228       srcclk = \_\_HAL\_RCC\_GET\_QSPI\_SOURCE();}
+\DoxyCodeLine{01229       }
+\DoxyCodeLine{01230       \textcolor{keywordflow}{if}(srcclk == RCC\_QSPICLKSOURCE\_PLL)  \textcolor{comment}{/* PLL ? */}}
+\DoxyCodeLine{01231       \{}
+\DoxyCodeLine{01232         \textcolor{comment}{/* f(PLLQ) = f(VCO input) * PLLN / PLLQ */}}
+\DoxyCodeLine{01233         plln = READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLN) >> RCC\_PLLCFGR\_PLLN\_Pos;}
+\DoxyCodeLine{01234         frequency = (pllvco * plln) / (((READ\_BIT(RCC-\/>PLLCFGR, RCC\_PLLCFGR\_PLLQ) >> RCC\_PLLCFGR\_PLLQ\_Pos) + 1U) << 1U);}
+\DoxyCodeLine{01235       \}}
+\DoxyCodeLine{01236       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_QSPICLKSOURCE\_HSI)}
+\DoxyCodeLine{01237       \{}
+\DoxyCodeLine{01238         frequency = HSI\_VALUE;}
+\DoxyCodeLine{01239       \}      }
+\DoxyCodeLine{01240       \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(srcclk == RCC\_QSPICLKSOURCE\_SYSCLK)}
+\DoxyCodeLine{01241       \{}
+\DoxyCodeLine{01242         frequency = HAL\_RCC\_GetSysClockFreq();}
+\DoxyCodeLine{01243       \}}
+\DoxyCodeLine{01244       \textcolor{keywordflow}{else} \textcolor{comment}{/* No clock source */}}
+\DoxyCodeLine{01245       \{}
+\DoxyCodeLine{01246         \textcolor{comment}{/* nothing to do: frequency already initialized to 0 */}}
+\DoxyCodeLine{01247       \}}
+\DoxyCodeLine{01248       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01249 }
+\DoxyCodeLine{01250 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* QUADSPI */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01251 }
+\DoxyCodeLine{01252     \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{01253       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{01254     \}}
+\DoxyCodeLine{01255   \}}
+\DoxyCodeLine{01256 }
+\DoxyCodeLine{01257   \textcolor{keywordflow}{return}(frequency);}
+\DoxyCodeLine{01258 \}}
+\DoxyCodeLine{01259 }
+\DoxyCodeLine{01286 \textcolor{keywordtype}{void} HAL\_RCCEx\_EnableLSECSS(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01287 \{}
+\DoxyCodeLine{01288   SET\_BIT(RCC-\/>BDCR, RCC\_BDCR\_LSECSSON) ;}
+\DoxyCodeLine{01289 \}}
+\DoxyCodeLine{01290 }
+\DoxyCodeLine{01296 \textcolor{keywordtype}{void} HAL\_RCCEx\_DisableLSECSS(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01297 \{}
+\DoxyCodeLine{01298   CLEAR\_BIT(RCC-\/>BDCR, RCC\_BDCR\_LSECSSON) ;}
+\DoxyCodeLine{01299 }
+\DoxyCodeLine{01300   \textcolor{comment}{/* Disable LSE CSS IT if any */}}
+\DoxyCodeLine{01301   \_\_HAL\_RCC\_DISABLE\_IT(RCC\_IT\_LSECSS);}
+\DoxyCodeLine{01302 \}}
+\DoxyCodeLine{01303 }
+\DoxyCodeLine{01309 \textcolor{keywordtype}{void} HAL\_RCCEx\_EnableLSECSS\_IT(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01310 \{}
+\DoxyCodeLine{01311   \textcolor{comment}{/* Enable LSE CSS */}}
+\DoxyCodeLine{01312   SET\_BIT(RCC-\/>BDCR, RCC\_BDCR\_LSECSSON) ;}
+\DoxyCodeLine{01313 }
+\DoxyCodeLine{01314   \textcolor{comment}{/* Enable LSE CSS IT */}}
+\DoxyCodeLine{01315   \_\_HAL\_RCC\_ENABLE\_IT(RCC\_IT\_LSECSS);}
+\DoxyCodeLine{01316 }
+\DoxyCodeLine{01317   \textcolor{comment}{/* Enable IT on EXTI Line 19 */}}
+\DoxyCodeLine{01318   \_\_HAL\_RCC\_LSECSS\_EXTI\_ENABLE\_IT();}
+\DoxyCodeLine{01319   \_\_HAL\_RCC\_LSECSS\_EXTI\_ENABLE\_RISING\_EDGE();}
+\DoxyCodeLine{01320 \}}
+\DoxyCodeLine{01321 }
+\DoxyCodeLine{01326 \textcolor{keywordtype}{void} HAL\_RCCEx\_LSECSS\_IRQHandler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01327 \{}
+\DoxyCodeLine{01328   \textcolor{comment}{/* Check RCC LSE CSSF flag  */}}
+\DoxyCodeLine{01329   \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_GET\_IT(RCC\_IT\_LSECSS))}
+\DoxyCodeLine{01330   \{}
+\DoxyCodeLine{01331     \textcolor{comment}{/* RCC LSE Clock Security System interrupt user callback */}}
+\DoxyCodeLine{01332     HAL\_RCCEx\_LSECSS\_Callback();}
+\DoxyCodeLine{01333 }
+\DoxyCodeLine{01334     \textcolor{comment}{/* Clear RCC LSE CSS pending bit */}}
+\DoxyCodeLine{01335     \_\_HAL\_RCC\_CLEAR\_IT(RCC\_IT\_LSECSS);}
+\DoxyCodeLine{01336   \}}
+\DoxyCodeLine{01337 \}}
+\DoxyCodeLine{01338 }
+\DoxyCodeLine{01343 \_\_weak \textcolor{keywordtype}{void} HAL\_RCCEx\_LSECSS\_Callback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01344 \{}
+\DoxyCodeLine{01345   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{01346 \textcolor{comment}{            the @ref HAL\_RCCEx\_LSECSS\_Callback should be implemented in the user file}}
+\DoxyCodeLine{01347 \textcolor{comment}{   */}}
+\DoxyCodeLine{01348 \}}
+\DoxyCodeLine{01349 }
+\DoxyCodeLine{01358 \textcolor{keywordtype}{void} HAL\_RCCEx\_EnableLSCO(uint32\_t LSCOSource)}
+\DoxyCodeLine{01359 \{}
+\DoxyCodeLine{01360   GPIO\_InitTypeDef GPIO\_InitStruct;}
+\DoxyCodeLine{01361   FlagStatus       pwrclkchanged = RESET;}
+\DoxyCodeLine{01362   FlagStatus       backupchanged = RESET;}
+\DoxyCodeLine{01363 }
+\DoxyCodeLine{01364   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01365   assert\_param(IS\_RCC\_LSCOSOURCE(LSCOSource));}
+\DoxyCodeLine{01366 }
+\DoxyCodeLine{01367   \textcolor{comment}{/* LSCO Pin Clock Enable */}}
+\DoxyCodeLine{01368   \_\_LSCO\_CLK\_ENABLE();}
+\DoxyCodeLine{01369 }
+\DoxyCodeLine{01370   \textcolor{comment}{/* Configure the LSCO pin in analog mode */}}
+\DoxyCodeLine{01371   GPIO\_InitStruct.Pin = LSCO\_PIN;}
+\DoxyCodeLine{01372   GPIO\_InitStruct.Mode = GPIO\_MODE\_ANALOG;}
+\DoxyCodeLine{01373   GPIO\_InitStruct.Speed = GPIO\_SPEED\_FREQ\_HIGH;}
+\DoxyCodeLine{01374   GPIO\_InitStruct.Pull = GPIO\_NOPULL;}
+\DoxyCodeLine{01375   HAL\_GPIO\_Init(LSCO\_GPIO\_PORT, \&GPIO\_InitStruct);}
+\DoxyCodeLine{01376 }
+\DoxyCodeLine{01377   \textcolor{comment}{/* Update LSCOSEL clock source in Backup Domain control register */}}
+\DoxyCodeLine{01378   \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_PWR\_IS\_CLK\_DISABLED())}
+\DoxyCodeLine{01379   \{}
+\DoxyCodeLine{01380     \_\_HAL\_RCC\_PWR\_CLK\_ENABLE();}
+\DoxyCodeLine{01381     pwrclkchanged = SET;}
+\DoxyCodeLine{01382   \}}
+\DoxyCodeLine{01383   \textcolor{keywordflow}{if}(HAL\_IS\_BIT\_CLR(PWR-\/>CR1, PWR\_CR1\_DBP))}
+\DoxyCodeLine{01384   \{}
+\DoxyCodeLine{01385     HAL\_PWR\_EnableBkUpAccess();}
+\DoxyCodeLine{01386     backupchanged = SET;}
+\DoxyCodeLine{01387   \}}
+\DoxyCodeLine{01388 }
+\DoxyCodeLine{01389   MODIFY\_REG(RCC-\/>BDCR, RCC\_BDCR\_LSCOSEL | RCC\_BDCR\_LSCOEN, LSCOSource | RCC\_BDCR\_LSCOEN);}
+\DoxyCodeLine{01390 }
+\DoxyCodeLine{01391   \textcolor{keywordflow}{if}(backupchanged == SET)}
+\DoxyCodeLine{01392   \{}
+\DoxyCodeLine{01393     HAL\_PWR\_DisableBkUpAccess();}
+\DoxyCodeLine{01394   \}}
+\DoxyCodeLine{01395   \textcolor{keywordflow}{if}(pwrclkchanged == SET)}
+\DoxyCodeLine{01396   \{}
+\DoxyCodeLine{01397     \_\_HAL\_RCC\_PWR\_CLK\_DISABLE();}
+\DoxyCodeLine{01398   \}}
+\DoxyCodeLine{01399 \}}
+\DoxyCodeLine{01400 }
+\DoxyCodeLine{01405 \textcolor{keywordtype}{void} HAL\_RCCEx\_DisableLSCO(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01406 \{}
+\DoxyCodeLine{01407   FlagStatus       pwrclkchanged = RESET;}
+\DoxyCodeLine{01408   FlagStatus       backupchanged = RESET;}
+\DoxyCodeLine{01409 }
+\DoxyCodeLine{01410   \textcolor{comment}{/* Update LSCOEN bit in Backup Domain control register */}}
+\DoxyCodeLine{01411   \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_PWR\_IS\_CLK\_DISABLED())}
+\DoxyCodeLine{01412   \{}
+\DoxyCodeLine{01413     \_\_HAL\_RCC\_PWR\_CLK\_ENABLE();}
+\DoxyCodeLine{01414     pwrclkchanged = SET;}
+\DoxyCodeLine{01415   \}}
+\DoxyCodeLine{01416   \textcolor{keywordflow}{if}(HAL\_IS\_BIT\_CLR(PWR-\/>CR1, PWR\_CR1\_DBP))}
+\DoxyCodeLine{01417   \{}
+\DoxyCodeLine{01418     \textcolor{comment}{/* Enable access to the backup domain */}}
+\DoxyCodeLine{01419     HAL\_PWR\_EnableBkUpAccess();}
+\DoxyCodeLine{01420     backupchanged = SET;}
+\DoxyCodeLine{01421   \}}
+\DoxyCodeLine{01422 }
+\DoxyCodeLine{01423   CLEAR\_BIT(RCC-\/>BDCR, RCC\_BDCR\_LSCOEN);}
+\DoxyCodeLine{01424 }
+\DoxyCodeLine{01425   \textcolor{comment}{/* Restore previous configuration */}}
+\DoxyCodeLine{01426   \textcolor{keywordflow}{if}(backupchanged == SET)}
+\DoxyCodeLine{01427   \{}
+\DoxyCodeLine{01428     \textcolor{comment}{/* Disable access to the backup domain */}}
+\DoxyCodeLine{01429     HAL\_PWR\_DisableBkUpAccess();}
+\DoxyCodeLine{01430   \}}
+\DoxyCodeLine{01431   \textcolor{keywordflow}{if}(pwrclkchanged == SET)}
+\DoxyCodeLine{01432   \{}
+\DoxyCodeLine{01433     \_\_HAL\_RCC\_PWR\_CLK\_DISABLE();}
+\DoxyCodeLine{01434   \}}
+\DoxyCodeLine{01435 \}}
+\DoxyCodeLine{01436 }
+\DoxyCodeLine{01437 }
+\DoxyCodeLine{01442 \textcolor{preprocessor}{\#if defined(CRS)}}
+\DoxyCodeLine{01443 }
+\DoxyCodeLine{01513 \textcolor{keywordtype}{void} HAL\_RCCEx\_CRSConfig(RCC\_CRSInitTypeDef *pInit)}
+\DoxyCodeLine{01514 \{}
+\DoxyCodeLine{01515   uint32\_t value;}
+\DoxyCodeLine{01516 }
+\DoxyCodeLine{01517   \textcolor{comment}{/* Check the parameters */}}
+\DoxyCodeLine{01518   assert\_param(IS\_RCC\_CRS\_SYNC\_DIV(pInit-\/>Prescaler));}
+\DoxyCodeLine{01519   assert\_param(IS\_RCC\_CRS\_SYNC\_SOURCE(pInit-\/>Source));}
+\DoxyCodeLine{01520   assert\_param(IS\_RCC\_CRS\_SYNC\_POLARITY(pInit-\/>Polarity));}
+\DoxyCodeLine{01521   assert\_param(IS\_RCC\_CRS\_RELOADVALUE(pInit-\/>ReloadValue));}
+\DoxyCodeLine{01522   assert\_param(IS\_RCC\_CRS\_ERRORLIMIT(pInit-\/>ErrorLimitValue));}
+\DoxyCodeLine{01523   assert\_param(IS\_RCC\_CRS\_HSI48CALIBRATION(pInit-\/>HSI48CalibrationValue));}
+\DoxyCodeLine{01524 }
+\DoxyCodeLine{01525   \textcolor{comment}{/* CONFIGURATION */}}
+\DoxyCodeLine{01526 }
+\DoxyCodeLine{01527   \textcolor{comment}{/* Before configuration, reset CRS registers to their default values*/}}
+\DoxyCodeLine{01528   \_\_HAL\_RCC\_CRS\_FORCE\_RESET();}
+\DoxyCodeLine{01529   \_\_HAL\_RCC\_CRS\_RELEASE\_RESET();}
+\DoxyCodeLine{01530 }
+\DoxyCodeLine{01531   \textcolor{comment}{/* Set the SYNCDIV[2:0] bits according to Prescaler value */}}
+\DoxyCodeLine{01532   \textcolor{comment}{/* Set the SYNCSRC[1:0] bits according to Source value */}}
+\DoxyCodeLine{01533   \textcolor{comment}{/* Set the SYNCSPOL bit according to Polarity value */}}
+\DoxyCodeLine{01534   value = (pInit-\/>Prescaler | pInit-\/>Source | pInit-\/>Polarity);}
+\DoxyCodeLine{01535   \textcolor{comment}{/* Set the RELOAD[15:0] bits according to ReloadValue value */}}
+\DoxyCodeLine{01536   value |= pInit-\/>ReloadValue;}
+\DoxyCodeLine{01537   \textcolor{comment}{/* Set the FELIM[7:0] bits according to ErrorLimitValue value */}}
+\DoxyCodeLine{01538   value |= (pInit-\/>ErrorLimitValue << CRS\_CFGR\_FELIM\_Pos);}
+\DoxyCodeLine{01539   WRITE\_REG(CRS-\/>CFGR, value);}
+\DoxyCodeLine{01540 }
+\DoxyCodeLine{01541   \textcolor{comment}{/* Adjust HSI48 oscillator smooth trimming */}}
+\DoxyCodeLine{01542   \textcolor{comment}{/* Set the TRIM[6:0] bits according to RCC\_CRS\_HSI48CalibrationValue value */}}
+\DoxyCodeLine{01543   MODIFY\_REG(CRS-\/>CR, CRS\_CR\_TRIM, (pInit-\/>HSI48CalibrationValue << CRS\_CR\_TRIM\_Pos));}
+\DoxyCodeLine{01544 }
+\DoxyCodeLine{01545   \textcolor{comment}{/* START AUTOMATIC SYNCHRONIZATION*/}}
+\DoxyCodeLine{01546 }
+\DoxyCodeLine{01547   \textcolor{comment}{/* Enable Automatic trimming \& Frequency error counter */}}
+\DoxyCodeLine{01548   SET\_BIT(CRS-\/>CR, CRS\_CR\_AUTOTRIMEN | CRS\_CR\_CEN);}
+\DoxyCodeLine{01549 \}}
+\DoxyCodeLine{01550 }
+\DoxyCodeLine{01555 \textcolor{keywordtype}{void} HAL\_RCCEx\_CRSSoftwareSynchronizationGenerate(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01556 \{}
+\DoxyCodeLine{01557   SET\_BIT(CRS-\/>CR, CRS\_CR\_SWSYNC);}
+\DoxyCodeLine{01558 \}}
+\DoxyCodeLine{01559 }
+\DoxyCodeLine{01565 \textcolor{keywordtype}{void} HAL\_RCCEx\_CRSGetSynchronizationInfo(RCC\_CRSSynchroInfoTypeDef *pSynchroInfo)}
+\DoxyCodeLine{01566 \{}
+\DoxyCodeLine{01567   \textcolor{comment}{/* Check the parameter */}}
+\DoxyCodeLine{01568   assert\_param(pSynchroInfo != (\textcolor{keywordtype}{void} *)NULL);}
+\DoxyCodeLine{01569 }
+\DoxyCodeLine{01570   \textcolor{comment}{/* Get the reload value */}}
+\DoxyCodeLine{01571   pSynchroInfo-\/>ReloadValue = (READ\_BIT(CRS-\/>CFGR, CRS\_CFGR\_RELOAD));}
+\DoxyCodeLine{01572 }
+\DoxyCodeLine{01573   \textcolor{comment}{/* Get HSI48 oscillator smooth trimming */}}
+\DoxyCodeLine{01574   pSynchroInfo-\/>HSI48CalibrationValue = (READ\_BIT(CRS-\/>CR, CRS\_CR\_TRIM) >> CRS\_CR\_TRIM\_Pos);}
+\DoxyCodeLine{01575 }
+\DoxyCodeLine{01576   \textcolor{comment}{/* Get Frequency error capture */}}
+\DoxyCodeLine{01577   pSynchroInfo-\/>FreqErrorCapture = (READ\_BIT(CRS-\/>ISR, CRS\_ISR\_FECAP) >> CRS\_ISR\_FECAP\_Pos);}
+\DoxyCodeLine{01578 }
+\DoxyCodeLine{01579   \textcolor{comment}{/* Get Frequency error direction */}}
+\DoxyCodeLine{01580   pSynchroInfo-\/>FreqErrorDirection = (READ\_BIT(CRS-\/>ISR, CRS\_ISR\_FEDIR));}
+\DoxyCodeLine{01581 \}}
+\DoxyCodeLine{01582 }
+\DoxyCodeLine{01598 uint32\_t HAL\_RCCEx\_CRSWaitSynchronization(uint32\_t Timeout)}
+\DoxyCodeLine{01599 \{}
+\DoxyCodeLine{01600   uint32\_t crsstatus = RCC\_CRS\_NONE;}
+\DoxyCodeLine{01601   uint32\_t tickstart;}
+\DoxyCodeLine{01602 }
+\DoxyCodeLine{01603   \textcolor{comment}{/* Get timeout */}}
+\DoxyCodeLine{01604   tickstart = HAL\_GetTick();}
+\DoxyCodeLine{01605 }
+\DoxyCodeLine{01606   \textcolor{comment}{/* Wait for CRS flag or timeout detection */}}
+\DoxyCodeLine{01607   \textcolor{keywordflow}{do}}
+\DoxyCodeLine{01608   \{}
+\DoxyCodeLine{01609     \textcolor{keywordflow}{if}(Timeout != HAL\_MAX\_DELAY)}
+\DoxyCodeLine{01610     \{}
+\DoxyCodeLine{01611       \textcolor{keywordflow}{if}(((HAL\_GetTick() -\/ tickstart) > Timeout) || (Timeout == 0U))}
+\DoxyCodeLine{01612       \{}
+\DoxyCodeLine{01613         crsstatus = RCC\_CRS\_TIMEOUT;}
+\DoxyCodeLine{01614       \}}
+\DoxyCodeLine{01615     \}}
+\DoxyCodeLine{01616     \textcolor{comment}{/* Check CRS SYNCOK flag  */}}
+\DoxyCodeLine{01617     \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_CRS\_GET\_FLAG(RCC\_CRS\_FLAG\_SYNCOK))}
+\DoxyCodeLine{01618     \{}
+\DoxyCodeLine{01619       \textcolor{comment}{/* CRS SYNC event OK */}}
+\DoxyCodeLine{01620       crsstatus |= RCC\_CRS\_SYNCOK;}
+\DoxyCodeLine{01621 }
+\DoxyCodeLine{01622       \textcolor{comment}{/* Clear CRS SYNC event OK bit */}}
+\DoxyCodeLine{01623       \_\_HAL\_RCC\_CRS\_CLEAR\_FLAG(RCC\_CRS\_FLAG\_SYNCOK);}
+\DoxyCodeLine{01624     \}}
+\DoxyCodeLine{01625 }
+\DoxyCodeLine{01626     \textcolor{comment}{/* Check CRS SYNCWARN flag  */}}
+\DoxyCodeLine{01627     \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_CRS\_GET\_FLAG(RCC\_CRS\_FLAG\_SYNCWARN))}
+\DoxyCodeLine{01628     \{}
+\DoxyCodeLine{01629       \textcolor{comment}{/* CRS SYNC warning */}}
+\DoxyCodeLine{01630       crsstatus |= RCC\_CRS\_SYNCWARN;}
+\DoxyCodeLine{01631 }
+\DoxyCodeLine{01632       \textcolor{comment}{/* Clear CRS SYNCWARN bit */}}
+\DoxyCodeLine{01633       \_\_HAL\_RCC\_CRS\_CLEAR\_FLAG(RCC\_CRS\_FLAG\_SYNCWARN);}
+\DoxyCodeLine{01634     \}}
+\DoxyCodeLine{01635 }
+\DoxyCodeLine{01636     \textcolor{comment}{/* Check CRS TRIM overflow flag  */}}
+\DoxyCodeLine{01637     \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_CRS\_GET\_FLAG(RCC\_CRS\_FLAG\_TRIMOVF))}
+\DoxyCodeLine{01638     \{}
+\DoxyCodeLine{01639       \textcolor{comment}{/* CRS SYNC Error */}}
+\DoxyCodeLine{01640       crsstatus |= RCC\_CRS\_TRIMOVF;}
+\DoxyCodeLine{01641 }
+\DoxyCodeLine{01642       \textcolor{comment}{/* Clear CRS Error bit */}}
+\DoxyCodeLine{01643       \_\_HAL\_RCC\_CRS\_CLEAR\_FLAG(RCC\_CRS\_FLAG\_TRIMOVF);}
+\DoxyCodeLine{01644     \}}
+\DoxyCodeLine{01645 }
+\DoxyCodeLine{01646     \textcolor{comment}{/* Check CRS Error flag  */}}
+\DoxyCodeLine{01647     \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_CRS\_GET\_FLAG(RCC\_CRS\_FLAG\_SYNCERR))}
+\DoxyCodeLine{01648     \{}
+\DoxyCodeLine{01649       \textcolor{comment}{/* CRS SYNC Error */}}
+\DoxyCodeLine{01650       crsstatus |= RCC\_CRS\_SYNCERR;}
+\DoxyCodeLine{01651 }
+\DoxyCodeLine{01652       \textcolor{comment}{/* Clear CRS Error bit */}}
+\DoxyCodeLine{01653       \_\_HAL\_RCC\_CRS\_CLEAR\_FLAG(RCC\_CRS\_FLAG\_SYNCERR);}
+\DoxyCodeLine{01654     \}}
+\DoxyCodeLine{01655 }
+\DoxyCodeLine{01656     \textcolor{comment}{/* Check CRS SYNC Missed flag  */}}
+\DoxyCodeLine{01657     \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_CRS\_GET\_FLAG(RCC\_CRS\_FLAG\_SYNCMISS))}
+\DoxyCodeLine{01658     \{}
+\DoxyCodeLine{01659       \textcolor{comment}{/* CRS SYNC Missed */}}
+\DoxyCodeLine{01660       crsstatus |= RCC\_CRS\_SYNCMISS;}
+\DoxyCodeLine{01661 }
+\DoxyCodeLine{01662       \textcolor{comment}{/* Clear CRS SYNC Missed bit */}}
+\DoxyCodeLine{01663       \_\_HAL\_RCC\_CRS\_CLEAR\_FLAG(RCC\_CRS\_FLAG\_SYNCMISS);}
+\DoxyCodeLine{01664     \}}
+\DoxyCodeLine{01665 }
+\DoxyCodeLine{01666     \textcolor{comment}{/* Check CRS Expected SYNC flag  */}}
+\DoxyCodeLine{01667     \textcolor{keywordflow}{if}(\_\_HAL\_RCC\_CRS\_GET\_FLAG(RCC\_CRS\_FLAG\_ESYNC))}
+\DoxyCodeLine{01668     \{}
+\DoxyCodeLine{01669       \textcolor{comment}{/* frequency error counter reached a zero value */}}
+\DoxyCodeLine{01670       \_\_HAL\_RCC\_CRS\_CLEAR\_FLAG(RCC\_CRS\_FLAG\_ESYNC);}
+\DoxyCodeLine{01671     \}}
+\DoxyCodeLine{01672   \} \textcolor{keywordflow}{while}(RCC\_CRS\_NONE == crsstatus);}
+\DoxyCodeLine{01673 }
+\DoxyCodeLine{01674   \textcolor{keywordflow}{return} crsstatus;}
+\DoxyCodeLine{01675 \}}
+\DoxyCodeLine{01676 }
+\DoxyCodeLine{01681 \textcolor{keywordtype}{void} HAL\_RCCEx\_CRS\_IRQHandler(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01682 \{}
+\DoxyCodeLine{01683   uint32\_t crserror = RCC\_CRS\_NONE;}
+\DoxyCodeLine{01684   \textcolor{comment}{/* Get current IT flags and IT sources values */}}
+\DoxyCodeLine{01685   uint32\_t itflags = READ\_REG(CRS-\/>ISR);}
+\DoxyCodeLine{01686   uint32\_t itsources = READ\_REG(CRS-\/>CR);}
+\DoxyCodeLine{01687 }
+\DoxyCodeLine{01688   \textcolor{comment}{/* Check CRS SYNCOK flag  */}}
+\DoxyCodeLine{01689   \textcolor{keywordflow}{if}(((itflags \& RCC\_CRS\_FLAG\_SYNCOK) != 0U) \&\& ((itsources \& RCC\_CRS\_IT\_SYNCOK) != 0U))}
+\DoxyCodeLine{01690   \{}
+\DoxyCodeLine{01691     \textcolor{comment}{/* Clear CRS SYNC event OK flag */}}
+\DoxyCodeLine{01692     WRITE\_REG(CRS-\/>ICR, CRS\_ICR\_SYNCOKC);}
+\DoxyCodeLine{01693 }
+\DoxyCodeLine{01694     \textcolor{comment}{/* user callback */}}
+\DoxyCodeLine{01695     HAL\_RCCEx\_CRS\_SyncOkCallback();}
+\DoxyCodeLine{01696   \}}
+\DoxyCodeLine{01697   \textcolor{comment}{/* Check CRS SYNCWARN flag  */}}
+\DoxyCodeLine{01698   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(((itflags \& RCC\_CRS\_FLAG\_SYNCWARN) != 0U) \&\& ((itsources \& RCC\_CRS\_IT\_SYNCWARN) != 0U))}
+\DoxyCodeLine{01699   \{}
+\DoxyCodeLine{01700     \textcolor{comment}{/* Clear CRS SYNCWARN flag */}}
+\DoxyCodeLine{01701     WRITE\_REG(CRS-\/>ICR, CRS\_ICR\_SYNCWARNC);}
+\DoxyCodeLine{01702 }
+\DoxyCodeLine{01703     \textcolor{comment}{/* user callback */}}
+\DoxyCodeLine{01704     HAL\_RCCEx\_CRS\_SyncWarnCallback();}
+\DoxyCodeLine{01705   \}}
+\DoxyCodeLine{01706   \textcolor{comment}{/* Check CRS Expected SYNC flag  */}}
+\DoxyCodeLine{01707   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(((itflags \& RCC\_CRS\_FLAG\_ESYNC) != 0U) \&\& ((itsources \& RCC\_CRS\_IT\_ESYNC) != 0U))}
+\DoxyCodeLine{01708   \{}
+\DoxyCodeLine{01709     \textcolor{comment}{/* frequency error counter reached a zero value */}}
+\DoxyCodeLine{01710     WRITE\_REG(CRS-\/>ICR, CRS\_ICR\_ESYNCC);}
+\DoxyCodeLine{01711 }
+\DoxyCodeLine{01712     \textcolor{comment}{/* user callback */}}
+\DoxyCodeLine{01713     HAL\_RCCEx\_CRS\_ExpectedSyncCallback();}
+\DoxyCodeLine{01714   \}}
+\DoxyCodeLine{01715   \textcolor{comment}{/* Check CRS Error flags  */}}
+\DoxyCodeLine{01716   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01717   \{}
+\DoxyCodeLine{01718     \textcolor{keywordflow}{if}(((itflags \& RCC\_CRS\_FLAG\_ERR) != 0U) \&\& ((itsources \& RCC\_CRS\_IT\_ERR) != 0U))}
+\DoxyCodeLine{01719     \{}
+\DoxyCodeLine{01720       \textcolor{keywordflow}{if}((itflags \& RCC\_CRS\_FLAG\_SYNCERR) != 0U)}
+\DoxyCodeLine{01721       \{}
+\DoxyCodeLine{01722         crserror |= RCC\_CRS\_SYNCERR;}
+\DoxyCodeLine{01723       \}}
+\DoxyCodeLine{01724       \textcolor{keywordflow}{if}((itflags \& RCC\_CRS\_FLAG\_SYNCMISS) != 0U)}
+\DoxyCodeLine{01725       \{}
+\DoxyCodeLine{01726         crserror |= RCC\_CRS\_SYNCMISS;}
+\DoxyCodeLine{01727       \}}
+\DoxyCodeLine{01728       \textcolor{keywordflow}{if}((itflags \& RCC\_CRS\_FLAG\_TRIMOVF) != 0U)}
+\DoxyCodeLine{01729       \{}
+\DoxyCodeLine{01730         crserror |= RCC\_CRS\_TRIMOVF;}
+\DoxyCodeLine{01731       \}}
+\DoxyCodeLine{01732 }
+\DoxyCodeLine{01733       \textcolor{comment}{/* Clear CRS Error flags */}}
+\DoxyCodeLine{01734       WRITE\_REG(CRS-\/>ICR, CRS\_ICR\_ERRC);}
+\DoxyCodeLine{01735 }
+\DoxyCodeLine{01736       \textcolor{comment}{/* user error callback */}}
+\DoxyCodeLine{01737       HAL\_RCCEx\_CRS\_ErrorCallback(crserror);}
+\DoxyCodeLine{01738     \}}
+\DoxyCodeLine{01739   \}}
+\DoxyCodeLine{01740 \}}
+\DoxyCodeLine{01741 }
+\DoxyCodeLine{01746 \_\_weak \textcolor{keywordtype}{void} HAL\_RCCEx\_CRS\_SyncOkCallback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01747 \{}
+\DoxyCodeLine{01748   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{01749 \textcolor{comment}{            the @ref HAL\_RCCEx\_CRS\_SyncOkCallback should be implemented in the user file}}
+\DoxyCodeLine{01750 \textcolor{comment}{   */}}
+\DoxyCodeLine{01751 \}}
+\DoxyCodeLine{01752 }
+\DoxyCodeLine{01757 \_\_weak \textcolor{keywordtype}{void} HAL\_RCCEx\_CRS\_SyncWarnCallback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01758 \{}
+\DoxyCodeLine{01759   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{01760 \textcolor{comment}{            the @ref HAL\_RCCEx\_CRS\_SyncWarnCallback should be implemented in the user file}}
+\DoxyCodeLine{01761 \textcolor{comment}{   */}}
+\DoxyCodeLine{01762 \}}
+\DoxyCodeLine{01763 }
+\DoxyCodeLine{01768 \_\_weak \textcolor{keywordtype}{void} HAL\_RCCEx\_CRS\_ExpectedSyncCallback(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{01769 \{}
+\DoxyCodeLine{01770   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{01771 \textcolor{comment}{            the @ref HAL\_RCCEx\_CRS\_ExpectedSyncCallback should be implemented in the user file}}
+\DoxyCodeLine{01772 \textcolor{comment}{   */}}
+\DoxyCodeLine{01773 \}}
+\DoxyCodeLine{01774 }
+\DoxyCodeLine{01784 \_\_weak \textcolor{keywordtype}{void} HAL\_RCCEx\_CRS\_ErrorCallback(uint32\_t Error)}
+\DoxyCodeLine{01785 \{}
+\DoxyCodeLine{01786   \textcolor{comment}{/* Prevent unused argument(s) compilation warning */}}
+\DoxyCodeLine{01787   UNUSED(Error);}
+\DoxyCodeLine{01788 }
+\DoxyCodeLine{01789   \textcolor{comment}{/* NOTE : This function should not be modified, when the callback is needed,}}
+\DoxyCodeLine{01790 \textcolor{comment}{            the @ref HAL\_RCCEx\_CRS\_ErrorCallback should be implemented in the user file}}
+\DoxyCodeLine{01791 \textcolor{comment}{   */}}
+\DoxyCodeLine{01792 \}}
+\DoxyCodeLine{01793 }
+\DoxyCodeLine{01798 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* CRS */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01799 }
+\DoxyCodeLine{01816 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAL\_RCC\_MODULE\_ENABLED */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

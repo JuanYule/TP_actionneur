@@ -1,0 +1,552 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Core/\+Src/main.c File Reference}
+\label{main_8c}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/main.c@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Src/main.c}}
+
+
+\+: Main program body  
+
+
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stdio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stdlib.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE}~64
+\item 
+\#define \textbf{ UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE}~1
+\item 
+\#define \textbf{ CMD\+\_\+\+BUFFER\+\_\+\+SIZE}~64
+\item 
+\#define \textbf{ MAX\+\_\+\+ARGS}~9
+\item 
+\#define \textbf{ ARR}~1023
+\item 
+\#define \textbf{ ALPHA}~50
+\item 
+\#define \textbf{ SPEED\+\_\+\+MAX}~100
+\item 
+\#define \textbf{ ASCII\+\_\+\+LF}~0x0A
+\item 
+\#define \textbf{ ASCII\+\_\+\+CR}~0x0D
+\item 
+\#define \textbf{ ASCII\+\_\+\+DEL}~0x7F
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ System\+Clock\+\_\+\+Config} (void)
+\begin{DoxyCompactList}\small\item\em System Clock Configuration. \end{DoxyCompactList}\item 
+void \textbf{ configuration} ()
+\item 
+void \textbf{ HAL\+\_\+\+GPIO\+\_\+\+EXTI\+\_\+\+Callback} (uint16\+\_\+t GPIO\+\_\+\+Pin)
+\item 
+int \textbf{ main} (void)
+\begin{DoxyCompactList}\small\item\em The application entry point. \end{DoxyCompactList}\item 
+void \textbf{ HAL\+\_\+\+UART\+\_\+\+Rx\+Cplt\+Callback} (\textbf{ UART\+\_\+\+Handle\+Type\+Def} $\ast$huart)
+\item 
+void \textbf{ power\+Up} (void)
+\item 
+void \textbf{ HAL\+\_\+\+ADC\+\_\+\+Conv\+Cplt\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void \textbf{ Error\+\_\+\+Handler} (void)
+\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ ADC\+\_\+\+Handle\+Type\+Def} \textbf{ hadc1}
+\item 
+\textbf{ TIM\+\_\+\+Handle\+Type\+Def} \textbf{ htim1}
+\item 
+\textbf{ TIM\+\_\+\+Handle\+Type\+Def} \textbf{ htim2}
+\item 
+\textbf{ UART\+\_\+\+Handle\+Type\+Def} \textbf{ huart2}
+\item 
+uint8\+\_\+t \textbf{ prompt} [$\,$] =\char`\"{}user@Nucleo-\/STM32\+G431$>$$>$\char`\"{}
+\item 
+uint8\+\_\+t \textbf{ started} [$\,$]
+\item 
+uint8\+\_\+t \textbf{ newline} [$\,$] =\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}
+\item 
+uint8\+\_\+t \textbf{ cmd\+Not\+Found} [$\,$] =\char`\"{}Command not found\textbackslash{}r\textbackslash{}n\char`\"{}
+\item 
+uint32\+\_\+t \textbf{ uart\+Rx\+Received}
+\item 
+uint8\+\_\+t \textbf{ uart\+Rx\+Buffer} [UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE]
+\item 
+uint8\+\_\+t \textbf{ uart\+Tx\+Buffer} [UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE]
+\item 
+char \textbf{ cmd} [CMD\+\_\+\+BUFFER\+\_\+\+SIZE]
+\item 
+\mbox{\label{main_8c_a7f0a5a2e32844fe97f21c66477350506}} 
+int {\bfseries idx\+Cmd}
+\item 
+const uint8\+\_\+t \textbf{ help} [$\,$]
+\item 
+const uint8\+\_\+t \textbf{ pinout} [$\,$]
+\item 
+const uint8\+\_\+t \textbf{ power\+On} [$\,$] = \char`\"{}Power ON \textbackslash{}r\textbackslash{}n\char`\"{}
+\item 
+const uint8\+\_\+t \textbf{ power\+Off} [$\,$] = \char`\"{}Power OFF\char`\"{}
+\item 
+char \textbf{ speed} [4]
+\item 
+int \textbf{ speed\+Int} = 0
+\item 
+int \textbf{ old\+Speed} = 50
+\item 
+uint16\+\_\+t \textbf{ CCR1}
+\item 
+uint16\+\_\+t \textbf{ CCR2}
+\item 
+uint16\+\_\+t \textbf{ AD\+\_\+\+RES} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Main program body 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2022 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ main.\+c}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{main_8c_af5abd28c44c29b7397c84f1fec4b1d84}} 
+\index{main.c@{main.c}!ALPHA@{ALPHA}}
+\index{ALPHA@{ALPHA}!main.c@{main.c}}
+\doxysubsubsection{ALPHA}
+{\footnotesize\ttfamily \#define ALPHA~50}
+
+
+
+Definition at line \textbf{ 41} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_aed411dc4f4a3a12395d565ed3060cc7a}} 
+\index{main.c@{main.c}!ARR@{ARR}}
+\index{ARR@{ARR}!main.c@{main.c}}
+\doxysubsubsection{ARR}
+{\footnotesize\ttfamily \#define ARR~1023}
+
+
+
+Definition at line \textbf{ 40} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a089ed4925403ab02a05e603967c74579}} 
+\index{main.c@{main.c}!ASCII\_CR@{ASCII\_CR}}
+\index{ASCII\_CR@{ASCII\_CR}!main.c@{main.c}}
+\doxysubsubsection{ASCII\_CR}
+{\footnotesize\ttfamily \#define ASCII\+\_\+\+CR~0x0D}
+
+
+
+Definition at line \textbf{ 46} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a3bb28e223b7c203113dc8c0387d43b36}} 
+\index{main.c@{main.c}!ASCII\_DEL@{ASCII\_DEL}}
+\index{ASCII\_DEL@{ASCII\_DEL}!main.c@{main.c}}
+\doxysubsubsection{ASCII\_DEL}
+{\footnotesize\ttfamily \#define ASCII\+\_\+\+DEL~0x7F}
+
+
+
+Definition at line \textbf{ 48} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_aca3b498f5936dbe4f3076a47c3e1810d}} 
+\index{main.c@{main.c}!ASCII\_LF@{ASCII\_LF}}
+\index{ASCII\_LF@{ASCII\_LF}!main.c@{main.c}}
+\doxysubsubsection{ASCII\_LF}
+{\footnotesize\ttfamily \#define ASCII\+\_\+\+LF~0x0A}
+
+
+
+Definition at line \textbf{ 44} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a8a0465f8e8bbe71e4d6e8011e975bf75}} 
+\index{main.c@{main.c}!CMD\_BUFFER\_SIZE@{CMD\_BUFFER\_SIZE}}
+\index{CMD\_BUFFER\_SIZE@{CMD\_BUFFER\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{CMD\_BUFFER\_SIZE}
+{\footnotesize\ttfamily \#define CMD\+\_\+\+BUFFER\+\_\+\+SIZE~64}
+
+
+
+Definition at line \textbf{ 37} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a29b7451465deac204c5f7cb1f9c6e1fc}} 
+\index{main.c@{main.c}!MAX\_ARGS@{MAX\_ARGS}}
+\index{MAX\_ARGS@{MAX\_ARGS}!main.c@{main.c}}
+\doxysubsubsection{MAX\_ARGS}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+ARGS~9}
+
+
+
+Definition at line \textbf{ 38} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_ad7c86544bbb397ff14a6bb7f288f63a0}} 
+\index{main.c@{main.c}!SPEED\_MAX@{SPEED\_MAX}}
+\index{SPEED\_MAX@{SPEED\_MAX}!main.c@{main.c}}
+\doxysubsubsection{SPEED\_MAX}
+{\footnotesize\ttfamily \#define SPEED\+\_\+\+MAX~100}
+
+
+
+Definition at line \textbf{ 42} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a5bdd6772c246436bb14377095de79b31}} 
+\index{main.c@{main.c}!UART\_RX\_BUFFER\_SIZE@{UART\_RX\_BUFFER\_SIZE}}
+\index{UART\_RX\_BUFFER\_SIZE@{UART\_RX\_BUFFER\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{UART\_RX\_BUFFER\_SIZE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE~1}
+
+
+
+Definition at line \textbf{ 36} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a05f5d709605c6317c97e4974bec3402a}} 
+\index{main.c@{main.c}!UART\_TX\_BUFFER\_SIZE@{UART\_TX\_BUFFER\_SIZE}}
+\index{UART\_TX\_BUFFER\_SIZE@{UART\_TX\_BUFFER\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{UART\_TX\_BUFFER\_SIZE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE~64}
+
+
+
+Definition at line \textbf{ 35} of file \textbf{ main.\+c}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{main_8c_a3d99d6865a7c04d92df007f99c5110da}} 
+\index{main.c@{main.c}!configuration@{configuration}}
+\index{configuration@{configuration}!main.c@{main.c}}
+\doxysubsubsection{configuration()}
+{\footnotesize\ttfamily void configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \textbf{ 119} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a1730ffe1e560465665eb47d9264826f9}} 
+\index{main.c@{main.c}!Error\_Handler@{Error\_Handler}}
+\index{Error\_Handler@{Error\_Handler}!main.c@{main.c}}
+\doxysubsubsection{Error\_Handler()}
+{\footnotesize\ttfamily void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+This function is executed in case of error occurrence. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 713} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{main()}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+The application entry point. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 144} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_aaa8a49bd03358a90593363de8694922b}} 
+\index{main.c@{main.c}!powerUp@{powerUp}}
+\index{powerUp@{powerUp}!main.c@{main.c}}
+\doxysubsubsection{powerUp()}
+{\footnotesize\ttfamily void power\+Up (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \textbf{ 693} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a70af21c671abfcc773614a9a4f63d920}} 
+\index{main.c@{main.c}!SystemClock\_Config@{SystemClock\_Config}}
+\index{SystemClock\_Config@{SystemClock\_Config}!main.c@{main.c}}
+\doxysubsubsection{SystemClock\_Config()}
+{\footnotesize\ttfamily void System\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+System Clock Configuration. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Configure the main internal regulator output voltage
+
+Initializes the RCC Oscillators according to the specified parameters in the \doxyref{RCC\+\_\+\+Osc\+Init\+Type\+Def}{p.}{struct_r_c_c___osc_init_type_def} structure.
+
+Initializes the CPU, AHB and APB buses clocks
+
+Definition at line \textbf{ 338} of file \textbf{ main.\+c}.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{main_8c_a384c6d778ab0f1d44503880fd73df230}} 
+\index{main.c@{main.c}!AD\_RES@{AD\_RES}}
+\index{AD\_RES@{AD\_RES}!main.c@{main.c}}
+\doxysubsubsection{AD\_RES}
+{\footnotesize\ttfamily uint16\+\_\+t AD\+\_\+\+RES = 0}
+
+
+
+Definition at line \textbf{ 102} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_ad79421c4e62a7d84ff575dae460c4653}} 
+\index{main.c@{main.c}!CCR1@{CCR1}}
+\index{CCR1@{CCR1}!main.c@{main.c}}
+\doxysubsubsection{CCR1}
+{\footnotesize\ttfamily uint16\+\_\+t CCR1}
+
+
+
+Definition at line \textbf{ 98} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_afc7f008879cd53630231d480714ce4ad}} 
+\index{main.c@{main.c}!CCR2@{CCR2}}
+\index{CCR2@{CCR2}!main.c@{main.c}}
+\doxysubsubsection{CCR2}
+{\footnotesize\ttfamily uint16\+\_\+t CCR2}
+
+
+
+Definition at line \textbf{ 99} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a99c89de7e0aef38d558be346ad04cd11}} 
+\index{main.c@{main.c}!cmd@{cmd}}
+\index{cmd@{cmd}!main.c@{main.c}}
+\doxysubsubsection{cmd}
+{\footnotesize\ttfamily char cmd[CMD\+\_\+\+BUFFER\+\_\+\+SIZE]}
+
+
+
+Definition at line \textbf{ 79} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a25205e7c6d817620c1d9f7351a817a04}} 
+\index{main.c@{main.c}!cmdNotFound@{cmdNotFound}}
+\index{cmdNotFound@{cmdNotFound}!main.c@{main.c}}
+\doxysubsubsection{cmdNotFound}
+{\footnotesize\ttfamily uint8\+\_\+t cmd\+Not\+Found[$\,$] =\char`\"{}Command not found\textbackslash{}r\textbackslash{}n\char`\"{}}
+
+
+
+Definition at line \textbf{ 73} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a22b804736f5648d52f639b2647d4ed13}} 
+\index{main.c@{main.c}!hadc1@{hadc1}}
+\index{hadc1@{hadc1}!main.c@{main.c}}
+\doxysubsubsection{hadc1}
+{\footnotesize\ttfamily \textbf{ ADC\+\_\+\+Handle\+Type\+Def} hadc1}
+
+
+
+Definition at line \textbf{ 58} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a3369aa142a6ea1e89e677006836ee2ff}} 
+\index{main.c@{main.c}!help@{help}}
+\index{help@{help}!main.c@{main.c}}
+\doxysubsubsection{help}
+{\footnotesize\ttfamily const uint8\+\_\+t help[$\,$]}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*"{}}}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n| Fonctions disponibles |"{}}}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*"{}}}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n pinout : contenant la liste des pin utilisées"{}}}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n start : allume l'etage de puissance du moteur"{}}}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n stop : éteind l'etage de puissance du moteur\(\backslash\)r\(\backslash\)n"{}}}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 81} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a25fc663547539bc49fecc0011bd76ab5}} 
+\index{main.c@{main.c}!htim1@{htim1}}
+\index{htim1@{htim1}!main.c@{main.c}}
+\doxysubsubsection{htim1}
+{\footnotesize\ttfamily \textbf{ TIM\+\_\+\+Handle\+Type\+Def} htim1}
+
+
+
+Definition at line \textbf{ 60} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a2c80fd5510e2990a59a5c90d745c716c}} 
+\index{main.c@{main.c}!htim2@{htim2}}
+\index{htim2@{htim2}!main.c@{main.c}}
+\doxysubsubsection{htim2}
+{\footnotesize\ttfamily \textbf{ TIM\+\_\+\+Handle\+Type\+Def} htim2}
+
+
+
+Definition at line \textbf{ 61} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_aa9479c261d65eecedd3d9582f7f0f89c}} 
+\index{main.c@{main.c}!huart2@{huart2}}
+\index{huart2@{huart2}!main.c@{main.c}}
+\doxysubsubsection{huart2}
+{\footnotesize\ttfamily \textbf{ UART\+\_\+\+Handle\+Type\+Def} huart2}
+
+
+
+Definition at line \textbf{ 63} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a98a2c452a5e7053154e9f49a4cad4e98}} 
+\index{main.c@{main.c}!newline@{newline}}
+\index{newline@{newline}!main.c@{main.c}}
+\doxysubsubsection{newline}
+{\footnotesize\ttfamily uint8\+\_\+t newline[$\,$] =\char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}}
+
+
+
+Definition at line \textbf{ 72} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_ad062fa0f9c986e55aae8222b016f397a}} 
+\index{main.c@{main.c}!oldSpeed@{oldSpeed}}
+\index{oldSpeed@{oldSpeed}!main.c@{main.c}}
+\doxysubsubsection{oldSpeed}
+{\footnotesize\ttfamily int old\+Speed = 50}
+
+
+
+Definition at line \textbf{ 95} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_ac88f7e9fb5c08068a71fdf0108918291}} 
+\index{main.c@{main.c}!pinout@{pinout}}
+\index{pinout@{pinout}!main.c@{main.c}}
+\doxysubsubsection{pinout}
+{\footnotesize\ttfamily const uint8\+\_\+t pinout[$\,$]}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}PA5 : LED \(\backslash\)r\(\backslash\)n"{}}}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 88} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_aeb39f657e7d4109c7d352e6ad376228a}} 
+\index{main.c@{main.c}!powerOff@{powerOff}}
+\index{powerOff@{powerOff}!main.c@{main.c}}
+\doxysubsubsection{powerOff}
+{\footnotesize\ttfamily const uint8\+\_\+t power\+Off[$\,$] = \char`\"{}Power OFF\char`\"{}}
+
+
+
+Definition at line \textbf{ 91} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_aaf2189933bda013fb3c72e886dc5a3d2}} 
+\index{main.c@{main.c}!powerOn@{powerOn}}
+\index{powerOn@{powerOn}!main.c@{main.c}}
+\doxysubsubsection{powerOn}
+{\footnotesize\ttfamily const uint8\+\_\+t power\+On[$\,$] = \char`\"{}Power ON \textbackslash{}r\textbackslash{}n\char`\"{}}
+
+
+
+Definition at line \textbf{ 90} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a8b893859891afe33d4bba72ba06fd381}} 
+\index{main.c@{main.c}!prompt@{prompt}}
+\index{prompt@{prompt}!main.c@{main.c}}
+\doxysubsubsection{prompt}
+{\footnotesize\ttfamily uint8\+\_\+t prompt[$\,$] =\char`\"{}user@Nucleo-\/STM32\+G431$>$$>$\char`\"{}}
+
+
+
+Definition at line \textbf{ 66} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a3648ecd11be3228ea064164b83c1d3a5}} 
+\index{main.c@{main.c}!speed@{speed}}
+\index{speed@{speed}!main.c@{main.c}}
+\doxysubsubsection{speed}
+{\footnotesize\ttfamily char speed[4]}
+
+
+
+Definition at line \textbf{ 93} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a526672aa114d924407a1437624a718ca}} 
+\index{main.c@{main.c}!speedInt@{speedInt}}
+\index{speedInt@{speedInt}!main.c@{main.c}}
+\doxysubsubsection{speedInt}
+{\footnotesize\ttfamily int speed\+Int = 0}
+
+
+
+Definition at line \textbf{ 94} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a835573497a60b314a9bf5a6fcac9602a}} 
+\index{main.c@{main.c}!started@{started}}
+\index{started@{started}!main.c@{main.c}}
+\doxysubsubsection{started}
+{\footnotesize\ttfamily uint8\+\_\+t started[$\,$]}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*"{}}}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n| Welcome on Nucleo-\/STM32G431 |"{}}}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*"{}}}
+\DoxyCodeLine{        \textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)n"{}}}
+
+\end{DoxyCode}
+
+
+Definition at line \textbf{ 67} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a2542ac6d4440b9e1c4a6435c55c79df3}} 
+\index{main.c@{main.c}!uartRxBuffer@{uartRxBuffer}}
+\index{uartRxBuffer@{uartRxBuffer}!main.c@{main.c}}
+\doxysubsubsection{uartRxBuffer}
+{\footnotesize\ttfamily uint8\+\_\+t uart\+Rx\+Buffer[UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE]}
+
+
+
+Definition at line \textbf{ 75} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a9d8a518124b90c249458a5b30ab36c52}} 
+\index{main.c@{main.c}!uartRxReceived@{uartRxReceived}}
+\index{uartRxReceived@{uartRxReceived}!main.c@{main.c}}
+\doxysubsubsection{uartRxReceived}
+{\footnotesize\ttfamily uint32\+\_\+t uart\+Rx\+Received}
+
+
+
+Definition at line \textbf{ 74} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8c_a3f98e2db2fa0d8f0cfd87b887576207f}} 
+\index{main.c@{main.c}!uartTxBuffer@{uartTxBuffer}}
+\index{uartTxBuffer@{uartTxBuffer}!main.c@{main.c}}
+\doxysubsubsection{uartTxBuffer}
+{\footnotesize\ttfamily uint8\+\_\+t uart\+Tx\+Buffer[UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE]}
+
+
+
+Definition at line \textbf{ 76} of file \textbf{ main.\+c}.
+

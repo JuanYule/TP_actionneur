@@ -1,0 +1,289 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Core/\+Inc/main.h File Reference}
+\label{main_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Inc/main.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Core/Inc/main.h}}
+
+
+\+: Header for \doxyref{main.\+c}{p.}{main_8c} file. This file contains the common defines of the application.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ BUTTON\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+13
+\item 
+\#define \textbf{ BUTTON\+\_\+\+GPIO\+\_\+\+Port}~GPIOC
+\item 
+\#define \textbf{ BUTTON\+\_\+\+EXTI\+\_\+\+IRQn}~\textbf{ EXTI15\+\_\+10\+\_\+\+IRQn}
+\item 
+\#define \textbf{ POWER\+\_\+\+UP\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+3
+\item 
+\#define \textbf{ POWER\+\_\+\+UP\+\_\+\+GPIO\+\_\+\+Port}~GPIOC
+\item 
+\#define \textbf{ LED\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+5
+\item 
+\#define \textbf{ LED\+\_\+\+GPIO\+\_\+\+Port}~GPIOA
+\item 
+\#define \textbf{ T\+\_\+\+SWDIO\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+13
+\item 
+\#define \textbf{ T\+\_\+\+SWDIO\+\_\+\+GPIO\+\_\+\+Port}~GPIOA
+\item 
+\#define \textbf{ T\+\_\+\+SWCLK\+\_\+\+Pin}~GPIO\+\_\+\+PIN\+\_\+14
+\item 
+\#define \textbf{ T\+\_\+\+SWCLK\+\_\+\+GPIO\+\_\+\+Port}~GPIOA
+\item 
+\#define \textbf{ UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE}~64
+\item 
+\#define \textbf{ UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE}~1
+\item 
+\#define \textbf{ CMD\+\_\+\+BUFFER\+\_\+\+SIZE}~64
+\item 
+\#define \textbf{ MAX\+\_\+\+ARGS}~9
+\item 
+\#define \textbf{ ASCII\+\_\+\+LF}~0x0A
+\item 
+\#define \textbf{ ASCII\+\_\+\+CR}~0x0D
+\item 
+\#define \textbf{ ASCII\+\_\+\+DEL}~0x7F
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ HAL\+\_\+\+TIM\+\_\+\+Msp\+Post\+Init} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\item 
+void \textbf{ Error\+\_\+\+Handler} (void)
+\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Header for \doxyref{main.\+c}{p.}{main_8c} file. This file contains the common defines of the application. 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2022 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ main.\+h}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{main_8h_a089ed4925403ab02a05e603967c74579}} 
+\index{main.h@{main.h}!ASCII\_CR@{ASCII\_CR}}
+\index{ASCII\_CR@{ASCII\_CR}!main.h@{main.h}}
+\doxysubsubsection{ASCII\_CR}
+{\footnotesize\ttfamily \#define ASCII\+\_\+\+CR~0x0D}
+
+
+
+Definition at line \textbf{ 81} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a3bb28e223b7c203113dc8c0387d43b36}} 
+\index{main.h@{main.h}!ASCII\_DEL@{ASCII\_DEL}}
+\index{ASCII\_DEL@{ASCII\_DEL}!main.h@{main.h}}
+\doxysubsubsection{ASCII\_DEL}
+{\footnotesize\ttfamily \#define ASCII\+\_\+\+DEL~0x7F}
+
+
+
+Definition at line \textbf{ 83} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_aca3b498f5936dbe4f3076a47c3e1810d}} 
+\index{main.h@{main.h}!ASCII\_LF@{ASCII\_LF}}
+\index{ASCII\_LF@{ASCII\_LF}!main.h@{main.h}}
+\doxysubsubsection{ASCII\_LF}
+{\footnotesize\ttfamily \#define ASCII\+\_\+\+LF~0x0A}
+
+
+
+Definition at line \textbf{ 79} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a812bf63e26027e8a894bfc3ae8fda4bf}} 
+\index{main.h@{main.h}!BUTTON\_EXTI\_IRQn@{BUTTON\_EXTI\_IRQn}}
+\index{BUTTON\_EXTI\_IRQn@{BUTTON\_EXTI\_IRQn}!main.h@{main.h}}
+\doxysubsubsection{BUTTON\_EXTI\_IRQn}
+{\footnotesize\ttfamily \#define BUTTON\+\_\+\+EXTI\+\_\+\+IRQn~\textbf{ EXTI15\+\_\+10\+\_\+\+IRQn}}
+
+
+
+Definition at line \textbf{ 64} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a337357b16ac6a539173b7bfc0857e3bc}} 
+\index{main.h@{main.h}!BUTTON\_GPIO\_Port@{BUTTON\_GPIO\_Port}}
+\index{BUTTON\_GPIO\_Port@{BUTTON\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{BUTTON\_GPIO\_Port}
+{\footnotesize\ttfamily \#define BUTTON\+\_\+\+GPIO\+\_\+\+Port~GPIOC}
+
+
+
+Definition at line \textbf{ 63} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a45572d24f4cc0266349f9d54a890402e}} 
+\index{main.h@{main.h}!BUTTON\_Pin@{BUTTON\_Pin}}
+\index{BUTTON\_Pin@{BUTTON\_Pin}!main.h@{main.h}}
+\doxysubsubsection{BUTTON\_Pin}
+{\footnotesize\ttfamily \#define BUTTON\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+13}
+
+
+
+Definition at line \textbf{ 62} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a8a0465f8e8bbe71e4d6e8011e975bf75}} 
+\index{main.h@{main.h}!CMD\_BUFFER\_SIZE@{CMD\_BUFFER\_SIZE}}
+\index{CMD\_BUFFER\_SIZE@{CMD\_BUFFER\_SIZE}!main.h@{main.h}}
+\doxysubsubsection{CMD\_BUFFER\_SIZE}
+{\footnotesize\ttfamily \#define CMD\+\_\+\+BUFFER\+\_\+\+SIZE~64}
+
+
+
+Definition at line \textbf{ 76} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a3cf393d21586a4097159246e8aca13a2}} 
+\index{main.h@{main.h}!LED\_GPIO\_Port@{LED\_GPIO\_Port}}
+\index{LED\_GPIO\_Port@{LED\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{LED\_GPIO\_Port}
+{\footnotesize\ttfamily \#define LED\+\_\+\+GPIO\+\_\+\+Port~GPIOA}
+
+
+
+Definition at line \textbf{ 68} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_ac969c4fccd009dd70b69992d92cbe81a}} 
+\index{main.h@{main.h}!LED\_Pin@{LED\_Pin}}
+\index{LED\_Pin@{LED\_Pin}!main.h@{main.h}}
+\doxysubsubsection{LED\_Pin}
+{\footnotesize\ttfamily \#define LED\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+5}
+
+
+
+Definition at line \textbf{ 67} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a29b7451465deac204c5f7cb1f9c6e1fc}} 
+\index{main.h@{main.h}!MAX\_ARGS@{MAX\_ARGS}}
+\index{MAX\_ARGS@{MAX\_ARGS}!main.h@{main.h}}
+\doxysubsubsection{MAX\_ARGS}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+ARGS~9}
+
+
+
+Definition at line \textbf{ 77} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a0c4fe6111f7088ada5668196272fd4c2}} 
+\index{main.h@{main.h}!POWER\_UP\_GPIO\_Port@{POWER\_UP\_GPIO\_Port}}
+\index{POWER\_UP\_GPIO\_Port@{POWER\_UP\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{POWER\_UP\_GPIO\_Port}
+{\footnotesize\ttfamily \#define POWER\+\_\+\+UP\+\_\+\+GPIO\+\_\+\+Port~GPIOC}
+
+
+
+Definition at line \textbf{ 66} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_aa80b79c3a613a5e084669a33f3aa83e0}} 
+\index{main.h@{main.h}!POWER\_UP\_Pin@{POWER\_UP\_Pin}}
+\index{POWER\_UP\_Pin@{POWER\_UP\_Pin}!main.h@{main.h}}
+\doxysubsubsection{POWER\_UP\_Pin}
+{\footnotesize\ttfamily \#define POWER\+\_\+\+UP\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+3}
+
+
+
+Definition at line \textbf{ 65} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_aa13afc64c30db4eed10d4747f962a5b0}} 
+\index{main.h@{main.h}!T\_SWCLK\_GPIO\_Port@{T\_SWCLK\_GPIO\_Port}}
+\index{T\_SWCLK\_GPIO\_Port@{T\_SWCLK\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{T\_SWCLK\_GPIO\_Port}
+{\footnotesize\ttfamily \#define T\+\_\+\+SWCLK\+\_\+\+GPIO\+\_\+\+Port~GPIOA}
+
+
+
+Definition at line \textbf{ 72} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a3c891e8c1436da67e20c097ed3ae73cf}} 
+\index{main.h@{main.h}!T\_SWCLK\_Pin@{T\_SWCLK\_Pin}}
+\index{T\_SWCLK\_Pin@{T\_SWCLK\_Pin}!main.h@{main.h}}
+\doxysubsubsection{T\_SWCLK\_Pin}
+{\footnotesize\ttfamily \#define T\+\_\+\+SWCLK\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+14}
+
+
+
+Definition at line \textbf{ 71} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a5b133bbad2494c84e7268b552def76d1}} 
+\index{main.h@{main.h}!T\_SWDIO\_GPIO\_Port@{T\_SWDIO\_GPIO\_Port}}
+\index{T\_SWDIO\_GPIO\_Port@{T\_SWDIO\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{T\_SWDIO\_GPIO\_Port}
+{\footnotesize\ttfamily \#define T\+\_\+\+SWDIO\+\_\+\+GPIO\+\_\+\+Port~GPIOA}
+
+
+
+Definition at line \textbf{ 70} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a20d0c61c6be06f9e3dd0476996f108ad}} 
+\index{main.h@{main.h}!T\_SWDIO\_Pin@{T\_SWDIO\_Pin}}
+\index{T\_SWDIO\_Pin@{T\_SWDIO\_Pin}!main.h@{main.h}}
+\doxysubsubsection{T\_SWDIO\_Pin}
+{\footnotesize\ttfamily \#define T\+\_\+\+SWDIO\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+13}
+
+
+
+Definition at line \textbf{ 69} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a5bdd6772c246436bb14377095de79b31}} 
+\index{main.h@{main.h}!UART\_RX\_BUFFER\_SIZE@{UART\_RX\_BUFFER\_SIZE}}
+\index{UART\_RX\_BUFFER\_SIZE@{UART\_RX\_BUFFER\_SIZE}!main.h@{main.h}}
+\doxysubsubsection{UART\_RX\_BUFFER\_SIZE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE~1}
+
+
+
+Definition at line \textbf{ 75} of file \textbf{ main.\+h}.
+
+\mbox{\label{main_8h_a05f5d709605c6317c97e4974bec3402a}} 
+\index{main.h@{main.h}!UART\_TX\_BUFFER\_SIZE@{UART\_TX\_BUFFER\_SIZE}}
+\index{UART\_TX\_BUFFER\_SIZE@{UART\_TX\_BUFFER\_SIZE}!main.h@{main.h}}
+\doxysubsubsection{UART\_TX\_BUFFER\_SIZE}
+{\footnotesize\ttfamily \#define UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE~64}
+
+
+
+Definition at line \textbf{ 74} of file \textbf{ main.\+h}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{main_8h_a1730ffe1e560465665eb47d9264826f9}} 
+\index{main.h@{main.h}!Error\_Handler@{Error\_Handler}}
+\index{Error\_Handler@{Error\_Handler}!main.h@{main.h}}
+\doxysubsubsection{Error\_Handler()}
+{\footnotesize\ttfamily void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+This function is executed in case of error occurrence. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+
+
+Definition at line \textbf{ 713} of file \textbf{ main.\+c}.
+
+\mbox{\label{main_8h_ae70bce6c39d0b570a7523b86738cec4b}} 
+\index{main.h@{main.h}!HAL\_TIM\_MspPostInit@{HAL\_TIM\_MspPostInit}}
+\index{HAL\_TIM\_MspPostInit@{HAL\_TIM\_MspPostInit}!main.h@{main.h}}
+\doxysubsubsection{HAL\_TIM\_MspPostInit()}
+{\footnotesize\ttfamily void HAL\+\_\+\+TIM\+\_\+\+Msp\+Post\+Init (\begin{DoxyParamCaption}\item[{\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$}]{htim }\end{DoxyParamCaption})}
+
+TIM1 GPIO Configuration PA8 -\/-\/-\/---$>$ TIM1\+\_\+\+CH1 PA9 -\/-\/-\/---$>$ TIM1\+\_\+\+CH2 PA11 -\/-\/-\/---$>$ TIM1\+\_\+\+CH1N PA12 -\/-\/-\/---$>$ TIM1\+\_\+\+CH2N
+
+TIM2 GPIO Configuration PA15 -\/-\/-\/---$>$ TIM2\+\_\+\+CH1
+
+TIM1 GPIO Configuration PA8 -\/-\/-\/---$>$ TIM1\+\_\+\+CH1 PA9 -\/-\/-\/---$>$ TIM1\+\_\+\+CH2 PA11 -\/-\/-\/---$>$ TIM1\+\_\+\+CH1N PA12 -\/-\/-\/---$>$ TIM1\+\_\+\+CH2N
+
+TIM2 GPIO Configuration PA15 -\/-\/-\/---$>$ TIM2\+\_\+\+CH1
+
+Definition at line \textbf{ 195} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+msp.\+c}.
+

@@ -1,0 +1,134 @@
+\doxysection{stm32g4xx\+\_\+hal\+\_\+dma\+\_\+ex.\+h}
+\label{stm32g4xx__hal__dma__ex_8h_source}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_dma\_ex.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_dma\_ex.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001 }
+\DoxyCodeLine{00019 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020 \textcolor{preprocessor}{\#ifndef \_\_STM32G4xx\_HAL\_DMA\_EX\_H}}
+\DoxyCodeLine{00021 \textcolor{preprocessor}{\#define \_\_STM32G4xx\_HAL\_DMA\_EX\_H}}
+\DoxyCodeLine{00022 }
+\DoxyCodeLine{00023 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00024 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{00025 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026 }
+\DoxyCodeLine{00027 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028 \textcolor{preprocessor}{\#include "{}stm32g4xx\_hal\_def.h"{}}}
+\DoxyCodeLine{00029 }
+\DoxyCodeLine{00038 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00051 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00052 \{}
+\DoxyCodeLine{00053   uint32\_t SyncSignalID;  }
+\DoxyCodeLine{00056   uint32\_t SyncPolarity;  }
+\DoxyCodeLine{00059   FunctionalState SyncEnable;  }
+\DoxyCodeLine{00063   FunctionalState EventEnable;    }
+\DoxyCodeLine{00066   uint32\_t RequestNumber; }
+\DoxyCodeLine{00070 \} HAL\_DMA\_MuxSyncConfigTypeDef;}
+\DoxyCodeLine{00071 }
+\DoxyCodeLine{00072 }
+\DoxyCodeLine{00076 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{00077 \{}
+\DoxyCodeLine{00078   uint32\_t SignalID;      }
+\DoxyCodeLine{00081   uint32\_t Polarity;       }
+\DoxyCodeLine{00084   uint32\_t RequestNumber;  }
+\DoxyCodeLine{00087 \} HAL\_DMA\_MuxRequestGeneratorConfigTypeDef;}
+\DoxyCodeLine{00088 }
+\DoxyCodeLine{00093 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00101 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI0                      0U     }}
+\DoxyCodeLine{00102 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI1                      1U     }}
+\DoxyCodeLine{00103 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI2                      2U     }}
+\DoxyCodeLine{00104 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI3                      3U     }}
+\DoxyCodeLine{00105 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI4                      4U     }}
+\DoxyCodeLine{00106 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI5                      5U     }}
+\DoxyCodeLine{00107 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI6                      6U     }}
+\DoxyCodeLine{00108 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI7                      7U     }}
+\DoxyCodeLine{00109 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI8                      8U     }}
+\DoxyCodeLine{00110 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI9                      9U     }}
+\DoxyCodeLine{00111 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI10                    10U     }}
+\DoxyCodeLine{00112 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI11                    11U     }}
+\DoxyCodeLine{00113 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI12                    12U     }}
+\DoxyCodeLine{00114 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI13                    13U     }}
+\DoxyCodeLine{00115 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI14                    14U     }}
+\DoxyCodeLine{00116 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_EXTI15                    15U     }}
+\DoxyCodeLine{00117 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_DMAMUX1\_CH0\_EVT           16U     }}
+\DoxyCodeLine{00118 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_DMAMUX1\_CH1\_EVT           17U     }}
+\DoxyCodeLine{00119 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_DMAMUX1\_CH2\_EVT           18U     }}
+\DoxyCodeLine{00120 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_DMAMUX1\_CH3\_EVT           19U     }}
+\DoxyCodeLine{00121 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_SYNC\_LPTIM1\_OUT                20U     }}
+\DoxyCodeLine{00130 \textcolor{preprocessor}{\#define HAL\_DMAMUX\_SYNC\_NO\_EVENT                               0U    }}
+\DoxyCodeLine{00131 \textcolor{preprocessor}{\#define HAL\_DMAMUX\_SYNC\_RISING     ((uint32\_t)DMAMUX\_CxCR\_SPOL\_0)    }}
+\DoxyCodeLine{00132 \textcolor{preprocessor}{\#define HAL\_DMAMUX\_SYNC\_FALLING    ((uint32\_t)DMAMUX\_CxCR\_SPOL\_1)    }}
+\DoxyCodeLine{00133 \textcolor{preprocessor}{\#define HAL\_DMAMUX\_SYNC\_RISING\_FALLING ((uint32\_t)DMAMUX\_CxCR\_SPOL)  }}
+\DoxyCodeLine{00142 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI0                0U        }}
+\DoxyCodeLine{00143 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI1                1U        }}
+\DoxyCodeLine{00144 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI2                2U        }}
+\DoxyCodeLine{00145 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI3                3U        }}
+\DoxyCodeLine{00146 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI4                4U        }}
+\DoxyCodeLine{00147 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI5                5U        }}
+\DoxyCodeLine{00148 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI6                6U        }}
+\DoxyCodeLine{00149 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI7                7U        }}
+\DoxyCodeLine{00150 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI8                8U        }}
+\DoxyCodeLine{00151 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI9                9U        }}
+\DoxyCodeLine{00152 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI10              10U        }}
+\DoxyCodeLine{00153 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI11              11U        }}
+\DoxyCodeLine{00154 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI12              12U        }}
+\DoxyCodeLine{00155 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI13              13U        }}
+\DoxyCodeLine{00156 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI14              14U        }}
+\DoxyCodeLine{00157 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_EXTI15              15U        }}
+\DoxyCodeLine{00158 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_DMAMUX1\_CH0\_EVT     16U        }}
+\DoxyCodeLine{00159 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_DMAMUX1\_CH1\_EVT     17U        }}
+\DoxyCodeLine{00160 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_DMAMUX1\_CH2\_EVT     18U        }}
+\DoxyCodeLine{00161 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_DMAMUX1\_CH3\_EVT     19U        }}
+\DoxyCodeLine{00162 \textcolor{preprocessor}{\#define HAL\_DMAMUX1\_REQ\_GEN\_LPTIM1\_OUT          20U        }}
+\DoxyCodeLine{00171 \textcolor{preprocessor}{\#define HAL\_DMAMUX\_REQ\_GEN\_NO\_EVENT         0x00000000U           }}
+\DoxyCodeLine{00172 \textcolor{preprocessor}{\#define HAL\_DMAMUX\_REQ\_GEN\_RISING           DMAMUX\_RGxCR\_GPOL\_0   }}
+\DoxyCodeLine{00173 \textcolor{preprocessor}{\#define HAL\_DMAMUX\_REQ\_GEN\_FALLING          DMAMUX\_RGxCR\_GPOL\_1   }}
+\DoxyCodeLine{00174 \textcolor{preprocessor}{\#define HAL\_DMAMUX\_REQ\_GEN\_RISING\_FALLING   DMAMUX\_RGxCR\_GPOL     }}
+\DoxyCodeLine{00184 \textcolor{comment}{/* Exported macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00185 }
+\DoxyCodeLine{00186 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00191 \textcolor{comment}{/* IO operation functions *****************************************************/}}
+\DoxyCodeLine{00196 \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ REQUEST -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00197 HAL\_StatusTypeDef HAL\_DMAEx\_ConfigMuxRequestGenerator(DMA\_HandleTypeDef *hdma,}
+\DoxyCodeLine{00198                                                       HAL\_DMA\_MuxRequestGeneratorConfigTypeDef *pRequestGeneratorConfig);}
+\DoxyCodeLine{00199 HAL\_StatusTypeDef HAL\_DMAEx\_EnableMuxRequestGenerator(DMA\_HandleTypeDef *hdma);}
+\DoxyCodeLine{00200 HAL\_StatusTypeDef HAL\_DMAEx\_DisableMuxRequestGenerator(DMA\_HandleTypeDef *hdma);}
+\DoxyCodeLine{00201 \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ */}}
+\DoxyCodeLine{00202 }
+\DoxyCodeLine{00203 \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ SYNCHRO -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00204 HAL\_StatusTypeDef HAL\_DMAEx\_ConfigMuxSync(DMA\_HandleTypeDef *hdma, HAL\_DMA\_MuxSyncConfigTypeDef *pSyncConfig);}
+\DoxyCodeLine{00205 \textcolor{comment}{/* -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ */}}
+\DoxyCodeLine{00206 }
+\DoxyCodeLine{00207 \textcolor{keywordtype}{void} HAL\_DMAEx\_MUX\_IRQHandler(DMA\_HandleTypeDef *hdma);}
+\DoxyCodeLine{00208 }
+\DoxyCodeLine{00217 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00223 \textcolor{preprocessor}{\#define IS\_DMAMUX\_SYNC\_SIGNAL\_ID(SIGNAL\_ID) ((SIGNAL\_ID) <= HAL\_DMAMUX1\_SYNC\_LPTIM1\_OUT)}}
+\DoxyCodeLine{00224 }
+\DoxyCodeLine{00225 \textcolor{preprocessor}{\#define IS\_DMAMUX\_SYNC\_REQUEST\_NUMBER(REQUEST\_NUMBER) (((REQUEST\_NUMBER) > 0U) \&\& ((REQUEST\_NUMBER) <= 32U))}}
+\DoxyCodeLine{00226 }
+\DoxyCodeLine{00227 \textcolor{preprocessor}{\#define IS\_DMAMUX\_SYNC\_POLARITY(POLARITY) (((POLARITY) == HAL\_DMAMUX\_SYNC\_NO\_EVENT)    || \(\backslash\)}}
+\DoxyCodeLine{00228 \textcolor{preprocessor}{                                           ((POLARITY) == HAL\_DMAMUX\_SYNC\_RISING)   || \(\backslash\)}}
+\DoxyCodeLine{00229 \textcolor{preprocessor}{                                           ((POLARITY) == HAL\_DMAMUX\_SYNC\_FALLING)  || \(\backslash\)}}
+\DoxyCodeLine{00230 \textcolor{preprocessor}{                                           ((POLARITY) == HAL\_DMAMUX\_SYNC\_RISING\_FALLING))}}
+\DoxyCodeLine{00231 }
+\DoxyCodeLine{00232 \textcolor{preprocessor}{\#define IS\_DMAMUX\_SYNC\_STATE(SYNC) (((SYNC) == DISABLE)   || ((SYNC) == ENABLE))}}
+\DoxyCodeLine{00233 }
+\DoxyCodeLine{00234 \textcolor{preprocessor}{\#define IS\_DMAMUX\_SYNC\_EVENT(EVENT) (((EVENT) == DISABLE)   || \(\backslash\)}}
+\DoxyCodeLine{00235 \textcolor{preprocessor}{                                     ((EVENT) == ENABLE))}}
+\DoxyCodeLine{00236 }
+\DoxyCodeLine{00237 \textcolor{preprocessor}{\#define IS\_DMAMUX\_REQUEST\_GEN\_SIGNAL\_ID(SIGNAL\_ID) ((SIGNAL\_ID) <= HAL\_DMAMUX1\_REQ\_GEN\_LPTIM1\_OUT)}}
+\DoxyCodeLine{00238 }
+\DoxyCodeLine{00239 \textcolor{preprocessor}{\#define IS\_DMAMUX\_REQUEST\_GEN\_REQUEST\_NUMBER(REQUEST\_NUMBER) (((REQUEST\_NUMBER) > 0U) \&\& ((REQUEST\_NUMBER) <= 32U))}}
+\DoxyCodeLine{00240 }
+\DoxyCodeLine{00241 \textcolor{preprocessor}{\#define IS\_DMAMUX\_REQUEST\_GEN\_POLARITY(POLARITY) (((POLARITY) == HAL\_DMAMUX\_REQ\_GEN\_NO\_EVENT)   || \(\backslash\)}}
+\DoxyCodeLine{00242 \textcolor{preprocessor}{                                                  ((POLARITY) == HAL\_DMAMUX\_REQ\_GEN\_RISING)  || \(\backslash\)}}
+\DoxyCodeLine{00243 \textcolor{preprocessor}{                                                  ((POLARITY) == HAL\_DMAMUX\_REQ\_GEN\_FALLING) || \(\backslash\)}}
+\DoxyCodeLine{00244 \textcolor{preprocessor}{                                                  ((POLARITY) == HAL\_DMAMUX\_REQ\_GEN\_RISING\_FALLING))}}
+\DoxyCodeLine{00245 }
+\DoxyCodeLine{00259 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{00260 \}}
+\DoxyCodeLine{00261 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00262 }
+\DoxyCodeLine{00263 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_STM32G4xx\_HAL\_DMA\_EX\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00264 }
+
+\end{DoxyCode}

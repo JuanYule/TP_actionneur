@@ -1,0 +1,63 @@
+\doxysection{FLASH Exported Types}
+\label{group___f_l_a_s_h___exported___types}\index{FLASH Exported Types@{FLASH Exported Types}}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ FLASH\+\_\+\+Erase\+Init\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em FLASH Erase structure definition. \end{DoxyCompactList}\item 
+struct \textbf{ FLASH\+\_\+\+OBProgram\+Init\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em FLASH Option Bytes Program structure definition. \end{DoxyCompactList}\item 
+struct \textbf{ FLASH\+\_\+\+Process\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em FLASH handle Structure definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ FLASH\+\_\+\+Procedure\+Type\+Def} \{ \newline
+{\bfseries FLASH\+\_\+\+PROC\+\_\+\+NONE} = 0
+, {\bfseries FLASH\+\_\+\+PROC\+\_\+\+PAGE\+\_\+\+ERASE}
+, {\bfseries FLASH\+\_\+\+PROC\+\_\+\+MASS\+\_\+\+ERASE}
+, {\bfseries FLASH\+\_\+\+PROC\+\_\+\+PROGRAM}
+, \newline
+{\bfseries FLASH\+\_\+\+PROC\+\_\+\+PROGRAM\+\_\+\+LAST}
+ \}
+\begin{DoxyCompactList}\small\item\em FLASH Procedure structure definition. \end{DoxyCompactList}\item 
+enum \textbf{ FLASH\+\_\+\+Cache\+Type\+Def} \{ {\bfseries FLASH\+\_\+\+CACHE\+\_\+\+DISABLED} = 0
+, {\bfseries FLASH\+\_\+\+CACHE\+\_\+\+ICACHE\+\_\+\+ENABLED}
+, {\bfseries FLASH\+\_\+\+CACHE\+\_\+\+DCACHE\+\_\+\+ENABLED}
+, {\bfseries FLASH\+\_\+\+CACHE\+\_\+\+ICACHE\+\_\+\+DCACHE\+\_\+\+ENABLED}
+ \}
+\begin{DoxyCompactList}\small\item\em FLASH Cache structure definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\label{group___f_l_a_s_h___exported___types_ga551c2661127487b169802a5e41a64784}} 
+\index{FLASH Exported Types@{FLASH Exported Types}!FLASH\_CacheTypeDef@{FLASH\_CacheTypeDef}}
+\index{FLASH\_CacheTypeDef@{FLASH\_CacheTypeDef}!FLASH Exported Types@{FLASH Exported Types}}
+\doxysubsubsection{FLASH\_CacheTypeDef}
+{\footnotesize\ttfamily enum \textbf{ FLASH\+\_\+\+Cache\+Type\+Def}}
+
+
+
+FLASH Cache structure definition. 
+
+
+
+Definition at line \textbf{ 123} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+
+\mbox{\label{group___f_l_a_s_h___exported___types_ga2b0268387bc11bcab76be9ce7c43eaaf}} 
+\index{FLASH Exported Types@{FLASH Exported Types}!FLASH\_ProcedureTypeDef@{FLASH\_ProcedureTypeDef}}
+\index{FLASH\_ProcedureTypeDef@{FLASH\_ProcedureTypeDef}!FLASH Exported Types@{FLASH Exported Types}}
+\doxysubsubsection{FLASH\_ProcedureTypeDef}
+{\footnotesize\ttfamily enum \textbf{ FLASH\+\_\+\+Procedure\+Type\+Def}}
+
+
+
+FLASH Procedure structure definition. 
+
+
+
+Definition at line \textbf{ 111} of file \textbf{ stm32g4xx\+\_\+hal\+\_\+flash.\+h}.
+

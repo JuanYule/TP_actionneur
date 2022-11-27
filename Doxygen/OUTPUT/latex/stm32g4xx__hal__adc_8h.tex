@@ -1,0 +1,628 @@
+\doxysection{/home/yule/\+Documents/\+ENSEA/\+Ensea\+\_\+2022-\/2023/\+Actionneur\+\_\+et\+\_\+automatique/\+TP\+\_\+actionneur/\+TP\+\_\+actionneur/\+Drivers/\+STM32\+G4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32g4xx\+\_\+hal\+\_\+adc.h File Reference}
+\label{stm32g4xx__hal__adc_8h}\index{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_adc.h@{/home/yule/Documents/ENSEA/Ensea\_2022-\/2023/Actionneur\_et\_automatique/TP\_actionneur/TP\_actionneur/Drivers/STM32G4xx\_HAL\_Driver/Inc/stm32g4xx\_hal\_adc.h}}
+
+
+Header file of ADC HAL module.  
+
+
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+ll\+\_\+adc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stm32g4xx\+\_\+hal\+\_\+adc\+\_\+ex.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ ADC\+\_\+\+Oversampling\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em ADC group regular oversampling structure definition. \end{DoxyCompactList}\item 
+struct \textbf{ ADC\+\_\+\+Init\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em Structure definition of ADC instance and ADC group regular. \end{DoxyCompactList}\item 
+struct \textbf{ ADC\+\_\+\+Channel\+Conf\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em Structure definition of ADC channel for regular group. \end{DoxyCompactList}\item 
+struct \textbf{ ADC\+\_\+\+Analog\+WDGConf\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em Structure definition of ADC analog watchdog. \end{DoxyCompactList}\item 
+struct \textbf{ ADC\+\_\+\+Injection\+Config\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em ADC group injected contexts queue configuration. \end{DoxyCompactList}\item 
+struct \textbf{ ADC\+\_\+\+Handle\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em ADC handle Structure definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+RESET}~(0x00000000\+UL)
+\begin{DoxyCompactList}\small\item\em HAL ADC state machine\+: ADC states definition (bitfields) \end{DoxyCompactList}\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+READY}~(0x00000001\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+BUSY\+\_\+\+INTERNAL}~(0x00000002\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+TIMEOUT}~(0x00000004\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+ERROR\+\_\+\+INTERNAL}~(0x00000010\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+ERROR\+\_\+\+CONFIG}~(0x00000020\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+ERROR\+\_\+\+DMA}~(0x00000040\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+REG\+\_\+\+BUSY}~(0x00000100\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+REG\+\_\+\+EOC}~(0x00000200\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+REG\+\_\+\+OVR}~(0x00000400\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+REG\+\_\+\+EOSMP}~(0x00000800\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+INJ\+\_\+\+BUSY}~(0x00001000\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+INJ\+\_\+\+EOC}~(0x00002000\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+INJ\+\_\+\+JQOVF}~(0x00004000\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+AWD1}~(0x00010000\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+AWD2}~(0x00020000\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+AWD3}~(0x00040000\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+MULTIMODE\+\_\+\+SLAVE}~(0x00100000\+UL)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+ERROR\+\_\+\+NONE}~(0x00U)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+ERROR\+\_\+\+INTERNAL}~(0x01U)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+ERROR\+\_\+\+OVR}~(0x02U)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+ERROR\+\_\+\+DMA}~(0x04U)
+\item 
+\#define \textbf{ HAL\+\_\+\+ADC\+\_\+\+ERROR\+\_\+\+JQOVF}~(0x08U)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+SYNC\+\_\+\+PCLK\+\_\+\+DIV1}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+SYNC\+\_\+\+PCLK\+\_\+\+DIV1)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+SYNC\+\_\+\+PCLK\+\_\+\+DIV2}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+SYNC\+\_\+\+PCLK\+\_\+\+DIV2)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+SYNC\+\_\+\+PCLK\+\_\+\+DIV4}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+SYNC\+\_\+\+PCLK\+\_\+\+DIV4)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV1}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV1)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV2}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV2)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV4}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV4)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV6}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV6)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV8}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV8)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV10}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV10)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV12}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV12)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV16}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV16)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV32}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV32)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV64}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV64)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV128}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV128)
+\item 
+\#define \textbf{ ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV256}~(LL\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+ASYNC\+\_\+\+DIV256)
+\item 
+\#define \textbf{ ADC\+\_\+\+RESOLUTION\+\_\+12B}~(LL\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+12B)
+\item 
+\#define \textbf{ ADC\+\_\+\+RESOLUTION\+\_\+10B}~(LL\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+10B)
+\item 
+\#define \textbf{ ADC\+\_\+\+RESOLUTION\+\_\+8B}~(LL\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+8B)
+\item 
+\#define \textbf{ ADC\+\_\+\+RESOLUTION\+\_\+6B}~(LL\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+6B)
+\item 
+\#define \textbf{ ADC\+\_\+\+DATAALIGN\+\_\+\+RIGHT}~(LL\+\_\+\+ADC\+\_\+\+DATA\+\_\+\+ALIGN\+\_\+\+RIGHT)
+\item 
+\#define \textbf{ ADC\+\_\+\+DATAALIGN\+\_\+\+LEFT}~(LL\+\_\+\+ADC\+\_\+\+DATA\+\_\+\+ALIGN\+\_\+\+LEFT)
+\item 
+\#define \textbf{ ADC\+\_\+\+SCAN\+\_\+\+DISABLE}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+SCAN\+\_\+\+ENABLE}~(0x00000001\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+SOFTWARE\+\_\+\+START}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+SOFTWARE)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T1\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T1\+\_\+\+TRGO2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+TRGO2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T1\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T1\+\_\+\+CC2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+CH2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T1\+\_\+\+CC3}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM1\+\_\+\+CH3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T2\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM2\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T2\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM2\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T2\+\_\+\+CC2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM2\+\_\+\+CH2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T2\+\_\+\+CC3}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM2\+\_\+\+CH3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T3\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM3\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T3\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM3\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T3\+\_\+\+CC4}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM3\+\_\+\+CH4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T4\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM4\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T4\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM4\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T4\+\_\+\+CC4}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM4\+\_\+\+CH4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T6\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM6\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T7\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM7\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T8\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM8\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T8\+\_\+\+TRGO2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM8\+\_\+\+TRGO2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T8\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM8\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T15\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM15\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T20\+\_\+\+TRGO}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+TRGO)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T20\+\_\+\+TRGO2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+TRGO2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T20\+\_\+\+CC1}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+CH1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T20\+\_\+\+CC2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+CH2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+T20\+\_\+\+CC3}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+TIM20\+\_\+\+CH3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG1}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG1)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG3}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG3)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG4}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG4)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG5}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG5)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG6}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG6)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG7}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG7)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG8}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG8)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG9}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG9)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+HRTIM\+\_\+\+TRG10}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+HRTIM\+\_\+\+TRG10)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+EXT\+\_\+\+IT2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+EXTI\+\_\+\+LINE2)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+EXT\+\_\+\+IT11}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+EXTI\+\_\+\+LINE11)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIG\+\_\+\+LPTIM\+\_\+\+OUT}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+LPTIM\+\_\+\+OUT)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGCONVEDGE\+\_\+\+NONE}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGCONVEDGE\+\_\+\+RISING}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+RISING)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGCONVEDGE\+\_\+\+FALLING}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+FALLING)
+\item 
+\#define \textbf{ ADC\+\_\+\+EXTERNALTRIGCONVEDGE\+\_\+\+RISINGFALLING}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+TRIG\+\_\+\+EXT\+\_\+\+RISINGFALLING)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+NORMAL}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+BULB}~(\textbf{ ADC\+\_\+\+CFGR2\+\_\+\+BULB})
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLING\+\_\+\+MODE\+\_\+\+TRIGGER\+\_\+\+CONTROLED}~(\textbf{ ADC\+\_\+\+CFGR2\+\_\+\+SMPTRIG})
+\item 
+\#define \textbf{ ADC\+\_\+\+EOC\+\_\+\+SINGLE\+\_\+\+CONV}~(\textbf{ ADC\+\_\+\+ISR\+\_\+\+EOC})
+\item 
+\#define \textbf{ ADC\+\_\+\+EOC\+\_\+\+SEQ\+\_\+\+CONV}~(\textbf{ ADC\+\_\+\+ISR\+\_\+\+EOS})
+\item 
+\#define \textbf{ ADC\+\_\+\+OVR\+\_\+\+DATA\+\_\+\+PRESERVED}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+OVR\+\_\+\+DATA\+\_\+\+PRESERVED)
+\item 
+\#define \textbf{ ADC\+\_\+\+OVR\+\_\+\+DATA\+\_\+\+OVERWRITTEN}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+OVR\+\_\+\+DATA\+\_\+\+OVERWRITTEN)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+1}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+1)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+2}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+2)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+3}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+3)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+4}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+4)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+6}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+6)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+7}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+7)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+8}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+8)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+9}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+9)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+10}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+10)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+11}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+11)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+12}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+12)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+13}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+13)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+14}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+14)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+15}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+15)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGULAR\+\_\+\+RANK\+\_\+16}~(LL\+\_\+\+ADC\+\_\+\+REG\+\_\+\+RANK\+\_\+16)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+2\+CYCLES\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+2\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+6\+CYCLES\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+6\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+12\+CYCLES\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+12\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+24\+CYCLES\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+24\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+47\+CYCLES\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+47\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+92\+CYCLES\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+92\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+247\+CYCLES\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+247\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+640\+CYCLES\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+640\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+SAMPLETIME\+\_\+3\+CYCLES\+\_\+5}~(\textbf{ ADC\+\_\+\+SMPR1\+\_\+\+SMPPLUS} $\vert$ LL\+\_\+\+ADC\+\_\+\+SAMPLINGTIME\+\_\+2\+CYCLES\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+0}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+0)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+1}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+1)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+2}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+2)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+3}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+3)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+4}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+4)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+6}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+6)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+7}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+7)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+8}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+8)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+9}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+9)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+10}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+10)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+11}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+11)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+12}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+12)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+13}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+13)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+14}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+14)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+15}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+15)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+16}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+16)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+17}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+17)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+18}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+18)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VREFINT}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VREFINT)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+TEMPSENSOR\+\_\+\+ADC1}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+TEMPSENSOR\+\_\+\+ADC1)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+TEMPSENSOR\+\_\+\+ADC5}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+TEMPSENSOR\+\_\+\+ADC5)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VBAT}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VBAT)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP1}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP1)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP2}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP2)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP3\+\_\+\+ADC2}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP3\+\_\+\+ADC2)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP3\+\_\+\+ADC3}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP3\+\_\+\+ADC3)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP4}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP4)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP5}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP5)
+\item 
+\#define \textbf{ ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP6}~(LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+VOPAMP6)
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+1}~(LL\+\_\+\+ADC\+\_\+\+AWD1)
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+2}~(LL\+\_\+\+ADC\+\_\+\+AWD2)
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+3}~(LL\+\_\+\+ADC\+\_\+\+AWD3)
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+FILTERING\+\_\+\+NONE}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+FILTERING\+\_\+2\+SAMPLES}~((\textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+0}))
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+FILTERING\+\_\+3\+SAMPLES}~((\textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+1}))
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+FILTERING\+\_\+4\+SAMPLES}~((\textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+1} $\vert$ \textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+0}))
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+FILTERING\+\_\+5\+SAMPLES}~((\textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+2}))
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+FILTERING\+\_\+6\+SAMPLES}~((\textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+2} $\vert$ \textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+0}))
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+FILTERING\+\_\+7\+SAMPLES}~((\textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+2} $\vert$ \textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+1}))
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+FILTERING\+\_\+8\+SAMPLES}~((\textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+2} $\vert$ \textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+1} $\vert$ \textbf{ ADC\+\_\+\+TR1\+\_\+\+AWDFILT\+\_\+0}))
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+NONE}~(0x00000000\+UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+REG}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+INJEC}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+SINGLE\+\_\+\+REGINJEC}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+SGL} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+REG}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+INJEC}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+ANALOGWATCHDOG\+\_\+\+ALL\+\_\+\+REGINJEC}~(\textbf{ ADC\+\_\+\+CFGR\+\_\+\+AWD1\+EN} $\vert$ \textbf{ ADC\+\_\+\+CFGR\+\_\+\+JAWD1\+EN})
+\item 
+\#define \textbf{ ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO\+\_\+2}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+RATIO\+\_\+2)
+\item 
+\#define \textbf{ ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO\+\_\+4}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+RATIO\+\_\+4)
+\item 
+\#define \textbf{ ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO\+\_\+8}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+RATIO\+\_\+8)
+\item 
+\#define \textbf{ ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO\+\_\+16}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+RATIO\+\_\+16)
+\item 
+\#define \textbf{ ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO\+\_\+32}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+RATIO\+\_\+32)
+\item 
+\#define \textbf{ ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO\+\_\+64}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+RATIO\+\_\+64)
+\item 
+\#define \textbf{ ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO\+\_\+128}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+RATIO\+\_\+128)
+\item 
+\#define \textbf{ ADC\+\_\+\+OVERSAMPLING\+\_\+\+RATIO\+\_\+256}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+RATIO\+\_\+256)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+\+NONE}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+NONE)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+1}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+RIGHT\+\_\+1)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+2}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+RIGHT\+\_\+2)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+3}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+RIGHT\+\_\+3)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+4}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+RIGHT\+\_\+4)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+5}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+RIGHT\+\_\+5)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+6}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+RIGHT\+\_\+6)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+7}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+RIGHT\+\_\+7)
+\item 
+\#define \textbf{ ADC\+\_\+\+RIGHTBITSHIFT\+\_\+8}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+SHIFT\+\_\+\+RIGHT\+\_\+8)
+\item 
+\#define \textbf{ ADC\+\_\+\+TRIGGEREDMODE\+\_\+\+SINGLE\+\_\+\+TRIGGER}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+REG\+\_\+\+CONT)
+\item 
+\#define \textbf{ ADC\+\_\+\+TRIGGEREDMODE\+\_\+\+MULTI\+\_\+\+TRIGGER}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+REG\+\_\+\+DISCONT)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGOVERSAMPLING\+\_\+\+CONTINUED\+\_\+\+MODE}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+GRP\+\_\+\+REGULAR\+\_\+\+CONTINUED)
+\item 
+\#define \textbf{ ADC\+\_\+\+REGOVERSAMPLING\+\_\+\+RESUMED\+\_\+\+MODE}~(LL\+\_\+\+ADC\+\_\+\+OVS\+\_\+\+GRP\+\_\+\+REGULAR\+\_\+\+RESUMED)
+\item 
+\#define \textbf{ ADC\+\_\+\+EOSMP\+\_\+\+EVENT}~(\textbf{ ADC\+\_\+\+FLAG\+\_\+\+EOSMP})
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD1\+\_\+\+EVENT}~(\textbf{ ADC\+\_\+\+FLAG\+\_\+\+AWD1})
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD2\+\_\+\+EVENT}~(\textbf{ ADC\+\_\+\+FLAG\+\_\+\+AWD2})
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD3\+\_\+\+EVENT}~(\textbf{ ADC\+\_\+\+FLAG\+\_\+\+AWD3})
+\item 
+\#define \textbf{ ADC\+\_\+\+OVR\+\_\+\+EVENT}~(\textbf{ ADC\+\_\+\+FLAG\+\_\+\+OVR})
+\item 
+\#define \textbf{ ADC\+\_\+\+JQOVF\+\_\+\+EVENT}~(\textbf{ ADC\+\_\+\+FLAG\+\_\+\+JQOVF})
+\item 
+\#define \textbf{ ADC\+\_\+\+AWD\+\_\+\+EVENT}~\textbf{ ADC\+\_\+\+AWD1\+\_\+\+EVENT}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+RDY}~\textbf{ ADC\+\_\+\+IER\+\_\+\+ADRDYIE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+EOSMP}~\textbf{ ADC\+\_\+\+IER\+\_\+\+EOSMPIE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+EOC}~\textbf{ ADC\+\_\+\+IER\+\_\+\+EOCIE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+EOS}~\textbf{ ADC\+\_\+\+IER\+\_\+\+EOSIE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+OVR}~\textbf{ ADC\+\_\+\+IER\+\_\+\+OVRIE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+JEOC}~\textbf{ ADC\+\_\+\+IER\+\_\+\+JEOCIE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+JEOS}~\textbf{ ADC\+\_\+\+IER\+\_\+\+JEOSIE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+AWD1}~\textbf{ ADC\+\_\+\+IER\+\_\+\+AWD1\+IE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+AWD2}~\textbf{ ADC\+\_\+\+IER\+\_\+\+AWD2\+IE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+AWD3}~\textbf{ ADC\+\_\+\+IER\+\_\+\+AWD3\+IE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+JQOVF}~\textbf{ ADC\+\_\+\+IER\+\_\+\+JQOVFIE}
+\item 
+\#define \textbf{ ADC\+\_\+\+IT\+\_\+\+AWD}~\textbf{ ADC\+\_\+\+IT\+\_\+\+AWD1}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+RDY}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+ADRDY}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+EOSMP}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+EOSMP}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+EOC}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+EOC}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+EOS}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+EOS}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+OVR}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+OVR}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+JEOC}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+JEOC}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+JEOS}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+JEOS}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+AWD1}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+AWD1}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+AWD2}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+AWD2}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+AWD3}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+AWD3}
+\item 
+\#define \textbf{ ADC\+\_\+\+FLAG\+\_\+\+JQOVF}~\textbf{ ADC\+\_\+\+ISR\+\_\+\+JQOVF}
+\item 
+\#define \textbf{ ADC\+\_\+\+GET\+\_\+\+RESOLUTION}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~  (LL\+\_\+\+ADC\+\_\+\+Get\+Resolution((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance))
+\begin{DoxyCompactList}\small\item\em Return resolution bits in CFGR register RES[1\+:0] field. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+CLEAR\+\_\+\+ERRORCODE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Error\+Code = \textbf{ HAL\+\_\+\+ADC\+\_\+\+ERROR\+\_\+\+NONE})
+\begin{DoxyCompactList}\small\item\em Clear ADC error code (set it to no error code \char`\"{}\+HAL\+\_\+\+ADC\+\_\+\+ERROR\+\_\+\+NONE\char`\"{}). \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+STATE\+\_\+\+CLR\+\_\+\+SET}~MODIFY\+\_\+\+REG
+\begin{DoxyCompactList}\small\item\em Simultaneously clear and set specific bits of the handle State. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+RANGE}(\+\_\+\+\_\+\+RESOLUTION\+\_\+\+\_\+,  \+\_\+\+\_\+\+ADC\+\_\+\+VALUE\+\_\+\+\_\+)~  ((\+\_\+\+\_\+\+ADC\+\_\+\+VALUE\+\_\+\+\_\+) $<$= \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+DIGITAL\+\_\+\+SCALE(\+\_\+\+\_\+\+RESOLUTION\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Verify that a given value is aligned with the ADC resolution range. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+REGULAR\+\_\+\+NB\+\_\+\+CONV}(\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+) $>$= (1UL)) \&\& ((\+\_\+\+\_\+\+LENGTH\+\_\+\+\_\+) $<$= (16UL)))
+\begin{DoxyCompactList}\small\item\em Verify the length of the scheduled regular conversions group. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+REGULAR\+\_\+\+DISCONT\+\_\+\+NUMBER}(NUMBER)~(((NUMBER) $>$= (1UL)) \&\& ((NUMBER) $<$= (8UL)))
+\begin{DoxyCompactList}\small\item\em Verify the number of scheduled regular conversions in discontinuous mode. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+CLOCKPRESCALER}(\+\_\+\+\_\+\+ADC\+\_\+\+CLOCK\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC clock setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+RESOLUTION}(\+\_\+\+\_\+\+RESOLUTION\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC resolution setting. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+8\+\_\+6\+\_\+\+BITS}(\+\_\+\+\_\+\+RESOLUTION\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC resolution setting when limited to 6 or 8 bits. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+DATA\+\_\+\+ALIGN}(\+\_\+\+\_\+\+ALIGN\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC converted data alignment. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+GAIN\+\_\+\+COMPENSATION}(\+\_\+\+\_\+\+GAIN\+\_\+\+COMPENSATION\+\_\+\+\_\+)~((\+\_\+\+\_\+\+GAIN\+\_\+\+COMPENSATION\+\_\+\+\_\+) $<$= 16393UL)
+\begin{DoxyCompactList}\small\item\em Verify the ADC gain compensation. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+SCAN\+\_\+\+MODE}(\+\_\+\+\_\+\+SCAN\+\_\+\+MODE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC scan mode. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+EXTTRIG\+\_\+\+EDGE}(\+\_\+\+\_\+\+EDGE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC edge trigger setting for regular group. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+SAMPLINGMODE}(\+\_\+\+\_\+\+SAMPLINGMODE\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC regular conversions external trigger. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+EOC\+\_\+\+SELECTION}(\+\_\+\+\_\+\+EOC\+\_\+\+SELECTION\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC regular conversions check for converted data availability. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+OVERRUN}(\+\_\+\+\_\+\+OVR\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC regular conversions overrun handling. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+SAMPLE\+\_\+\+TIME}(\+\_\+\+\_\+\+TIME\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC conversions sampling time. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+ADC\+\_\+\+REGULAR\+\_\+\+RANK}(\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Verify the ADC regular channel setting. \end{DoxyCompactList}\item 
+\#define \textbf{ ADC\+\_\+\+STOP\+\_\+\+CONVERSION\+\_\+\+TIMEOUT}~( 5UL)
+\item 
+\#define \textbf{ ADC\+\_\+\+TEMPSENSOR\+\_\+\+DELAY\+\_\+\+US}~(LL\+\_\+\+ADC\+\_\+\+DELAY\+\_\+\+TEMPSENSOR\+\_\+\+STAB\+\_\+\+US)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+RESET\+\_\+\+HANDLE\+\_\+\+STATE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)~  ((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$State = \textbf{ HAL\+\_\+\+ADC\+\_\+\+STATE\+\_\+\+RESET})
+\begin{DoxyCompactList}\small\item\em Reset ADC handle state. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+ENABLE\+\_\+\+IT}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)~  (((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$IER) $\vert$= (\+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Enable ADC interrupt. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+DISABLE\+\_\+\+IT}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)~  (((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$IER) \&= $\sim$(\+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Disable ADC interrupt. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+GET\+\_\+\+IT\+\_\+\+SOURCE}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)~  (((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$IER \& (\+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+)) == (\+\_\+\+\_\+\+INTERRUPT\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Checks if the specified ADC interrupt source is enabled or disabled. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+GET\+\_\+\+FLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+FLAG\+\_\+\+\_\+)~  ((((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$ISR) \& (\+\_\+\+\_\+\+FLAG\+\_\+\+\_\+)) == (\+\_\+\+\_\+\+FLAG\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Check whether the specified ADC flag is set or not. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+CLEAR\+\_\+\+FLAG}(\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+,  \+\_\+\+\_\+\+FLAG\+\_\+\+\_\+)~  (((\+\_\+\+\_\+\+HANDLE\+\_\+\+\_\+)-\/$>$Instance-\/$>$ISR) = (\+\_\+\+\_\+\+FLAG\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Clear the specified ADC flag. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+TO\+\_\+\+DECIMAL\+\_\+\+NB}(\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+)~  \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+TO\+\_\+\+DECIMAL\+\_\+\+NB((\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Helper macro to get ADC channel number in decimal format from literals ADC\+\_\+\+CHANNEL\+\_\+x. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+DECIMAL\+\_\+\+NB\+\_\+\+TO\+\_\+\+CHANNEL}(\+\_\+\+\_\+\+DECIMAL\+\_\+\+NB\+\_\+\+\_\+)~  \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+DECIMAL\+\_\+\+NB\+\_\+\+TO\+\_\+\+CHANNEL((\+\_\+\+\_\+\+DECIMAL\+\_\+\+NB\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Helper macro to get ADC channel in literal format ADC\+\_\+\+CHANNEL\+\_\+x from number in decimal format. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+IS\+\_\+\+CHANNEL\+\_\+\+INTERNAL}(\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+)~  \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+IS\+\_\+\+CHANNEL\+\_\+\+INTERNAL((\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Helper macro to determine whether the selected channel corresponds to literal definitions of driver. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+INTERNAL\+\_\+\+TO\+\_\+\+EXTERNAL}(\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+)~  \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+CHANNEL\+\_\+\+INTERNAL\+\_\+\+TO\+\_\+\+EXTERNAL((\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Helper macro to convert a channel defined from parameter definition of a ADC internal channel (ADC\+\_\+\+CHANNEL\+\_\+\+VREFINT, ADC\+\_\+\+CHANNEL\+\_\+\+TEMPSENSOR, ...), to its equivalent parameter definition of a ADC external channel (ADC\+\_\+\+CHANNEL\+\_\+1, ADC\+\_\+\+CHANNEL\+\_\+2, ...). \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+IS\+\_\+\+CHANNEL\+\_\+\+INTERNAL\+\_\+\+AVAILABLE}(\+\_\+\+\_\+\+ADC\+\_\+\+INSTANCE\+\_\+\+\_\+,  \+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+)~  \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+IS\+\_\+\+CHANNEL\+\_\+\+INTERNAL\+\_\+\+AVAILABLE((\+\_\+\+\_\+\+ADC\+\_\+\+INSTANCE\+\_\+\+\_\+), (\+\_\+\+\_\+\+CHANNEL\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Helper macro to determine whether the internal channel selected is available on the ADC instance selected. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+COMMON\+\_\+\+INSTANCE}(\+\_\+\+\_\+\+ADCx\+\_\+\+\_\+)~  \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+COMMON\+\_\+\+INSTANCE((\+\_\+\+\_\+\+ADCx\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Helper macro to select the ADC common instance to which is belonging the selected ADC instance. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+IS\+\_\+\+ENABLED\+\_\+\+ALL\+\_\+\+COMMON\+\_\+\+INSTANCE}(\+\_\+\+\_\+\+ADCXY\+\_\+\+COMMON\+\_\+\+\_\+)~  \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+IS\+\_\+\+ENABLED\+\_\+\+ALL\+\_\+\+COMMON\+\_\+\+INSTANCE((\+\_\+\+\_\+\+ADCXY\+\_\+\+COMMON\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Helper macro to check if all ADC instances sharing the same ADC common instance are disabled. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+DIGITAL\+\_\+\+SCALE}(\+\_\+\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+\+\_\+)~  \+\_\+\+\_\+\+LL\+\_\+\+ADC\+\_\+\+DIGITAL\+\_\+\+SCALE((\+\_\+\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+\+\_\+))
+\begin{DoxyCompactList}\small\item\em Helper macro to define the ADC conversion data full-\/scale digital value corresponding to the selected ADC resolution. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+CONVERT\+\_\+\+DATA\+\_\+\+RESOLUTION}(\+\_\+\+\_\+\+DATA\+\_\+\+\_\+,  \+\_\+\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+\+CURRENT\+\_\+\+\_\+,  \+\_\+\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+\+TARGET\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Helper macro to convert the ADC conversion data from a resolution to another resolution. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+CALC\+\_\+\+DATA\+\_\+\+TO\+\_\+\+VOLTAGE}(\+\_\+\+\_\+\+VREFANALOG\+\_\+\+VOLTAGE\+\_\+\+\_\+,  \+\_\+\+\_\+\+ADC\+\_\+\+DATA\+\_\+\+\_\+,  \+\_\+\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the voltage (unit\+: m\+Volt) corresponding to a ADC conversion data (unit\+: digital value). \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+CALC\+\_\+\+VREFANALOG\+\_\+\+VOLTAGE}(\+\_\+\+\_\+\+VREFINT\+\_\+\+ADC\+\_\+\+DATA\+\_\+\+\_\+,  \+\_\+\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate analog reference voltage (Vref+) (unit\+: m\+Volt) from ADC conversion data of internal voltage reference Vref\+Int. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+CALC\+\_\+\+TEMPERATURE}(\+\_\+\+\_\+\+VREFANALOG\+\_\+\+VOLTAGE\+\_\+\+\_\+,  \+\_\+\+\_\+\+TEMPSENSOR\+\_\+\+ADC\+\_\+\+DATA\+\_\+\+\_\+,  \+\_\+\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the temperature (unit\+: degree Celsius) from ADC conversion data of internal temperature sensor. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+ADC\+\_\+\+CALC\+\_\+\+TEMPERATURE\+\_\+\+TYP\+\_\+\+PARAMS}(\+\_\+\+\_\+\+TEMPSENSOR\+\_\+\+TYP\+\_\+\+AVGSLOPE\+\_\+\+\_\+,  \+\_\+\+\_\+\+TEMPSENSOR\+\_\+\+TYP\+\_\+\+CALX\+\_\+\+V\+\_\+\+\_\+,  \+\_\+\+\_\+\+TEMPSENSOR\+\_\+\+CALX\+\_\+\+TEMP\+\_\+\+\_\+,  \+\_\+\+\_\+\+VREFANALOG\+\_\+\+VOLTAGE\+\_\+\+\_\+,  \+\_\+\+\_\+\+TEMPSENSOR\+\_\+\+ADC\+\_\+\+DATA\+\_\+\+\_\+,  \+\_\+\+\_\+\+ADC\+\_\+\+RESOLUTION\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Helper macro to calculate the temperature (unit\+: degree Celsius) from ADC conversion data of internal temperature sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Init} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+De\+Init} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void \textbf{ HAL\+\_\+\+ADC\+\_\+\+Msp\+Init} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\begin{DoxyCompactList}\small\item\em ADC MSP Initialization This function configures the hardware resources used in this example. \end{DoxyCompactList}\item 
+void \textbf{ HAL\+\_\+\+ADC\+\_\+\+Msp\+De\+Init} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\begin{DoxyCompactList}\small\item\em ADC MSP De-\/\+Initialization This function freeze the hardware resources used in this example. \end{DoxyCompactList}\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Start} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Stop} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Poll\+For\+Conversion} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t Timeout)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Poll\+For\+Event} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t Event\+Type, uint32\+\_\+t Timeout)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Start\+\_\+\+IT} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Stop\+\_\+\+IT} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Start\+\_\+\+DMA} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t $\ast$p\+Data, uint32\+\_\+t Length)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Stop\+\_\+\+DMA} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+ADC\+\_\+\+Get\+Value} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Start\+Sampling} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Stop\+Sampling} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries HAL\+\_\+\+ADC\+\_\+\+IRQHandler} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void \textbf{ HAL\+\_\+\+ADC\+\_\+\+Conv\+Cplt\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries HAL\+\_\+\+ADC\+\_\+\+Conv\+Half\+Cplt\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries HAL\+\_\+\+ADC\+\_\+\+Level\+Out\+Of\+Window\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries HAL\+\_\+\+ADC\+\_\+\+Error\+Callback} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Config\+Channel} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, \textbf{ ADC\+\_\+\+Channel\+Conf\+Type\+Def} $\ast$s\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries HAL\+\_\+\+ADC\+\_\+\+Analog\+WDGConfig} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, \textbf{ ADC\+\_\+\+Analog\+WDGConf\+Type\+Def} $\ast$Analog\+WDGConfig)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+ADC\+\_\+\+Get\+State} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+uint32\+\_\+t {\bfseries HAL\+\_\+\+ADC\+\_\+\+Get\+Error} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries ADC\+\_\+\+Conversion\+Stop} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc, uint32\+\_\+t Conversion\+Group)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries ADC\+\_\+\+Enable} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} {\bfseries ADC\+\_\+\+Disable} (\textbf{ ADC\+\_\+\+Handle\+Type\+Def} $\ast$hadc)
+\item 
+void {\bfseries ADC\+\_\+\+DMAConv\+Cplt} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+void {\bfseries ADC\+\_\+\+DMAHalf\+Conv\+Cplt} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\item 
+void {\bfseries ADC\+\_\+\+DMAError} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of ADC HAL module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team 
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2019 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+Definition in file \textbf{ stm32g4xx\+\_\+hal\+\_\+adc.\+h}.
+
