@@ -7,11 +7,12 @@ Juan Sebastian YULE GIRALDO
 1. [Github et Doxygen](https://github.com/JuanYule/TP_actionneur/README.md#github-et-doxygen)
 2. [Configuration des pins]()
 
-## Github et Doxygen
+## Configuration des broches
 L'image suivante illustre la configuration des broches. La configuration des broches a été effectuée à partir du fichier .ioc.
 
 ![configuration des broches](/images/pins.png "Configuration des broches")
 
+## Github et Doxygen
 Tout d'abord, nous avons créé un dépôt github afin de téléverse toutes les informations concernant la réalisation du TP.
 
 ### Configuration de Doxygen
