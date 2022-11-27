@@ -1,9 +1,11 @@
 # TP_actionneur
-TP d'Actionneur et automatique appliquée. Option ESE
-Liziaine RAMOS MEDINA
-Juan Sebastian YULE GIRALDO
+Le but de ce TP est de contrôler un hacheur depuis la carte électronique STM32. Pour cela, nous avons utilisé le PowerModule 70097 qui permet d'adaptation entre l'étage numérique et l'étage de puissance du moteur.
 
-**Table of Contents**
+## Auteurs
+Ramos Medina Lizziane: [lil05RM](https://github.com/lil05RM)
+Yule Giraldo Juan Sebastian: [JuanYule](https://github.com/JuanYule)
+
+**Sommaire**
 1. [Configuration des pins](https://github.com/JuanYule/TP_actionneur/README.md#configuration-des-broches)
 2. [Github et Doxygen](https://github.com/JuanYule/TP_actionneur/README.md#github-et-doxygen)
 3. [Console UART](https://github.com/JuanYule/TP_actionneur/README.md#console-UART)
