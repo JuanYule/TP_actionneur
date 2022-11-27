@@ -59,8 +59,8 @@ Nous avons généré quatre signaux PWM à partir du TIMER 1. Le cahier des char
 
 ### Commande start
 
-![Commande start](/images/start.png "commande start")
+![Commande start](/images/start.jpg "commande start")
 
-![PWM 60%](/images/PWM_60.png "PWM 60%")
+![PWM 60%](/images/PWM_60.jpg "PWM 60%")
 
-![PWM 100 %](/images/PWM_100.png "PWM 100 %")
+![PWM 100 %](/images/PWM_100.jpg "PWM 100 %")
