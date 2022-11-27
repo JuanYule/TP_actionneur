@@ -4,8 +4,10 @@ Liziaine RAMOS MEDINA
 Juan Sebastian YULE GIRALDO
 
 **Table of Contents**
-1. [Github et Doxygen](https://github.com/JuanYule/TP_actionneur/README.md#github-et-doxygen)
-2. [Configuration des pins]()
+1. [Configuration des pins](https://github.com/JuanYule/TP_actionneur/README.md#configuration-des-broches)
+2. [Github et Doxygen](https://github.com/JuanYule/TP_actionneur/README.md#github-et-doxygen)
+3. [Console UART](https://github.com/JuanYule/TP_actionneur/README.md#console-UART)
+4. [Console UART](https://github.com/JuanYule/TP_actionneur/README.md#commande-mcc-basique)
 
 ## Configuration des broches
 L'image suivante illustre la configuration des broches. La configuration des broches a été effectuée à partir du fichier .ioc.
@@ -65,8 +67,10 @@ L'image suivante illustre les quatre sigaux PWM avec un temps mort de 2 us.
 
 ### Commande start
 Selon la fiche technique du hacheur, un pulse minimun de 2 us est nécessaire pour démarrer le système. Donc avec les fonction *HAL*, nous avons généré une impulsion de 6.68 us comme l'illustre la figure suivante.
- 
+
 ![Commande start](/images/start.jpg "commande start")
+
+### Commande de vitesse
 
 ![PWM 60%](/images/PWM_60.jpg "PWM 60%")
 
