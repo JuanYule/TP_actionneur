@@ -32,3 +32,35 @@ L'image suivante illustre la page html avec l'information du projet.
 ![Doxygen](/images/doxygen.png "Doxygen")
 
 ## Console UART
+Dans cette partie, nous avons avons implmenté le code discponible dans moodle pour crées notre shell. [Voir lien ici](https://moodle.ensea.fr/mod/resource/view.php?id=46898). D'ailleur nous avond imlementé des variables et des fonctions pour leur fonctionnement.
+```
+char cmd[CMD_BUFFER_SIZE] : contenant la commande en cours
+int idxCmd : contenant l'index du prochain caractère à remplir
+const uint8_t prompt[] : contenant le prompt comme sur un shell linux
+const uint8_t started[] : contenant un message de bienvenue au démarrage du microprocesseur
+const uint8_t newLine[] : contenant la chaine de caractère pour faire un retour à la ligne
+const uint8_t help[] : contenant le message d'aide, la liste des fonctions
+const uint8_t pinout[] : contenant la liste des pin utilisées
+const uint8_t powerOn[] : contenant le message d'allumage du moteur
+const uint8_t powerOff[] : contenant le message d'extinction du moteur
+const uint8_t cmdNotFound[] : contenant le message du commande non reconnue
+uint32_t uartRxReceived : flag de récéption d'un caractère sur la liaison uart
+uint8_t uartRxBuffer[UART_RX_BUFFER_SIZE] : buffer de réception de donnée de l'uart
+uint8_t uartTxBuffer[UART_TX_BUFFER_SIZE] : buffer d'émission des données de l'uart
+```
+## Commande MCC basique
+Nous avons généré quatre signaux PWM à partir du TIMER 1. Le cahier des charges pour ce TIMER est le suivante:
+    1. Fréquence de la PWM : 16 kHz
+    2. Temps mort minimum : 2 us
+    3. Résolution minimum : 10 bits.
+### Temps mort
+
+![Temps mort](/images/Temps_mort.png "Doxygen")
+
+### Commande start
+
+![Commande start](/images/start.png "commande start")
+
+![PWM 60%](/images/PWM_60.png "PWM 60%")
+
+![PWM 100 %](/images/PWM_100.png "PWM 100 %")
