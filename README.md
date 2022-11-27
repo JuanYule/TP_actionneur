@@ -8,3 +8,26 @@ Juan Sebastian YULE GIRALDO
 2. [Configuration des pins]()
 
 ## Github et Doxygen
+L'image suivante illustre la configuration des broches. La configuration des broches a été effectuée à partir du fichier .ioc.
+
+![configuration des broches](/images/pins.png "Configuration des broches")
+
+Tout d'abord, nous avons créé un dépôt github afin de téléverse toutes les informations concernant la réalisation du TP.
+
+### Configuration de Doxygen
+Nous avons suivi la configuration pour l'installation comme indiqué sur le site officiel.
+Nous avons utilisé les commandes suivantes pour l'installation sur un ordinateur linux. [Voir ici documentation](https://www.doxygen.nl/download.html)
+```
+git clone https://github.com/doxygen/doxygen.git
+cd doxygen
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+make
+```
+Noud avons eu des problèmes pour générer la documentation, donc nous avons téléchargé et utilisé l'interface graphique ```doxywizard```.
+L'image suivante illustre la page html avec l'information du projet.
+
+![Doxygen](/images/doxygen.png "Doxygen")
+
+## Console UART
