@@ -7,7 +7,7 @@ Juan Sebastian YULE GIRALDO
 1. [Configuration des pins](https://github.com/JuanYule/TP_actionneur/README.md#configuration-des-broches)
 2. [Github et Doxygen](https://github.com/JuanYule/TP_actionneur/README.md#github-et-doxygen)
 3. [Console UART](https://github.com/JuanYule/TP_actionneur/README.md#console-UART)
-4. [Console UART](https://github.com/JuanYule/TP_actionneur/README.md#commande-mcc-basique)
+4. [Commande-mcc-basique](https://github.com/JuanYule/TP_actionneur/README.md#commande-mcc-basique)
 
 ## Configuration des broches
 L'image suivante illustre la configuration des broches. La configuration des broches a été effectuée à partir du fichier .ioc.
