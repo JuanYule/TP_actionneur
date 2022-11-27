@@ -50,15 +50,22 @@ uint8_t uartTxBuffer[UART_TX_BUFFER_SIZE] : buffer d'émission des données de l
 ```
 ## Commande MCC basique
 Nous avons généré quatre signaux PWM à partir du TIMER 1. Le cahier des charges pour ce TIMER est le suivante:
-    1. Fréquence de la PWM : 16 kHz
-    2. Temps mort minimum : 2 us
-    3. Résolution minimum : 10 bits.
-### Temps mort
+1. Fréquence de la PWM : 16 kHz
+2. Temps mort minimum : 2 us
+3. Résolution minimum : 10 bits.
 
-![Temps mort](/images/Temps_mort.png "Doxygen")
+### Configuration du TIMER
+Afin d'avoir une fréquence de 16 kHz dans le TIMER 1, Nous avons réglé le PSC à *5-1*, l'ARR à *1022* et le Countermode à *TIM_COUNTERMODE_CENTERALIGNED1*. Puis, nous avons active les deux canaux du TIMER.
+
+### Temps mort
+Pour configurer, le temps mort. il faut taper sur l'option *Break and Dead Time management* et insérer 200 dans la case vide *Dead Time*.
+
+L'image suivante illustre les quatre sigaux PWM avec un temps mort de 2 us.
+![Temps mort](/images/Temps_mort.jpg "Doxygen")
 
 ### Commande start
-
+Selon la fiche technique du hacheur, un pulse minimun de 2 us est nécessaire pour démarrer le système. Donc avec les fonction *HAL*, nous avons généré une impulsion de 6.68 us comme l'illustre la figure suivante.
+ 
 ![Commande start](/images/start.jpg "commande start")
 
 ![PWM 60%](/images/PWM_60.jpg "PWM 60%")
