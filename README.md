@@ -78,12 +78,22 @@ Selon la fiche technique du hacheur, un pulse minimum de 2 µs est nécessaire p
 ![Commande start](/images/start.jpg "commande start")
 
 ### Commande de vitesse
+Pour controler la vitesse du moteur, nous avons envoyer un séquence via liaison UART de la forme:
+```
+speed=XXXX
+```
+Pour obtenir les 4 dernières données entrées sur la ligne de commande, nous avons vérifie si l'entrée de commande fait 10 caractères. Ensuite, nous avons les quatre dernieres chifres et si la valeur est plus grande que la vitesse maximale autorisé *100*, on l'abaisse à cette valeur.
+La figure suivante illustre les quatre signaux PWM avec un rapport cyclique de 60%.
 
 ![PWM 60%](/images/PWM_60.jpg "PWM 60%")
 
+La figure suivante illustre les quatre signaux PWM avec un rapport cyclique de 100%.
 ![PWM 100 %](/images/PWM_100.jpg "PWM 100 %")
 
 ### Premiers tests
 Après avoir correctement branché le moteur, nous avons fait un test avec un rapport cyclique de 50% puis de 70%. Pour le premier test, le moteur ne tourne pas car il est à son point d'équilibre. Nous avons augmenté le rapport cyclique de deux en deux pour atteindre 56% et voir le moteur commencer à tourner. Ensuite, nous avons appliqué un rapport cyclique de 70% et le moteur ne tournais plus car l'augmentation du rapport cyclique était trop rapide.
 
 Pour pallier à ce problème, nous avons programmé une montée progressive du rapport cyclique jusqu'à la vitesse souhaitée via la commande. Pour cela, nous avons mis en place une boucle *for* avec un délai, tout en gardant l'ancienne valeur de commande de vitesse. Ainsi, nous avons incrémenté la valeur du rapport cyclique de un en un à partir de l'ancienne valeur et jusqu'à la nouvelle valeur de commande de vitesse.
+La ligne [267](https://github.com/JuanYule/TP_actionneur/blob/main/TP_actionneur/Core/Src/main.c#L267) montre la manière comment nous avons mis en œuvre cette solution.
+
+## Mesure de Vitesse et de courant
