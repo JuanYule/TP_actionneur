@@ -97,3 +97,6 @@ Pour pallier à ce problème, nous avons programmé une montée progressive du r
 La ligne [267](https://github.com/JuanYule/TP_actionneur/blob/main/TP_actionneur/Core/Src/main.c#L267) montre la manière comment nous avons mis en œuvre cette solution.
 
 ## Mesure de Vitesse et de courant
+Dans cette section, nous avons utilisé les broches retournées par le hacheur pour messurer le courant qui traverse le moteur. Pour cela, nous avons utilisé l'interruption de l'ADC pour prend les données de mesure. De cette façon il n'y aura pas de problèmes avec l'affichage de caractères dans le shell.
+
+L'implémentation de cette partie du code fonctionne mais ne montre pas les valeurs correctes du courant, c'est-à-dire qu'il y'a une lecture erronée au moment de la conversion ADC.
