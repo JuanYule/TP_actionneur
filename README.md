@@ -73,6 +73,16 @@ Afin de connecter notre STM32 au hacheur, nous avons utilisé une carte d'adapta
 
 *Tableau avec broches*
 
+|Pour la connexion du hacheur||
+| :------------: | :---------------:|
+| CMD_B_TOP | 11 |
+| CMD_Y_TOP | 12 |
+| CMD_B_BOT | 29 |
+| CMD_Y_BOT | 30 |
+| ISO_RESET | 33 |
+| ISO_GND | 36 |
+| ISO_+5V | 37 |
+
 ### Commande start
 Selon la fiche technique du hacheur, un pulse minimum de 2 µs est nécessaire pour démarrer le système. Pour commander cette séquence nous avons choisi d'utiliser l'appui du bouton bleu de la carte avec une gestion d'interruption en mode EXTI. Ainsi, avec les fonctions *HAL* et une broche GPIO de sortie, nous avons généré une impulsion de 6.68 µs comme l'illustre la figure suivante.
 
